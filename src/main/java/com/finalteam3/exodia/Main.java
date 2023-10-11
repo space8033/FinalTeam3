@@ -7,4 +7,5 @@ public class Main {
 
 	
 	//오우주 바보
+	//미운나이 32
 }
