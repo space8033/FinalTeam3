@@ -1,11 +1,14 @@
 package com.finalteam3.exodia;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+@Controller
 public class Main {
 	
-	//오우주바보멍청이똥개
-	//오우주
-
+	@RequestMapping("/")
+	public String home() {
+		return "index";
+	}
 	
-	//오우주 바보
-	//미운나이 32
 }
