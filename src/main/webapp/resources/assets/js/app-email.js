@@ -63,7 +63,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modules: {
           toolbar: '.email-editor-toolbar'
         },
-        placeholder: 'Message... ',
+        placeholder: '메세지를 입력하세요. ',
         theme: 'snow'
       });
     }

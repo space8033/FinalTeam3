@@ -4,27 +4,30 @@
 
 'use strict';
 
-(async function () {
-  let boards;
-  const kanbanSidebar = document.querySelector('.kanban-update-item-sidebar'),
-    kanbanWrapper = document.querySelector('.kanban-wrapper'),
-    commentEditor = document.querySelector('.comment-editor'),
-    kanbanAddNewBoard = document.querySelector('.kanban-add-new-board'),
-    kanbanAddNewInput = [].slice.call(document.querySelectorAll('.kanban-add-board-input')),
-    kanbanAddBoardBtn = document.querySelector('.kanban-add-board-btn'),
-    datePicker = document.querySelector('#due-date'),
-    select2 = $('.select2'), // ! Using jquery vars due to select2 jQuery dependency
-    assetsPath = document.querySelector('html').getAttribute('data-assets-path');
+(function () {
+	var boards;
+	var kanbanSidebar = document.querySelector('.kanban-update-item-sidebar');
+	var kanbanWrapper = document.querySelector('.kanban-wrapper');
+	var commentEditor = document.querySelector('.comment-editor');
+	var kanbanAddNewBoard = document.querySelector('.kanban-add-new-board');
+	var kanbanAddNewInput = [].slice.call(document.querySelectorAll('.kanban-add-board-input'));
+	var kanbanAddBoardBtn = document.querySelector('.kanban-add-board-btn');
+	var datePicker = document.querySelector('#due-date');
+	var select2 = $('.select2'); // jQuery를 사용하기 때문에 jQuery 변수 사용
+	var assetsPath = document.querySelector('html').getAttribute('data-assets-path');
 
-  // Init kanban Offcanvas
-  const kanbanOffcanvas = new bootstrap.Offcanvas(kanbanSidebar);
+	// kanban Offcanvas 초기화
+	var kanbanOffcanvas = new bootstrap.Offcanvas(kanbanSidebar);
 
-  // Get kanban data
-  const kanbanResponse = await fetch(assetsPath + 'json/kanban.json');
-  if (!kanbanResponse.ok) {
-    console.error('error', kanbanResponse);
-  }
-  boards = await kanbanResponse.json();
+	// kanban 데이터 가져오기
+	var xhr = new XMLHttpRequest();
+	xhr.open('GET', assetsPath + 'json/kanban.json', false); // 비동기로 변경 가능
+	xhr.send();
+	if (xhr.status !== 200) {
+	  console.error('error', xhr);
+	} else {
+	  boards = JSON.parse(xhr.responseText);
+	}
 
   // datepicker init
   if (datePicker) {

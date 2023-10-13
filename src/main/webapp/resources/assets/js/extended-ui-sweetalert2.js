@@ -405,44 +405,50 @@
 
   // Alert With Steps
   if (progressSteps) {
-    progressSteps.onclick = function () {
-      const steps = ['1', '2', '3'];
-      const swalQueueStep = Swal.mixin({
-        confirmButtonText: 'Forward',
-        cancelButtonText: 'Back',
-        progressSteps: steps,
-        input: 'text',
-        inputAttributes: {
-          required: true
-        },
-        validationMessage: 'This field is required'
-      });
+	  progressSteps.onclick = function() {
+	    var steps = ['1', '2', '3'];
+	    var swalQueueStep = Swal.mixin({
+	      confirmButtonText: 'Forward',
+	      cancelButtonText: 'Back',
+	      progressSteps: steps,
+	      input: 'text',
+	      inputAttributes: {
+	        required: true
+	      },
+	      validationMessage: 'This field is required'
+	    });
 
-      async function backAndForward() {
-        const values = [];
-        let currentStep;
+	    function backAndForward() {
+	      var values = [];
+	      var currentStep = 0;
 
-        for (currentStep = 0; currentStep < steps.length; ) {
-          const result = await new swalQueueStep({
-            title: 'Question ' + steps[currentStep],
-            showCancelButton: currentStep > 0,
-            currentProgressStep: currentStep
-          });
+	      while (currentStep < steps.length) {
+	        (function(step) {
+	          swalQueueStep({
+	            title: 'Question ' + steps[step],
+	            showCancelButton: step > 0,
+	            currentProgressStep: step,
+	          }).then(function(result) {
+	            if (result.value) {
+	              values[step] = result.value;
+	              currentStep++;
+	            } else if (result.dismiss === 'cancel') {
+	              currentStep--;
+	            }
 
-          if (result.value) {
-            values[currentStep] = result.value;
-            currentStep++;
-          } else if (result.dismiss === 'cancel') {
-            currentStep--;
-          }
-        }
+	            if (currentStep >= 0 && currentStep < steps.length) {
+	              step(currentStep);
+	            } else {
+	              Swal.fire(JSON.stringify(values));
+	            }
+	          });
+	        })(currentStep);
+	      }
+	    }
 
-        Swal.fire(JSON.stringify(values));
-      }
-
-      backAndForward();
-    };
-  }
+	    backAndForward();
+	  };
+	}
 
   // Alert With Ajax Request
   if (ajaxRequest) {

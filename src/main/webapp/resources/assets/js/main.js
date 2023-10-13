@@ -135,9 +135,11 @@ if (document.getElementById('layout-menu')) {
   let styleSwitcher = document.querySelector('.dropdown-style-switcher');
 
   // Get style from local storage or use 'system' as default
-  let storedStyle =
-    localStorage.getItem('templateCustomizer-' + templateName + '--Style') || //if no template style then use Customizer style
-    (window.templateCustomizer?.settings?.defaultStyle ?? 'light'); //!if there is no Customizer then use default style as light
+  var storedStyle = localStorage.getItem('templateCustomizer-' + templateName + '--Style');
+  if (!storedStyle) {
+    storedStyle = 
+    	(window.templateCustomizer && window.templateCustomizer.settings && window.templateCustomizer.settings.defaultStyle) || 'light';
+  } //!if there is no Customizer then use default style as light
 
   // Set style on click of style switcher item if template customizer is enabled
   if (window.templateCustomizer && styleSwitcher) {
