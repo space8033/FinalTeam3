@@ -14,60 +14,60 @@ document.addEventListener('DOMContentLoaded', function (e) {
           username: {
             validators: {
               notEmpty: {
-                message: 'Please enter username'
+                message: '아이디 비었다. 써넣거라'
               },
               stringLength: {
                 min: 6,
-                message: 'Username must be more than 6 characters'
+                message: '6자 넘어야 한다.'
               }
             }
           },
           email: {
             validators: {
               notEmpty: {
-                message: 'Please enter your email'
+                message: '이메일 써넣거라.'
               },
               emailAddress: {
-                message: 'Please enter valid email address'
+                message: '유효한 이메일을 써넣거라.'
               }
             }
           },
           'email-username': {
             validators: {
               notEmpty: {
-                message: 'Please enter email / username'
+                message: '아이디나 이메일을 써넣거라'
               },
               stringLength: {
                 min: 6,
-                message: 'Username must be more than 6 characters'
+                message: '6자가 넘어야한다.'
               }
             }
           },
           password: {
             validators: {
               notEmpty: {
-                message: 'Please enter your password'
+                message: '비번을 써넣거라'
               },
               stringLength: {
                 min: 6,
-                message: 'Password must be more than 6 characters'
+                message: '비번은 6자가 넘어야한다.'
               }
             }
           },
           'confirm-password': {
             validators: {
               notEmpty: {
-                message: 'Please confirm password'
+                message: '비번 틀렸다 확인해라'
               },
               identical: {
                 compare: function () {
                   return formAuthentication.querySelector('[name="password"]').value;
                 },
-                message: 'The password and its confirm are not the same'
+                message: '비밀번호가 같지 않다.'
               },
               stringLength: {
                 min: 6,
-                message: 'Password must be more than 6 characters'
+                message: '비번이 6자가 넘지 않는다.'
               }
             }
           },
