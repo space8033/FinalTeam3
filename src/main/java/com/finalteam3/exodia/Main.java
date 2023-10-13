@@ -8,8 +8,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class Main {
 	
 	@RequestMapping("/")
-	public String home(Model model) {
-		return "index";
+	public String login(Model model) {
+		return "login";
 	}
 	
+	@RequestMapping("/note")
+	public String note(Model model) {
+		return "note";
+	}
+	
+	@RequestMapping("/chat")
+	public String chat(Model model) {
+		return "chat";
+	}
 }
