@@ -29,4 +29,9 @@ public class Main {
 	public String chat2(Model model) {
 		return "chat2";
 	}
+	
+	@RequestMapping("/searchUser")
+	public String searchUser(Model model) {
+		return "searchUser";
+	}
 }
