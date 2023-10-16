@@ -45,4 +45,13 @@ public class Main {
 	public String initialPassword(Model model) {
 		return "initialPassword";
 	}
+	
+	@RequestMapping("/addProject")
+	public String addProject(Model model) {
+		return "addProject";
+	}
+	@RequestMapping("/addProject2")
+	public String addProject2(Model model) {
+		return "addProject2";
+	}
 }

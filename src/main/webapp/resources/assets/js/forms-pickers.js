@@ -23,6 +23,7 @@
     });
   }
 
+
   // Time
   if (flatpickrTime) {
     flatpickrTime.flatpickr({
