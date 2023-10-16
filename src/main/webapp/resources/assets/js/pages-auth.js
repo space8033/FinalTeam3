@@ -100,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
       });
     }
 
+
     //  Two Steps Verification
     const numeralMask = document.querySelectorAll('.numeral-mask');
 

@@ -34,4 +34,9 @@ public class Main {
 	public String searchUser(Model model) {
 		return "searchUser";
 	}
+	
+	@RequestMapping("/initialPassword")
+	public String initialPassword(Model model) {
+		return "initialPassword";
+	}
 }

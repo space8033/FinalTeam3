@@ -120,10 +120,9 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">안녕! 👋</h4>
-              <p class="mb-4">왔으면 로그인해라.</p>
+              <p class="mb-4">초기 비밀번호 변경</p>
 
-              <form id="formAuthentication" class="mb-3" action="initialPassword" method="POST">
+              <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
                 <div class="mb-3">
                   <label for="email" class="form-label">아이디</label>
                   <input
@@ -131,15 +130,29 @@
                     class="form-control"
                     id="email"
                     name="email-username"
-                    placeholder="아이디를 써넣거라"
+                    placeholder="아이디"
                     autofocus />
                 </div>
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">비밀번호</label>
-                    <a href="auth-forgot-password-basic.html">
-                      <small>비밀번호 잊어먹었냐?</small>
-                    </a>
+                    <label class="form-label" for="password">변경할 비밀번호</label>
+                   
+                  </div>
+                  <div class="input-group input-group-merge">
+                    <input
+                      type="password"
+                      id="password"
+                      class="form-control"
+                      name="password"
+                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+                      aria-describedby="password" />
+                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                  </div>
+                </div>
+                 <div class="mb-3 form-password-toggle">
+                  <div class="d-flex justify-content-between">
+                    <label class="form-label" for="password">변경할 비밀번호 확인</label>
+                   
                   </div>
                   <div class="input-group input-group-merge">
                     <input
@@ -159,10 +172,9 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <button class="login btn btn-primary d-grid w-100" type="submit">드루와</button>
+                  <button class="btn btn-primary d-grid w-100" type="submit">드루와</button>
                 </div>
               </form>
-
 
             </div>
           </div>
