@@ -54,4 +54,8 @@ public class Main {
 	public String addUser(Model model) {
 		return "addUser";
 	}
+	@RequestMapping("/userManagement")
+	public String userManagement(Model model) {
+		return "userManagement";
+	}
 }
