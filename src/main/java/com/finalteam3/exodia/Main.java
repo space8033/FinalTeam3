@@ -35,6 +35,12 @@ public class Main {
 		return "searchUser";
 	}
 	
+
+	@RequestMapping("/calendar")
+	public String calendar(Model model) {
+		return "calendar";
+	}
+	
 	@RequestMapping("/initialPassword")
 	public String initialPassword(Model model) {
 		return "initialPassword";
