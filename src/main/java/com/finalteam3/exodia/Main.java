@@ -50,8 +50,8 @@ public class Main {
 	public String addProject(Model model) {
 		return "addProject";
 	}
-	@RequestMapping("/addProject2")
-	public String addProject2(Model model) {
-		return "addProject2";
+	@RequestMapping("/addUser")
+	public String addUser(Model model) {
+		return "addUser";
 	}
 }
