@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', function () {
       emailSearch = document.querySelector('.email-search-input'),
       toggleCC = document.querySelector('.email-compose-toggle-cc'),
       toggleBCC = document.querySelector('.email-compose-toggle-bcc'),
+      toggleReserv = document.querySelector('.send-toggle-reserv'),
       emailCompose = document.querySelector('.app-email-compose'),
       emailListDelete = document.querySelector('.email-list-delete'),
       emailListRead = document.querySelector('.email-list-read'),
@@ -209,6 +210,12 @@ document.addEventListener('DOMContentLoaded', function () {
         Helpers._toggleClass(document.querySelector('.email-compose-cc'), 'd-block', 'd-none');
       });
     }
+    
+    if (toggleReserv) {
+    	toggleReserv.addEventListener('click', e => {
+          Helpers._toggleClass(document.querySelector('.send-reserv'), 'd-block', 'd-none');
+        });
+      }
 
     // Empty compose email message inputs when modal is hidden
     emailCompose.addEventListener('hidden.bs.modal', event => {

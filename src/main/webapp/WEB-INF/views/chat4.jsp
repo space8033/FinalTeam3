@@ -61,7 +61,8 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
- 		<aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+
+        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="index.html" class="app-brand-link">
               <span class="app-brand-logo demo">
@@ -113,7 +114,7 @@
                   </g>
                 </svg>
               </span>
-              <span class="app-brand-text demo menu-text fw-bold ms-2">pms</span>
+              <span class="app-brand-text demo menu-text fw-bold ms-2">Sneat</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -125,89 +126,1116 @@
 
           <ul class="menu-inner py-1">
             <!-- Dashboards -->
-                        <!-- Apps & Pages -->
-            <li class="menu-header small text-uppercase">
-              <span class="menu-header-text">MENU</span>
-            </li>
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div class="text-truncate" >프로젝트</div>
+                <div class="text-truncate" data-i18n="Dashboards">Dashboards</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
                   <a href="dashboards-analytics.html" class="menu-link">
-                    <div class="text-truncate" >프로젝트 목록</div>
+                    <div class="text-truncate" data-i18n="Analytics">Analytics</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="dashboards-crm.html" class="menu-link">
-                    <div class="text-truncate" >프로젝트 조직도</div>
+                    <div class="text-truncate" data-i18n="CRM">CRM</div>
                   </a>
                 </li>
                 <li class="menu-item">
                   <a href="app-ecommerce-dashboard.html" class="menu-link">
-                    <div class="text-truncate">프로젝트 인력 검색</div>
+                    <div class="text-truncate" data-i18n="eCommerce">eCommerce</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="app-logistics-dashboard.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Logistics">Logistics</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="app-academy-dashboard.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Academy">Academy</div>
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="menu-item active">
+
+            <!-- Layouts -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-layout"></i>
+                <div class="text-truncate" data-i18n="Layouts">Layouts</div>
+              </a>
+
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="layouts-collapsed-menu.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Collapsed menu">Collapsed menu</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-content-navbar.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Content navbar">Content navbar</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-content-navbar-with-sidebar.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Content nav + Sidebar">Content nav + Sidebar</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="../horizontal-menu-template" class="menu-link" target="_blank">
+                    <div class="text-truncate" data-i18n="Horizontal">Horizontal</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-without-menu.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Without menu">Without menu</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-without-navbar.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Without navbar">Without navbar</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-fluid.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Fluid">Fluid</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-container.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Container">Container</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="layouts-blank.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Blank">Blank</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Front Pages -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-store"></i>
+                <div class="text-truncate" data-i18n="Front Pages">Front Pages</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="../front-pages/landing-page.html" class="menu-link" target="_blank">
+                    <div class="text-truncate" data-i18n="Landing">Landing</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="../front-pages/pricing-page.html" class="menu-link" target="_blank">
+                    <div class="text-truncate" data-i18n="Pricing">Pricing</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="../front-pages/payment-page.html" class="menu-link" target="_blank">
+                    <div class="text-truncate" data-i18n="Payment">Payment</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="../front-pages/checkout-page.html" class="menu-link" target="_blank">
+                    <div class="text-truncate" data-i18n="Checkout">Checkout</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="../front-pages/help-center-landing.html" class="menu-link" target="_blank">
+                    <div class="text-truncate" data-i18n="Help Center">Help Center</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Apps & Pages -->
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Apps &amp; Pages</span>
+            </li>
+            <li class="menu-item">
               <a href="app-email.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-envelope"></i>
-                <div class="text-truncate">공지사항</div>
+                <div class="text-truncate" data-i18n="Email">Email</div>
+              </a>
+            </li>
+            <li class="menu-item active">
+              <a href="app-chat.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-chat"></i>
+                <div class="text-truncate" data-i18n="Chat">Chat</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="app-chat.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-chat"></i>
-                <div class="text-truncate">문의하기</div>
+              <a href="app-calendar.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-calendar"></i>
+                <div class="text-truncate" data-i18n="Calendar">Calendar</div>
               </a>
             </li>
-            
+            <li class="menu-item">
+              <a href="app-kanban.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-grid"></i>
+                <div class="text-truncate" data-i18n="Kanban">Kanban</div>
+              </a>
+            </li>
             <!-- e-commerce-app menu start -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-cart-alt"></i>
-                <div class="text-truncate">일정관리</div>
+                <div class="text-truncate" data-i18n="eCommerce">eCommerce</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
                   <a href="app-ecommerce-dashboard.html" class="menu-link">
-                    <div class="text-truncate">팀 별 일정 관리</div>
+                    <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="javascript:void(0);" class="menu-link">
-                    <div class="text-truncate">개인 별 일정 관리</div>
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <div class="text-truncate" data-i18n="Products">Products</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="app-ecommerce-product-list.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Product list">Product list</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="app-ecommerce-product-add.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Add Product">Add Product</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="app-ecommerce-category-list.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Category list">Category List</div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <div class="text-truncate" data-i18n="Order">Order</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="app-ecommerce-order-list.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Order list">Order list</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="app-ecommerce-order-details.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Order Details">Order Details</div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <div class="text-truncate" data-i18n="Customer">Customer</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="app-ecommerce-customer-all.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="All Customers">All Customers</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="javascript:void(0);" class="menu-link menu-toggle">
+                        <div class="text-truncate" data-i18n="Customer Details">Customer Details</div>
+                      </a>
+                      <ul class="menu-sub">
+                        <li class="menu-item">
+                          <a href="app-ecommerce-customer-details-overview.html" class="menu-link">
+                            <div class="text-truncate" data-i18n="Overview">Overview</div>
+                          </a>
+                        </li>
+                        <li class="menu-item">
+                          <a href="app-ecommerce-customer-details-security.html" class="menu-link">
+                            <div class="text-truncate" data-i18n="Security">Security</div>
+                          </a>
+                        </li>
+                        <li class="menu-item">
+                          <a href="app-ecommerce-customer-details-billing.html" class="menu-link">
+                            <div class="text-truncate" data-i18n="Address & Billing">Address & Billing</div>
+                          </a>
+                        </li>
+                        <li class="menu-item">
+                          <a href="app-ecommerce-customer-details-notifications.html" class="menu-link">
+                            <div class="text-truncate" data-i18n="Notifications">Notifications</div>
+                          </a>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item">
+                  <a href="app-ecommerce-manage-reviews.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Manage reviews">Manage reviews</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="app-ecommerce-referral.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Referrals">Referrals</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <div class="text-truncate" data-i18n="Settings">Settings</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="app-ecommerce-settings-detail.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Store details">Store details</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="app-ecommerce-settings-payments.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Payments">Payments</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="app-ecommerce-settings-checkout.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Checkout">Checkout</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="app-ecommerce-settings-shipping.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Shipping & delivery">Shipping & delivery</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="app-ecommerce-settings-locations.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Locations">Locations</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="app-ecommerce-settings-notifications.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Notifications">Notifications</div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <!-- e-commerce-app menu end -->
+            <!-- Academy menu start -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-book-open"></i>
+                <div class="text-truncate" data-i18n="Academy">Academy</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="app-academy-dashboard.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="app-academy-course.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="My Course">My Course</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="app-academy-course-details.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Course Details">Course Details</div>
                   </a>
                 </li>
               </ul>
             </li>
-            
-            <!--관리자 메뉴-->
+            <!-- Academy menu end -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-car"></i>
+                <div class="text-truncate" data-i18n="Logistics">Logistics</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="app-logistics-dashboard.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Dashboard">Dashboard</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="app-logistics-fleet.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Fleet">Fleet</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-food-menu"></i>
+                <div class="text-truncate" data-i18n="Invoice">Invoice</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="app-invoice-list.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="List">List</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="app-invoice-preview.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Preview">Preview</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="app-invoice-edit.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Edit">Edit</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="app-invoice-add.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Add">Add</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div class="text-truncate" data-i18n="Users">Users</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="app-user-list.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="List">List</div>
+                  </a>
+                </li>
+
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <div class="text-truncate" data-i18n="View">View</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="app-user-view-account.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Account">Account</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="app-user-view-security.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Security">Security</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="app-user-view-billing.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Billing & Plans">Billing & Plans</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="app-user-view-notifications.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Notifications">Notifications</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="app-user-view-connections.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Connections">Connections</div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-check-shield"></i>
+                <div class="text-truncate" data-i18n="Roles & Permissions">Roles & Permissions</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="app-access-roles.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Roles">Roles</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="app-access-permission.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Permission">Permission</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div class="text-truncate" data-i18n="Pages">Pages</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <div class="text-truncate" data-i18n="User Profile">User Profile</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="pages-profile-user.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Profile">Profile</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="pages-profile-teams.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Teams">Teams</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="pages-profile-projects.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Projects">Projects</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="pages-profile-connections.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Connections">Connections</div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <div class="text-truncate" data-i18n="Account Settings">Account Settings</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="pages-account-settings-account.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Account">Account</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="pages-account-settings-security.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Security">Security</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="pages-account-settings-billing.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Billing & Plans">Billing & Plans</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="pages-account-settings-notifications.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Notifications">Notifications</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="pages-account-settings-connections.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Connections">Connections</div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item">
+                  <a href="pages-faq.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="FAQ">FAQ</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="pages-pricing.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Pricing">Pricing</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <div class="text-truncate" data-i18n="Misc">Misc</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="pages-misc-error.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Error">Error</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="pages-misc-under-maintenance.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Under Maintenance">Under Maintenance</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="pages-misc-comingsoon.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Coming Soon">Coming Soon</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="pages-misc-not-authorized.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Not Authorized">Not Authorized</div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
+                <div class="text-truncate" data-i18n="Authentications">Authentications</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <div class="text-truncate" data-i18n="Login">Login</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="auth-login-basic.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Basic">Basic</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="auth-login-cover.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Cover">Cover</div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <div class="text-truncate" data-i18n="Register">Register</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="auth-register-basic.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Basic">Basic</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="auth-register-cover.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Cover">Cover</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="auth-register-multisteps.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Multi-steps">Multi-steps</div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <div class="text-truncate" data-i18n="Verify Email">Verify Email</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="auth-verify-email-basic.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Basic">Basic</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="auth-verify-email-cover.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Cover">Cover</div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <div class="text-truncate" data-i18n="Reset Password">Reset Password</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="auth-reset-password-basic.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Basic">Basic</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="auth-reset-password-cover.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Cover">Cover</div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <div class="text-truncate" data-i18n="Forgot Password">Forgot Password</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="auth-forgot-password-basic.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Basic">Basic</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="auth-forgot-password-cover.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Cover">Cover</div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <div class="text-truncate" data-i18n="Two Steps">Two Steps</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="auth-two-steps-basic.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Basic">Basic</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="auth-two-steps-cover.html" class="menu-link" target="_blank">
+                        <div class="text-truncate" data-i18n="Cover">Cover</div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-spreadsheet"></i>
+                <div class="text-truncate" data-i18n="Wizard Examples">Wizard Examples</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="wizard-ex-checkout.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Checkout">Checkout</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="wizard-ex-property-listing.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Property Listing">Property Listing</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="wizard-ex-create-deal.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Create Deal">Create Deal</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="modal-examples.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-window-open"></i>
+                <div class="text-truncate" data-i18n="Modal Examples">Modal Examples</div>
+              </a>
+            </li>
+
+            <!-- Components -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Components</span></li>
+            <!-- Cards -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-collection"></i>
+                <div class="text-truncate" data-i18n="Cards">Cards</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="cards-basic.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Basic">Basic</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="cards-advance.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Advance">Advance</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="cards-statistics.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Statistics">Statistics</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="cards-analytics.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Analytics">Analytics</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="cards-gamifications.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Gamifications">Gamifications</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="cards-actions.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Actions">Actions</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!-- User interface -->
+            <li class="menu-item">
+              <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-box"></i>
+                <div class="text-truncate" data-i18n="User interface">User interface</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="ui-accordion.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Accordion">Accordion</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-alerts.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Alerts">Alerts</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-badges.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Badges">Badges</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-buttons.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Buttons">Buttons</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-carousel.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Carousel">Carousel</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-collapse.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Collapse">Collapse</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-dropdowns.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Dropdowns">Dropdowns</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-footer.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Footer">Footer</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-list-groups.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="List Groups">List groups</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-modals.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Modals">Modals</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-navbar.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Navbar">Navbar</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-offcanvas.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Offcanvas">Offcanvas</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-pagination-breadcrumbs.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Pagination & Breadcrumbs">Pagination &amp; Breadcrumbs</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-progress.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Progress">Progress</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-spinners.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Spinners">Spinners</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-tabs-pills.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Tabs & Pills">Tabs &amp; Pills</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-toasts.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Toasts">Toasts</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-tooltips-popovers.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Tooltips & Popovers">Tooltips &amp; popovers</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="ui-typography.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Typography">Typography</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Extended components -->
+            <li class="menu-item">
+              <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-copy"></i>
+                <div class="text-truncate" data-i18n="Extended UI">Extended UI</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="extended-ui-avatar.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Avatar">Avatar</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="extended-ui-blockui.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="BlockUI">BlockUI</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="extended-ui-drag-and-drop.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Drag & Drop">Drag &amp; Drop</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="extended-ui-media-player.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Media Player">Media Player</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="extended-ui-perfect-scrollbar.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Perfect Scrollbar">Perfect scrollbar</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="extended-ui-star-ratings.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Star Ratings">Star Ratings</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="extended-ui-sweetalert2.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="SweetAlert2">SweetAlert2</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="extended-ui-text-divider.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Text Divider">Text Divider</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="javascript:void(0);" class="menu-link menu-toggle">
+                    <div class="text-truncate" data-i18n="Timeline">Timeline</div>
+                  </a>
+                  <ul class="menu-sub">
+                    <li class="menu-item">
+                      <a href="extended-ui-timeline-basic.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Basic">Basic</div>
+                      </a>
+                    </li>
+                    <li class="menu-item">
+                      <a href="extended-ui-timeline-fullscreen.html" class="menu-link">
+                        <div class="text-truncate" data-i18n="Fullscreen">Fullscreen</div>
+                      </a>
+                    </li>
+                  </ul>
+                </li>
+                <li class="menu-item">
+                  <a href="extended-ui-tour.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Tour">Tour</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="extended-ui-treeview.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Treeview">Treeview</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="extended-ui-misc.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Miscellaneous">Miscellaneous</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Icons -->
+            <li class="menu-item">
+              <a href="javascript:void(0)" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-crown"></i>
+                <div class="text-truncate" data-i18n="Icons">Icons</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="icons-boxicons.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Boxicons">Boxicons</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="icons-font-awesome.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Fontawesome">Fontawesome</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Forms & Tables -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Forms &amp; Tables</span></li>
+            <!-- Forms -->
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div class="text-truncate" data-i18n="Form Elements">Form Elements</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="forms-basic-inputs.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Basic Inputs">Basic Inputs</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="forms-input-groups.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Input groups">Input groups</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="forms-custom-options.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Custom Options">Custom Options</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="forms-editors.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Editors">Editors</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="forms-file-upload.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="File Upload">File Upload</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="forms-pickers.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Pickers">Pickers</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="forms-selects.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Select & Tags">Select &amp; Tags</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="forms-sliders.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Sliders">Sliders</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="forms-switches.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Switches">Switches</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="forms-extras.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Extras">Extras</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-detail"></i>
+                <div class="text-truncate" data-i18n="Form Layouts">Form Layouts</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="form-layouts-vertical.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Vertical Form">Vertical Form</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="form-layouts-horizontal.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Horizontal Form">Horizontal Form</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="form-layouts-sticky.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Sticky Actions">Sticky Actions</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-carousel"></i>
+                <div class="text-truncate" data-i18n="Form Wizard">Form Wizard</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="form-wizard-numbered.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Numbered">Numbered</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="form-wizard-icons.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Icons">Icons</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="form-validation.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-list-check"></i>
+                <div class="text-truncate" data-i18n="Form Validation">Form Validation</div>
+              </a>
+            </li>
+            <!-- Tables -->
+            <li class="menu-item">
+              <a href="tables-basic.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-table"></i>
+                <div class="text-truncate" data-i18n="Tables">Tables</div>
+              </a>
+            </li>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-grid"></i>
+                <div class="text-truncate" data-i18n="Datatables">Datatables</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="tables-datatables-basic.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Basic">Basic</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="tables-datatables-advanced.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Advanced">Advanced</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="tables-datatables-extensions.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Extensions">Extensions</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- Charts & Maps -->
             <li class="menu-header small text-uppercase">
-              <span class="menu-header-text">ADMIN MENU</span>
+              <span class="menu-header-text">Charts &amp; Maps</span>
             </li>
-            
- 			<li class="menu-item">
-              <a href="app-chat.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-chat"></i>
-                <div class="text-truncate">프로젝트 등록</div>
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-chart"></i>
+                <div class="text-truncate" data-i18n="Charts">Charts</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="charts-apex.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="Apex Charts">Apex Charts</div>
+                  </a>
+                </li>
+                <li class="menu-item">
+                  <a href="charts-chartjs.html" class="menu-link">
+                    <div class="text-truncate" data-i18n="ChartJS">ChartJS</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="menu-item">
+              <a href="maps-leaflet.html" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-map-alt"></i>
+                <div class="text-truncate" data-i18n="Leaflet Maps">Leaflet Maps</div>
+              </a>
+            </li>
+
+            <!-- Misc -->
+            <li class="menu-header small text-uppercase"><span class="menu-header-text">Misc</span></li>
+            <li class="menu-item">
+              <a href="https://themeselection.com/support/" target="_blank" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-support"></i>
+                <div class="text-truncate" data-i18n="Support">Support</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="app-chat.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-chat"></i>
-                <div class="text-truncate">사용자 등록</div>
+              <a
+                href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
+                target="_blank"
+                class="menu-link">
+                <i class="menu-icon tf-icons bx bx-file"></i>
+                <div class="text-truncate" data-i18n="Documentation">Documentation</div>
               </a>
             </li>
-            <li class="menu-item">
-              <a href="app-chat.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-chat"></i>
-                <div class="text-truncate">인력 관리</div>
-              </a>
-            </li>            
           </ul>
         </aside>
         <!-- / Menu -->
@@ -643,8 +1671,8 @@
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-medium d-block">김시온</span>
-                            <small class="text-muted">관리자</small>
+                            <span class="fw-medium d-block">John Doe</span>
+                            <small class="text-muted">Admin</small>
                           </div>
                         </div>
                       </a>
@@ -655,35 +1683,46 @@
                     <li>
                       <a class="dropdown-item" href="pages-profile-user.html">
                         <i class="bx bx-user me-2"></i>
-                        <span class="align-middle mx-1">마이 페이지</span>
+                        <span class="align-middle">My Profile</span>
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="${pageContext.request.contextPath}/note">
-                        <span class="d-flex align-items-center align-middle">
-                    	  <i class="bx bx-envelope me-3"></i>
-                     	  <span class="flex-grow-1 align-middle">쪽지함</span>
-                      	  <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                      	</span>
+                      <a class="dropdown-item" href="pages-account-settings-account.html">
+                        <i class="bx bx-cog me-2"></i>
+                        <span class="align-middle">Settings</span>
                       </a>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="${pageContext.request.contextPath}/chat">
+                      <a class="dropdown-item" href="pages-account-settings-billing.html">
                         <span class="d-flex align-items-center align-middle">
-                          <i class="bx bx-chat me-3"></i>
-                          <span class="flex-grow-1 align-middle">채팅</span>
+                          <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
+                          <span class="flex-grow-1 align-middle">Billing</span>
                           <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
                         </span>
                       </a>
                     </li>
-
+                    <li>
+                      <div class="dropdown-divider"></div>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="pages-faq.html">
+                        <i class="bx bx-help-circle me-2"></i>
+                        <span class="align-middle">FAQ</span>
+                      </a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" href="pages-pricing.html">
+                        <i class="bx bx-dollar me-2"></i>
+                        <span class="align-middle">Pricing</span>
+                      </a>
+                    </li>
                     <li>
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
                       <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
                         <i class="bx bx-power-off me-2"></i>
-                        <span class="align-middle">로그아웃</span>
+                        <span class="align-middle">Log Out</span>
                       </a>
                     </li>
                   </ul>
@@ -697,7 +1736,7 @@
               <input
                 type="text"
                 class="form-control search-input container-xxl border-0"
-                placeholder="검색"
+                placeholder="Search..."
                 aria-label="Search..." />
               <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
             </div>
@@ -719,8 +1758,8 @@
                       <div class="avatar avatar-xl avatar-online">
                         <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
                       </div>
-                      <h5 class="mt-3 mb-1">김시온</h5>
-                      <small class="text-muted">개발자</small>
+                      <h5 class="mt-3 mb-1">John Doe</h5>
+                      <small class="text-muted">UI/UX Designer</small>
                       <i
                         class="bx bx-x bx-sm cursor-pointer close-sidebar me-1 fs-4"
                         data-bs-toggle="sidebar"
@@ -729,17 +1768,17 @@
                     </div>
                     <div class="sidebar-body px-4 pb-4">
                       <div class="my-3">
-                        <span class="text-muted text-uppercase">소개</span>
+                        <span class="text-muted text-uppercase">About</span>
                         <textarea
                           id="chat-sidebar-left-user-about"
                           class="form-control chat-sidebar-left-user-about mt-2"
                           rows="4"
                           maxlength="120">
-							맛있는게 먹고 싶다.</textarea
+Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw brownie brownie marshmallow.</textarea
                         >
                       </div>
                       <div class="my-4">
-                        <span class="text-muted text-uppercase">상태</span>
+                        <span class="text-muted text-uppercase">Status</span>
                         <div class="d-grid gap-1 mt-2">
                           <div class="form-check form-check-success">
                             <input
@@ -749,7 +1788,7 @@
                               value="active"
                               id="user-active"
                               checked />
-                            <label class="form-check-label" for="user-active">활동중</label>
+                            <label class="form-check-label" for="user-active">Active</label>
                           </div>
                           <div class="form-check form-check-danger">
                             <input
@@ -758,7 +1797,7 @@
                               type="radio"
                               value="busy"
                               id="user-busy" />
-                            <label class="form-check-label" for="user-busy">바쁨</label>
+                            <label class="form-check-label" for="user-busy">Busy</label>
                           </div>
                           <div class="form-check form-check-warning">
                             <input
@@ -767,7 +1806,7 @@
                               type="radio"
                               value="away"
                               id="user-away" />
-                            <label class="form-check-label" for="user-away">자리비움</label>
+                            <label class="form-check-label" for="user-away">Away</label>
                           </div>
                           <div class="form-check form-check-secondary">
                             <input
@@ -776,12 +1815,12 @@
                               type="radio"
                               value="offline"
                               id="user-offline" />
-                            <label class="form-check-label" for="user-offline">오프라인</label>
+                            <label class="form-check-label" for="user-offline">Offline</label>
                           </div>
                         </div>
                       </div>
                       <div class="my-4">
-                        <span class="text-muted text-uppercase">설정</span>
+                        <span class="text-muted text-uppercase">Settings</span>
                         <ul class="list-unstyled d-grid gap-2 mt-2">
                           <li class="d-flex justify-content-between align-items-center">
                             <div>
@@ -795,7 +1834,7 @@
                           <li class="d-flex justify-content-between align-items-center">
                             <div>
                               <i class="bx bx-bell me-1"></i>
-                              <span class="align-middle">알림</span>
+                              <span class="align-middle">Notification</span>
                             </div>
                             <div class="form-check form-switch mb-0">
                               <input class="form-check-input" type="checkbox" id="switchNotification" checked />
@@ -839,7 +1878,7 @@
                           <input
                             type="text"
                             class="form-control chat-search-input"
-                            placeholder="검색"
+                            placeholder="Search..."
                             aria-label="Search..."
                             aria-describedby="basic-addon-search31" />
                         </div>
@@ -855,10 +1894,10 @@
                       <!-- Chats -->
                       <ul class="list-unstyled chat-contact-list pt-1" id="chat-list">
                         <li class="chat-contact-list-item chat-contact-list-item-title">
-                          <h5 class="text-primary mb-0">채팅</h5>
+                          <h5 class="text-primary mb-0">Chats</h5>
                         </li>
                         <li class="chat-contact-list-item chat-list-item-0 d-none">
-                          <h6 class="text-muted mb-0">대화목록을 찾을 수 없습니다.</h6>
+                          <h6 class="text-muted mb-0">No Chats Found</h6>
                         </li>
                         <li class="chat-contact-list-item">
                           <a class="d-flex align-items-center">
@@ -866,12 +1905,12 @@
                               <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/13.png" alt="Avatar" class="rounded-circle" />
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">오우주</h6>
+                              <h6 class="chat-contact-name text-truncate m-0">Waldemar Mannering</h6>
                               <p class="chat-contact-status text-truncate mb-0 text-muted">
-                                	나는 팀장이다. 내 말을 들어라
+                                Refer friends. Get rewards.
                               </p>
                             </div>
-                            <small class="text-muted mb-auto">5분전</small>
+                            <small class="text-muted mb-auto">5 Minutes</small>
                           </a>
                         </li>
                         <li class="chat-contact-list-item active">
@@ -880,33 +1919,33 @@
                               <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">박재홍</h6>
+                              <h6 class="chat-contact-name text-truncate m-0">Felecia Rower</h6>
                               <p class="chat-contact-status text-truncate mb-0 text-muted">
-                                	나는 아기고양이. 앙냥냥 👍
+                                I will purchase it for sure. 👍
                               </p>
                             </div>
-                            <small class="text-muted mb-auto">30분전</small>
+                            <small class="text-muted mb-auto">30 Minutes</small>
                           </a>
                         </li>
                         <li class="chat-contact-list-item">
                           <a class="d-flex align-items-center">
                             <div class="flex-shrink-0 avatar avatar-busy">
-                              <span class="avatar-initial rounded-circle bg-label-success">JJ</span>
+                              <span class="avatar-initial rounded-circle bg-label-success">CM</span>
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">김종진</h6>
+                              <h6 class="chat-contact-name text-truncate m-0">Calvin Moore</h6>
                               <p class="chat-contact-status text-truncate mb-0 text-muted">
-                              		 나는 김종지다.
+                                If it takes long you can mail inbox user
                               </p>
                             </div>
-                            <small class="text-muted mb-auto">1일 전</small>
+                            <small class="text-muted mb-auto">1 Day</small>
                           </a>
                         </li>
                       </ul>
                       <!-- Contacts -->
                       <ul class="list-unstyled chat-contact-list mb-0" id="contact-list">
                         <li class="chat-contact-list-item chat-contact-list-item-title">
-                          <h5 class="text-primary mb-0">목록</h5>
+                          <h5 class="text-primary mb-0">Contacts</h5>
                         </li>
                         <li class="chat-contact-list-item contact-list-item-0 d-none">
                           <h6 class="text-muted mb-0">No Contacts Found</h6>
@@ -917,7 +1956,7 @@
                               <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/4.png" alt="Avatar" class="rounded-circle" />
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">이은지</h6>
+                              <h6 class="chat-contact-name text-truncate m-0">Natalie Maxwell</h6>
                               <p class="chat-contact-status text-truncate mb-0 text-muted">UI/UX Designer</p>
                             </div>
                           </a>
@@ -928,7 +1967,7 @@
                               <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">김 철</h6>
+                              <h6 class="chat-contact-name text-truncate m-0">Jess Cook</h6>
                               <p class="chat-contact-status text-truncate mb-0 text-muted">Business Analyst</p>
                             </div>
                           </a>
@@ -936,10 +1975,10 @@
                         <li class="chat-contact-list-item">
                           <a class="d-flex align-items-center">
                             <div class="avatar d-block flex-shrink-0">
-                              <span class="avatar-initial rounded-circle bg-label-primary">MS</span>
+                              <span class="avatar-initial rounded-circle bg-label-primary">LM</span>
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">김미소</h6>
+                              <h6 class="chat-contact-name text-truncate m-0">Louie Mason</h6>
                               <p class="chat-contact-status text-truncate mb-0 text-muted">Resource Manager</p>
                             </div>
                           </a>
@@ -950,7 +1989,7 @@
                               <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">성유진</h6>
+                              <h6 class="chat-contact-name text-truncate m-0">Krystal Norton</h6>
                               <p class="chat-contact-status text-truncate mb-0 text-muted">Business Executive</p>
                             </div>
                           </a>
@@ -961,7 +2000,7 @@
                               <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/8.png" alt="Avatar" class="rounded-circle" />
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">조성진</h6>
+                              <h6 class="chat-contact-name text-truncate m-0">Stacy Garrison</h6>
                               <p class="chat-contact-status text-truncate mb-0 text-muted">Marketing Ninja</p>
                             </div>
                           </a>
@@ -969,10 +2008,10 @@
                         <li class="chat-contact-list-item">
                           <a class="d-flex align-items-center">
                             <div class="avatar d-block flex-shrink-0">
-                              <span class="avatar-initial rounded-circle bg-label-success">SM</span>
+                              <span class="avatar-initial rounded-circle bg-label-success">CM</span>
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">이송미</h6>
+                              <h6 class="chat-contact-name text-truncate m-0">Calvin Moore</h6>
                               <p class="chat-contact-status text-truncate mb-0 text-muted">UX Engineer</p>
                             </div>
                           </a>
@@ -983,7 +2022,7 @@
                               <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/10.png" alt="Avatar" class="rounded-circle" />
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">송원석</h6>
+                              <h6 class="chat-contact-name text-truncate m-0">Mary Giles</h6>
                               <p class="chat-contact-status text-truncate mb-0 text-muted">Account Department</p>
                             </div>
                           </a>
@@ -994,7 +2033,7 @@
                               <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/13.png" alt="Avatar" class="rounded-circle" />
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">김상규</h6>
+                              <h6 class="chat-contact-name text-truncate m-0">Waldemar Mannering</h6>
                               <p class="chat-contact-status text-truncate mb-0 text-muted">AWS Support</p>
                             </div>
                           </a>
@@ -1002,10 +2041,10 @@
                         <li class="chat-contact-list-item">
                           <a class="d-flex align-items-center">
                             <div class="avatar d-block flex-shrink-0">
-                              <span class="avatar-initial rounded-circle bg-label-danger">현주</span>
+                              <span class="avatar-initial rounded-circle bg-label-danger">AJ</span>
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">이현주</h6>
+                              <h6 class="chat-contact-name text-truncate m-0">Amy Johnson</h6>
                               <p class="chat-contact-status text-truncate mb-0 text-muted">Frontend Developer</p>
                             </div>
                           </a>
@@ -1016,7 +2055,7 @@
                               <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">고재승</h6>
+                              <h6 class="chat-contact-name text-truncate m-0">Felecia Rower</h6>
                               <p class="chat-contact-status text-truncate mb-0 text-muted">Cloud Engineer</p>
                             </div>
                           </a>
@@ -1027,7 +2066,7 @@
                               <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/11.png" alt="Avatar" class="rounded-circle" />
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">김진성</h6>
+                              <h6 class="chat-contact-name text-truncate m-0">William Stephens</h6>
                               <p class="chat-contact-status text-truncate mb-0 text-muted">Backend Developer</p>
                             </div>
                           </a>
@@ -1058,7 +2097,7 @@
                                 data-target="#app-chat-sidebar-right" />
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="m-0">박재홍</h6>
+                              <h6 class="m-0">Felecia Rower</h6>
                               <small class="user-status text-muted">NextJS developer</small>
                             </div>
                           </div>
@@ -1093,7 +2132,7 @@
                             <div class="d-flex overflow-hidden">
                               <div class="chat-message-wrapper flex-grow-1">
                                 <div class="chat-message-text">
-                                  <p class="mb-0">내가 널 위해 있어 😄</p>
+                                  <p class="mb-0">How can we help? We're here for you! 😄</p>
                                 </div>
                                 <div class="text-end text-muted mt-1">
                                   <i class="bx bx-check-double text-success"></i>
@@ -1116,11 +2155,11 @@
                               </div>
                               <div class="chat-message-wrapper flex-grow-1">
                                 <div class="chat-message-text">
-                                  <p class="mb-0">와 이 템플릿 진짜 좋다.</p>
-                                  <p class="mb-0">이거 어디서 찾았는지 알려줄 수 있어b? 🤔</p>
+                                  <p class="mb-0">Hey John, I am looking for the best admin template.</p>
+                                  <p class="mb-0">Could you please help me to find it out? 🤔</p>
                                 </div>
                                 <div class="chat-message-text mt-2">
-                                  <p class="mb-0">내가 쓰기도 좋아야 해.</p>
+                                  <p class="mb-0">It should be Bootstrap 5 compatible.</p>
                                 </div>
                                 <div class="text-muted mt-1">
                                   <small>10:02 AM</small>
@@ -1132,7 +2171,7 @@
                             <div class="d-flex overflow-hidden">
                               <div class="chat-message-wrapper flex-grow-1">
                                 <div class="chat-message-text">
-                                  <p class="mb-0">물론이지.</p>
+                                  <p class="mb-0">Sneat has all the components you'll ever need in a app.</p>
                                 </div>
                                 <div class="text-end text-muted mt-1">
                                   <i class="bx bx-check-double text-success"></i>
@@ -1155,13 +2194,13 @@
                               </div>
                               <div class="chat-message-wrapper flex-grow-1">
                                 <div class="chat-message-text">
-                                  <p class="mb-0">거 참 보기 좋군 hmm. 😃</p>
+                                  <p class="mb-0">Looks clean and fresh UI. 😃</p>
                                 </div>
                                 <div class="chat-message-text mt-2">
-                                  <p class="mb-0">우리 프로젝트에 최고야.</p>
+                                  <p class="mb-0">It's perfect for my next project.</p>
                                 </div>
                                 <div class="chat-message-text mt-2">
-                                  <p class="mb-0">얼마면 돼?</p>
+                                  <p class="mb-0">How can I purchase it?</p>
                                 </div>
                                 <div class="text-muted mt-1">
                                   <small>10:05 AM</small>
@@ -1173,7 +2212,7 @@
                             <div class="d-flex overflow-hidden">
                               <div class="chat-message-wrapper flex-grow-1">
                                 <div class="chat-message-text">
-                                  <p class="mb-0">1억.</p>
+                                  <p class="mb-0">Thanks, you can purchase it.</p>
                                 </div>
                                 <div class="text-end text-muted mt-1">
                                   <i class="bx bx-check-double text-success"></i>
@@ -1196,10 +2235,10 @@
                               </div>
                               <div class="chat-message-wrapper flex-grow-1">
                                 <div class="chat-message-text">
-                                  <p class="mb-0">내가 본 것 중 최고댜b. 👍</p>
+                                  <p class="mb-0">I will purchase it for sure. 👍</p>
                                 </div>
                                 <div class="chat-message-text mt-2">
-                                  <p class="mb-0">땡삼.</p>
+                                  <p class="mb-0">Thanks.</p>
                                 </div>
                                 <div class="text-muted mt-1">
                                   <small>10:08 AM</small>
@@ -1211,7 +2250,7 @@
                             <div class="d-flex overflow-hidden">
                               <div class="chat-message-wrapper flex-grow-1">
                                 <div class="chat-message-text">
-                                  <p class="mb-0">기분 좋구만.</p>
+                                  <p class="mb-0">Great, Feel free to get in touch.</p>
                                 </div>
                                 <div class="text-end text-muted mt-1">
                                   <i class="bx bx-check-double text-success"></i>
@@ -1234,7 +2273,7 @@
                               </div>
                               <div class="chat-message-wrapper flex-grow-1">
                                 <div class="chat-message-text">
-                                  <p class="mb-0">파일 좀 있니?</p>
+                                  <p class="mb-0">Do you have design files for Sneat?</p>
                                 </div>
                                 <div class="text-muted mt-1">
                                   <small>10:15 AM</small>
@@ -1247,7 +2286,7 @@
                               <div class="chat-message-wrapper flex-grow-1 w-50">
                                 <div class="chat-message-text">
                                   <p class="mb-0">
-                                   		ㅇㅇ 머가 필요해?
+                                    Yes that's correct documentation file, Design files are included with the template.
                                   </p>
                                 </div>
                                 <div class="text-end text-muted mt-1">
@@ -1294,7 +2333,7 @@
                       <div class="avatar avatar-xl avatar-online">
                         <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
                       </div>
-                      <h6 class="mt-3 mb-1">박재홍</h6>
+                      <h6 class="mt-3 mb-1">Felecia Rower</h6>
                       <small class="text-muted">NextJS Developer</small>
                       <i
                         class="bx bx-x bx-sm cursor-pointer close-sidebar me-1 fs-4 d-block"
@@ -1304,13 +2343,14 @@
                     </div>
                     <div class="sidebar-body px-4 pb-4">
                       <div class="my-3">
-                        <span class="text-muted text-uppercase">소개</span>
+                        <span class="text-muted text-uppercase">About</span>
                         <p class="mb-0 mt-2">
-                          개발자 싫어 흐긓ㄱ
+                          A Next. js developer is a software developer who uses the Next. js framework alongside ReactJS
+                          to build web applications.
                         </p>
                       </div>
                       <div class="my-4">
-                        <span class="text-muted text-uppercase">프로필 정보</span>
+                        <span class="text-muted text-uppercase">Personal Information</span>
                         <ul class="list-unstyled d-grid gap-2 mt-2">
                           <li class="d-flex align-items-center">
                             <i class="bx bx-envelope"></i>
