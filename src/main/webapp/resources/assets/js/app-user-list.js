@@ -43,6 +43,7 @@ $(function () {
       columns: [
         // columns according to JSON
         { data: '' },
+        { data: 'id' },
         { data: 'full_name' },
         { data: 'role' },
         { data: 'current_plan' },
@@ -63,8 +64,22 @@ $(function () {
           }
         },
         {
-          // User full name and email
+          // For Checkboxes
           targets: 1,
+          orderable: false,
+          searchable: false,
+          responsivePriority: 3,
+          checkboxes: true,
+          render: function () {
+            return '<input type="checkbox" class="dt-checkboxes form-check-input">';
+          },
+          checkboxes: {
+            selectAllRender: '<input type="checkbox" class="form-check-input">'
+          }
+        },
+        {
+          // User full name and email
+          targets: 2,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
             var $name = full['full_name'],
@@ -108,7 +123,7 @@ $(function () {
         },
         {
           // User Role
-          targets: 2,
+          targets: 3,
           render: function (data, type, full, meta) {
             var $role = full['role'];
             var roleBadgeObj = {
@@ -128,7 +143,7 @@ $(function () {
         },
         {
           // Plans
-          targets: 3,
+          targets: 4,
           render: function (data, type, full, meta) {
             var $plan = full['current_plan'];
 
@@ -137,7 +152,7 @@ $(function () {
         },
         {
           // User Status
-          targets: 5,
+          targets: 6,
           render: function (data, type, full, meta) {
             var $status = full['status'];
 
@@ -146,8 +161,8 @@ $(function () {
         },
         {
           // Actions
-          targets: -1,
-          title: 'Actions',
+          targets: 7,
+          title: '메신저',
           searchable: false,
           orderable: false,
           render: function (data, type, full, meta) {
@@ -167,7 +182,7 @@ $(function () {
           }
         }
       ],
-      order: [[1, 'desc']],
+      order: [[2, 'desc']],
       dom:
         '<"row mx-2"' +
         '<"col-md-2"<"me-3"l>>' +
@@ -369,7 +384,7 @@ $(function () {
       initComplete: function () {
         // Adding role filter once table initialized
         this.api()
-          .columns(2)
+          .columns(3)
           .every(function () {
             var column = this;
             var select = $(
@@ -391,7 +406,7 @@ $(function () {
           });
         // Adding plan filter once table initialized
         this.api()
-          .columns(3)
+          .columns(4)
           .every(function () {
             var column = this;
             var select = $(
@@ -413,7 +428,7 @@ $(function () {
           });
         // Adding status filter once table initialized
         this.api()
-          .columns(5)
+          .columns(6)
           .every(function () {
             var column = this;
             var select = $(
