@@ -142,9 +142,9 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">MENU</span>
             </li>
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate" >프로젝트</div>
               </a>
               <ul class="menu-sub">
@@ -158,22 +158,22 @@
                     <div class="text-truncate" >프로젝트 조직도</div>
                   </a>
                 </li>
-                <li class="menu-item">
-                  <a href="app-ecommerce-dashboard.html" class="menu-link">
+                <li class="menu-item active">
+                  <a href="${pageContext.request.contextPath}/searchUser" class="menu-link">
                     <div class="text-truncate">프로젝트 인력 검색</div>
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="menu-item active">
+            <li class="menu-item">
               <a href="app-email.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-envelope"></i>
+                <i class="menu-icon tf-icons bx bx-bell"></i>
                 <div class="text-truncate">공지사항</div>
               </a>
             </li>
             <li class="menu-item">
               <a href="app-chat.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-chat"></i>
+                <i class="menu-icon tf-icons bx bx-conversation"></i>
                 <div class="text-truncate">문의하기</div>
               </a>
             </li>
@@ -181,7 +181,7 @@
             <!-- e-commerce-app menu start -->
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-cart-alt"></i>
+                <i class="menu-icon tf-icons bx bx-task"></i>
                 <div class="text-truncate">일정관리</div>
               </a>
               <ul class="menu-sub">
@@ -203,21 +203,22 @@
               <span class="menu-header-text">ADMIN MENU</span>
             </li>
             
- 			<li class="menu-item">
+            <li class="menu-item">
               <a href="app-chat.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-chat"></i>
+                <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
             <li class="menu-item">
               <a href="app-chat.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-chat"></i>
+                <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
               </a>
             </li>
+            
             <li class="menu-item">
               <a href="app-chat.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-chat"></i>
+                <i class="menu-icon tf-icons bx bx-face"></i>
                 <div class="text-truncate">인력 관리</div>
               </a>
             </li>            
