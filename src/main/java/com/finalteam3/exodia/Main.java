@@ -58,4 +58,12 @@ public class Main {
 	public String userManagement(Model model) {
 		return "userManagement";
 	}
+	@RequestMapping("/userProfile")
+	public String userProfile(Model model) {
+		return "userProfile";
+	}
+	@RequestMapping("/userModify")
+	public String userModify(Model model) {
+		return "userModify";
+	}
 }

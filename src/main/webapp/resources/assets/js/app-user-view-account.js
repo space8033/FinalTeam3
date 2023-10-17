@@ -17,11 +17,9 @@ $(function () {
       columns: [
         // columns according to JSON
         { data: 'hours' },
-        { data: 'hours' },
         { data: 'project_name' },
         { data: 'total_task' },
-        { data: 'progress' },
-        { data: 'hours' }
+        { data: 'progress' }
       ],
       columnDefs: [
         {
@@ -35,21 +33,10 @@ $(function () {
             return '';
           }
         },
-        {
-          // For Checkboxes
-          targets: 1,
-          orderable: false,
-          checkboxes: {
-            selectAllRender: '<input type="checkbox" class="form-check-input">'
-          },
-          render: function () {
-            return '<input type="checkbox" class="dt-checkboxes form-check-input" >';
-          },
-          searchable: false
-        },
+       
         {
           // User full name and email
-          targets: 2,
+          targets: 1,
           responsivePriority: 1,
           render: function (data, type, full, meta) {
             var $name = full['project_name'],
@@ -94,12 +81,12 @@ $(function () {
           }
         },
         {
-          targets: 3,
+          targets: 2,
           orderable: false
         },
         {
           // Label
-          targets: 4,
+          targets: 3,
           responsivePriority: 3,
           render: function (data, type, full, meta) {
             var $progress = full['progress'] + '%',
@@ -134,11 +121,8 @@ $(function () {
               '</div>'
             );
           }
-        },
-        {
-          targets: 5,
-          orderable: false
         }
+       
       ],
       order: [[2, 'desc']],
       dom:
@@ -155,7 +139,7 @@ $(function () {
       language: {
         sLengthMenu: 'Show _MENU_',
         // search: '',
-        searchPlaceholder: 'Search Project'
+        searchPlaceholder: '프로젝트 검색'
       },
       // For responsive popup
       responsive: {
@@ -297,6 +281,7 @@ $(function () {
       language: {
         sLengthMenu: '_MENU_',
         search: '',
+        
         searchPlaceholder: 'Search Invoice'
       },
       // Buttons with Dropdown

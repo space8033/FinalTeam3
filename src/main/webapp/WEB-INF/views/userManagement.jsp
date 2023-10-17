@@ -640,7 +640,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item" href="pages-account-settings-account.html">
+                      <a class="dropdown-item" href="${pageContext.request.contextPath}/userModify">
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
@@ -649,7 +649,7 @@
                           </div>
                           <div class="flex-grow-1">
                             <span class="fw-medium d-block">김시온</span>
-                            <small class="text-muted">관리자</small>
+                            <small class="text-muted">개인 정보 수정</small>
                           </div>
                         </div>
                       </a>
@@ -658,7 +658,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="pages-profile-user.html">
+                      <a class="dropdown-item" href="${pageContext.request.contextPath}/userProfile">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle mx-1">마이 페이지</span>
                       </a>
@@ -1019,7 +1019,7 @@
 	         
                         <!-- Basic -->
                         <div class="col-md-8 mb-4">
-                          <label for="TypeaheadBasic" class="form-label">팀 업무 배정</label>
+                          <label for="TypeaheadBasic" class="form-label">팀 업무 배정(임시)</label>
                           <input
                             id="TypeaheadBasic"
                             class="form-control typeahead"
@@ -1110,7 +1110,9 @@
 
       <!-- Drag Target Area To SlideIn Menu On Small Screens -->
       <div class="drag-target"></div>
+     </div>
     </div>
+    
     <!-- / Layout wrapper -->
 
     <!-- Core JS -->

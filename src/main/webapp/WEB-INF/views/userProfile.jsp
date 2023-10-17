@@ -14,7 +14,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Extras - Forms | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>User Profile - Profile | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content="" />
 
@@ -41,9 +41,12 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css" />
 
     <!-- Page CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/pages/page-profile.css" />
 
     <!-- Helpers -->
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/helpers.js"></script>
@@ -60,7 +63,6 @@
       <div class="layout-container">
         <!-- Menu -->
 
-        
          <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="index.html" class="app-brand-link">
@@ -196,7 +198,7 @@
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
-            <li class="menu-item active">
+            <li class="menu-item">
               <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
@@ -210,6 +212,8 @@
               </a>
             </li>            
           </ul>
+          
+         
         </aside>
         <!-- / Menu -->
 
@@ -654,7 +658,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                     <a class="dropdown-item" href="${pageContext.request.contextPath}/userProfile">
+                      <a class="dropdown-item" href="${pageContext.request.contextPath}/userProfile">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle mx-1">마이 페이지</span>
                       </a>
@@ -704,6 +708,7 @@
             </div>
           </nav>
 
+
           <!-- / Navbar -->
 
           <!-- Content wrapper -->
@@ -712,84 +717,137 @@
 
             <div class="container-xxl flex-grow-1 container-p-y">
 
-
+              <!-- Header -->
               <div class="row">
-                <!-- Autosize -->
-                
-
-                <!-- Form Repeater -->
                 <div class="col-12">
-                  <div class="card">
-                    <h5 class="card-header">사용자 등록</h5>
-                    <div class="card-body">
-                      <form class="form-repeater">
-                        <div data-repeater-list="group-a">
-                          <div data-repeater-item>
-                            <div class="row">
-                              <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                <label class="form-label" for="form-repeater-1-1">이름</label>
-                                <input type="text" id="form-repeater-1-1" class="form-control" placeholder="김시온" />
-                              </div>
-                              <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                <label class="form-label" for="form-repeater-1-2">아이디</label>
-                                <input
-                                  type="text"
-                                  id="form-repeater-1-2"
-                                  class="form-control"
-                                  placeholder="201723445" />
-                              </div>
-                              <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                <label class="form-label" for="form-repeater-1-3">전화번호</label>
-                                <input
-                                  type="tel"
-                                  id="form-repeater-1-3"
-                                  class="form-control"
-                                  placeholder="010-4504-1219" />
-                              </div>
-                              
-                              <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                <label class="form-label" for="form-repeater-1-4">이메일</label>
-                                <input
-                                  type="text"
-                                  id="form-repeater-1-4"
-                                  class="form-control"
-                                  placeholder="noismik@oti.com" />
-                                 
-                              </div>
-            
-		                      
-                              <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                <label class="form-label" for="form-repeater-1-5">직위</label>
-                                <select id="form-repeater-1-5" class="form-select">
-                                  <option value="Designer">사원</option>
-                                  <option value="Developer">대리</option>
-                                  <option value="Tester">과장</option>
-                                  <option value="Manager">차장</option>
-                                  <option value="Bujang">부장</option>
-                                </select>
-                              </div>
-                              <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
-                                <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                                  <i class="bx bx-x me-1"></i>
-                                  <span class="align-middle">삭제</span>
-                                </button>
-                              </div>
-                            </div>
-                            <hr />
+                  <div class="card mb-4">
+                    <div class="user-profile-header-banner">
+                      <img src="${pageContext.request.contextPath}/resources/assets/img/pages/profile-banner.png" alt="Banner image" class="rounded-top" />
+                    </div>
+                    <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
+                      <div class="flex-shrink-0 mt-n2 mx-sm-0 mx-auto">
+                        <img
+                          src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
+                          alt="user image"
+                          class="d-block h-auto ms-0 ms-sm-4 rounded user-profile-img" />
+                      </div>
+                      <div class="flex-grow-1 mt-3 mt-sm-5">
+                        <div
+                          class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
+                          <div class="user-profile-info">
+                            <h4>김시온</h4>
+                            <ul
+                              class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
+                              <li class="list-inline-item fw-medium"><i class="bx bx-id-card mb-1"></i> 개발자</li>
+                              <li class="list-inline-item fw-medium"><i class="bx bx-buildings mb-1"></i> 오티아이</li>
+
+                            </ul>
                           </div>
+                          
                         </div>
-                        <div class="mb-0 me-2 col text-center">
-                          <button class="btn btn-primary align-items-center" data-repeater-create>
-                            <i class="bx bx-plus me-1"></i>
-                            <span class="align-middle">추가</span>
-                          </button>
-                        </div>
-                      </form>
+                      </div>
                     </div>
                   </div>
                 </div>
-                <!-- /Form Repeater -->
               </div>
+              <!--/ Header -->
+
+             
+
+              <!-- User Profile Content -->
+              <div class="row">
+                <div class="col-xl-4 col-lg-5 col-md-5">
+                  <!-- About User -->
+                  <div class="card mb-4">
+                    <div class="card-body">
+                      <small class="text-muted text-uppercase">About</small>
+                      <ul class="list-unstyled mb-4 mt-3">
+                        <li class="d-flex align-items-center mb-3">
+                          <i class="bx bx-user"></i><span class="fw-medium mx-2">이름 :</span> <span>김시온</span>
+                        </li>
+                        <li class="d-flex align-items-center mb-3">
+                          <i class="bx bx-detail"></i><span class="fw-medium mx-2">아이디 :</span>
+                          <span>20231234</span>
+                        </li>
+                        <li class="d-flex align-items-center mb-3">
+                          <i class="bx bx-check"></i><span class="fw-medium mx-2">상태 :</span> <span>활동중</span>
+                        </li>
+                        <li class="d-flex align-items-center mb-3">
+                          <i class="bx bx-star"></i><span class="fw-medium mx-2">권한 :</span> <span>개발자</span>
+                        </li>
+                        <li class="d-flex align-items-center mb-3">
+                          <i class="bx bx-sitemap"></i><span class="fw-medium mx-2">직위 :</span> <span>부장</span>
+                        </li>
+                         <li class="d-flex align-items-center mb-3">
+                          <i class="bx bx-task"></i><span class="fw-medium mx-2">업무 :</span> <span>로그인</span>
+                        </li>
+                        
+                      </ul>
+                      <small class="text-muted text-uppercase">Contacts</small>
+                      <ul class="list-unstyled mb-4 mt-3">
+                        <li class="d-flex align-items-center mb-3">
+                          <i class="bx bx-phone"></i><span class="fw-medium mx-2">전화번호 :</span>
+                          <span>010-4504-1219</span>
+                        </li>
+                        
+                        <li class="d-flex align-items-center mb-3">
+                          <i class="bx bx-envelope"></i><span class="fw-medium mx-2">이메일 :</span>
+                          <span>noismik@example.com</span>
+                        </li>
+                      </ul>
+                      <small class="text-muted text-uppercase">Teams</small>
+                      <ul class="list-unstyled mt-3 mb-0">
+                        <li class="d-flex align-items-center mb-3">
+                          <i class="bx bxl-github text-primary me-2"></i>
+                          <div class="d-flex flex-wrap">
+                            <span class="fw-medium me-2">개발 1팀</span><span>(12명)</span>
+                          </div>
+                        </li>
+                        <li class="d-flex align-items-center">
+                          <i class="bx bxl-react text-info me-2"></i>
+                          <div class="d-flex flex-wrap">
+                            <span class="fw-medium me-2">개발 2팀</span><span>(9명)</span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <!--/ About User -->
+                  <!-- Profile Overview -->
+                   <!-- Teams -->
+                    
+                    <!--/ Teams -->
+                  <!--/ Profile Overview -->
+                </div>
+                <div class="col-xl-8 col-lg-7 col-md-7">
+                  
+                  <div class="row">
+                    
+                   
+                    <div class="card mb-4">
+	                    <h5 class="card-header mt-2">프로젝트 리스트</h5>
+	                    <div class="table-responsive mb-3">
+	                      <table class="table datatable-project">
+	                        <thead class="table-light">
+	                          <tr>
+	                            <th></th>
+	                            <th>프로젝트명</th>
+	                            <th class="text-nowrap">총 업무</th>
+	                            <th>진행율</th>
+	                            <th></th>
+	                          </tr>
+	                        </thead>
+	                      </table>
+	                    </div>
+                    </div>
+                  </div>
+                  <!-- Projects table -->
+                  
+ 
+                  <!--/ Projects table -->
+                </div>
+              </div>
+              <!--/ User Profile Content -->
             </div>
             <!-- / Content -->
 
@@ -856,16 +914,12 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/autosize/autosize.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
 
     <!-- Main JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-extras.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/app-user-view-account.js"></script>
   </body>
 </html>
