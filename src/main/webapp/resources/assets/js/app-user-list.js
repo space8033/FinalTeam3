@@ -168,7 +168,8 @@ $(function () {
           render: function (data, type, full, meta) {
             return (
               '<div class="d-inline-block text-nowrap">' +
-              '<button class="btn btn-sm btn-icon"><i class="bx bx-edit"></i></button>' +
+              '<button class="btn btn-sm btn-icon"><i class="bx bx-paper-plane"></i></button>' +
+              '<button class="btn btn-sm btn-icon"><i class="bx bx-chat"></i></button>' +
               '<button class="btn btn-sm btn-icon delete-record"><i class="bx bx-trash"></i></button>' +
               '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded me-2"></i></button>' +
               '<div class="dropdown-menu dropdown-menu-end m-0">' +
@@ -198,156 +199,9 @@ $(function () {
         searchPlaceholder: 'Search..'
       },
       // Buttons with Dropdown
-      buttons: [
-        {
-          extend: 'collection',
-          className: 'btn btn-label-secondary dropdown-toggle mx-3',
-          text: '<i class="bx bx-export me-1"></i>Export',
-          buttons: [
-            {
-              extend: 'print',
-              text: '<i class="bx bx-printer me-2" ></i>Print',
-              className: 'dropdown-item',
-              exportOptions: {
-                columns: [1, 2, 3, 4, 5],
-                // prevent avatar to be print
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('user-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              },
-              customize: function (win) {
-                //customize print view for dark
-                $(win.document.body)
-                  .css('color', headingColor)
-                  .css('border-color', borderColor)
-                  .css('background-color', bodyBg);
-                $(win.document.body)
-                  .find('table')
-                  .addClass('compact')
-                  .css('color', 'inherit')
-                  .css('border-color', 'inherit')
-                  .css('background-color', 'inherit');
-              }
-            },
-            {
-              extend: 'csv',
-              text: '<i class="bx bx-file me-2" ></i>Csv',
-              className: 'dropdown-item',
-              exportOptions: {
-                columns: [1, 2, 3, 4, 5],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('user-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              }
-            },
-            {
-              extend: 'excel',
-              text: '<i class="bx bxs-file-export me-2"></i>Excel',
-              className: 'dropdown-item',
-              exportOptions: {
-                columns: [1, 2, 3, 4, 5],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('user-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              }
-            },
-            {
-              extend: 'pdf',
-              text: '<i class="bx bxs-file-pdf me-2"></i>Pdf',
-              className: 'dropdown-item',
-              exportOptions: {
-                columns: [1, 2, 3, 4, 5],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('user-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              }
-            },
-            {
-              extend: 'copy',
-              text: '<i class="bx bx-copy me-2" ></i>Copy',
-              className: 'dropdown-item',
-              exportOptions: {
-                columns: [1, 2, 3, 4, 5],
-                // prevent avatar to be display
-                format: {
-                  body: function (inner, coldex, rowdex) {
-                    if (inner.length <= 0) return inner;
-                    var el = $.parseHTML(inner);
-                    var result = '';
-                    $.each(el, function (index, item) {
-                      if (item.classList !== undefined && item.classList.contains('user-name')) {
-                        result = result + item.lastChild.firstChild.textContent;
-                      } else if (item.innerText === undefined) {
-                        result = result + item.textContent;
-                      } else result = result + item.innerText;
-                    });
-                    return result;
-                  }
-                }
-              }
-            }
-          ]
-        },
-        {
-          text: '<i class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">Add New User</span>',
-          className: 'add-new btn btn-primary',
-          attr: {
-            'data-bs-toggle': 'offcanvas',
-            'data-bs-target': '#offcanvasAddUser'
-          }
-        }
-      ],
+      
+        
+      
       // For responsive popup
       responsive: {
         details: {
@@ -388,7 +242,7 @@ $(function () {
           .every(function () {
             var column = this;
             var select = $(
-              '<select id="UserRole" class="form-select text-capitalize"><option value=""> Select Role </option></select>'
+              '<select id="UserRole" class="form-select text-capitalize"><option value=""> 권한별 검색 필터 </option></select>'
             )
               .appendTo('.user_role')
               .on('change', function () {
@@ -410,7 +264,7 @@ $(function () {
           .every(function () {
             var column = this;
             var select = $(
-              '<select id="UserPlan" class="form-select text-capitalize"><option value=""> Select Plan </option></select>'
+              '<select id="UserPlan" class="form-select text-capitalize"><option value=""> 팀별 검색 필터 </option></select>'
             )
               .appendTo('.user_plan')
               .on('change', function () {
@@ -432,7 +286,7 @@ $(function () {
           .every(function () {
             var column = this;
             var select = $(
-              '<select id="FilterTransaction" class="form-select text-capitalize"><option value=""> Select Status </option></select>'
+              '<select id="FilterTransaction" class="form-select text-capitalize"><option value=""> 상태별 검색 필터 </option></select>'
             )
               .appendTo('.user_status')
               .on('change', function () {
@@ -457,7 +311,6 @@ $(function () {
       }
     });
     // To remove default btn-secondary in export buttons
-    $('.dt-buttons > .btn-group > button').removeClass('btn-secondary');
   }
 
   // Delete Record

@@ -55,4 +55,34 @@ public class Main {
 	public String initialPassword(Model model) {
 		return "initialPassword";
 	}
+	
+	@RequestMapping("/addProject")
+	public String addProject(Model model) {
+		return "addProject";
+	}
+	@RequestMapping("/addUser")
+	public String addUser(Model model) {
+		return "addUser";
+	}
+	@RequestMapping("/userManagement")
+	public String userManagement(Model model) {
+		return "userManagement";
+	}
+	@RequestMapping("/userProfile")
+	public String userProfile(Model model) {
+		return "userProfile";
+	}
+	@RequestMapping("/userModify")
+	public String userModify(Model model) {
+		return "userModify";
+	}
+	@RequestMapping("/userModify2")
+	public String userModify2(Model model) {
+		return "userModify2";
+	}
+	
+	@RequestMapping("/projectList")
+	public String projectList(Model model) {
+		return "projectList";
+	}
 }

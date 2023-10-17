@@ -136,7 +136,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="dashboards-analytics.html" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/projectList" class="menu-link">
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
                 </li>
@@ -191,20 +191,20 @@
             </li>
             
             <li class="menu-item">
-              <a href="app-chat.html" class="menu-link">
+              <a href="${pageContext.request.contextPath}/addProject" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="app-chat.html" class="menu-link">
+              <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
               </a>
             </li>
             
             <li class="menu-item">
-              <a href="app-chat.html" class="menu-link">
+              <a href="${pageContext.request.contextPath}/userManagement" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-face"></i>
                 <div class="text-truncate">인력 관리</div>
               </a>
@@ -636,7 +636,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item" href="pages-account-settings-account.html">
+                      <a class="dropdown-item" href="${pageContext.request.contextPath}/userModify">
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
@@ -645,7 +645,7 @@
                           </div>
                           <div class="flex-grow-1">
                             <span class="fw-medium d-block">김시온</span>
-                            <small class="text-muted">관리자</small>
+                            <small class="text-muted">개인 정보 수정</small>
                           </div>
                         </div>
                       </a>
@@ -654,7 +654,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="pages-profile-user.html">
+                      <a class="dropdown-item" href="${pageContext.request.contextPath}/userProfile">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle mx-1">마이 페이지</span>
                       </a>
