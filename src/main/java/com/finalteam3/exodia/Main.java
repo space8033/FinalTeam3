@@ -85,4 +85,14 @@ public class Main {
 	public String projectList(Model model) {
 		return "projectList";
 	}
+	
+	@RequestMapping("/qnaList")
+	public String qnaList(Model model) {
+		return "qnaList";
+	}
+	
+	@RequestMapping("/noticeDetail")
+	public String noticeDetail(Model model) {
+		return "noticeDetail";
+	}
 }
