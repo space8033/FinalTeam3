@@ -14,7 +14,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Account settings - Account | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>eCommerce Add Product - Apps | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content="" />
 
@@ -41,10 +41,13 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/typography.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/katex.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/editor.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/styles/index.min.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/animate-css/animate.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/sweetalert2/sweetalert2.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/dropzone/dropzone.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.css" />
 
     <!-- Page CSS -->
 
@@ -62,8 +65,7 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+ 		 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="index.html" class="app-brand-link">
               <span class="app-brand-logo demo">
@@ -131,7 +133,7 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">MENU</span>
             </li>
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate" >프로젝트</div>
@@ -154,7 +156,7 @@
                 </li>
               </ul>
             </li>
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="${pageContext.request.contextPath}/noticeList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bell"></i>
                 <div class="text-truncate">공지사항</div>
@@ -212,8 +214,6 @@
               </a>
             </li>            
           </ul>
-          
-         
         </aside>
         <!-- / Menu -->
 
@@ -707,7 +707,6 @@
               <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
             </div>
           </nav>
-
           <!-- / Navbar -->
 
           <!-- Content wrapper -->
@@ -715,162 +714,115 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
+              <!-- <h4 class="py-3 mb-4"><span class="text-muted fw-light">eCommerce /</span><span> Add Product</span></h4> -->
 
-              <div class="row">
-                <div class="col-md-12">
-                  
-                  <div class="card mb-4">
-                    <h5 class="card-header">개인 정보 수정</h5>
-                    <!-- Account -->
-                    <div class="card-body">
-                      <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img
-                          src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
-                          alt="user-avatar"
-                          class="d-block rounded"
-                          height="100"
-                          width="100"
-                          id="uploadedAvatar" />
-                        <div class="button-wrapper">
-                          <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                            <span class="d-none d-sm-block">프로필 사진 변경</span>
-                            <i class="bx bx-upload d-block d-sm-none"></i>
-                            <input
-                              type="file"
-                              id="upload"
-                              class="account-file-input"
-                              hidden
-                              accept="image/png, image/jpeg" />
-                          </label>
-                          <button type="button" class="btn btn-label-secondary account-image-reset mb-4">
-                            <i class="bx bx-reset d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">초기화 </span>
-                          </button>
+              <div class="app-ecommerce">
+                <!-- Add Product -->
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                  <div class="d-flex flex-column justify-content-center">
+                    <h4 class="mb-1 mt-3"><strong>공지사항 내용🍣</strong></h4>
+                    <!-- <p class="text-muted">Orders placed across your store</p> -->
+                  </div>
+                  <div class="d-flex align-content-center flex-wrap gap-3">
+                    <!-- <button class="btn btn-label-secondary">Discard</button>
+                    <button class="btn btn-label-primary">Save draft</button> -->
+                    <button type="submit" class="btn btn-primary">등록</button>
+                  </div>
+                </div>
 
-                          <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
-                        </div>
+                <div class="row">
+                  <!-- First column-->
+                  <div class="col-12 col-lg-12">
+                    <!-- Product Information -->
+                    <div class="card mb-4">
+                      <!-- <div class="card-header">
+                        <h5 class="card-tile mb-0">Product information</h5>
+                      </div> -->
+                      <div class="card-body">
+                        	<div class="card-body">
+								<div>
+									<div>
+										<div>
+											<p>
+												<span>번호:</span> 
+												<span>${board.bno}</span>
+											</p>
+											
+											<p>
+												<span>제목:</span> 
+												<span>${board.btitle}</span>
+											</p>
+											
+											<p>
+												<span>글쓴이:</span> 
+												<span>${board.mid}</span>
+											<p>
+											
+											<p>
+												<span>날짜:</span> 
+												<span><fmt:formatDate value="${board.bdate}" pattern="yyyy-MM-dd HH.mm.ss"/></span> <br/>
+											</p>
+											
+											<c:if test="${board.battachoname !=null}">
+												<p>
+													<%-- <span>첨부:</span> 
+													<span>
+														${board.battachoname}
+														
+														<!-- 첨부파일이 파일 시스템에 저장되어 있는 경우 -->
+														<c:if test="${board.battachoname != null}">
+															<a href="filedownload1?bno=${board.bno}"
+															 class="btn btn-info btn-sm ml-2">다운로드</a>
+															<img src="filedownload1?bno=${board.bno}" height="100"/>
+														</c:if>
+														
+														<!-- 첨부파일이 DB에 저장되어 있는 경우 --> 
+														<c:if test="${board.battachdata != null}">
+															<a href="filedownload2?bno=${board.bno}"
+															 class="btn btn-info btn-sm ml-2">다운로드</a>
+															 <!-- 
+															  src의 속성값은 완전한 응답 HTTP가 되어야 함 
+															  (jpg,png 나 filedownload1?bno=${board.bno} 요청으로 완전한 http를 받는다)
+															  
+															   1) 서버의 정적을 요청해서 응답을 받는 경우, 예) photo1.jpg
+															   2) 요청경로를 이용해서 컨트롤러에서 응답을 생성하는 경우, 예) filedownload1?bno=${board.bno}
+															   
+															   데이터를 직접 주면 안됨! 만약 데이터를 직접 넣어야할 경우 아래와 같음
+															  src="data:MIME;base64, base64로 인코딩된 데이터"
+															 -->
+															<img src="data:${board.battachtype};base64, ${base64Img}" height="100"/>
+														</c:if>
+														 
+													</span> --%>
+												</p>
+											</c:if>
+										</div>
+										
+										<%-- <div>
+											<span class="title">내용:</span> <br/>
+											<textarea style="width:100%" readonly>${board.bcontent}</textarea>
+										</div> --%>
+										<div>
+				                          <label class="form-label"><strong>내용</strong></label>
+				                          <div class="form-control p-0 pt-1">
+				                            <div class="comment-toolbar border-0 border-bottom">
+				                              <div class="d-flex justify-content-start">
+				                              </div>
+				                            </div>
+				                          </div>
+				                        </div>
+										
+										<a class="btn btn-primary btn-sm mt-2" href="getBoardList">목록</a>
+										<a class="btn btn-primary btn-sm mt-2" href="updateBoard?bno=${board.bno}">수정</a>
+										<a class="btn btn-primary btn-sm mt-2" href="deleteBoard?bno=${board.bno}">삭제</a>
+										
+									</div>
+								</div>
+							</div>
                       </div>
                     </div>
-                    <hr class="my-0" />
-                    <div class="card-body">
-                      <form id="formAccountSettings" method="POST" onsubmit="return false">
-                        <div class="row">
-                          
-                          <div class="mb-3 col-md-6">
-                          
-                            <label for="firstName" class="form-label">이름</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              id="firstName"
-                              name="firstName"
-                              value="김시온"
-                              autofocus />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="lastName" class="form-label">아이디</label>
-                            <input class="form-control" type="text" name="lastName" id="lastName" value="201234566" />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="email" class="form-label">이메일</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              id="email"
-                              name="email"
-                              value="john.doe@example.com"
-                              placeholder="john.doe@example.com" />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="organization" class="form-label">회사</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="organization"
-                              name="organization"
-                              value="OTI" />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label class="form-label" for="phoneNumber">휴대폰 번호</label>
-                            <div class="input-group input-group-merge">
-                              <input
-                                type="text"
-                                id="phoneNumber"
-                                name="phoneNumber"
-                                class="form-control"
-                                placeholder="010-1234-5678" />
-                            </div>
-                          </div>
-                          
-                        </div>
-                        <div class="mt-2">
-                          <button type="submit" class="btn btn-primary me-2">저장</button>
-                          <button type="reset" class="btn btn-label-secondary">취소</button>
-                        </div>
-                      </form>
-                    </div>
-                    <!-- /Account -->
-                    <div>
-     				 <div class="card">
-	                    <h5 class="card-header">비밀번호 변경</h5>
-	                    <div class="card-body">
-	                      
-	                      <form id="formAccountDeactivation" onsubmit="return false">
-	                      	<div class="mb-3 form-password-toggle col-md-6">
-		                       <label class="form-label" for="basic-default-password">현재 비밀번호</label>
-		                          <div class="input-group input-group-merge">
-		                            <input
-		                              type="password"
-		                              id="basic-default-password"
-		                              class="form-control"
-		                              placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-		                              aria-describedby="basic-default-password3"
-		                              required />
-		                            <span class="input-group-text cursor-pointer" id="basic-default-password3"
-		                              ><i class="bx bx-hide"></i
-		                            ></span>
-		                          </div>
-		                     </div>
-	                         <div class="mb-3 col-md-6">
-	                          <div class="form-password-toggle">
-	                            <label class="form-label" for="formValidationPass">새로운 비밀번호</label>
-	                            <div class="input-group input-group-merge">
-	                              <input
-	                                class="form-control"
-	                                type="password"
-	                                id="formValidationPass"
-	                                name="formValidationPass"
-	                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-	                                aria-describedby="multicol-password2" />
-	                              <span class="input-group-text cursor-pointer" id="multicol-password2"
-	                                ><i class="bx bx-hide"></i
-	                              ></span>
-	                            </div>
-                        	  </div>
-                        	</div>
-	                        <div class="mb-3 col-md-6">
-	                          <div class="form-password-toggle">
-	                            <label class="form-label" for="formValidationConfirmPass">비밀번호 확인</label>
-	                            <div class="input-group input-group-merge">
-	                              <input
-	                                class="form-control"
-	                                type="password"
-	                                id="formValidationConfirmPass"
-	                                name="formValidationConfirmPass"
-	                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-	                                aria-describedby="multicol-confirm-password2" />
-	                              <span class="input-group-text cursor-pointer" id="multicol-confirm-password2"
-	                                ><i class="bx bx-hide"></i
-	                              ></span>
-	                            </div>
-	                          </div>
-	                        </div>
-	                        <button type="submit" class="btn btn-danger deactivate-account">비밀번호 변경</button>
-	                      </form>
-	                 	</div>
-                  	</div>
-                  </div>
-               </div>
+                </div>
+              </div>
             </div>
             <!-- / Content -->
 
@@ -878,11 +830,11 @@
             <footer class="content-footer footer bg-footer-theme">
               <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                 <div class="mb-2 mb-md-0">
-                  ©
+                  Â©
                   <script>
                     document.write(new Date().getFullYear());
                   </script>
-                  , made with ❤️ by
+                  , made with â¤ï¸ by
                   <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">ThemeSelection</a>
                 </div>
                 <div class="d-none d-lg-inline-block">
@@ -937,27 +889,18 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/katex.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/quill.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/dropzone/dropzone.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.js"></script>
 
     <!-- Main JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/pages-account-settings-account.js"></script>
-    
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
-
-
-    <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/form-validation2.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/app-ecommerce-product-add.js"></script>
   </body>
 </html>

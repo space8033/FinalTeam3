@@ -155,13 +155,13 @@
               </ul>
             </li>
             <li class="menu-item">
-              <a href="app-email.html" class="menu-link">
+             <a href="${pageContext.request.contextPath}/noticeList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bell"></i>
                 <div class="text-truncate">공지사항</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="app-chat.html" class="menu-link">
+              <a href="${pageContext.request.contextPath}/qnaList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-conversation"></i>
                 <div class="text-truncate">문의하기</div>
               </a>
@@ -175,12 +175,12 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="app-ecommerce-dashboard.html" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/calendar" class="menu-link">
                     <div class="text-truncate">팀 별 일정 관리</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="javascript:void(0);" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/calendar" class="menu-link">
                     <div class="text-truncate">개인 별 일정 관리</div>
                   </a>
                 </li>

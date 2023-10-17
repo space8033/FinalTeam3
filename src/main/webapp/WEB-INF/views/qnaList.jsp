@@ -7,14 +7,14 @@
   dir="ltr"
   data-theme="theme-default"
   data-assets-path="${pageContext.request.contextPath}/resources/assets/"
-  data-template="vertical-menu-template">
+  data-template="vertical-menu-template-no-customizer">
   <head>
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Account settings - Account | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Product List - eCommerce | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content="" />
 
@@ -34,25 +34,23 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/fonts/flag-icons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/core.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/theme-default.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/styles/index.min.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/animate-css/animate.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/sweetalert2/sweetalert2.css" />
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
   </head>
@@ -62,8 +60,7 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-
-        <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+ 		 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="index.html" class="app-brand-link">
               <span class="app-brand-logo demo">
@@ -160,7 +157,7 @@
                 <div class="text-truncate">공지사항</div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="${pageContext.request.contextPath}/qnaList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-conversation"></i>
                 <div class="text-truncate">문의하기</div>
@@ -193,27 +190,25 @@
             </li>
             
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/addProject" class="menu-link">
+              <a href="app-chat.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
+              <a href="app-chat.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
               </a>
             </li>
             
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/userManagement" class="menu-link">
+              <a href="app-chat.html" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-face"></i>
                 <div class="text-truncate">인력 관리</div>
               </a>
             </li>            
           </ul>
-          
-         
         </aside>
         <!-- / Menu -->
 
@@ -640,7 +635,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                      <a class="dropdown-item" href="${pageContext.request.contextPath}/userModify">
+                     <a class="dropdown-item" href="${pageContext.request.contextPath}/userModify">
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
@@ -707,7 +702,6 @@
               <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
             </div>
           </nav>
-
           <!-- / Navbar -->
 
           <!-- Content wrapper -->
@@ -716,161 +710,32 @@
 
             <div class="container-xxl flex-grow-1 container-p-y">
 
-              <div class="row">
-                <div class="col-md-12">
-                  
-                  <div class="card mb-4">
-                    <h5 class="card-header">개인 정보 수정</h5>
-                    <!-- Account -->
-                    <div class="card-body">
-                      <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img
-                          src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
-                          alt="user-avatar"
-                          class="d-block rounded"
-                          height="100"
-                          width="100"
-                          id="uploadedAvatar" />
-                        <div class="button-wrapper">
-                          <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
-                            <span class="d-none d-sm-block">프로필 사진 변경</span>
-                            <i class="bx bx-upload d-block d-sm-none"></i>
-                            <input
-                              type="file"
-                              id="upload"
-                              class="account-file-input"
-                              hidden
-                              accept="image/png, image/jpeg" />
-                          </label>
-                          <button type="button" class="btn btn-label-secondary account-image-reset mb-4">
-                            <i class="bx bx-reset d-block d-sm-none"></i>
-                            <span class="d-none d-sm-block">초기화 </span>
-                          </button>
-
-                          <p class="text-muted mb-0">Allowed JPG, GIF or PNG. Max size of 800K</p>
-                        </div>
-                      </div>
-                    </div>
-                    <hr class="my-0" />
-                    <div class="card-body">
-                      <form id="formAccountSettings" method="POST" onsubmit="return false">
-                        <div class="row">
-                          
-                          <div class="mb-3 col-md-6">
-                          
-                            <label for="firstName" class="form-label">이름</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              id="firstName"
-                              name="firstName"
-                              value="김시온"
-                              autofocus />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="lastName" class="form-label">아이디</label>
-                            <input class="form-control" type="text" name="lastName" id="lastName" value="201234566" />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="email" class="form-label">이메일</label>
-                            <input
-                              class="form-control"
-                              type="text"
-                              id="email"
-                              name="email"
-                              value="john.doe@example.com"
-                              placeholder="john.doe@example.com" />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label for="organization" class="form-label">회사</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="organization"
-                              name="organization"
-                              value="OTI" />
-                          </div>
-                          <div class="mb-3 col-md-6">
-                            <label class="form-label" for="phoneNumber">휴대폰 번호</label>
-                            <div class="input-group input-group-merge">
-                              <input
-                                type="text"
-                                id="phoneNumber"
-                                name="phoneNumber"
-                                class="form-control"
-                                placeholder="010-1234-5678" />
-                            </div>
-                          </div>
-                          
-                        </div>
-                        <div class="mt-2">
-                          <button type="submit" class="btn btn-primary me-2">저장</button>
-                          <button type="reset" class="btn btn-label-secondary">취소</button>
-                        </div>
-                      </form>
-                    </div>
-                    <!-- /Account -->
-                    <div>
-     				 <div class="card">
-	                    <h5 class="card-header">비밀번호 변경</h5>
-	                    <div class="card-body">
-	                      
-	                      <form id="formAccountDeactivation" onsubmit="return false">
-	                      	<div class="mb-3 form-password-toggle col-md-6">
-		                       <label class="form-label" for="basic-default-password">현재 비밀번호</label>
-		                          <div class="input-group input-group-merge">
-		                            <input
-		                              type="password"
-		                              id="basic-default-password"
-		                              class="form-control"
-		                              placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-		                              aria-describedby="basic-default-password3"
-		                              required />
-		                            <span class="input-group-text cursor-pointer" id="basic-default-password3"
-		                              ><i class="bx bx-hide"></i
-		                            ></span>
-		                          </div>
-		                     </div>
-	                         <div class="mb-3 col-md-6">
-	                          <div class="form-password-toggle">
-	                            <label class="form-label" for="formValidationPass">새로운 비밀번호</label>
-	                            <div class="input-group input-group-merge">
-	                              <input
-	                                class="form-control"
-	                                type="password"
-	                                id="formValidationPass"
-	                                name="formValidationPass"
-	                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-	                                aria-describedby="multicol-password2" />
-	                              <span class="input-group-text cursor-pointer" id="multicol-password2"
-	                                ><i class="bx bx-hide"></i
-	                              ></span>
-	                            </div>
-                        	  </div>
-                        	</div>
-	                        <div class="mb-3 col-md-6">
-	                          <div class="form-password-toggle">
-	                            <label class="form-label" for="formValidationConfirmPass">비밀번호 확인</label>
-	                            <div class="input-group input-group-merge">
-	                              <input
-	                                class="form-control"
-	                                type="password"
-	                                id="formValidationConfirmPass"
-	                                name="formValidationConfirmPass"
-	                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-	                                aria-describedby="multicol-confirm-password2" />
-	                              <span class="input-group-text cursor-pointer" id="multicol-confirm-password2"
-	                                ><i class="bx bx-hide"></i
-	                              ></span>
-	                            </div>
-	                          </div>
-	                        </div>
-	                        <button type="submit" class="btn btn-danger deactivate-account">비밀번호 변경</button>
-	                      </form>
-	                 	</div>
-                  	</div>
+              <!-- Product List Table -->
+              <div class="card2">
+                <div class="card-header">
+                  <h5 class="card-title"></h5>
+                  <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
+                    <div class="col-md-4 product_category" style = "margin-left: 20px"><h3><strong>공지사항🚨</strong></h3></div>
                   </div>
-               </div>
+                </div>
+                <div class="card-datatable table-responsive">
+                  <table class="datatables-products table border-top">
+                    <thead>
+                      <tr>
+                        <th></th>
+                        <th>번호</th>
+                        <th>제목</th>
+                        <th>글쓴이</th>
+                        <th>날짜</th>
+                        <!-- <th>actions</th> -->
+                        <!-- <th>stock</th> -->                     
+                        <!-- <th>sku</th> -->
+                        <!-- <th>qty</th> -->
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
             </div>
             <!-- / Content -->
 
@@ -878,11 +743,11 @@
             <footer class="content-footer footer bg-footer-theme">
               <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                 <div class="mb-2 mb-md-0">
-                  ©
+                  Â©
                   <script>
                     document.write(new Date().getFullYear());
                   </script>
-                  , made with ❤️ by
+                  , made with â¤ï¸ by
                   <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">ThemeSelection</a>
                 </div>
                 <div class="d-none d-lg-inline-block">
@@ -937,27 +802,13 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
     <!-- Main JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/pages-account-settings-account.js"></script>
-    
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
-
-
-    <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/form-validation2.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/app-ecommerce-product-list.js"></script>
   </body>
 </html>
