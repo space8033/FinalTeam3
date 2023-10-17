@@ -66,4 +66,8 @@ public class Main {
 	public String userModify(Model model) {
 		return "userModify";
 	}
+	@RequestMapping("/userModify2")
+	public String userModify2(Model model) {
+		return "userModify2";
+	}
 }
