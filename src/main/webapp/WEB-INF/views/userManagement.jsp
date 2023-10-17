@@ -138,7 +138,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="dashboards-analytics.html" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/projectList" class="menu-link">
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
                 </li>

@@ -70,4 +70,9 @@ public class Main {
 	public String userModify2(Model model) {
 		return "userModify2";
 	}
+	
+	@RequestMapping("/projectList")
+	public String projectList(Model model) {
+		return "projectList";
+	}
 }
