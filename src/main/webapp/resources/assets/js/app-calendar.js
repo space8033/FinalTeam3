@@ -38,10 +38,10 @@ document.addEventListener('DOMContentLoaded', function () {
       eventTitle = document.querySelector('#eventTitle'),
       eventStartDate = document.querySelector('#eventStartDate'),
       eventEndDate = document.querySelector('#eventEndDate'),
-      eventUrl = document.querySelector('#eventURL'),
+      //eventUrl = document.querySelector('#eventURL'),
       eventLabel = $('#eventLabel'), // ! Using jquery vars due to select2 jQuery dependency
       eventGuests = $('#eventGuests'), // ! Using jquery vars due to select2 jQuery dependency
-      eventLocation = document.querySelector('#eventLocation'),
+      //eventLocation = document.querySelector('#eventLocation'),
       eventDescription = document.querySelector('#eventDescription'),
       allDaySwitch = document.querySelector('.allDay-switch'),
       selectAll = document.querySelector('.select-all'),
@@ -156,9 +156,9 @@ document.addEventListener('DOMContentLoaded', function () {
       bsAddEventSidebar.show();
       // For update event set offcanvas title text: Update Event
       if (offcanvasTitle) {
-        offcanvasTitle.innerHTML = 'Update Event';
+        offcanvasTitle.innerHTML = '수정하기';
       }
-      btnSubmit.innerHTML = 'Update';
+      btnSubmit.innerHTML = '수정';
       btnSubmit.classList.add('btn-update-event');
       btnSubmit.classList.remove('btn-add-event');
       btnDeleteEvent.classList.remove('d-none');
@@ -282,9 +282,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // For new event set offcanvas title text: Add Event
         if (offcanvasTitle) {
-          offcanvasTitle.innerHTML = 'Add Event';
+          offcanvasTitle.innerHTML = '일정 추가';
         }
-        btnSubmit.innerHTML = 'Add';
+        btnSubmit.innerHTML = '추가';
         btnSubmit.classList.remove('btn-update-event');
         btnSubmit.classList.add('btn-add-event');
         btnDeleteEvent.classList.add('d-none');
@@ -385,6 +385,7 @@ document.addEventListener('DOMContentLoaded', function () {
       eventData.id = parseInt(eventData.id);
       currentEvents[currentEvents.findIndex(el => el.id === eventData.id)] = eventData; // Update event by id
       calendar.refetchEvents();
+      removeEvent();
 
       // ? To update event directly to calender (won't update currentEvents object)
       // let propsToUpdate = ['id', 'title', 'url'];
@@ -457,15 +458,15 @@ document.addEventListener('DOMContentLoaded', function () {
             endStr: eventEndDate.value,
             display: 'block',
             extendedProps: {
-              location: eventLocation.value,
+              //location: eventLocation.value,
               guests: eventGuests.val(),
               calendar: eventLabel.val(),
               description: eventDescription.value
             }
           };
-          if (eventUrl.value) {
+          /*if (eventUrl.value) {
             newEvent.url = eventUrl.value;
-          }
+          }*/
           if (allDaySwitch.checked) {
             newEvent.allDay = true;
           }
@@ -481,9 +482,9 @@ document.addEventListener('DOMContentLoaded', function () {
             title: eventTitle.value,
             start: eventStartDate.value,
             end: eventEndDate.value,
-            url: eventUrl.value,
+            //url: eventUrl.value,
             extendedProps: {
-              location: eventLocation.value,
+              //location: eventLocation.value,
               guests: eventGuests.val(),
               calendar: eventLabel.val(),
               description: eventDescription.value
@@ -509,10 +510,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // ------------------------------------------------
     function resetValues() {
       eventEndDate.value = '';
-      eventUrl.value = '';
+      //eventUrl.value = '';
       eventStartDate.value = '';
       eventTitle.value = '';
-      eventLocation.value = '';
+      //eventLocation.value = '';
       allDaySwitch.checked = false;
       eventGuests.val('').trigger('change');
       eventDescription.value = '';

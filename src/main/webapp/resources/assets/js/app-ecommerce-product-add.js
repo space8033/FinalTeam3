@@ -15,7 +15,7 @@
       modules: {
         toolbar: '.comment-toolbar'
       },
-      placeholder: 'Product Description',
+      placeholder: '내용을 입력해 주세요',
       theme: 'snow'
     });
   }

@@ -41,6 +41,16 @@ public class Main {
 		return "calendar";
 	}
 	
+	@RequestMapping("/noticeList")
+	public String noticeList(Model model) {
+		return "noticeList";
+	}
+	
+	@RequestMapping("/noticeAdd")
+	public String noticeAdd(Model model) {
+		return "noticeAdd";
+	}
+	
 	@RequestMapping("/initialPassword")
 	public String initialPassword(Model model) {
 		return "initialPassword";
@@ -65,5 +75,14 @@ public class Main {
 	@RequestMapping("/userModify")
 	public String userModify(Model model) {
 		return "userModify";
+	}
+	@RequestMapping("/userModify2")
+	public String userModify2(Model model) {
+		return "userModify2";
+	}
+	
+	@RequestMapping("/projectList")
+	public String projectList(Model model) {
+		return "projectList";
 	}
 }

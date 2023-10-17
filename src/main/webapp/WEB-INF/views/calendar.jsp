@@ -14,7 +14,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Fullcalendar - Apps | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>PMS - 일정관리/스케쥴</title>
 
     <meta name="description" content="" />
 
@@ -140,7 +140,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="dashboards-analytics.html" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/projectList" class="menu-link">
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
                 </li>
@@ -811,7 +811,7 @@
                       id="addEventSidebar"
                       aria-labelledby="addEventSidebarLabel">
                       <div class="offcanvas-header border-bottom">
-                        <h5 class="offcanvas-title mb-2" id="addEventSidebarLabel">일정 추가</h5>
+                        <h5 class="offcanvas-title mb-2" id="addEventSidebarLabel">변경</h5>
                         <button
                           type="button"
                           class="btn-close text-reset"
@@ -830,7 +830,7 @@
                               />
                           </div>
                           <div class="mb-3">
-                            <label class="form-label" for="eventDescription">Description</label>
+                            <label class="form-label" for="eventDescription">내용</label>
                             <textarea class="form-control" name="eventDescription" id="eventDescription"></textarea>
                           </div>
                           <div class="mb-3">
@@ -870,7 +870,7 @@
                               <span class="switch-label">하루종일</span>
                             </label>
                           </div>
-                          <div class="mb-3">
+                          <!-- <div class="mb-3">
                             <label class="form-label" for="eventURL">Event URL</label>
                             <input
                               type="url"
@@ -878,30 +878,15 @@
                               id="eventURL"
                               name="eventURL"
                               placeholder="https://www.google.com" />
-                          </div>
-                          <div class="mb-3 select2-primary">
-                            <label class="form-label" for="eventGuests">Add Guests</label>
-                            <select
-                              class="select2 select-event-guests form-select"
-                              id="eventGuests"
-                              name="eventGuests"
-                              multiple>
-                              <option data-avatar="1.png" value="Jane Foster">Jane Foster</option>
-                              <option data-avatar="3.png" value="Donna Frank">Donna Frank</option>
-                              <option data-avatar="5.png" value="Gabrielle Robertson">Gabrielle Robertson</option>
-                              <option data-avatar="7.png" value="Lori Spears">Lori Spears</option>
-                              <option data-avatar="9.png" value="Sandy Vega">Sandy Vega</option>
-                              <option data-avatar="11.png" value="Cheryl May">Cheryl May</option>
-                            </select>
-                          </div>
-                          <div class="mb-3">
+                          </div> -->
+                          <!-- <div class="mb-3">
                             <label class="form-label" for="eventLocation">Location</label>
                             <input
                               type="text"
                               class="form-control"
                               id="eventLocation"
                               name="eventLocation"/>
-                          </div>
+                          </div> -->
                           <div class="mb-3 d-flex justify-content-sm-between justify-content-start my-4">
                             <div>
                               <button type="submit" class="btn btn-primary btn-add-event me-sm-3 me-1">추가</button>
@@ -933,24 +918,24 @@
                     document.write(new Date().getFullYear());
                   </script>
                   , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">ThemeSelection</a>
+                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">FinalTeam3</a>
                 </div>
                 <div class="d-none d-lg-inline-block">
-                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
+                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank"></a>
+                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4"></a>
 
                   <a
                     href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
                     target="_blank"
                     class="footer-link me-4"
-                    >Documentation</a
+                    ></a
                   >
 
                   <a
                     href="https://themeselection.com/support/"
                     target="_blank"
                     class="footer-link d-none d-sm-inline-block"
-                    >Support</a
+                    ></a
                   >
                 </div>
               </div>
