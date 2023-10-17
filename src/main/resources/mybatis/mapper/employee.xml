@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finalteam3.exodia.employee.dao.EmployeeDao">
+	<select id="selectByEmpId" resultType="String" parameterType="String">
+		select emp_id
+		from emp
+		where emp_id = #{emp_id}
+	</select>
+
+	<select id="selectInfoByEmpId" resultType="LoginResponse" parameterType="LoginRequest">
+		select e.emp_id, e.emp_password, e.emp_isinit, e.emp_deletedAt, r.role_category
+		from emp e, role r
+		where project_no = #{project_no}
+		and emp_id = #{emp_id}
+	</select>
+	
+	<update id="updateStatus" parameterType="String">
+		update emp set emp_status = 'connected' where emp_id = #{emp_id}
+	</update>
+</mapper>
