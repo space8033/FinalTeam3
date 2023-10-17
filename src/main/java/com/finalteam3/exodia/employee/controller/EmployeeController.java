@@ -12,8 +12,11 @@ import com.finalteam3.exodia.employee.dto.request.LoginRequest;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Controller
 @RequestMapping("/employee")
+@Slf4j
 public class EmployeeController {
 	@Resource
 	private EmployeeService employeeService;
@@ -25,7 +28,7 @@ public class EmployeeController {
 	
 	@PostMapping("/login")
 	public String login(LoginRequest loginRequest, HttpSession session) {
-		LoginResponse loginResponse = employeeService.login(loginRequest);
+		LoginResponse loginResponse = employeeService.login(loginRequest);	
 		session.setAttribute("login", loginResponse);
 		
 		return "redirect:/initialPassword";

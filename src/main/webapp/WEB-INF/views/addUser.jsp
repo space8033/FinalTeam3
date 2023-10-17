@@ -662,10 +662,10 @@
                     <li>
                       <a class="dropdown-item" href="${pageContext.request.contextPath}/note">
                         <span class="d-flex align-items-center align-middle">
-                    	  <i class="bx bx-envelope me-3"></i>
-                     	  <span class="flex-grow-1 align-middle">쪽지함</span>
-                      	  <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                      	</span>
+                         <i class="bx bx-envelope me-3"></i>
+                          <span class="flex-grow-1 align-middle">쪽지함</span>
+                           <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                         </span>
                       </a>
                     </li>
                     <li>
@@ -757,7 +757,7 @@
                                  
                               </div>
             
-		                      
+                            
                               <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
                                 <label class="form-label" for="form-repeater-1-5">직위</label>
                                 <select id="form-repeater-1-5" class="form-select">
@@ -768,9 +768,15 @@
                                   <option value="Bujang">부장</option>
                                 </select>
                               </div>
-                              <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center mb-0">
+                              <div class="mb-3 col-lg-12 col-xl-1 col-12 d-flex align-items-center justify-content-center mb-0">
+                                <button class="btn btn-label-success mt-4" data-repeater-delete>
+                                  <i class="bx me-1"></i>
+                                  <span class="align-middle">확인</span>
+                                </button>
+                              </div>
+                              <div class="mb-3 col-lg-12 col-xl-1 col-12 d-flex align-items-center justify-content-center mb-0">
                                 <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                                  <i class="bx bx-x me-1"></i>
+                                  <i class="bx me-1"></i>
                                   <span class="align-middle">삭제</span>
                                 </button>
                               </div>
