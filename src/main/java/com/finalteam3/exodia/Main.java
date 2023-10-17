@@ -41,6 +41,16 @@ public class Main {
 		return "calendar";
 	}
 	
+	@RequestMapping("/noticeList")
+	public String noticeList(Model model) {
+		return "noticeList";
+	}
+	
+	@RequestMapping("/noticeAdd")
+	public String noticeAdd(Model model) {
+		return "noticeAdd";
+	}
+	
 	@RequestMapping("/initialPassword")
 	public String initialPassword(Model model) {
 		return "initialPassword";
