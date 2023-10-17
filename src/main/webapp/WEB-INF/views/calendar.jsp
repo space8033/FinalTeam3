@@ -133,7 +133,7 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">MENU</span>
             </li>
-            <li class="menu-item active">
+            <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate" >프로젝트</div>
@@ -149,7 +149,7 @@
                     <div class="text-truncate" >프로젝트 조직도</div>
                   </a>
                 </li>
-                <li class="menu-item active">
+                <li class="menu-item">
                   <a href="${pageContext.request.contextPath}/searchUser" class="menu-link">
                     <div class="text-truncate">프로젝트 인력 검색</div>
                   </a>
@@ -157,32 +157,32 @@
               </ul>
             </li>
             <li class="menu-item">
-              <a href="app-email.html" class="menu-link">
+              <a href="${pageContext.request.contextPath}/noticeList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bell"></i>
                 <div class="text-truncate">공지사항</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="app-chat.html" class="menu-link">
+              <a href="${pageContext.request.contextPath}/qnaList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-conversation"></i>
                 <div class="text-truncate">문의하기</div>
               </a>
             </li>
             
             <!-- e-commerce-app menu start -->
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-task"></i>
                 <div class="text-truncate">일정관리</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="app-ecommerce-dashboard.html" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/calendar" class="menu-link">
                     <div class="text-truncate">팀 별 일정 관리</div>
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="javascript:void(0);" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/calendar" class="menu-link">
                     <div class="text-truncate">개인 별 일정 관리</div>
                   </a>
                 </li>
