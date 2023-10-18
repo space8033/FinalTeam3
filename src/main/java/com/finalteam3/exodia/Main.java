@@ -95,4 +95,9 @@ public class Main {
 	public String noticeDetail(Model model) {
 		return "noticeDetail";
 	}
+	
+	@RequestMapping("/main")
+	public String main(Model model) {
+		return "main";
+	}
 }
