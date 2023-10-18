@@ -812,7 +812,7 @@
 				                          </div>
 				                        </div>
 										
-										<a class="btn btn-primary btn-sm mt-2" href="getBoardList">목록</a>
+										<a class="btn btn-primary btn-sm mt-2" href="noticeList">목록</a>
 										<a class="btn btn-primary btn-sm mt-2" href="updateBoard?bno=${board.bno}">수정</a>
 										<a class="btn btn-primary btn-sm mt-2" href="deleteBoard?bno=${board.bno}">삭제</a>
 										

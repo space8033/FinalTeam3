@@ -152,7 +152,7 @@
               </ul>
             </li>
             <li class="menu-item">
-              <a href="app-email.html" class="menu-link">
+              <a href="noticeList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bell"></i>
                 <div class="text-truncate">공지사항</div>
               </a>
@@ -740,7 +740,7 @@
             <!-- / Content -->
 
             <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
+            <!-- <footer class="content-footer footer bg-footer-theme">
               <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
                 <div class="mb-2 mb-md-0">
                   Â©
@@ -769,7 +769,7 @@
                   >
                 </div>
               </div>
-            </footer>
+            </footer> -->
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>

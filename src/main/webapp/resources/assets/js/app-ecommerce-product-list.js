@@ -19,6 +19,8 @@ $(function () {
   }
 
   // Variable declaration for table
+  var sharedNoticeNo = null;
+  
   var dt_product_table = $('.datatables-products'),
     productAdd = "noticeAdd",
     statusObj = {
@@ -74,71 +76,41 @@ $(function () {
         },
         
         {
-        	// price
+        	// price -> notice no
         	targets: 1,
         	render: function (data, type, full, meta) {
-        		var $price = full['price'];
-        		
-        		return '<span>' + $price + '</span>';
+        		sharedNoticeNo = full['notice_no'];
+        		  return "<span class='text-truncate d-flex align-items-center'>" + sharedNoticeNo + '</span>';
         	}
         },
         {
-          // Product name and product_brand
-          targets: 2,
-          responsivePriority: 1,
-          render: function (data, type, full, meta) {
-            var $name = full['product_name'],
-              $id = full['id'],
-              $product_brand = full['product_brand'],
-              $image = full['image'];
-            if ($image) {
-              // For Product image
+        	  // Product name and product_brand -> notice title
+        	  targets: 2,
+        	  responsivePriority: 1,
+        	  render: function (data, type, full, meta) {
+        		  var $title = full['notice_title'];
 
-              var $output =
-                '<img src="' +
-                assetsPath +
-                'img/ecommerce-images/' +
-                $image +
-                '" alt="Product-' +
-                $id +
-                '" class="rounded-2">';
-            } else {
-              // For Product badge
-              var stateNum = Math.floor(Math.random() * 6);
-              var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
-              var $state = states[stateNum],
-                $name = full['product_brand'],
-                $initials = $name.match(/\b\w/g) || [];
-              $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-              $output = '<span class="avatar-initial rounded-2 bg-label-' + $state + '">' + $initials + '</span>';
-            }
-            // Creates full output for Product name and product_brand
-            var $row_output =
-              '<div class="d-flex justify-content-start align-items-center product-name">' +
-              '<div class="avatar-wrapper">' +
-              '<div class="avatar avatar me-2 rounded-2 bg-label-secondary">' +
-              $output +
-              '</div>' +
-              '</div>' +
-              '<div class="d-flex flex-column">' +
-              '<h6 class="text-body text-nowrap mb-0">' +
-              $name +
-              '</h6>' +
-              '<small class="text-muted text-truncate d-none d-sm-block">' +
-              $product_brand +
-              '</small>' +
-              '</div>' +
-              '</div>';
-            return $row_output;
-          }
-        },
+        		    // Create a text output for Product name
+        		    var $row_output =
+        		      '<div class="d-flex justify-content-start align-items-center product-name">' +
+        		      '<div class="d-flex flex-column">' +
+        		      '<h6 class="text-body text-nowrap mb-0">' +
+        		      '<a href="noticeDetail.jsp?no=' + sharedNoticeNo + '">' + $title + '</a>' +
+        		      '</h6>' +
+        		      '</div>' +
+        		      '</div>';
+        		    return $row_output;
+        	  }
+        	},
         {
-          // Product Category
+          // Product Category -> writer
 
           targets: 3,
           responsivePriority: 5,
           render: function (data, type, full, meta) {
-            var $category = categoryObj[full['category']].title;
+        	  var $writerName = full['writer']; //writer 필드에서 글쓴이 이름을 가져옴
+        	    return "<span class='text-truncate d-flex align-items-center'>" + $writerName + '</span>';
+            /*var $category = categoryObj[full['category']].title;
             var categoryBadgeObj = {
               Household:
                 '<span class="avatar-sm rounded-circle d-flex justify-content-center align-items-center bg-label-warning me-2"><i class="bx bx-home-alt"></i></span>',
@@ -157,14 +129,16 @@ $(function () {
               categoryBadgeObj[$category] +
               $category +
               '</span>'
-            );
+            );*/
           }
         },
         {
-        	// Status
+        	// Status -> date
         	targets: 4,
         	render: function (data, type, full, meta) {
-        		var $status = full['status'];
+        		var $date = full['notice_createdat']; //date 필드에서 날짜 정보를 가져옴
+        	    return '<span class="text-truncate d-flex align-items-center">' + $date + '</span>';
+        		/*var $status = full['status'];
         		
         		return (
         				'<span class="badge ' +
@@ -172,7 +146,7 @@ $(function () {
         				'" text-capitalized>' +
         				statusObj[$status].title +
         				'</span>'
-        		);
+        		);*/
         	}
         }
         /*{
