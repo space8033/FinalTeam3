@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
+import com.finalteam3.exodia.employee.dto.request.JoinRequest;
 import com.finalteam3.exodia.employee.dto.request.LoginRequest;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 
@@ -51,5 +52,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 		employeeDao.updateStatus(loginRequest.getEmp_id());
 		
 		return loginResponse;
+	}
+
+	@Override
+	public void join(JoinRequest joinRequest) {
+		employeeDao.insertEmp(joinRequest);
+		
 	}
 }

@@ -712,11 +712,9 @@
 
             <div class="container-xxl flex-grow-1 container-p-y">
 
-
               <div class="row">
                 <!-- Autosize -->
                 
-
                 <!-- Form Repeater -->
                 <div class="col-12">
                   <div class="card">
@@ -728,7 +726,7 @@
                             <div class="row">
                               <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
                                 <label class="form-label" for="form-repeater-1-1">이름</label>
-                                <input type="text" id="form-repeater-1-1" class="form-control" placeholder="김시온" />
+                                <input type="text" id="form-repeater-1-1" class="form-control" placeholder="김시온" name="empinfo_name" />
                               </div>
                               <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
                                 <label class="form-label" for="form-repeater-1-2">아이디</label>
@@ -736,7 +734,8 @@
                                   type="text"
                                   id="form-repeater-1-2"
                                   class="form-control"
-                                  placeholder="201723445" />
+                                  placeholder="201723445"
+                                  name="emp_id" />
                               </div>
                               <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
                                 <label class="form-label" for="form-repeater-1-3">전화번호</label>
@@ -744,7 +743,8 @@
                                   type="tel"
                                   id="form-repeater-1-3"
                                   class="form-control"
-                                  placeholder="010-4504-1219" />
+                                  placeholder="010-4504-1219"
+                                  name="empinfo_phone" />
                               </div>
                               
                               <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
@@ -753,14 +753,14 @@
                                   type="text"
                                   id="form-repeater-1-4"
                                   class="form-control"
-                                  placeholder="noismik@oti.com" />
+                                  placeholder="noismik@oti.com"
+                                  name="empinfo_email" />
                                  
                               </div>
             
-                            
                               <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
                                 <label class="form-label" for="form-repeater-1-5">직위</label>
-                                <select id="form-repeater-1-5" class="form-select">
+                                <select id="form-repeater-1-5" class="form-select" name="empinfo_position">
                                   <option value="Designer">사원</option>
                                   <option value="Developer">대리</option>
                                   <option value="Tester">과장</option>
@@ -768,18 +768,19 @@
                                   <option value="Bujang">부장</option>
                                 </select>
                               </div>
+                              
                               <div class="mb-3 col-lg-12 col-xl-1 col-12 d-flex align-items-center justify-content-center mb-0">
-                                <button class="btn btn-label-success mt-4" data-repeater-delete>
-                                  <i class="bx me-1"></i>
+                                <button class="btn btn-label-success mt-4">
                                   <span class="align-middle">확인</span>
                                 </button>
                               </div>
                               <div class="mb-3 col-lg-12 col-xl-1 col-12 d-flex align-items-center justify-content-center mb-0">
                                 <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                                  <i class="bx me-1"></i>
+                                  
                                   <span class="align-middle">삭제</span>
                                 </button>
                               </div>
+                              
                             </div>
                             <hr />
                           </div>

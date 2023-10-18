@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.finalteam3.exodia.employee.dto.request.JoinRequest;
 import com.finalteam3.exodia.employee.dto.request.LoginRequest;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
@@ -32,5 +33,19 @@ public class EmployeeController {
 		session.setAttribute("login", loginResponse);
 		
 		return "redirect:/initialPassword";
+	}
+	
+	@GetMapping("/addUser")
+	public String joinForm() {
+		return "/addUser";
+	}
+	
+	@PostMapping("/addUser")
+	public String join(JoinRequest joinRequest) {
+		log.info(joinRequest.toString());
+		
+		//employeeService.join(joinRequest);
+		
+		return "/addUser";
 	}
 }
