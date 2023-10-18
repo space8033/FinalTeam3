@@ -190,20 +190,20 @@
             </li>
             
             <li class="menu-item">
-              <a href="app-chat.html" class="menu-link">
+              <a href="${pageContext.request.contextPath}/addProject" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="app-chat.html" class="menu-link">
+              <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
               </a>
             </li>
             
             <li class="menu-item">
-              <a href="app-chat.html" class="menu-link">
+              <a href="${pageContext.request.contextPath}/userManagement" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-face"></i>
                 <div class="text-truncate">인력 관리</div>
               </a>

@@ -133,7 +133,7 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">MENU</span>
             </li>
-            <li class="menu-item active">
+            <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate" >프로젝트</div>
