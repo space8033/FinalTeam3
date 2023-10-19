@@ -68,6 +68,8 @@
 	    <artifactId>spring-context</artifactId>
 	    <version>5.3.29</version>
 	</dependency>
+	
+	
   	
   	<dependency>
 	    <groupId>org.springframework</groupId>
@@ -173,6 +175,14 @@
 	    <version>1.9.19</version>
 	    <scope>runtime</scope>
 	</dependency>
+	
+	<dependency>
+    	<groupId>org.springframework</groupId>
+    	<artifactId>spring-websocket</artifactId>
+    	<version>5.3.29</version>
+	</dependency>
+	
+
   	 
   </dependencies>
 </project>
