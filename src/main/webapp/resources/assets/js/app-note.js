@@ -344,6 +344,8 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
     initSelect2();
+    
+
 
     // Scroll to bottom on reply click
     // ? Using jquery vars due to jQuery animation dependency

@@ -22,13 +22,13 @@
 
 	<select id="selectNoteByEmpNo" resultType="NoteAll" parameterType="Map">
 		<![CDATA[
-	       select n.note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type
+	       select rnum, note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
 			 from (
-			    select rownum as rnum, n.note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type
+			    select rownum as rnum, note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
 			    from(
-			        select n.note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type
+			        select n.note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
 			        from note n, noteRead nr
-			        where emp_no_receiver = #{emp_no_receiver} and n.note_no = nr.note_no
+			        where emp_no_receiver = #{empNo} and n.note_no = nr.note_no
 			    )
 			    where rownum <= #{endRowNo}
 			 )
