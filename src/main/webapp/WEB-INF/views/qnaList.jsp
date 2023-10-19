@@ -715,7 +715,7 @@
                 <div class="card-header">
                   <h5 class="card-title"></h5>
                   <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
-                    <div class="col-md-4 product_category" style = "margin-left: 20px"><h3><strong>공지사항🚨</strong></h3></div>
+                    <div class="col-md-4 product_category" style = "margin-left: 20px"><h3><strong>문의 게시판🍇</strong></h3></div>
                   </div>
                 </div>
                 <div class="card-datatable table-responsive">
@@ -809,6 +809,6 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/app-ecommerce-product-list.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/qnaList.js"></script>
   </body>
 </html>

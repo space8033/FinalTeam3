@@ -14,7 +14,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Extras - Forms | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>eCommerce Add Product - Apps | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content="" />
 
@@ -41,7 +41,13 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/typography.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/katex.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/editor.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/dropzone/dropzone.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.css" />
 
     <!-- Page CSS -->
 
@@ -59,9 +65,7 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-
-        
-         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+ 		 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="index.html" class="app-brand-link">
               <span class="app-brand-logo demo">
@@ -129,14 +133,14 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">MENU</span>
             </li>
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate" >프로젝트</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                 <a href="${pageContext.request.contextPath}/projectList" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/projectList" class="menu-link">
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
                 </li>
@@ -152,8 +156,8 @@
                 </li>
               </ul>
             </li>
-            <li class="menu-item">
-			  <a href="${pageContext.request.contextPath}/noticeList" class="menu-link">
+            <li class="menu-item active">
+              <a href="${pageContext.request.contextPath}/noticeList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bell"></i>
                 <div class="text-truncate">공지사항</div>
               </a>
@@ -196,7 +200,7 @@
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
-            <li class="menu-item active">
+            <li class="menu-item">
               <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
@@ -654,7 +658,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                     <a class="dropdown-item" href="${pageContext.request.contextPath}/userProfile">
+                      <a class="dropdown-item" href="${pageContext.request.contextPath}/userProfile">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle mx-1">마이 페이지</span>
                       </a>
@@ -662,10 +666,10 @@
                     <li>
                       <a class="dropdown-item" href="${pageContext.request.contextPath}/note">
                         <span class="d-flex align-items-center align-middle">
-                         <i class="bx bx-envelope me-3"></i>
-                          <span class="flex-grow-1 align-middle">쪽지함</span>
-                           <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                         </span>
+                    	  <i class="bx bx-envelope me-3"></i>
+                     	  <span class="flex-grow-1 align-middle">쪽지함</span>
+                      	  <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                      	</span>
                       </a>
                     </li>
                     <li>
@@ -703,7 +707,6 @@
               <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
             </div>
           </nav>
-
           <!-- / Navbar -->
 
           <!-- Content wrapper -->
@@ -711,127 +714,146 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
+              <!-- <h4 class="py-3 mb-4"><span class="text-muted fw-light">eCommerce /</span><span> Add Product</span></h4> -->
 
-              <div class="row">
-                <!-- Autosize -->
-                
-                <!-- Form Repeater -->
-                <div class="col-12">
-                  <div class="card">
-                    <h5 class="card-header">사용자 등록</h5>
-                    <div class="card-body">
-                      <form class="form-repeater">
-                        <div data-repeater-list="group-a">
-                          <div data-repeater-item>
-                            <div class="row">
-                              <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                <label class="form-label" for="form-repeater-1-1">이름</label>
-                                <input type="text" id="form-repeater-1-1" class="form-control" placeholder="김시온" name="empinfo_name" />
-                              </div>
-                              <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                <label class="form-label" for="form-repeater-1-2">아이디</label>
-                                <input
-                                  type="text"
-                                  id="form-repeater-1-2"
-                                  class="form-control"
-                                  placeholder="201723445"
-                                  name="emp_id" />
-                              </div>
-                              <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                <label class="form-label" for="form-repeater-1-3">전화번호</label>
-                                <input
-                                  type="tel"
-                                  id="form-repeater-1-3"
-                                  class="form-control"
-                                  placeholder="010-4504-1219"
-                                  name="empinfo_phone" />
-                              </div>
-                              
-                              <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                <label class="form-label" for="form-repeater-1-4">이메일</label>
-                                <input
-                                  type="text"
-                                  id="form-repeater-1-4"
-                                  class="form-control"
-                                  placeholder="noismik@oti.com"
-                                  name="empinfo_email" />
-                                 
-                              </div>
-            
-                              <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
-                                <label class="form-label" for="form-repeater-1-5">직위</label>
-                                <select id="form-repeater-1-5" class="form-select" name="empinfo_position">
-                                  <option value="Designer">사원</option>
-                                  <option value="Developer">대리</option>
-                                  <option value="Tester">과장</option>
-                                  <option value="Manager">차장</option>
-                                  <option value="Bujang">부장</option>
-                                </select>
-                              </div>
-                              
-                              <div class="mb-3 col-lg-12 col-xl-1 col-12 d-flex align-items-center justify-content-center mb-0">
-                                <button class="btn btn-label-success mt-4">
-                                  <span class="align-middle">확인</span>
-                                </button>
-                              </div>
-                              <div class="mb-3 col-lg-12 col-xl-1 col-12 d-flex align-items-center justify-content-center mb-0">
-                                <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                                  
-                                  <span class="align-middle">삭제</span>
-                                </button>
-                              </div>
-                              
-                            </div>
-                            <hr />
-                          </div>
-                        </div>
-                        <div class="mb-0 me-2 col text-center">
-                          <button class="btn btn-primary align-items-center" data-repeater-create>
-                            <i class="bx bx-plus me-1"></i>
-                            <span class="align-middle">추가</span>
-                          </button>
-                        </div>
-                      </form>
-                    </div>
+              <div class="app-ecommerce">
+                <!-- Add Product -->
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                  <div class="d-flex flex-column justify-content-center">
+                    <h4 class="mb-1 mt-3"><strong>공지사항 내용🍣</strong></h4>
+                    <!-- <p class="text-muted">Orders placed across your store</p> -->
+                  </div>
+                  <div class="d-flex align-content-center flex-wrap gap-3">
+                    <!-- <button class="btn btn-label-secondary">Discard</button>
+                    <button class="btn btn-label-primary">Save draft</button> -->
+                    <button type="submit" class="btn btn-primary">등록</button>
                   </div>
                 </div>
-                <!-- /Form Repeater -->
+
+                <div class="row">
+                  <!-- First column-->
+                  <div class="col-12 col-lg-12">
+                    <!-- Product Information -->
+                    <div class="card mb-4">
+                      <!-- <div class="card-header">
+                        <h5 class="card-tile mb-0">Product information</h5>
+                      </div> -->
+                      <div class="card-body">
+                        	<div class="card-body">
+								<div>
+									<div>
+										<div>
+											<p>
+												<span>번호:</span> 
+												<span>${board.bno}</span>
+											</p>
+											
+											<p>
+												<span>제목:</span> 
+												<span>${board.btitle}</span>
+											</p>
+											
+											<p>
+												<span>글쓴이:</span> 
+												<span>${board.mid}</span>
+											<p>
+											
+											<p>
+												<span>날짜:</span> 
+												<span><fmt:formatDate value="${board.bdate}" pattern="yyyy-MM-dd HH.mm.ss"/></span> <br/>
+											</p>
+											
+											<c:if test="${board.battachoname !=null}">
+												<p>
+													<%-- <span>첨부:</span> 
+													<span>
+														${board.battachoname}
+														
+														<!-- 첨부파일이 파일 시스템에 저장되어 있는 경우 -->
+														<c:if test="${board.battachoname != null}">
+															<a href="filedownload1?bno=${board.bno}"
+															 class="btn btn-info btn-sm ml-2">다운로드</a>
+															<img src="filedownload1?bno=${board.bno}" height="100"/>
+														</c:if>
+														
+														<!-- 첨부파일이 DB에 저장되어 있는 경우 --> 
+														<c:if test="${board.battachdata != null}">
+															<a href="filedownload2?bno=${board.bno}"
+															 class="btn btn-info btn-sm ml-2">다운로드</a>
+															 <!-- 
+															  src의 속성값은 완전한 응답 HTTP가 되어야 함 
+															  (jpg,png 나 filedownload1?bno=${board.bno} 요청으로 완전한 http를 받는다)
+															  
+															   1) 서버의 정적을 요청해서 응답을 받는 경우, 예) photo1.jpg
+															   2) 요청경로를 이용해서 컨트롤러에서 응답을 생성하는 경우, 예) filedownload1?bno=${board.bno}
+															   
+															   데이터를 직접 주면 안됨! 만약 데이터를 직접 넣어야할 경우 아래와 같음
+															  src="data:MIME;base64, base64로 인코딩된 데이터"
+															 -->
+															<img src="data:${board.battachtype};base64, ${base64Img}" height="100"/>
+														</c:if>
+														 
+													</span> --%>
+												</p>
+											</c:if>
+										</div>
+										
+										<%-- <div>
+											<span class="title">내용:</span> <br/>
+											<textarea style="width:100%" readonly>${board.bcontent}</textarea>
+										</div> --%>
+										<div>
+				                          <label class="form-label"><strong>내용</strong></label>
+				                          <div class="form-control p-0 pt-1">
+				                            <div class="comment-toolbar border-0 border-bottom">
+				                              <div class="d-flex justify-content-start">
+				                              </div>
+				                            </div>
+				                          </div>
+				                        </div>
+										
+										<a class="btn btn-primary btn-sm mt-2" href="noticeList">목록</a>
+										<a class="btn btn-primary btn-sm mt-2" href="updateBoard?bno=${board.bno}">수정</a>
+										<a class="btn btn-primary btn-sm mt-2" href="deleteBoard?bno=${board.bno}">삭제</a>
+										
+										<!-- 댓글 -->
+										<hr />
+	
+										<ul>
+										    <li>
+										    	<div>
+										    		<p>첫번째 작성자</p>
+										    		<p>첫번째 댓글</p>
+										    	</div>
+										    </li>
+										    <li>
+										    	<div>
+										    		<p>두번째 작성자</p>
+										    		<p>두번째 댓글</p>
+										    	</div>
+										    </li>
+										    
+										</ul>
+										
+										<div>
+										    <p>
+										        <span class="title">댓글</span> <br/>
+												<textarea rows="4" style="width:100%"></textarea>
+										    </p>
+										    <p>
+										        <a class="btn btn-primary btn-sm mt-2" onclick="saveComment()" style="color: white;">댓글 작성</a>
+										    </p>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+                      </div>
+                    </div>
+                </div>
               </div>
             </div>
             <!-- / Content -->
-
-            <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">ThemeSelection</a>
-                </div>
-                <div class="d-none d-lg-inline-block">
-                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                  <a
-                    href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Documentation</a
-                  >
-
-                  <a
-                    href="https://themeselection.com/support/"
-                    target="_blank"
-                    class="footer-link d-none d-sm-inline-block"
-                    >Support</a
-                  >
-                </div>
-              </div>
-            </footer>
-            <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
           </div>
@@ -863,16 +885,18 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/autosize/autosize.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-maxlength/bootstrap-maxlength.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/katex.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/quill.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/dropzone/dropzone.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.js"></script>
 
     <!-- Main JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-extras.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/qnaDetail.js"></script>
   </body>
 </html>

@@ -810,6 +810,6 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/app-ecommerce-product-list.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/noticeList.js"></script>
   </body>
 </html>

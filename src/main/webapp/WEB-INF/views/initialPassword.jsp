@@ -66,7 +66,7 @@
             <div class="card-body">
               <!-- Logo -->
               <div class="app-brand justify-content-center">
-                <a href="index.html" class="app-brand-link gap-2">
+                <a href="employee/login" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
                     <svg
                       width="25"
@@ -122,7 +122,7 @@
               <!-- /Logo -->
               <p class="mb-4">초기 비밀번호 변경</p>
 
-              <form id="formAuthentication" class="mb-3" action="index.html" method="POST">
+              <form id="formAuthentication" class="mb-3" action="main" method="POST">
                 <div class="mb-3">
                   <label for="email" class="form-label">아이디</label>
                   <input
@@ -172,7 +172,7 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">드루와</button>
+                  <button class="btn btn-primary d-grid w-100" type="submit" href="main">드루와</button>
                 </div>
               </form>
 

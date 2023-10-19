@@ -6,6 +6,7 @@
 	<typeAliases>
 		<typeAlias alias="LoginRequest" type="com.finalteam3.exodia.employee.dto.request.LoginRequest" />
 		<typeAlias alias="LoginResponse" type="com.finalteam3.exodia.employee.dto.response.LoginResponse" />
+		<typeAlias alias="JoinRequest" type="com.finalteam3.exodia.employee.dto.request.JoinRequest" />
 		
 	</typeAliases>
 </configuration>
