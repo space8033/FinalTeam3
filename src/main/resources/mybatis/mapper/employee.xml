@@ -27,7 +27,7 @@
 	</select>
 
 	<select id="selectInfoByEmpId" resultType="LoginResponse" parameterType="LoginRequest">
-		select e.emp_id, e.emp_password, e.emp_isinit, e.emp_deletedAt, r.role_category
+		select e.emp_no, e.emp_id, e.emp_password, e.emp_isinit, e.emp_deletedAt, r.role_category
 		from emp e, role r
 		where project_no = #{project_no}
 		and emp_id = #{emp_id}
@@ -36,4 +36,10 @@
 	<update id="updateStatus" parameterType="String">
 		update emp set emp_status = 'connected' where emp_id = #{emp_id}
 	</update>
+	
+	<select id="selectInfoByEmpNo" resultType="EmployeeInfo" parameterType="int">
+		select empinfo_no, empinfo_name, empinfo_position, empinfo_phone, empinfo_email, empinfo_createdat
+		from empinfo
+		where emp_no = #{emp_no}
+	</select>
 </mapper>

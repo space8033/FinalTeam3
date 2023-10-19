@@ -657,7 +657,7 @@
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-medium d-block">김시온</span>
+                            <span class="fw-medium d-block">${login.empinfo_name}</span>
                             <small class="text-muted">개인 정보 수정</small>
                           </div>
                         </div>
@@ -1843,7 +1843,7 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/app-email.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/app-note.js"></script>
     
      <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->

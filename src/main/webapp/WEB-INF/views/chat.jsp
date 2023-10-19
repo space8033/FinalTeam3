@@ -54,6 +54,7 @@
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
   </head>
 
   <body>
@@ -1268,16 +1269,17 @@
                       <!-- Chat message form -->
                       <div class="chat-history-footer">
                         <form class="form-send-message d-flex justify-content-between align-items-center">
-                          <input
+                          <input id="msg"
                             class="form-control message-input border-0 me-3 shadow-none"
-                            placeholder="Type your message here..." />
+                            placeholder="Type your message here..." 
+                            aria-label="Recipient's username" aria-describedby="button-addon2"/>
                           <div class="message-actions d-flex align-items-center">
                             <i class="speech-to-text bx bx-microphone bx-sm cursor-pointer"></i>
                             <label for="attach-doc" class="form-label mb-0">
                               <i class="bx bx-paperclip bx-sm cursor-pointer mx-3"></i>
                               <input type="file" id="attach-doc" hidden />
                             </label>
-                            <button class="btn btn-primary d-flex send-msg-btn">
+                            <button id="button-send" class="btn btn-primary d-flex send-msg-btn">
                               <i class="bx bx-paper-plane me-md-1 me-0"></i>
                               <span class="align-middle d-md-inline-block d-none">Send</span>
                             </button>
