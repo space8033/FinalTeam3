@@ -22,7 +22,7 @@ $(function () {
   var sharedNoticeNo = null;
   
   var dt_product_table = $('.datatables-products'),
-    productAdd = "noticeAdd",
+    productAdd = "qnaAdd",
     statusObj = {
       1: { title: 'Scheduled', class: 'bg-label-warning' },
       2: { title: 'Publish', class: 'bg-label-success' },
@@ -243,7 +243,7 @@ $(function () {
       // Buttons with Dropdown
       buttons: [
         {
-          text: '<i class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">공지사항 등록</span>',
+          text: '<i class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">문의사항 등록</span>',
           className: 'add-new btn btn-primary',
           action: function () {
             window.location.href = productAdd;

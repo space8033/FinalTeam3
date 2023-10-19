@@ -93,6 +93,11 @@ public class Main {
 		return "qnaDetail";
 	}
 	
+	@RequestMapping("/qnaAdd")
+	public String qnaAdd(Model model) {
+		return "qnaAdd";
+	}
+	
 	@RequestMapping("/noticeDetail")
 	public String noticeDetail(Model model) {
 		return "noticeDetail";
