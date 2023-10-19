@@ -986,5 +986,6 @@
     <!-- Page JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/app-calendar-events.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/app-calendar.js"></script>
+    
   </body>
 </html>

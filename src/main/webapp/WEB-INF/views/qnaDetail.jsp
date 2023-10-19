@@ -7,14 +7,14 @@
   dir="ltr"
   data-theme="theme-default"
   data-assets-path="${pageContext.request.contextPath}/resources/assets/"
-  data-template="vertical-menu-template-no-customizer">
+  data-template="vertical-menu-template">
   <head>
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Product List - eCommerce | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>eCommerce Add Product - Apps | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content="" />
 
@@ -34,23 +34,28 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/fonts/flag-icons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/core.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/theme-default.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/typography.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/katex.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/editor.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/dropzone/dropzone.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.css" />
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
   </head>
@@ -128,7 +133,7 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">MENU</span>
             </li>
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate" >프로젝트</div>
@@ -151,13 +156,13 @@
                 </li>
               </ul>
             </li>
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="${pageContext.request.contextPath}/noticeList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bell"></i>
                 <div class="text-truncate">공지사항</div>
               </a>
             </li>
-            <li class="menu-item active">
+            <li class="menu-item">
               <a href="${pageContext.request.contextPath}/qnaList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-conversation"></i>
                 <div class="text-truncate">문의하기</div>
@@ -635,7 +640,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-                     <a class="dropdown-item" href="${pageContext.request.contextPath}/userModify">
+                      <a class="dropdown-item" href="${pageContext.request.contextPath}/userModify">
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
@@ -709,68 +714,146 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
+              <!-- <h4 class="py-3 mb-4"><span class="text-muted fw-light">eCommerce /</span><span> Add Product</span></h4> -->
 
-              <!-- Product List Table -->
-              <div class="card2">
-                <div class="card-header">
-                  <h5 class="card-title"></h5>
-                  <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
-                    <div class="col-md-4 product_category" style = "margin-left: 20px"><h3><strong>문의 게시판🍇</strong></h3></div>
+              <div class="app-ecommerce">
+                <!-- Add Product -->
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                  <div class="d-flex flex-column justify-content-center">
+                    <h4 class="mb-1 mt-3"><strong>공지사항 내용🍣</strong></h4>
+                    <!-- <p class="text-muted">Orders placed across your store</p> -->
+                  </div>
+                  <div class="d-flex align-content-center flex-wrap gap-3">
+                    <!-- <button class="btn btn-label-secondary">Discard</button>
+                    <button class="btn btn-label-primary">Save draft</button> -->
+                    <button type="submit" class="btn btn-primary">등록</button>
                   </div>
                 </div>
-                <div class="card-datatable table-responsive">
-                  <table class="datatables-products table border-top">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>글쓴이</th>
-                        <th>날짜</th>
-                        <!-- <th>actions</th> -->
-                        <!-- <th>stock</th> -->                     
-                        <!-- <th>sku</th> -->
-                        <!-- <th>qty</th> -->
-                      </tr>
-                    </thead>
-                  </table>
+
+                <div class="row">
+                  <!-- First column-->
+                  <div class="col-12 col-lg-12">
+                    <!-- Product Information -->
+                    <div class="card mb-4">
+                      <!-- <div class="card-header">
+                        <h5 class="card-tile mb-0">Product information</h5>
+                      </div> -->
+                      <div class="card-body">
+                        	<div class="card-body">
+								<div>
+									<div>
+										<div>
+											<p>
+												<span>번호:</span> 
+												<span>${board.bno}</span>
+											</p>
+											
+											<p>
+												<span>제목:</span> 
+												<span>${board.btitle}</span>
+											</p>
+											
+											<p>
+												<span>글쓴이:</span> 
+												<span>${board.mid}</span>
+											<p>
+											
+											<p>
+												<span>날짜:</span> 
+												<span><fmt:formatDate value="${board.bdate}" pattern="yyyy-MM-dd HH.mm.ss"/></span> <br/>
+											</p>
+											
+											<c:if test="${board.battachoname !=null}">
+												<p>
+													<%-- <span>첨부:</span> 
+													<span>
+														${board.battachoname}
+														
+														<!-- 첨부파일이 파일 시스템에 저장되어 있는 경우 -->
+														<c:if test="${board.battachoname != null}">
+															<a href="filedownload1?bno=${board.bno}"
+															 class="btn btn-info btn-sm ml-2">다운로드</a>
+															<img src="filedownload1?bno=${board.bno}" height="100"/>
+														</c:if>
+														
+														<!-- 첨부파일이 DB에 저장되어 있는 경우 --> 
+														<c:if test="${board.battachdata != null}">
+															<a href="filedownload2?bno=${board.bno}"
+															 class="btn btn-info btn-sm ml-2">다운로드</a>
+															 <!-- 
+															  src의 속성값은 완전한 응답 HTTP가 되어야 함 
+															  (jpg,png 나 filedownload1?bno=${board.bno} 요청으로 완전한 http를 받는다)
+															  
+															   1) 서버의 정적을 요청해서 응답을 받는 경우, 예) photo1.jpg
+															   2) 요청경로를 이용해서 컨트롤러에서 응답을 생성하는 경우, 예) filedownload1?bno=${board.bno}
+															   
+															   데이터를 직접 주면 안됨! 만약 데이터를 직접 넣어야할 경우 아래와 같음
+															  src="data:MIME;base64, base64로 인코딩된 데이터"
+															 -->
+															<img src="data:${board.battachtype};base64, ${base64Img}" height="100"/>
+														</c:if>
+														 
+													</span> --%>
+												</p>
+											</c:if>
+										</div>
+										
+										<%-- <div>
+											<span class="title">내용:</span> <br/>
+											<textarea style="width:100%" readonly>${board.bcontent}</textarea>
+										</div> --%>
+										<div>
+				                          <label class="form-label"><strong>내용</strong></label>
+				                          <div class="form-control p-0 pt-1">
+				                            <div class="comment-toolbar border-0 border-bottom">
+				                              <div class="d-flex justify-content-start">
+				                              </div>
+				                            </div>
+				                          </div>
+				                        </div>
+										
+										<a class="btn btn-primary btn-sm mt-2" href="noticeList">목록</a>
+										<a class="btn btn-primary btn-sm mt-2" href="updateBoard?bno=${board.bno}">수정</a>
+										<a class="btn btn-primary btn-sm mt-2" href="deleteBoard?bno=${board.bno}">삭제</a>
+										
+										<!-- 댓글 -->
+										<hr />
+	
+										<ul>
+										    <li>
+										    	<div>
+										    		<p>첫번째 작성자</p>
+										    		<p>첫번째 댓글</p>
+										    	</div>
+										    </li>
+										    <li>
+										    	<div>
+										    		<p>두번째 작성자</p>
+										    		<p>두번째 댓글</p>
+										    	</div>
+										    </li>
+										    
+										</ul>
+										
+										<div>
+										    <p>
+										        <span class="title">댓글</span> <br/>
+												<textarea rows="4" style="width:100%"></textarea>
+										    </p>
+										    <p>
+										        <a class="btn btn-primary btn-sm mt-2" onclick="saveComment()" style="color: white;">댓글 작성</a>
+										    </p>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+                      </div>
+                    </div>
                 </div>
               </div>
             </div>
             <!-- / Content -->
-
-            <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  Â©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with â¤ï¸ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">ThemeSelection</a>
-                </div>
-                <div class="d-none d-lg-inline-block">
-                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                  <a
-                    href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Documentation</a
-                  >
-
-                  <a
-                    href="https://themeselection.com/support/"
-                    target="_blank"
-                    class="footer-link d-none d-sm-inline-block"
-                    >Support</a
-                  >
-                </div>
-              </div>
-            </footer>
-            <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
           </div>
@@ -802,13 +885,18 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/katex.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/quill.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/dropzone/dropzone.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.js"></script>
 
     <!-- Main JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/qnaList.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/qnaDetail.js"></script>
   </body>
 </html>

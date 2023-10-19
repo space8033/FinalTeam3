@@ -58,7 +58,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public void join(JoinRequest joinRequest) {
 		employeeDao.insertEmp(joinRequest);
+		int emp_no = employeeDao.selectNoByEmpId(joinRequest.getEmp_id());
 		
+		joinRequest.setEmp_no(emp_no);
+		employeeDao.insertEmpInfo(joinRequest);
 	}
 
 	@Override

@@ -20,8 +20,8 @@
 	</insert>
 	
 
-	<select id="selectByEmpId" resultType="String" parameterType="String">
-		select emp_id
+	<select id="selectNoByEmpId" resultType="int" parameterType="String">
+		select emp_no
 		from emp
 		where emp_id = #{emp_id}
 	</select>
