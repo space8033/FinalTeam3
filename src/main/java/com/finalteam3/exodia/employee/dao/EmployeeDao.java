@@ -8,7 +8,7 @@ import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 
 @Mapper
 public interface EmployeeDao {
-	public String selectByEmpId(String emp_id);
+	public int selectNoByEmpId(String emp_id);
 	public LoginResponse selectInfoByEmpId(LoginRequest loginRequest);
 	public void updateStatus(String emp_id);
 	public void insertEmp(JoinRequest joinRequest);

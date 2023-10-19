@@ -24,6 +24,7 @@ public class EmployeeController {
 	
 	@GetMapping("/login")
 	public String loginForm() {
+		log.info("ggg");
 		return "/login";
 	}
 	
