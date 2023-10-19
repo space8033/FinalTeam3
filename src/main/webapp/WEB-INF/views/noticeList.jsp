@@ -151,13 +151,8 @@
                 </li>
               </ul>
             </li>
-<<<<<<< HEAD
             <li class="menu-item">
-              <a href="noticeList" class="menu-link">
-=======
-            <li class="menu-item active">
               <a href="${pageContext.request.contextPath}/noticeList" class="menu-link">
->>>>>>> branch 'master' of https://github.com/space8033/FinalTeam3.git
                 <i class="menu-icon tf-icons bx bx-bell"></i>
                 <div class="text-truncate">공지사항</div>
               </a>
