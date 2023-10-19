@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
       chatSidebarLeftUserAbout = $('.chat-sidebar-left-user-about'),
       formSendMessage = document.querySelector('.form-send-message'),
       messageInput = document.querySelector('.message-input'),
+      msgArea = document.getElementById("msgArea"),
       searchInput = document.querySelector('.chat-search-input'),
       speechToText = $('.speech-to-text'), // ! jQuery dependency for speech to text
       userStatusObj = {
@@ -29,6 +30,39 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize PerfectScrollbar
     // ------------------------------
 
+    
+    // 소켓 생성 및 연결
+	  const sock = new SockJS("http://localhost:8080/exodia/chat");
+	  sock.onmessage = onMessage;
+	  sock.onclose = onClose;
+	  sock.onopen = onOpen;
+/*    let websocket;
+    
+    //입장 버튼을 눌렀을 때 호출되는 함수
+    function connect() {
+        // 웹소켓 주소
+        var wsUri = "ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/chat";
+        // 소켓 객체 생성
+        websocket = new WebSocket(wsUri);
+        //웹 소켓에 이벤트가 발생했을 때 호출될 함수 등록
+        websocket.onopen = onOpen;
+        websocket.onmessage = onMessage;
+    }
+    
+    //웹 소켓에 연결되었을 때 호출될 함수
+    function onOpen() {
+    }
+    
+   // * 1 메시지 전송
+   function sendMessage(message){
+   }
+   
+    // * 2 메세지 수신
+    function onMessage(evt) {
+   }
+	  
+	  */
+	  
     // Chat contacts scrollbar
     if (chatContactsBody) {
       new PerfectScrollbar(chatContactsBody, {
@@ -154,12 +188,50 @@ document.addEventListener('DOMContentLoaded', function () {
         listItem0.classList.add('d-none');
       }
     }
+    
+    function sendMessage() {
+  	    sock.send(messageInput.value);
+  	}
+
+	function onMessage(msg) {
+	    const data = msg.data;
+	    const arr = data.split(":");
+	
+	    for (let i = 0; i < arr.length; i++) {
+	      console.log("arr[" + i + "]: " + arr[i]);
+	    }
+	
+	    const cur_session = "YOUR_USER_ID"; // 현재 세션에 로그인 한 사람
+	    console.log("cur_session : " + cur_session);
+	
+	    const sessionId = arr[0];
+	    const message = arr[1];
+	
+	    if (sessionId === cur_session) {
+	      appendMessage(msgArea, sessionId, message, "alert-secondary");
+	    } else {
+	      appendMessage(msgArea, sessionId, message, "alert-warning");
+	    }
+	    
+	  }
+	function onClose(evt) {
+	    const user = "YOUR_USERNAME";
+	    const str = user + " 님이 퇴장하셨습니다.";
+	    appendMessage(msgArea, "", str, "alert-info");
+	  }
+
+	  function onOpen(evt) {
+	    const user = "YOUR_USERNAME";
+	    const str = user + " 님이 입장하셨습니다.";
+	    appendMessage(msgArea, "", str, "alert-info");
+	  }
 
     // Send Message
     formSendMessage.addEventListener('submit', e => {
       e.preventDefault();
       if (messageInput.value) {
         // Create a div and add a class
+    	sendMessage();
         let renderMsg = document.createElement('div');
         renderMsg.className = 'chat-message-text mt-2';
         renderMsg.innerHTML = '<p class="mb-0 text-break">' + messageInput.value + '</p>';
@@ -168,6 +240,10 @@ document.addEventListener('DOMContentLoaded', function () {
         scrollToBottom();
       }
     });
+    
+    
+  	  
+  	  
 
     // on click of chatHistoryHeaderMenu, Remove data-overlay attribute from chatSidebarLeftClose to resolve overlay overlapping issue for two sidebar
     let chatHistoryHeaderMenu = document.querySelector(".chat-history-header [data-target='#app-chat-contacts']"),

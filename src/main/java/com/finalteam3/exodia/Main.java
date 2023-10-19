@@ -12,19 +12,16 @@ public class Main {
 		return "login";
 	}
 	
-	@RequestMapping("/note")
+/*	@RequestMapping("/note")
 	public String note(Model model) {
 		return "note";
-	}
+	}*/
 	@RequestMapping("/note2")
 	public String note2(Model model) {
 		return "note2";
 	}
 	
-	@RequestMapping("/chat")
-	public String chat(Model model) {
-		return "chat";
-	}
+
 	@RequestMapping("/chat2")
 	public String chat2(Model model) {
 		return "chat2";

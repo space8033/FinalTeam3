@@ -26,5 +26,8 @@
 	<mybatis-spring:scan
 		base-package="com.finalteam3.exodia.employee.dao"
 		annotation="org.apache.ibatis.annotations.Mapper" />
+		<mybatis-spring:scan
+		base-package="com.finalteam3.exodia.note.dao"
+		annotation="org.apache.ibatis.annotations.Mapper" />
 
 </beans>
