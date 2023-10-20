@@ -12,19 +12,16 @@ public class Main {
 		return "login";
 	}
 	
-	@RequestMapping("/note")
+/*	@RequestMapping("/note")
 	public String note(Model model) {
 		return "note";
-	}
+	}*/
 	@RequestMapping("/note2")
 	public String note2(Model model) {
 		return "note2";
 	}
 	
-	@RequestMapping("/chat")
-	public String chat(Model model) {
-		return "chat";
-	}
+
 	@RequestMapping("/chat2")
 	public String chat2(Model model) {
 		return "chat2";
@@ -89,6 +86,16 @@ public class Main {
 	@RequestMapping("/qnaList")
 	public String qnaList(Model model) {
 		return "qnaList";
+	}
+	
+	@RequestMapping("/qnaDetail")
+	public String qnaDetail(Model model) {
+		return "qnaDetail";
+	}
+	
+	@RequestMapping("/qnaAdd")
+	public String qnaAdd(Model model) {
+		return "qnaAdd";
 	}
 	
 	@RequestMapping("/noticeDetail")

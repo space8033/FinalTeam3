@@ -12,6 +12,7 @@ import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
 import com.finalteam3.exodia.employee.dto.request.LoginRequest;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
+import com.finalteam3.exodia.note.dto.EmployeeInfo;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{
@@ -57,5 +58,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 		
 		joinRequest.setEmp_no(emp_no);
 		employeeDao.insertEmpInfo(joinRequest);
+	}
+
+	@Override
+	public EmployeeInfo getEmpInfo(int empNo) {
+		EmployeeInfo employeeInfo = employeeDao.selectInfoByEmpNo(empNo);
+		return employeeInfo;
 	}
 }

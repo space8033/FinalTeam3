@@ -14,7 +14,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>eCommerce - Dashboards | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>eCommerce Add Product - Apps | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content="" />
 
@@ -41,10 +41,15 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/typography.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/katex.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/editor.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/dropzone/dropzone.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.css" />
 
     <!-- Page CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/pages/card-analytics.css" />
 
     <!-- Helpers -->
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/helpers.js"></script>
@@ -157,7 +162,7 @@
                 <div class="text-truncate">공지사항</div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="${pageContext.request.contextPath}/qnaList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-conversation"></i>
                 <div class="text-truncate">문의하기</div>
@@ -635,7 +640,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-           			  <a class="dropdown-item" href="${pageContext.request.contextPath}/userModify">
+                      <a class="dropdown-item" href="${pageContext.request.contextPath}/userModify">
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
@@ -653,7 +658,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                     <a class="dropdown-item" href="${pageContext.request.contextPath}/userProfile">
+                      <a class="dropdown-item" href="${pageContext.request.contextPath}/userProfile">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle mx-1">마이 페이지</span>
                       </a>
@@ -709,316 +714,143 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <div class="row">
-                <div class="content-wrapper">
-            		<!-- Content -->
+              <!-- <h4 class="py-3 mb-4"><span class="text-muted fw-light">eCommerce /</span><span> Add Product</span></h4> -->
 
-		            <div class="container-xxl flex-grow-1 container-p-y">
-		              <div class="card app-calendar-wrapper">
-		                <div class="row g-0">
-		
-		                  
-		                </div>
-		              </div>
-		            </div>
-            		<!-- / Content -->
-            		<div class="content-backdrop fade"></div>
-          		</div>
-                <div class="col-md-6 col-lg-8 mb-4 mb-md-0">
-                  <div class="card">
-                    <div class="table-responsive text-nowrap">
-                      <table class="table text-nowrap">
-                        <thead>
-                          <tr>
-                            <th>Product</th>
-                            <th>Category</th>
-                            <th>Payment</th>
-                            <th>Order Status</th>
-                            <th>Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0">
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center">
-                                <img
-                                  src="${pageContext.request.contextPath}/resources/assets/img/products/oneplus-lg.png"
-                                  alt="Oneplus"
-                                  height="32"
-                                  width="32"
-                                  class="me-2" />
-                                <div class="d-flex flex-column">
-                                  <span class="fw-medium lh-1">OnePlus 7Pro</span>
-                                  <small class="text-muted">OnePlus</small>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <span class="badge bg-label-primary rounded-pill badge-center p-3 me-2"
-                                ><i class="bx bx-mobile-alt bx-xs"></i
-                              ></span>
-                              Smart Phone
-                            </td>
-                            <td>
-                              <div class="text-muted lh-1"><span class="text-primary fw-medium">$120</span>/499</div>
-                              <small class="text-muted">Partially Paid</small>
-                            </td>
-                            <td><span class="badge bg-label-primary">Confirmed</span></td>
-                            <td>
-                              <div class="dropdown">
-                                <button
-                                  type="button"
-                                  class="btn p-0 dropdown-toggle hide-arrow"
-                                  data-bs-toggle="dropdown">
-                                  <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="javascript:void(0);"
-                                    ><i class="bx bx-edit-alt me-1"></i> View Details</a
-                                  >
-                                  <a class="dropdown-item" href="javascript:void(0);"
-                                    ><i class="bx bx-trash me-1"></i> Delete</a
-                                  >
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center">
-                                <img
-                                  src="${pageContext.request.contextPath}/resources/assets/img/products/magic-mouse.png"
-                                  alt="Apple"
-                                  height="32"
-                                  width="32"
-                                  class="me-2" />
-                                <div class="d-flex flex-column">
-                                  <span class="fw-medium lh-1">Magic Mouse</span>
-                                  <small class="text-muted">Apple</small>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <span class="badge bg-label-warning rounded-pill badge-center p-3 me-2"
-                                ><i class="bx bx-mouse bx-xs"></i
-                              ></span>
-                              Mouse
-                            </td>
-                            <td>
-                              <div class="lh-1"><span class="text-primary fw-medium">$149</span></div>
-                              <small class="text-muted">Fully Paid</small>
-                            </td>
-                            <td><span class="badge bg-label-success">Completed</span></td>
-                            <td>
-                              <div class="dropdown">
-                                <button
-                                  type="button"
-                                  class="btn p-0 dropdown-toggle hide-arrow"
-                                  data-bs-toggle="dropdown">
-                                  <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="javascript:void(0);"
-                                    ><i class="bx bx-edit-alt me-1"></i> View Details</a
-                                  >
-                                  <a class="dropdown-item" href="javascript:void(0);"
-                                    ><i class="bx bx-trash me-1"></i> Delete</a
-                                  >
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center">
-                                <img
-                                  src="${pageContext.request.contextPath}/resources/assets/img/products/iphone.png"
-                                  alt="Apple"
-                                  height="32"
-                                  width="32"
-                                  class="me-2" />
-                                <div class="d-flex flex-column">
-                                  <span class="fw-medium lh-1">iPhone 11 Pro</span>
-                                  <small class="text-muted">Apple</small>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <span class="badge bg-label-primary rounded-pill badge-center p-3 me-2"
-                                ><i class="bx bx-mobile-alt bx-xs"></i
-                              ></span>
-                              Smart Phone
-                            </td>
-                            <td>
-                              <div class="lh-1"><span class="text-primary fw-medium">$399</span></div>
-                              <small class="text-muted">Fully Paid</small>
-                            </td>
-                            <td><span class="badge bg-label-success">Completed</span></td>
-                            <td>
-                              <div class="dropdown">
-                                <button
-                                  type="button"
-                                  class="btn p-0 dropdown-toggle hide-arrow"
-                                  data-bs-toggle="dropdown">
-                                  <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="javascript:void(0);"
-                                    ><i class="bx bx-edit-alt me-1"></i> View Details</a
-                                  >
-                                  <a class="dropdown-item" href="javascript:void(0);"
-                                    ><i class="bx bx-trash me-1"></i> Delete</a
-                                  >
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center">
-                                <img
-                                  src="${pageContext.request.contextPath}/resources/assets/img/products/mi-tv.png"
-                                  alt="Xiaomi"
-                                  height="32"
-                                  width="32"
-                                  class="me-2" />
-                                <div class="d-flex flex-column">
-                                  <span class="fw-medium lh-1">Mi LED TV 4X</span>
-                                  <small class="text-muted">Xiaomi</small>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <span class="badge bg-label-danger rounded-pill badge-center p-3 me-2"
-                                ><i class="bx bx-tv bx-xs"></i
-                              ></span>
-                              Smart TV
-                            </td>
-                            <td>
-                              <div class="text-muted lh-1"><span class="text-primary fw-medium">$349</span>/2499</div>
-                              <small class="text-muted">Partially Paid</small>
-                            </td>
-                            <td><span class="badge bg-label-primary">Confirmed</span></td>
-                            <td>
-                              <div class="dropdown">
-                                <button
-                                  type="button"
-                                  class="btn p-0 dropdown-toggle hide-arrow"
-                                  data-bs-toggle="dropdown">
-                                  <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="javascript:void(0);"
-                                    ><i class="bx bx-edit-alt me-1"></i> View Details</a
-                                  >
-                                  <a class="dropdown-item" href="javascript:void(0);"
-                                    ><i class="bx bx-trash me-1"></i> Delete</a
-                                  >
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <div class="d-flex align-items-center">
-                                <img
-                                  src="${pageContext.request.contextPath}/resources/assets/img/products/logitech-mx.png"
-                                  alt="Logitech"
-                                  height="32"
-                                  width="32"
-                                  class="me-2" />
-                                <div class="d-flex flex-column">
-                                  <span class="fw-medium lh-1">Logitech MX</span>
-                                  <small class="text-muted">Logitech</small>
-                                </div>
-                              </div>
-                            </td>
-                            <td>
-                              <span class="badge bg-label-warning rounded-pill badge-center p-3 me-2"
-                                ><i class="bx bx-mouse bx-xs"></i
-                              ></span>
-                              Mouse
-                            </td>
-                            <td>
-                              <div class="lh-1"><span class="text-primary fw-medium">$89</span></div>
-                              <small class="text-muted">Fully Paid</small>
-                            </td>
-                            <td><span class="badge bg-label-primary">Completed</span></td>
-                            <td>
-                              <div class="dropdown">
-                                <button
-                                  type="button"
-                                  class="btn p-0 dropdown-toggle hide-arrow"
-                                  data-bs-toggle="dropdown">
-                                  <i class="bx bx-dots-vertical-rounded"></i>
-                                </button>
-                                <div class="dropdown-menu">
-                                  <a class="dropdown-item" href="javascript:void(0);"
-                                    ><i class="bx bx-edit-alt me-1"></i> View Details</a
-                                  >
-                                  <a class="dropdown-item" href="javascript:void(0);"
-                                    ><i class="bx bx-trash me-1"></i> Delete</a
-                                  >
-                                </div>
-                              </div>
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
+              <div class="app-ecommerce">
+                <!-- Add Product -->
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                  <div class="d-flex flex-column justify-content-center">
+                    <h4 class="mb-1 mt-3"><strong>문의사항 내용🍣</strong></h4>
+                    <!-- <p class="text-muted">Orders placed across your store</p> -->
+                  </div>
+                  <div class="d-flex align-content-center flex-wrap gap-3">
+                    <!-- <button class="btn btn-label-secondary">Discard</button>
+                    <button class="btn btn-label-primary">Save draft</button> -->
+                    <button type="submit" class="btn btn-primary">등록</button>
                   </div>
                 </div>
-		                <div class="col-md-4">
-		                	<div class="card">
-		                        <div class="card-body">
-		                          <div class="text-center">
-		                            <div class="dropdown">
-		                              <button
-		                                class="btn btn-sm btn-label-primary dropdown-toggle"
-		                                type="button"
-		                                id="growthReportId"
-		                                data-bs-toggle="dropdown"
-		                                aria-haspopup="true"
-		                                aria-expanded="false">
-		                                	프로젝트 1
-		                              </button>
-		                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-		                                <a class="dropdown-item" href="javascript:void(0);">프로젝트 2</a>
-		                                <a class="dropdown-item" href="javascript:void(0);">프로젝트 3</a>
-		                                <a class="dropdown-item" href="javascript:void(0);">프로젝트 4</a>
-		                              </div>
-		                            </div>
-		                          </div>
-		                        </div>
-		                        <div id="growthChart"></div>
-		                        <div class="text-center fw-medium pt-3 mb-2">화이팅!</div>
-		
-		                        <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-		                          <div class="d-flex">
-		                            <div class="me-2">
-		                              <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
-		                            </div>
-		                            <div class="d-flex flex-column">
-		                              <small>프로젝트 시작</small>
-		                              <h6 class="mb-0">23.4~</h6>
-		                            </div>
-		                          </div>
-		                          <div class="d-flex">
-		                            <div class="me-2">
-		                              <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
-		                            </div>
-		                            <div class="d-flex flex-column">
-		                              <small>프로젝트 종료</small>
-		                              <h6 class="mb-0">~23.12</h6>
-		                            </div>
-		                          </div>
-		                        </div>
-		                      </div>
-		              	</div>
-	                </div>
-	              </div>
-	            </div>
+
+                <div class="row">
+                  <!-- First column-->
+                  <div class="col-12 col-lg-12">
+                    <!-- Product Information -->
+                    <div class="card mb-4">
+                      <!-- <div class="card-header">
+                        <h5 class="card-tile mb-0">Product information</h5>
+                      </div> -->
+                      <div class="card-body">
+                        	<div class="card-body">
+								<div>
+									<div>
+										<div>
+											<p>
+												<span>번호:</span> 
+												<span>${board.bno}</span>
+											</p>
+											
+											<p>
+												<span>제목:</span> 
+												<span>${board.btitle}</span>
+											</p>
+											
+											<p>
+												<span>글쓴이:</span> 
+												<span>${board.mid}</span>
+											<p>
+											
+											<p>
+												<span>날짜:</span> 
+												<span><fmt:formatDate value="${board.bdate}" pattern="yyyy-MM-dd HH.mm.ss"/></span> <br/>
+											</p>
+											
+											<c:if test="${board.battachoname !=null}">
+												<p>
+													<%-- <span>첨부:</span> 
+													<span>
+														${board.battachoname}
+														
+														<!-- 첨부파일이 파일 시스템에 저장되어 있는 경우 -->
+														<c:if test="${board.battachoname != null}">
+															<a href="filedownload1?bno=${board.bno}"
+															 class="btn btn-info btn-sm ml-2">다운로드</a>
+															<img src="filedownload1?bno=${board.bno}" height="100"/>
+														</c:if>
+														
+														<!-- 첨부파일이 DB에 저장되어 있는 경우 --> 
+														<c:if test="${board.battachdata != null}">
+															<a href="filedownload2?bno=${board.bno}"
+															 class="btn btn-info btn-sm ml-2">다운로드</a>
+															 <!-- 
+															  src의 속성값은 완전한 응답 HTTP가 되어야 함 
+															  (jpg,png 나 filedownload1?bno=${board.bno} 요청으로 완전한 http를 받는다)
+															  
+															   1) 서버의 정적을 요청해서 응답을 받는 경우, 예) photo1.jpg
+															   2) 요청경로를 이용해서 컨트롤러에서 응답을 생성하는 경우, 예) filedownload1?bno=${board.bno}
+															   
+															   데이터를 직접 주면 안됨! 만약 데이터를 직접 넣어야할 경우 아래와 같음
+															  src="data:MIME;base64, base64로 인코딩된 데이터"
+															 -->
+															<img src="data:${board.battachtype};base64, ${base64Img}" height="100"/>
+														</c:if>
+														 
+													</span> --%>
+												</p>
+											</c:if>
+										</div>
+										
+										<%-- <div>
+											<span class="title">내용:</span> <br/>
+											<textarea style="width:100%" readonly>${board.bcontent}</textarea>
+										</div> --%>
+										<div>
+				                          <label class="form-label"><strong>내용</strong></label>
+				                          <div class="form-control p-0 pt-1">
+				                            <div class="comment-toolbar border-0 border-bottom">
+				                              <div class="d-flex justify-content-start">
+				                              </div>
+				                            </div>
+				                          </div>
+				                        </div>
+										
+										<a class="btn btn-primary btn-sm mt-2" href="noticeList">목록</a>
+										<a class="btn btn-primary btn-sm mt-2" href="updateBoard?bno=${board.bno}">수정</a>
+										<a class="btn btn-primary btn-sm mt-2" href="deleteBoard?bno=${board.bno}">삭제</a>
+										
+										<!-- 댓글 -->
+										<hr />
+	
+										<ul>
+										    <li>
+										    	<div>
+										    		<p>첫번째 작성자</p>
+										    		<p>첫번째 댓글</p>
+										    	</div>
+										    </li>
+										    <li>
+										    	<div>
+										    		<p>두번째 작성자</p>
+										    		<p>두번째 댓글</p>
+										    	</div>
+										    </li>
+										    
+										</ul>
+										
+										<div>
+										    <p>
+										        <span class="title">댓글</span> <br/>
+												<textarea rows="4" style="width:100%"></textarea>
+										    </p>
+										    <p>
+										        <a class="btn btn-primary btn-sm mt-2" onclick="saveComment()" style="color: white;">댓글 작성</a>
+										    </p>
+										</div>
+									</div>
+									
+								</div>
+							</div>
+                      </div>
+                    </div>
+                </div>
               </div>
             </div>
             <!-- / Content -->
@@ -1053,29 +885,18 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/katex.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/quill.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/dropzone/dropzone.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/moment/moment.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.js"></script>
 
     <!-- Main JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/app-ecommerce-dashboard.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/dashboards-analytics.js"></script>
-    
-    
-    <script>
-        // 사이드바를 숨기기
-        //document.getElementById('app-calendar-sidebar').style.display = 'none';
-
-        // 또는 사이드바를 다시 나타내려면 다음과 같이 사용
-        // document.getElementById('app-calendar-sidebar').style.display = 'block';
-    </script>
-    
+    <script src="${pageContext.request.contextPath}/resources/assets/js/qnaDetail.js"></script>
   </body>
 </html>
