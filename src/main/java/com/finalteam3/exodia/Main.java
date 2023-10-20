@@ -107,4 +107,9 @@ public class Main {
 	public String main(Model model) {
 		return "main";
 	}
+	
+	@RequestMapping("/mainCalendar")
+	public String mainCalendar(Model model) {
+		return "mainCalendar";
+	}
 }

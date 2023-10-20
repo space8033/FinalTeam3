@@ -53,6 +53,19 @@
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
+    <!-- calendar -->
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+    <script>
+
+      document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: 'dayGridMonth'
+        });
+        calendar.render();
+      });
+
+    </script>
   </head>
 
   <body>
@@ -708,22 +721,18 @@
           <div class="content-wrapper">
             <!-- Content -->
 
-            <div class="container-xxl flex-grow-1 container-p-y">
+            <div class="container-xxl flex-grow-1 container-p-y" >
               <div class="row">
-                <div class="content-wrapper">
-            		<!-- Content -->
-
-		            <div class="container-xxl flex-grow-1 container-p-y">
+                <div class="col-md-6 col-lg-8 mb-4 mb-md-0">
+		            <div class="flex-grow-1 container-p-y">
 		              <div class="card app-calendar-wrapper">
 		                <div class="row g-0">
-		
-		                  
+		                  <div id='calendar'></div>
 		                </div>
 		              </div>
 		            </div>
-            		<!-- / Content -->
-            		<div class="content-backdrop fade"></div>
           		</div>
+          		
                 <div class="col-md-6 col-lg-8 mb-4 mb-md-0">
                   <div class="card">
                     <div class="table-responsive text-nowrap">
@@ -969,58 +978,59 @@
                     </div>
                   </div>
                 </div>
-		                <div class="col-md-4">
-		                	<div class="card">
-		                        <div class="card-body">
-		                          <div class="text-center">
-		                            <div class="dropdown">
-		                              <button
-		                                class="btn btn-sm btn-label-primary dropdown-toggle"
-		                                type="button"
-		                                id="growthReportId"
-		                                data-bs-toggle="dropdown"
-		                                aria-haspopup="true"
-		                                aria-expanded="false">
-		                                	프로젝트 1
-		                              </button>
-		                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-		                                <a class="dropdown-item" href="javascript:void(0);">프로젝트 2</a>
-		                                <a class="dropdown-item" href="javascript:void(0);">프로젝트 3</a>
-		                                <a class="dropdown-item" href="javascript:void(0);">프로젝트 4</a>
-		                              </div>
-		                            </div>
-		                          </div>
-		                        </div>
-		                        <div id="growthChart"></div>
-		                        <div class="text-center fw-medium pt-3 mb-2">화이팅!</div>
-		
-		                        <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-		                          <div class="d-flex">
-		                            <div class="me-2">
-		                              <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
-		                            </div>
-		                            <div class="d-flex flex-column">
-		                              <small>프로젝트 시작</small>
-		                              <h6 class="mb-0">23.4~</h6>
-		                            </div>
-		                          </div>
-		                          <div class="d-flex">
-		                            <div class="me-2">
-		                              <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
-		                            </div>
-		                            <div class="d-flex flex-column">
-		                              <small>프로젝트 종료</small>
-		                              <h6 class="mb-0">~23.12</h6>
-		                            </div>
-		                          </div>
-		                        </div>
-		                      </div>
-		              	</div>
-	                </div>
-	              </div>
-	            </div>
-              </div>
-            </div>
+                <div class="col-md-4">
+                	<div class="card">
+                      <div class="card-body">
+                        <div class="text-center">
+                          <div class="dropdown">
+                            <button
+                              class="btn btn-sm btn-label-primary dropdown-toggle"
+                              type="button"
+                              id="growthReportId"
+                              data-bs-toggle="dropdown"
+                              aria-haspopup="true"
+                              aria-expanded="false">
+                              	프로젝트 1
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
+                              <a class="dropdown-item" href="javascript:void(0);">프로젝트 2</a>
+                              <a class="dropdown-item" href="javascript:void(0);">프로젝트 3</a>
+                              <a class="dropdown-item" href="javascript:void(0);">프로젝트 4</a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div id="growthChart"></div>
+                      <div class="text-center fw-medium pt-3 mb-2">화이팅!</div>
+
+                      <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
+                        <div class="d-flex">
+                          <div class="me-2">
+                            <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
+                          </div>
+                          <div class="d-flex flex-column">
+                            <small>프로젝트 시작</small>
+                            <h6 class="mb-0">23.4~</h6>
+                          </div>
+                        </div>
+                        <div class="d-flex">
+                          <div class="me-2">
+                            <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
+                          </div>
+                          <div class="d-flex flex-column">
+                            <small>프로젝트 종료</small>
+                            <h6 class="mb-0">~23.12</h6>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+              	</div>
+              	
+		     </div>
+		   	</div>
+		   </div>
+	  	</div>
+	  </div>
             <!-- / Content -->
 
             <div class="content-backdrop fade"></div>
