@@ -8,10 +8,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.finalteam3.exodia.employee.dto.request.JoinList;
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
 import com.finalteam3.exodia.employee.dto.request.LoginRequest;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
+import com.finalteam3.exodia.employee.service.EmployeeService.LoginResult;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -24,16 +26,27 @@ public class EmployeeController {
 	
 	@GetMapping("/login")
 	public String loginForm() {
-		log.info("ggg");
 		return "/login";
 	}
 	
 	@PostMapping("/login")
 	public String login(LoginRequest loginRequest, HttpSession session) {
-		LoginResponse loginResponse = employeeService.login(loginRequest);	
-		session.setAttribute("login", loginResponse);
+		if(employeeService.login(loginRequest).equals(LoginResult.SUCCESS)) {
+			LoginResponse loginResponse = employeeService.getLoginResponse(loginRequest);
+			session.setAttribute("login", loginResponse);
+			return "redirect:/initialPassword";
+		//아이디가 없는 경우
+		}else if(employeeService.login(loginRequest).equals(LoginResult.FAIL_ID)) {
+			log.info("아디없음");
+		//비밀번호가 틀린 경우
+		}else if(employeeService.login(loginRequest).equals(LoginResult.FAIL_PASSWORD)) {
+			log.info("비번틀림");
+		//아이디가 삭제된 경우
+		}else if(employeeService.login(loginRequest).equals(LoginResult.FAIL_ENABLED)) {
+			log.info("만료됨");
+		}
 		
-		return "redirect:/initialPassword";
+		return "/login";
 	}
 	
 	@GetMapping("/addUser")
@@ -43,6 +56,7 @@ public class EmployeeController {
 	
 	@PostMapping("/addUser")
 	public String join(JoinRequest joinRequest) {
+		
 		log.info(joinRequest.toString());
 		
 		//employeeService.join(joinRequest);

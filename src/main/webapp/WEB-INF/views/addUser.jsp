@@ -720,8 +720,8 @@
                   <div class="card">
                     <h5 class="card-header">사용자 등록</h5>
                     <div class="card-body">
-                      <form class="form-repeater">
-                        <div data-repeater-list="group-a">
+                      <form class="form-repeater" id="joinForm">
+                        <div data-repeater-list="joinList">
                           <div data-repeater-item>
                             <div class="row">
                               <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
@@ -761,22 +761,16 @@
                               <div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
                                 <label class="form-label" for="form-repeater-1-5">직위</label>
                                 <select id="form-repeater-1-5" class="form-select" name="empinfo_position">
-                                  <option value="Designer">사원</option>
-                                  <option value="Developer">대리</option>
-                                  <option value="Tester">과장</option>
-                                  <option value="Manager">차장</option>
+                                  <option value="Sawon">사원</option>
+                                  <option value="Daeri">대리</option>
+                                  <option value="Gwajang">과장</option>
+                                  <option value="Chajang">차장</option>
                                   <option value="Bujang">부장</option>
                                 </select>
                               </div>
                               
-                              <div class="mb-3 col-lg-12 col-xl-1 col-12 d-flex align-items-center justify-content-center mb-0">
-                                <button class="btn btn-label-success mt-4">
-                                  <span class="align-middle">확인</span>
-                                </button>
-                              </div>
-                              <div class="mb-3 col-lg-12 col-xl-1 col-12 d-flex align-items-center justify-content-center mb-0">
+                              <div class="mb-3 col-lg-12 col-xl-2 col-12 d-flex align-items-center justify-content-center mb-0">
                                 <button class="btn btn-label-danger mt-4" data-repeater-delete>
-                                  
                                   <span class="align-middle">삭제</span>
                                 </button>
                               </div>
@@ -786,12 +780,13 @@
                           </div>
                         </div>
                         <div class="mb-0 me-2 col text-center">
-                          <button class="btn btn-primary align-items-center" data-repeater-create>
+                          <button onclick="submit" class="btn btn-primary align-items-center" data-repeater-create >
                             <i class="bx bx-plus me-1"></i>
                             <span class="align-middle">추가</span>
                           </button>
                         </div>
                       </form>
+                      
                     </div>
                   </div>
                 </div>
