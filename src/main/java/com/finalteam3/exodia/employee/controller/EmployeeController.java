@@ -31,7 +31,7 @@ public class EmployeeController {
 	
 	@PostMapping("/login")
 	public String login(LoginRequest loginRequest, HttpSession session) {
-		if(employeeService.login(loginRequest).equals(LoginResult.SUCCESS)) {
+		if(employeeService.login(loginRequest).equals(LoginResult.LOGIN_SUCCESS)) {
 			LoginResponse loginResponse = employeeService.getLoginResponse(loginRequest);
 			session.setAttribute("login", loginResponse);
 			return "redirect:/initialPassword";
@@ -63,4 +63,21 @@ public class EmployeeController {
 		
 		return "/addUser";
 	}
+	
+	//프로젝트 진행을 위한 임시 부분/////////////////////////////////////////////////////////
+	@GetMapping("/jjoin")
+	public String jjoinForm() {
+		return "/jjoin";
+	}
+	
+	@PostMapping("/jjoin")
+	public String jjoin(JoinRequest joinRequest) {
+		
+		log.info(joinRequest.toString());
+		
+		employeeService.join(joinRequest);
+		
+		return "redirect:/employee/login";
+	}
+	//프로젝트 진행을 위한 임시 부분/////////////////////////////////////////////////////////
 }

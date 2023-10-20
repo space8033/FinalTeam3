@@ -5,6 +5,7 @@ import javax.security.auth.login.CredentialExpiredException;
 
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,8 @@ import com.finalteam3.exodia.note.dto.EmployeeInfo;
 public class EmployeeServiceImpl implements EmployeeService{
 	@Resource
 	private EmployeeDao employeeDao;
+	/*@Resource
+	private BCryptPasswordEncoder encoder;*/
 	
 	
 	@Override
@@ -41,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		//로그인 중인 사용자 로그인 상태 변경
 		employeeDao.updateStatus(loginRequest.getEmp_id());
 		
-		return LoginResult.SUCCESS;
+		return LoginResult.LOGIN_SUCCESS;
 	}
 
 	@Override
@@ -52,6 +55,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
+	@Transactional
 	public void join(JoinRequest joinRequest) {
 		employeeDao.insertEmp(joinRequest);
 		int emp_no = employeeDao.selectNoByEmpId(joinRequest.getEmp_id());
