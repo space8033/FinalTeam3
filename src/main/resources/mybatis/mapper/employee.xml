@@ -37,6 +37,10 @@
 		update emp set emp_status = 'connected' where emp_id = #{emp_id}
 	</update>
 	
+	<update id="updatePassword" parameterType="Map">
+		update emp set emp_password = #{emp_password}, emp_isinit = #{emp_isinit} where emp_id = #{emp_id}
+	</update>
+	
 	<select id="selectInfoByEmpNo" resultType="EmployeeInfo" parameterType="int">
 		select empinfo_no, empinfo_name, empinfo_position, empinfo_phone, empinfo_email, empinfo_createdat
 		from empinfo

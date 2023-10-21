@@ -1,5 +1,7 @@
 package com.finalteam3.exodia.employee.dao;
 
+import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
@@ -15,4 +17,5 @@ public interface EmployeeDao {
 	public void insertEmp(JoinRequest joinRequest);
 	public void insertEmpInfo(JoinRequest joinRequest);
 	public EmployeeInfo selectInfoByEmpNo(int emp_no);
+	public void updatePassword(Map<String, Object> map);
 }

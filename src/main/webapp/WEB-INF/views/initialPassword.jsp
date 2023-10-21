@@ -122,15 +122,16 @@
               <!-- /Logo -->
               <p class="mb-4">초기 비밀번호 변경</p>
 
-              <form id="formAuthentication" class="mb-3" action="main" method="POST">
+              <form id="formAuthentication" class="mb-3" action="initialPassword" method="POST">
                 <div class="mb-3">
                   <label for="email" class="form-label">아이디</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="email"
-                    name="email-username"
-                    placeholder="아이디"
+                    id="loginId"
+                    name="loginId"
+                    value="${loginEmp}"
+                    disabled="disabled"
                     autofocus />
                 </div>
                 <div class="mb-3 form-password-toggle">
@@ -143,7 +144,7 @@
                       type="password"
                       id="password"
                       class="form-control"
-                      name="password"
+                      name="newPassword"
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password" />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
@@ -159,7 +160,7 @@
                       type="password"
                       id="password"
                       class="form-control"
-                      name="password"
+                      name="confirmPassword"
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password" />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
@@ -172,7 +173,7 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit" href="main">드루와</button>
+                  <button class="btn btn-primary d-grid w-100" type="submit">드루와</button>
                 </div>
               </form>
 
