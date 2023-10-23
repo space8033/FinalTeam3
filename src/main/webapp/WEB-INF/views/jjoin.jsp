@@ -66,7 +66,7 @@
             <div class="card-body">
               <!-- Logo -->
               <div class="app-brand justify-content-center">
-                <a href="employee/login" class="app-brand-link gap-2">
+                <a href="index.html" class="app-brand-link gap-2">
                   <span class="app-brand-logo demo">
                     <svg
                       width="25"
@@ -120,52 +120,61 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <p class="mb-4">초기 비밀번호 변경</p>
+              <h4 class="mb-2">안녕! 👋</h4>
+              <p class="mb-4">왔으면 로그인해라.</p>
 
-              <form id="formAuthentication" class="mb-3" action="initialPassword" method="POST">
+              <form id="formAuthentication" class="mb-3" name="JoinRequest" action="jjoin" method="POST">
                 <div class="mb-3">
-                  <label for="email" class="form-label">아이디</label>
+                  <label for="emp_id" class="form-label">아이디</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="loginId"
-                    name="loginId"
-                    value="${loginEmp}"
-                    disabled="disabled"
+                    id="emp_id"
+                    name="emp_id"
+                    placeholder="아이디를 써넣거라"
                     autofocus />
                 </div>
-                <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">변경할 비밀번호</label>
-                   
-                  </div>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      name="newPassword"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password" />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
+                <div class="mb-3">
+                  <label for="emp_name" class="form-label">이름</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="emp_name"
+                    name="empinfo_name"
+                    placeholder="아이디를 써넣거라"
+                    autofocus />
                 </div>
-                 <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">변경할 비밀번호 확인</label>
-                   
-                  </div>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      name="confirmPassword"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password" />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
+                <div class="mb-3">
+                  <label for="emp_phone" class="form-label">전화번호</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="emp_phone"
+                    name="empinfo_phone"
+                    placeholder="아이디를 써넣거라"
+                    autofocus />
                 </div>
+                <div class="mb-3">
+                  <label for="emp_email" class="form-label">이메일</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="emp_email"
+                    name="empinfo_email"
+                    placeholder="아이디를 써넣거라"
+                    autofocus />
+                </div>
+               	<div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
+                  <label class="form-label" for="emp_position">직위</label>
+                  <select id="emp_position" class="form-select" name="empinfo_position">
+                    <option value="Sawon">사원</option>
+                    <option value="Daeri">대리</option>
+                    <option value="Gwajang">과장</option>
+                    <option value="Chajang">차장</option>
+                    <option value="Bujang">부장</option>
+                  </select>
+                </div>
+                
                 <div class="mb-3">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="remember-me" />
@@ -173,9 +182,10 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">드루와</button>
+                  <button class="login btn btn-primary d-grid w-100" type="submit">드루와</button>
                 </div>
               </form>
+
 
             </div>
           </div>

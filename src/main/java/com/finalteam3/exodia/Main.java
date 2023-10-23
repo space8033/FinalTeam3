@@ -9,7 +9,7 @@ public class Main {
 	
 	@RequestMapping("/")
 	public String login(Model model) {
-		return "login";
+		return "redirect:/employee/login";
 	}
 	
 /*	@RequestMapping("/note")
@@ -57,10 +57,7 @@ public class Main {
 	public String addProject(Model model) {
 		return "addProject";
 	}
-	@RequestMapping("/addUser")
-	public String addUser(Model model) {
-		return "addUser";
-	}
+	
 	@RequestMapping("/userManagement")
 	public String userManagement(Model model) {
 		return "userManagement";

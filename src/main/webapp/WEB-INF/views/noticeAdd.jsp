@@ -200,8 +200,14 @@
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
-            <li class="menu-item">
+            <%-- <li class="menu-item">
               <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div class="text-truncate">사용자 등록</div>
+              </a>
+            </li> --%>
+            <li class="menu-item">
+              <a href="${pageContext.request.contextPath}/employee/jjoin" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
               </a>
