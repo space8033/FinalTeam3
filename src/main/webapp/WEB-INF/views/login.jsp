@@ -156,7 +156,7 @@
                   </div>
                 </div>
                 <div class="mb-3">
-                  <button class="login btn btn-primary d-grid w-100" type="submit">로그인</button>
+                  <button class="login btn btn-primary d-grid w-100" type="submit" id="btnLogin">로그인</button>
                 </div>
                 <small>비밀번호 분실시 010-1212-3434</small>
               </form>
