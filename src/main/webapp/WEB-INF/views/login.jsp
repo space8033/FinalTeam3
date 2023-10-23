@@ -120,8 +120,8 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">로그인! 👋</h4>
-              <p class="mb-4">왔으면 로그인해라.</p>
+              <h4 class="mb-2">로그인 👋</h4>
+              <p class="mb-4">PMS를 이용하시려면 로그인 해주세요</p>
 
               <form id="formAuthentication" class="mb-3" name="loginRequest" action="login" method="POST">
                 <div class="mb-3">
@@ -131,13 +131,12 @@
                     class="form-control"
                     id="email"
                     name="emp_id"
-                    placeholder="아이디를 써넣거라"
+                    placeholder="아이디"
                     autofocus />
                 </div>
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
                     <label class="form-label" for="password">비밀번호</label>
-                     <small>비밀번호 분실시 010-1212-3434</small>
                   </div>
                   <div class="input-group input-group-merge">
                     <input
@@ -153,12 +152,13 @@
                 <div class="mb-3">
                   <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="remember-me" />
-                    <label class="form-check-label" for="remember-me"> 나를 기억해줘 </label>
+                    <label class="form-check-label" for="remember-me"> 아이디 저장 </label>
                   </div>
                 </div>
                 <div class="mb-3">
-                  <button class="login btn btn-primary d-grid w-100" type="submit">드루와</button>
+                  <button class="login btn btn-primary d-grid w-100" type="submit">로그인</button>
                 </div>
+                <small>비밀번호 분실시 010-1212-3434</small>
               </form>
 
 

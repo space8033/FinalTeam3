@@ -1044,17 +1044,6 @@
                             class="form-control"
                             value="abatisse2@nih.gov, Justinian Hattersley" />
                         </div>
-                        
-                        <div class="col-md-8 mb-4">
-                          <label for="TagifyCustomInlineSuggestion" class="form-label">업무 배정</label>
-                          <input
-                            id="TagifyCustomInlineSuggestion"
-                            name="TagifyCustomInlineSuggestion"
-                            class="form-control"
-                            placeholder="select technologies"
-                            value="css, html, javascript" />
-                        </div>
-               
                
 		               <hr>
 				        	<div class="mb-0">

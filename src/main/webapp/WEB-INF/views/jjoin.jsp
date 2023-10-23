@@ -131,7 +131,7 @@
                     class="form-control"
                     id="emp_id"
                     name="emp_id"
-                    placeholder="아이디를 써넣거라"
+                    placeholder="아이디"
                     autofocus />
                 </div>
                 <div class="mb-3">
@@ -141,7 +141,7 @@
                     class="form-control"
                     id="emp_name"
                     name="empinfo_name"
-                    placeholder="아이디를 써넣거라"
+                    placeholder="이름"
                     autofocus />
                 </div>
                 <div class="mb-3">
@@ -151,7 +151,7 @@
                     class="form-control"
                     id="emp_phone"
                     name="empinfo_phone"
-                    placeholder="아이디를 써넣거라"
+                    placeholder="전화번호"
                     autofocus />
                 </div>
                 <div class="mb-3">
@@ -161,7 +161,7 @@
                     class="form-control"
                     id="emp_email"
                     name="empinfo_email"
-                    placeholder="아이디를 써넣거라"
+                    placeholder="이메일"
                     autofocus />
                 </div>
                	<div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
@@ -176,13 +176,7 @@
                 </div>
                 
                 <div class="mb-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="remember-me" />
-                    <label class="form-check-label" for="remember-me"> 나를 기억해줘 </label>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <button class="login btn btn-primary d-grid w-100" type="submit">드루와</button>
+                  <button class="login btn btn-primary d-grid w-100" type="submit">가입하기</button>
                 </div>
               </form>
 

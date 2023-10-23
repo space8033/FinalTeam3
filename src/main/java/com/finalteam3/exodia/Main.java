@@ -57,10 +57,6 @@ public class Main {
 	public String addProject(Model model) {
 		return "addProject";
 	}
-	@RequestMapping("/test")
-	public String addProject2(Model model) {
-		return "main2";
-	}
 	
 	@RequestMapping("/userManagement")
 	public String userManagement(Model model) {
