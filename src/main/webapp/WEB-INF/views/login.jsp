@@ -116,11 +116,11 @@
                       </g>
                     </svg>
                   </span>
-                  <span class="app-brand-text demo text-body fw-bold">PMS</span>
+                  <span class="app-brand-text demo text-body fw-bold" style="font-family: Arial, sans-serif;">PMS</span>
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">안녕! 👋</h4>
+              <h4 class="mb-2">로그인! 👋</h4>
               <p class="mb-4">왔으면 로그인해라.</p>
 
               <form id="formAuthentication" class="mb-3" name="loginRequest" action="login" method="POST">

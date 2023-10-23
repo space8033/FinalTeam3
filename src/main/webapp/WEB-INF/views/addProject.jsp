@@ -120,7 +120,7 @@
                   </g>
                 </svg>
               </span>
-              <span class="app-brand-text demo menu-text fw-bold ms-2">pms</span>
+              <span class="app-brand-text demo menu-text fw-bold ms-2">PMS</span>
             </a>
 
             <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
@@ -728,6 +728,7 @@
               <!-- Sticky Actions -->
               <div class="row">
                 <div class="col-12">
+               	<form id="projectRegister" name="ProjectAddRequest" action="addProject" method="POST">
                   <div class="card">
                     <div
                       class="card-header sticky-element bg-label-secondary d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row">
@@ -748,8 +749,7 @@
                                   type="text"
                                   id="fullname" 
                                   class="form-control"
-                                  name="fullname"
-                                  
+                                  name="project_name"
                                   placeholder="프로젝트명" />
                             </div>
 
@@ -757,7 +757,7 @@
                             <div class="col-12">
                               <label class="form-label" for="index">프로젝트 개요</label>
                               <textarea
-                                name="index"
+                                name="project_outline"
                                 class="form-control"
                                 id="address"
                                 rows="2"
@@ -766,52 +766,38 @@
                             
                             <div class="col-md-12 mb-2">
                           		<label for="TagifyBasic" class="form-label">구성 팀</label>
-                         		<input id="TagifyBasic" class="form-control" name="TagifyBasic" value="개발1팀, 개발2팀, 개발3팀" />
+                         		<input id="TagifyBasic" class="form-control" name="team_name" value="개발1팀" />
                        		</div>
                        		
 		                    <div class="col-md-12">
-                              <label class="form-label" for="pnumber">프로젝트 투입인력(임시)</label>
+                              <label class="form-label" for="pnumber">클라이언트</label>
                               <input
-                                  type="number"
+                                  type="text"
                                   id="pnumber" 
                                   class="form-control"
-                                  name="pnumber"
+                                  name="project_client"
                                   
                                   placeholder="프로젝트 인원 수" />
                             </div>
                             
-                            <div class="col-md-12">
-                              <label class="form-label" for="pnumber">PM 선택(임시)</label>
-                              <input
-                                  type="number"
-                                  id="pnumber" 
-                                  class="form-control"
-                                  name="pnumber"
-                                  
-                                  placeholder="오우주" />
-                            </div>
 		                    
 		 					 <!-- Range Picker-->
 	                        <div class="col-md-12 mb-3">
 	                          <label for="flatpickr-range" class="form-label">프로젝트 기간</label>
 	                          <input
 	                            type="text"
+	                            name="project_period"
 	                            class="form-control"
 	                            placeholder="YYYY-MM-DD to YYYY-MM-DD"
 	                            id="flatpickr-range" />
 	                        </div>
-
-                       		
-                       		
-                            
-                           
                           </div>
-                    
-                            
                         </div>
                       </div>
                     </div>
                   </div>
+               	</form>
+               	
                 </div>
               </div>
               <!-- /Sticky Actions -->

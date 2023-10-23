@@ -2,4 +2,35 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.finalteam3.exodia.project.dao.ProjectDao">
 	
+	<insert id="insertProject" parameterType="ProjectAddRequest">
+		<selectKey keyProperty="project_no" resultType="int" order="BEFORE">
+			select seq_project.nextval from dual
+		</selectKey>
+		
+		insert into project(project_no, project_name, project_outline, project_client, project_startdate, project_enddate, project_status, project_createdat)
+		values(#{project_no}, #{project_name}, #{project_outline}, #{project_client}, #{project_startDate}, #{project_endDate}, #{project_status}, to_char(sysdate,'yyyy.mm.dd hh24:mi:ss'))
+	</insert>
+	
+	<insert id="insertTeam" parameterType="Map">
+		<selectKey keyProperty="team_no" resultType="int" order="BEFORE">
+			select seq_team.nextval from dual
+		</selectKey>
+		
+		insert into team(team_no, project_no, empinfo_no, team_name)
+		values (#{team_no}, #{project_no}, 0, #{team_name})
+	</insert>
+	
+	<select id="selectRecentNo" resultType="int">
+		<![CDATA[
+		    SELECT project_no
+		    FROM (
+		        SELECT project_no
+		        FROM project
+		        ORDER BY project_createdat DESC
+		    )
+		    WHERE ROWNUM = 1
+		]]>
+		
+	</select>
+	
 </mapper>
