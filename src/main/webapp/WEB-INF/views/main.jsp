@@ -203,7 +203,7 @@
             </li>
             
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/addProject" class="menu-link">
+              <a href="${pageContext.request.contextPath}/project/addProject" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate">프로젝트 등록</div>
               </a>

@@ -53,11 +53,6 @@ public class Main {
 		return "initialPassword";
 	}
 	
-	@RequestMapping("/addProject")
-	public String addProject(Model model) {
-		return "addProject";
-	}
-	
 	@RequestMapping("/userManagement")
 	public String userManagement(Model model) {
 		return "userManagement";
