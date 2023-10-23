@@ -16,10 +16,10 @@ public class Main {
 	public String note(Model model) {
 		return "note";
 	}*/
-	@RequestMapping("/note2")
+	/*@RequestMapping("/note")
 	public String note2(Model model) {
-		return "note2";
-	}
+		return "note";
+	}*/
 	
 
 	@RequestMapping("/chat2")
@@ -108,5 +108,10 @@ public class Main {
 	@RequestMapping("/mainCalendar")
 	public String mainCalendar(Model model) {
 		return "mainCalendar";
+	}
+	
+	@RequestMapping("/programManagement")
+	public String programManagement(Model model) {
+		return "programManagement";
 	}
 }

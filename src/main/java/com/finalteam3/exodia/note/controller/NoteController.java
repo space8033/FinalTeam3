@@ -29,7 +29,7 @@ public class NoteController {
 	@Resource
 	private NoteService noteService;
 	
-	@GetMapping("/note2")
+	@GetMapping("/note")
 	public String notePage(String pageNo, HttpSession session, Model model) {
 		LoginResponse loginResoponse = (LoginResponse) session.getAttribute("login");
 		log.info("여기까지 ok1");
@@ -72,7 +72,7 @@ public class NoteController {
 		model.addAttribute("list", list);
 		log.info("여기까지 ok4");
 		
-		return "/note2";
+		return "/note";
 	}
 	
 }
