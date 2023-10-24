@@ -91,20 +91,35 @@ $(function () {
       ],
       order: [[1, 'desc']],
       dom:
-        '<"row mx-2"' +
-        '<"col-sm-12 col-md-4 col-lg-6" l>' +
-        '<"col-sm-12 col-md-8 col-lg-6"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-md-end justify-content-center align-items-center flex-sm-nowrap flex-wrap me-1"<"me-3"f><"user_role w-px-200 pb-3 pb-sm-0">>>' +
-        '>t' +
-        '<"row mx-2"' +
-        '<"col-sm-12 col-md-6"i>' +
-        '<"col-sm-12 col-md-6"p>' +
-        '>',
+    	  '<"card-header d-flex flex-wrap py-0"' +
+          '<"me-5 ms-n2 pe-5"f>' +
+          '<"d-flex justify-content-start justify-content-md-end align-items-baseline"<"dt-action-buttons d-flex align-items-start align-items-md-center justify-content-sm-center mb-3 mb-sm-0 gap-3"lB>>' +
+          '>t' +
+          '<"row mx-2"' +
+          '<"col-sm-12 col-md-6"i>' +
+          '<"col-sm-12 col-md-6"p>' +
+          '>',
       language: {
-        sLengthMenu: '_MENU_',
+        sLengthMenu: '페이지당_MENU_개씩 보기',
         search: '검색',
-        searchPlaceholder: '검색'
+        searchPlaceholder: '검색',
+        pagenate: {
+        	next: '다음',
+        	previous: '이전'
+        },
+        info: '현재 _START_ - _END_ / _TOTAL_건'
       },
       // For responsive popup
+      buttons: [
+          {
+            text: '<i class="bx bx-plus me-0 me-sm-1"></i>프로그램 등록',
+            className: 'add-new btn btn-primary ms-2',
+            attr: {
+              'data-bs-toggle': 'offcanvas',
+              'data-bs-target': '#offcanvasEcommerceCategoryList'
+            }
+          }
+      ],
       responsive: {
         details: {
           display: $.fn.dataTable.Responsive.display.modal({
@@ -137,6 +152,7 @@ $(function () {
           }
         }
       },
+      lengthChange: false,
       initComplete: function () {
         // Adding role filter once table initialized
         this.api()
@@ -171,6 +187,46 @@ $(function () {
     $('.dataTables_length .form-select').removeClass('form-select-sm');
   }, 300);
 });
+
+//For form validation
+(function () {
+const eCommerceCategoryListForm = document.getElementById('eCommerceCategoryListForm');
+
+//Add New customer Form Validation
+const fv = FormValidation.formValidation(eCommerceCategoryListForm, {
+  fields: {
+    categoryTitle: {
+      validators: {
+        notEmpty: {
+          message: 'Please enter category title'
+        }
+      }
+    },
+    slug: {
+      validators: {
+        notEmpty: {
+          message: 'Please enter slug'
+        }
+      }
+    }
+  },
+  plugins: {
+    trigger: new FormValidation.plugins.Trigger(),
+    bootstrap5: new FormValidation.plugins.Bootstrap5({
+      // Use this for enabling/changing valid/invalid class
+      eleValidClass: 'is-valid',
+      rowSelector: function (field, ele) {
+        // field is the field name & ele is the field element
+        return '.mb-3';
+      }
+    }),
+    submitButton: new FormValidation.plugins.SubmitButton(),
+    // Submit the form when all fields are valid
+    // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+    autoFocus: new FormValidation.plugins.AutoFocus()
+  }
+});
+})();
 
 (function () {
   // On edit role click, update text

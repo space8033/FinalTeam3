@@ -62,7 +62,7 @@
         <!-- Menu -->
  		 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="main" class="app-brand-link">
+            <a href="${pageContext.request.contextPath}/main" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -115,7 +115,7 @@
               <span class="app-brand-text demo menu-text fw-bold ms-2">pms</span>
             </a>
 
-            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+             <a href="${pageContext.request.contextPath}/main" class="layout-menu-toggle menu-link text-large ms-auto">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
             </a>
           </div>
