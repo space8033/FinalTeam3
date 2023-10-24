@@ -202,7 +202,12 @@
                 </li>
               </ul>
             </li>
-            
+            <li class="menu-item">
+              <a href="${pageContext.request.contextPath}/programManagement" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-server"></i>
+                <div class="text-truncate">프로그램</div>
+              </a>
+            </li>
             <!--관리자 메뉴-->
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">ADMIN MENU</span>
