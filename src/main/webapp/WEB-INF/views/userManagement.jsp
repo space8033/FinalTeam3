@@ -720,378 +720,349 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-              <div class="container-xxl flex-grow-1 container-p-y">
+              <div class="container-xxl flex-grow-1 container-p-y d-flex">
 
               <!-- Basic Bootstrap Table -->
-              <div class="card">
-                <h5 class="card-header">팀 목록</h5>
-                <div class="table-responsive text-nowrap">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>팀명</th>
-                        <th>팀장</th>
-                        <th>팀원</th>
-                        <th>팀업무</th>
-                        <th>편집</th>
-                      </tr>
-                    </thead>
-                    <tbody class="table-border-bottom-0">
-                      <tr>
-                        <td>
-                          
-                          <span class="fw-medium">개발 1팀</span>
-                        </td>
-                        <td>김시온</td>
-                        <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Lilian Fuller">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-                            </li>
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Sophia Wilkerson">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
-                            </li>
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Christina Parker">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
-                            </li>
-                             <li class="avatar avatar-xs col-md-3 col-sm-6">
-		                          <span
-		                            class="avatar-initial rounded-circle pull-up bg-secondary"
-		                            data-bs-toggle="tooltip"
-		                            data-bs-placement="bottom"
-		                            title="5 more"
-		                            >+5</span
-		                          >
-                        	</li>
-                          </ul>
-                        </td>
-                        <td><span class="badge bg-label-primary me-1">로그인</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-1"></i> Delete</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          </i> <span class="fw-medium">개발 2팀</span>
-                        </td>
-                        <td>박재홍</td>
-                        <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Lilian Fuller">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-                            </li>
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Sophia Wilkerson">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
-                            </li>
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Christina Parker">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
-                            </li>
-                            <li class="avatar avatar-xs col-md-3 col-sm-6">
-		                          <span
-		                            class="avatar-initial rounded-circle pull-up bg-secondary"
-		                            data-bs-toggle="tooltip"
-		                            data-bs-placement="bottom"
-		                            title="3 more"
-		                            >+3</span
-		                          >
-                        	</li>
-               
-                          </ul>
-                        </td>
-                        <td><span class="badge bg-label-success me-1">회원가입</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-2"></i> Edit</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-2"></i> Delete</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          
-                          <span class="fw-medium">개발 3팀</span>
-                        </td>
-                        <td>이은지</td>
-                        <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Lilian Fuller">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-                            </li>
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Sophia Wilkerson">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
-                            </li>
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Christina Parker">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
-                            </li>
-                             <li class="avatar avatar-xs col-md-3 col-sm-6">
-		                          <span
-		                            class="avatar-initial rounded-circle pull-up bg-secondary"
-		                            data-bs-toggle="tooltip"
-		                            data-bs-placement="bottom"
-		                            title="2 more"
-		                            >+2</span
-		                          >
-                        	</li>
-                          </ul>
-                        </td>
-                        <td><span class="badge bg-label-info me-1">채팅</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-2"></i> Edit</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-2"></i> Delete</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>
-                          
-                          <span class="fw-medium">개발 4팀</span>
-                        </td>
-                        <td>이송미</td>
-                        <td>
-                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Lilian Fuller">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-                            </li>
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Sophia Wilkerson">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
-                            </li>
-                            <li
-                              data-bs-toggle="tooltip"
-                              data-popup="tooltip-custom"
-                              data-bs-placement="top"
-                              class="avatar avatar-xs pull-up"
-                              title="Christina Parker">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
-                            </li>
-                             <li class="avatar avatar-xs col-md-3 col-sm-6">
-		                          <span
-		                            class="avatar-initial rounded-circle pull-up bg-secondary"
-		                            data-bs-toggle="tooltip"
-		                            data-bs-placement="bottom"
-		                            title="9 more"
-		                            >+9</span
-		                          >
-                        	</li>
-                          </ul>
-                        </td>
-                        <td><span class="badge bg-label-warning me-1">쪽지</span></td>
-                        <td>
-                          <div class="dropdown">
-                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                              <i class="bx bx-dots-vertical-rounded"></i>
-                            </button>
-                            <div class="dropdown-menu">
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-edit-alt me-2"></i> Edit</a
-                              >
-                              <a class="dropdown-item" href="javascript:void(0);"
-                                ><i class="bx bx-trash me-2"></i> Delete</a
-                              >
-                            </div>
-                          </div>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+	              <div style="width : 50%; padding-top:1.625rem;">
+	              	<div class="card" style="height: 545px;">
+		                <h5 class="card-header">팀 목록</h5>
+		                <div class="table-responsive text-nowrap">
+		                  <table class="table">
+		                    <thead>
+		                      <tr>
+		                        <th>팀명</th>
+		                        <th>팀장</th>
+		                        <th>팀원</th>
+		                        <th>팀업무</th>
+		                        <th>편집</th>
+		                      </tr>
+		                    </thead>
+		                    <tbody class="table-border-bottom-0">
+		                      <tr>
+		                        <td>
+		                          
+		                          <span class="fw-medium">개발 1팀</span>
+		                        </td>
+		                        <td>김시온</td>
+		                        <td>
+		                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+		                            <li
+		                              data-bs-toggle="tooltip"
+		                              data-popup="tooltip-custom"
+		                              data-bs-placement="top"
+		                              class="avatar avatar-xs pull-up"
+		                              title="Lilian Fuller">
+		                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
+		                            </li>
+		                            <li
+		                              data-bs-toggle="tooltip"
+		                              data-popup="tooltip-custom"
+		                              data-bs-placement="top"
+		                              class="avatar avatar-xs pull-up"
+		                              title="Sophia Wilkerson">
+		                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
+		                            </li>
+		                            <li
+		                              data-bs-toggle="tooltip"
+		                              data-popup="tooltip-custom"
+		                              data-bs-placement="top"
+		                              class="avatar avatar-xs pull-up"
+		                              title="Christina Parker">
+		                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
+		                            </li>
+		                             <li class="avatar avatar-xs col-md-3 col-sm-6">
+				                          <span
+				                            class="avatar-initial rounded-circle pull-up bg-secondary"
+				                            data-bs-toggle="tooltip"
+				                            data-bs-placement="bottom"
+				                            title="5 more"
+				                            >+5</span
+				                          >
+		                        	</li>
+		                          </ul>
+		                        </td>
+		                        <td><span class="badge bg-label-primary me-1">로그인</span></td>
+		                        <td>
+		                          <div class="dropdown">
+		                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+		                              <i class="bx bx-dots-vertical-rounded"></i>
+		                            </button>
+		                            <div class="dropdown-menu">
+		                              <a class="dropdown-item" href="javascript:void(0);"
+		                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
+		                              >
+		                              <a class="dropdown-item" href="javascript:void(0);"
+		                                ><i class="bx bx-trash me-1"></i> Delete</a
+		                              >
+		                            </div>
+		                          </div>
+		                        </td>
+		                      </tr>
+		                      <tr>
+		                        <td>
+		                          </i> <span class="fw-medium">개발 2팀</span>
+		                        </td>
+		                        <td>박재홍</td>
+		                        <td>
+		                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+		                            <li
+		                              data-bs-toggle="tooltip"
+		                              data-popup="tooltip-custom"
+		                              data-bs-placement="top"
+		                              class="avatar avatar-xs pull-up"
+		                              title="Lilian Fuller">
+		                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
+		                            </li>
+		                            <li
+		                              data-bs-toggle="tooltip"
+		                              data-popup="tooltip-custom"
+		                              data-bs-placement="top"
+		                              class="avatar avatar-xs pull-up"
+		                              title="Sophia Wilkerson">
+		                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
+		                            </li>
+		                            <li
+		                              data-bs-toggle="tooltip"
+		                              data-popup="tooltip-custom"
+		                              data-bs-placement="top"
+		                              class="avatar avatar-xs pull-up"
+		                              title="Christina Parker">
+		                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
+		                            </li>
+		                            <li class="avatar avatar-xs col-md-3 col-sm-6">
+				                          <span
+				                            class="avatar-initial rounded-circle pull-up bg-secondary"
+				                            data-bs-toggle="tooltip"
+				                            data-bs-placement="bottom"
+				                            title="3 more"
+				                            >+3</span
+				                          >
+		                        	</li>
+		               
+		                          </ul>
+		                        </td>
+		                        <td><span class="badge bg-label-success me-1">회원가입</span></td>
+		                        <td>
+		                          <div class="dropdown">
+		                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+		                              <i class="bx bx-dots-vertical-rounded"></i>
+		                            </button>
+		                            <div class="dropdown-menu">
+		                              <a class="dropdown-item" href="javascript:void(0);"
+		                                ><i class="bx bx-edit-alt me-2"></i> Edit</a
+		                              >
+		                              <a class="dropdown-item" href="javascript:void(0);"
+		                                ><i class="bx bx-trash me-2"></i> Delete</a
+		                              >
+		                            </div>
+		                          </div>
+		                        </td>
+		                      </tr>
+		                      <tr>
+		                        <td>
+		                          
+		                          <span class="fw-medium">개발 3팀</span>
+		                        </td>
+		                        <td>이은지</td>
+		                        <td>
+		                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+		                            <li
+		                              data-bs-toggle="tooltip"
+		                              data-popup="tooltip-custom"
+		                              data-bs-placement="top"
+		                              class="avatar avatar-xs pull-up"
+		                              title="Lilian Fuller">
+		                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
+		                            </li>
+		                            <li
+		                              data-bs-toggle="tooltip"
+		                              data-popup="tooltip-custom"
+		                              data-bs-placement="top"
+		                              class="avatar avatar-xs pull-up"
+		                              title="Sophia Wilkerson">
+		                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
+		                            </li>
+		                            <li
+		                              data-bs-toggle="tooltip"
+		                              data-popup="tooltip-custom"
+		                              data-bs-placement="top"
+		                              class="avatar avatar-xs pull-up"
+		                              title="Christina Parker">
+		                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
+		                            </li>
+		                             <li class="avatar avatar-xs col-md-3 col-sm-6">
+				                          <span
+				                            class="avatar-initial rounded-circle pull-up bg-secondary"
+				                            data-bs-toggle="tooltip"
+				                            data-bs-placement="bottom"
+				                            title="2 more"
+				                            >+2</span
+				                          >
+		                        	</li>
+		                          </ul>
+		                        </td>
+		                        <td><span class="badge bg-label-info me-1">채팅</span></td>
+		                        <td>
+		                          <div class="dropdown">
+		                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+		                              <i class="bx bx-dots-vertical-rounded"></i>
+		                            </button>
+		                            <div class="dropdown-menu">
+		                              <a class="dropdown-item" href="javascript:void(0);"
+		                                ><i class="bx bx-edit-alt me-2"></i> Edit</a
+		                              >
+		                              <a class="dropdown-item" href="javascript:void(0);"
+		                                ><i class="bx bx-trash me-2"></i> Delete</a
+		                              >
+		                            </div>
+		                          </div>
+		                        </td>
+		                      </tr>
+		                      <tr>
+		                        <td>
+		                          
+		                          <span class="fw-medium">개발 4팀</span>
+		                        </td>
+		                        <td>이송미</td>
+		                        <td>
+		                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+		                            <li
+		                              data-bs-toggle="tooltip"
+		                              data-popup="tooltip-custom"
+		                              data-bs-placement="top"
+		                              class="avatar avatar-xs pull-up"
+		                              title="Lilian Fuller">
+		                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
+		                            </li>
+		                            <li
+		                              data-bs-toggle="tooltip"
+		                              data-popup="tooltip-custom"
+		                              data-bs-placement="top"
+		                              class="avatar avatar-xs pull-up"
+		                              title="Sophia Wilkerson">
+		                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
+		                            </li>
+		                            <li
+		                              data-bs-toggle="tooltip"
+		                              data-popup="tooltip-custom"
+		                              data-bs-placement="top"
+		                              class="avatar avatar-xs pull-up"
+		                              title="Christina Parker">
+		                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
+		                            </li>
+		                             <li class="avatar avatar-xs col-md-3 col-sm-6">
+				                          <span
+				                            class="avatar-initial rounded-circle pull-up bg-secondary"
+				                            data-bs-toggle="tooltip"
+				                            data-bs-placement="bottom"
+				                            title="9 more"
+				                            >+9</span
+				                          >
+		                        	</li>
+		                          </ul>
+		                        </td>
+		                        <td><span class="badge bg-label-warning me-1">쪽지</span></td>
+		                        <td>
+		                          <div class="dropdown">
+		                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+		                              <i class="bx bx-dots-vertical-rounded"></i>
+		                            </button>
+		                            <div class="dropdown-menu">
+		                              <a class="dropdown-item" href="javascript:void(0);"
+		                                ><i class="bx bx-edit-alt me-2"></i> Edit</a
+		                              >
+		                              <a class="dropdown-item" href="javascript:void(0);"
+		                                ><i class="bx bx-trash me-2"></i> Delete</a
+		                              >
+		                            </div>
+		                          </div>
+		                        </td>
+		                      </tr>
+		                    </tbody>
+		                  </table>
+		                </div>
+		              </div>
+	              </div>
               <!--/ Basic Bootstrap Table -->
-
-            <div class="container-xxl flex-grow-1 container-p-y">
-
-              <div class="row">
-                <!-- Select2 -->
-                <div class="col-12">
-                  <div class="card mb-4">
-                    <h5 class="card-header">인력 관리</h5>
-                    <div class="card-body">
-                      <div class="row">
-                        <!-- Basic -->
-
-                        <div class="col-md-8 mb-4">
-                          <label for="selectpickerIcons" class="form-label">권한 설정</label>
-                          <select
-                            class="selectpicker w-100 show-tick"
-                            id="selectpickerIcons"
-                            data-icon-base="bx"
-                            data-tick-icon="bx-check"
-                            data-style="btn-default">
-                            <option data-icon="bx bxl-instagram">관리자</option>
-                            <option data-icon="bx bxl-pinterest-alt">PM</option>
-                            <option data-icon="bx bxl-twitch">개발자</option>
-                          </select>
-                        </div>
-                        
-                          <!-- Live Search -->
-                        <div class="col-md-8 mb-4">
-                          <label for="selectpickerLiveSearch" class="form-label">팀 설정</label>
-                          <select
-                            id="selectpickerLiveSearch"
-                            class="selectpicker w-100"
-                            data-style="btn-default"
-                            data-live-search="true">
-                            <option data-tokens="ketchup mustard">개발 1팀</option>
-                            <option data-tokens="mustard">개발 2팀</option>
-                            <option data-tokens="frosting">개발 3팀</option>
-                          </select>
-                        </div>
-                        
-	         
-                        <!-- Basic -->
-                        <div class="col-md-8 mb-4">
-                          <label for="TypeaheadBasic" class="form-label">팀 업무 배정(임시)</label>
-                          <input
-                            id="TypeaheadBasic"
-                            class="form-control typeahead"
-                            type="text"
-                            autocomplete="off"
-                            placeholder="로그인" />
-                        </div>
-	                       
-	            
-                        
-                        <div class="col-md-8 mb-4">
-                          <label for="TagifyUserList" class="form-label">사용자 목록</label>
-                          <input
-                            id="TagifyUserList"
-                            name="TagifyUserList"
-                            class="form-control"
-                            value="abatisse2@nih.gov, Justinian Hattersley" />
-                        </div>
-               
-		               <hr>
-				        	<div class="mb-0">
-				            <button class="btn btn-primary" data-repeater-create>
-				               <span class="align-middle">저장</span>
-				             </button>
-				           </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+				<div style="width:50%">
+		            <div class="container-xxl flex-grow-1 container-p-y">
+		
+		              <div class="row">
+		                <!-- Select2 -->
+		                <div class="col-12">
+		                  <div class="card mb-4">
+		                    <h5 class="card-header">인력 관리</h5>
+		                    <div class="card-body">
+		                      <div class="row">
+		                        <!-- Basic -->
+		
+		                        <div class="col-md-10 mb-4">
+		                          <label for="selectpickerIcons" class="form-label">권한 설정</label>
+		                          <select
+		                            class="selectpicker w-100 show-tick"
+		                            id="selectpickerIcons"
+		                            data-icon-base="bx"
+		                            data-tick-icon="bx-check"
+		                            data-style="btn-default">
+		                            <option data-icon="bx bxl-instagram">관리자</option>
+		                            <option data-icon="bx bxl-pinterest-alt">PM</option>
+		                            <option data-icon="bx bxl-twitch">개발자</option>
+		                          </select>
+		                        </div>
+		                        
+		                          <!-- Live Search -->
+		                        <div class="col-md-10 mb-4">
+		                          <label for="selectpickerLiveSearch" class="form-label">팀 설정</label>
+		                          <select
+		                            id="selectpickerLiveSearch"
+		                            class="selectpicker w-100"
+		                            data-style="btn-default"
+		                            data-live-search="true">
+		                            <option data-tokens="ketchup mustard">개발 1팀</option>
+		                            <option data-tokens="mustard">개발 2팀</option>
+		                            <option data-tokens="frosting">개발 3팀</option>
+		                          </select>
+		                        </div>
+		                        
+			         
+		                        <!-- Basic -->
+		                        <div class="col-md-10 mb-4">
+		                          <label for="TypeaheadBasic" class="form-label">팀 업무 배정(임시)</label>
+		                          <input
+		                            id="TypeaheadBasic"
+		                            class="form-control typeahead"
+		                            type="text"
+		                            autocomplete="off"
+		                            placeholder="로그인" />
+		                        </div>
+			                       
+			            
+		                        
+		                        <div class="col-md-10 mb-4">
+		                          <label for="TagifyUserList" class="form-label">사용자 목록</label>
+		                          <input
+		                            id="TagifyUserList"
+		                            name="TagifyUserList"
+		                            class="form-control"
+		                            value="abatisse2@nih.gov, Justinian Hattersley" />
+		                        </div>
+		               
+				               <hr>
+						        	<div class="mb-0">
+						            <button class="btn btn-primary" data-repeater-create>
+						               <span class="align-middle">저장</span>
+						             </button>
+						           </div>
+		                      </div>
+		                    </div>
+		                  </div>
+		                </div>
+		              </div>
+		            </div>
+				</div>
             
             <!-- / Content -->
 
-            <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">ThemeSelection</a>
-                </div>
-                <div class="d-none d-lg-inline-block">
-                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                  <a
-                    href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Documentation</a
-                  >
-
-                  <a
-                    href="https://themeselection.com/support/"
-                    target="_blank"
-                    class="footer-link d-none d-sm-inline-block"
-                    >Support</a
-                  >
-                </div>
-              </div>
-            </footer>
-            <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
           </div>
