@@ -166,14 +166,9 @@
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
                 </div>
+                
                 <div class="mb-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="remember-me" />
-                    <label class="form-check-label" for="remember-me"> 나를 기억해줘 </label>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">드루와</button>
+                  <button class="btn btn-primary d-grid w-100" type="submit">변경하기</button>
                 </div>
               </form>
 

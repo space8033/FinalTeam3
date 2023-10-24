@@ -16,10 +16,10 @@ public class Main {
 	public String note(Model model) {
 		return "note";
 	}*/
-	/*@RequestMapping("/note")
+	@RequestMapping("/note")
 	public String note2(Model model) {
 		return "note";
-	}*/
+	}
 	
 
 	@RequestMapping("/chat2")
