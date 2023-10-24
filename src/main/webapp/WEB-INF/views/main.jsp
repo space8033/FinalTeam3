@@ -797,6 +797,7 @@
 					                </div>
 					              </td>
 					            </tr>
+					            
 					            <tr>
 					              <td>
 					                
@@ -831,6 +832,7 @@
 					                </div>
 					              </td>
 					            </tr>
+					            
 					            <tr>
 					              <td>
 					                
@@ -865,75 +867,19 @@
 					                </div>
 					              </td>
 					            </tr>
+					            
 					            <tr>
 					              <td>
-					                <div class="d-flex align-items-center">
-					                  <img
-					                    src="${pageContext.request.contextPath}/resources/assets/img/products/magic-mouse.png"
-					                   alt="Apple"
-					                   height="32"
-					                   width="32"
-					                   class="me-2" />
-					                 <div class="d-flex flex-column">
-					                   <span class="fw-medium lh-1">Magic Mouse</span>
-					                   <small class="text-muted">Apple</small>
-					                 </div>
-					               </div>
-					             </td>
-					             <td>
-					               <span class="badge bg-label-warning rounded-pill badge-center p-3 me-2"
-					                 ><i class="bx bx-mouse bx-xs"></i
-					               ></span>
-					               Mouse
-					             </td>
-					             <td>
-					               <div class="lh-1"><span class="text-primary fw-medium">$149</span></div>
-					               <small class="text-muted">Fully Paid</small>
-					             </td>
-					             <td><span class="badge bg-label-success">Completed</span></td>
-					             <td>
-					               <div class="dropdown">
-					                 <button
-					                   type="button"
-					                   class="btn p-0 dropdown-toggle hide-arrow"
-					                   data-bs-toggle="dropdown">
-					                   <i class="bx bx-dots-vertical-rounded"></i>
-					                 </button>
-					                 <div class="dropdown-menu">
-					                   <a class="dropdown-item" href="javascript:void(0);"
-					                     ><i class="bx bx-edit-alt me-1"></i> View Details</a
-					                   >
-					                   <a class="dropdown-item" href="javascript:void(0);"
-					                     ><i class="bx bx-trash me-1"></i> Delete</a
-					                   >
-					                 </div>
-					               </div>
-					             </td>
-					           </tr>
-					
-					           <tr>
-					             <td>
-					               <div class="d-flex align-items-center">
-					                 <img
-					                   src="${pageContext.request.contextPath}/resources/assets/img/products/mi-tv.png"
-					                    alt="Xiaomi"
-					                    height="32"
-					                    width="32"
-					                    class="me-2" />
-					                  <div class="d-flex flex-column">
-					                    <span class="fw-medium lh-1">Mi LED TV 4X</span>
-					                    <small class="text-muted">Xiaomi</small>
-					                  </div>
-					                </div>
+					                
 					              </td>
 					              <td>
-					                <span class="badge bg-label-danger rounded-pill badge-center p-3 me-2"
-					                  ><i class="bx bx-tv bx-xs"></i
+					                <span class="badge bg-label-primary rounded-pill badge-center p-3 me-2"
+					                  ><i class="bx bx-mobile-alt bx-xs"></i
 					                ></span>
-					                Smart TV
+					                Smart Phone
 					              </td>
 					              <td>
-					                <div class="text-muted lh-1"><span class="text-primary fw-medium">$349</span>/2499</div>
+					                <div class="text-muted lh-1"><span class="text-primary fw-medium">$120</span>/499</div>
 					                <small class="text-muted">Partially Paid</small>
 					              </td>
 					              <td><span class="badge bg-label-primary">Confirmed</span></td>
@@ -956,6 +902,42 @@
 					                </div>
 					              </td>
 					            </tr>
+					            
+					            <tr>
+					              <td>
+					                
+					              </td>
+					              <td>
+					                <span class="badge bg-label-primary rounded-pill badge-center p-3 me-2"
+					                  ><i class="bx bx-mobile-alt bx-xs"></i
+					                ></span>
+					                Smart Phone
+					              </td>
+					              <td>
+					                <div class="text-muted lh-1"><span class="text-primary fw-medium">$120</span>/499</div>
+					                <small class="text-muted">Partially Paid</small>
+					              </td>
+					              <td><span class="badge bg-label-primary">Confirmed</span></td>
+					              <td>
+					                <div class="dropdown">
+					                  <button
+					                    type="button"
+					                    class="btn p-0 dropdown-toggle hide-arrow"
+					                    data-bs-toggle="dropdown">
+					                    <i class="bx bx-dots-vertical-rounded"></i>
+					                  </button>
+					                  <div class="dropdown-menu">
+					                    <a class="dropdown-item" href="javascript:void(0);"
+					                      ><i class="bx bx-edit-alt me-1"></i> View Details</a
+					                    >
+					                    <a class="dropdown-item" href="javascript:void(0);"
+					                      ><i class="bx bx-trash me-1"></i> Delete</a
+					                    >
+					                  </div>
+					                </div>
+					              </td>
+					            </tr>
+					              
 					          </tbody>
 					        </table>
 					      </div>

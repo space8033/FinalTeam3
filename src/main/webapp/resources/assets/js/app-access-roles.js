@@ -21,13 +21,12 @@ $(function () {
       ajax: assetsPath + 'json/user-list.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        { data: '' },
-        { data: 'full_name' },
+    	{ data: '' },
+    	{ data: 'full_name' },
         { data: 'role' },
         { data: 'current_plan' },
         { data: 'billing' },
-        { data: 'status' },
-        { data: '' }
+        { data: 'status' }
       ],
       columnDefs: [
         {
@@ -43,43 +42,19 @@ $(function () {
         },
         {
           // User full name and email
-          targets: 1,
+          targets: 2,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            var $name = full['full_name'],
-              $email = full['email'],
-              $image = full['avatar'];
-            if ($image) {
-              // For Avatar image
-              var $output =
-                '<img src="' + assetsPath + 'img/avatars/' + $image + '" alt="Avatar" class="rounded-circle">';
-            } else {
-              // For Avatar badge
-              var stateNum = Math.floor(Math.random() * 6) + 1;
-              var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
-              var $state = states[stateNum],
-                $name = full['full_name'],
-                $initials = $name.match(/\b\w/g) || [];
-              $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-              $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';
-            }
+            var $name = full['full_name'];
             // Creates full output for row
             var $row_output =
               '<div class="d-flex justify-content-left align-items-center">' +
-              '<div class="avatar-wrapper">' +
-              '<div class="avatar avatar-sm me-3">' +
-              $output +
-              '</div>' +
-              '</div>' +
               '<div class="d-flex flex-column">' +
               '<a href="' +
               userView +
               '" class="text-body text-truncate"><span class="fw-medium">' +
               $name +
               '</span></a>' +
-              '<small class="text-muted">@' +
-              $email +
-              '</small>' +
               '</div>' +
               '</div>';
             return $row_output;
@@ -87,22 +62,10 @@ $(function () {
         },
         {
           // User Role
-          targets: 2,
+          targets: 1,
           render: function (data, type, full, meta) {
             var $role = full['role'];
-            var roleBadgeObj = {
-              Subscriber:
-                '<span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2"><i class="bx bx-user bx-xs"></i></span>',
-              Author:
-                '<span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30 me-2"><i class="bx bx-cog bx-xs"></i></span>',
-              Maintainer:
-                '<span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2"><i class="bx bx-pie-chart-alt bx-xs"></i></span>',
-              Editor:
-                '<span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30 me-2"><i class="bx bx-edit bx-xs"></i></span>',
-              Admin:
-                '<span class="badge badge-center rounded-pill bg-label-secondary w-px-30 h-px-30 me-2"><i class="bx bx-mobile-alt bx-xs"></i></span>'
-            };
-            return "<span class='text-truncate d-flex align-items-center'>" + roleBadgeObj[$role] + $role + '</span>';
+            return "<span class='text-truncate d-flex align-items-center'>" + $role + '</span>';
           }
         },
         {
@@ -114,19 +77,11 @@ $(function () {
             return '<span class="fw-medium">' + $plan + '</span>';
           }
         },
-        {
-          // User Status
-          targets: 5,
-          render: function (data, type, full, meta) {
-            var $status = full['status'];
-
-            return '<span class="badge ' + statusObj[$status].class + '">' + statusObj[$status].title + '</span>';
-          }
-        },
+        
         {
           // Actions
-          targets: -1,
-          title: 'View',
+          targets: 5,
+          title: '상태',
           searchable: false,
           orderable: false,
           render: function (data, type, full, meta) {
@@ -146,8 +101,8 @@ $(function () {
         '>',
       language: {
         sLengthMenu: '_MENU_',
-        search: 'Search',
-        searchPlaceholder: 'Search..'
+        search: '검색',
+        searchPlaceholder: '검색'
       },
       // For responsive popup
       responsive: {

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html
@@ -54,6 +55,8 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/katex.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/editor.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.css" />
 
     <!-- Page CSS -->
 
@@ -236,492 +239,7 @@
         <div class="layout-page">
           <!-- Navbar -->
 
-          <nav
-            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-            id="layout-navbar">
-            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                <i class="bx bx-menu bx-sm"></i>
-              </a>
-            </div>
-
-            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <!-- Search -->
-              <div class="navbar-nav align-items-center">
-                <div class="nav-item navbar-search-wrapper mb-0">
-                  <a class="nav-item nav-link search-toggler px-0" href="javascript:void(0);">
-                    <i class="bx bx-search bx-sm"></i>
-                    <span class="d-none d-md-inline-block text-muted">Search (Ctrl+/)</span>
-                  </a>
-                </div>
-              </div>
-              <!-- /Search -->
-
-              <ul class="navbar-nav flex-row align-items-center ms-auto">
-                <!-- Language -->
-                <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
-                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <i class="bx bx-globe bx-sm"></i>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-language="en">
-                        <span class="align-middle">English</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-language="fr">
-                        <span class="align-middle">French</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-language="de">
-                        <span class="align-middle">German</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-language="pt">
-                        <span class="align-middle">Portuguese</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <!-- /Language -->
-
-                <!-- Quick links  -->
-                <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-2 me-xl-0">
-                  <a
-                    class="nav-link dropdown-toggle hide-arrow"
-                    href="javascript:void(0);"
-                    data-bs-toggle="dropdown"
-                    data-bs-auto-close="outside"
-                    aria-expanded="false">
-                    <i class="bx bx-grid-alt bx-sm"></i>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-end py-0">
-                    <div class="dropdown-menu-header border-bottom">
-                      <div class="dropdown-header d-flex align-items-center py-3">
-                        <h5 class="text-body mb-0 me-auto">Shortcuts</h5>
-                        <a
-                          href="javascript:void(0)"
-                          class="dropdown-shortcuts-add text-body"
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="top"
-                          title="Add shortcuts"
-                          ><i class="bx bx-sm bx-plus-circle"></i
-                        ></a>
-                      </div>
-                    </div>
-                    <div class="dropdown-shortcuts-list scrollable-container">
-                      <div class="row row-bordered overflow-visible g-0">
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-calendar fs-4"></i>
-                          </span>
-                          <a href="app-calendar.html" class="stretched-link">Calendar</a>
-                          <small class="text-muted mb-0">Appointments</small>
-                        </div>
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-food-menu fs-4"></i>
-                          </span>
-                          <a href="app-invoice-list.html" class="stretched-link">Invoice App</a>
-                          <small class="text-muted mb-0">Manage Accounts</small>
-                        </div>
-                      </div>
-                      <div class="row row-bordered overflow-visible g-0">
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-user fs-4"></i>
-                          </span>
-                          <a href="app-user-list.html" class="stretched-link">User App</a>
-                          <small class="text-muted mb-0">Manage Users</small>
-                        </div>
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-check-shield fs-4"></i>
-                          </span>
-                          <a href="app-access-roles.html" class="stretched-link">Role Management</a>
-                          <small class="text-muted mb-0">Permission</small>
-                        </div>
-                      </div>
-                      <div class="row row-bordered overflow-visible g-0">
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-pie-chart-alt-2 fs-4"></i>
-                          </span>
-                          <a href="index.html" class="stretched-link">Dashboard</a>
-                          <small class="text-muted mb-0">User Profile</small>
-                        </div>
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-cog fs-4"></i>
-                          </span>
-                          <a href="pages-account-settings-account.html" class="stretched-link">Setting</a>
-                          <small class="text-muted mb-0">Account Settings</small>
-                        </div>
-                      </div>
-                      <div class="row row-bordered overflow-visible g-0">
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-help-circle fs-4"></i>
-                          </span>
-                          <a href="pages-faq.html" class="stretched-link">FAQs</a>
-                          <small class="text-muted mb-0">FAQs & Articles</small>
-                        </div>
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-window-open fs-4"></i>
-                          </span>
-                          <a href="modal-examples.html" class="stretched-link">Modals</a>
-                          <small class="text-muted mb-0">Useful Popups</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <!-- Quick links -->
-
-                <!-- Style Switcher -->
-                <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
-                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <i class="bx bx-sm"></i>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
-                        <span class="align-middle"><i class="bx bx-sun me-2"></i>Light</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
-                        <span class="align-middle"><i class="bx bx-moon me-2"></i>Dark</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
-                        <span class="align-middle"><i class="bx bx-desktop me-2"></i>System</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <!-- / Style Switcher-->
-
-                <!-- Notification -->
-                <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
-                  <a
-                    class="nav-link dropdown-toggle hide-arrow"
-                    href="javascript:void(0);"
-                    data-bs-toggle="dropdown"
-                    data-bs-auto-close="outside"
-                    aria-expanded="false">
-                    <i class="bx bx-bell bx-sm"></i>
-                    <span class="badge bg-danger rounded-pill badge-notifications">5</span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end py-0">
-                    <li class="dropdown-menu-header border-bottom">
-                      <div class="dropdown-header d-flex align-items-center py-3">
-                        <h5 class="text-body mb-0 me-auto">Notification</h5>
-                        <a
-                          href="javascript:void(0)"
-                          class="dropdown-notifications-all text-body"
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="top"
-                          title="Mark all as read"
-                          ><i class="bx fs-4 bx-envelope-open"></i
-                        ></a>
-                      </div>
-                    </li>
-                    <li class="dropdown-notifications-list scrollable-container">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">Congratulation Lettie 🎉</h6>
-                              <p class="mb-0">Won the monthly best seller gold badge</p>
-                              <small class="text-muted">1h ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <span class="avatar-initial rounded-circle bg-label-danger">CF</span>
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">Charles Franklin</h6>
-                              <p class="mb-0">Accepted your connection</p>
-                              <small class="text-muted">12hr ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle" />
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">New Message ✉️</h6>
-                              <p class="mb-0">You have new message from Natalie</p>
-                              <small class="text-muted">1h ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <span class="avatar-initial rounded-circle bg-label-success"
-                                  ><i class="bx bx-cart"></i
-                                ></span>
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">Whoo! You have new order 🛒</h6>
-                              <p class="mb-0">ACME Inc. made new order $1,154</p>
-                              <small class="text-muted">1 day ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/9.png" alt class="w-px-40 h-auto rounded-circle" />
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">Application has been approved 🚀</h6>
-                              <p class="mb-0">Your ABC project application has been approved.</p>
-                              <small class="text-muted">2 days ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <span class="avatar-initial rounded-circle bg-label-success"
-                                  ><i class="bx bx-pie-chart-alt"></i
-                                ></span>
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">Monthly report is generated</h6>
-                              <p class="mb-0">July monthly financial report is generated</p>
-                              <small class="text-muted">3 days ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/5.png" alt class="w-px-40 h-auto rounded-circle" />
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">Send connection request</h6>
-                              <p class="mb-0">Peter sent you connection request</p>
-                              <small class="text-muted">4 days ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/6.png" alt class="w-px-40 h-auto rounded-circle" />
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">New message from Jane</h6>
-                              <p class="mb-0">Your have new message from Jane</p>
-                              <small class="text-muted">5 days ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <span class="avatar-initial rounded-circle bg-label-warning"
-                                  ><i class="bx bx-error"></i
-                                ></span>
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">CPU is running high</h6>
-                              <p class="mb-0">CPU Utilization Percent is currently at 88.63%,</p>
-                              <small class="text-muted">5 days ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="dropdown-menu-footer border-top p-3">
-                      <button class="btn btn-primary text-uppercase w-100">view all notifications</button>
-                    </li>
-                  </ul>
-                </li>
-                <!--/ Notification -->
-                <!-- User -->
-                <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div class="avatar avatar-online">
-                      <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                    </div>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a class="dropdown-item" href="${pageContext.request.contextPath}/userModify">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar avatar-online">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <span class="fw-medium d-block">${login.empinfo_name}</span>
-                            <small class="text-muted">개인 정보 수정</small>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                     <a class="dropdown-item" href="${pageContext.request.contextPath}/userProfile">
-                        <i class="bx bx-user me-2"></i>
-                        <span class="align-middle mx-1">마이 페이지</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="${pageContext.request.contextPath}/note">
-                        <span class="d-flex align-items-center align-middle">
-                    	  <i class="bx bx-envelope me-3"></i>
-                     	  <span class="flex-grow-1 align-middle">쪽지함</span>
-                      	  <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                      	</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="${pageContext.request.contextPath}/chat">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="bx bx-chat me-3"></i>
-                          <span class="flex-grow-1 align-middle">채팅</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
-                      </a>
-                    </li>
-
-                    <li>
-                      <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
-                        <i class="bx bx-power-off me-2"></i>
-                        <span class="align-middle">로그아웃</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <!--/ User -->
-              </ul>
-            </div>
-
-            <!-- Search Small Screens -->
-            <div class="navbar-search-wrapper search-input-wrapper d-none">
-              <input
-                type="text"
-                class="form-control search-input container-xxl border-0"
-                placeholder="Search..."
-                aria-label="Search..." />
-              <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
-            </div>
-          </nav>
+          <%@ include file="/WEB-INF/views/header.jsp" %>
 
           <!-- / Navbar -->
 
@@ -941,8 +459,11 @@
                               class="email-pagination d-sm-flex d-none align-items-center flex-wrap justify-content-between justify-sm-content-end">
                               <span class="d-sm-block d-none mx-3 text-muted">1-10 of 653</span>
                               <i
-                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4"></i>
-                              <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i>
+                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
+                                <a href="javascript:showNoteByUser(1)"></a>
+                                </i>
+                              <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4">
+                              	<a href="javascript:showNoteByUser(${pager.totalPageNo})">맨끝</a></i>
                             </div>
                           </div>
                         </div>
@@ -950,368 +471,57 @@
                         <!-- Email List: Items -->
                         <div class="email-list pt-0">
                           <ul class="list-unstyled m-0">
-                            <li
-                              class="email-list-item email-marked-read"
-                              data-starred="true"
-                              data-bs-toggle="sidebar"
-                              data-target="#app-email-view">
-                              <div class="d-flex align-items-center">
-                                <div class="form-check">
-                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-1" />
-                                  <label class="form-check-label" for="email-1"></label>
-                                </div>
-                                <i
-                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"></i>
-                                <img
-                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
-                                  alt="user-avatar"
-                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
-                                  height="32"
-                                  width="32" />
-                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                  <span class="email-list-item-username me-2 h6">김시온</span>
-                                  <span class="email-list-item-subject d-xl-inline-block d-block">
-                                    김시온 너는 천재야 멋져</span
-                                  >
-                                </div>
-                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                  <span
-                                    class="email-list-item-label badge badge-dot bg-danger d-none d-md-inline-block me-2"
-                                    data-label="private"></span>
-                                  <small class="email-list-item-time text-muted">08:40 AM</small>
-                                  <ul class="list-inline email-list-item-actions">
-                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
-                                    <li class="list-inline-item email-read"><i class="bx bx-envelope fs-4"></i></li>
-                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </li>
-                            <li
-                              class="email-list-item email-marked-read"
-                              data-sent="true"
-                              data-bs-toggle="sidebar"
-                              data-target="#app-email-view">
-                              <div class="d-flex align-items-center">
-                                <div class="form-check">
-                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-2" />
-                                  <label class="form-check-label" for="email-2"></label>
-                                </div>
-                                <i
-                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"></i>
-                                <img
-                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png"
-                                  alt="user-avatar"
-                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
-                                  height="32"
-                                  width="32" />
-                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                  <span class="email-list-item-username me-2 h6">성유진</span>
-                                  <span class="email-list-item-subject d-xl-inline-block d-block">
-                                    앙냥냥냥 젤리 맛조아.</span
-                                  >
-                                </div>
-                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                  <span
-                                    class="email-list-item-label badge badge-dot bg-danger d-none d-md-inline-block me-2"
-                                    data-label="private"></span>
-                                  <small class="email-list-item-time text-muted">10:12 AM</small>
-                                  <ul class="list-inline email-list-item-actions">
-                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
-                                    <li class="list-inline-item email-unread"><i class="bx bx-envelope fs-4"></i></li>
-                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </li>
-                            <li
-                              class="email-list-item email-marked-read"
-                              data-draft="true"
-                              data-bs-toggle="sidebar"
-                              data-target="#app-email-view">
-                              <div class="d-flex align-items-center">
-                                <div class="form-check">
-                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-3" />
-                                  <label class="form-check-label" for="email-3"></label>
-                                </div>
-                                <i
-                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"></i>
-                                <div class="avatar avatar-sm d-block flex-shrink-0 me-sm-3 me-0">
-                                  <span class="avatar-initial rounded-circle bg-label-warning">BS</span>
-                                </div>
-                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                  <span class="email-list-item-username me-2 h6">김미소</span>
-                                  <span class="email-list-item-subject d-xl-inline-block d-block">
-                                    	안녕? 반가워 보고 싶었어.</span
-                                  >
-                                </div>
-                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                  <span
-                                    class="email-list-item-label badge badge-dot bg-primary d-none d-md-inline-block me-2"
-                                    data-label="company"></span>
-                                  <small class="email-list-item-time text-muted">12:44 AM</small>
-                                  <ul class="list-inline email-list-item-actions">
-                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
-                                    <li class="list-inline-item email-read"><i class="bx bx-envelope fs-4"></i></li>
-                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </li>
-                            <li
-                              class="email-list-item"
-                              data-starred="true"
-                              data-bs-toggle="sidebar"
-                              data-target="#app-email-view">
-                              <div class="d-flex align-items-center">
-                                <div class="form-check">
-                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-4" />
-                                  <label class="form-check-label" for="email-4"></label>
-                                </div>
-                                <i
-                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"></i>
-                                <img
-                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/3.png"
-                                  alt="user-avatar"
-                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
-                                  height="32"
-                                  width="32" />
-                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                  <span class="email-list-item-username me-2 h6">오우주</span>
-                                  <span class="email-list-item-subject d-xl-inline-block d-block">
-                                   너는 정말 스윗해.</span
-                                  >
-                                </div>
-                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                  <span
-                                    class="email-list-item-label badge badge-dot bg-success d-none d-md-inline-block me-2"
-                                    data-label="work"></span>
-                                  <small class="email-list-item-time text-muted">Yesterday</small>
-                                  <ul class="list-inline email-list-item-actions">
-                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
-                                    <li class="list-inline-item email-unread"><i class="bx bx-envelope fs-4"></i></li>
-                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </li>
-                            <li
-                              class="email-list-item email-marked-read"
-                              data-spam="true"
-                              data-bs-toggle="sidebar"
-                              data-target="#app-email-view">
-                              <div class="d-flex align-items-center">
-                                <div class="form-check">
-                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-5" />
-                                  <label class="form-check-label" for="email-5"></label>
-                                </div>
-                                <i
-                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"></i>
-                                <img
-                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/4.png"
-                                  alt="user-avatar"
-                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
-                                  height="32"
-                                  width="32" />
-                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                  <span class="email-list-item-username me-2 h6">박재홍</span>
-                                  <span class="email-list-item-subject d-xl-inline-block d-block">
-                                    나는 아기고양이 냐옹 .</span
-                                  >
-                                </div>
-                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                  <span
-                                    class="email-list-item-label badge badge-dot bg-primary d-none d-md-inline-block me-2"
-                                    data-label="company"></span>
-                                  <small class="email-list-item-time text-muted">Yesterday</small>
-                                  <ul class="list-inline email-list-item-actions">
-                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
-                                    <li class="list-inline-item email-unread"><i class="bx bx-envelope fs-4"></i></li>
-                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </li>
-                            <li
-                              class="email-list-item"
-                              data-trash="true"
-                              data-bs-toggle="sidebar"
-                              data-target="#app-email-view">
-                              <div class="d-flex align-items-center">
-                                <div class="form-check">
-                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-6" />
-                                  <label class="form-check-label" for="email-6"></label>
-                                </div>
-                                <i
-                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"></i>
-                                <div class="avatar avatar-sm d-block flex-shrink-0 me-sm-3 me-0">
-                                  <span class="avatar-initial rounded-circle bg-label-info">Sk</span>
-                                </div>
-                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                  <span class="email-list-item-username me-2 h6">이은지</span>
-                                  <span class="email-list-item-subject d-xl-inline-block d-block">
-                                    까꿍>_<.</span
-                                  >
-                                </div>
-                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                  <span
-                                    class="email-list-item-label badge badge-dot bg-info d-none d-md-inline-block me-2"
-                                    data-label="work"></span>
-                                  <small class="email-list-item-time text-muted">5 May</small>
-                                  <ul class="list-inline email-list-item-actions">
-                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
-                                    <li class="list-inline-item email-read"><i class="bx bx-envelope fs-4"></i></li>
-                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </li>
-                            <li
-                              class="email-list-item email-marked-read"
-                              data-draft="true"
-                              data-bs-toggle="sidebar"
-                              data-target="#app-email-view">
-                              <div class="d-flex align-items-center">
-                                <div class="form-check">
-                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-7" />
-                                  <label class="form-check-label" for="email-7"></label>
-                                </div>
-                                <i
-                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"></i>
-                                <img
-                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/5.png"
-                                  alt="user-avatar"
-                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
-                                  height="32"
-                                  width="32" />
-                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                  <span class="email-list-item-username me-2 h6">김종진</span>
-                                  <span class="email-list-item-subject d-xl-inline-block d-block">
-                                    나는 나르시즘에 걸렸다구 하핫</span>
-                                </div>
-                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                  <span
-                                    class="email-list-item-label badge badge-dot bg-primary d-none d-md-inline-block me-2"
-                                    data-label="company"></span>
-                                  <small class="email-list-item-time text-muted">15 May</small>
-                                  <ul class="list-inline email-list-item-actions">
-                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
-                                    <li class="list-inline-item email-unread"><i class="bx bx-envelope fs-4"></i></li>
-                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </li>
-                            <li
-                              class="email-list-item"
-                              data-starred="true"
-                              data-bs-toggle="sidebar"
-                              data-target="#app-email-view">
-                              <div class="d-flex align-items-center">
-                                <div class="form-check">
-                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-8" />
-                                  <label class="form-check-label" for="email-8"></label>
-                                </div>
-                                <i
-                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"></i>
-                                <img
-                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/6.png"
-                                  alt="user-avatar"
-                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
-                                  height="32"
-                                  width="32" />
-                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                  <span class="email-list-item-username me-2 h6">김 철</span>
-                                  <span class="email-list-item-subject d-xl-inline-block d-block">
-                                  나는 멋져 나는 잘났어</span
-                                  >
-                                </div>
-                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                  <span
-                                    class="email-list-item-attachment bx bx-paperclip cursor-pointer float-end float-sm-none"></span>
-                                  <span
-                                    class="email-list-item-label badge badge-dot bg-danger d-none d-md-inline-block ms-2"
-                                    data-label="private"></span>
-                                  <small class="email-list-item-time text-muted">20 Apr</small>
-                                  <ul class="list-inline email-list-item-actions">
-                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
-                                    <li class="list-inline-item email-unread"><i class="bx bx-envelope fs-4"></i></li>
-                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </li>
-                            <li
-                              class="email-list-item email-marked-read"
-                              data-spam="true"
-                              data-bs-toggle="sidebar"
-                              data-target="#app-email-view">
-                              <div class="d-flex align-items-center">
-                                <div class="form-check">
-                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-9" />
-                                  <label class="form-check-label" for="email-9"></label>
-                                </div>
-                                <i
-                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"></i>
-                                <div class="avatar avatar-sm d-block flex-shrink-0 me-sm-3 me-0">
-                                  <span class="avatar-initial rounded-circle bg-label-danger">JF</span>
-                                </div>
-                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                  <span class="email-list-item-username me-2 h6">이현주</span>
-                                  <span class="email-list-item-subject d-xl-inline-block d-block">
-                                    나는 근육짱짱걸</span
-                                  >
-                                </div>
-                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                  <span
-                                    class="email-list-item-label badge badge-dot bg-info d-none d-md-inline-block me-2"
-                                    data-label="important"></span>
-                                  <small class="email-list-item-time text-muted">25 Mar</small>
-                                  <ul class="list-inline email-list-item-actions">
-                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
-                                    <li class="list-inline-item email-unread"><i class="bx bx-envelope fs-4"></i></li>
-                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </li>
-                            <li
-                              class="email-list-item"
-                              data-trash="true"
-                              data-bs-toggle="sidebar"
-                              data-target="#app-email-view">
-                              <div class="d-flex align-items-center">
-                                <div class="form-check">
-                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-10" />
-                                  <label class="form-check-label" for="email-10"></label>
-                                </div>
-                                <i
-                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"></i>
-                                <img
-                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/9.png"
-                                  alt="user-avatar"
-                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
-                                  height="32"
-                                  width="32" />
-                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-                                  <span class="email-list-item-username me-2 h6">이송미 </span>
-                                  <span class="email-list-item-subject d-xl-inline-block d-block">
-                                   나는 천재야!.</span
-                                  >
-                                </div>
-                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
-                                  <span
-                                    class="email-list-item-label badge badge-dot bg-primary d-none d-md-inline-block me-2"
-                                    data-label="company"></span>
-                                  <small class="email-list-item-time text-muted">25 Feb</small>
-                                  <ul class="list-inline email-list-item-actions">
-                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
-                                    <li class="list-inline-item email-unread"><i class="bx bx-envelope fs-4"></i></li>
-                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
-                                  </ul>
-                                </div>
-                              </div>
-                            </li>
+                            
+                            <c:forEach var="note" items="${list}">
+	                            <li
+		                              class="
+				                          <c:if test ="${noteRead_read == null}">email-list-item email-marked-read
+				                          </c:if>
+				                          <c:if test ="${noteRead_read != null}">email-list-item
+				                          </c:if>
+				                          "
+		                              data-starred="
+		                              	  <c:if test ="${noteRead_starred == null}">false
+				                          </c:if>
+				                          <c:if test ="${noteRead_starred != null}">true
+				                          </c:if>
+				                          "
+		                              data-bs-toggle="sidebar"
+		                              data-target="#app-email-view">
+		                              <div class="d-flex align-items-center">
+		                                <div class="form-check">
+		                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-${note.noteRead_no}" />
+		                                  <label class="form-check-label" for="email-${note.noteRead_no}"></label>
+		                                </div>
+		                                <i
+		                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"></i>
+		                                <img
+		                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
+		                                  alt="user-avatar"
+		                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
+		                                  height="32"
+		                                  width="32" />
+		                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
+		                                  <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
+		                                  <span class="email-list-item-subject d-xl-inline-block d-block">
+		                               	     ${note.note_title}</span
+		                                  >
+		                                </div>
+		                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
+		                                  <span
+		                                    class="email-list-item-label badge badge-dot bg-danger d-none d-md-inline-block me-2"
+		                                    data-label="private"></span>
+		                                  <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)}</small>
+		                                  <ul class="list-inline email-list-item-actions">
+		                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
+		                                    <li class="list-inline-item email-read"><i class="bx bx-envelope fs-4"></i></li>
+		                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
+		                                  </ul>
+		                                </div>
+		                              </div>
+	                            </li>
+	                        </c:forEach>  
+	                        
                           </ul>
                           <ul class="list-unstyled m-0">
                             <li class="email-list-empty text-center d-none">No items found.</li>
@@ -1645,12 +855,12 @@
                                 id="emailContacts"
                                 name="emailContacts"
                                 multiple>
-                                <option data-avatar="1.png" value="Jane Foster">김시온</option>
-                                <option data-avatar="3.png" value="Donna Frank">오우주</option>
-                                <option data-avatar="5.png" value="Gabrielle Robertson">박재홍</option>
-                                <option data-avatar="7.png" value="Lori Spears">이은지</option>
-                                <option data-avatar="9.png" value="Sandy Vega">김종진</option>
-                                <option data-avatar="11.png" value="Cheryl May">성유진</option>
+                                <option data-avatar="1.png" value="김시온">김시온</option>
+                                <option data-avatar="3.png" value="오우주">오우주</option>
+                                <option data-avatar="5.png" value="박재홍">박재홍</option>
+                                <option data-avatar="7.png" value="이은지">이은지</option>
+                                <option data-avatar="9.png" value="김종진">김종진</option>
+                                <option data-avatar="11.png" value="성유진">성유진</option>
                               </select>
                             </div>
                             <div class="email-compose-toggle-wrapper mb-2 mx-3">
@@ -1658,27 +868,35 @@
                               <a class="email-compose-toggle-bcc text-body" href="javascript:void(0);">비밀참조</a>
                             </div>
                           </div>
-
                           <div class="email-compose-cc d-none">
                             <hr class="mx-n4 my-2" />
                             <div class="d-flex align-items-center">
-                              <label for="email-cc" class="form-label mb-0 me-2">참조: </label>
-                              <input
-                                type="text"
-                                class="form-control border-0 shadow-none flex-grow-1 mx-2"
-                                id="email-cc"
-                                placeholder="someone@email.com" />
+                               <div class="col-md-6 mb-4">
+		                          <label for="TagifyUserList" class="form-label">참조:</label>
+		                          <input
+		                            id="TagifyUserList"
+		                            name="TagifyUserList"
+		                            class="form-control"
+		                            value="abatisse2@nih.gov, Justinian Hattersley" />
+		                        </div>
                             </div>
                           </div>
                           <div class="email-compose-bcc d-none">
                             <hr class="mx-n4 my-2" />
                             <div class="d-flex align-items-center">
-                              <label for="email-bcc" class="form-label mb-0">비밀참조:  </label>
-                              <input
-                                type="text"
-                                class="form-control border-0 shadow-none flex-grow-1 mx-2"
-                                id="email-bcc"
-                                placeholder="someone@email.com" />
+                               <div class="col-md-6 mb-4">
+		                          <label for="selectpickerSelectDeselect" class="form-label">비밀참조:</label>
+		                          <select
+		                            id="selectpickerSelectDeselect"
+		                            class="selectpicker w-100"
+		                            data-style="btn-default"
+		                            multiple
+		                            data-actions-box="true">
+		                            <option>Rocky</option>
+		                            <option>Pulp Fiction</option>
+		                            <option>The Godfather</option>
+		                          </select>
+		                        </div>
                             </div>
                           </div>
                           <hr class="mx-n4 my-0" />
@@ -1778,36 +996,7 @@
             <!-- / Content -->
 
             <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">ThemeSelection</a>
-                </div>
-                <div class="d-none d-lg-inline-block">
-                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                  <a
-                    href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Documentation</a
-                  >
-
-                  <a
-                    href="https://themeselection.com/support/"
-                    target="_blank"
-                    class="footer-link d-none d-sm-inline-block"
-                    >Support</a
-                  >
-                </div>
-              </div>
-            </footer>
+            
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
@@ -1861,10 +1050,14 @@
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery-timepicker/jquery-timepicker.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/pickr/pickr.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bloodhound/bloodhound.js"></script>
 
 
 
     <!-- Page JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/forms-pickers.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-tagify.js"></script>
   </body>
 </html>
