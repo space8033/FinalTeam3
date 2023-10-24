@@ -123,7 +123,7 @@
               <h4 class="mb-2">로그인 👋</h4>
               <p class="mb-4">PMS를 이용하시려면 로그인 해주세요</p>
 
-              <form id="formAuthentication" class="mb-3" name="loginRequest" action="login" method="POST">
+              <form id="formAuthentication" class="mb-3" name="loginRequest" action="/exodia/login" method="POST">
                 <div class="mb-3">
                   <label for="email" class="form-label">아이디</label>
                   <input
