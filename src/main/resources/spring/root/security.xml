@@ -53,6 +53,9 @@
 		<property name="defaultTargetUrl" value="/employee/login"></property>
 	</bean>
 	
+	<!-- DB로부터 사용자 정보를 가져오는 객체 설정 -->
+	<bean id="empDetailService" class="com.finalteam3.exodia.security.service.EmpDetailService"></bean>
+	
 	<!-- 인증 제공자 설정 -->
 	<bean id="daoAuthenticationProvider"
 		  class="org.springframework.security.authentication.dao.DaoAuthenticationProvider">

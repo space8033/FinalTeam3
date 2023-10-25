@@ -11,6 +11,7 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -44,6 +45,7 @@ public class EmployeeController {
 		return "/login";
 	}
 	
+	@Secured("{ROLE_EMP}")
 	@GetMapping("/initialPassword")
 	public String initialPasswordForm(Authentication authentication, Model model) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
@@ -54,6 +56,7 @@ public class EmployeeController {
 		return "/initialPassword";
 	}
 	
+	@Secured("{ROLE_EMP}")
 	@PostMapping("/initialPassword")
 	public String initialPassword(Authentication authentication, PasswordRequest passwordRequest) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
@@ -74,6 +77,7 @@ public class EmployeeController {
 		return "/addUser";
 	}
 	
+	
 	@PostMapping("/addUser")
 	public String join(JoinList joinRequest) {
 		
@@ -85,11 +89,13 @@ public class EmployeeController {
 	}
 	
 	//프로젝트 진행을 위한 임시 부분/////////////////////////////////////////////////////////
+	@Secured("{ROLE_ADMIN}")
 	@GetMapping("/jjoin")
 	public String jjoinForm() {
 		return "/jjoin";
 	}
 	
+	@Secured("{ROLE_ADMIN}")
 	@PostMapping("/jjoin")
 	public String jjoin(JoinRequest joinRequest) {
 		if(employeeService.join(joinRequest).equals(JoinResult.JOIN_SUCCESS)) {
@@ -99,7 +105,7 @@ public class EmployeeController {
 		}
 	}
 	//프로젝트 진행을 위한 임시 부분/////////////////////////////////////////////////////////
-	
+	@Secured("{ROLE_ADMIN}")
 	@PostMapping("/poiJoin")
 	public String poiJoin() {
 	    
