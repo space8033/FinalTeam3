@@ -16,9 +16,9 @@ public class Main {
 	public String note(Model model) {
 		return "note";
 	}*/
-	@RequestMapping("/note")
+	@RequestMapping("/note3")
 	public String note2(Model model) {
-		return "note";
+		return "note3";
 	}
 	
 

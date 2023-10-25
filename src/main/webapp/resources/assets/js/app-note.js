@@ -9,13 +9,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const emailList = document.querySelector('.email-list'),
       emailListItems = [].slice.call(document.querySelectorAll('.email-list-item')),
       emailListItemInputs = [].slice.call(document.querySelectorAll('.email-list-item-input')),
-      emailView = document.querySelector('.app-email-view-content'),
+      emailViews = [].slice.call(document.querySelectorAll('.app-email-view-content')),
       emailFilters = document.querySelector('.email-filters'),
       emailFilterByFolders = [].slice.call(document.querySelectorAll('.email-filter-folders li')),
       emailEditor = document.querySelector('.email-editor'),
       appEmailSidebar = document.querySelector('.app-email-sidebar'),
       appOverlay = document.querySelector('.app-overlay'),
-      emailReplyEditor = document.querySelector('.email-reply-editor'),
+      emailReplyContainers = [].slice.call(document.querySelectorAll('.email-reply')),		
+      emailReplyEditors = [].slice.call(document.querySelectorAll('.email-reply-editor')),
+      emailReplyToolbars = [].slice.call(document.querySelectorAll('.email-reply-toolbar')),
       bookmarkEmail = [].slice.call(document.querySelectorAll('.email-list-item-bookmark')),
       selectAllEmails = document.getElementById('email-select-all'),
       emailSearch = document.querySelector('.email-search-input'),
@@ -27,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
       emailListRead = document.querySelector('.email-list-read'),
       emailListEmpty = document.querySelector('.email-list-empty'),
       refreshEmails = document.querySelector('.email-refresh'),
-      emailViewContainer = document.getElementById('app-email-view'),
+      emailViewContainers = Array.from(document.querySelectorAll('.app-email-view')),
       emailFilterFolderLists = [].slice.call(document.querySelectorAll('.email-filter-folders li')),
       emailListItemActions = [].slice.call(document.querySelectorAll('.email-list-item-actions li'));
 
@@ -50,13 +52,12 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Email view scrollbar
-    if (emailView) {
-      new PerfectScrollbar(emailView, {
-        wheelPropagation: false,
-        suppressScrollX: true
-      });
-    }
-
+    emailViews.forEach(emailView => {
+	      new PerfectScrollbar(emailView, {
+	        wheelPropagation: false,
+	        suppressScrollX: true
+	      });
+    });
     // Initialize Quill Editor
     // ------------------------------
     if (emailEditor) {
@@ -69,15 +70,24 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
-    if (emailReplyEditor) {
-      new Quill('.email-reply-editor', {
-        modules: {
-          toolbar: '.email-reply-toolbar'
-        },
-        placeholder: 'Write your message... ',
-        theme: 'snow'
-      });
-    }
+    emailReplyContainers.forEach((container, index) => {
+    	
+    	const editorElement = container.querySelector('.email-reply-editor');
+    	const toolbarElement = container.querySelector('.email-reply-toolbar');
+    
+    // 답장
+	    if (editorElement && toolbarElement) {
+	    	
+		      new Quill(editorElement, {
+		        modules: {
+		          toolbar: toolbarElement
+		        },
+		        placeholder: '메세지를 입력하세요. ',
+		        theme: 'snow'
+		      });
+	    }
+    
+    });
 
     // Bookmark email
     if (bookmarkEmail) {
@@ -363,11 +373,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Close view on email filter folder list click
     if (emailFilterFolderLists) {
-      emailFilterFolderLists.forEach(emailFilterFolderList => {
-        emailFilterFolderList.addEventListener('click', e => {
-          emailViewContainer.classList.remove('show');
+        emailFilterFolderLists.forEach(emailFilterFolderList => {
+          emailFilterFolderList.addEventListener('click', e => {
+            emailViewContainers.forEach(container => {
+            	container.classList.remove('show');
+            });
+          });
         });
-      });
     }
 
     // Email List Items Actions
