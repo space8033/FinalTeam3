@@ -3,11 +3,14 @@ package com.finalteam3.exodia.employee.controller;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.json.JSONObject;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
 import com.finalteam3.exodia.employee.dto.request.LoginRequest;
@@ -17,6 +20,7 @@ import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.employee.service.EmployeeService.JoinResult;
 import com.finalteam3.exodia.employee.service.EmployeeService.LoginResult;
 import com.finalteam3.exodia.employee.service.EmployeeService.PasswordResult;
+import com.finalteam3.exodia.security.dto.EmpDetails;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -32,7 +36,7 @@ public class EmployeeController {
 		return "/login";
 	}
 	
-	@PostMapping("/login")
+	/*@PostMapping("/login")
 	public String login(LoginRequest loginRequest, HttpSession session) {
 		if(employeeService.login(loginRequest).equals(LoginResult.LOGIN_SUCCESS)) {
 
@@ -59,25 +63,27 @@ public class EmployeeController {
 		}
 		
 		return "/login";
-	}
+	}*/
 	
 	@GetMapping("/initialPassword")
-	public String initialPasswordForm(HttpSession session, Model model) {
-		LoginResponse nowLogin = (LoginResponse) session.getAttribute("login");
+	public String initialPasswordForm(Authentication authentication, Model model) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
-		model.addAttribute("loginEmp", nowLogin.getEmp_id());
+		model.addAttribute("loginEmp", loginResponse.getEmp_id());
 		
 		return "/initialPassword";
 	}
 	
 	@PostMapping("/initialPassword")
-	public String initialPassword(HttpSession session, PasswordRequest passwordRequest) {
-		LoginResponse nowLogin = (LoginResponse) session.getAttribute("login");
-		String emp_id = nowLogin.getEmp_id();
+	public String initialPassword(Authentication authentication, PasswordRequest passwordRequest) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		String emp_id = loginResponse.getEmp_id();
 		passwordRequest.setEmp_id(emp_id);
 		
 		if(employeeService.changePassword(passwordRequest).equals(PasswordResult.PCHANGE_SUCCESS)) {
-			return "redirect:/employee/login";			
+			return "redirect:/logout";			
 		}else {
 			return "redirect:/employee/initialPassword";
 		}

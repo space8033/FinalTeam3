@@ -19,7 +19,13 @@
       	values(#{empinfo_no}, #{empinfo_name}, #{empinfo_position}, #{empinfo_phone}, #{empinfo_email}, to_char(sysdate,'yyyy.mm.dd hh24:mi:ss'), #{emp_no})
 	</insert>
 	
-
+	<select id="selectEmpByEmpId" parameterType="String" resultType="LoginResponse">
+		select e.emp_id, e.emp_password, e.emp_no, e.emp_isinit, e.emp_deletedAt, r.role_category
+		from emp e, role r
+		where project_no = 0
+		and emp_id = #{emp_id}
+	</select>
+	
 	<select id="selectNoByEmpId" resultType="int" parameterType="String">
 		select emp_no
 		from emp
