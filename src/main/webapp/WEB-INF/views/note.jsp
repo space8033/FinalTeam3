@@ -79,7 +79,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="${pageContext.request.contextPath}/main" class="app-brand-link">
+            <a href="${pageContext.request.contextPath}/mainㅡ" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -387,9 +387,9 @@
                                   <i class="bx bx-dots-vertical-rounded bx-sm text-muted"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="emailsActions">
-                                  <a class="dropdown-item" href="javascript:void(0)">Mark as read</a>
-                                  <a class="dropdown-item" href="javascript:void(0)">Mark as unread</a>
-                                  <a class="dropdown-item" href="javascript:void(0)">Delete</a>
+                                  <a class="dropdown-item" href="javascript:void(0)">확인 </a>
+                                  <a class="dropdown-item" href="javascript:void(0)">미확인</a>
+                                  <a class="dropdown-item" href="javascript:void(0)">삭제</a>
                                   <a class="dropdown-item" href="javascript:void(0)">Archive</a>
                                 </div>
                               </div>
@@ -468,7 +468,7 @@
                                 <a href="javascript:showNoteByUser(1)"></a>
                                 </i>
                               <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4">
-                              	<a href="javascript:showNoteByUser(${pager.totalPageNo})">맨끝</a></i>
+                              	<a class="text-muted" href="javascript:showNoteByUser(${pager.totalPageNo})">맨끝</a></i>
                             </div>
                           </div>
                         </div>
@@ -485,14 +485,15 @@
 				                          <c:if test ="${noteRead_read != null}">email-list-item
 				                          </c:if>
 				                          "
-		                              data-starred="
-		                              	  <c:if test ="${noteRead_starred == null}">false
+				                          <c:if test ="${noteRead_starred == null}">
+		                              
 				                          </c:if>
-				                          <c:if test ="${noteRead_starred != null}">true
+				                          <c:if test ="${noteRead_starred != null}">
+				                          data-starred="true"
 				                          </c:if>
-				                          "
+				                          
 		                              data-bs-toggle="sidebar"
-		                              data-target="#app-email-view">
+		                              data-target="#app-email-view-${note.noteRead_no}">
 		                              <div class="d-flex align-items-center">
 		                                <div class="form-check">
 		                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-${note.noteRead_no}" />
@@ -525,20 +526,19 @@
 		                                </div>
 		                              </div>
 	                            </li>
-	                        </c:forEach>  
-	                        
+	                        	</c:forEach>
                           </ul>
                           <ul class="list-unstyled m-0">
-                            <li class="email-list-empty text-center d-none">No items found.</li>
+                            <li class="email-list-empty text-center d-none">쪽지가 없습니다.</li>
                           </ul>
                         </div>
                       </div>
                       <div class="app-overlay"></div>
                     </div>
                     <!-- /Emails List -->
-
+					<c:forEach var="note" items="${list}">
                     <!-- Email View -->
-                    <div class="col app-email-view flex-grow-0 bg-body" id="app-email-view">
+                    <div class="col app-email-view flex-grow-0 bg-body" id="app-email-view-${note.noteRead_no}">
                       <div class="app-email-view-header p-3 py-md-3 py-2 rounded-0">
                         <!-- Email View : Title  bar-->
                         <div class="d-flex justify-content-between align-items-center">
@@ -546,7 +546,7 @@
                             <i
                               class="bx bx-chevron-left bx-sm cursor-pointer me-2"
                               data-bs-toggle="sidebar"
-                              data-target="#app-email-view"></i>
+                              data-target="#app-email-view-${note.noteRead_no}"></i>
                             <h6 class="text-truncate mb-0 me-2">Focused impactful open issues</h6>
                             <span class="badge bg-label-warning">Important</span>
                           </div>
@@ -557,13 +557,13 @@
                               <button
                                 class="btn p-0"
                                 type="button"
-                                id="dropdownMoreOptions"
+                                id="dropdownMoreOptions-${note.noteRead_no}"
                                 data-bs-toggle="dropdown"
                                 aria-haspopup="true"
                                 aria-expanded="false">
                                 <i class="bx bx-dots-vertical-rounded fs-4"></i>
                               </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMoreOptions">
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMoreOptions-${note.noteRead_no}">
                                 <a class="dropdown-item" href="javascript:void(0)">
                                   <i class="bx bx-envelope-open bx-xs me-1"></i>
                                   <span class="align-middle">Mark as unread</span>
@@ -598,19 +598,19 @@
                             <i
                               class="bx bx-trash-alt cursor-pointer me-3 fs-4"
                               data-bs-toggle="sidebar"
-                              data-target="#app-email-view"></i>
+                              data-target="#app-email-view-${note.noteRead_no}"></i>
                             <i class="bx bx-envelope fs-4 cursor-pointer me-3"></i>
                             <div class="dropdown">
                               <button
                                 class="btn p-0"
                                 type="button"
-                                id="dropdownMenuFolderTwo"
+                                id="dropdownMenuFolderTwo-${note.noteRead_no}"
                                 data-bs-toggle="dropdown"
                                 aria-haspopup="true"
                                 aria-expanded="false">
                                 <i class="bx bx-folder fs-4 me-3"></i>
                               </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuFolderTwo">
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuFolderTwo-${note.noteRead_no}">
                                 <a class="dropdown-item" href="javascript:void(0)">
                                   <i class="bx bx-error-circle me-1"></i>
                                   <span class="align-middle">Spam</span>
@@ -629,13 +629,13 @@
                               <button
                                 class="btn p-0"
                                 type="button"
-                                id="dropdownLabelTwo"
+                                id="dropdownLabelTwo-${note.noteRead_no}"
                                 data-bs-toggle="dropdown"
                                 aria-haspopup="true"
                                 aria-expanded="false">
                                 <i class="bx bx-label fs-4 me-3"></i>
                               </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLabelTwo">
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLabelTwo-${note.noteRead_no}">
                                 <a class="dropdown-item" href="javascript:void(0)">
                                   <i class="badge badge-dot bg-success me-1"></i>
                                   <span class="align-middle">Workshop</span>
@@ -659,6 +659,9 @@
                         </div>
                       </div>
                       <hr class="m-0" />
+                     
+                      
+                      
                       <!-- Email View : Content-->
                       <div class="app-email-view-content py-4">
                         <p class="email-earlier-msgs text-center text-muted cursor-pointer mb-5">1 Earlier Message</p>
@@ -685,13 +688,13 @@
                                 <button
                                   class="btn p-0"
                                   type="button"
-                                  id="dropdownEmailOne"
+                                  id="dropdownEmailOne-${note.noteRead_no}"
                                   data-bs-toggle="dropdown"
                                   aria-haspopup="true"
                                   aria-expanded="false">
                                   <i class="bx bx-dots-vertical-rounded bx-sm"></i>
                                 </button>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownEmailOne">
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownEmailOne-${note.noteRead_no}">
                                   <a class="dropdown-item scroll-to-reply" href="javascript:void(0)">
                                     <i class="bx bx-share me-1"></i>
                                     <span class="align-middle">Reply</span>
@@ -711,18 +714,8 @@
                           <div class="card-body">
                             <p class="fw-medium">Greetings!</p>
                             <p>
-                              It is a long established fact that a reader will be distracted by the readable content of
-                              a page when looking at its layout.The point of using Lorem Ipsum is that it has a
-                              more-or-less normal distribution of letters, as opposed to using 'Content here, content
-                              here',making it look like readable English.
+                              ${note.note_content}
                             </p>
-                            <p>
-                              There are many variations of passages of Lorem Ipsum available, but the majority have
-                              suffered alteration in some form, by injected humour, or randomised words which don't look
-                              even slightly believable.
-                            </p>
-                            <p class="mb-0">Sincerely yours,</p>
-                            <p class="fw-medium mb-0">Envato Design Team</p>
                             <hr />
                             <p class="mb-2">Attachments</p>
                             <div class="cursor-pointer">
@@ -743,58 +736,48 @@
                                 height="38"
                                 width="38" />
                               <div class="flex-grow-1 ms-1">
-                                <h6 class="m-0">Chandler Bing</h6>
+                                <h6 class="m-0">${note.note_sender_name}</h6>
                                 <small class="text-muted">iAmAhoot@email.com</small>
                               </div>
                             </div>
                             <div class="d-flex align-items-center">
-                              <small class="mb-0 me-3 text-muted">June 20th 2020, 08:10 AM</small>
+                              <small class="mb-0 me-3 text-muted">${note.note_createdAt}</small>
                               <i class="bx bx-paperclip cursor-pointer me-2 bx-sm"></i>
                               <i class="email-list-item-bookmark bx bx-star cursor-pointer me-2 bx-sm"></i>
                               <div class="dropdown me-3">
                                 <button
                                   class="btn p-0"
                                   type="button"
-                                  id="dropdownEmailTwo"
+                                  id="dropdownEmailTwo-${note.noteRead_no}"
                                   data-bs-toggle="dropdown"
                                   aria-haspopup="true"
                                   aria-expanded="false">
                                   <i class="bx bx-dots-vertical-rounded bx-sm"></i>
                                 </button>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownEmailTwo">
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownEmailTwo-${note.noteRead_no}">
                                   <a class="dropdown-item scroll-to-reply" href="javascript:void(0)">
                                     <i class="bx bx-share me-1"></i>
-                                    <span class="align-middle">Reply</span>
+                                    <span class="align-middle">답장</span>
                                   </a>
                                   <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="bx bx-share me-1 scaleX-n1 scaleX-n1-rtl"></i>
-                                    <span class="align-middle">Forward</span>
+                                    <span class="align-middle">전달</span>
                                   </a>
                                   <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="bx bx-info-circle me-1"></i>
-                                    <span class="align-middle">Report</span>
+                                    <span class="align-middle">팝업 창 띄우기</span>
                                   </a>
                                 </div>
                               </div>
                             </div>
                           </div>
                           <div class="card-body pt-3">
-                            <p class="fw-medium">Hey John,</p>
+                            <p class="fw-medium py-2"><strong>제목 : ${note.note_title}</strong></p>
                             <p>
-                              It is a long established fact that a reader will be distracted by the readable content of
-                              a page when looking at its layout.The point of using Lorem Ipsum is that it has a
-                              more-or-less normal distribution of letters, as opposed to using 'Content here, content
-                              here',making it look like readable English.
+                            	 ${note.note_content}
                             </p>
-                            <p>
-                              There are many variations of passages of Lorem Ipsum available, but the majority have
-                              suffered alteration in some form, by injected humour, or randomised words which don't look
-                              even slightly believable.
-                            </p>
-                            <p class="mb-0">Sincerely yours,</p>
-                            <p class="fw-medium mb-0">Envato Design Team</p>
                             <hr />
-                            <p class="mb-2">Attachments</p>
+                            <p class="mb-2">첨부 파일</p>
                             <div class="cursor-pointer">
                               <i class="bx bx-file"></i>
                               <span class="align-middle ms-1">report.xlsx</span>
@@ -803,7 +786,7 @@
                         </div>
                         <!-- Email View : Reply mail-->
                         <div class="email-reply card mt-4 mx-sm-4 mx-3 border">
-                          <h6 class="card-header border-0">Reply to Ross Geller</h6>
+                          <h6 class="card-header border mb-2"><strong>'${note.note_sender_name}' 님께 답장</strong></h6>
                           <div class="card-body pt-0 px-3">
                             <div class="d-flex justify-content-start">
                               <div class="email-reply-toolbar border-0 w-100 ps-0">
@@ -818,15 +801,15 @@
                                 </span>
                               </div>
                             </div>
-                            <div class="email-reply-editor"></div>
+                            <div class="email-reply-editor" id="editor-${note.noteRead_no}"></div>
                             <div class="d-flex justify-content-end align-items-center">
                               <div class="cursor-pointer me-3">
                                 <i class="bx bx-paperclip"></i>
-                                <span class="align-middle">Attachments</span>
+                                <span class="align-middle">첨부 파일</span>
                               </div>
                               <button class="btn btn-primary">
                                 <i class="bx bx-paper-plane me-1"></i>
-                                <span class="align-middle">Send</span>
+                                <span class="align-middle">보내기</span>
                               </button>
                             </div>
                           </div>
@@ -834,6 +817,8 @@
                       </div>
                     </div>
                     <!-- Email View -->
+                    </c:forEach>
+                      
                   </div>
                 </div>
 
