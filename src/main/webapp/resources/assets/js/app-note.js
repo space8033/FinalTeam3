@@ -336,13 +336,13 @@ document.addEventListener('DOMContentLoaded', function () {
             $(option.element).data('avatar') +
             "' alt='avatar' class='rounded-circle' />" +
             '</div>' +
-            option.text +
+            option.text + $(option.element).data('subtext') +
             '</div>';
 
           return $avatar;
         }
         emailContacts.wrap('<div class="position-relative"></div>').select2({
-          placeholder: 'Select value',
+          placeholder: '선택',
           dropdownParent: emailContacts.parent(),
           closeOnSelect: false,
           templateResult: renderContactsAvatar,

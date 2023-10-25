@@ -8,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +19,7 @@ import com.finalteam3.exodia.note.dto.EmployeeInfo;
 import com.finalteam3.exodia.note.dto.NoteAll;
 import com.finalteam3.exodia.note.dto.Pager;
 import com.finalteam3.exodia.note.service.NoteService;
+import com.finalteam3.exodia.security.dto.EmpDetails;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -30,10 +32,10 @@ public class NoteController {
 	private NoteService noteService;
 	
 	@GetMapping("/note")
-	public String notePage(String pageNo, HttpSession session, Model model) {
-		LoginResponse loginResoponse = (LoginResponse) session.getAttribute("login");
-		log.info("여기까지 ok1");
-		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResoponse.getEmp_no());
+	public String notePage(String pageNo, HttpSession session, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
 		if(pageNo == null) {
 			   //세션에 저장되어 있는지 확인
