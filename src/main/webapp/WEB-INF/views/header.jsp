@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 	<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
           id="layout-navbar">
           <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -426,7 +426,7 @@
                        </div>
                      </div>
                      <div class="flex-grow-1">
-                       <span class="fw-medium d-block">김시온</span>
+                       <span class="fw-medium d-block">${empInfo_name}</span>
                        <small class="text-muted">개인 정보 수정</small>
                      </div>
                    </div>

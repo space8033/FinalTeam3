@@ -45,7 +45,6 @@ public class EmployeeController {
 		return "/login";
 	}
 	
-	@Secured("{ROLE_EMP}")
 	@GetMapping("/initialPassword")
 	public String initialPasswordForm(Authentication authentication, Model model) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
@@ -53,10 +52,10 @@ public class EmployeeController {
 		
 		model.addAttribute("loginEmp", loginResponse.getEmp_id());
 		
+		
 		return "/initialPassword";
 	}
 	
-	@Secured("{ROLE_EMP}")
 	@PostMapping("/initialPassword")
 	public String initialPassword(Authentication authentication, PasswordRequest passwordRequest) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
@@ -73,7 +72,13 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/addUser")
-	public String joinForm() {
+	public String joinForm(Authentication authentication, Model model) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		String emp_name = loginResponse.getEmpInfo_name();
+		model.addAttribute("empInfo_name", emp_name);
+		
 		return "/addUser";
 	}
 	
@@ -89,13 +94,16 @@ public class EmployeeController {
 	}
 	
 	//프로젝트 진행을 위한 임시 부분/////////////////////////////////////////////////////////
-	@Secured("{ROLE_ADMIN}")
 	@GetMapping("/jjoin")
-	public String jjoinForm() {
+	public String jjoinForm(Authentication authentication, Model model) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		String emp_name = loginResponse.getEmpInfo_name();
+		model.addAttribute("empInfo_name", emp_name);
 		return "/jjoin";
 	}
 	
-	@Secured("{ROLE_ADMIN}")
 	@PostMapping("/jjoin")
 	public String jjoin(JoinRequest joinRequest) {
 		if(employeeService.join(joinRequest).equals(JoinResult.JOIN_SUCCESS)) {
@@ -105,7 +113,6 @@ public class EmployeeController {
 		}
 	}
 	//프로젝트 진행을 위한 임시 부분/////////////////////////////////////////////////////////
-	@Secured("{ROLE_ADMIN}")
 	@PostMapping("/poiJoin")
 	public String poiJoin() {
 	    
