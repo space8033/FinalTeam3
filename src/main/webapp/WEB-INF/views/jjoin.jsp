@@ -120,9 +120,17 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <h4 class="mb-2">안녕! 👋</h4>
-              <p class="mb-4">왔으면 로그인해라.</p>
-
+              
+              <h4 class="mb-4">엑셀 회원가입 👋</h4>
+              <form action="poiJoin" method="POST">
+	               <div class="mb-5">
+	                 	<button class="login btn btn-primary d-grid w-100" type="submit">엑셀로 가입하기</button>
+	               </div>              
+              </form>
+              
+              <hr/>
+              
+              <h4 class="mb-2">개인 회원가입 👋</h4>
               <form id="formAuthentication" class="mb-3" name="JoinRequest" action="jjoin" method="POST">
                 <div class="mb-3">
                   <label for="emp_id" class="form-label">아이디</label>
@@ -164,7 +172,7 @@
                     placeholder="이메일"
                     autofocus />
                 </div>
-               	<div class="mb-3 col-lg-6 col-xl-2 col-12 mb-0">
+               	<div class="mb-3 col-lg-6 col-xl-4 col-12 mb-0">
                   <label class="form-label" for="emp_position">직위</label>
                   <select id="emp_position" class="form-select" name="empinfo_position">
                     <option value="Sawon">사원</option>
@@ -179,8 +187,7 @@
                   <button class="login btn btn-primary d-grid w-100" type="submit">가입하기</button>
                 </div>
               </form>
-
-
+              
             </div>
           </div>
           <!-- /Register -->
