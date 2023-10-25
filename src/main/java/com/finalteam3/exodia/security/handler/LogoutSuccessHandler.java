@@ -15,6 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 public class LogoutSuccessHandler extends SimpleUrlLogoutSuccessHandler{
 	@Override
 	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+		//로그아웃 성공시 다시 로그인 화면으로
 		setDefaultTargetUrl("/employee/login");
 		log.info("로갓");
 		super.onLogoutSuccess(request, response, authentication);

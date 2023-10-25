@@ -18,6 +18,7 @@ import lombok.extern.slf4j.Slf4j;
 public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticationSuccessHandler {
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws ServletException, IOException {
+		//비밀번호 초기화 해야하는 대상이면 초기화 화면으로, 아니면 메인으로 이동
 		EmpDetails empDetails = (EmpDetails)authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		

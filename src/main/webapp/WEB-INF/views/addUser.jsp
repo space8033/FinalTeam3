@@ -240,7 +240,7 @@
                   <div class="card">
                     <h5 class="card-header">사용자 등록</h5>
                     <div class="card-body">
-                      <form class="form-repeater" id="joinForm">
+                      <form class="form-repeater" id="joinForm" action="employee/addUser">
                         <div data-repeater-list="joinList">
                           <div data-repeater-item>
                             <div class="row">

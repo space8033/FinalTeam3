@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.finalteam3.exodia.employee.dao.EmployeeDao">
+	
 	<insert id="insertEmp" parameterType="JoinRequest">
 		<selectKey keyProperty="emp_no" resultType="int" order="BEFORE">
 	         select seq_emp.nextval from dual
       	</selectKey>
       	
       	insert into emp(emp_no, emp_id, emp_password, emp_isinit)
-      	values(#{emp_no}, #{emp_id}, '0000', #{emp_isinit})
+      	values(#{emp_no}, #{emp_id}, '{noop}0000', #{emp_isinit})
 	</insert>
 
 	<insert id="insertEmpInfo" parameterType="JoinRequest">
