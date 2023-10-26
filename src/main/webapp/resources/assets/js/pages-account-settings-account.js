@@ -188,7 +188,7 @@ $(function () {
     });
   }
 });
-
+//이메일, 전화번호 유효성검사
 $(document).ready(function() {
     $("#returnBtn").click(function() {
         $("#formAccountSettings")[0].reset(); // 폼을 초기 상태로 되돌립니다.

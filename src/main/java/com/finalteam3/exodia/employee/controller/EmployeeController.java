@@ -55,7 +55,6 @@ public class EmployeeController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
 		boolean isSame = employeeService.confirmPassword(loginResponse.getEmp_id(), emp_password);
-		log.info(isSame + "결과임");
 		return isSame;
 	}
 	
@@ -133,13 +132,17 @@ public class EmployeeController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
 		String emp_name = loginResponse.getEmpInfo_name();
+		String two_name = emp_name.substring(emp_name.length() - 2);
+		
 		model.addAttribute("empInfo_name", emp_name);
 		
 		EmpModifyResponse response = employeeService.getModifyInfo(authentication.getName());
+		response.setTwo_name(two_name);
+		
 		model.addAttribute("empModifyResponse", response);
 		log.info(response.toString());
 		
-		return "userModify";
+		return "/userModify";
 	}
 	
 	@PostMapping("/userModify")
