@@ -16,9 +16,9 @@ public class Main {
 	public String note(Model model) {
 		return "note";
 	}*/
-	@RequestMapping("/note2")
+	@RequestMapping("/note3")
 	public String note2(Model model) {
-		return "note2";
+		return "note3";
 	}
 	
 
@@ -51,6 +51,11 @@ public class Main {
 	@RequestMapping("/initialPassword")
 	public String initialPassword(Model model) {
 		return "initialPassword";
+	}
+	
+	@RequestMapping("/addProject")
+	public String addProject(Model model) {
+		return "addProject";
 	}
 	
 	@RequestMapping("/userManagement")
@@ -103,5 +108,10 @@ public class Main {
 	@RequestMapping("/mainCalendar")
 	public String mainCalendar(Model model) {
 		return "mainCalendar";
+	}
+	
+	@RequestMapping("/programManagement")
+	public String programManagement(Model model) {
+		return "programManagement";
 	}
 }

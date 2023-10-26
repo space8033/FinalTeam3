@@ -138,23 +138,8 @@ $(function () {
     var row = 2;
     var col = 1;
     formRepeater.on('submit', function (e) {
-      e.preventDefault();
-      
-      var formData = $(this).serialize();
-  	
-	  	$.ajax({
-	  		url: "employee/addUser",
-	  		method: "post",
-	  		data: formData,
-	  		success: function(data) {
-	  			console.log("나머");
-	  			console.log(formData);
-	  		},
-	  		error: function(error) {
-	  			console.log("아왜");
-	  		},
-	  	});
-  	
+
+	  	e.preventDefault();
     });
     formRepeater.repeater({
       show: function () {
@@ -165,18 +150,6 @@ $(function () {
           var id = 'form-repeater-' + row + '-' + col;
           $(fromControl[i]).attr('id', id);
           $(formLabel[i]).attr('for', id);
-          
-          /*if(col == 1) {
-        	  $(fromControl[i]).attr('name', 'empinfo_name');        	  
-          }else if(col == 2) {        	  
-        	  $(fromControl[i]).attr('name', 'emp_id');        	  
-          }else if(col == 3) {        	  
-        	  $(fromControl[i]).attr('name', 'empinfo_phone');        	  
-          }else if(col == 4) {        	  
-        	  $(fromControl[i]).attr('name', 'empinfo_email');        	  
-          }else if(col == 5) {        	  
-        	  $(fromControl[i]).attr('name', 'empinfo_position');        	  
-          }*/
           
           col++;
         });

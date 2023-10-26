@@ -18,4 +18,7 @@ public interface EmployeeDao {
 	public void insertEmpInfo(JoinRequest joinRequest);
 	public EmployeeInfo selectInfoByEmpNo(int emp_no);
 	public void updatePassword(Map<String, Object> map);
+	public LoginResponse selectEmpByEmpId(String emp_id);
+	
+	public int selectNoByEmpName(String empinfo_name);
 }

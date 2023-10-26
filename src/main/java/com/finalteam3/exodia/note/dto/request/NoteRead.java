@@ -1,4 +1,4 @@
-package com.finalteam3.exodia.note.dto;
+package com.finalteam3.exodia.note.dto.request;
 
 import lombok.Data;
 

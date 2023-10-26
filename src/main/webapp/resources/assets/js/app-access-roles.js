@@ -21,13 +21,12 @@ $(function () {
       ajax: assetsPath + 'json/user-list.json', // JSON file to add data
       columns: [
         // columns according to JSON
-        { data: '' },
-        { data: 'full_name' },
+    	{ data: '' },
+    	{ data: 'full_name' },
         { data: 'role' },
         { data: 'current_plan' },
         { data: 'billing' },
-        { data: 'status' },
-        { data: '' }
+        { data: 'status' }
       ],
       columnDefs: [
         {
@@ -43,43 +42,19 @@ $(function () {
         },
         {
           // User full name and email
-          targets: 1,
+          targets: 2,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            var $name = full['full_name'],
-              $email = full['email'],
-              $image = full['avatar'];
-            if ($image) {
-              // For Avatar image
-              var $output =
-                '<img src="' + assetsPath + 'img/avatars/' + $image + '" alt="Avatar" class="rounded-circle">';
-            } else {
-              // For Avatar badge
-              var stateNum = Math.floor(Math.random() * 6) + 1;
-              var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
-              var $state = states[stateNum],
-                $name = full['full_name'],
-                $initials = $name.match(/\b\w/g) || [];
-              $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-              $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';
-            }
+            var $name = full['full_name'];
             // Creates full output for row
             var $row_output =
               '<div class="d-flex justify-content-left align-items-center">' +
-              '<div class="avatar-wrapper">' +
-              '<div class="avatar avatar-sm me-3">' +
-              $output +
-              '</div>' +
-              '</div>' +
               '<div class="d-flex flex-column">' +
               '<a href="' +
               userView +
               '" class="text-body text-truncate"><span class="fw-medium">' +
               $name +
               '</span></a>' +
-              '<small class="text-muted">@' +
-              $email +
-              '</small>' +
               '</div>' +
               '</div>';
             return $row_output;
@@ -87,22 +62,10 @@ $(function () {
         },
         {
           // User Role
-          targets: 2,
+          targets: 1,
           render: function (data, type, full, meta) {
             var $role = full['role'];
-            var roleBadgeObj = {
-              Subscriber:
-                '<span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2"><i class="bx bx-user bx-xs"></i></span>',
-              Author:
-                '<span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30 me-2"><i class="bx bx-cog bx-xs"></i></span>',
-              Maintainer:
-                '<span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2"><i class="bx bx-pie-chart-alt bx-xs"></i></span>',
-              Editor:
-                '<span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30 me-2"><i class="bx bx-edit bx-xs"></i></span>',
-              Admin:
-                '<span class="badge badge-center rounded-pill bg-label-secondary w-px-30 h-px-30 me-2"><i class="bx bx-mobile-alt bx-xs"></i></span>'
-            };
-            return "<span class='text-truncate d-flex align-items-center'>" + roleBadgeObj[$role] + $role + '</span>';
+            return "<span class='text-truncate d-flex align-items-center'>" + $role + '</span>';
           }
         },
         {
@@ -114,19 +77,11 @@ $(function () {
             return '<span class="fw-medium">' + $plan + '</span>';
           }
         },
-        {
-          // User Status
-          targets: 5,
-          render: function (data, type, full, meta) {
-            var $status = full['status'];
-
-            return '<span class="badge ' + statusObj[$status].class + '">' + statusObj[$status].title + '</span>';
-          }
-        },
+        
         {
           // Actions
-          targets: -1,
-          title: 'View',
+          targets: 5,
+          title: '상태',
           searchable: false,
           orderable: false,
           render: function (data, type, full, meta) {
@@ -136,20 +91,35 @@ $(function () {
       ],
       order: [[1, 'desc']],
       dom:
-        '<"row mx-2"' +
-        '<"col-sm-12 col-md-4 col-lg-6" l>' +
-        '<"col-sm-12 col-md-8 col-lg-6"<"dt-action-buttons text-xl-end text-lg-start text-md-end text-start d-flex align-items-center justify-content-md-end justify-content-center align-items-center flex-sm-nowrap flex-wrap me-1"<"me-3"f><"user_role w-px-200 pb-3 pb-sm-0">>>' +
-        '>t' +
-        '<"row mx-2"' +
-        '<"col-sm-12 col-md-6"i>' +
-        '<"col-sm-12 col-md-6"p>' +
-        '>',
+    	  '<"card-header d-flex flex-wrap py-0"' +
+          '<"me-5 ms-n2 pe-5"f>' +
+          '<"d-flex justify-content-start justify-content-md-end align-items-baseline"<"dt-action-buttons d-flex align-items-start align-items-md-center justify-content-sm-center mb-3 mb-sm-0 gap-3"lB>>' +
+          '>t' +
+          '<"row mx-2"' +
+          '<"col-sm-12 col-md-6"i>' +
+          '<"col-sm-12 col-md-6"p>' +
+          '>',
       language: {
-        sLengthMenu: '_MENU_',
-        search: 'Search',
-        searchPlaceholder: 'Search..'
+        sLengthMenu: '페이지당_MENU_개씩 보기',
+        search: '검색',
+        searchPlaceholder: '검색',
+        pagenate: {
+        	next: '다음',
+        	previous: '이전'
+        },
+        info: '현재 _START_ - _END_ / _TOTAL_건'
       },
       // For responsive popup
+      buttons: [
+          {
+            text: '<i class="bx bx-plus me-0 me-sm-1"></i>프로그램 등록',
+            className: 'add-new btn btn-primary ms-2',
+            attr: {
+              'data-bs-toggle': 'offcanvas',
+              'data-bs-target': '#offcanvasEcommerceCategoryList'
+            }
+          }
+      ],
       responsive: {
         details: {
           display: $.fn.dataTable.Responsive.display.modal({
@@ -182,6 +152,7 @@ $(function () {
           }
         }
       },
+      lengthChange: false,
       initComplete: function () {
         // Adding role filter once table initialized
         this.api()
@@ -216,6 +187,46 @@ $(function () {
     $('.dataTables_length .form-select').removeClass('form-select-sm');
   }, 300);
 });
+
+//For form validation
+(function () {
+const eCommerceCategoryListForm = document.getElementById('eCommerceCategoryListForm');
+
+//Add New customer Form Validation
+const fv = FormValidation.formValidation(eCommerceCategoryListForm, {
+  fields: {
+    categoryTitle: {
+      validators: {
+        notEmpty: {
+          message: 'Please enter category title'
+        }
+      }
+    },
+    slug: {
+      validators: {
+        notEmpty: {
+          message: 'Please enter slug'
+        }
+      }
+    }
+  },
+  plugins: {
+    trigger: new FormValidation.plugins.Trigger(),
+    bootstrap5: new FormValidation.plugins.Bootstrap5({
+      // Use this for enabling/changing valid/invalid class
+      eleValidClass: 'is-valid',
+      rowSelector: function (field, ele) {
+        // field is the field name & ele is the field element
+        return '.mb-3';
+      }
+    }),
+    submitButton: new FormValidation.plugins.SubmitButton(),
+    // Submit the form when all fields are valid
+    // defaultSubmit: new FormValidation.plugins.DefaultSubmit(),
+    autoFocus: new FormValidation.plugins.AutoFocus()
+  }
+});
+})();
 
 (function () {
   // On edit role click, update text

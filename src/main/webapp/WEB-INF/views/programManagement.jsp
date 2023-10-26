@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
 <html
@@ -14,7 +15,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>eCommerce Category List - Apps | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Roles - Apps | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content="" />
 
@@ -43,25 +44,19 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/styles/index.min.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/typography.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/katex.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/editor.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
-	
-	    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery-timepicker/jquery-timepicker.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/pickr/pickr-themes.css" />
 
     <!-- Page CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/pages/page-faq.css" />
 
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/pages/app-ecommerce.css" />
+    <!-- Vendors CSS -->
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
 
     <!-- Helpers -->
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/helpers.js"></script>
@@ -78,7 +73,6 @@
       <div class="layout-container">
         <!-- Menu -->
 
-       
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="${pageContext.request.contextPath}/main" class="app-brand-link">
@@ -134,7 +128,7 @@
               <span class="app-brand-text demo menu-text fw-bold ms-2">pms</span>
             </a>
 
-             <a href="${pageContext.request.contextPath}/main" class="layout-menu-toggle menu-link text-large ms-auto">
+            <a href="${pageContext.request.contextPath}/main" class="layout-menu-toggle menu-link text-large ms-auto">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
             </a>
           </div>
@@ -147,13 +141,13 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">MENU</span>
             </li>
-            <li class="menu-item active">
+            <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate" >프로젝트</div>
               </a>
               <ul class="menu-sub">
-                <li class="menu-item active">
+                <li class="menu-item">
                   <a href="${pageContext.request.contextPath}/projectList" class="menu-link">
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
@@ -202,19 +196,20 @@
                 </li>
               </ul>
             </li>
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="${pageContext.request.contextPath}/programManagement" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-server"></i>
                 <div class="text-truncate">프로그램</div>
               </a>
             </li>
+            
             <!--관리자 메뉴-->
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">ADMIN MENU</span>
             </li>
             
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/project/addProject" class="menu-link">
+              <a href="${pageContext.request.contextPath}/addProject" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
@@ -224,13 +219,12 @@
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
               </a>
-            </li>
 <%--             <li class="menu-item">
               <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
-              </a>
-            </li> --%>
+              </a> --%>
+            </li>
             
             <li class="menu-item">
               <a href="${pageContext.request.contextPath}/userManagement" class="menu-link">
@@ -239,8 +233,6 @@
               </a>
             </li>            
           </ul>
-          
-         
         </aside>
         <!-- / Menu -->
 
@@ -248,8 +240,7 @@
         <div class="layout-page">
           <!-- Navbar -->
 
-           <%@ include file="/WEB-INF/views/header.jsp" %>
-
+          <%@ include file="/WEB-INF/views/header.jsp" %>
 
           <!-- / Navbar -->
 
@@ -258,115 +249,279 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <h4 class="py-3 mx-1 mb-2"> 프로젝트 목록</h4>
+              <h4 class="py-3 mb-2">프로그램 목록</h4>
 
-              <div class="app-ecommerce-category">
-                <!-- Category List Table -->
-                <div class="card">
-                  <div class="card-datatable table-responsive">
-                    <table class="datatables-category-list table border-top">
-                      <thead>
-                        <tr>
-                          <th></th>
-                          <th></th>
-                          <th>프로젝트명</th>
-                          <th class="text-nowrap text-sm-end">투입인력 &nbsp;</th>
-                          <th class="text-nowrap text-sm-end">기간</th>
-                          <th class="text-lg-center">삭제</th>
-                        </tr>
-                      </thead>
-                    </table>
+             
+              <!-- Role cards -->
+              <div class="row">
+                
+                <div class="col-md-6 col-lg-6 mb-4 mb-md-0">
+                  <!-- Role Table -->
+                  <div class="card">
+                    <div class="card-datatable table-responsive">
+                      <table class="datatables-users table border-top">
+                        <thead>
+                          <tr>
+                          	<th></th>
+                            <th>팀</th>
+                            <th>프로그램명</th>
+                            <th>담당자</th>
+                            <th>기간</th>
+                            <th>상태</th>
+                          </tr>
+                        </thead>
+                      </table>
+                    </div>
                   </div>
+                  <!--/ Role Table -->
                 </div>
-                <!-- Offcanvas to add new customer -->
-                <div
+            
+              
+                <!-- Form Separator -->
+                <div class="col-md-6 col-lg-6 mb-4 mb-md-0 py-0">
+                  <div class="card mb-5">
+                    <h5 class="card-header mb-4">프로그램 상세정보 </h5>
+                    <form class="card-body">
+                      <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="multicol-email">프로그램명</label>
+                        <div class="col-sm-9">
+                          <div class="input-group input-group-merge">
+                            <input
+                              type="text"
+                              id="multicol-email"
+                              class="form-control"
+                              placeholder="프로그램명"
+                              aria-label="john.doe"
+                              aria-describedby="multicol-email2" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="multicol-user">담당자</label>
+                        <div class="col-sm-9">
+                          <input type="text" id="multicol-user" class="form-control" placeholder="담당자" />
+                        </div>
+                      </div>
+                      
+                      <div class="row form-password-toggle mb-3">
+                        <label class="col-sm-3 col-form-label" for="multicol-password">업무구분</label>
+                        <div class="col-sm-9">
+                          <div class="input-group input-group-merge">
+                            <input
+                              type="text"
+                              id="multicol-password"
+                              class="form-control"
+                              placeholder="업무구분"
+                              aria-describedby="multicol-password2" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="task-priority">작업 중요도</label>
+                        
+                        <div class="col-sm-9">
+                          <select id="task-priority" class="select2 form-select" data-allow-clear="true">
+                          	<option value="">선택</option>
+                            <option value="상">상</option>
+                            <option value="중">중</option>
+                            <option value="하">하</option>
+                            
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="multicol-country">프로그램 유형</label>
+                        <div class="col-sm-9">
+                          <select id="multicol-country" class="select2 form-select" data-allow-clear="true">
+                            <option value="">Select</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                         
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="detail-category">세부 유형</label>
+                        <div class="col-sm-9">
+                          <select id="detail-category" class="select2 form-select" data-allow-clear="true">
+                            <option value="">Select</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                         
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="flatpickr-range">개발 예정 기간</label>
+                        <div class="col-sm-9">
+                          <input
+                            type="text"
+                            class="form-control"
+                            placeholder="YYYY-MM-DD to YYYY-MM-DD"
+                            id="flatpickr-range" />
+                        </div>
+                      </div>
+                      <div class="row mb-3">
+                           <label for="bs-rangepicker-basic" class="col-sm-3 col-form-label">실적 기간</label>
+                           <div class="col-sm-9">
+                           	<input type="text" id="bs-rangepicker-basic" class="form-control" />
+                           </div>
+                      </div>
+                      <div class="row mb-3">
+                        <label class="col-sm-3 col-form-label" for="task-progress">작업진척율</label>
+                        <div class="col-sm-9">
+                          <select id="task-progress" class="select2 form-select" data-allow-clear="true">
+                          	<option value="">선택</option>
+                            <option value="undone">미진행</option>
+                            <option value="screen">화면개발</option>
+                            <option value="test">단위테스트</option>
+                            <option value="pltest">pl테스트</option>
+                            
+                          </select>
+                        </div>
+                      </div>
+                      <div class="pt-4">
+                        <div class="row justify-content-end">
+                          <div class="col-sm-12 col-md-8 ps-4">
+                            <button type="submit" class="btn btn-primary me-sm-2 me-1 mb-2">수정</button>
+                            <button type="reset" class="btn btn-label-secondary mb-2 me-1">취소</button>
+                          </div>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+               </div>
+              <!--/ 프로그램 등록 -->
+               <div
                   class="offcanvas offcanvas-end"
                   tabindex="-1"
                   id="offcanvasEcommerceCategoryList"
                   aria-labelledby="offcanvasEcommerceCategoryListLabel">
                   <!-- Offcanvas Header -->
                   <div class="offcanvas-header py-4">
-                    <h5 id="offcanvasEcommerceCategoryListLabel" class="offcanvas-title">프로젝트 편집</h5>
+                    <h5 id="offcanvasEcommerceCategoryListLabel" class="offcanvas-title">프로그램 등록</h5>
                     <button
                       type="button"
                       class="btn-close bg-label-secondary text-reset"
                       data-bs-dismiss="offcanvas"
                       aria-label="Close"></button>
-                  </div>
+                  </div> 
                   <!-- Offcanvas Body -->
                   <div class="offcanvas-body border-top">
                     <form class="pt-0" id="eCommerceCategoryListForm" onsubmit="return true">
                       <!-- Title -->
-                      <div class="mb-3">
-                        <label class="form-label" for="ecommerce-category-title">프로젝트명</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="ecommerce-category-title"
-                          placeholder="프로젝트명"
-                          name="categoryTitle"
-                          aria-label="category title" />
-                      </div>
-                      <!-- Slug -->
-                      <div class="mb-3">
-                        <label class="form-label" for="ecommerce-category-slug">투입 인력</label>
-                        <input
-                          type="number"
-                          id="ecommerce-category-slug"
-                          class="form-control"
-                          placeholder="21"
-                          aria-label="slug"
-                          name="slug" />
-                      </div>
-                     
-                      <!-- Description -->
-                      <div class="mb-3">
-                        <label class="form-label">프로젝트 개요</label>
-                        <div class="form-control p-0 pt-1">
-                          <div class="comment-editor border-0" id="ecommerce-category-description"></div>
-                          <div class="comment-toolbar border-0 rounded">
-                            <div class="d-flex justify-content-end">
-                              <span class="ql-formats me-0">
-                                <button class="ql-bold"></button>
-                                <button class="ql-italic"></button>
-                                <button class="ql-underline"></button>
-                                <button class="ql-list" value="ordered"></button>
-                                <button class="ql-list" value="bullet"></button>
-                                <button class="ql-link"></button>
-                                <button class="ql-image"></button>
-                              </span>
-                            </div>
+                      <div class="row mb-4 mt-3">
+                        <label class="col-sm-4 col-form-label" for="multicol-program">프로그램명</label>
+                        <div class="col-sm-8">
+                          <div class="col-sm-8 input-group input-group-merge">
+                            <input
+                              type="text"
+                              id="multicol-program"
+                              class="form-control"
+                              placeholder="프로그램명"
+                              aria-label="john.doe"
+                              aria-describedby="multicol-email2" />
                           </div>
                         </div>
                       </div>
-                      <!-- Status -->
-                      <div class="col-md-12 mb-2">
-                   		<label for="TagifyBasic" class="form-label">구성 팀</label>
-                  		<input id="TagifyBasic" class="form-control" name="TagifyBasic" value="개발1팀, 개발2팀, 개발3팀" />
+                      <div class="row mb-4">
+                        <label class="col-sm-4 col-form-label" for="multicol-name">담당자</label>
+                        <div class="col-sm-8">
+                          <input type="text" id="multicol-name" class="form-control" placeholder="담당자" />
+                        </div>
                       </div>
-                      <!-- Range Picker-->
-                       <div class="col-md-12 mb-3">
-                         <label for="flatpickr-range" class="form-label">프로젝트 기간</label>
-                         <input
-                           type="text"
-                           class="form-control"
-                           placeholder="YYYY-MM-DD to YYYY-MM-DD"
-                           id="flatpickr-range" />
-                       </div>
+                      
+                      <div class="row mb-4">
+                        <label class="col-sm-4 col-form-label" for="multicol-task">업무구분</label>
+                        <div class="col-sm-8">
+                          <div class="input-group input-group-merge">
+                            <input
+                              type="text"
+                              id="multicol-task"
+                              class="form-control"
+                              placeholder="업무구분"
+                              aria-describedby="multicol-password2" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="row mb-4">
+                        <label class="col-sm-4 col-form-label" for="task-priority-plus">작업 중요도</label>
+                        
+                        <div class="col-sm-8">
+                          <select id="task-priority-plus" class="select2 form-select" data-allow-clear="true">
+                          	<option value="">선택</option>
+                            <option value="상">상</option>
+                            <option value="중">중</option>
+                            <option value="하">하</option>
+                            
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row mb-4">
+                        <label class="col-sm-4 col-form-label" for="multicol-category">프로그램 유형</label>
+                        <div class="col-sm-8">
+                          <select id="multicol-category" class="select2 form-select" data-allow-clear="true">
+                            <option value="">Select</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                         
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row mb-4">
+                        <label class="col-sm-4 col-form-label" for="detail-category2">세부 유형</label>
+                        <div class="col-sm-8">
+                          <select id="detail-category2" class="select2 form-select" data-allow-clear="true">
+                            <option value="">Select</option>
+                            <option value="Australia">Australia</option>
+                            <option value="Bangladesh">Bangladesh</option>
+                         
+                          </select>
+                        </div>
+                      </div>
+                      <div class="row mb-4 com-sm-12">
+                         <label for="bs-rangepicker-week-num" class="form-label col-sm-4">개발 예정 기간</label>
+                          <input type="text" id="bs-rangepicker-week-num" class="form-control col-sm-8" />
+                      </div>
+                      <div class="row mb-4">
+                            <label for="bs-rangepicker-dropdown" class="form-label col-sm-4">실적 기간</label>
+                          <input type="text" id="bs-rangepicker-dropdown" class="form-control col-sm-8" />
+                      </div>
+                      <div class="row mb-5">
+                        <label class="col-sm-4 col-form-label" for="task-progress2">작업진척율</label>
+                        <div class="col-sm-8">
+                          <select id="task-progress2" class="select2 form-select" data-allow-clear="true">
+                          	<option value="">선택</option>
+                            <option value="undone">미진행</option>
+                            <option value="screen">화면개발</option>
+                            <option value="test">단위테스트</option>
+                            <option value="pltest">pl테스트</option>
+                            
+                          </select>
+                        </div>
+                      </div>
+
+                    
                       <!-- Submit and reset -->
-                      <div class="mb-3">
-                        <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">수정</button>
+                      <div class="col-sm-12 col-md-8 ps-5 ms-4">
+                        <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">등록</button>
                         <button type="reset" class="btn bg-label-danger" data-bs-dismiss="offcanvas">취소</button>
                       </div>
                     </form>
                   </div>
                 </div>
-              </div>
+
+              <!-- Add Role Modal -->
+              <!-- Add Role Modal -->
+              
+              <!--/ Add Role Modal -->
+
+              <!-- / Add Role Modal -->
             </div>
             <!-- / Content -->
 
             <!-- Footer -->
-           
+
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
@@ -399,43 +554,36 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/moment/moment.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.js"></script>
+
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/katex.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/quill.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery-sticky/jquery-sticky.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bloodhound/bloodhound.js"></script>
-    
-    
 
     <!-- Main JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/app-ecommerce-category-list2.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/app-access-roles.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/modal-add-role.js"></script>
+    
+
+
+    <!-- Vendors JS -->
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/moment/moment.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.js"></script>
+    
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery-timepicker/jquery-timepicker.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/pickr/pickr.js"></script>
-    <!-- Main JS -->
+
+    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-pickers.js"></script>
 
     <!-- Page JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/form-layouts.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-selects.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-tagify.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-typeahead.js"></script>
-    
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-pickers.js"></script>
   </body>
 </html>

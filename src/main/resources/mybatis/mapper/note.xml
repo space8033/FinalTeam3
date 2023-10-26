@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.finalteam3.exodia.note.dao.NoteDao">
-<!-- 	<insert id="insertNote" parameterType="Note">
-		<selectKey keyProperty="emp_no" resultType="int" order="BEFORE">
-	         select seq_emp.nextval from dual
-      	</selectKey>
-      	
-      	insert into emp(emp_no, emp_id, emp_password, emp_isinit)
-      	values(#{emp_no}, #{emp_id}, '0000', #{emp_isinit})
+	<insert id="insertNote" parameterType="Note">
+		<selectKey keyProperty="note_no" resultType="int" order="BEFORE">
+			select SEQ_NOTE.nextval from dual
+		</selectKey>
+		insert into NOTE(
+        NOTE_NO, NOTE_TITLE, NOTE_CONTENT, NOTE_SENDER, NOTE_ISCANCELED, NOTE_CREATEDAT, NOTE_RESTIME
+	    )
+	    values(
+	        #{note_no}, #{note_title}, #{note_content}, #{note_sender}, #{note_isCanceled}, to_char(sysdate,'yyyy.mm.dd hh24:mi:ss'), #{note_restime}
+	    )
 	</insert>
-
+	
+	<!-- 작성자: 김시온 -->
 	<insert id="insertNoteRead" parameterType="NoteRead">
-		<selectKey keyProperty="empinfo_no" resultType="int" order="BEFORE">
-	         select seq_empinfo.nextval from dual
-      	</selectKey> 
-      	
-      	insert into empinfo(empinfo_no, empinfo_name, empinfo_position, empinfo_phone, empinfo_email, empinfo_createdat, emp_no)
-      	values(#{empinfo_no}, #{empinfo_name}, #{empinfo_position}, #{empinfo_phone}, #{empinfo_email}, to_char(sysdate,'yyyy.mm.dd hh24:mi:ss'), #{emp_no})
-	</insert> -->
+		<selectKey keyProperty="noteRead_no" resultType="int" order="BEFORE">
+			select SEQ_NOTEREAD.nextval as noteRead_no from dual
+		</selectKey>
+		 insert into NOTEREAD(NOTEREAD_NO, NOTE_NO, EMP_NO_RECEIVER, NOTEREAD_READ, NOTEREAD_TYPE)
+  	     values(#{noteRead_no}, #{note_no}, #{emp_no_receiver}, #{noteRead_read}, #{noteRead_type})
+	</insert> 
 	
 
 	<select id="selectNoteByEmpNo" resultType="NoteAll" parameterType="Map">
@@ -41,6 +44,7 @@
   		from noteRead
   		where emp_no_receiver = #{emp_no_receiver}
 	</select>
+
 
 	
 </mapper>
