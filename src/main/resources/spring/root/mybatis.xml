@@ -35,5 +35,8 @@
 	<mybatis-spring:scan
 		base-package="com.finalteam3.exodia.notice.dao"
 		annotation="org.apache.ibatis.annotations.Mapper" />
+	<mybatis-spring:scan
+		base-package="com.finalteam3.exodia.calendar.dao"
+		annotation="org.apache.ibatis.annotations.Mapper" />
 
 </beans>

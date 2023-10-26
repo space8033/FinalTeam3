@@ -343,7 +343,7 @@
                           aria-label="Close"></button>
                       </div>
                       <div class="offcanvas-body">
-                        <form class="event-form pt-0" id="eventForm" onsubmit="return false">
+                        <form class="event-form pt-0" id="eventForm" name="CalendarRequest" onsubmit="return false">
                           <div class="mb-3">
                             <label class="form-label" for="eventTitle">제목</label>
                             <input
@@ -413,7 +413,7 @@
                           </div> -->
                           <div class="mb-3 d-flex justify-content-sm-between justify-content-start my-4">
                             <div>
-                              <button type="submit" class="btn btn-primary btn-add-event me-sm-3 me-1">추가</button>
+                              <button type="submit" id="calendarsubmit" class="btn btn-primary btn-add-event me-sm-3 me-1">추가</button>
                               <button
                                 type="reset"
                                 class="btn btn-label-secondary btn-cancel me-sm-0 me-1"
@@ -479,8 +479,8 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/app-calendar-events.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/app-calendar.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/calendar-events.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/calendar.js"></script>
     
   </body>
 </html>

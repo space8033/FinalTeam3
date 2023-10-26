@@ -14,5 +14,6 @@
 		<typeAlias alias="ProjectAddRequest" type="com.finalteam3.exodia.project.dto.request.ProjectAddRequest" />
 		<typeAlias alias="ProjectResponse" type="com.finalteam3.exodia.project.dto.response.ProjectResponse" />
 		<typeAlias alias="Notice" type="com.finalteam3.exodia.notice.dto.Notice" />
+		<typeAlias alias="Calendar" type="com.finalteam3.exodia.calendar.dto.request.CalendarRequest" />
 	</typeAliases>
 </configuration>
