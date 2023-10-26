@@ -787,5 +787,6 @@
 
     <!-- Page JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/noticeTest.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
   </body>
 </html>

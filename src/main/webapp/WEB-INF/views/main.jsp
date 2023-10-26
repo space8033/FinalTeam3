@@ -713,7 +713,7 @@
     <!-- Page JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/mainRank.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/mainGraph.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
     
     
     <script>

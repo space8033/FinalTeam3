@@ -630,5 +630,6 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/forms-selects.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/forms-tagify.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/forms-typeahead.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
   </body>
 </html>
