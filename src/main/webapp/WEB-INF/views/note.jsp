@@ -480,9 +480,9 @@
                             <c:forEach var="note" items="${list}">
 	                            <li
 		                              class="
-				                          <c:if test ="${noteRead_read == null}">email-list-item email-marked-read
+				                          <c:if test ="${note.noteRead_read == null}">email-list-item 
 				                          </c:if>
-				                          <c:if test ="${noteRead_read != null}">email-list-item
+				                          <c:if test ="${note.noteRead_read != null}">email-list-item email-marked-read
 				                          </c:if>
 				                          "
 				                          <c:if test ="${noteRead_starred == null}">
@@ -491,7 +491,7 @@
 				                          <c:if test ="${noteRead_starred != null}">
 				                          data-starred="true"
 				                          </c:if>
-				                          
+				                      id="${note.noteRead_no}"
 		                              data-bs-toggle="sidebar"
 		                              data-target="#app-email-view-${note.noteRead_no}">
 		                              <div class="d-flex align-items-center">
@@ -510,7 +510,7 @@
 		                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
 		                                  <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
 		                                  <span class="email-list-item-subject d-xl-inline-block d-block">
-		                               	     ${note.note_title}</span
+		                               	     ${note.note_title} 나는 읽음 번호야 ${note.noteRead_read}</span
 		                                  >
 		                                </div>
 		                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
@@ -520,7 +520,12 @@
 		                                  <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)}</small>
 		                                  <ul class="list-inline email-list-item-actions">
 		                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
-		                                    <li class="list-inline-item email-read"><i class="bx bx-envelope fs-4"></i></li>
+		                                     <c:if test ="${note.noteRead_read != null}">
+					                              <li class="list-inline-item email-read"><i class="bx bx-envelope-open fs-4"></i></li>
+					                         </c:if>
+					                          <c:if test ="${note.noteRead_read == null}">
+		                                          <li class="list-inline-item email-unread"><i class="bx bx-envelope fs-4"></i></li>
+		                                      </c:if>
 		                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
 		                                  </ul>
 		                                </div>
@@ -547,7 +552,7 @@
                               class="bx bx-chevron-left bx-sm cursor-pointer me-2"
                               data-bs-toggle="sidebar"
                               data-target="#app-email-view-${note.noteRead_no}"></i>
-                            <h6 class="text-truncate mb-0 me-2">Focused impactful open issues</h6>
+                            <h6 class="text-truncate mb-0 me-2">뒤로가기 </h6>
                             <span class="badge bg-label-warning">Important</span>
                           </div>
                           <!-- Email View : Action  bar-->
@@ -664,7 +669,7 @@
                       
                       <!-- Email View : Content-->
                       <div class="app-email-view-content py-4">
-                        <p class="email-earlier-msgs text-center text-muted cursor-pointer mb-5">1 Earlier Message</p>
+                        <p class="email-earlier-msgs text-center text-muted cursor-pointer mb-5">이전 메세지 1개</p>
                         <!-- Email View : Previous mails-->
                         <div class="card email-card-prev mx-sm-4 mx-3 border">
                           <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
@@ -863,7 +868,7 @@
                               |<a class="email-compose-toggle-bcc text-body mx-1" href="javascript:void(0);"> 비밀참조</a>
                             </div>
                           </div>
-                          <div class="email-compose-cc d-none">
+                         <!--  <div class="email-compose-cc d-none">
                             <hr class="mx-n4 my-2" />
                             <div class="d-flex justify-content-between align-items-center">
                                <label for="TagifyUserList" class="form-label me-3" style="width: 35px;">참조 :</label>
@@ -874,17 +879,20 @@
 		                            value="" 
 		                            />
                             </div>
-                          </div> 
-                          <!-- <div class="email-compose-cc d-none">
+                          </div>  -->
+                           <div class="email-compose-cc d-none">
                             <hr class="mx-n4 my-2" />
                             <div class="d-flex justify-content-between align-items-center">
-                               <label for="selec" class="form-label me-3" style="width: 35px;">참조 :</label>
+                               <label for="selectpickerSelectDeselect" class="form-label me-1" style="width: 40px;">참조 :</label>
 		                          <select class="selectpicker w-100 my-2 mb-3" 
-		                          multiple data-action-box="true" id="selec"
-		                          data-style="btn-default"
-		                          name="note_receiver_cc">
+		                          	multiple
+		                            data-actions-box="true"
+		                            id="selectpickerSelectDeselect"
+		                         	 data-style="btn-default"
+		                        	  name="note_receiver_cc"
+		                        	  data-live-search="true">
 		                           	<optgroup label="개발1팀">	
-		                           		<option data-avatar="1.png">김시온</option>
+		                           		<option data-avatar="1.png" data-subtext="대리">김시온</option>
 		                           		<option data-avatar="7.png">이은지</option>
 		                           	</optgroup>
 		                           	<optgroup label="개발2팀">
@@ -894,22 +902,29 @@
 		                           	</optgroup>
 		                          </select> 
                             </div>
-                          </div> -->
+                          </div>
                          <div class="email-compose-bcc d-none">
                             <hr class="mx-n4 my-2" />
                             <div class=" d-flex justify-content-between align-items-center">
-                               <label for="selectpickerSelectDeselect" class="form-label me-1" style="width: 70px;">비밀참조 :</label>
+                               <label for="selecBcc" class="form-label me-1" style="width: 70px;">비밀참조 :</label>
 		                          <select
-		                            id="selectpickerSelectDeselect"
+		                            id="selecBcc"
 		                            name="note_receiver_bcc"
 		                            class="selectpicker w-100 my-2 mb-3"
 		                            data-style="btn-default"
 		                            data-live-search="true"
 		                            multiple
 		                            data-actions-box="true">
-		                            <option data-subtext="나는로키" data-avatar="2.png">오우주</option>
-		                            <option>박재홍</option>
-		                            <option>김시온</option>
+		                            <optgroup label="개발1팀">	
+			                            <option data-subtext="나는로키" data-avatar="2.png">오우주</option>
+			                            <option>박재홍</option>
+			                            <option>김시온</option>
+			                        </optgroup>
+			                        <optgroup label="개발2팀">	
+			                            <option data-avatar="2.png">오우주</option>
+		                           		<option data-avatar="5.png">박재홍</option>
+		                           		<option data-avatar="6.png">누구씨</option>
+			                        </optgroup>
 		                          </select>
                             </div>
                           </div> 
@@ -937,7 +952,7 @@
                               </div>
                             </div>
                             <div class="email-editor border-0 border-top"></div>
-                            <input type="hidden" id="note-content" name="note_content">
+                            <textarea id="note-content" name="note_content" style="display:none"></textarea>
                           </div>
                           <hr class="mx-n4 mt-0 mb-2" />
 		                           <!-- 보내기 예약 -->

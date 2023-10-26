@@ -16,4 +16,5 @@ public interface NoteDao {
 	public void insertNote(Note note);
 	public void insertNoteRead(NoteRead noteRead);
 	public int selectNoteNo(Note note);
+	public void updateNoteRead(int noteReadNo);
 }

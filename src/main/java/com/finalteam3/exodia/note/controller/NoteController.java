@@ -7,11 +7,13 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 
+import org.eclipse.jdt.internal.compiler.parser.ParserBasicInformation;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
@@ -47,10 +49,8 @@ public class NoteController {
 			   }
 		}
 		
-		int empNo = 0;
-		if(session.getAttribute("login") != null ) {
-			empNo = empInfo.getEmpinfo_no();
-		}
+		int empNo = empInfo.getEmpinfo_no();
+		
 		
 		//문자열을 정수로 변환
 		int intPageNo = Integer.parseInt(pageNo);
@@ -86,6 +86,16 @@ public class NoteController {
 		request.setNote_sender(loginResponse.getEmp_no());
 		
 		noteService.addNote(request);
+		
+		return "redirect:/note";
+	}
+	
+	@PostMapping("/readUpdate")
+	@ResponseBody
+	public String readUpdate(String readUpdateId) {
+		log.info(readUpdateId+"controller 못들어오는건지");
+		int readUpdateIdNo = Integer.parseInt(readUpdateId);
+		noteService.updateRead(readUpdateIdNo);
 		
 		return "redirect:/note";
 	}
