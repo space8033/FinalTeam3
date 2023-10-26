@@ -303,5 +303,6 @@
 
     <!-- Page JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/app-ecommerce-product-list2.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
   </body>
 </html>

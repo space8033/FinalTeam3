@@ -21,10 +21,18 @@
 	</insert>
 	
 	<select id="selectEmpByEmpId" parameterType="String" resultType="LoginResponse">
-		select e.emp_id, e.emp_password, e.emp_no, e.emp_isinit, e.emp_deletedAt, r.role_category
-		from emp e, role r
+		select e.emp_id, e.emp_password, i.empinfo_name, e.emp_no, e.emp_isinit, e.emp_deletedAt, r.role_category
+		from emp e, empinfo i, role r
 		where project_no = 0
+		and e.emp_no = i.emp_no
 		and emp_id = #{emp_id}
+	</select>
+	
+	<select id="selectModifyByEmpId" parameterType="String" resultType="EmpModifyResponse">
+		select i.empinfo_name, e.emp_id, i.empinfo_email, i.empinfo_phone, i.empinfo_position
+		from emp e, empinfo i
+		where e.emp_no = i.emp_no
+		and emp_id=#{emp_id}
 	</select>
 	
 	<select id="selectNoByEmpId" resultType="int" parameterType="String">
@@ -37,6 +45,12 @@
 		select emp_no
 		from empinfo
 		where empinfo_name = #{empinfo_name}
+	</select>
+	
+	<select id="selectNowPassword" resultType="String" parameterType="String">
+		select emp_password
+		from emp
+		where emp_id = #{emp_id}
 	</select>
 
 	<select id="selectInfoByEmpId" resultType="LoginResponse" parameterType="LoginRequest">
@@ -54,6 +68,10 @@
 		update emp set emp_password = #{emp_password}, emp_isinit = #{emp_isinit} where emp_id = #{emp_id}
 	</update>
 	
+	<select id="updateEmpInfo" parameterType="ModifyRequest">
+		update empinfo set empinfo_email = #{empinfo_email}, empinfo_phone = #{empinfo_phone} where emp_no = #{emp_no}
+	</select>
+
 	<select id="selectInfoByEmpNo" resultType="EmployeeInfo" parameterType="int">
 		select empinfo_no, empinfo_name, empinfo_position, empinfo_phone, empinfo_email, empinfo_createdat
 		from empinfo

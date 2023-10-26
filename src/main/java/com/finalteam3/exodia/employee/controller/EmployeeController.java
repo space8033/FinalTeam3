@@ -18,10 +18,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.finalteam3.exodia.employee.dto.request.JoinList;
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
+import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
 import com.finalteam3.exodia.employee.dto.request.PasswordRequest;
+import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.employee.service.EmployeeService.JoinResult;
@@ -45,7 +48,17 @@ public class EmployeeController {
 		return "/login";
 	}
 	
-	@Secured("{ROLE_EMP}")
+	@PostMapping("/confirmPassword")
+	@ResponseBody
+	public boolean confirmPassword(String emp_password, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		boolean isSame = employeeService.confirmPassword(loginResponse.getEmp_id(), emp_password);
+		log.info(isSame + "결과임");
+		return isSame;
+	}
+	
 	@GetMapping("/initialPassword")
 	public String initialPasswordForm(Authentication authentication, Model model) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
@@ -53,10 +66,10 @@ public class EmployeeController {
 		
 		model.addAttribute("loginEmp", loginResponse.getEmp_id());
 		
+		
 		return "/initialPassword";
 	}
 	
-	@Secured("{ROLE_EMP}")
 	@PostMapping("/initialPassword")
 	public String initialPassword(Authentication authentication, PasswordRequest passwordRequest) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
@@ -73,7 +86,13 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/addUser")
-	public String joinForm() {
+	public String joinForm(Authentication authentication, Model model) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		String emp_name = loginResponse.getEmpInfo_name();
+		model.addAttribute("empInfo_name", emp_name);
+		
 		return "/addUser";
 	}
 	
@@ -89,13 +108,16 @@ public class EmployeeController {
 	}
 	
 	//프로젝트 진행을 위한 임시 부분/////////////////////////////////////////////////////////
-	@Secured("{ROLE_ADMIN}")
 	@GetMapping("/jjoin")
-	public String jjoinForm() {
+	public String jjoinForm(Authentication authentication, Model model) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		String emp_name = loginResponse.getEmpInfo_name();
+		model.addAttribute("empInfo_name", emp_name);
 		return "/jjoin";
 	}
 	
-	@Secured("{ROLE_ADMIN}")
 	@PostMapping("/jjoin")
 	public String jjoin(JoinRequest joinRequest) {
 		if(employeeService.join(joinRequest).equals(JoinResult.JOIN_SUCCESS)) {
@@ -104,8 +126,36 @@ public class EmployeeController {
 			return "/redirect:/employee/jjoin";
 		}
 	}
+	
+	@GetMapping("/userModify")
+	public String getUserModify(Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		String emp_name = loginResponse.getEmpInfo_name();
+		model.addAttribute("empInfo_name", emp_name);
+		
+		EmpModifyResponse response = employeeService.getModifyInfo(authentication.getName());
+		model.addAttribute("empModifyResponse", response);
+		log.info(response.toString());
+		
+		return "userModify";
+	}
+	
+	@PostMapping("/userModify")
+	public String userModify(Authentication authentication, ModifyRequest modifyRequest, Model model) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		int emp_no = loginResponse.getEmp_no();
+		modifyRequest.setEmp_no(emp_no);
+		
+		employeeService.changeEmpInfo(modifyRequest);
+		
+		return "redirect:/employee/userModify";
+	}
+	
 	//프로젝트 진행을 위한 임시 부분/////////////////////////////////////////////////////////
-	@Secured("{ROLE_ADMIN}")
 	@PostMapping("/poiJoin")
 	public String poiJoin() {
 	    
@@ -116,7 +166,7 @@ public class EmployeeController {
             XSSFWorkbook workbook = new XSSFWorkbook(file);
 
             // workbook의 첫번째 sheet를 가저온다.
-            XSSFSheet sheet = workbook.getSheetAt(0);
+            XSSFSheet sheet = workbook.getSheetAt(1);
 
             // 만약 특정 이름의 시트를 찾는다면 workbook.getSheet("찾는 시트의 이름");
             // 만약 모든 시트를 순회하고 싶으면
@@ -161,4 +211,5 @@ public class EmployeeController {
 		
 		return "redirect:/employee/jjoin";
 	}
+
 }

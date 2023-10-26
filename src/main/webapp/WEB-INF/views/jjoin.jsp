@@ -221,5 +221,6 @@
 
     <!-- Page JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/pages-auth.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
   </body>
 </html>

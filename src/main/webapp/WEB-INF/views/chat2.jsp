@@ -777,5 +777,6 @@ Dessert chocolate cake lemon drops jujubes. Biscuit cupcake ice cream bear claw 
 
     <!-- Page JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/app-chat.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
   </body>
 </html>
