@@ -7,14 +7,14 @@
   dir="ltr"
   data-theme="theme-default"
   data-assets-path="${pageContext.request.contextPath}/resources/assets/"
-  data-template="vertical-menu-template">
+  data-template="vertical-menu-template-no-customizer">
   <head>
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>eCommerce - Dashboards | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Product List - eCommerce | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content="" />
 
@@ -34,38 +34,25 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/fonts/flag-icons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/core.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/theme-default.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/apex-charts/apex-charts.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
 
     <!-- Page CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/pages/card-analytics.css" />
 
     <!-- Helpers -->
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
-    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
-    <!-- calendar -->
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
-    <script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
-        calendar.render();
-      });
-
-    </script>
   </head>
 
   <body>
@@ -75,7 +62,7 @@
         <!-- Menu -->
  		 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="main" class="app-brand-link">
+            <a href="${pageContext.request.contextPath}/main" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -128,7 +115,7 @@
               <span class="app-brand-text demo menu-text fw-bold ms-2">pms</span>
             </a>
 
-            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+             <a href="${pageContext.request.contextPath}/main" class="layout-menu-toggle menu-link text-large ms-auto">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
             </a>
           </div>
@@ -164,7 +151,7 @@
                 </li>
               </ul>
             </li>
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="${pageContext.request.contextPath}/noticeList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bell"></i>
                 <div class="text-truncate">공지사항</div>
@@ -196,7 +183,12 @@
                 </li>
               </ul>
             </li>
-            
+            <li class="menu-item">
+              <a href="${pageContext.request.contextPath}/programManagement" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-server"></i>
+                <div class="text-truncate">프로그램</div>
+              </a>
+            </li>
             <!--관리자 메뉴-->
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">ADMIN MENU</span>
@@ -209,11 +201,17 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
+              <a href="${pageContext.request.contextPath}/employee/jjoin" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
               </a>
             </li>
+<%--             <li class="menu-item">
+              <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div class="text-truncate">사용자 등록</div>
+              </a>
+            </li> --%>
             
             <li class="menu-item">
               <a href="${pageContext.request.contextPath}/userManagement" class="menu-link">
@@ -229,7 +227,7 @@
         <div class="layout-page">
           <!-- Navbar -->
 
-          <nav
+           <nav
             class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
             id="layout-navbar">
             <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -648,7 +646,7 @@
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li>
-           			  <a class="dropdown-item" href="${pageContext.request.contextPath}/userModify">
+ 					 <a class="dropdown-item" href="${pageContext.request.contextPath}/userModify">
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
@@ -666,7 +664,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                     <a class="dropdown-item" href="${pageContext.request.contextPath}/userProfile">
+                      <a class="dropdown-item" href="${pageContext.request.contextPath}/userProfile">
                         <i class="bx bx-user me-2"></i>
                         <span class="align-middle mx-1">마이 페이지</span>
                       </a>
@@ -721,427 +719,34 @@
           <div class="content-wrapper">
             <!-- Content -->
 
-            <div class="container-xxl flex-grow-1 container-p-y" >
-              <div class="row">
-				<div style="width:65%;">							
-					<!-- 공지사항 -->
-					<div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%; padding-top:1.625rem;">
-					    <div class="card">
-					      <div class="table-responsive text-nowrap" style="margin:17.5px;">
-					        <table class="table text-nowrap">
-					          <thead>
-					            <tr>
-					           <th>공지사항</th>
-					           <th></th>
-					              <th></th>
-					              <th></th>
-					              <th></th>
-					         </tr>
-					            <tr>
-					              <th>번호</th>
-					              <th>제목</th>
-					              <th>작성자</th>
-					              <th>날짜</th>
-					              <th></th>
-					            </tr>
-					          </thead>
-					          <tbody class="table-border-bottom-0">
-					            <tr>
-					              <td>
-					                
-					              </td>
-					              <td>
-					                <span class="badge bg-label-primary rounded-pill badge-center p-3 me-2"
-					                  ><i class="bx bx-mobile-alt bx-xs"></i
-					                ></span>
-					                Smart Phone
-					              </td>
-					              <td>
-					                <div class="text-muted lh-1"><span class="text-primary fw-medium">$120</span>/499</div>
-					                <small class="text-muted">Partially Paid</small>
-					              </td>
-					              <td><span class="badge bg-label-primary">Confirmed</span></td>
-					              <td>
-					                <div class="dropdown">
-					                  <button
-					                    type="button"
-					                    class="btn p-0 dropdown-toggle hide-arrow"
-					                    data-bs-toggle="dropdown">
-					                    <i class="bx bx-dots-vertical-rounded"></i>
-					                  </button>
-					                  <div class="dropdown-menu">
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-edit-alt me-1"></i> View Details</a
-					                    >
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-trash me-1"></i> Delete</a
-					                    >
-					                  </div>
-					                </div>
-					              </td>
-					            </tr>
-					            
-					            <tr>
-					              <td>
-					                
-					              </td>
-					              <td>
-					                <span class="badge bg-label-primary rounded-pill badge-center p-3 me-2"
-					                  ><i class="bx bx-mobile-alt bx-xs"></i
-					                ></span>
-					                Smart Phone
-					              </td>
-					              <td>
-					                <div class="text-muted lh-1"><span class="text-primary fw-medium">$120</span>/499</div>
-					                <small class="text-muted">Partially Paid</small>
-					              </td>
-					              <td><span class="badge bg-label-primary">Confirmed</span></td>
-					              <td>
-					                <div class="dropdown">
-					                  <button
-					                    type="button"
-					                    class="btn p-0 dropdown-toggle hide-arrow"
-					                    data-bs-toggle="dropdown">
-					                    <i class="bx bx-dots-vertical-rounded"></i>
-					                  </button>
-					                  <div class="dropdown-menu">
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-edit-alt me-1"></i> View Details</a
-					                    >
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-trash me-1"></i> Delete</a
-					                    >
-					                  </div>
-					                </div>
-					              </td>
-					            </tr>
-					            
-					            <tr>
-					              <td>
-					                
-					              </td>
-					              <td>
-					                <span class="badge bg-label-primary rounded-pill badge-center p-3 me-2"
-					                  ><i class="bx bx-mobile-alt bx-xs"></i
-					                ></span>
-					                Smart Phone
-					              </td>
-					              <td>
-					                <div class="text-muted lh-1"><span class="text-primary fw-medium">$120</span>/499</div>
-					                <small class="text-muted">Partially Paid</small>
-					              </td>
-					              <td><span class="badge bg-label-primary">Confirmed</span></td>
-					              <td>
-					                <div class="dropdown">
-					                  <button
-					                    type="button"
-					                    class="btn p-0 dropdown-toggle hide-arrow"
-					                    data-bs-toggle="dropdown">
-					                    <i class="bx bx-dots-vertical-rounded"></i>
-					                  </button>
-					                  <div class="dropdown-menu">
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-edit-alt me-1"></i> View Details</a
-					                    >
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-trash me-1"></i> Delete</a
-					                    >
-					                  </div>
-					                </div>
-					              </td>
-					            </tr>
-					            
-					            <tr>
-					              <td>
-					                
-					              </td>
-					              <td>
-					                <span class="badge bg-label-primary rounded-pill badge-center p-3 me-2"
-					                  ><i class="bx bx-mobile-alt bx-xs"></i
-					                ></span>
-					                Smart Phone
-					              </td>
-					              <td>
-					                <div class="text-muted lh-1"><span class="text-primary fw-medium">$120</span>/499</div>
-					                <small class="text-muted">Partially Paid</small>
-					              </td>
-					              <td><span class="badge bg-label-primary">Confirmed</span></td>
-					              <td>
-					                <div class="dropdown">
-					                  <button
-					                    type="button"
-					                    class="btn p-0 dropdown-toggle hide-arrow"
-					                    data-bs-toggle="dropdown">
-					                    <i class="bx bx-dots-vertical-rounded"></i>
-					                  </button>
-					                  <div class="dropdown-menu">
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-edit-alt me-1"></i> View Details</a
-					                    >
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-trash me-1"></i> Delete</a
-					                    >
-					                  </div>
-					                </div>
-					              </td>
-					            </tr>
-					            
-					            <tr>
-					              <td>
-					                
-					              </td>
-					              <td>
-					                <span class="badge bg-label-primary rounded-pill badge-center p-3 me-2"
-					                  ><i class="bx bx-mobile-alt bx-xs"></i
-					                ></span>
-					                Smart Phone
-					              </td>
-					              <td>
-					                <div class="text-muted lh-1"><span class="text-primary fw-medium">$120</span>/499</div>
-					                <small class="text-muted">Partially Paid</small>
-					              </td>
-					              <td><span class="badge bg-label-primary">Confirmed</span></td>
-					              <td>
-					                <div class="dropdown">
-					                  <button
-					                    type="button"
-					                    class="btn p-0 dropdown-toggle hide-arrow"
-					                    data-bs-toggle="dropdown">
-					                    <i class="bx bx-dots-vertical-rounded"></i>
-					                  </button>
-					                  <div class="dropdown-menu">
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-edit-alt me-1"></i> View Details</a
-					                    >
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-trash me-1"></i> Delete</a
-					                    >
-					                  </div>
-					                </div>
-					              </td>
-					            </tr>
-					              
-					          </tbody>
-					        </table>
-					      </div>
-					    </div>
-					 </div>
-					 
-					 <div class="col-md-6 col-lg-4 mb-4 mb-mb-0" style="width:100%; padding-top:1.625rem;">
-	                  <div class="card text-center" style="padding-: 1.625rem !important;">
-	                    <div class="card-header py-3">
-	                      <ul class="nav nav-pills" role="tablist">
-	                        <li class="nav-item">
-	                          <button
-	                            type="button"
-	                            class="nav-link active"
-	                            role="tab"
-	                            data-bs-toggle="tab"
-	                            data-bs-target="#navs-pills-browser"
-	                            aria-controls="navs-pills-browser"
-	                            aria-selected="true">
-	                            	개발 1팀
-	                          </button>
-	                        </li>
-	                        <li class="nav-item">
-	                          <button
-	                            type="button"
-	                            class="nav-link"
-	                            role="tab"
-	                            data-bs-toggle="tab"
-	                            data-bs-target="#navs-pills-os"
-	                            aria-controls="navs-pills-os"
-	                            aria-selected="false">
-	                            	개발 2팀
-	                          </button>
-	                        </li>
-	                        <li class="nav-item">
-	                          <button
-	                            type="button"
-	                            class="nav-link"
-	                            role="tab"
-	                            data-bs-toggle="tab"
-	                            data-bs-target="#navs-pills-country"
-	                            aria-controls="navs-pills-country"
-	                            aria-selected="false">
-	                            	개발 3팀
-	                          </button>
-	                        </li>
-	                      </ul>
-	                    </div>
-	                    <div class="tab-content pt-0">
-	                      <div class="tab-pane fade show active" id="navs-pills-browser" role="tabpanel">
-	                        <div class="table-responsive text-start">
-	                          <table class="table table-borderless text-nowrap">
-	                            <thead>
-	                              <tr>
-	                                <th>No</th>
-	                                <th>담당 업무</th>
-	                                <th>이름</th>
-	                                <th class="w-50">진척률</th>
-	                              </tr>
-	                            </thead>
-	                            <tbody>
-	                              <tr>
-	                                <td>1</td>
-	                                <td>
-	                                  <div class="d-flex align-items-center">
-	                                    <img
-	                                      src="../../assets/img/icons/brands/chrome.png"
-	                                      alt="Chrome"
-	                                      height="24"
-	                                      class="me-2" />
-	                                    <span>Chrome</span>
-	                                  </div>
-	                                </td>
-	                                <td>8.92k</td>
-	                                <td>
-	                                  <div class="d-flex justify-content-between align-items-center gap-3">
-	                                    <div class="progress w-100" style="height: 10px">
-	                                      <div
-	                                        class="progress-bar bg-success"
-	                                        role="progressbar"
-	                                        style="width: 84.75%"
-	                                        aria-valuenow="84.75"
-	                                        aria-valuemin="0"
-	                                        aria-valuemax="100"></div>
-	                                    </div>
-	                                    <small class="fw-medium">84.75%</small>
-	                                  </div>
-	                                </td>
-	                              </tr>
-	                            </tbody>
-	                          </table>
-	                        </div>
-	                      </div>
-	                      <div class="tab-pane fade" id="navs-pills-os" role="tabpanel">
-	                        <div class="table-responsive text-start">
-	                          <table class="table table-borderless">
-	                            <thead>
-	                              <tr>
-	                                <th>No</th>
-	                                <th>담당 업무</th>
-	                                <th>이름</th>
-	                                <th class="w-50">진척률</th>
-	                              </tr>
-	                            </thead>
-	                            <tbody>
-	                              <tr>
-	                                <td>1</td>
-	                                <td>
-	                                  <div class="d-flex align-items-center">
-	                                    <img
-	                                      src="../../assets/img/icons/brands/windows.png"
-	                                      alt="Windows"
-	                                      height="24"
-	                                      class="me-2" />
-	                                    <span>Windows</span>
-	                                  </div>
-	                                </td>
-	                                <td>875.24k</td>
-	                                <td>
-	                                  <div class="d-flex justify-content-between align-items-center gap-3">
-	                                    <div class="progress w-100" style="height: 10px">
-	                                      <div
-	                                        class="progress-bar bg-success"
-	                                        role="progressbar"
-	                                        style="width: 71.5%"
-	                                        aria-valuenow="71.50"
-	                                        aria-valuemin="0"
-	                                        aria-valuemax="100"></div>
-	                                    </div>
-	                                    <small class="fw-medium">71.50%</small>
-	                                  </div>
-	                                </td>
-	                              </tr>
-	                            </thead>
-	                            <tbody>
-	                                                                     
-	                            </tbody>
-	                          </table>
-	                        </div>
-	                      </div>
-	                    </div>
-	                  </div>
-	                </div>
-					 
-				</div>
-              	<div style="width:35%;">
-              		<!-- 캘린더 -->
-					 <div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%;">
-			            <div class="flex-grow-1 container-p-y">
-			              <div class="card app-calendar-wrapper">
-			                <div class="row g-0">
-			                  <div id='calendar'></div>
-			                </div>
-			              </div>
-			            </div>
-	          		</div>
-              		
-	                
-	                
-	                <!-- 진척률 -->
-	                <div class="col-md-4" style="width:100%;">
-	                	<div class="card">
-	                      <div class="card-body">
-	                        <div class="text-center">
-	                          <div class="dropdown">
-	                            <button
-	                              class="btn btn-sm btn-label-primary dropdown-toggle"
-	                              type="button"
-	                              id="growthReportId"
-	                              data-bs-toggle="dropdown"
-	                              aria-haspopup="true"
-	                              aria-expanded="false">
-	                              	프로젝트 1
-	                            </button>
-	                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
-	                              <a class="dropdown-item" href="javascript:void(0);">프로젝트 2</a>
-	                              <a class="dropdown-item" href="javascript:void(0);">프로젝트 3</a>
-	                              <a class="dropdown-item" href="javascript:void(0);">프로젝트 4</a>
-	                            </div>
-	                          </div>
-	                        </div>
-	                      </div>
-	                      <div id="growthChart"></div>
-	                      <div class="text-center fw-medium pt-3 mb-2">화이팅!</div>
-	
-	                      <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
-	                        <div class="d-flex">
-	                          <div class="me-2">
-	                            <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
-	                          </div>
-	                          <div class="d-flex flex-column">
-	                            <small>프로젝트 시작</small>
-	                            <h6 class="mb-0">23.4~</h6>
-	                          </div>
-	                        </div>
-	                        <div class="d-flex">
-	                          <div class="me-2">
-	                            <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
-	                          </div>
-	                          <div class="d-flex flex-column">
-	                            <small>프로젝트 종료</small>
-	                            <h6 class="mb-0">~23.12</h6>
-	                          </div>
-	                        </div>
-	                      </div>
-	                    </div>
-	              	</div>
-              	
-              	
-              	
-              	</div>
-              
+            <div class="container-xxl flex-grow-1 container-p-y">
 
-              
-              	
-              	
-		     </div>
-		   	</div>
-		   </div>
-	  	</div>
-	  </div>
+              <!-- Product List Table -->
+              <div class="card2">
+                <div class="card-header">
+                  <h5 class="card-title"></h5>
+                  <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
+                    <div class="col-md-4 product_category" style = "margin-left: 20px"><h3><strong>공지사항🚨</strong></h3></div>
+                  </div>
+                </div>
+                <div class="card-datatable table-responsive">
+                  <table class="datatables-products table border-top" id="tablediv">
+                    <thead>
+                      <tr>
+                        <th class="noticece">번호</th>
+                        <th class="noticece">제목</th>
+                        <th class="noticece">글쓴이</th>
+                        <th class="noticece">날짜</th>
+                        <!-- <th>actions</th> -->
+                        <!-- <th>stock</th> -->                     
+                        <!-- <th>sku</th> -->
+                        <!-- <th>qty</th> -->
+                      </tr>
+                    </thead>
+                  </table>
+                </div>
+              </div>
+            </div>
             <!-- / Content -->
 
             <div class="content-backdrop fade"></div>
@@ -1174,29 +779,13 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/apex-charts/apexcharts.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/moment/moment.js"></script>
 
     <!-- Main JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/mainRank.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/mainGraph.js"></script>
-    
-    
-    <script>
-        // 사이드바를 숨기기
-        //document.getElementById('app-calendar-sidebar').style.display = 'none';
-
-        // 또는 사이드바를 다시 나타내려면 다음과 같이 사용
-        // document.getElementById('app-calendar-sidebar').style.display = 'block';
-    </script>
-    
+    <script src="${pageContext.request.contextPath}/resources/assets/js/noticeTest.js"></script>
   </body>
 </html>
