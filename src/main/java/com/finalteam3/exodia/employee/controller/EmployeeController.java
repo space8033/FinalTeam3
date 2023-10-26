@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.finalteam3.exodia.employee.dto.request.JoinList;
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
@@ -45,6 +46,17 @@ public class EmployeeController {
 	@GetMapping("/login")
 	public String loginForm() {
 		return "/login";
+	}
+	
+	@PostMapping("/confirmPassword")
+	@ResponseBody
+	public boolean confirmPassword(String emp_password, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		boolean isSame = employeeService.confirmPassword(loginResponse.getEmp_id(), emp_password);
+		log.info(isSame + "결과임");
+		return isSame;
 	}
 	
 	@GetMapping("/initialPassword")

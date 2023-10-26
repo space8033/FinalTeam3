@@ -46,6 +46,12 @@
 		from empinfo
 		where empinfo_name = #{empinfo_name}
 	</select>
+	
+	<select id="selectNowPassword" resultType="String" parameterType="String">
+		select emp_password
+		from emp
+		where emp_id = #{emp_id}
+	</select>
 
 	<select id="selectInfoByEmpId" resultType="LoginResponse" parameterType="LoginRequest">
 		select e.emp_no, e.emp_id, e.emp_password, e.emp_isinit, e.emp_deletedAt, r.role_category

@@ -24,4 +24,5 @@ public interface EmployeeDao {
 	public EmpModifyResponse selectModifyByEmpId(String emp_id);
 	public void updateEmpInfo(ModifyRequest modifyRequest);	
 	public int selectNoByEmpName(String empinfo_name);
+	public String selectNowPassword(String emp_id);
 }

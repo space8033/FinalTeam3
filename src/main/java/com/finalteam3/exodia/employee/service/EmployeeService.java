@@ -39,4 +39,5 @@ public interface EmployeeService {
 	public PasswordResult changePassword(PasswordRequest passwordRequest);
 	public EmpModifyResponse getModifyInfo(String emp_id);
 	public ModifyResult changeEmpInfo(ModifyRequest modifyRequest);
+	public boolean confirmPassword(String emp_id, String emp_password);
 }

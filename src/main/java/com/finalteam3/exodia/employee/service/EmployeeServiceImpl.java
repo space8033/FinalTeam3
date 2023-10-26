@@ -150,4 +150,15 @@ public class EmployeeServiceImpl implements EmployeeService{
 			return ModifyResult.MODIFY_SUCCESS;
 		}		
 	}
+
+	@Override
+	public boolean confirmPassword(String emp_id, String emp_password) {
+		String dBPassword = employeeDao.selectNowPassword(emp_id);
+		
+		if(passwordEncoder.matches(emp_password, dBPassword)) {
+			return true;
+		}
+		
+		return false;
+	}
 }
