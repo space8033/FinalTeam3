@@ -79,7 +79,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="index.html" class="app-brand-link">
+            <a href="${pageContext.request.contextPath}/mainㅡ" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -132,7 +132,7 @@
               <span class="app-brand-text demo menu-text fw-bold ms-2">pms</span>
             </a>
 
-            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto">
+             <a href="${pageContext.request.contextPath}/main" class="layout-menu-toggle menu-link text-large ms-auto">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
             </a>
           </div>
@@ -200,7 +200,12 @@
                 </li>
               </ul>
             </li>
-            
+            <li class="menu-item">
+              <a href="${pageContext.request.contextPath}/programManagement" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-server"></i>
+                <div class="text-truncate">프로그램</div>
+              </a>
+            </li>
             <!--관리자 메뉴-->
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">ADMIN MENU</span>
@@ -239,492 +244,7 @@
         <div class="layout-page">
           <!-- Navbar -->
 
-          <nav
-            class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
-            id="layout-navbar">
-            <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
-              <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
-                <i class="bx bx-menu bx-sm"></i>
-              </a>
-            </div>
-
-            <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-              <!-- Search -->
-              <div class="navbar-nav align-items-center">
-                <div class="nav-item navbar-search-wrapper mb-0">
-                  <a class="nav-item nav-link search-toggler px-0" href="javascript:void(0);">
-                    <i class="bx bx-search bx-sm"></i>
-                    <span class="d-none d-md-inline-block text-muted">Search (Ctrl+/)</span>
-                  </a>
-                </div>
-              </div>
-              <!-- /Search -->
-
-              <ul class="navbar-nav flex-row align-items-center ms-auto">
-                <!-- Language -->
-                <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
-                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <i class="bx bx-globe bx-sm"></i>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-language="en">
-                        <span class="align-middle">English</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-language="fr">
-                        <span class="align-middle">French</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-language="de">
-                        <span class="align-middle">German</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-language="pt">
-                        <span class="align-middle">Portuguese</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <!-- /Language -->
-
-                <!-- Quick links  -->
-                <li class="nav-item dropdown-shortcuts navbar-dropdown dropdown me-2 me-xl-0">
-                  <a
-                    class="nav-link dropdown-toggle hide-arrow"
-                    href="javascript:void(0);"
-                    data-bs-toggle="dropdown"
-                    data-bs-auto-close="outside"
-                    aria-expanded="false">
-                    <i class="bx bx-grid-alt bx-sm"></i>
-                  </a>
-                  <div class="dropdown-menu dropdown-menu-end py-0">
-                    <div class="dropdown-menu-header border-bottom">
-                      <div class="dropdown-header d-flex align-items-center py-3">
-                        <h5 class="text-body mb-0 me-auto">Shortcuts</h5>
-                        <a
-                          href="javascript:void(0)"
-                          class="dropdown-shortcuts-add text-body"
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="top"
-                          title="Add shortcuts"
-                          ><i class="bx bx-sm bx-plus-circle"></i
-                        ></a>
-                      </div>
-                    </div>
-                    <div class="dropdown-shortcuts-list scrollable-container">
-                      <div class="row row-bordered overflow-visible g-0">
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-calendar fs-4"></i>
-                          </span>
-                          <a href="app-calendar.html" class="stretched-link">Calendar</a>
-                          <small class="text-muted mb-0">Appointments</small>
-                        </div>
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-food-menu fs-4"></i>
-                          </span>
-                          <a href="app-invoice-list.html" class="stretched-link">Invoice App</a>
-                          <small class="text-muted mb-0">Manage Accounts</small>
-                        </div>
-                      </div>
-                      <div class="row row-bordered overflow-visible g-0">
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-user fs-4"></i>
-                          </span>
-                          <a href="app-user-list.html" class="stretched-link">User App</a>
-                          <small class="text-muted mb-0">Manage Users</small>
-                        </div>
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-check-shield fs-4"></i>
-                          </span>
-                          <a href="app-access-roles.html" class="stretched-link">Role Management</a>
-                          <small class="text-muted mb-0">Permission</small>
-                        </div>
-                      </div>
-                      <div class="row row-bordered overflow-visible g-0">
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-pie-chart-alt-2 fs-4"></i>
-                          </span>
-                          <a href="index.html" class="stretched-link">Dashboard</a>
-                          <small class="text-muted mb-0">User Profile</small>
-                        </div>
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-cog fs-4"></i>
-                          </span>
-                          <a href="pages-account-settings-account.html" class="stretched-link">Setting</a>
-                          <small class="text-muted mb-0">Account Settings</small>
-                        </div>
-                      </div>
-                      <div class="row row-bordered overflow-visible g-0">
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-help-circle fs-4"></i>
-                          </span>
-                          <a href="pages-faq.html" class="stretched-link">FAQs</a>
-                          <small class="text-muted mb-0">FAQs & Articles</small>
-                        </div>
-                        <div class="dropdown-shortcuts-item col">
-                          <span class="dropdown-shortcuts-icon bg-label-secondary rounded-circle mb-2">
-                            <i class="bx bx-window-open fs-4"></i>
-                          </span>
-                          <a href="modal-examples.html" class="stretched-link">Modals</a>
-                          <small class="text-muted mb-0">Useful Popups</small>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-                <!-- Quick links -->
-
-                <!-- Style Switcher -->
-                <li class="nav-item dropdown-style-switcher dropdown me-2 me-xl-0">
-                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <i class="bx bx-sm"></i>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end dropdown-styles">
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-theme="light">
-                        <span class="align-middle"><i class="bx bx-sun me-2"></i>Light</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-theme="dark">
-                        <span class="align-middle"><i class="bx bx-moon me-2"></i>Dark</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="javascript:void(0);" data-theme="system">
-                        <span class="align-middle"><i class="bx bx-desktop me-2"></i>System</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <!-- / Style Switcher-->
-
-                <!-- Notification -->
-                <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
-                  <a
-                    class="nav-link dropdown-toggle hide-arrow"
-                    href="javascript:void(0);"
-                    data-bs-toggle="dropdown"
-                    data-bs-auto-close="outside"
-                    aria-expanded="false">
-                    <i class="bx bx-bell bx-sm"></i>
-                    <span class="badge bg-danger rounded-pill badge-notifications">5</span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end py-0">
-                    <li class="dropdown-menu-header border-bottom">
-                      <div class="dropdown-header d-flex align-items-center py-3">
-                        <h5 class="text-body mb-0 me-auto">Notification</h5>
-                        <a
-                          href="javascript:void(0)"
-                          class="dropdown-notifications-all text-body"
-                          data-bs-toggle="tooltip"
-                          data-bs-placement="top"
-                          title="Mark all as read"
-                          ><i class="bx fs-4 bx-envelope-open"></i
-                        ></a>
-                      </div>
-                    </li>
-                    <li class="dropdown-notifications-list scrollable-container">
-                      <ul class="list-group list-group-flush">
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">Congratulation Lettie 🎉</h6>
-                              <p class="mb-0">Won the monthly best seller gold badge</p>
-                              <small class="text-muted">1h ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <span class="avatar-initial rounded-circle bg-label-danger">CF</span>
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">Charles Franklin</h6>
-                              <p class="mb-0">Accepted your connection</p>
-                              <small class="text-muted">12hr ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle" />
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">New Message ✉️</h6>
-                              <p class="mb-0">You have new message from Natalie</p>
-                              <small class="text-muted">1h ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <span class="avatar-initial rounded-circle bg-label-success"
-                                  ><i class="bx bx-cart"></i
-                                ></span>
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">Whoo! You have new order 🛒</h6>
-                              <p class="mb-0">ACME Inc. made new order $1,154</p>
-                              <small class="text-muted">1 day ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/9.png" alt class="w-px-40 h-auto rounded-circle" />
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">Application has been approved 🚀</h6>
-                              <p class="mb-0">Your ABC project application has been approved.</p>
-                              <small class="text-muted">2 days ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <span class="avatar-initial rounded-circle bg-label-success"
-                                  ><i class="bx bx-pie-chart-alt"></i
-                                ></span>
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">Monthly report is generated</h6>
-                              <p class="mb-0">July monthly financial report is generated</p>
-                              <small class="text-muted">3 days ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/5.png" alt class="w-px-40 h-auto rounded-circle" />
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">Send connection request</h6>
-                              <p class="mb-0">Peter sent you connection request</p>
-                              <small class="text-muted">4 days ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/6.png" alt class="w-px-40 h-auto rounded-circle" />
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">New message from Jane</h6>
-                              <p class="mb-0">Your have new message from Jane</p>
-                              <small class="text-muted">5 days ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                        <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
-                          <div class="d-flex">
-                            <div class="flex-shrink-0 me-3">
-                              <div class="avatar">
-                                <span class="avatar-initial rounded-circle bg-label-warning"
-                                  ><i class="bx bx-error"></i
-                                ></span>
-                              </div>
-                            </div>
-                            <div class="flex-grow-1">
-                              <h6 class="mb-1">CPU is running high</h6>
-                              <p class="mb-0">CPU Utilization Percent is currently at 88.63%,</p>
-                              <small class="text-muted">5 days ago</small>
-                            </div>
-                            <div class="flex-shrink-0 dropdown-notifications-actions">
-                              <a href="javascript:void(0)" class="dropdown-notifications-read"
-                                ><span class="badge badge-dot"></span
-                              ></a>
-                              <a href="javascript:void(0)" class="dropdown-notifications-archive"
-                                ><span class="bx bx-x"></span
-                              ></a>
-                            </div>
-                          </div>
-                        </li>
-                      </ul>
-                    </li>
-                    <li class="dropdown-menu-footer border-top p-3">
-                      <button class="btn btn-primary text-uppercase w-100">view all notifications</button>
-                    </li>
-                  </ul>
-                </li>
-                <!--/ Notification -->
-                <!-- User -->
-                <li class="nav-item navbar-dropdown dropdown-user dropdown">
-                  <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <div class="avatar avatar-online">
-                      <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                    </div>
-                  </a>
-                  <ul class="dropdown-menu dropdown-menu-end">
-                    <li>
-                      <a class="dropdown-item" href="${pageContext.request.contextPath}/userModify">
-                        <div class="d-flex">
-                          <div class="flex-shrink-0 me-3">
-                            <div class="avatar avatar-online">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
-                            </div>
-                          </div>
-                          <div class="flex-grow-1">
-                            <span class="fw-medium d-block">${empInfo.empinfo_name}</span>
-                            <small class="text-muted">개인 정보 수정</small>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                    <li>
-                      <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                     <a class="dropdown-item" href="${pageContext.request.contextPath}/userProfile">
-                        <i class="bx bx-user me-2"></i>
-                        <span class="align-middle mx-1">마이 페이지</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="${pageContext.request.contextPath}/note">
-                        <span class="d-flex align-items-center align-middle">
-                    	  <i class="bx bx-envelope me-3"></i>
-                     	  <span class="flex-grow-1 align-middle">쪽지함</span>
-                      	  <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                      	</span>
-                      </a>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="${pageContext.request.contextPath}/chat">
-                        <span class="d-flex align-items-center align-middle">
-                          <i class="bx bx-chat me-3"></i>
-                          <span class="flex-grow-1 align-middle">채팅</span>
-                          <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
-                        </span>
-                      </a>
-                    </li>
-
-                    <li>
-                      <div class="dropdown-divider"></div>
-                    </li>
-                    <li>
-                      <a class="dropdown-item" href="auth-login-cover.html" target="_blank">
-                        <i class="bx bx-power-off me-2"></i>
-                        <span class="align-middle">로그아웃</span>
-                      </a>
-                    </li>
-                  </ul>
-                </li>
-                <!--/ User -->
-              </ul>
-            </div>
-
-            <!-- Search Small Screens -->
-            <div class="navbar-search-wrapper search-input-wrapper d-none">
-              <input
-                type="text"
-                class="form-control search-input container-xxl border-0"
-                placeholder="Search..."
-                aria-label="Search..." />
-              <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
-            </div>
-          </nav>
+          <%@ include file="/WEB-INF/views/header.jsp" %>
 
           <!-- / Navbar -->
 
@@ -867,9 +387,9 @@
                                   <i class="bx bx-dots-vertical-rounded bx-sm text-muted"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="emailsActions">
-                                  <a class="dropdown-item" href="javascript:void(0)">Mark as read</a>
-                                  <a class="dropdown-item" href="javascript:void(0)">Mark as unread</a>
-                                  <a class="dropdown-item" href="javascript:void(0)">Delete</a>
+                                  <a class="dropdown-item" href="javascript:void(0)">확인 </a>
+                                  <a class="dropdown-item" href="javascript:void(0)">미확인</a>
+                                  <a class="dropdown-item" href="javascript:void(0)">삭제</a>
                                   <a class="dropdown-item" href="javascript:void(0)">Archive</a>
                                 </div>
                               </div>
@@ -948,7 +468,7 @@
                                 <a href="javascript:showNoteByUser(1)"></a>
                                 </i>
                               <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4">
-                              	<a href="javascript:showNoteByUser(${pager.totalPageNo})">맨끝</a></i>
+                              	<a class="text-muted" href="javascript:showNoteByUser(${pager.totalPageNo})">맨끝</a></i>
                             </div>
                           </div>
                         </div>
@@ -965,14 +485,15 @@
 				                          <c:if test ="${noteRead_read != null}">email-list-item
 				                          </c:if>
 				                          "
-		                              data-starred="
-		                              	  <c:if test ="${noteRead_starred == null}">false
+				                          <c:if test ="${noteRead_starred == null}">
+		                              
 				                          </c:if>
-				                          <c:if test ="${noteRead_starred != null}">true
+				                          <c:if test ="${noteRead_starred != null}">
+				                          data-starred="true"
 				                          </c:if>
-				                          "
+				                          
 		                              data-bs-toggle="sidebar"
-		                              data-target="#app-email-view">
+		                              data-target="#app-email-view-${note.noteRead_no}">
 		                              <div class="d-flex align-items-center">
 		                                <div class="form-check">
 		                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-${note.noteRead_no}" />
@@ -1005,20 +526,19 @@
 		                                </div>
 		                              </div>
 	                            </li>
-	                        </c:forEach>  
-	                        
+	                        	</c:forEach>
                           </ul>
                           <ul class="list-unstyled m-0">
-                            <li class="email-list-empty text-center d-none">No items found.</li>
+                            <li class="email-list-empty text-center d-none">쪽지가 없습니다.</li>
                           </ul>
                         </div>
                       </div>
                       <div class="app-overlay"></div>
                     </div>
                     <!-- /Emails List -->
-
+					<c:forEach var="note" items="${list}">
                     <!-- Email View -->
-                    <div class="col app-email-view flex-grow-0 bg-body" id="app-email-view">
+                    <div class="col app-email-view flex-grow-0 bg-body" id="app-email-view-${note.noteRead_no}">
                       <div class="app-email-view-header p-3 py-md-3 py-2 rounded-0">
                         <!-- Email View : Title  bar-->
                         <div class="d-flex justify-content-between align-items-center">
@@ -1026,7 +546,7 @@
                             <i
                               class="bx bx-chevron-left bx-sm cursor-pointer me-2"
                               data-bs-toggle="sidebar"
-                              data-target="#app-email-view"></i>
+                              data-target="#app-email-view-${note.noteRead_no}"></i>
                             <h6 class="text-truncate mb-0 me-2">Focused impactful open issues</h6>
                             <span class="badge bg-label-warning">Important</span>
                           </div>
@@ -1037,13 +557,13 @@
                               <button
                                 class="btn p-0"
                                 type="button"
-                                id="dropdownMoreOptions"
+                                id="dropdownMoreOptions-${note.noteRead_no}"
                                 data-bs-toggle="dropdown"
                                 aria-haspopup="true"
                                 aria-expanded="false">
                                 <i class="bx bx-dots-vertical-rounded fs-4"></i>
                               </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMoreOptions">
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMoreOptions-${note.noteRead_no}">
                                 <a class="dropdown-item" href="javascript:void(0)">
                                   <i class="bx bx-envelope-open bx-xs me-1"></i>
                                   <span class="align-middle">Mark as unread</span>
@@ -1078,19 +598,19 @@
                             <i
                               class="bx bx-trash-alt cursor-pointer me-3 fs-4"
                               data-bs-toggle="sidebar"
-                              data-target="#app-email-view"></i>
+                              data-target="#app-email-view-${note.noteRead_no}"></i>
                             <i class="bx bx-envelope fs-4 cursor-pointer me-3"></i>
                             <div class="dropdown">
                               <button
                                 class="btn p-0"
                                 type="button"
-                                id="dropdownMenuFolderTwo"
+                                id="dropdownMenuFolderTwo-${note.noteRead_no}"
                                 data-bs-toggle="dropdown"
                                 aria-haspopup="true"
                                 aria-expanded="false">
                                 <i class="bx bx-folder fs-4 me-3"></i>
                               </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuFolderTwo">
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuFolderTwo-${note.noteRead_no}">
                                 <a class="dropdown-item" href="javascript:void(0)">
                                   <i class="bx bx-error-circle me-1"></i>
                                   <span class="align-middle">Spam</span>
@@ -1109,13 +629,13 @@
                               <button
                                 class="btn p-0"
                                 type="button"
-                                id="dropdownLabelTwo"
+                                id="dropdownLabelTwo-${note.noteRead_no}"
                                 data-bs-toggle="dropdown"
                                 aria-haspopup="true"
                                 aria-expanded="false">
                                 <i class="bx bx-label fs-4 me-3"></i>
                               </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLabelTwo">
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLabelTwo-${note.noteRead_no}">
                                 <a class="dropdown-item" href="javascript:void(0)">
                                   <i class="badge badge-dot bg-success me-1"></i>
                                   <span class="align-middle">Workshop</span>
@@ -1139,6 +659,9 @@
                         </div>
                       </div>
                       <hr class="m-0" />
+                     
+                      
+                      
                       <!-- Email View : Content-->
                       <div class="app-email-view-content py-4">
                         <p class="email-earlier-msgs text-center text-muted cursor-pointer mb-5">1 Earlier Message</p>
@@ -1165,13 +688,13 @@
                                 <button
                                   class="btn p-0"
                                   type="button"
-                                  id="dropdownEmailOne"
+                                  id="dropdownEmailOne-${note.noteRead_no}"
                                   data-bs-toggle="dropdown"
                                   aria-haspopup="true"
                                   aria-expanded="false">
                                   <i class="bx bx-dots-vertical-rounded bx-sm"></i>
                                 </button>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownEmailOne">
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownEmailOne-${note.noteRead_no}">
                                   <a class="dropdown-item scroll-to-reply" href="javascript:void(0)">
                                     <i class="bx bx-share me-1"></i>
                                     <span class="align-middle">Reply</span>
@@ -1191,18 +714,8 @@
                           <div class="card-body">
                             <p class="fw-medium">Greetings!</p>
                             <p>
-                              It is a long established fact that a reader will be distracted by the readable content of
-                              a page when looking at its layout.The point of using Lorem Ipsum is that it has a
-                              more-or-less normal distribution of letters, as opposed to using 'Content here, content
-                              here',making it look like readable English.
+                              ${note.note_content}
                             </p>
-                            <p>
-                              There are many variations of passages of Lorem Ipsum available, but the majority have
-                              suffered alteration in some form, by injected humour, or randomised words which don't look
-                              even slightly believable.
-                            </p>
-                            <p class="mb-0">Sincerely yours,</p>
-                            <p class="fw-medium mb-0">Envato Design Team</p>
                             <hr />
                             <p class="mb-2">Attachments</p>
                             <div class="cursor-pointer">
@@ -1223,58 +736,48 @@
                                 height="38"
                                 width="38" />
                               <div class="flex-grow-1 ms-1">
-                                <h6 class="m-0">Chandler Bing</h6>
+                                <h6 class="m-0">${note.note_sender_name}</h6>
                                 <small class="text-muted">iAmAhoot@email.com</small>
                               </div>
                             </div>
                             <div class="d-flex align-items-center">
-                              <small class="mb-0 me-3 text-muted">June 20th 2020, 08:10 AM</small>
+                              <small class="mb-0 me-3 text-muted">${note.note_createdAt}</small>
                               <i class="bx bx-paperclip cursor-pointer me-2 bx-sm"></i>
                               <i class="email-list-item-bookmark bx bx-star cursor-pointer me-2 bx-sm"></i>
                               <div class="dropdown me-3">
                                 <button
                                   class="btn p-0"
                                   type="button"
-                                  id="dropdownEmailTwo"
+                                  id="dropdownEmailTwo-${note.noteRead_no}"
                                   data-bs-toggle="dropdown"
                                   aria-haspopup="true"
                                   aria-expanded="false">
                                   <i class="bx bx-dots-vertical-rounded bx-sm"></i>
                                 </button>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownEmailTwo">
+                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownEmailTwo-${note.noteRead_no}">
                                   <a class="dropdown-item scroll-to-reply" href="javascript:void(0)">
                                     <i class="bx bx-share me-1"></i>
-                                    <span class="align-middle">Reply</span>
+                                    <span class="align-middle">답장</span>
                                   </a>
                                   <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="bx bx-share me-1 scaleX-n1 scaleX-n1-rtl"></i>
-                                    <span class="align-middle">Forward</span>
+                                    <span class="align-middle">전달</span>
                                   </a>
                                   <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="bx bx-info-circle me-1"></i>
-                                    <span class="align-middle">Report</span>
+                                    <span class="align-middle">팝업 창 띄우기</span>
                                   </a>
                                 </div>
                               </div>
                             </div>
                           </div>
                           <div class="card-body pt-3">
-                            <p class="fw-medium">Hey John,</p>
+                            <p class="fw-medium py-2"><strong>제목 : ${note.note_title}</strong></p>
                             <p>
-                              It is a long established fact that a reader will be distracted by the readable content of
-                              a page when looking at its layout.The point of using Lorem Ipsum is that it has a
-                              more-or-less normal distribution of letters, as opposed to using 'Content here, content
-                              here',making it look like readable English.
+                            	 ${note.note_content}
                             </p>
-                            <p>
-                              There are many variations of passages of Lorem Ipsum available, but the majority have
-                              suffered alteration in some form, by injected humour, or randomised words which don't look
-                              even slightly believable.
-                            </p>
-                            <p class="mb-0">Sincerely yours,</p>
-                            <p class="fw-medium mb-0">Envato Design Team</p>
                             <hr />
-                            <p class="mb-2">Attachments</p>
+                            <p class="mb-2">첨부 파일</p>
                             <div class="cursor-pointer">
                               <i class="bx bx-file"></i>
                               <span class="align-middle ms-1">report.xlsx</span>
@@ -1283,7 +786,7 @@
                         </div>
                         <!-- Email View : Reply mail-->
                         <div class="email-reply card mt-4 mx-sm-4 mx-3 border">
-                          <h6 class="card-header border-0">Reply to Ross Geller</h6>
+                          <h6 class="card-header border mb-2"><strong>'${note.note_sender_name}' 님께 답장</strong></h6>
                           <div class="card-body pt-0 px-3">
                             <div class="d-flex justify-content-start">
                               <div class="email-reply-toolbar border-0 w-100 ps-0">
@@ -1298,15 +801,15 @@
                                 </span>
                               </div>
                             </div>
-                            <div class="email-reply-editor"></div>
+                            <div class="email-reply-editor" id="editor-${note.noteRead_no}"></div>
                             <div class="d-flex justify-content-end align-items-center">
                               <div class="cursor-pointer me-3">
                                 <i class="bx bx-paperclip"></i>
-                                <span class="align-middle">Attachments</span>
+                                <span class="align-middle">첨부 파일</span>
                               </div>
                               <button class="btn btn-primary">
                                 <i class="bx bx-paper-plane me-1"></i>
-                                <span class="align-middle">Send</span>
+                                <span class="align-middle">보내기</span>
                               </button>
                             </div>
                           </div>
@@ -1314,6 +817,8 @@
                       </div>
                     </div>
                     <!-- Email View -->
+                    </c:forEach>
+                      
                   </div>
                 </div>
 
@@ -1331,64 +836,90 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body flex-grow-1 pb-sm-0 p-4 py-2">
-                        <form class="email-compose-form">
+                        <form class="email-compose-form" name="NoteRequest" action="noteSend" id="noteSend" method="POST">
                           <div class="email-compose-to d-flex justify-content-between align-items-center">
-                            <label class="form-label mb-2" for="emailContacts">받는 사람:</label>
+                            <label class="form-label mb-2" for="emailContacts" style="width: 90px;">받는 사람 :</label>
                             <div class="select2-primary border-0 shadow-none flex-grow-1 mx-1">
                               <select
-                                class="select2 select-email-contacts form-select"
+                                class="select-email-contacts selecr2 form-select"
                                 id="emailContacts"
-                                name="emailContacts"
-                                multiple>
-                                <option data-avatar="1.png" value="김시온">김시온</option>
-                                <option data-avatar="3.png" value="오우주">오우주</option>
-                                <option data-avatar="5.png" value="박재홍">박재홍</option>
-                                <option data-avatar="7.png" value="이은지">이은지</option>
-                                <option data-avatar="9.png" value="김종진">김종진</option>
-                                <option data-avatar="11.png" value="성유진">성유진</option>
+                                name="note_receiver"
+                                multiple data-actions-box="true"
+                                 data-style="btn-default"
+                                 data-live-search="true">
+                                <optgroup label="개발1팀">
+                                	<option data-avatar="1.png" value="김시온" data-subtext="대리">김시온 </option>
+                                	<option data-avatar="3.png" value="오우주">오우주 </option>
+                                	<option data-avatar="5.png" value="박재홍">박재홍 </option>
+                                </optgroup>
+                                <optgroup label="개발2팀">
+                                	<option data-avatar="7.png" value="이은지">이은지 </option>
+                                	<option data-avatar="9.png" value="김종진">김종진 </option>
+                                	<option data-avatar="11.png" value="성유진">성유진 </option>
+                                </optgroup>
                               </select>
                             </div>
-                            <div class="email-compose-toggle-wrapper mb-2 mx-3">
-                              <a class="email-compose-toggle-cc text-body" href="javascript:void(0);">참조 |</a>
-                              <a class="email-compose-toggle-bcc text-body" href="javascript:void(0);">비밀참조</a>
+                            <div class="email-compose-toggle-wrapper mb-2 mx-1" style="width: 140px;">
+                              <a class="email-compose-toggle-cc text-body mx-1" href="javascript:void(0);">참조  </a>
+                              |<a class="email-compose-toggle-bcc text-body mx-1" href="javascript:void(0);"> 비밀참조</a>
                             </div>
                           </div>
                           <div class="email-compose-cc d-none">
                             <hr class="mx-n4 my-2" />
-                            <div class="d-flex align-items-center">
-                               <div class="col-md-6 mb-4">
-		                          <label for="TagifyUserList" class="form-label">참조:</label>
+                            <div class="d-flex justify-content-between align-items-center">
+                               <label for="TagifyUserList" class="form-label me-3" style="width: 35px;">참조 :</label>
 		                          <input
 		                            id="TagifyUserList"
-		                            name="TagifyUserList"
-		                            class="form-control"
-		                            value="abatisse2@nih.gov, Justinian Hattersley" />
-		                        </div>
+		                            name="note_receiver_cc"
+		                            class="form-control my-2 mb-2"
+		                            value="abatisse2@nih.gov, Justinian Hattersley" 
+		                            />
                             </div>
-                          </div>
-                          <div class="email-compose-bcc d-none">
+                          </div> 
+                          <!-- <div class="email-compose-cc d-none">
                             <hr class="mx-n4 my-2" />
-                            <div class="d-flex align-items-center">
-                               <div class="col-md-6 mb-4">
-		                          <label for="selectpickerSelectDeselect" class="form-label">비밀참조:</label>
+                            <div class="d-flex justify-content-between align-items-center">
+                               <label for="selec" class="form-label me-3" style="width: 35px;">참조 :</label>
+		                          <select class="selectpicker w-100 my-2 mb-3" 
+		                          multiple data-action-box="true" id="selec"
+		                          data-style="btn-default"
+		                          name="note_receiver_cc">
+		                           	<optgroup label="개발1팀">	
+		                           		<option data-avatar="1.png">김시온</option>
+		                           		<option data-avatar="7.png">이은지</option>
+		                           	</optgroup>
+		                           	<optgroup label="개발2팀">
+		                           		<option data-avatar="2.png">오우주</option>
+		                           		<option data-avatar="5.png">박재홍</option>
+		                           		<option data-avatar="6.png">누구씨</option>
+		                           	</optgroup>
+		                          </select> 
+                            </div>
+                          </div> -->
+                         <div class="email-compose-bcc d-none">
+                            <hr class="mx-n4 my-2" />
+                            <div class=" d-flex justify-content-between align-items-center">
+                               <label for="selectpickerSelectDeselect" class="form-label me-1" style="width: 70px;">비밀참조 :</label>
 		                          <select
 		                            id="selectpickerSelectDeselect"
-		                            class="selectpicker w-100"
+		                            name="note_receiver_bcc"
+		                            class="selectpicker w-100 my-2 mb-3"
 		                            data-style="btn-default"
+		                            data-live-search="true"
 		                            multiple
 		                            data-actions-box="true">
-		                            <option>Rocky</option>
+		                            <option data-subtext="나는로키" data-avatar="2.png">Rocky</option>
 		                            <option>Pulp Fiction</option>
 		                            <option>The Godfather</option>
 		                          </select>
-		                        </div>
                             </div>
-                          </div>
+                          </div> 
                           <hr class="mx-n4 my-0" />
-                          <div class="email-compose-subject d-flex align-items-center my-1">
-                            <label for="email-subject" class="form-label mb-0">주제:</label>
+                          <div class="email-compose-subject d-flex justify-content-between align-items-center my-1">
+                            <label for="email-subject" class="form-label mb-0 d-inline" style="width: 35px;" >주제 :</label>
                             <input
                               type="text"
+                              name="note_title"
                               class="form-control border-0 shadow-none flex-grow-1 mx-2"
                               id="email-subject" />
                           </div>
@@ -1407,6 +938,7 @@
                               </div>
                             </div>
                             <div class="email-editor border-0 border-top"></div>
+                            <input type="hidden" id="note-content" name="note_content">
                           </div>
                           <hr class="mx-n4 mt-0 mb-2" />
 		                           <!-- 보내기 예약 -->
@@ -1416,6 +948,7 @@
 		                          <input
 		                            type="text"
 		                            class="form-control"
+		                            name="note_reserve_time"
 		                            placeholder="YYYY-MM-DD HH:MM"
 		                            id="flatpickr-datetime" />
 		                        </div>
@@ -1425,7 +958,7 @@
                             class="email-compose-actions d-flex justify-content-between align-items-center my-2 py-1">
                             <div class="d-flex align-items-center">
                               <div class="btn-group">
-                                <button type="reset" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">
+                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">
                                   	보내기
                                 </button>
                                 <button
@@ -1481,36 +1014,7 @@
             <!-- / Content -->
 
             <!-- Footer -->
-            <footer class="content-footer footer bg-footer-theme">
-              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                <div class="mb-2 mb-md-0">
-                  ©
-                  <script>
-                    document.write(new Date().getFullYear());
-                  </script>
-                  , made with ❤️ by
-                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">ThemeSelection</a>
-                </div>
-                <div class="d-none d-lg-inline-block">
-                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
-                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
-
-                  <a
-                    href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
-                    target="_blank"
-                    class="footer-link me-4"
-                    >Documentation</a
-                  >
-
-                  <a
-                    href="https://themeselection.com/support/"
-                    target="_blank"
-                    class="footer-link d-none d-sm-inline-block"
-                    >Support</a
-                  >
-                </div>
-              </div>
-            </footer>
+            
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>

@@ -22,5 +22,6 @@ public interface EmployeeDao {
 	public void updatePassword(Map<String, Object> map);
 	public LoginResponse selectEmpByEmpId(String emp_id);
 	public EmpModifyResponse selectModifyByEmpId(String emp_id);
-	public void updateEmpInfo(ModifyRequest modifyRequest);
+	public void updateEmpInfo(ModifyRequest modifyRequest);	
+	public int selectNoByEmpName(String empinfo_name);
 }

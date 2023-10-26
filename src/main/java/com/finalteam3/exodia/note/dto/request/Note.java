@@ -1,4 +1,4 @@
-package com.finalteam3.exodia.note.dto;
+package com.finalteam3.exodia.note.dto.request;
 
 import lombok.Data;
 
@@ -11,4 +11,5 @@ public class Note {
 	private boolean note_isCanceled;
 	private String note_createdAt;
 	private String note_deletedAt;
+	private String note_restime;
 }

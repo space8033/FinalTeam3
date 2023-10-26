@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!DOCTYPE html>
 
 <html
@@ -245,7 +248,7 @@
                   </div>
                 </div>
                 <div class="card-datatable table-responsive">
-                  <table class="datatables-products table border-top">
+                  <table id="noticeTable" class="datatables-products table border-top">
                     <thead>
                       <tr>
                         <th></th>
@@ -253,12 +256,9 @@
                         <th>제목</th>
                         <th>글쓴이</th>
                         <th>날짜</th>
-                        <!-- <th>actions</th> -->
-                        <!-- <th>stock</th> -->                     
-                        <!-- <th>sku</th> -->
-                        <!-- <th>qty</th> -->
                       </tr>
                     </thead>
+
                   </table>
                 </div>
               </div>
@@ -302,6 +302,6 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/noticeList.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/app-ecommerce-product-list2.js"></script>
   </body>
 </html>

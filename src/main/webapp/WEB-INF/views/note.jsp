@@ -836,64 +836,89 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body flex-grow-1 pb-sm-0 p-4 py-2">
-                        <form class="email-compose-form">
+                        <form class="email-compose-form" name="NoteRequest" action="noteSend" id="noteSend" method="POST">
                           <div class="email-compose-to d-flex justify-content-between align-items-center">
-                            <label class="form-label mb-2" for="emailContacts">받는 사람:</label>
+                            <label class="form-label mb-2" for="emailContacts" style="width: 90px;">받는 사람 :</label>
                             <div class="select2-primary border-0 shadow-none flex-grow-1 mx-1">
                               <select
-                                class="select2 select-email-contacts form-select"
+                                class="select-email-contacts select2 form-select"
                                 id="emailContacts"
                                 name="emailContacts"
                                 multiple>
-                                <option data-avatar="1.png" value="김시온">김시온</option>
-                                <option data-avatar="3.png" value="오우주">오우주</option>
-                                <option data-avatar="5.png" value="박재홍">박재홍</option>
-                                <option data-avatar="7.png" value="이은지">이은지</option>
-                                <option data-avatar="9.png" value="김종진">김종진</option>
-                                <option data-avatar="11.png" value="성유진">성유진</option>
+                                <optgroup label="개발1팀">
+                                	<option data-avatar="1.png" data-subtext="대리">김시온</option>
+                                	<option data-avatar="3.png">오우주</option>
+                                	<option data-avatar="5.png">박재홍</option>
+                                </optgroup>
+                                <optgroup label="개발2팀">
+                                	<option data-avatar="7.png">성유진</option>
+                                	<option data-avatar="9.png" >송원석</option>
+                                	<option data-avatar="11.png" >성유진</option>
+                                </optgroup>
                               </select>
+                              <input type="hidden" name="note_receiver" id="note_receiver" value="">
                             </div>
-                            <div class="email-compose-toggle-wrapper mb-2 mx-3">
-                              <a class="email-compose-toggle-cc text-body" href="javascript:void(0);">참조 |</a>
-                              <a class="email-compose-toggle-bcc text-body" href="javascript:void(0);">비밀참조</a>
+                            <div class="email-compose-toggle-wrapper mb-2 mx-1" style="width: 140px;">
+                              <a class="email-compose-toggle-cc text-body mx-1" href="javascript:void(0);">참조  </a>
+                              |<a class="email-compose-toggle-bcc text-body mx-1" href="javascript:void(0);"> 비밀참조</a>
                             </div>
                           </div>
                           <div class="email-compose-cc d-none">
                             <hr class="mx-n4 my-2" />
-                            <div class="d-flex align-items-center">
-                               <div class="col-md-6 mb-4">
-		                          <label for="TagifyUserList" class="form-label">참조:</label>
+                            <div class="d-flex justify-content-between align-items-center">
+                               <label for="TagifyUserList" class="form-label me-3" style="width: 35px;">참조 :</label>
 		                          <input
 		                            id="TagifyUserList"
-		                            name="TagifyUserList"
-		                            class="form-control"
-		                            value="abatisse2@nih.gov, Justinian Hattersley" />
-		                        </div>
+		                            name="note_receiver_cc"
+		                            class="form-control my-2 mb-2"
+		                            value="" 
+		                            />
                             </div>
-                          </div>
-                          <div class="email-compose-bcc d-none">
+                          </div> 
+                          <!-- <div class="email-compose-cc d-none">
                             <hr class="mx-n4 my-2" />
-                            <div class="d-flex align-items-center">
-                               <div class="col-md-6 mb-4">
-		                          <label for="selectpickerSelectDeselect" class="form-label">비밀참조:</label>
+                            <div class="d-flex justify-content-between align-items-center">
+                               <label for="selec" class="form-label me-3" style="width: 35px;">참조 :</label>
+		                          <select class="selectpicker w-100 my-2 mb-3" 
+		                          multiple data-action-box="true" id="selec"
+		                          data-style="btn-default"
+		                          name="note_receiver_cc">
+		                           	<optgroup label="개발1팀">	
+		                           		<option data-avatar="1.png">김시온</option>
+		                           		<option data-avatar="7.png">이은지</option>
+		                           	</optgroup>
+		                           	<optgroup label="개발2팀">
+		                           		<option data-avatar="2.png">오우주</option>
+		                           		<option data-avatar="5.png">박재홍</option>
+		                           		<option data-avatar="6.png">누구씨</option>
+		                           	</optgroup>
+		                          </select> 
+                            </div>
+                          </div> -->
+                         <div class="email-compose-bcc d-none">
+                            <hr class="mx-n4 my-2" />
+                            <div class=" d-flex justify-content-between align-items-center">
+                               <label for="selectpickerSelectDeselect" class="form-label me-1" style="width: 70px;">비밀참조 :</label>
 		                          <select
 		                            id="selectpickerSelectDeselect"
-		                            class="selectpicker w-100"
+		                            name="note_receiver_bcc"
+		                            class="selectpicker w-100 my-2 mb-3"
 		                            data-style="btn-default"
+		                            data-live-search="true"
 		                            multiple
 		                            data-actions-box="true">
-		                            <option>Rocky</option>
-		                            <option>Pulp Fiction</option>
-		                            <option>The Godfather</option>
+		                            <option data-subtext="나는로키" data-avatar="2.png">오우주</option>
+		                            <option>박재홍</option>
+		                            <option>김시온</option>
 		                          </select>
-		                        </div>
                             </div>
-                          </div>
+                          </div> 
                           <hr class="mx-n4 my-0" />
-                          <div class="email-compose-subject d-flex align-items-center my-1">
-                            <label for="email-subject" class="form-label mb-0">주제:</label>
+                          <div class="email-compose-subject d-flex justify-content-between align-items-center my-1">
+                            <label for="email-subject" class="form-label mb-0 d-inline" style="width: 35px;" >주제 :</label>
                             <input
                               type="text"
+                              name="note_title"
                               class="form-control border-0 shadow-none flex-grow-1 mx-2"
                               id="email-subject" />
                           </div>
@@ -912,6 +937,7 @@
                               </div>
                             </div>
                             <div class="email-editor border-0 border-top"></div>
+                            <input type="hidden" id="note-content" name="note_content">
                           </div>
                           <hr class="mx-n4 mt-0 mb-2" />
 		                           <!-- 보내기 예약 -->
@@ -921,6 +947,7 @@
 		                          <input
 		                            type="text"
 		                            class="form-control"
+		                            name="note_reserve_time"
 		                            placeholder="YYYY-MM-DD HH:MM"
 		                            id="flatpickr-datetime" />
 		                        </div>
@@ -930,7 +957,7 @@
                             class="email-compose-actions d-flex justify-content-between align-items-center my-2 py-1">
                             <div class="d-flex align-items-center">
                               <div class="btn-group">
-                                <button type="reset" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">
+                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">
                                   	보내기
                                 </button>
                                 <button

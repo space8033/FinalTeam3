@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+    	"notice_no":0,
+    	"project_no":0,
+    	"notice_title":"공지사항1",
+    	"notice_content":"공지내용1",
+    	"notice_type":"NOTICE",
+    	"notice_createdat":"2023.10.23 15:18:48",
+    	"notice_modifiedat":"2023.10.23 15:18:48",
+    	"notice_deletedat":null,
+    	"notice_team":null,
+    	"empinfo_no_writer":0
+    }
+  ]
+}

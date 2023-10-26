@@ -10,10 +10,11 @@
 		<typeAlias alias="ModifyRequest" type="com.finalteam3.exodia.employee.dto.request.ModifyRequest" />
 		<typeAlias alias="EmpModifyResponse" type="com.finalteam3.exodia.employee.dto.response.EmpModifyResponse" />		
 		<typeAlias alias="EmployeeInfo" type="com.finalteam3.exodia.note.dto.EmployeeInfo" />
-		<typeAlias alias="Note" type="com.finalteam3.exodia.note.dto.Note" />
-		<typeAlias alias="NoteRead" type="com.finalteam3.exodia.note.dto.NoteRead" />
+		<typeAlias alias="Note" type="com.finalteam3.exodia.note.dto.request.Note" />
+		<typeAlias alias="NoteRead" type="com.finalteam3.exodia.note.dto.request.NoteRead" />
 		<typeAlias alias="NoteAll" type="com.finalteam3.exodia.note.dto.NoteAll" />
 		<typeAlias alias="ProjectAddRequest" type="com.finalteam3.exodia.project.dto.request.ProjectAddRequest" />
 		<typeAlias alias="ProjectResponse" type="com.finalteam3.exodia.project.dto.response.ProjectResponse" />
+		<typeAlias alias="Notice" type="com.finalteam3.exodia.notice.dto.Notice" />
 	</typeAliases>
 </configuration>
