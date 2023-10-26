@@ -11,6 +11,6 @@ public interface NoteService {
 	public List<NoteAll> getNoteListByRno(Map<String, Object> map);
 	public int countByNoteNo(int noteNo);
 	public void addNote(NoteRequest note);
-	
+	public void updateRead(int noteNo);
 	
 }

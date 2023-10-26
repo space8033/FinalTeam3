@@ -70,10 +70,20 @@ document.addEventListener('DOMContentLoaded', function () {
         theme: 'snow'
       });
       
+      let lastEditorContents = null;
       quill.on('text-change', function() {
     	  const editorContents = quill.getContents();
-    	  const htmlContent = quill.clipboard.convert(editorContents);
-    	  document.getElementById('note-content').value = htmlContent;
+    	  
+    	  const htmlContent = quill.root.innerHTML;
+    	  const inputElement = document.getElementById('note-content');
+    	  if(JSON.stringify(editorContents) !== JSON.stringify(lastEditorContents)) {
+    		  lastEditorContents = editorContents;
+    		  inputElement.value = htmlContent;
+    		  
+    	  }
+    	  
+    	  console.log(htmlContent+"뭐라 나오는지 좀 보자");
+    	  console.log(inputElement.value+"그래서 넘어가는 값이 뭐냐");
       });
     }
 
@@ -215,6 +225,35 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       });
     });
+    
+    // 메일 목록 클릭 시 읽음 update 
+    if (emailListItems) {
+    	emailListItems.forEach(emailListItem => {
+    		emailListItem.addEventListener('click', e => {
+    			let currentTarget = e.currentTarget;
+    			let currentTargetId = currentTarget.id;
+    			console.log(currentTargetId+"아이디 잘 가져오고 있나 ㅋㅋ");
+    			var postData = {
+    		        readUpdateId: currentTargetId
+		        };
+		        
+		        // AJAX 요청으로 데이터 전송
+		        $.ajax({
+		        	url: "/exodia/readUpdate",
+		            type: "POST",
+		            data: postData,
+		            success: function(response) {
+
+		            },
+		            error: function() {
+		                // 오류 처리
+		                alert("데이터 전송 중 오류가 발생했습니다.");
+		            }
+		        });
+            });
+        });
+    }
+    
 
     // Toggle CC/BCC input
     if (toggleBCC) {
@@ -237,7 +276,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Empty compose email message inputs when modal is hidden
     emailCompose.addEventListener('hidden.bs.modal', event => {
-      document.querySelector('.email-editor .ql-editor').innerHTML = '';
       $('#emailContacts').val('');
       initSelect2();
     });
@@ -409,7 +447,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (emailListItem.length == 0) {
               emailListEmpty.classList.remove('d-none');
             }
-          } else if (Helpers._hasClass('email-read', currentTarget)) {
+          } /*else if (Helpers._hasClass('email-read', currentTarget)) {
             currentTarget.parentNode.closest('li.email-list-item').classList.add('email-marked-read');
             Helpers._toggleClass(currentTarget, 'email-read', 'email-unread');
             Helpers._toggleClass(currentTarget.querySelector('i'), 'bx-envelope-open', 'bx-envelope');
@@ -417,7 +455,7 @@ document.addEventListener('DOMContentLoaded', function () {
             currentTarget.parentNode.closest('li.email-list-item').classList.remove('email-marked-read');
             Helpers._toggleClass(currentTarget, 'email-read', 'email-unread');
             Helpers._toggleClass(currentTarget.querySelector('i'), 'bx-envelope-open', 'bx-envelope');
-          }
+          }*/
         });
       });
     }

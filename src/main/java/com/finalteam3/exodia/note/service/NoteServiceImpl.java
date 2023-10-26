@@ -50,9 +50,13 @@ public class NoteServiceImpl implements NoteService{
 		Note note = new Note();
 		
 		//note테이블 insert
-		
+		note.setNote_sender(request.getNote_sender());
 		note.setNote_title(request.getNote_title());
+		
+		log.info(request.getNote_content().toString()+"내용알려줘엉");
+		log.info(request.getNote_content());
 		note.setNote_content(request.getNote_content());
+		
 		
 		if(request.getNote_reserve_time() == null) {
 			note.setNote_restime("");
@@ -60,28 +64,26 @@ public class NoteServiceImpl implements NoteService{
 			note.setNote_restime(request.getNote_reserve_time());
 		}
 		noteDao.insertNote(note);
-		int generatedNoteNo = 16;
+		
+		int noteNo = note.getNote_no();
+		log.info(noteNo+"노트넘버 삽입됐낭");
 		
 		//참조 수신자 분할/추가
-		if(request.getNote_receiver_cc()== null) {
-			
+		List<String> receiverCC = request.getNote_receiver_cc();
+		if(request.getNote_receiver_bcc() == null) {
+
 		} else {
-			JSONArray receiverCC = request.getNote_receiver_cc();
-			int ccLength = receiverCC.length();
-			for(int i = 0; i < ccLength; i++) {
-				JSONObject obj = receiverCC.getJSONObject(i);
-				NoteRead noteRead = new NoteRead();
-				String name = obj.getString("value");
-				int nameInt = Integer.parseInt(name);
-				//int receiver = employeeDao.selectNoByEmpName(name);
-				noteRead.setEmp_no_receiver(nameInt);
-				noteRead.setNoteRead_type("참조");
-				noteRead.setNoteRead_read("0");
-				noteRead.setNote_no(generatedNoteNo);
-				
-				log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 cc니");
-				noteDao.insertNoteRead(noteRead);
-		
+			for(String receiverCCName : receiverCC) {
+				String[] parts = receiverCCName.split(",");
+				for(String nameCC : parts) {
+					NoteRead noteRead = new NoteRead();
+					int receiverNoCC = employeeDao.selectNoByEmpName(nameCC);
+					noteRead.setEmp_no_receiver(receiverNoCC);
+					noteRead.setNoteRead_type("참조");
+					noteRead.setNote_no(noteNo);
+					log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
+					noteDao.insertNoteRead(noteRead);
+				}
 			}
 		}
 		
@@ -95,8 +97,7 @@ public class NoteServiceImpl implements NoteService{
 				int receiverNo = employeeDao.selectNoByEmpName(name);
 				noteRead.setEmp_no_receiver(receiverNo);
 				noteRead.setNoteRead_type("수신");
-				noteRead.setNote_no(generatedNoteNo);
-				noteRead.setNoteRead_read("0");
+				noteRead.setNote_no(noteNo);
 				log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
 				noteDao.insertNoteRead(noteRead);
 			}
@@ -115,12 +116,18 @@ public class NoteServiceImpl implements NoteService{
 					int receiverBccNo = employeeDao.selectNoByEmpName(namebcc);
 					noteRead.setEmp_no_receiver(receiverBccNo);
 					noteRead.setNoteRead_type("비밀참조");
-					noteRead.setNote_no(generatedNoteNo);
+					noteRead.setNote_no(noteNo);
 					log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 bcc니");
-					noteRead.setNoteRead_read("0");
 					noteDao.insertNoteRead(noteRead);
 				}
 			}
 		}
+	}
+
+	@Override
+	public void updateRead(int noteNo) {
+		noteDao.updateNoteRead(noteNo);
+		
+		
 	}
 }

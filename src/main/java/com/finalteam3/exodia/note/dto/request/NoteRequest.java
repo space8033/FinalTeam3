@@ -12,7 +12,7 @@ public class NoteRequest {
 	private String note_title;
 	private String note_content;
 	private List<String> note_receiver;
-	private JSONArray note_receiver_cc;
+	private List<String> note_receiver_cc;
 	private List<String> note_receiver_bcc;
 	private String note_reserve_time;
 }
