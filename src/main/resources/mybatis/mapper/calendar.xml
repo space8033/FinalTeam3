@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finalteam3.exodia.calendar.dao.CalendarDao">
+
+	<insert id="insert" parameterType="Calendar">
+		<selectKey keyProperty="task_no" resultType="int" order="BEFORE">
+	         select seq_taskno.nextval from dual
+      	</selectKey>
+      	
+		INSERT INTO task(task_no, task_name, task_content, task_type, task_startdate, task_enddate, emp_no, project_no)
+        VALUES (#{task_no}, #{task_name}, #{task_content}, #{task_type}, #{task_startdate}, #{task_enddate}, #{emp_no}, 0)
+    </insert>
+
+	
+</mapper>

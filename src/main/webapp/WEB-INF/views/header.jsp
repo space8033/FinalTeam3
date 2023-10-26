@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
 	<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
           id="layout-navbar">
           <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -418,7 +418,7 @@
              </a>
              <ul class="dropdown-menu dropdown-menu-end">
                <li>
-      			  <a class="dropdown-item" href="${pageContext.request.contextPath}/userModify">
+      			  <a class="dropdown-item" href="${pageContext.request.contextPath}/employee/userModify">
                    <div class="d-flex">
                      <div class="flex-shrink-0 me-3">
                        <div class="avatar avatar-online">
@@ -426,7 +426,7 @@
                        </div>
                      </div>
                      <div class="flex-grow-1">
-                       <span class="fw-medium d-block">김시온</span>
+                       <span class="fw-medium d-block">${empInfo_name}</span>
                        <small class="text-muted">개인 정보 수정</small>
                      </div>
                    </div>
@@ -439,7 +439,16 @@
                 <a class="dropdown-item" href="${pageContext.request.contextPath}/userProfile">
                    <i class="bx bx-user me-2"></i>
                    <span class="align-middle mx-1">마이 페이지</span>
+                </a>
+               </li>
+               <li>
+                <a class="dropdown-item" href="#" data-bs-target="#upgradePlanModal" data-bs-toggle="modal">
+                   <i class="bx bx-lock me-2"></i>
+                   <span class="align-middle mx-1">비밀번호 변경</span>
                  </a>
+               </li>
+               <li>
+                 <div class="dropdown-divider"></div>
                </li>
                <li>
                  <a class="dropdown-item" href="${pageContext.request.contextPath}/note">
@@ -485,3 +494,39 @@
          <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
        </div>
      </nav>
+     
+     <div class="modal fade" id="upgradePlanModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-simple modal-upgrade-plan">
+          <div class="modal-content p-3 p-md-5">
+            <div class="modal-body">
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              <div class="text-center mb-4">
+                <h3>비밀번호 변경</h3>
+                <p>본인 확인을 위해 비밀번호를 입력하세요</p>
+              </div>
+              <form id="upgradePlanForm" class="row g-3" onsubmit="return false">
+                <div class="col-sm-9 mt-4">
+	                  <label class="form-label" for="choosePlan">현재 비밀번호 입력</label>
+                	<div class="input-group">
+	                  <input
+	                            type="password"
+	                            class="form-control"
+	                            id="choosePlan"
+	                            placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+	                            aria-describedby="basic-default-password2" />
+	                  <span id="basic-default-password2" class="input-group-text cursor-pointer">
+	                  	<i class="bx bx-hide"></i>    
+	                  </span>
+                	</div>
+                  
+                  
+                  <!-- <input name="choosePlan" type="password" class="form-control"/> -->
+                </div>
+                <div class="col-sm-3 d-flex align-items-end">
+                  <button type="submit" class="btn btn-primary" id="confirmBtn">확인</button>
+                </div>
+              </form>
+            </div>
+           </div>
+         </div>
+      </div>

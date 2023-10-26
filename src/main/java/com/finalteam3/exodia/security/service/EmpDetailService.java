@@ -16,7 +16,10 @@ import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.security.dto.EmpDetails;
 
+import lombok.extern.slf4j.Slf4j;
+
 @Service
+@Slf4j
 public class EmpDetailService implements UserDetailsService{
 	@Resource
 	private EmployeeDao employeeDao;

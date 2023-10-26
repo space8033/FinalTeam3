@@ -417,5 +417,6 @@
 
     <!-- Page JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/app-user-view-account.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
   </body>
 </html>
