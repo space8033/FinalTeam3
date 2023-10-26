@@ -6,6 +6,7 @@
 
 document.addEventListener('DOMContentLoaded', function (e) {
   (function () {
+	  
     const formAccSettings = document.querySelector('#formAccountSettings'),
       deactivateAcc = document.querySelector('#formAccountDeactivation'),
       deactivateButton = deactivateAcc.querySelector('.deactivate-account');
@@ -14,17 +15,17 @@ document.addEventListener('DOMContentLoaded', function (e) {
     if (formAccSettings) {
       const fv = FormValidation.formValidation(formAccSettings, {
         fields: {
-          firstName: {
+          email: {
             validators: {
               notEmpty: {
-                message: 'Please enter first name'
+                message: 'Please enter email'
               }
             }
           },
-          lastName: {
+          phoneNumber: {
             validators: {
               notEmpty: {
-                message: 'Please enter last name'
+                message: 'Please enter phoneNumber'
               }
             }
           }
@@ -186,4 +187,56 @@ $(function () {
       });
     });
   }
+});
+
+$(document).ready(function() {
+    $("#returnBtn").click(function() {
+        $("#formAccountSettings")[0].reset(); // 폼을 초기 상태로 되돌립니다.
+    });
+
+    $("#saveBtn").click(function() {
+    	var isValid = true;
+    	var emailInput = $("#email").val();
+    	var phoneNo = $("#phoneNumber2").val();
+    	
+    	const msgEmail = '유효하지 않은 이메일입니다.';
+    	if(/^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/.test(emailInput)) {
+    	}else {
+    		isValid = false;
+    		alert(msgEmail);
+    	}
+    	
+    	if(isValid) {
+    		const msgTel = '유효하지 않는 전화번호입니다.';
+    		if (/^[0-9]{3}-[0-9]{4}-[0-9]{4}/.test(phoneNo)) {
+    		}else {
+    			isValid = false;
+    			alert(msgTel);
+    		}    		
+    	}
+    	
+    	
+    	if(isValid) {
+    		var formData = new FormData($("#formAccountSettings")[0]);
+    		
+    		$.ajax({
+    			url: '/exodia/employee/userModify', // 귀하의 Java 컨트롤러의 URL로 대체해야 합니다.
+    			type: 'POST',
+    			data: formData,
+    			processData: false,
+    			contentType: false,
+    			success: function(data) {
+    				alert("수정 완료!");
+    			},
+    			error: function(jqXHR, textStatus, errorThrown) {
+    				console.error('AJAX Error: ', textStatus, errorThrown);
+    			}
+    		});
+    	}
+    	
+    });
+    
+    $("#formAccountSettings").submit(function(event) {
+        event.preventDefault();
+    });
 });

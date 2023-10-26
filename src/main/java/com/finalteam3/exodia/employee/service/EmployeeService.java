@@ -2,7 +2,9 @@ package com.finalteam3.exodia.employee.service;
 
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
 import com.finalteam3.exodia.employee.dto.request.LoginRequest;
+import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
 import com.finalteam3.exodia.employee.dto.request.PasswordRequest;
+import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 
@@ -24,9 +26,17 @@ public interface EmployeeService {
 		PASSWORD_NOT_MATCHED
 	}
 	
+	public enum ModifyResult {
+		MODIFY_SUCCESS,
+		WRONG_PHONE,
+		WRONG_EMAIL
+	}
+	
 	public LoginResult login(LoginRequest loginRequest);
 	public LoginResponse getLoginResponse(LoginRequest loginRequest);
 	public EmployeeInfo getEmpInfo(int empNo);
 	public JoinResult join(JoinRequest joinRequest);
 	public PasswordResult changePassword(PasswordRequest passwordRequest);
+	public EmpModifyResponse getModifyInfo(String emp_id);
+	public ModifyResult changeEmpInfo(ModifyRequest modifyRequest);
 }

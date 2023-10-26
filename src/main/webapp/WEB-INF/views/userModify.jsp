@@ -238,14 +238,14 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-
             <div class="container-xxl flex-grow-1 container-p-y">
 
               <div class="row">
                 <div class="col-md-12">
                   
                   <div class="card mb-4">
-                    <h5 class="card-header">개인 정보 수정</h5>
+		            <h5 class="card-header">개인 정보 수정</h5>
+  
                     <!-- Account -->
                     <div class="card-body">
                       <div class="d-flex align-items-start align-items-sm-center gap-4">
@@ -278,7 +278,7 @@
                     </div>
                     <hr class="my-0" />
                     <div class="card-body">
-                      <form id="formAccountSettings" method="POST" onsubmit="return false">
+                      <form id="formAccountSettings" method="POST" name="modifyRequest">
                         <div class="row">
                           
                           <div class="mb-3 col-md-6">
@@ -289,12 +289,13 @@
                               type="text"
                               id="firstName"
                               name="firstName"
-                              value="김시온"
+                              value="${empModifyResponse.empinfo_name}"
+                              readonly="readonly"
                               autofocus />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="lastName" class="form-label">아이디</label>
-                            <input class="form-control" type="text" name="lastName" id="lastName" value="201234566" />
+                            <input class="form-control" type="text" name="lastName" id="lastName" value="${empModifyResponse.emp_id}" readonly="readonly"/>
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="email" class="form-label">이메일</label>
@@ -302,9 +303,8 @@
                               class="form-control"
                               type="text"
                               id="email"
-                              name="email"
-                              value="john.doe@example.com"
-                              placeholder="john.doe@example.com" />
+                              name="empinfo_email"
+                              value="${empModifyResponse.empinfo_email}" />
                           </div>
                           <div class="mb-3 col-md-6">
                             <label for="organization" class="form-label">회사</label>
@@ -313,88 +313,29 @@
                               class="form-control"
                               id="organization"
                               name="organization"
-                              value="OTI" />
+                              value="${empModifyResponse.empinfo_position}"
+                              readonly="readonly" />
                           </div>
                           <div class="mb-3 col-md-6">
-                            <label class="form-label" for="phoneNumber">휴대폰 번호</label>
+                            <label class="form-label" for="phoneNumber2">휴대폰 번호</label>
                             <div class="input-group input-group-merge">
                               <input
                                 type="text"
-                                id="phoneNumber"
-                                name="phoneNumber"
+                                id="phoneNumber2"
+                                name="empinfo_phone"
                                 class="form-control"
-                                placeholder="010-1234-5678" />
+                                value="${empModifyResponse.empinfo_phone}" />
                             </div>
                           </div>
                           
                         </div>
                         <div class="mt-2">
-                          <button type="submit" class="btn btn-primary me-2">저장</button>
-                          <button type="reset" class="btn btn-label-secondary">취소</button>
+                          <button type="submit" class="btn btn-primary me-2" id="saveBtn">저장</button>
+                          <button type="reset" class="btn btn-label-secondary" id="returnBtn">취소</button>
                         </div>
                       </form>
                     </div>
-                    <!-- /Account -->
-                    <div>
-     				 <div class="card">
-	                    <h5 class="card-header">비밀번호 변경</h5>
-	                    <div class="card-body">
-	                      
-	                      <form id="formAccountDeactivation" onsubmit="return false">
-	                      	<div class="mb-3 form-password-toggle col-md-6">
-		                       <label class="form-label" for="basic-default-password">현재 비밀번호</label>
-		                          <div class="input-group input-group-merge">
-		                            <input
-		                              type="password"
-		                              id="basic-default-password"
-		                              class="form-control"
-		                              placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-		                              aria-describedby="basic-default-password3"
-		                              required />
-		                            <span class="input-group-text cursor-pointer" id="basic-default-password3"
-		                              ><i class="bx bx-hide"></i
-		                            ></span>
-		                          </div>
-		                     </div>
-	                         <div class="mb-3 col-md-6">
-	                          <div class="form-password-toggle">
-	                            <label class="form-label" for="formValidationPass">새로운 비밀번호</label>
-	                            <div class="input-group input-group-merge">
-	                              <input
-	                                class="form-control"
-	                                type="password"
-	                                id="formValidationPass"
-	                                name="formValidationPass"
-	                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-	                                aria-describedby="multicol-password2" />
-	                              <span class="input-group-text cursor-pointer" id="multicol-password2"
-	                                ><i class="bx bx-hide"></i
-	                              ></span>
-	                            </div>
-                        	  </div>
-                        	</div>
-	                        <div class="mb-3 col-md-6">
-	                          <div class="form-password-toggle">
-	                            <label class="form-label" for="formValidationConfirmPass">비밀번호 확인</label>
-	                            <div class="input-group input-group-merge">
-	                              <input
-	                                class="form-control"
-	                                type="password"
-	                                id="formValidationConfirmPass"
-	                                name="formValidationConfirmPass"
-	                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-	                                aria-describedby="multicol-confirm-password2" />
-	                              <span class="input-group-text cursor-pointer" id="multicol-confirm-password2"
-	                                ><i class="bx bx-hide"></i
-	                              ></span>
-	                            </div>
-	                          </div>
-	                        </div>
-	                        <button type="submit" class="btn btn-danger deactivate-account">비밀번호 변경</button>
-	                      </form>
-	                 	</div>
-                  	</div>
-                  </div>
+                    
                </div>
             </div>
             <!-- / Content -->

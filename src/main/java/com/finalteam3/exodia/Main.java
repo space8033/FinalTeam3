@@ -102,16 +102,7 @@ public class Main {
 		
 		return "userProfile";
 	}
-	@RequestMapping("/userModify")
-	public String userModify(Model model, Authentication authentication) {
-		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		LoginResponse loginResponse = empDetails.getLoginResponse();
-		
-		String emp_name = loginResponse.getEmpInfo_name();
-		model.addAttribute("empInfo_name", emp_name);
-		
-		return "userModify";
-	}
+
 	@RequestMapping("/userModify2")
 	public String userModify2(Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();

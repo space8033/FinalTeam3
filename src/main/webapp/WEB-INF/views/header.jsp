@@ -418,7 +418,7 @@
              </a>
              <ul class="dropdown-menu dropdown-menu-end">
                <li>
-      			  <a class="dropdown-item" href="${pageContext.request.contextPath}/userModify">
+      			  <a class="dropdown-item" href="${pageContext.request.contextPath}/employee/userModify">
                    <div class="d-flex">
                      <div class="flex-shrink-0 me-3">
                        <div class="avatar avatar-online">
@@ -440,6 +440,15 @@
                    <i class="bx bx-user me-2"></i>
                    <span class="align-middle mx-1">마이 페이지</span>
                  </a>
+               </li>
+               <li>
+                <a class="dropdown-item" href="${pageContext.request.contextPath}/userProfile">
+                   <i class="bx bx-lock me-2"></i>
+                   <span class="align-middle mx-1">비밀번호 변경</span>
+                 </a>
+               </li>
+               <li>
+                 <div class="dropdown-divider"></div>
                </li>
                <li>
                  <a class="dropdown-item" href="${pageContext.request.contextPath}/note">

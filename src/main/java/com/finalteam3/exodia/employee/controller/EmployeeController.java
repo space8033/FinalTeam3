@@ -21,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.finalteam3.exodia.employee.dto.request.JoinList;
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
+import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
 import com.finalteam3.exodia.employee.dto.request.PasswordRequest;
+import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.employee.service.EmployeeService.JoinResult;
@@ -112,6 +114,35 @@ public class EmployeeController {
 			return "/redirect:/employee/jjoin";
 		}
 	}
+	
+	@GetMapping("/userModify")
+	public String getUserModify(Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		String emp_name = loginResponse.getEmpInfo_name();
+		model.addAttribute("empInfo_name", emp_name);
+		
+		EmpModifyResponse response = employeeService.getModifyInfo(authentication.getName());
+		model.addAttribute("empModifyResponse", response);
+		log.info(response.toString());
+		
+		return "userModify";
+	}
+	
+	@PostMapping("/userModify")
+	public String userModify(Authentication authentication, ModifyRequest modifyRequest, Model model) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		int emp_no = loginResponse.getEmp_no();
+		modifyRequest.setEmp_no(emp_no);
+		
+		employeeService.changeEmpInfo(modifyRequest);
+		
+		return "redirect:/employee/userModify";
+	}
+	
 	//프로젝트 진행을 위한 임시 부분/////////////////////////////////////////////////////////
 	@PostMapping("/poiJoin")
 	public String poiJoin() {
@@ -123,7 +154,7 @@ public class EmployeeController {
             XSSFWorkbook workbook = new XSSFWorkbook(file);
 
             // workbook의 첫번째 sheet를 가저온다.
-            XSSFSheet sheet = workbook.getSheetAt(0);
+            XSSFSheet sheet = workbook.getSheetAt(1);
 
             // 만약 특정 이름의 시트를 찾는다면 workbook.getSheet("찾는 시트의 이름");
             // 만약 모든 시트를 순회하고 싶으면
@@ -168,4 +199,5 @@ public class EmployeeController {
 		
 		return "redirect:/employee/jjoin";
 	}
+
 }

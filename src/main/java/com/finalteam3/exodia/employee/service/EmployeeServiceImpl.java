@@ -2,6 +2,8 @@ package com.finalteam3.exodia.employee.service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 
@@ -13,7 +15,9 @@ import org.springframework.transaction.annotation.Transactional;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
 import com.finalteam3.exodia.employee.dto.request.LoginRequest;
+import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
 import com.finalteam3.exodia.employee.dto.request.PasswordRequest;
+import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 
@@ -118,5 +122,32 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}else {
 			return PasswordResult.PASSWORD_NOT_MATCHED;
 		}
+	}
+
+	@Override
+	public EmpModifyResponse getModifyInfo(String emp_id) {
+		EmpModifyResponse response = employeeDao.selectModifyByEmpId(emp_id);
+		
+		return response;
+	}
+
+	@Override
+	public ModifyResult changeEmpInfo(ModifyRequest modifyRequest) {
+		Pattern phonePattern = Pattern.compile("\\d{3}-\\d{4}-\\d{4}");
+		Matcher phoneMatcher = phonePattern.matcher(modifyRequest.getEmpinfo_phone());
+		
+		String ep = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+		Pattern emailPattern = Pattern.compile(ep);
+		Matcher emailMatcher = emailPattern.matcher(modifyRequest.getEmpinfo_email());
+		
+		if(!phoneMatcher.matches()) {
+			return ModifyResult.WRONG_PHONE;
+		}else if(!emailMatcher.matches()) {
+			return ModifyResult.WRONG_EMAIL;
+		}else {
+			employeeDao.updateEmpInfo(modifyRequest);
+			
+			return ModifyResult.MODIFY_SUCCESS;
+		}		
 	}
 }
