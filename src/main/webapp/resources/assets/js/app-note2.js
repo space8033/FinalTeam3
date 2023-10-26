@@ -31,8 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
       refreshEmails = document.querySelector('.email-refresh'),
       emailViewContainers = Array.from(document.querySelectorAll('.app-email-view')),
       emailFilterFolderLists = [].slice.call(document.querySelectorAll('.email-filter-folders li')),
-      emailListItemActions = [].slice.call(document.querySelectorAll('.email-list-item-actions li')),
-      receiverInput = document.getElementById('note_receiver');
+      emailListItemActions = [].slice.call(document.querySelectorAll('.email-list-item-actions li'));
 
     // Initialize PerfectScrollbar
     // ------------------------------
@@ -62,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize Quill Editor
     // ------------------------------
     if (emailEditor) {
-      const quill = new Quill('.email-editor', {
+      quill = new Quill('.email-editor', {
         modules: {
           toolbar: '.email-editor-toolbar'
         },
@@ -70,13 +69,10 @@ document.addEventListener('DOMContentLoaded', function () {
         theme: 'snow'
       });
       
-      quill.on('text-change', function() {
-    	  const editorContents = quill.getContents();
-    	  const htmlContent = quill.clipboard.convert(editorContents);
-    	  document.getElementById('note-content').value = htmlContent;
+      quill.on('text-change', function(){
+    	  document.getElementById("note-content").value = quill.root.innerHTML;
       });
     }
-
 
     emailReplyContainers.forEach((container, index) => {
     	
@@ -358,13 +354,6 @@ document.addEventListener('DOMContentLoaded', function () {
           escapeMarkup: function (es) {
             return es;
           }
-        });
-        
-        emailContacts.on('change', function () {
-            const selectedOptions = emailContacts.val();
-            console.log(selectedOptions + " 값은 가져오냐잉");
-            receiverInput.value = selectedOptions;
-            console.log(receiverInput.value + " 값은 들어가냐잉");
         });
       }
     }

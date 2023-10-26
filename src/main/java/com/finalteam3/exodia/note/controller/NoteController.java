@@ -1,6 +1,5 @@
 package com.finalteam3.exodia.note.controller;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,12 +11,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 import com.finalteam3.exodia.note.dto.NoteAll;
 import com.finalteam3.exodia.note.dto.Pager;
+import com.finalteam3.exodia.note.dto.request.NoteRequest;
 import com.finalteam3.exodia.note.service.NoteService;
 import com.finalteam3.exodia.security.dto.EmpDetails;
 
@@ -75,6 +76,18 @@ public class NoteController {
 		log.info("여기까지 ok4");
 		
 		return "/note";
+	}
+	
+	@PostMapping("/noteSend")
+	public String noteSend(NoteRequest request, Authentication authentication) {
+		log.info(request.toString());
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		request.setNote_sender(loginResponse.getEmp_no());
+		
+		noteService.addNote(request);
+		
+		return "redirect:/note";
 	}
 	
 }
