@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html
@@ -249,13 +250,21 @@
                     <!-- Account -->
                     <div class="card-body">
                       <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <img
-                          src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
-                          alt="user-avatar"
-                          class="d-block rounded"
-                          height="100"
-                          width="100"
-                          id="uploadedAvatar" />
+                        <c:if test="${empModifyResponse.media_data == null}">
+                        	<span class="avatar-initial rounded-circle" id="nameProfile" 
+                        	style="width :100px; height: 100px; font-size: 40px; display: flex; align-items: center; justify-content: center;"> 
+                        	${empModifyResponse.two_name} 
+                        	</span>
+                        </c:if>
+                        <c:if test="${empModifyResponse.media_data != null}">
+	                        <img
+	                          src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
+	                          alt="user-avatar"
+	                          class="d-block rounded-circle"
+	                          height="100"
+	                          width="100"
+	                          id="uploadedAvatar" />            	            
+                        </c:if>
                         <div class="button-wrapper">
                           <label for="upload" class="btn btn-primary me-2 mb-4" tabindex="0">
                             <span class="d-none d-sm-block">프로필 사진 변경</span>

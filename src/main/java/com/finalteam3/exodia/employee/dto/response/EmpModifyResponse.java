@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class EmpModifyResponse {
 	private String empinfo_name;
+	private String two_name;
 	private String emp_id;
 	private String empinfo_email;
 	private String empinfo_phone;
