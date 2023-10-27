@@ -12,5 +12,26 @@ let nextMonth = date.getMonth() === 11 ? new Date(date.getFullYear() + 1, 0, 1) 
 let prevMonth = date.getMonth() === 11 ? new Date(date.getFullYear() - 1, 0, 1) : new Date(date.getFullYear(), date.getMonth() - 1, 1);
 
 let events = [
-  
-];
+	  {
+	    id: 1,
+	    url: '',
+	    title: 'Design Review',
+	    start: date,
+	    end: nextDay,
+	    allDay: false,
+	    extendedProps: {
+	      calendar: 'Business'
+	    }
+	  },
+	  {
+	    id: 2,
+	    url: '',
+	    title: 'Meeting With Client',
+	    start: new Date(date.getFullYear(), date.getMonth() + 1, -11),
+	    end: new Date(date.getFullYear(), date.getMonth() + 1, -10),
+	    allDay: true,
+	    extendedProps: {
+	      calendar: 'Business'
+	    }
+	  }
+	];

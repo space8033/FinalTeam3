@@ -18,7 +18,7 @@ if (isRtl) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-	console.log("asfasdf");// HTML 문서의 내용이 완전히 로드되면 (DOMContentLoaded 이벤트) 실행되는 함수를 정의
+	console.log("시작");// HTML 문서의 내용이 완전히 로드되면 (DOMContentLoaded 이벤트) 실행되는 함수를 정의
   (function () {
     const calendarEl = document.getElementById('calendar'), //document 객체를 사용하여 HTML 문서에서 ID가 'calendar'인 요소를 찾아서 calendarEl 변수에 할당, 웹 페이지에서 캘린더를 표시하는 부분
       appCalendarSidebar = document.querySelector('.app-calendar-sidebar'),
@@ -575,9 +575,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 $(document).ready(function() {
 //add task
-	console.log("aaaaaaaaaaaa");
+	console.log("add시작");
     $('#calendarsubmit').click(function() {
-    	console.log("asdfs");
+    	console.log("submit 클릭 성공");
         var eventData = {
             task_name: $('input[name=eventTitle]').val(),
             task_content: $('#eventDescription').val(),
