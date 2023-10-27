@@ -25,7 +25,9 @@
 		from emp e, empinfo i, role r
 		where project_no = 0
 		and e.emp_no = i.emp_no
-		and emp_id = #{emp_id}
+		and e.emp_id = #{emp_id}
+		and r.project_no = 0
+		and r.empinfo_no = i.empinfo_no
 	</select>
 	
 	<select id="selectModifyByEmpId" parameterType="String" resultType="EmpModifyResponse">

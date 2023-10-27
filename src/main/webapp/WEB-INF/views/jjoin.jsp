@@ -175,11 +175,11 @@
                	<div class="mb-3 col-lg-6 col-xl-4 col-12 mb-0">
                   <label class="form-label" for="emp_position">직위</label>
                   <select id="emp_position" class="form-select" name="empinfo_position">
-                    <option value="Sawon">사원</option>
-                    <option value="Daeri">대리</option>
-                    <option value="Gwajang">과장</option>
-                    <option value="Chajang">차장</option>
-                    <option value="Bujang">부장</option>
+                    <option value="사원">사원</option>
+                    <option value="대리">대리</option>
+                    <option value="과장">과장</option>
+                    <option value="차장">차장</option>
+                    <option value="부장">부장</option>
                   </select>
                 </div>
                 
