@@ -79,7 +79,7 @@
 
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="${pageContext.request.contextPath}/mainㅡ" class="app-brand-link">
+            <a href="${pageContext.request.contextPath}/main" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -463,12 +463,20 @@
                             <div
                               class="email-pagination d-sm-flex d-none align-items-center flex-wrap justify-content-between justify-sm-content-end">
                               <span class="d-sm-block d-none mx-3 text-muted">1-10 of 653</span>
+                              <span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="?pageNo=1">처음</a></span>
                               <i
                                 class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
-                                <a href="javascript:showNoteByUser(1)"></a>
-                                </i>
+                                   <c:if test="${pager.groupNo>1}">
+                                       <a href="?pageNo=${pager.startPageNo-1}"></a>
+                                   </c:if>
+                              </i>
                               <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4">
-                              	<a class="text-muted" href="javascript:showNoteByUser(${pager.totalPageNo})">맨끝</a></i>
+                              <c:if test="${pager.groupNo<pager.totalGroupNo}">
+                              	 <a href="?pageNo=${pager.endPageNo+1}"></a>
+                              </c:if>
+                              	</i>
+                              	
+                              	<span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="?pageNo=${pager.totalPageNo}">맨끝</a></span>
                             </div>
                           </div>
                         </div>
@@ -510,7 +518,7 @@
 		                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
 		                                  <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
 		                                  <span class="email-list-item-subject d-xl-inline-block d-block">
-		                               	     ${note.note_title} 나는 읽음 번호야 ${note.noteRead_read}</span
+		                               	     ${note.note_title}</span
 		                                  >
 		                                </div>
 		                                <div class="email-list-item-meta ms-auto d-flex align-items-center">

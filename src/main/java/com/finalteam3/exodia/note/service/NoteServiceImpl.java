@@ -126,8 +126,10 @@ public class NoteServiceImpl implements NoteService{
 
 	@Override
 	public void updateRead(int noteNo) {
-		noteDao.updateNoteRead(noteNo);
+		NoteRead noteRead = noteDao.selectNoteRead(noteNo);
 		
-		
+		if(noteRead == null) {
+			noteDao.updateNoteRead(noteNo);
+		}
 	}
 }
