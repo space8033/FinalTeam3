@@ -22,7 +22,7 @@
   	     values(#{noteRead_no}, #{note_no}, #{emp_no_receiver}, #{noteRead_type})
 	</insert> 
 	
-
+	<!-- 수신 쪽지 목록  -->
 	<select id="selectNoteByEmpNo" resultType="NoteAll" parameterType="Map">
 		<![CDATA[
 	       select rnum, note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
@@ -40,17 +40,50 @@
 		]]>
 	</select>
 	
+	<!-- 발신 쪽지 목록 -->
+	<select id="selectSentNoteByEmpNo" resultType="NoteAll" parameterType="Map">
+		<![CDATA[
+	       select rnum, note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			 from (
+			    select rownum as rnum, note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			    from(
+			        select n.note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			        from note n, noteRead nr
+			        where note_sender = #{empNo} and n.note_no = nr.note_no
+			        order by note_createdAt desc
+			    )
+			    where rownum <= #{endRowNo}
+			 )
+			 where rnum >= #{startRowNo}
+		]]>
+	</select>
+	
+	<!-- 수신 쪽지 갯수 가져오기 -->
 	<select id="countByEmpno" parameterType="int" resultType="int">
 		select count(*)
   		from noteRead
   		where emp_no_receiver = #{emp_no_receiver}
 	</select>
 	
+	<!-- 발신 쪽지 갯수 가져오기 -->
+	<select id="countBySentEmpno" parameterType="int" resultType="int">
+		select count(*)
+  		from note
+  		where note_sender = #{note_sender}
+	</select>
+	
 	<!-- 쪽지 번호로 noteRead 얻어오기 작성자: 김시온 -->
 	<select id="selectNoteRead" parameterType="int" resultType="noteRead">
-		select noteRead_read
+		select noteRead_read, note_no
   		from noteRead
   		where noteRead_no = #{noteRead_no}
+	</select>
+	
+	<!-- 쪽지 번호로 noteRead 얻어오기 작성자: 김시온 -->
+	<select id="selectNoteByNoteNo" parameterType="int" resultType="note">
+		select note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, note_restime
+  		from note
+  		where note_no = #{note_no}
 	</select>
 	
 	<!-- 쪽지 번호로 noteRead 읽음 업데이트 작성자: 김시온 -->

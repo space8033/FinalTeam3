@@ -69,6 +69,11 @@
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
+  
+  
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script> 
+
+  
   </head>
 
   <body>
@@ -272,14 +277,14 @@
                         <!-- Email Filters: Folder -->
                         <ul class="email-filter-folders list-unstyled pb-1">
                           <li class="active d-flex justify-content-between" data-target="inbox">
-                            <a href="javascript:void(0);" class="d-flex flex-wrap align-items-center">
+                            <a href="javascript:void(0);" id="inboxNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-envelope"></i>
                               <span class="align-middle ms-2">수신 쪽지함</span>
                             </a>
                             <div class="badge bg-label-primary rounded-pill">21</div>
                           </li>
                           <li class="d-flex" data-target="sent">
-                            <a href="javascript:void(0);" class="d-flex flex-wrap align-items-center">
+                            <a href="javascript:void(0);" id="sentNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-send"></i>
                               <span class="align-middle ms-2">발신 쪽지함</span>
                             </a>
@@ -319,7 +324,7 @@
                             <li data-target="work">
                               <a href="javascript:void(0);">
                                 <i class="badge badge-dot bg-success"></i>
-                                <span class="align-middle ms-2">초록이</span>
+                                <span class="align-middle ms-2">초록이 </span>
                               </a>
                             </li>
                             <li data-target="company">
@@ -348,8 +353,8 @@
                     <!--/ Email Sidebar -->
 
                     <!-- Emails List -->
-                    <div class="col app-emails-list">
-                      <div class="card shadow-none border-0">
+                    <div class="col app-emails-list" id="refreshNoteContent">
+<%--                       <div class="card shadow-none border-0">
                         <div class="card-body emails-list-header p-3 py-lg-3 py-2">
                           <!-- Email List: Search -->
                           <div class="d-flex justify-content-between align-items-center">
@@ -484,75 +489,74 @@
                         <!-- Email List: Items -->
                         <div class="email-list pt-0">
                           <ul class="list-unstyled m-0">
-                            
-                            <c:forEach var="note" items="${list}">
-	                            <li
-		                              class="
-				                          <c:if test ="${note.noteRead_read == null}">email-list-item 
-				                          </c:if>
-				                          <c:if test ="${note.noteRead_read != null}">email-list-item email-marked-read
-				                          </c:if>
-				                          "
-				                          <c:if test ="${noteRead_starred == null}">
-		                              
-				                          </c:if>
-				                          <c:if test ="${noteRead_starred != null}">
-				                          data-starred="true"
-				                          </c:if>
-				                      id="${note.noteRead_no}"
-		                              data-bs-toggle="sidebar"
-		                              data-target="#app-email-view-${note.noteRead_no}">
-		                              <div class="d-flex align-items-center">
-		                                <div class="form-check">
-		                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-${note.noteRead_no}" />
-		                                  <label class="form-check-label" for="email-${note.noteRead_no}"></label>
-		                                </div>
-		                                <i
-		                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"></i>
-		                                <img
-		                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
-		                                  alt="user-avatar"
-		                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
-		                                  height="32"
-		                                  width="32" />
-		                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
-		                                  <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
-		                                  <span class="email-list-item-subject d-xl-inline-block d-block">
-		                               	     ${note.note_title}</span
-		                                  >
-		                                </div>
-		                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
-		                                  <span
-		                                    class="email-list-item-label badge badge-dot bg-danger d-none d-md-inline-block me-2"
-		                                    data-label="private"></span>
-		                                  <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)}</small>
-		                                  <ul class="list-inline email-list-item-actions">
-		                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
-		                                     <c:if test ="${note.noteRead_read != null}">
-					                              <li class="list-inline-item email-read"><i class="bx bx-envelope-open fs-4"></i></li>
-					                         </c:if>
-					                          <c:if test ="${note.noteRead_read == null}">
-		                                          <li class="list-inline-item email-unread"><i class="bx bx-envelope fs-4"></i></li>
-		                                      </c:if>
-		                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
-		                                  </ul>
-		                                </div>
-		                              </div>
-	                            </li>
-	                        	</c:forEach>
+	                            <c:forEach var="note" items="${list}">
+		                            <li
+			                              class="
+					                          <c:if test ="${note.noteRead_read == null}">email-list-item 
+					                          </c:if>
+					                          <c:if test ="${note.noteRead_read != null}">email-list-item email-marked-read
+					                          </c:if>
+					                          "
+					                          <c:if test ="${note.noteRead_starred == null}">
+			                              
+					                          </c:if>
+					                          <c:if test ="${note.noteRead_starred != null}">
+					                          data-starred="true"
+					                          </c:if>
+					                      data-sent="true"
+					                      id="${note.noteRead_no}"
+			                              data-bs-toggle="sidebar"
+			                              data-target="#app-email-view-${note.noteRead_no}">
+			                              <div class="d-flex align-items-center">
+			                                <div class="form-check">
+			                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-${note.noteRead_no}" />
+			                                  <label class="form-check-label" for="email-${note.noteRead_no}"></label>
+			                                </div>
+			                                <i
+			                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"></i>
+			                                <img
+			                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
+			                                  alt="user-avatar"
+			                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
+			                                  height="32"
+			                                  width="32" />
+			                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
+			                                  <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
+			                                  <span class="email-list-item-subject d-xl-inline-block d-block">
+			                               	     ${note.note_title}</span
+			                                  >
+			                                </div>
+			                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
+			                                  <span
+			                                    class="email-list-item-label badge badge-dot bg-danger d-none d-md-inline-block me-2"
+			                                    data-label="private"></span>
+			                                  <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)}</small>
+			                                  <ul class="list-inline email-list-item-actions">
+			                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
+			                                     <c:if test ="${note.noteRead_read != null}">
+						                              <li class="list-inline-item email-read"><i class="bx bx-envelope-open fs-4"></i></li>
+						                         </c:if>
+						                          <c:if test ="${note.noteRead_read == null}">
+			                                          <li class="list-inline-item email-unread"><i class="bx bx-envelope fs-4"></i></li>
+			                                      </c:if>
+			                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
+			                                  </ul>
+			                                </div>
+			                              </div>
+		                            </li>
+		                        </c:forEach>
                           </ul>
                           <ul class="list-unstyled m-0">
                             <li class="email-list-empty text-center d-none">쪽지가 없습니다.</li>
                           </ul>
                         </div>
                       </div>
-                      <div class="app-overlay"></div>
-                    </div>
+                      <div class="app-overlay"></div> --%>
+                    </div> 
                     <!-- /Emails List -->
-					<c:forEach var="note" items="${list}">
                     <!-- Email View -->
-                    <div class="col app-email-view flex-grow-0 bg-body" id="app-email-view-${note.noteRead_no}">
-                      <div class="app-email-view-header p-3 py-md-3 py-2 rounded-0">
+                    <div class="col app-email-view flex-grow-0 bg-body" id="app-email-view">
+                     <%--  <div class="app-email-view-header p-3 py-md-3 py-2 rounded-0">
                         <!-- Email View : Title  bar-->
                         <div class="d-flex justify-content-between align-items-center">
                           <div class="d-flex align-items-center overflow-hidden">
@@ -576,7 +580,7 @@
                                 aria-expanded="false">
                                 <i class="bx bx-dots-vertical-rounded fs-4"></i>
                               </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMoreOptions-${note.noteRead_no}">
+                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMoreOption">
                                 <a class="dropdown-item" href="javascript:void(0)">
                                   <i class="bx bx-envelope-open bx-xs me-1"></i>
                                   <span class="align-middle">Mark as unread</span>
@@ -827,12 +831,11 @@
                             </div>
                           </div>
                         </div>
-                      </div>
+                      </div> --%>
                     </div>
                     <!-- Email View -->
-                    </c:forEach>
                       
-                  </div>
+                  </div> 
                 </div>
 
                 <!-- Compose Email -->

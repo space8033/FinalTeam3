@@ -3,8 +3,50 @@
  */
 
 'use strict';
+function showDetail(noteReadNo) {
+  	 var data = {
+  			 noteReadNo: noteReadNo
+	        };
+	        
+	        $.ajax({
+	        	url: "/exodia/noteDetail",
+	            type: "GET",
+	            data: data 
+	            
+	            }).done(function(result) {
+		        	console.log("결과확인");
+		        	var html = jQuery('<div>').html(result);
+		        	var contents = html.find("div#noteDetail").html();
+		        	$("#app-email-view").html(contents);
+		        	$("#app-email-view").addClass("show");
+		        	/*$("#refreshNoteContent").hide();*/
+		        	
+		        }).fail(function (jqXHR, textStatus, errorThrown) {
+		        	console.log("에러");
+		        	console.log(jqXHR);
+		        	console.log(textStatus);
+		        	console.log(errorThrown);
+		        	
+		        });
+  	
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
+	
+
+  
   (function () {
     const emailList = document.querySelector('.email-list'),
       emailListItems = [].slice.call(document.querySelectorAll('.email-list-item')),
@@ -32,10 +74,79 @@ document.addEventListener('DOMContentLoaded', function () {
       emailViewContainers = Array.from(document.querySelectorAll('.app-email-view')),
       emailFilterFolderLists = [].slice.call(document.querySelectorAll('.email-filter-folders li')),
       emailListItemActions = [].slice.call(document.querySelectorAll('.email-list-item-actions li')),
-      receiverInput = document.getElementById('note_receiver');
+      receiverInput = document.getElementById('note_receiver'),
+      sentNoteList = document.getElementById('sentNoteList'),
+      inboxNoteList = document.getElementById('inboxNoteList');
 
     // Initialize PerfectScrollbar
     // ------------------------------
+
+    //발신함
+    if(sentNoteList) {
+    	sentNoteList.addEventListener('click', e => {
+    		let noteSent = "발신";
+			var postData = {
+				noteSent: noteSent
+	        };
+	        
+	        // AJAX 요청으로 데이터 전송
+	        $.ajax({
+	        	url: "/exodia/noteSent",
+	            type: "GET",
+	            data: postData
+	           
+	        }).done(function(result) {
+	        	console.log("결과확인");
+	        	var html = jQuery('<div>').html(result);
+	        	var contents = html.find("div#noteContent").html();
+	        	$("#refreshNoteContent").html(contents);
+	        	$("#app-email-view").removeClass("show");
+	        	
+	        }).fail(function (jqXHR, textStatus, errorThrown) {
+	        	console.log("에러");
+	        	console.log(jqXHR);
+	        	console.log(textStatus);
+	        	console.log(errorThrown);
+	        	
+	        });
+	        
+        });
+    	
+    }
+  //발신함
+    if(inboxNoteList) {
+    	inboxNoteList.addEventListener('click', e => {
+    		let inbox = "수신";
+			var postData = {
+				inbox: inbox
+	        };
+	        
+	        // AJAX 요청으로 데이터 전송
+	        $.ajax({
+	        	url: "/exodia/noteInbox",
+	            type: "GET",
+	            data: postData
+	           
+	        }).done(function(result) {
+	        	console.log("결과확인");
+	        	var html = jQuery('<div>').html(result);
+	        	var contents = html.find("div#noteContent").html();
+	        	$("#refreshNoteContent").html(contents);
+	        	$("#app-email-view").removeClass("show");
+	        	
+	        }).fail(function (jqXHR, textStatus, errorThrown) {
+	        	console.log("에러");
+	        	console.log(jqXHR);
+	        	console.log(textStatus);
+	        	console.log(errorThrown);
+	        	
+	        });
+	        
+        });
+    	
+    }
+    
+    
     // Email list scrollbar
     if (emailList) {
       let emailListInstance = new PerfectScrollbar(emailList, {
@@ -204,7 +315,7 @@ document.addEventListener('DOMContentLoaded', function () {
           currentTargetData = currentTarget.getAttribute('data-target');
 
         appEmailSidebar.classList.remove('show');
-        appOverlay.classList.remove('show');
+       /* appOverlay.classList.remove('show');*/
 
         // Remove active class from each folder filters
         Helpers._removeClass('active', emailFilterByFolders);
@@ -215,9 +326,11 @@ document.addEventListener('DOMContentLoaded', function () {
           if (currentTargetData == 'inbox') {
             emailListItem.classList.add('d-block');
             emailListItem.classList.remove('d-none');
+            
           } else if (emailListItem.hasAttribute('data-' + currentTargetData)) {
             emailListItem.classList.add('d-block');
             emailListItem.classList.remove('d-none');
+           
           } else {
             emailListItem.classList.add('d-none');
             emailListItem.classList.remove('d-block');
@@ -226,7 +339,37 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
     
+   
+   /*emailFilterByFolder.addEventListener('click', e => {
+        let currentTarget = e.currentTarget,
+          currentTargetData = currentTarget.getAttribute('data-target');
+
+          if (currentTargetData == 'sent') {
+        	  console.log('sent'+"나센트");
+        	  var postData = {
+      		        sentNote: sentNote
+  		      };
+        	  $.ajax({
+		        	url: "/exodia/note",
+		            type: "GET",
+		            data: postData,
+		            success: function(response) {
+
+		            },
+		            error: function() {
+		                // 오류 처리
+		                alert("데이터 전송 중 오류가 발생했습니다.");
+		            }
+		      });
+          } 
+    });
+    */
     // 메일 목록 클릭 시 읽음 update 
+    
+
+    
+    
+    
     if (emailListItems) {
     	emailListItems.forEach(emailListItem => {
     		emailListItem.addEventListener('click', e => {
@@ -250,6 +393,10 @@ document.addEventListener('DOMContentLoaded', function () {
 		                alert("데이터 전송 중 오류가 발생했습니다.");
 		            }
 		        });
+		        
+		        
+		       
+		        
             });
         });
     }
@@ -425,7 +572,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // Close view on email filter folder list click
-    if (emailFilterFolderLists) {
+    /*if (emailFilterFolderLists) {
         emailFilterFolderLists.forEach(emailFilterFolderList => {
           emailFilterFolderList.addEventListener('click', e => {
             emailViewContainers.forEach(container => {
@@ -433,7 +580,7 @@ document.addEventListener('DOMContentLoaded', function () {
             });
           });
         });
-    }
+    }*/
 
     // Email List Items Actions
     if (emailListItemActions) {
