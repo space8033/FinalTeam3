@@ -142,7 +142,7 @@
                           <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex align-items-center">
                               <div class="form-check me-2">
-                                <input class="form-check-input" type="checkbox" id="email-select-all" />
+                                <input class="form-check-input" type="checkbox" id="email-select-all" onclick="javascript:checkAll()"/>
                                 <label class="form-check-label" for="email-select-all"></label>
                               </div>
                               <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4"></i>
@@ -204,7 +204,7 @@
                             </div>
                             <div
                               class="email-pagination d-sm-flex d-none align-items-center flex-wrap justify-content-between justify-sm-content-end">
-                              <span class="d-sm-block d-none mx-3 text-muted">1-10 of 653</span>
+                              <span class="d-sm-block d-none mx-3 text-muted">1-10 of ${pager.totalRows}</span>
                               <span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="javascript:showEmailList('${contentType}', 1)">처음</a></span>
                               <i
                                 class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
@@ -244,21 +244,21 @@
 					                      id="${note.noteRead_no}"
 			                              data-bs-toggle="sidebar"
 			                              data-target="#app-email-view-${note.noteRead_no}"
-			                              onclick="javascript:showDetail(${note.noteRead_no});">
+			                              >
 			                              <div class="d-flex align-items-center">
 			                                <div class="form-check">
 			                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-${note.noteRead_no}" />
 			                                  <label class="form-check-label" for="email-${note.noteRead_no}"></label>
 			                                </div>
 			                                <i
-			                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"></i>
+			                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"  onclick="javascript:bookMark(${note.noteRead_no})"></i>
 			                                <img
 			                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
 			                                  alt="user-avatar"
 			                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
 			                                  height="32"
 			                                  width="32" />
-			                                <div class="email-list-item-content ms-2 ms-sm-0 me-2">
+			                                <div class="email-list-item-content ms-2 ms-sm-0 me-2"  onclick="javascript:showDetail(${note.noteRead_no});">
 			                                  <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
 			                                  <span class="email-list-item-subject d-xl-inline-block d-block">
 			                               	     ${note.note_title}</span

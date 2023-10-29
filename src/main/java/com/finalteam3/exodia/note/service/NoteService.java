@@ -17,6 +17,7 @@ public interface NoteService {
 	public void addNote(NoteRequest note);
 	public void addReply(ReplyRequest note);
 	public void updateRead(int noteNo);
+	public void updateStarred(int noteNo, String noteStarred);
 
 	
 }

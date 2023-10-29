@@ -196,6 +196,10 @@ public class NoteController {
 		
 		Note note = noteService.getNote(noteRead_No);
 		model.addAttribute("note", note);
+		EmployeeInfo sender = employeeService.getEmpInfo(note.getNote_sender());
+		String name = sender.getEmpinfo_name();
+				
+		model.addAttribute("name", name);
 		
 		
 		return "/noteDetail";
@@ -232,6 +236,18 @@ public class NoteController {
 		log.info(readUpdateId+"controller 못들어오는건지");
 		int readUpdateIdNo = Integer.parseInt(readUpdateId);
 		noteService.updateRead(readUpdateIdNo);
+		
+		return "redirect:/note";
+	}
+	
+	
+	@PostMapping("/noteStarredUpdate")
+	@ResponseBody
+	public String noteStarredUpdate(String noteStarred, String noteReadNo) {
+		int noteRead_no = Integer.parseInt(noteReadNo);
+		
+		
+		noteService.updateStarred(noteRead_no, noteStarred);
 		
 		return "redirect:/note";
 	}

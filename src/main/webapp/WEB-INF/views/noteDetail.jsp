@@ -283,7 +283,7 @@
                                 height="38"
                                 width="38" />
                               <div class="flex-grow-1 ms-1">
-                                <h6 class="m-0">${note.note_sender}</h6>
+                                <h6 class="m-0">${name}</h6>
                                 <small class="text-muted">iAmAhoot@email.com</small>
                               </div>
                             </div>
@@ -336,7 +336,7 @@
                         
                         <!-- Email View : Reply mail-->
 	                        <div class="email-reply card mt-4 mx-sm-4 mx-3 border">
-	                          <h6 class="card-header border mb-2"><strong>'${note.note_sender}' 님께 답장</strong></h6>
+	                          <h6 class="card-header border mb-2"><strong>'${name}' 님께 답장</strong></h6>
 	                          <div class="card-body pt-0 px-3">
 	                            <div class="d-flex justify-content-start">
 	                              <div class="email-reply-toolbar border-0 w-100 ps-0" id="toolbar">

@@ -21,4 +21,5 @@ public interface NoteDao {
 	public int selectNoteNo(Note note);
 	public void updateNoteRead(int noteReadNo);
 	public NoteRead selectNoteRead(int noteReadNo);
+	public void updateNoteStarred(NoteRead noteRead);
 }

@@ -192,4 +192,14 @@ public class NoteServiceImpl implements NoteService{
 		noteRead.setNote_no(noteNo);
 		noteDao.insertNoteRead(noteRead);
 	}
+
+	@Override
+	public void updateStarred(int noteNo, String noteStarred) {
+		
+		NoteRead noteRead = new NoteRead();
+		noteRead.setNoteRead_no(noteNo);
+		noteRead.setNoteRead_starred(noteStarred);
+		noteDao.updateNoteStarred(noteRead);
+		
+	}
 }
