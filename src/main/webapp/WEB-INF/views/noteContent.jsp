@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
 <!DOCTYPE html>
 
 <html
@@ -204,20 +205,20 @@
                             <div
                               class="email-pagination d-sm-flex d-none align-items-center flex-wrap justify-content-between justify-sm-content-end">
                               <span class="d-sm-block d-none mx-3 text-muted">1-10 of 653</span>
-                              <span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="?pageNo=1">처음</a></span>
+                              <span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="javascript:showEmailList('${contentType}', 1)">처음</a></span>
                               <i
                                 class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
                                    <c:if test="${pager.groupNo>1}">
-                                       <a href="?pageNo=${pager.startPageNo-1}"></a>
+                                       <a href="javascript:showEmailList('${contentType}', ${pager.startPageNo-1})"></a>
                                    </c:if>
                               </i>
                               <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4">
                               <c:if test="${pager.groupNo<pager.totalGroupNo}">
-                              	 <a href="?pageNo=${pager.endPageNo+1}"></a>
+                              	 <a href="javascript:showEmailList('${contentType}', ${pager.endPageNo+1})"></a>
                               </c:if>
                               	</i>
                               	
-                              	<span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="?pageNo=${pager.totalPageNo}">맨끝</a></span>
+                              	<span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="javascript:showEmailList('${contentType}', ${pager.totalPageNo})">맨끝</a></span>
                             </div>
                           </div>
                         </div>
@@ -267,11 +268,28 @@
 			                                  <span
 			                                    class="email-list-item-label badge badge-dot bg-danger d-none d-md-inline-block me-2"
 			                                    data-label="private"></span>
-			                                  <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)}</small>
+			                                   
+			                                   
+			                                  <c:set var="today" value="<%=new java.util.Date()%>" />
+												<!-- 현재날짜 -->
+												<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy.MM.dd" /></c:set>
+												  <c:if test="${note.note_createdAt.substring(0, 10) eq date}">
+												  	<c:if test="${note.note_createdAt.substring(11, 13) ge '0' && note.note_createdAt.substring(11, 13) le '11'}">
+												    <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} AM</small>
+												    </c:if>
+												  	<c:if test="${note.note_createdAt.substring(11, 13) ge '12' && note.note_createdAt.substring(11, 13) le '23'}">
+												    <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} PM</small>
+												    </c:if>
+												  </c:if>
+												 
+												  <c:if test="${note.note_createdAt.substring(0, 10) ne date}">
+												    <small class="email-list-item-time text-muted">${note.note_createdAt.substring(2, 10)}</small>
+												  </c:if>
+												  
 			                                  <ul class="list-inline email-list-item-actions">
 			                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
 			                                     <c:if test ="${note.noteRead_read != null}">
-						                              <li class="list-inline-item email-read"><i class="bx bx-envelope-open fs-4"></i></li>
+						                              <li id="li-${note.noteRead_no}" class="list-inline-item email-read"><i id="i-${note.noteRead_no}" class="bx bx-envelope-open fs-4"></i></li>
 						                         </c:if>
 						                          <c:if test ="${note.noteRead_read == null}">
 			                                          <li class="list-inline-item email-unread"><i class="bx bx-envelope fs-4"></i></li>

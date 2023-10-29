@@ -14,6 +14,7 @@ import com.finalteam3.exodia.note.dto.NoteAll;
 import com.finalteam3.exodia.note.dto.request.Note;
 import com.finalteam3.exodia.note.dto.request.NoteRead;
 import com.finalteam3.exodia.note.dto.request.NoteRequest;
+import com.finalteam3.exodia.note.dto.request.ReplyRequest;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -124,8 +125,8 @@ public class NoteServiceImpl implements NoteService{
 	@Override
 	public void updateRead(int noteNo) {
 		NoteRead noteRead = noteDao.selectNoteRead(noteNo);
-		
-		if(noteRead == null) {
+		String noteReadRead = noteRead.getNoteRead_read();
+		if(noteReadRead == null) {
 			noteDao.updateNoteRead(noteNo);
 		}
 	}
@@ -152,5 +153,43 @@ public class NoteServiceImpl implements NoteService{
 		Note note = noteDao.selectNoteByNoteNo(noteNo);
 		
 		return note;
+	}
+
+	@Override
+	public void addReply(ReplyRequest request) {
+		Note note = new Note();
+		
+		//note테이블 insert
+		note.setNote_sender(request.getNote_sender());
+		note.setNote_title("re: " + request.getNote_title());
+		
+		log.info(request.getNote_content().toString()+"내용알려줘엉");
+		note.setNote_content(request.getNote_content());
+		
+		
+		if(request.getNote_reserve_time() == null) {
+			note.setNote_restime("");
+		} else {
+			note.setNote_restime(request.getNote_reserve_time());
+		}
+		noteDao.insertNote(note);
+		
+		int noteNo = note.getNote_no();
+		log.info(noteNo+"노트넘버 삽입됐낭");
+		
+		int requestNo = request.getNote_no();
+		log.info(requestNo+"일단 답장할 노트No 잘가져오나");
+		
+		
+		//답장 표시 noteRead
+		int receiver = Integer.parseInt(request.getNote_receiver());
+		
+		
+		
+		NoteRead noteRead = new NoteRead();
+		noteRead.setEmp_no_receiver(receiver);
+		noteRead.setNoteRead_type("답장");
+		noteRead.setNote_no(noteNo);
+		noteDao.insertNoteRead(noteRead);
 	}
 }

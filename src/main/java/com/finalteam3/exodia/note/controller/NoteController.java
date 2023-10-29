@@ -22,6 +22,7 @@ import com.finalteam3.exodia.note.dto.NoteAll;
 import com.finalteam3.exodia.note.dto.Pager;
 import com.finalteam3.exodia.note.dto.request.Note;
 import com.finalteam3.exodia.note.dto.request.NoteRequest;
+import com.finalteam3.exodia.note.dto.request.ReplyRequest;
 import com.finalteam3.exodia.note.service.NoteService;
 import com.finalteam3.exodia.security.dto.EmpDetails;
 
@@ -64,7 +65,6 @@ public class NoteController {
 		log.info(totalRows+"나전체숫자");
 		
 		Pager pager = new Pager(10, 5, totalRows, intPageNo);
-		String menuType = "inbox";
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("startRowNo", pager.getStartRowNo());
@@ -77,7 +77,6 @@ public class NoteController {
 			
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
-		model.addAttribute("menuType", menuType);
 	
 		log.info("여기까지 ok4");
 		
@@ -112,7 +111,6 @@ public class NoteController {
 		log.info(totalRows+"나전체숫자");
 		
 		Pager pager = new Pager(10, 5, totalRows, intPageNo);
-		String menuType = "inbox";
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("startRowNo", pager.getStartRowNo());
@@ -125,7 +123,8 @@ public class NoteController {
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
-		model.addAttribute("menuType", menuType);
+		String contentType = "수신";
+		model.addAttribute("contentType", contentType);
 		
 		log.info("여기까지 ok4");
 		
@@ -175,6 +174,10 @@ public class NoteController {
 			
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
+		String contentType = "발신";
+		model.addAttribute("contentType", contentType);
+		
+		
 		log.info("여기까지 ok4");
 		
 		return "/noteContent";
@@ -207,6 +210,18 @@ public class NoteController {
 		request.setNote_sender(loginResponse.getEmp_no());
 		
 		noteService.addNote(request);
+		
+		return "redirect:/note";
+	}
+	
+	@PostMapping("/replySend")
+	public String replySend(ReplyRequest request, Authentication authentication) {
+		log.info(request.toString());
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		request.setNote_sender(loginResponse.getEmp_no());
+		
+		noteService.addReply(request);
 		
 		return "redirect:/note";
 	}

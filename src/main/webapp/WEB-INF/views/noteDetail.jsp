@@ -93,7 +93,7 @@
                               class="bx bx-chevron-left bx-sm cursor-pointer me-2"
                               data-bs-toggle="sidebar"
                               data-target="#app-email-view"
-                             ></i>
+                              onclick="javascript:showNoteList();"></i>
                             <h6 class="text-truncate mb-0 me-2">뒤로가기 </h6>
                             <span class="badge bg-label-warning">Important</span>
                           </div>
@@ -211,7 +211,7 @@
                       
                       <!-- Email View : Content-->
                       <div class="app-email-view-content py-4">
-                        <p class="email-earlier-msgs text-center text-muted cursor-pointer mb-5">이전 메세지 1개 여어 히사시부리 디테일에 온거을 환영한다네</p>
+                        <p class="email-earlier-msgs text-center text-muted cursor-pointer mb-5">이전 메세지 1개</p>
                         <!-- Email View : Previous mails-->
                         <div class="card email-card-prev mx-sm-4 mx-3 border">
                           <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
@@ -244,15 +244,15 @@
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownEmailOne">
                                   <a class="dropdown-item scroll-to-reply" href="javascript:void(0)">
                                     <i class="bx bx-share me-1"></i>
-                                    <span class="align-middle">Reply</span>
+                                    <span class="align-middle">답장</span>
                                   </a>
                                   <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="bx bx-share scaleX-n1 scaleX-n1-rtl me-1"></i>
-                                    <span class="align-middle">Forward</span>
+                                    <span class="align-middle">전달</span>
                                   </a>
                                   <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="bx bx-info-circle me-1"></i>
-                                    <span class="align-middle">Report</span>
+                                    <span class="align-middle">팝업 창 띄우기</span>
                                   </a>
                                 </div>
                               </div>
@@ -331,36 +331,46 @@
                             </div>
                           </div>
                         </div>
+                        
+                        <form name="ReplyRequest" action="replySend" id="replySend" method="POST">
+                        
                         <!-- Email View : Reply mail-->
-                        <div class="email-reply card mt-4 mx-sm-4 mx-3 border">
-                          <h6 class="card-header border mb-2"><strong>'${note.note_sender}' 님께 답장</strong></h6>
-                          <div class="card-body pt-0 px-3">
-                            <div class="d-flex justify-content-start">
-                              <div class="email-reply-toolbar border-0 w-100 ps-0">
-                                <span class="ql-formats me-0">
-                                  <button class="ql-bold"></button>
-                                  <button class="ql-italic"></button>
-                                  <button class="ql-underline"></button>
-                                  <button class="ql-list" value="ordered"></button>
-                                  <button class="ql-list" value="bullet"></button>
-                                  <button class="ql-link"></button>
-                                  <button class="ql-image"></button>
-                                </span>
-                              </div>
-                            </div>
-                            <div class="email-reply-editor" id="editor"></div>
-                            <div class="d-flex justify-content-end align-items-center">
-                              <div class="cursor-pointer me-3">
-                                <i class="bx bx-paperclip"></i>
-                                <span class="align-middle">첨부 파일</span>
-                              </div>
-                              <button class="btn btn-primary">
-                                <i class="bx bx-paper-plane me-1"></i>
-                                <span class="align-middle">보내기</span>
-                              </button>
-                            </div>
-                          </div>
-                        </div>
+	                        <div class="email-reply card mt-4 mx-sm-4 mx-3 border">
+	                          <h6 class="card-header border mb-2"><strong>'${note.note_sender}' 님께 답장</strong></h6>
+	                          <div class="card-body pt-0 px-3">
+	                            <div class="d-flex justify-content-start">
+	                              <div class="email-reply-toolbar border-0 w-100 ps-0" id="toolbar">
+	                                <span class="ql-formats me-0">
+	                                  <button class="ql-bold"></button>
+	                                  <button class="ql-italic"></button>
+	                                  <button class="ql-underline"></button>
+	                                  <button class="ql-list" value="ordered"></button>
+	                                  <button class="ql-list" value="bullet"></button>
+	                                  <button class="ql-link"></button>
+	                                  <button class="ql-image"></button>
+	                                </span>
+	                              </div>
+	                            </div>
+	                            <div class="email-reply-editor" id="editor"></div>
+	                            
+	                            <input type="hidden" name="note_content" id="reply"/>
+	                            <input type="hidden" name="note_no" value="${note.note_no}"/>
+	                            <input type="hidden" name="note_title" value="${note.note_title}"/>
+	                            <input type="hidden" name="note_receiver" value="${note.note_sender}"/>
+	                            <div class="d-flex justify-content-end align-items-center">
+	                              <div class="cursor-pointer me-3">
+	                                <i class="bx bx-paperclip"></i>
+	                                <span class="align-middle">첨부 파일</span>
+	                              </div>
+	                              <button type="submit" class="btn btn-primary">
+	                                <i class="bx bx-paper-plane me-1"></i>
+	                                <span class="align-middle">보내기</span>
+	                              </button>
+	                            </div>
+	                          </div>
+	                        </div>
+	                        
+                        </form>
                       </div>
                     </div>
                     <!-- Email View -->

@@ -6,6 +6,7 @@ import java.util.Map;
 import com.finalteam3.exodia.note.dto.NoteAll;
 import com.finalteam3.exodia.note.dto.request.Note;
 import com.finalteam3.exodia.note.dto.request.NoteRequest;
+import com.finalteam3.exodia.note.dto.request.ReplyRequest;
 
 public interface NoteService {
 	public List<NoteAll> getNoteListByRno(Map<String, Object> map);
@@ -14,6 +15,7 @@ public interface NoteService {
 	public int countByNoteNo(int empNo);
 	public int countByNoteSenderNo(int empNo);
 	public void addNote(NoteRequest note);
+	public void addReply(ReplyRequest note);
 	public void updateRead(int noteNo);
 
 	
