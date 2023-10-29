@@ -159,6 +159,46 @@ public class NoteServiceImpl implements NoteService{
 		}
 		return noteAllList;
 	}
+	
+	//휴지통 쪽지 가져오기
+	@Override
+	public List<NoteAll> getNoteTrashListByRno(Map<String, Object> map) {
+		List<NoteAll> noteAllList = noteDao.selectTrashNoteByEmpNo(map);
+		for(NoteAll noteAll : noteAllList) {
+			int senderNo = noteAll.getNote_sender();
+			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			noteAll.setNote_sender_name(sender.getEmpinfo_name());
+		}
+		return noteAllList;
+	}
+	
+	//임시저장 쪽지 가져오기
+	@Override
+	public List<NoteAll> getNoteDraftListByRno(Map<String, Object> map) {
+		
+		List<NoteAll> noteAllList = noteDao.selectDraftNoteByEmpNo(map);
+		for(NoteAll noteAll : noteAllList) {
+			int senderNo = noteAll.getNote_sender();
+			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			noteAll.setNote_sender_name(sender.getEmpinfo_name());
+		}
+		
+		
+		return noteAllList;
+	}
+    
+	//임시 쪽지 개수
+	@Override
+	public int countByNoteDraftNo(int empNo) {
+		return noteDao.countByDraftEmpno(empNo);
+	}
+
+	//휴지통 쪽지 개수
+	@Override
+	public int countByNoteTrashNo(int empNo) {
+		return noteDao.countByTrashEmpno(empNo);
+	}
+
 
 	//발신 쪽지 개수
 	@Override
@@ -230,5 +270,7 @@ public class NoteServiceImpl implements NoteService{
 		
 	}
 
+
+	
 	
 }

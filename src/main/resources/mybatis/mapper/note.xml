@@ -25,13 +25,13 @@
 	<!-- 수신 쪽지 목록  -->
 	<select id="selectNoteByEmpNo" resultType="NoteAll" parameterType="Map">
 		<![CDATA[
-	       select rnum, note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+	       select rnum, note_no, note_title, note_content, note_sender, note_draft, note_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
 			 from (
-			    select rownum as rnum, note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			    select rownum as rnum, note_no, note_title, note_content, note_sender, note_draft, note_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
 			    from(
-			        select n.note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			        select n.note_no, note_title, note_content, note_sender, note_draft, note_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
 			        from note n, noteRead nr
-			        where emp_no_receiver = #{empNo} and n.note_no = nr.note_no
+			        where emp_no_receiver = #{empNo} and n.note_no = nr.note_no and note_draft IS NULL
 			        order by note_createdAt desc
 			    )
 			    where rownum <= #{endRowNo}
@@ -43,13 +43,13 @@
 	<!-- 발신 쪽지 목록 -->
 	<select id="selectSentNoteByEmpNo" resultType="NoteAll" parameterType="Map">
 		<![CDATA[
-	       select rnum, note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+	       select rnum, note_no, note_title, note_content, note_sender, note_draft, note_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
 			 from (
-			    select rownum as rnum, note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			    select rownum as rnum, note_no, note_title, note_content, note_sender, note_draft, note_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
 			    from(
-			        select n.note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			        select n.note_no, note_title, note_content, note_sender, note_draft, note_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
 			        from note n, noteRead nr
-			        where note_sender = #{empNo} and n.note_no = nr.note_no
+			        where note_sender = #{empNo} and n.note_no = nr.note_no and note_draft IS NULL
 			        order by note_createdAt desc
 			    )
 			    where rownum <= #{endRowNo}
@@ -61,13 +61,49 @@
 	<!-- 중요 쪽지 목록 -->
 	<select id="selectStarredNoteByEmpNo" resultType="NoteAll" parameterType="Map">
 		<![CDATA[
-	       select rnum, note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+	       select rnum, note_no, note_title, note_content, note_sender, note_draft, note_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
 			 from (
-			    select rownum as rnum, note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			    select rownum as rnum, note_no, note_title, note_content, note_sender, note_draft, note_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
 			    from(
-			        select n.note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			        select n.note_no, note_title, note_content, note_sender, note_draft, note_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
 			        from note n, noteRead nr
-			        where emp_no_receiver = #{empNo} and noteRead_starred = 'starred' and n.note_no = nr.note_no
+			        where emp_no_receiver = #{empNo} and noteRead_starred = 'starred' and n.note_no = nr.note_no  and note_draft IS NULL
+			        order by note_createdAt desc
+			    )
+			    where rownum <= #{endRowNo}
+			 )
+			 where rnum >= #{startRowNo}
+		]]>
+	</select>
+	
+	<!-- 휴지통 쪽지 목록 -->
+	<select id="selectTrashNoteByEmpNo" resultType="NoteAll" parameterType="Map">
+		<![CDATA[
+	       select rnum, note_no, note_title, note_content, note_draft, note_sender, note_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			 from (
+			    select rownum as rnum, note_no, note_title, note_content, note_draft, note_sender, note_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			    from(
+			        select n.note_no, note_title, note_content, note_draft, note_sender, note_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			        from note n, noteRead nr
+			        where emp_no_receiver = #{empNo} and noteRead_deletedAt IS NOT NULL and n.note_no = nr.note_no
+			        order by note_createdAt desc
+			    )
+			    where rownum <= #{endRowNo}
+			 )
+			 where rnum >= #{startRowNo}
+		]]>
+	</select>
+	
+	<!-- 임시저장 쪽지 목록 -->
+	<select id="selectDraftNoteByEmpNo" resultType="NoteAll" parameterType="Map">
+		<![CDATA[
+	       select rnum, note_no, note_title, note_content, note_draft, note_sender, note_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			 from (
+			    select rownum as rnum, note_no, note_title, note_content, note_draft, note_sender, note_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			    from(
+			        select n.note_no, note_title, note_content, note_draft, note_sender, note_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			        from note n, noteRead nr
+			        where note_sender = #{empNo} and note_draft IS NOT NULL and n.note_no = nr.note_no
 			        order by note_createdAt desc
 			    )
 			    where rownum <= #{endRowNo}
@@ -79,22 +115,36 @@
 	<!-- 수신 쪽지 갯수 가져오기 -->
 	<select id="countByEmpno" parameterType="int" resultType="int">
 		select count(*)
-  		from noteRead
-  		where emp_no_receiver = #{emp_no_receiver}
+  		from note n, noteRead nr
+  		where emp_no_receiver = #{emp_no_receiver} and note_draft IS NULL and n.note_no = nr.note_no
 	</select>
 	
 	<!-- 발신 쪽지 갯수 가져오기 -->
 	<select id="countBySentEmpno" parameterType="int" resultType="int">
 		select count(*)
   		from note
-  		where note_sender = #{note_sender}
+  		where note_sender = #{note_sender} and note_draft IS NULL
+	</select>
+	
+	<!-- 임시저장 쪽지 갯수 가져오기 -->
+	<select id="countByDraftEmpno" parameterType="int" resultType="int">
+		select count(*)
+  		from note
+  		where note_sender = #{note_sender} and note_draft IS NOT NULL
 	</select>
 
 	<!-- 중요 쪽지 갯수 가져오기 -->
 	<select id="countByStarredEmpno" parameterType="int" resultType="int">
 		select count(*)
-  		from noteRead
-  		where emp_no_receiver = #{emp_no_receiver} and noteRead_starred = 'starred'
+  		from note n, noteRead nr
+  		where emp_no_receiver = #{emp_no_receiver} and noteRead_starred = 'starred' and note_draft IS NULL and n.note_no = nr.note_no
+	</select>
+	
+	<!-- 휴지통 쪽지 갯수 가져오기 -->
+	<select id="countByTrashEmpno" parameterType="int" resultType="int">
+		select count(*)
+  		from note n, noteRead nr
+  		where emp_no_receiver = #{emp_no_receiver} and noteRead_deletedAt IS NOT NULL and n.note_no = nr.note_no
 	</select>
 	
 	<!-- 쪽지 번호로 noteRead 얻어오기 작성자: 김시온 -->
@@ -104,9 +154,9 @@
   		where noteRead_no = #{noteRead_no}
 	</select>
 	
-	<!-- 쪽지 번호로 noteRead 얻어오기 작성자: 김시온 -->
+	<!-- 쪽지 번호로 note 얻어오기 작성자: 김시온 -->
 	<select id="selectNoteByNoteNo" parameterType="int" resultType="note">
-		select note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_deletedAt, note_restime
+		select note_no, note_title, note_content, note_sender, note_isCanceled, note_createdAt, note_label, note_restime, note_draft
   		from note
   		where note_no = #{note_no}
 	</select>

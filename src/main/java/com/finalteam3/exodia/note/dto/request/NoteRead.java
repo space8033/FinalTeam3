@@ -10,4 +10,5 @@ public class NoteRead {
 	private String noteRead_read;
 	private String noteRead_type;
 	private String noteRead_starred;
+	private String noteRead_deletedAt;
 }
