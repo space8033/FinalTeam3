@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -24,6 +25,7 @@ import com.finalteam3.exodia.employee.dto.request.JoinList;
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
 import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
 import com.finalteam3.exodia.employee.dto.request.PasswordRequest;
+import com.finalteam3.exodia.employee.dto.response.EmpManagementResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
@@ -132,7 +134,7 @@ public class EmployeeController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
 		String emp_name = loginResponse.getEmpInfo_name();
-		String two_name = emp_name.substring(emp_name.length() - 2);
+		String two_name = emp_name.substring(emp_name.length() - 2);	
 		
 		model.addAttribute("empInfo_name", emp_name);
 		
@@ -213,6 +215,14 @@ public class EmployeeController {
         }
 		
 		return "redirect:/employee/jjoin";
+	}
+	
+	@GetMapping("/userManagement")
+	public String getUserManagement(Model model) {
+		List<EmpManagementResponse> list = employeeService.getManagementResponse(0);
+		model.addAttribute("list", list);
+		
+		return "/userManagement";
 	}
 
 }

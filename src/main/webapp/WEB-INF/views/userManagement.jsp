@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html
@@ -252,70 +253,82 @@
 		                        <th>팀장</th>
 		                        <th>팀원</th>
 		                        <th>팀업무</th>
-		                        <th>편집</th>
+		                        <th>삭제</th>
 		                      </tr>
 		                    </thead>
-		                    <tbody class="table-border-bottom-0">
-		                      <tr>
-		                        <td>
-		                          <span class="fw-medium">개발 1팀</span>
-		                        </td>
-		                        <td>김시온</td>
-		                        <td>
-		                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-		                            <li
-		                              data-bs-toggle="tooltip"
-		                              data-popup="tooltip-custom"
-		                              data-bs-placement="top"
-		                              class="avatar avatar-xs pull-up"
-		                              title="Lilian Fuller">
-		                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
-		                            </li>
-		                            <li
-		                              data-bs-toggle="tooltip"
-		                              data-popup="tooltip-custom"
-		                              data-bs-placement="top"
-		                              class="avatar avatar-xs pull-up"
-		                              title="Sophia Wilkerson">
-		                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/6.png" alt="Avatar" class="rounded-circle" />
-		                            </li>
-		                            <li
-		                              data-bs-toggle="tooltip"
-		                              data-popup="tooltip-custom"
-		                              data-bs-placement="top"
-		                              class="avatar avatar-xs pull-up"
-		                              title="Christina Parker">
-		                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/7.png" alt="Avatar" class="rounded-circle" />
-		                            </li>
-		                             <li class="avatar avatar-xs col-md-3 col-sm-6">
-				                          <span
-				                            class="avatar-initial rounded-circle pull-up bg-secondary"
-				                            data-bs-toggle="tooltip"
-				                            data-bs-placement="bottom"
-				                            title="5 more"
-				                            >+5</span
-				                          >
-		                        	</li>
-		                          </ul>
-		                        </td>
-		                        <td><span class="badge bg-label-primary me-1">로그인</span></td>
-		                        <td>
-		                          <div class="dropdown">
-		                            <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-		                              <i class="bx bx-dots-vertical-rounded"></i>
-		                            </button>
-		                            <div class="dropdown-menu">
-		                              <a class="dropdown-item" href="javascript:void(0);"
-		                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
-		                              >
-		                              <a class="dropdown-item" href="javascript:void(0);"
-		                                ><i class="bx bx-trash me-1"></i> Delete</a
-		                              >
-		                            </div>
-		                          </div>
-		                        </td>
-		                      </tr>
-		                    </tbody>
+		                    <c:forEach var="teams" items="${list}" varStatus="status">
+			                    <tbody class="table-border-bottom-0">
+			                      <tr>
+			                        <td>
+			                          <span class="fw-medium">${teams.team_name}</span>
+			                        </td>
+			                        <td>${teams.team_leader}</td>
+			                        <td>
+			                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+			                          	<c:forEach var="members" items="${teams.team_members}">
+			                             	<li
+				                              data-bs-toggle="tooltip"
+				                              data-popup="tooltip-custom"
+				                              data-bs-placement="top"
+				                              class="avatar avatar-xs pull-up"
+				                              title="${members}">
+				                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
+				                            </li>
+				                             <!-- <li class="avatar avatar-xs col-md-3 col-sm-6">
+						                          <span
+						                            class="avatar-initial rounded-circle pull-up bg-secondary"
+						                            data-bs-toggle="tooltip"
+						                            data-bs-placement="bottom"
+						                            title="5 more"
+						                            >+5</span
+						                          >
+				                        	</li> -->
+			                          	</c:forEach>
+			                          </ul>
+			                        </td>
+			                        <c:if test="${status.index % 7 == 0}">
+				                        <td><span class="badge bg-label-primary me-1">${teams.team_duty}</span></td>
+			                        </c:if>
+			                        <c:if test="${status.index % 7 == 1}">
+				                        <td><span class="badge bg-label-success me-1">${teams.team_duty}</span></td>
+			                        </c:if>
+			                        <c:if test="${status.index % 7 == 2}">
+				                        <td><span class="badge bg-label-warning me-1">${teams.team_duty}</span></td>
+			                        </c:if>
+			                        <c:if test="${status.index % 7 == 3}">
+				                        <td><span class="badge bg-label-danger me-1">${teams.team_duty}</span></td>
+			                        </c:if>
+			                        <c:if test="${status.index % 7 == 4}">
+				                        <td><span class="badge bg-label-info me-1">${teams.team_duty}</span></td>
+			                        </c:if>
+			                        <c:if test="${status.index % 7 == 5}">
+				                        <td><span class="badge bg-label-dark me-1">${teams.team_duty}</span></td>
+			                        </c:if>
+			                        <c:if test="${status.index % 7 == 6}">
+				                        <td><span class="badge bg-label-secondary me-1">${teams.team_duty}</span></td>
+			                        </c:if>
+			                        <td>
+			                          <div class="dropdown">
+			                          	  <a class="dropdown-item" href="javascript:void(0);"
+			                                ><i class="bx bx-trash me-1" style="margin-left: 5px;"></i></a
+			                              >
+			                            <!-- <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+			                              <i class="bx bx-dots-vertical-rounded"></i>
+			                            </button>
+			                            <div class="dropdown-menu">
+			                              <a class="dropdown-item" href="javascript:void(0);"
+			                                ><i class="bx bx-edit-alt me-1"></i> Edit</a
+			                              >
+			                              <a class="dropdown-item" href="javascript:void(0);"
+			                                ><i class="bx bx-trash me-1"></i> Delete</a
+			                              >
+			                            </div> -->
+			                          </div>
+			                        </td>
+			                      </tr>
+			                    </tbody>
+		                    	
+		                    </c:forEach>
 		                  </table>
 		                </div>
 		              </div>
