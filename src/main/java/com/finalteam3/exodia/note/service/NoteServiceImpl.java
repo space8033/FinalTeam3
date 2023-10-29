@@ -1,13 +1,10 @@
 package com.finalteam3.exodia.note.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
@@ -131,5 +128,29 @@ public class NoteServiceImpl implements NoteService{
 		if(noteRead == null) {
 			noteDao.updateNoteRead(noteNo);
 		}
+	}
+
+	@Override
+	public List<NoteAll> getNoteSendListByRno(Map<String, Object> map) {
+		log.info(map+"잘가져오나.");
+		List<NoteAll> noteAllList = noteDao.selectSentNoteByEmpNo(map);
+		return noteAllList;
+	}
+
+	//발신 쪽지 개수
+	@Override
+	public int countByNoteSenderNo(int empNo) {
+		return noteDao.countBySentEmpno(empNo);
+	}
+
+	@Override
+	public Note getNote(int noteReadNo) {
+		
+		
+		NoteRead noteRead = noteDao.selectNoteRead(noteReadNo);
+		int noteNo = noteRead.getNote_no();
+		Note note = noteDao.selectNoteByNoteNo(noteNo);
+		
+		return note;
 	}
 }

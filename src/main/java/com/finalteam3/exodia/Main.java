@@ -30,6 +30,16 @@ public class Main {
 		return "note3";
 	}
 	
+	/*@RequestMapping("/noteContent")
+	public String noteContent(Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		String emp_name = loginResponse.getEmpInfo_name();
+		model.addAttribute("empInfo_name", emp_name);
+		return "noteContent";
+	}*/
+	
 
 	@RequestMapping("/chat2")
 	public String chat2(Model model, Authentication authentication) {
