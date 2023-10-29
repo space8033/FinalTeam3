@@ -297,7 +297,7 @@
                             <div class="badge bg-label-warning rounded-pill">1</div>
                           </li>
                           <li class="d-flex" data-target="starred">
-                            <a href="javascript:void(0);" class="d-flex flex-wrap align-items-center">
+                            <a href="javascript:void(0);" id="starredNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-star"></i>
                               <span class="align-middle ms-2">중요 쪽지함</span>
                             </a>

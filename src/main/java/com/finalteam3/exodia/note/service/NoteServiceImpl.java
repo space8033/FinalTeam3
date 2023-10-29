@@ -130,11 +130,33 @@ public class NoteServiceImpl implements NoteService{
 			noteDao.updateNoteRead(noteNo);
 		}
 	}
-
+	
+	//발신 쪽지 가져오기
 	@Override
 	public List<NoteAll> getNoteSendListByRno(Map<String, Object> map) {
 		log.info(map+"잘가져오나.");
+		
+		
 		List<NoteAll> noteAllList = noteDao.selectSentNoteByEmpNo(map);
+		for(NoteAll noteAll : noteAllList) {
+			int senderNo = noteAll.getNote_sender();
+			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			noteAll.setNote_sender_name(sender.getEmpinfo_name());
+		}
+		
+		
+		return noteAllList;
+	}
+	
+	//중요 쪽지 가져오기
+	@Override
+	public List<NoteAll> getNoteStarredListByRno(Map<String, Object> map) {
+		List<NoteAll> noteAllList = noteDao.selectStarredNoteByEmpNo(map);
+		for(NoteAll noteAll : noteAllList) {
+			int senderNo = noteAll.getNote_sender();
+			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			noteAll.setNote_sender_name(sender.getEmpinfo_name());
+		}
 		return noteAllList;
 	}
 
@@ -142,6 +164,11 @@ public class NoteServiceImpl implements NoteService{
 	@Override
 	public int countByNoteSenderNo(int empNo) {
 		return noteDao.countBySentEmpno(empNo);
+	}
+	//중요 쪽지 개수
+	@Override
+	public int countByNoteStarredNo(int empNo) {
+		return noteDao.countByStarredEmpno(empNo);
 	}
 
 	@Override
@@ -202,4 +229,6 @@ public class NoteServiceImpl implements NoteService{
 		noteDao.updateNoteStarred(noteRead);
 		
 	}
+
+	
 }

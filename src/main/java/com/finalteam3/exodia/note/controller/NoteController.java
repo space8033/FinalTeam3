@@ -183,6 +183,54 @@ public class NoteController {
 		return "/noteContent";
 	}
 	
+	@GetMapping("/noteStarred")
+	public String noteStarred(String pageNo,@RequestParam("noteStarred") String noteStarred, HttpSession session, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+	
+		if(pageNo == null) {
+			//세션에 저장되어 있는지 확인
+			pageNo = (String) session.getAttribute("pageNo");
+			//저장되어있지 않다면 "1"로 초기화
+			if(pageNo == null) {
+				pageNo = "1";
+			}
+		}
+		
+		int empNo = empInfo.getEmpinfo_no();
+		
+		
+		//문자열을 정수로 변환
+		int intPageNo = Integer.parseInt(pageNo);
+		//세션에 pageNo를 저장
+		session.setAttribute("pageNo", String.valueOf(pageNo));
+		log.info("여기까지 ok2");
+		int totalRows = noteService.countByNoteStarredNo(empNo);
+		log.info(totalRows+"나전체숫자");
+		
+		Pager pager = new Pager(10, 5, totalRows, intPageNo);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("startRowNo", pager.getStartRowNo());
+		map.put("endRowNo", pager.getEndRowNo());
+		map.put("empNo", empNo);
+		log.info(map+"여기까지 맵임ok3");
+		
+		List<NoteAll> list = noteService.getNoteStarredListByRno(map);
+		log.info(list+"여기까지 ok3");
+		
+		model.addAttribute("pager", pager);
+		model.addAttribute("list", list);
+		String contentType = "중요";
+		model.addAttribute("contentType", contentType);
+		
+		log.info("여기까지 ok4");
+		
+		return "/noteContent";
+	}
+	
 	@GetMapping("/noteDetail")
 	public String noteDetail(String noteReadNo, HttpSession session, Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();

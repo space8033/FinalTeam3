@@ -13,9 +13,11 @@ import com.finalteam3.exodia.note.dto.request.NoteRead;
 public interface NoteDao {
 	public List<NoteAll> selectNoteByEmpNo(Map<String, Object> map);
 	public List<NoteAll> selectSentNoteByEmpNo(Map<String, Object> map);
+	public List<NoteAll> selectStarredNoteByEmpNo(Map<String, Object> map);
 	public Note selectNoteByNoteNo(int noteNo);
 	public int countByEmpno(int Nno);
 	public int countBySentEmpno(int Nno);
+	public int countByStarredEmpno(int Nno);
 	public void insertNote(Note note);
 	public void insertNoteRead(NoteRead noteRead);
 	public int selectNoteNo(Note note);

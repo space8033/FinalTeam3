@@ -281,6 +281,7 @@ document.addEventListener('DOMContentLoaded', function () {
       emailListItemActions = [].slice.call(document.querySelectorAll('.email-list-item-actions li')),
       receiverInput = document.getElementById('note_receiver'),
       sentNoteList = document.getElementById('sentNoteList'),
+      starredNoteList = document.getElementById('starredNoteList'),
       inboxNoteList = document.getElementById('inboxNoteList');
 
     // Initialize PerfectScrollbar
@@ -392,6 +393,44 @@ document.addEventListener('DOMContentLoaded', function () {
 	        });
 	        
         });
+    	
+    }
+    
+    //중요
+    if(starredNoteList) {
+    	starredNoteList.addEventListener('click', e => {
+    		let noteStarred = "중요";
+    		var postData = {
+    				noteStarred: noteStarred
+    		};
+    		
+    		// AJAX 요청으로 데이터 전송
+    		$.ajax({
+    			url: "/exodia/noteStarred",
+    			type: "GET",
+    			data: postData
+    			
+    		}).done(function(result) {
+    			console.log("결과확인");
+    			var html = jQuery('<div>').html(result);
+    			var contents = html.find("div#noteContent").html();
+    			$("#refreshNoteContent").html(contents);
+    			$("#app-email-view").removeClass("show");
+    			
+    			var emailListInstance = new PerfectScrollbar('.email-list', {
+    				wheelPropagation: false,
+    				suppressScrollX: true
+    			});
+    			
+    		}).fail(function (jqXHR, textStatus, errorThrown) {
+    			console.log("에러");
+    			console.log(jqXHR);
+    			console.log(textStatus);
+    			console.log(errorThrown);
+    			
+    		});
+    		
+    	});
     	
     }
     
