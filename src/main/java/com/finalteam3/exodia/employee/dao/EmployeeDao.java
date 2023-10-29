@@ -1,5 +1,6 @@
 package com.finalteam3.exodia.employee.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -9,6 +10,7 @@ import com.finalteam3.exodia.employee.dto.request.LoginRequest;
 import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
 import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
+import com.finalteam3.exodia.employee.dto.response.TeamBasicResponse;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 
 @Mapper
@@ -25,4 +27,6 @@ public interface EmployeeDao {
 	public void updateEmpInfo(ModifyRequest modifyRequest);	
 	public int selectNoByEmpName(String empinfo_name);
 	public String selectNowPassword(String emp_id);
+	public List<String> selectTeamname(int project_no);
+	public List<TeamBasicResponse> selectTeamBasic(String team_name);
 }

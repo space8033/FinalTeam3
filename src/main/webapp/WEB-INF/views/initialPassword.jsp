@@ -120,7 +120,7 @@
                 </a>
               </div>
               <!-- /Logo -->
-              <p class="mb-4">초기 비밀번호 변경</p>
+              <p class="mb-4">비밀번호 변경</p>
 
               <form id="formAuthentication" class="mb-3" action="initialPassword" method="POST">
                 <div class="mb-3">

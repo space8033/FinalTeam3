@@ -62,6 +62,22 @@
 		and emp_id = #{emp_id}
 	</select>
 	
+	<select id="selectTeamname" resultType="String" parameterType="int">
+		select team_name
+		from team
+		where project_no = #{project_no}
+		and empinfo_no = 0
+		order by team_name
+	</select>
+	
+	<select id="selectTeamBasic" parameterType="string" resultType="TeamBasicResponse">
+		select t.team_duty, i.emp_no, i.empinfo_name, t.team_isleader
+		from team t, empinfo i
+		where project_no = 0
+		and i.empinfo_no = t.empinfo_no
+		and t.team_name = #{team_name}
+	</select>
+	
 	<update id="updateStatus" parameterType="String">
 		update emp set emp_status = 'connected' where emp_id = #{emp_id}
 	</update>
