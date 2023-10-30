@@ -270,7 +270,16 @@ public class NoteServiceImpl implements NoteService{
 		
 	}
 
-
-	
-	
+	@Override
+	public void checkTrash(String checkedIdsString) {
+		
+		String[] numberStrings = checkedIdsString.split(", ");
+		int[] numberArray = new int[numberStrings.length];
+		for(int i = 0; i < numberStrings.length; i++) {
+			numberArray[i] = Integer.parseInt(numberStrings[i].trim());
+		}
+		for(int noteReadNo : numberArray) {
+			noteDao.trashNote(noteReadNo);
+		}
+	}
 }

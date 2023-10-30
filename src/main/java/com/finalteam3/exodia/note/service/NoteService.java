@@ -24,6 +24,6 @@ public interface NoteService {
 	public void addReply(ReplyRequest note);
 	public void updateRead(int noteNo);
 	public void updateStarred(int noteNo, String noteStarred);
-
+	public void checkTrash(String checkedIdsString);
 	
 }

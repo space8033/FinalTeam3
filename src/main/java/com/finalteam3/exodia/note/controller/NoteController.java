@@ -407,4 +407,14 @@ public class NoteController {
 		return "redirect:/note";
 	}
 	
+	//쪽지 휴지통보내기
+	@PostMapping("/trashNote")
+	@ResponseBody
+	public String trashNote(String checkedIdsString, String contentType) {
+		
+		noteService.checkTrash(checkedIdsString);
+		
+		return "redirect:/note";
+	}
+	
 }

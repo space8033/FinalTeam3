@@ -145,7 +145,7 @@
                                 <input class="form-check-input" type="checkbox" id="email-select-all" onclick="javascript:checkAll()"/>
                                 <label class="form-check-label" for="email-select-all"></label>
                               </div>
-                              <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4"></i>
+                              <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:trashCheck('${contentType}')"></i>
                               <i class="bx bx-envelope email-list-read cursor-pointer me-3 fs-4"></i>
                               <div class="dropdown">
                                 <button

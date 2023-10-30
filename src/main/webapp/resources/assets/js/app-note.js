@@ -247,6 +247,49 @@ function checkAll() {
 	    }
 }
 
+function trashCheck(type) {
+	console.log("체크삭제");
+	var contentType = type;
+	
+	// 모든 체크된 체크박스를 선택
+	var checkedCheckboxes = $('input[type="checkbox"]:checked').not('#email-select-all');
+
+	// 체크된 체크박스의 ID를 가져오고 배열에 저장
+	var checkedIds = checkedCheckboxes.map(function() {
+		return this.id.replace('email-', '');
+	}).get();
+
+	// 체크된 체크박스의 ID 배열을 문자열로 조인
+	var checkedIdsString = checkedIds.join(', ');
+
+	
+	var postData = {
+			checkedIdsString: checkedIdsString,
+			contentType: contentType
+        };
+        
+	console.log("체크된 체크박스의 ID: " + checkedIdsString);
+        // AJAX 요청으로 데이터 전송
+        $.ajax({
+        	url: "/exodia/trashNote",
+            type: "POST",
+            data: postData,
+            success: function(response) {
+            	$.each(checkedIds, function(index, id) {
+            	    $('#' + id).hide();
+            	});
+	        
+            },
+            error: function() {
+                // 오류 처리
+                alert("데이터 전송 중 오류가 발생했습니다.");
+            }
+        });
+	// 체크된 체크박스의 ID 출력
+	
+	
+}
+
 
 document.addEventListener('DOMContentLoaded', function () {
 	
