@@ -3,6 +3,58 @@
  */
 
 $(document).ready(function() {
+  var usersList = [];
+  
+  $('#selectpickerIcons').on('change', function() {
+    var author = $(this).val();
+    var teamname = $('#selectpickerLiveSearch').val();
+    
+    sendAjaxRequest(author, teamname);
+  });
+
+  $('#selectpickerLiveSearch').on('change', function() {
+    var author = $('#selectpickerIcons').val();
+    var teamname = $(this).val();
+    
+    sendAjaxRequest(author, teamname);
+  });
+
+  function sendAjaxRequest(author, teamname) {
+    $.ajax({
+      type: "GET",
+      url: "/exodia/employee/getFilteredUser", // 여기에 컨트롤러의 엔드포인트를 삽입하세요
+      data: {
+        author: author,
+        teamname: teamname
+      },
+      success: function(data) {
+    	  console.log(data);
+ 		  usersList = data;
+ 		  
+ 		 TagifyUserList.settings.whitelist = usersList;
+         TagifyUserList.loading(false);
+      },
+      error: function(xhr, status, error) {
+        // 에러 처리를 수행합니다.
+      }
+    });
+  }
+  /*var author = $('#selectpickerIcons').val();
+  var teamname = $('#selectpickerLiveSearch').val();
+  
+  $.ajax({
+	 type : "GET",
+	 url : "/exodia/employee/getFilteredUser",
+	 data : {
+		 author : author,
+		 teamname : teamname
+	 },
+	 async : false,
+	 success : function(data) {
+		 console.log(data);
+		 usersList = data;
+	 }
+  });*/
   // Basic
   //------------------------------------------------------
   const tagifyBasicEl = $('#TagifyBasic')[0];
@@ -104,8 +156,8 @@ $(document).ready(function() {
   //------------------------------------------------------
   const TagifyUserListEl = $('#TagifyUserList')[0];
 
-  const usersList = [
-	   {
+/*  const usersList = [
+	    {
 	      value: 1,
 	      name: 'Justinian Hattersley',
 	      avatar: 'https://i.pravatar.cc/80?img=1',
@@ -165,10 +217,25 @@ $(document).ready(function() {
 	      avatar: 'https://i.pravatar.cc/80?img=10',
 	      email: 'ctidey9@youtube.com'
 	    }
-  ];
+  ];*/
 
   function tagTemplate(tagData) {
 	  return `
+	    <tag title="${tagData.title || tagData.email}"
+	      contenteditable='false'
+	      spellcheck='false'
+	      tabIndex="-1"
+	      class="${this.settings.classNames.tag} ${tagData.class ? tagData.class : ''}"
+	      ${this.getAttributes(tagData)}
+	    >
+	      <x title='' class='tagify__tag__removeBtn' role='button' aria-label='remove tag'></x>
+	      <div>
+	       
+	        <span class='tagify__tag-text'>${tagData.name}</span>
+	      </div>
+	    </tag>
+	  `;
+/*	  return `
 	    <tag title="${tagData.title || tagData.email}"
 	      contenteditable='false'
 	      spellcheck='false'
@@ -184,7 +251,7 @@ $(document).ready(function() {
 	        <span class='tagify__tag-text'>${tagData.name}</span>
 	      </div>
 	    </tag>
-	  `;
+	  `;*/
   }
 
   function suggestionItemTemplate(tagData) {

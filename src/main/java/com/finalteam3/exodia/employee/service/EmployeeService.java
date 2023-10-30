@@ -1,6 +1,7 @@
 package com.finalteam3.exodia.employee.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
 import com.finalteam3.exodia.employee.dto.request.LoginRequest;
@@ -9,6 +10,7 @@ import com.finalteam3.exodia.employee.dto.request.PasswordRequest;
 import com.finalteam3.exodia.employee.dto.response.EmpManagementResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
+import com.finalteam3.exodia.employee.dto.response.TransferDto;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 
 public interface EmployeeService {
@@ -44,4 +46,5 @@ public interface EmployeeService {
 	public ModifyResult changeEmpInfo(ModifyRequest modifyRequest);
 	public boolean confirmPassword(String emp_id, String emp_password);
 	public List<EmpManagementResponse> getManagementResponse(int project_no);
+	public List<TransferDto> getFilteredUser(Map<String, Object> map);
 }

@@ -272,7 +272,7 @@
 				                              data-bs-placement="top"
 				                              class="avatar avatar-xs pull-up"
 				                              title="${members}">
-				                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/5.png" alt="Avatar" class="rounded-circle" />
+				                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
 				                            </li>
 				                             <!-- <li class="avatar avatar-xs col-md-3 col-sm-6">
 						                          <span
@@ -355,6 +355,7 @@
 		                            data-icon-base="bx"
 		                            data-tick-icon="bx-check"
 		                            data-style="btn-default">
+		                            <option data-icon="bx">-------권한을 선택해주세요-------</option>
 		                            <option data-icon="bx">PM</option>
 		                            <option data-icon="bx">PL</option>
 		                            <option data-icon="bx">EMP</option>
@@ -369,13 +370,13 @@
 		                            class="selectpicker w-100"
 		                            data-style="btn-default"
 		                            data-live-search="true">
+		                            <option data-tokens="ketchup mustard">-------팀을 선택해주세요-------</option>
 		                            <c:forEach var="teamName" items="${list}">
 			                            <option data-tokens="ketchup mustard">${teamName.team_name}</option>
 		                            </c:forEach>
 		                          </select>
 		                        </div>
 		                        
-			         
 		                        <!-- Basic -->
 		                        <div class="col-md-10 mb-4">
 		                          <label for="TypeaheadBasic" class="form-label">팀 업무</label>
@@ -386,8 +387,6 @@
 		                            autocomplete="off"
 		                            value="로그인" />
 		                        </div>
-			                       
-			            
 		                        
 		                        <div class="col-md-10 mb-4">
 		                          <label for="TagifyUserList" class="form-label">사용자 목록</label>
@@ -395,7 +394,7 @@
 		                            id="TagifyUserList"
 		                            name="TagifyUserList"
 		                            class="form-control"
-		                            value="Ardeen Batisse, Justinian Hattersley" />
+		                            value="노노노"/>
 		                        </div>
 		               
 				               <hr>
