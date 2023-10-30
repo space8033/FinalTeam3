@@ -1,5 +1,8 @@
 package com.finalteam3.exodia.calendar.service;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.finalteam3.exodia.calendar.dao.CalendarDao;
 import com.finalteam3.exodia.calendar.dto.request.CalendarRequest;
 import com.finalteam3.exodia.calendar.dto.response.CalendarResponse;
+import com.finalteam3.exodia.calendar.dto.response.CalendarResponse2;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,12 +29,37 @@ public class CalendarServiceImpl implements CalendarService{
 	}
 
 	@Override
-	public CalendarResponse getPersonalTask(int emp_no) {
-		log.info("캘린더서비스 empno :" + emp_no);
-		CalendarResponse response = calendarDao.selectCalendarTask(emp_no);
-		log.info("캘린더서비스 response :" + response);
-		return response;
-	}
+    public List<CalendarResponse2> getPersonalTask(int emp_no) {
+		
+	    List<CalendarResponse> originalResponseList = calendarDao.selectCalendarTask(emp_no);
+	    log.info("캘린더dto 1 : " + originalResponseList);
+	    
+	    List<CalendarResponse2> responseList = new ArrayList<>();
 
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+	    for (CalendarResponse response : originalResponseList) {
+	        CalendarResponse2 response2 = new CalendarResponse2();
+	        response2.setId(response.getId());
+	        response2.setTitle(response.getTitle());
+	        //response2.setEmp_no(response.getEmp_no());
+	        response2.setUrl("");
+
+	        try {
+	            Date start = dateFormat.parse(response.getStart());
+	            Date end = dateFormat.parse(response.getEnd());
+	            response2.setStart(start);
+	            response2.setEnd(end);
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            // 날짜 변환 오류 처리
+	        }
+
+	        responseList.add(response2);
+	        log.info("날짜로 변환한 response2 : " + response2);
+	    }
+
+	    return responseList;
+    }
 
 }

@@ -72,7 +72,7 @@ public class Main {
 		return "calendar";
 	}
 	
-	@RequestMapping("/noticeList")
+	/*@RequestMapping("/noticeList")
 	public String noticeList(Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
@@ -80,7 +80,7 @@ public class Main {
 		String emp_name = loginResponse.getEmpInfo_name();
 		model.addAttribute("empInfo_name", emp_name);
 		return "noticeList";
-	}
+	}*/
 	
 	@RequestMapping("/noticeAdd")
 	public String noticeAdd(Model model, Authentication authentication) {

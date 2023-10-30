@@ -21,6 +21,7 @@ let events = [
 	    allDay: true,
 	    extendedProps: {
 	      calendar: 'Business'
+	     
 	    }
 	  }
 	];
