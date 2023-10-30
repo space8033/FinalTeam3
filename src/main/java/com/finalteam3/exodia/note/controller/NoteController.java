@@ -41,6 +41,8 @@ public class NoteController {
 	public String note(String pageNote, HttpSession session, @RequestParam(name= "inbox", required=false) String inbox, Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
+		String emp_id = loginResponse.getEmp_id();
+		model.addAttribute("emp_id", emp_id);
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
 		
