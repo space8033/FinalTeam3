@@ -39,7 +39,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		
 		
 		//채팅
-		log.info("#ChattingHandler, afterConnectionEstablished");
+		//log.info("#ChattingHandler, afterConnectionEstablished");
 		
 		log.info(session.getId()+"님이 입장하셨습니다.");
 	}
@@ -51,9 +51,9 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		//알람
 		for(WebSocketSession single : sessions) {
 			String memId = message.getPayload();
-			log.info(message+"나 메세지" + memId+"나 아이디"+single+"싱글이야?"+session.getId()+"세션에서 얻은 아이디"+single.getId()+"싱글에서얻은아이디");
+			//log.info(message+"나 메세지" + memId+"나 아이디"+single+"싱글이야?"+session.getId()+"세션에서 얻은 아이디"+single.getId()+"싱글에서얻은아이디");
 			//int count = alarmDao.selectAlarmUchkCount(memId);
-			int count = 3;
+			int count = 0;
 			
 			if(single.getId().equals(session.getId()) && count != 0) {
 				TextMessage sendMsg = new TextMessage(memId + "님 새 알람이 있습니다");
@@ -66,7 +66,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		
 		//채팅
 		
-		log.info(session.getId() + ": " + message);
+		//log.info(session.getId() + ": " + message);
 		
 		for(WebSocketSession s : sessionList) {
 			s.sendMessage(new TextMessage(message.getPayload()));
