@@ -18,7 +18,7 @@ if (isRtl) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-	console.log("asfasdf");// HTML 문서의 내용이 완전히 로드되면 (DOMContentLoaded 이벤트) 실행되는 함수를 정의
+	console.log("시작");// HTML 문서의 내용이 완전히 로드되면 (DOMContentLoaded 이벤트) 실행되는 함수를 정의
   (function () {
     const calendarEl = document.getElementById('calendar'), //document 객체를 사용하여 HTML 문서에서 ID가 'calendar'인 요소를 찾아서 calendarEl 변수에 할당, 웹 페이지에서 캘린더를 표시하는 부분
       appCalendarSidebar = document.querySelector('.app-calendar-sidebar'),
@@ -221,9 +221,9 @@ document.addEventListener('DOMContentLoaded', function () {
     // --------------------------------------------------------------------------------------------------
     function fetchEvents(info, successCallback) {
       // Fetch Events from API endpoint reference
-      /* $.ajax(
+       /*$.ajax(
         {
-          url: '../../../app-assets/data/app-calendar-events.js',
+          url: '../../../app-assets/data/calendar-events.js',
           type: 'GET',
           success: function (result) {
             // Get requested calendars as Array
@@ -235,7 +235,7 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log(error);
           }
         }
-      ); */
+      );*/ 
 
       let calendars = selectedCalendars();
       // We are reading event object from app-calendar-events.js file directly by including that file above app-calendar file.
@@ -575,9 +575,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
 $(document).ready(function() {
 //add task
-	console.log("aaaaaaaaaaaa");
+	console.log("add시작");
     $('#calendarsubmit').click(function() {
-    	console.log("asdfs");
+    	console.log("submit 클릭 성공");
         var eventData = {
             task_name: $('input[name=eventTitle]').val(),
             task_content: $('#eventDescription').val(),
@@ -596,6 +596,17 @@ $(document).ready(function() {
             }
         });
     });
+    
+//show task    
+    $.ajax({
+        type: 'get',
+        url: '/exodia/calendar', 
+        success: function(data) {
+            // 서버에서 반환한 데이터를 사용하여 화면에 이벤트를 추가
+            var eventData = JSON.parse(data); // JSON 응답을 JavaScript 객체로 변환
+            calendar.addEvent(eventData); // 캘린더에 이벤트 추가
+        }
+    }); 
 
 //update task
     $()
