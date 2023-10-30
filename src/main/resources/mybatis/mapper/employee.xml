@@ -20,6 +20,11 @@
       	values(#{empinfo_no}, #{empinfo_name}, #{empinfo_position}, #{empinfo_phone}, #{empinfo_email}, to_char(sysdate,'yyyy.mm.dd hh24:mi:ss'), #{emp_no})
 	</insert>
 	
+	<insert id="insertRole" parameterType="int">
+		insert into role(project_no, empinfo_no, role_category)
+		values(0, #{empinfo_no}, 'ROLE_EMP')
+	</insert>
+	
 	<select id="selectEmpByEmpId" parameterType="String" resultType="LoginResponse">
 		select e.emp_id, e.emp_password, i.empinfo_name, e.emp_no, e.emp_isinit, e.emp_deletedAt, r.role_category
 		from emp e, empinfo i, role r
@@ -70,13 +75,37 @@
 		order by team_name
 	</select>
 	
-	<select id="selectTeamBasic" parameterType="string" resultType="TeamBasicResponse">
+	<select id="selectNoTeamEmp" resultType="EmpSimpleResponse">
+		select empinfo_name, empinfo_email
+		from empinfo
+		left join team
+		on empinfo.empinfo_no = team.empinfo_no
+		where team.empinfo_no is null
+	</select>
+		
+	<select id="selectTeamEmp" resultType="EmpSimpleResponse" parameterType="String">
+		select i.empinfo_name, i.empinfo_email
+		from empinfo i, team t
+		where t.empinfo_no = i.empinfo_no
+		and t.team_name = #{team_name}
+	</select>
+	
+	<select id="selectTeamLeader" resultType="EmpSimpleResponse" parameterType="String">
+		select i.empinfo_name, i.empinfo_email
+		from empinfo i, team t
+		where t.empinfo_no = i.empinfo_no
+		and t.team_name = #{team_name}
+		and t.team_isleader = 1
+	</select>
+
+	<select id="selectTeamBasic" parameterType="String" resultType="TeamBasicResponse">
 		select t.team_duty, i.emp_no, i.empinfo_name, t.team_isleader
 		from team t, empinfo i
 		where project_no = 0
 		and i.empinfo_no = t.empinfo_no
 		and t.team_name = #{team_name}
 	</select>
+	
 	
 	<update id="updateStatus" parameterType="String">
 		update emp set emp_status = 'connected' where emp_id = #{emp_id}

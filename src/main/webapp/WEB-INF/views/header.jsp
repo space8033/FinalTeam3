@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+
+
+
+
+
 	<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
           id="layout-navbar">
           <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -170,7 +176,7 @@
            </li>
            <!-- / Style Switcher-->
 
-           <!-- Notification -->
+           <!-- 실시간 알람 -->
            <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
              <a
                class="nav-link dropdown-toggle hide-arrow"
@@ -178,9 +184,10 @@
                data-bs-toggle="dropdown"
                data-bs-auto-close="outside"
                aria-expanded="false">
-               <i class="bx bx-bell bx-sm"></i>
-               <span class="badge bg-danger rounded-pill badge-notifications">5</span>
+               <i class="bx bx-bell bx-sm"></i> <input id="alarmId" type="hidden" value="${emp_id}">
+               <span id="alarmIcon" class="d-none badge bg-danger rounded-pill badge-notifications">5</span>
              </a>
+       				 
              <ul class="dropdown-menu dropdown-menu-end py-0">
                <li class="dropdown-menu-header border-bottom">
                  <div class="dropdown-header d-flex align-items-center py-3">
@@ -483,6 +490,12 @@
            <!--/ User -->
          </ul>
        </div>
+       
+       
+     
+    
+                      
+                      
 
        <!-- Search Small Screens -->
        <div class="navbar-search-wrapper search-input-wrapper d-none">
@@ -493,7 +506,13 @@
            aria-label="Search..." />
          <i class="bx bx-x bx-sm search-toggler cursor-pointer"></i>
        </div>
+       
+         
      </nav>
+     
+     
+       
+     
      
      <div class="modal fade" id="upgradePlanModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-simple modal-upgrade-plan">
@@ -530,3 +549,26 @@
            </div>
          </div>
       </div>
+      
+      
+      
+      	<!-- 토스트 메세지 -->
+       <div
+       		 id="alarmToast"
+             class="bs-toast toast fade bg-primary position-fixed top-10 end-0"
+             role="alert"
+             aria-live="assertive"
+             aria-atomic="true"
+             style="margin-right:130px;">
+             
+             <div class="toast-header">
+               <i class="bx bx-bell me-2"></i>
+               <div class="me-auto fw-medium">알람</div>
+               <small>1초 전</small>
+               <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+             </div>
+             
+             <div id="alarmMsg" class="toast-body">
+               
+             </div>
+       </div>

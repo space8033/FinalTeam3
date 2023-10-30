@@ -3,8 +3,10 @@ package com.finalteam3.exodia.employee.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -12,13 +14,13 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.springframework.security.access.annotation.Secured;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.finalteam3.exodia.employee.dto.request.JoinList;
@@ -27,7 +29,9 @@ import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
 import com.finalteam3.exodia.employee.dto.request.PasswordRequest;
 import com.finalteam3.exodia.employee.dto.response.EmpManagementResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
+import com.finalteam3.exodia.employee.dto.response.EmpSimpleResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
+import com.finalteam3.exodia.employee.dto.response.TransferDto;
 import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.employee.service.EmployeeService.JoinResult;
 import com.finalteam3.exodia.employee.service.EmployeeService.PasswordResult;
@@ -224,5 +228,19 @@ public class EmployeeController {
 		
 		return "/userManagement";
 	}
-
+	
+	@GetMapping("/getFilteredUser")
+	@ResponseBody
+	public List<TransferDto> getFilteredUser(@RequestParam("author") String author,
+											@RequestParam("teamname") String teamname) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("author", author);
+		map.put("teamname", teamname);
+		
+		List<TransferDto> list = employeeService.getFilteredUser(map);
+		
+		log.info("결과닷!" + list.toString());
+		
+		return list;
+	}
 }

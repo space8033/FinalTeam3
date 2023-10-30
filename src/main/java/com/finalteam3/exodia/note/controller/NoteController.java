@@ -38,18 +38,20 @@ public class NoteController {
 	
 	
 	@GetMapping("/note")
-	public String note(String pageNo, HttpSession session, @RequestParam(name= "inbox", required=false) String inbox, Model model, Authentication authentication) {
+	public String note(String pageNote, HttpSession session, @RequestParam(name= "inbox", required=false) String inbox, Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
+		String emp_id = loginResponse.getEmp_id();
+		model.addAttribute("emp_id", emp_id);
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
 		
-		if(pageNo == null) {
+		if(pageNote == null) {
 			   //세션에 저장되어 있는지 확인
-			   pageNo = (String) session.getAttribute("pageNo");
+			pageNote = (String) session.getAttribute("pageNote");
 			   //저장되어있지 않다면 "1"로 초기화
-			   if(pageNo == null) {
-				   pageNo = "1";
+			   if(pageNote == null) {
+				   pageNote = "1";
 			   }
 		}
 		
@@ -57,9 +59,9 @@ public class NoteController {
 		
 		
 		//문자열을 정수로 변환
-		int intPageNo = Integer.parseInt(pageNo);
+		int intPageNo = Integer.parseInt(pageNote);
 		//세션에 pageNo를 저장
-		session.setAttribute("pageNo", String.valueOf(pageNo));
+		session.setAttribute("pageNote", String.valueOf(pageNote));
 		log.info("여기까지 ok2");
 		int totalRows = noteService.countByNoteNo(empNo);
 		log.info(totalRows+"나전체숫자");
@@ -85,18 +87,18 @@ public class NoteController {
 	
 	//수신 쪽지함 불러오기
 	@GetMapping("/noteInbox")
-	public String noteInbox(String pageNo, HttpSession session, @RequestParam(name= "inbox", required=false) String inbox, Model model, Authentication authentication) {
+	public String noteInbox(String pageInbox, HttpSession session, @RequestParam(name= "inbox", required=false) String inbox, Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
 	
-		if(pageNo == null) {
+		if(pageInbox == null) {
 			//세션에 저장되어 있는지 확인
-			pageNo = (String) session.getAttribute("pageNo");
+			pageInbox = (String) session.getAttribute("pageInbox");
 			//저장되어있지 않다면 "1"로 초기화
-			if(pageNo == null) {
-				pageNo = "1";
+			if(pageInbox == null) {
+				pageInbox = "1";
 			}
 		}
 		
@@ -104,9 +106,9 @@ public class NoteController {
 		
 		
 		//문자열을 정수로 변환
-		int intPageNo = Integer.parseInt(pageNo);
+		int intPageNo = Integer.parseInt(pageInbox);
 		//세션에 pageNo를 저장
-		session.setAttribute("pageNo", String.valueOf(pageNo));
+		session.setAttribute("pageInbox", String.valueOf(pageInbox));
 		log.info("여기까지 ok2");
 		int totalRows = noteService.countByNoteNo(empNo);
 		log.info(totalRows+"나전체숫자");
@@ -134,7 +136,7 @@ public class NoteController {
 	
 	//발신 쪽지함 불러오기
 	@GetMapping("/noteSent")
-	public String noteSent(String pageNo,@RequestParam("noteSent") String noteSent, HttpSession session, Model model, Authentication authentication) {
+	public String noteSent(String pageSent,@RequestParam("noteSent") String noteSent, HttpSession session, Model model, Authentication authentication) {
 		log.info(noteSent+"노트센트 잘받아오니");
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
@@ -142,12 +144,12 @@ public class NoteController {
 		model.addAttribute("empInfo", empInfo);
 		
 		
-		if(pageNo == null) {
+		if(pageSent == null) {
 			   //세션에 저장되어 있는지 확인
-			   pageNo = (String) session.getAttribute("pageNo");
+			pageSent = (String) session.getAttribute("pageSent");
 			   //저장되어있지 않다면 "1"로 초기화
-			   if(pageNo == null) {
-				   pageNo = "1";
+			   if(pageSent == null) {
+				   pageSent = "1";
 			   }
 		}
 		
@@ -155,9 +157,9 @@ public class NoteController {
 		
 		
 		//문자열을 정수로 변환
-		int intPageNo = Integer.parseInt(pageNo);
+		int intPageNo = Integer.parseInt(pageSent);
 		//세션에 pageNo를 저장
-		session.setAttribute("pageNo", String.valueOf(pageNo));
+		session.setAttribute("pageSent", String.valueOf(pageSent));
 		log.info("여기까지 ok2");
 		int totalRows = noteService.countByNoteSenderNo(empNo);
 		log.info(totalRows+"나전체숫자");
@@ -186,7 +188,7 @@ public class NoteController {
 	
 	//임시저장 쪽지함 불러오기
 	@GetMapping("/noteDraft")
-	public String noteDraft(String pageNo,@RequestParam("noteDraft") String noteDraft, HttpSession session, Model model, Authentication authentication) {
+	public String noteDraft(String pageDraft,@RequestParam("noteDraft") String noteDraft, HttpSession session, Model model, Authentication authentication) {
 		log.info(noteDraft+"노트임시 잘받아오니");
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
@@ -194,12 +196,12 @@ public class NoteController {
 		model.addAttribute("empInfo", empInfo);
 		
 		
-		if(pageNo == null) {
+		if(pageDraft == null) {
 			//세션에 저장되어 있는지 확인
-			pageNo = (String) session.getAttribute("pageNo");
+			pageDraft = (String) session.getAttribute("pageDraft");
 			//저장되어있지 않다면 "1"로 초기화
-			if(pageNo == null) {
-				pageNo = "1";
+			if(pageDraft == null) {
+				pageDraft = "1";
 			}
 		}
 		
@@ -207,9 +209,9 @@ public class NoteController {
 		
 		
 		//문자열을 정수로 변환
-		int intPageNo = Integer.parseInt(pageNo);
+		int intPageNo = Integer.parseInt(pageDraft);
 		//세션에 pageNo를 저장
-		session.setAttribute("pageNo", String.valueOf(pageNo));
+		session.setAttribute("pageDraft", String.valueOf(pageDraft));
 		log.info("여기까지 ok2");
 		int totalRows = noteService.countByNoteDraftNo(empNo);
 		log.info(totalRows+"나전체숫자");
@@ -238,18 +240,18 @@ public class NoteController {
 	
 	//중요쪽지함 불러오기
 	@GetMapping("/noteStarred")
-	public String noteStarred(String pageNo,@RequestParam("noteStarred") String noteStarred, HttpSession session, Model model, Authentication authentication) {
+	public String noteStarred(String pageStarred,@RequestParam("noteStarred") String noteStarred, HttpSession session, Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
 	
-		if(pageNo == null) {
+		if(pageStarred == null) {
 			//세션에 저장되어 있는지 확인
-			pageNo = (String) session.getAttribute("pageNo");
+			pageStarred = (String) session.getAttribute("pageStarred");
 			//저장되어있지 않다면 "1"로 초기화
-			if(pageNo == null) {
-				pageNo = "1";
+			if(pageStarred == null) {
+				pageStarred = "1";
 			}
 		}
 		
@@ -257,9 +259,9 @@ public class NoteController {
 		
 		
 		//문자열을 정수로 변환
-		int intPageNo = Integer.parseInt(pageNo);
+		int intPageNo = Integer.parseInt(pageStarred);
 		//세션에 pageNo를 저장
-		session.setAttribute("pageNo", String.valueOf(pageNo));
+		session.setAttribute("pageStarred", String.valueOf(pageStarred));
 		log.info("여기까지 ok2");
 		int totalRows = noteService.countByNoteStarredNo(empNo);
 		log.info(totalRows+"나전체숫자");
@@ -286,18 +288,18 @@ public class NoteController {
 	}
 	
 	@GetMapping("/noteTrash")
-	public String noteTrash(String pageNo,@RequestParam("noteTrash") String noteTrash, HttpSession session, Model model, Authentication authentication) {
+	public String noteTrash(String pageTrash, @RequestParam("noteTrash") String noteTrash, HttpSession session, Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
 		
-		if(pageNo == null) {
+		if(pageTrash == null) {
 			//세션에 저장되어 있는지 확인
-			pageNo = (String) session.getAttribute("pageNo");
+			pageTrash = (String) session.getAttribute("pageTrash");
 			//저장되어있지 않다면 "1"로 초기화
-			if(pageNo == null) {
-				pageNo = "1";
+			if(pageTrash == null) {
+				pageTrash = "1";
 			}
 		}
 		
@@ -305,9 +307,9 @@ public class NoteController {
 		
 		
 		//문자열을 정수로 변환
-		int intPageNo = Integer.parseInt(pageNo);
+		int intPageNo = Integer.parseInt(pageTrash);
 		//세션에 pageNo를 저장
-		session.setAttribute("pageNo", String.valueOf(pageNo));
+		session.setAttribute("pageTrash", String.valueOf(pageTrash));
 		log.info("여기까지 ok2");
 		int totalRows = noteService.countByNoteTrashNo(empNo);
 		log.info(totalRows+"나전체숫자");
@@ -406,5 +408,26 @@ public class NoteController {
 		
 		return "redirect:/note";
 	}
+	
+	//쪽지 휴지통보내기
+	@PostMapping("/trashNote")
+	@ResponseBody
+	public String trashNote(String checkedIdsString, String contentType) {
+		
+		noteService.checkTrash(checkedIdsString);
+		
+		return "redirect:/note";
+	}
+	
+	//휴지통 쪽지 복구하기
+	@PostMapping("/recoveryNote")
+	@ResponseBody
+	public String recoveryNote(String checkedIdsString) {
+		
+		noteService.recoverTrashNote(checkedIdsString);
+		
+		return "redirect:/note";
+	}
+	
 	
 }

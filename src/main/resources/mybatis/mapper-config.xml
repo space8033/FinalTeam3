@@ -10,8 +10,9 @@
 		<typeAlias alias="ModifyRequest" type="com.finalteam3.exodia.employee.dto.request.ModifyRequest" />
 		<typeAlias alias="EmpModifyResponse" type="com.finalteam3.exodia.employee.dto.response.EmpModifyResponse" />		
 		<typeAlias alias="EmpManagementResponse" type="com.finalteam3.exodia.employee.dto.response.EmpManagementResponse" />
-		<typeAlias alias="TeamBasicResponse" type="com.finalteam3.exodia.employee.dto.response.TeamBasicResponse" />
 		<typeAlias alias="EmployeeInfo" type="com.finalteam3.exodia.note.dto.EmployeeInfo" />
+		<typeAlias alias="EmpSimpleResponse" type="com.finalteam3.exodia.employee.dto.response.EmpSimpleResponse" />
+		<typeAlias alias="TeamBasicResponse" type="com.finalteam3.exodia.employee.dto.response.TeamBasicResponse" />
 		<typeAlias alias="Note" type="com.finalteam3.exodia.note.dto.request.Note" />
 		<typeAlias alias="NoteRead" type="com.finalteam3.exodia.note.dto.request.NoteRead" />
 		<typeAlias alias="NoteAll" type="com.finalteam3.exodia.note.dto.NoteAll" />
@@ -20,7 +21,6 @@
 		<typeAlias alias="Notice" type="com.finalteam3.exodia.notice.dto.Notice" />
 		<typeAlias alias="Calendar" type="com.finalteam3.exodia.calendar.dto.request.CalendarRequest" />
 		<typeAlias alias="CalendarResponse" type="com.finalteam3.exodia.calendar.dto.response.CalendarResponse" />
-		
 		<typeAlias alias="Media" type="com.finalteam3.exodia.media.dto.MediaDto" />
 
 	</typeAliases>

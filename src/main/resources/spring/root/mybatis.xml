@@ -41,5 +41,8 @@
 	<mybatis-spring:scan
 		base-package="com.finalteam3.exodia.media.dao"
 		annotation="org.apache.ibatis.annotations.Mapper" />
+	<mybatis-spring:scan
+		base-package="com.finalteam3.exodia.alarm.dao"
+		annotation="org.apache.ibatis.annotations.Mapper" />
 
 </beans>

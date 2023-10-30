@@ -23,8 +23,10 @@ import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
 import com.finalteam3.exodia.employee.dto.request.PasswordRequest;
 import com.finalteam3.exodia.employee.dto.response.EmpManagementResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
+import com.finalteam3.exodia.employee.dto.response.EmpSimpleResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.dto.response.TeamBasicResponse;
+import com.finalteam3.exodia.employee.dto.response.TransferDto;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -94,6 +96,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 			
 			joinRequest.setEmp_no(emp_no);
 			employeeDao.insertEmpInfo(joinRequest);
+			
+			employeeDao.insertRole(joinRequest.getEmpinfo_no());
 			
 			return JoinResult.JOIN_SUCCESS;
 		}else {
@@ -182,12 +186,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 				if(tbr.getEmp_no() == 0) {
 					emr.setTeam_name(tName);
 					emr.setTeam_duty(tbr.getTeam_duty());
-				}
-				if(tbr.isTeam_isleader()) {
-					emr.setTeam_leader(tbr.getEmpinfo_name());
+				}else if(tbr.isTeam_isleader()) {
+					emr.setTeam_leader(tbr.getEmpinfo_name());					
 				}else {
 					teamMembers.add(tbr.getEmp_no());
-					
 				}
 			}
 			
@@ -195,6 +197,36 @@ public class EmployeeServiceImpl implements EmployeeService{
 			emr.setTeam_members(teamMembers);
 			
 			list.add(emr);
+		}
+		
+		return list;
+	}
+
+	@Override
+	public List<TransferDto> getFilteredUser(Map<String, Object> map) {
+		List<EmpSimpleResponse> esrs = employeeDao.selectNoTeamEmp();
+		if(map.get("author").equals("EMP")) {
+			List<EmpSimpleResponse> teamEmps = employeeDao.selectTeamEmp(map.get("teamname").toString());
+			for(EmpSimpleResponse t : teamEmps) {
+				if(!t.getEmpinfo_name().equals("관리자")) {
+					esrs.add(t);					
+				}
+			}
+		}else if(map.get("author").equals("PL")) {
+			esrs.add(employeeDao.selectTeamLeader(map.get("teamname").toString()));
+		}
+		
+		List<TransferDto> list = new ArrayList<>();
+		int index = 1;
+		
+		for(EmpSimpleResponse esr : esrs) {
+			TransferDto t = new TransferDto();
+			t.setValue(index);
+			t.setName(esr.getEmpinfo_name());
+			t.setEmail(esr.getEmpinfo_email());
+			
+			index++;
+			list.add(t);
 		}
 		
 		return list;

@@ -4,6 +4,37 @@
 
 'use strict';
 
+
+	const sock = new SockJS("http://localhost:8080/exodia/header");
+	   
+	sock.onopen = function() {
+		var emp_id = document.getElementById('alarmId').value;
+		sock.send(emp_id);
+	    wsSend();
+	};
+
+	sock.onmessage = function(e) {
+		console.log("핸들러에서 전송한 메세지",e.data);
+	    var v_alarmIcon = document.querySelector("#alarmIcon");
+	    v_alarmIcon.classList.remove('d-none');
+	    var alarmToast = document.querySelector("#alarmToast");
+	    alarmToast.classList.add('show');
+	    var alarmMsg = document.querySelector("#alarmMsg");
+	    alarmMsg.innerText = e.data;
+	};
+
+	function wsSend() {
+	    setInterval(function() {
+	        // 3초마다 클라이언트로 메시지 전송
+	    	
+	    	var emp_id = document.getElementById('alarmId').value;
+	    	console.log(emp_id);
+	        sock.send(emp_id);
+	    }, 3000);
+	}
+
+
+
 let isRtl = window.Helpers.isRtl(),
   isDarkStyle = window.Helpers.isDarkStyle(),
   menu,
