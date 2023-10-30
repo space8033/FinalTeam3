@@ -105,7 +105,7 @@ $(document).ready(function() {
   const TagifyUserListEl = $('#TagifyUserList')[0];
 
   const usersList = [
-	  {
+	   {
 	      value: 1,
 	      name: 'Justinian Hattersley',
 	      avatar: 'https://i.pravatar.cc/80?img=1',
