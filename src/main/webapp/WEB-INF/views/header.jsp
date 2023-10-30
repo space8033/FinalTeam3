@@ -1,5 +1,33 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+
+<script>
+window.onload = function(){
+	var webSocket = new WebSocket("ws://exodia/${webPath}/ws-alarm");
+	   
+	webSocket.onopen = function() {
+	    webSocket.send("${emp_id}");
+	    wsSend();
+	};
+
+	webSocket.onmessage = function(e) {
+	    var v_alarmIcon = document.querySelector("#alarmIcon");
+	    v_alarmIcon.style.display = 'inline';
+	};
+
+	function wsSend() {
+	    setInterval(function() {
+	        // 3초마다 클라이언트로 메시지 전송
+	        webSocket.send("${emp_id}");
+	    }, 3000);
+	}
+}
+</script>
+
+
+
+
+
 	<nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
           id="layout-navbar">
           <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
@@ -170,7 +198,7 @@
            </li>
            <!-- / Style Switcher-->
 
-           <!-- Notification -->
+           <!-- 실시간 알람 -->
            <li class="nav-item dropdown-notifications navbar-dropdown dropdown me-3 me-xl-1">
              <a
                class="nav-link dropdown-toggle hide-arrow"
@@ -178,8 +206,8 @@
                data-bs-toggle="dropdown"
                data-bs-auto-close="outside"
                aria-expanded="false">
-               <i class="bx bx-bell bx-sm"></i>
-               <span class="badge bg-danger rounded-pill badge-notifications">5</span>
+               <i class="bx bx-bell bx-sm"></i> <input type="hidden" value="${emp_id}">
+               <span style="display:nonte;" id="alarmIcon" class="badge bg-danger rounded-pill badge-notifications">5</span>
              </a>
              <ul class="dropdown-menu dropdown-menu-end py-0">
                <li class="dropdown-menu-header border-bottom">

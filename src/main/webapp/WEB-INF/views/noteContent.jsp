@@ -57,8 +57,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/editor.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.css" />
-
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/styles/index.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/bs-stepper/bs-stepper.css" />
     <!-- Page CSS -->
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/pages/app-email.css" />
@@ -145,8 +146,15 @@
                                 <input class="form-check-input" type="checkbox" id="email-select-all" onclick="javascript:checkAll()"/>
                                 <label class="form-check-label" for="email-select-all"></label>
                               </div>
-                              <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4"></i>
+                              <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:trashCheck('${contentType}')"></i>
                               <i class="bx bx-envelope email-list-read cursor-pointer me-3 fs-4"></i>
+                              <c:choose>
+	                              <c:when test ="${contentType eq '휴지통'}">
+	                               	<i class="bx bx-rotate-left email-list-read cursor-pointer me-3 fs-4" onclick="javascript:recoveryCheck()"></i>
+	                              </c:when>
+	                              <c:otherwise>
+	                              </c:otherwise>
+                              </c:choose>
                               <div class="dropdown">
                                 <button
                                   class="btn p-0"
@@ -275,10 +283,10 @@
 												<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy.MM.dd" /></c:set>
 												  <c:if test="${note.note_createdAt.substring(0, 10) eq date}">
 												  	<c:if test="${note.note_createdAt.substring(11, 13) ge '0' && note.note_createdAt.substring(11, 13) le '11'}">
-												    <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} AM</small>
+												      <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} AM</small>
 												    </c:if>
 												  	<c:if test="${note.note_createdAt.substring(11, 13) ge '12' && note.note_createdAt.substring(11, 13) le '23'}">
-												    <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} PM</small>
+												      <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} PM</small>
 												    </c:if>
 												  </c:if>
 												 
@@ -287,14 +295,25 @@
 												  </c:if>
 												  
 			                                  <ul class="list-inline email-list-item-actions">
-			                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
+			                                    <li class="list-inline-item email-delete"><i id="trash-${note.noteRead_no}" class="bx bx-trash-alt fs-4" onclick="javascript:trashSingleNote(${note.noteRead_no});"></i></li>
 			                                     <c:if test ="${note.noteRead_read != null}">
 						                              <li id="li-${note.noteRead_no}" class="list-inline-item email-read"><i id="i-${note.noteRead_no}" class="bx bx-envelope-open fs-4"></i></li>
 						                         </c:if>
 						                          <c:if test ="${note.noteRead_read == null}">
-			                                          <li class="list-inline-item email-unread"><i class="bx bx-envelope fs-4"></i></li>
+			                                          <li id="li-${note.noteRead_no}" class="list-inline-item email-unread"><i id="i-${note.noteRead_no}" class="bx bx-envelope fs-4"></i></li>
 			                                      </c:if>
-			                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
+			                                      
+			                                      
+			                                      <!-- 발신 쪽지함일 경우 : 발송취소/읽음-->
+			                                      <c:if test ="${contentType eq '발신'}">
+			                                          <c:if test ="${note.noteRead_read != null}">
+			                                    	     <li class="list-inline-item"> 
+			                                    	        <a class="text-primary text-mute" data-bs-toggle="modal" data-bs-target="#shareProject">발송취소</a> 
+			                                    	       
+			                                    	        
+			                                    	     </li>
+			                                    	  </c:if>
+			                                      </c:if>
 			                                  </ul>
 			                                </div>
 			                              </div>
@@ -305,10 +324,118 @@
                           <ul class="list-unstyled m-0">
                             <li class="email-list-empty text-center d-none">쪽지가 없습니다.</li>
                           </ul>
+                          
                         </div>
                       </div>
                      
                       <div class="app-overlay"></div>
+                      
+                      
+                      		<!-- 발송취소 모달 따로 jsp뺴기 임시 기능 -->
+                      		
+                      		
+                       <div class="modal fade" id="shareProject" tabindex="-1" aria-hidden="true">
+		                <div class="modal-dialog modal-lg modal-simple modal-enable-otp modal-dialog-centered">
+		                  <div class="modal-content p-3 p-md-5">
+		                    <div class="modal-body">
+		                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		                      <div class="text-center">
+		                        <h3 class="mb-2">수신자 명단</h3>
+		                      </div>
+		                    </div>
+		                    <div class="mb-4 pb-2">
+		                      <label for="select2Basic" class="form-label">수신자 찾기</label>
+		                      <select
+		                        id="select2Basic"
+		                        class="form-select form-select-lg share-project-select"
+		                        data-allow-clear="true">
+		                        <option data-name="Adelaide Nichols" data-image="img/avatars/20.png" selected>
+		                          	 김시온
+		                        </option>
+		                        <option data-name="Julian Murphy" data-image="img/avatars/9.png">Julian Murphy</option>
+		                        <option data-name="Sophie Gilbert" data-image="img/avatars/10.png">Sophie Gilbert</option>
+		                        <option data-name="Marvin Wheeler" data-image="img/avatars/17.png">Marvin Wheeler</option>
+		                      </select>
+		                    </div>
+		                    <h4 class="mb-4 pb-2">수신자</h4>
+		                    <ul class="p-0 m-0">
+		                      <li class="d-flex flex-wrap mb-3">
+		                        <div class="avatar me-3">
+		                          <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt="avatar" class="rounded-circle" />
+		                        </div>
+		                        <div class="d-flex justify-content-between flex-grow-1">
+		                          <div class="me-2">
+		                            <p class="mb-0">Lester Palmer</p>
+		                            <p class="mb-0 text-muted">pe@vogeiz.net</p>
+		                          </div>
+		                          <div class="dropdown">
+		                            <button type="button" class="btn btn-outline-primary">발송 취소
+		                            </button>
+		                          </div>
+		                        </div>
+		                      </li>
+		                      <li class="d-flex flex-wrap mb-3">
+		                        <div class="avatar me-3">
+		                          <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt="avatar" class="rounded-circle" />
+		                        </div>
+		                        <div class="d-flex justify-content-between flex-grow-1">
+		                          <div class="me-2">
+		                            <p class="mb-0">Mattie Blair</p>
+		                            <p class="mb-0 text-muted">peromak@zukedohik.gov</p>
+		                          </div>
+		                          <div class="dropdown">
+		                            
+		                              <i class="bx bx-envelope-open me-2">
+		                              </i><span class="text-muted fw-normal me-2 d-none d-sm-inline-block">2023.11.10.13:11 읽음</span>
+		                          </div>
+		                        </div>
+		                      </li>
+		                      <li class="d-flex flex-wrap mb-3">
+		                        <div class="avatar me-3">
+		                          <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/3.png" alt="avatar" class="rounded-circle" />
+		                        </div>
+		                        <div class="d-flex justify-content-between flex-grow-1">
+		                          <div class="me-2">
+		                            <p class="mb-0">Marvin Wheeler</p>
+		                            <p class="mb-0 text-muted">rumet@jujpejah.net</p>
+		                          </div>
+		                          <div class="dropdown">
+		                           
+		                           	  <i class="bx bx-envelope-open me-1">
+		                              </i>
+		                              <span class="text-muted fw-normal me-2 d-none d-sm-inline-block">2023.11.10.13:11 읽음</span>
+		                          </div>
+		                        </div>
+		                      </li>
+		                      <li class="d-flex flex-wrap mb-3">
+		                        <div class="avatar me-3">
+		                          <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/4.png" alt="avatar" class="rounded-circle" />
+		                        </div>
+		                        <div class="d-flex justify-content-between flex-grow-1">
+		                          <div class="me-2">
+		                            <p class="mb-0">Nannie Ford</p>
+		                            <p class="mb-0 text-muted">negza@nuv.io</p>
+		                          </div>
+		                          <div class="dropdown">
+		                            <button
+		                              type="button"
+		                              class="btn dropdown-toggle p-2"
+		                              data-bs-toggle="dropdown"
+		                              aria-expanded="false">
+		                              <span class="text-muted fw-normal me-2 d-none d-sm-inline-block">Can Comment</span>
+		                            </button>
+		                          </div>
+		                        </div>
+		                      </li>
+		                      
+		                    </ul>
+		                    <div class="d-flex align-items-center mt-4 align-items-sm-center">
+		                      <div class="d-flex justify-content-between flex-grow-1 align-items-center flex-wrap gap-2">
+		                      </div>
+		                    </div>
+		                  </div>
+		                </div>
+		              </div>
          
         </div>
         
@@ -381,5 +508,30 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/forms-pickers.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/forms-tagify.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
+    
+    
+    
+
+    <!-- Vendors JS -->
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bs-stepper/bs-stepper.js"></script>
+
+    <!-- Main JS -->
+    <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
+
+    <!-- Page JS -->
+    <script src="${pageContext.request.contextPath}/resources/assets/js/pages-pricing.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/modal-create-app.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/modal-add-new-cc.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/modal-add-new-address.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/modal-edit-user.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/modal-enable-otp.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/modal-share-project.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/modal-two-factor-auth.js"></script>
+    
   </body>
 </html>
