@@ -348,16 +348,16 @@
 		                        <!-- Basic -->
 		
 		                        <div class="col-md-10 mb-4">
-		                          <label for="selectpickerIcons" class="form-label">권한 설정</label>
+		                          <label for="selectpickerIcons" class="form-label">권한 구분</label>
 		                          <select
 		                            class="selectpicker w-100 show-tick"
 		                            id="selectpickerIcons"
 		                            data-icon-base="bx"
 		                            data-tick-icon="bx-check"
 		                            data-style="btn-default">
-		                            <option data-icon="bx bxl-instagram">관리자</option>
-		                            <option data-icon="bx bxl-pinterest-alt">PM</option>
-		                            <option data-icon="bx bxl-twitch">개발자</option>
+		                            <option data-icon="bx">PM</option>
+		                            <option data-icon="bx">PL</option>
+		                            <option data-icon="bx">EMP</option>
 		                          </select>
 		                        </div>
 		                        
@@ -369,22 +369,22 @@
 		                            class="selectpicker w-100"
 		                            data-style="btn-default"
 		                            data-live-search="true">
-		                            <option data-tokens="ketchup mustard">개발 1팀</option>
-		                            <option data-tokens="mustard">개발 2팀</option>
-		                            <option data-tokens="frosting">개발 3팀</option>
+		                            <c:forEach var="teamName" items="${list}">
+			                            <option data-tokens="ketchup mustard">${teamName.team_name}</option>
+		                            </c:forEach>
 		                          </select>
 		                        </div>
 		                        
 			         
 		                        <!-- Basic -->
 		                        <div class="col-md-10 mb-4">
-		                          <label for="TypeaheadBasic" class="form-label">팀 업무 배정(임시)</label>
+		                          <label for="TypeaheadBasic" class="form-label">팀 업무</label>
 		                          <input
 		                            id="TypeaheadBasic"
 		                            class="form-control typeahead"
 		                            type="text"
 		                            autocomplete="off"
-		                            placeholder="로그인" />
+		                            value="로그인" />
 		                        </div>
 			                       
 			            
@@ -395,7 +395,7 @@
 		                            id="TagifyUserList"
 		                            name="TagifyUserList"
 		                            class="form-control"
-		                            value="abatisse2@nih.gov, Justinian Hattersley" />
+		                            value="Ardeen Batisse, Justinian Hattersley" />
 		                        </div>
 		               
 				               <hr>
