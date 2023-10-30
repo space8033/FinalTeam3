@@ -1,7 +1,11 @@
 package com.finalteam3.exodia.employee.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -17,8 +21,10 @@ import com.finalteam3.exodia.employee.dto.request.JoinRequest;
 import com.finalteam3.exodia.employee.dto.request.LoginRequest;
 import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
 import com.finalteam3.exodia.employee.dto.request.PasswordRequest;
+import com.finalteam3.exodia.employee.dto.response.EmpManagementResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
+import com.finalteam3.exodia.employee.dto.response.TeamBasicResponse;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 
 import lombok.extern.slf4j.Slf4j;
@@ -160,5 +166,37 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}
 		
 		return false;
+	}
+
+	@Override
+	public List<EmpManagementResponse> getManagementResponse(int project_no) {
+		List<String> tNames = employeeDao.selectTeamname(project_no);
+		List<EmpManagementResponse> list = new ArrayList<>();
+		
+		for(String tName : tNames) {
+			EmpManagementResponse emr = new EmpManagementResponse();
+			List<TeamBasicResponse> tbrs = employeeDao.selectTeamBasic(tName);
+			List<Integer> teamMembers = new ArrayList<>();
+			
+			for(TeamBasicResponse tbr : tbrs) {
+				if(tbr.getEmp_no() == 0) {
+					emr.setTeam_name(tName);
+					emr.setTeam_duty(tbr.getTeam_duty());
+				}
+				if(tbr.isTeam_isleader()) {
+					emr.setTeam_leader(tbr.getEmpinfo_name());
+				}else {
+					teamMembers.add(tbr.getEmp_no());
+					
+				}
+			}
+			
+			//사람당 이미지파일 구하기(아직 구현 전)
+			emr.setTeam_members(teamMembers);
+			
+			list.add(emr);
+		}
+		
+		return list;
 	}
 }

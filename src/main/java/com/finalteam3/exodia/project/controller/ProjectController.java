@@ -39,6 +39,6 @@ public class ProjectController {
 		log.info(request.toString());	
 		projectService.addProject(request);
 		
-		return "/addProject";
+		return "redirect:/employee/userManagement";
 	}
 }

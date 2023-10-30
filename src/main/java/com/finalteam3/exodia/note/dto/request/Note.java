@@ -10,6 +10,7 @@ public class Note {
 	private int note_sender;
 	private boolean note_isCanceled;
 	private String note_createdAt;
-	private String note_deletedAt;
+	private String note_label;
+	private String note_draft;
 	private String note_restime;
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.finalteam3.exodia.media.dao.MediaDao">
+
+	<insert id="insertMedia" parameterType="Media">
+		<selectKey keyProperty="media_no" resultType="int" order="BEFORE">
+	         select seq_media.nextval from dual
+      	</selectKey>
+      	
+		INSERT INTO media(media_no, media_name, media_data, media_type, media_from, from_no)
+        VALUES (#{media_no}, #{media_name}, #{media_data}, #{media_type}, #{media_from}, #{from_no})
+    </insert>
+
+	
+</mapper>
