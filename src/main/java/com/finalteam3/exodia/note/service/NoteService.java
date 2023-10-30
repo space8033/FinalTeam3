@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.finalteam3.exodia.note.dto.NoteAll;
 import com.finalteam3.exodia.note.dto.request.Note;
+import com.finalteam3.exodia.note.dto.request.NoteRead;
 import com.finalteam3.exodia.note.dto.request.NoteRequest;
 import com.finalteam3.exodia.note.dto.request.ReplyRequest;
 
@@ -25,5 +26,6 @@ public interface NoteService {
 	public void updateRead(int noteNo);
 	public void updateStarred(int noteNo, String noteStarred);
 	public void checkTrash(String checkedIdsString);
+	public void recoverTrashNote(String checkedIdsString);
 	
 }

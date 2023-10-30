@@ -147,6 +147,13 @@
                               </div>
                               <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:trashCheck('${contentType}')"></i>
                               <i class="bx bx-envelope email-list-read cursor-pointer me-3 fs-4"></i>
+                              <c:choose>
+	                              <c:when test ="${contentType eq '휴지통'}">
+	                               	<i class="bx bx-rotate-left email-list-read cursor-pointer me-3 fs-4" onclick="javascript:recoveryCheck()"></i>
+	                              </c:when>
+	                              <c:otherwise>
+	                              </c:otherwise>
+                              </c:choose>
                               <div class="dropdown">
                                 <button
                                   class="btn p-0"
@@ -275,10 +282,10 @@
 												<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy.MM.dd" /></c:set>
 												  <c:if test="${note.note_createdAt.substring(0, 10) eq date}">
 												  	<c:if test="${note.note_createdAt.substring(11, 13) ge '0' && note.note_createdAt.substring(11, 13) le '11'}">
-												    <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} AM</small>
+												      <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} AM</small>
 												    </c:if>
 												  	<c:if test="${note.note_createdAt.substring(11, 13) ge '12' && note.note_createdAt.substring(11, 13) le '23'}">
-												    <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} PM</small>
+												      <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} PM</small>
 												    </c:if>
 												  </c:if>
 												 
@@ -287,12 +294,12 @@
 												  </c:if>
 												  
 			                                  <ul class="list-inline email-list-item-actions">
-			                                    <li class="list-inline-item email-delete"><i class="bx bx-trash-alt fs-4"></i></li>
+			                                    <li class="list-inline-item email-delete"><i id="trash-${note.noteRead_no}" class="bx bx-trash-alt fs-4" onclick="javascript:trashSingleNote(${note.noteRead_no});"></i></li>
 			                                     <c:if test ="${note.noteRead_read != null}">
 						                              <li id="li-${note.noteRead_no}" class="list-inline-item email-read"><i id="i-${note.noteRead_no}" class="bx bx-envelope-open fs-4"></i></li>
 						                         </c:if>
 						                          <c:if test ="${note.noteRead_read == null}">
-			                                          <li class="list-inline-item email-unread"><i class="bx bx-envelope fs-4"></i></li>
+			                                          <li id="li-${note.noteRead_no}" class="list-inline-item email-unread"><i id="i-${note.noteRead_no}" class="bx bx-envelope fs-4"></i></li>
 			                                      </c:if>
 			                                    <li class="list-inline-item"><i class="bx bx-error-circle fs-4"></i></li>
 			                                  </ul>

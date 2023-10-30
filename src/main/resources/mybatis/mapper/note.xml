@@ -203,10 +203,18 @@
 		   set noteRead_starred = #{noteRead_starred} 
 		 where noteRead_no = #{noteRead_no}
 	</update>
-	<!-- 쪽지 번호로 noteRead 중요쪽지 업데이트 작성자: 김시온 -->
+	
+	<!-- 쪽지 번호로 noteRead 쪽지 삭제(휴지통) 업데이트 작성자: 김시온 -->
 	<update id="trashNote" parameterType="int">
 		update noteRead 
 		   set noteRead_deletedAt=to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
+  		 where noteRead_no = #{noteRead_no}
+	</update>
+	
+	<!-- 쪽지 번호로 noteRead 복구 쪽지 업데이트 작성자: 김시온 -->
+	<update id="recoveryNotebyNoteRead" parameterType="noteRead">
+		update noteRead 
+		   set noteRead_deletedAt= #{noteRead_deletedAt} 
   		 where noteRead_no = #{noteRead_no}
 	</update>
 
