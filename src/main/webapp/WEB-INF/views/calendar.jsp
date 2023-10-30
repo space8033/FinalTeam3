@@ -479,14 +479,10 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-<<<<<<< HEAD
     <script src="${pageContext.request.contextPath}/resources/assets/js/calendar-events.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/calendar.js"></script>
-=======
-    <script src="${pageContext.request.contextPath}/resources/assets/js/app-calendar-events.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/app-calendar.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
->>>>>>> branch 'master' of https://github.com/space8033/FinalTeam3.git
+
     
   </body>
 </html>
