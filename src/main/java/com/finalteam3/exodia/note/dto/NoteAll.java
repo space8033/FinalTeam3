@@ -7,10 +7,12 @@ public class NoteAll {
 	private int note_no;
 	private String note_title;
 	private String note_content;
+	private String note_draft;
 	private int note_sender;
 	private boolean note_isCanceled;
 	private String note_createdAt;
-	private String note_deletedAt;
+	private String noteRead_deletedAt;
+	private String note_label;
 	private int noteRead_no;
 	private int emp_no_receiver;
 	private String noteRead_read;

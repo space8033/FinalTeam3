@@ -283,37 +283,33 @@
                             </a>
                             <div class="badge bg-label-primary rounded-pill">21</div>
                           </li>
-                          <li class="d-flex" data-target="sent">
+                          <li class="d-flex justify-content-between" data-target="sent">
                             <a href="javascript:void(0);" id="sentNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-send"></i>
                               <span class="align-middle ms-2">발신 쪽지함</span>
                             </a>
                           </li>
                           <li class="d-flex justify-content-between" data-target="draft">
-                            <a href="javascript:void(0);" class="d-flex flex-wrap align-items-center">
+                            <a href="javascript:void(0);" id="draftNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-edit"></i>
                               <span class="align-middle ms-2">임시 저장함</span>
                             </a>
-                            <div class="badge bg-label-warning rounded-pill">1</div>
+                            <div class="badge bg-label-success rounded-pill">1</div>
                           </li>
-                          <li class="d-flex" data-target="starred">
-                            <a href="javascript:void(0);" class="d-flex flex-wrap align-items-center">
+                          <li class="d-flex justify-content-between" data-target="starred">
+                            <a href="javascript:void(0);" id="starredNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-star"></i>
                               <span class="align-middle ms-2">중요 쪽지함</span>
                             </a>
+                              <div class="badge bg-label-warning rounded-pill">3</div>
                           </li>
-                          <li class="d-flex justify-content-between" data-target="spam">
-                            <a href="javascript:void(0);" class="d-flex flex-wrap align-items-center">
-                              <i class="bx bx-error-circle"></i>
-                              <span class="align-middle ms-2">차단 쪽지함</span>
-                            </a>
-                            <div class="badge bg-label-danger rounded-pill">6</div>
-                          </li>
-                          <li class="d-flex align-items-center" data-target="trash">
-                            <a href="javascript:void(0);" class="d-flex flex-wrap align-items-center">
+                          
+                          <li class="d-flex justify-content-between align-items-center" data-target="trash">
+                            <a href="javascript:void(0);" id="trashNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-trash-alt"></i>
                               <span class="align-middle ms-2">휴지통</span>
                             </a>
+                             <div class="badge bg-label-secondary rounded-pill">10</div>
                           </li>
                         </ul>
 
@@ -321,30 +317,32 @@
                         <div class="email-filter-labels">
                           <small class="mx-4 text-uppercase text-muted">Labels</small>
                           <ul class="list-unstyled mb-0">
-                            <li data-target="work">
+                            <li data-target="private">
                               <a href="javascript:void(0);">
-                                <i class="badge badge-dot bg-success"></i>
-                                <span class="align-middle ms-2">초록이 </span>
-                              </a>
-                            </li>
-                            <li data-target="company">
-                              <a href="javascript:void(0);">
-                                <i class="badge badge-dot bg-primary"></i>
-                                <span class="align-middle ms-2">파랑이</span>
+                                <i class="badge badge-dot bg-danger"></i>
+                                <span class="align-middle ms-2">긴급 필독</span>
                               </a>
                             </li>
                             <li data-target="important">
                               <a href="javascript:void(0);">
                                 <i class="badge badge-dot bg-warning"></i>
-                                <span class="align-middle ms-2">노랑이</span>
+                                <span class="align-middle ms-2">공지 관련</span>
                               </a>
                             </li>
-                            <li data-target="private">
+                           
+                            <li data-target="work">
                               <a href="javascript:void(0);">
-                                <i class="badge badge-dot bg-danger"></i>
-                                <span class="align-middle ms-2">빨강이</span>
+                                <i class="badge badge-dot bg-success"></i>
+                                <span class="align-middle ms-2">기능 문의</span>
                               </a>
                             </li>
+                            <li data-target="company">
+                              <a href="javascript:void(0);">
+                                <i class="badge badge-dot bg-primary"></i>
+                                <span class="align-middle ms-2">일반 쪽지</span>
+                              </a>
+                            </li>
+                            
                           </ul>
                         </div>
                         <!--/ Email Filters -->
