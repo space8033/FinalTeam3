@@ -23,4 +23,10 @@ public class NoticeServiceImpl implements NoticeService{
 		return list;
 	}
 	
+	@Override
+	public Notice getNoticeDetail(int notice_no) {
+		Notice notice = noticeDao.selectDetailByNoticeNo(notice_no);
+		return notice;
+	}
+	
 }

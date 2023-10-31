@@ -271,27 +271,27 @@
 										<div>
 											<p>
 												<span>번호:</span> 
-												<span>${board.bno}</span>
+												<span>${notice.notice_no}</span>
 											</p>
 											
 											<p>
 												<span>제목:</span> 
-												<span>${board.btitle}</span>
+												<span>${notice.notice_title}</span>
 											</p>
 											
 											<p>
 												<span>글쓴이:</span> 
-												<span>${board.mid}</span>
+												<span>${notice.empinfo_name}</span>
 											<p>
 											
 											<p>
 												<span>날짜:</span> 
-												<span><fmt:formatDate value="${board.bdate}" pattern="yyyy-MM-dd HH.mm.ss"/></span> <br/>
+												<span>${notice.notice_createdat}</span> <br/>
 											</p>
 											
-											<c:if test="${board.battachoname !=null}">
+											<%-- <c:if test="${board.battachoname !=null}">
 												<p>
-													<%-- <span>첨부:</span> 
+												 <span>첨부:</span> 
 													<span>
 														${board.battachoname}
 														
@@ -319,16 +319,16 @@
 															<img src="data:${board.battachtype};base64, ${base64Img}" height="100"/>
 														</c:if>
 														 
-													</span> --%>
+													</span>
 												</p>
-											</c:if>
+											</c:if> --%>
 										</div>
 										
-										<%-- <div>
+										 <div>
 											<span class="title">내용:</span> <br/>
-											<textarea style="width:100%" readonly>${board.bcontent}</textarea>
-										</div> --%>
-										<div>
+											<textarea style="width:100%" readonly>${notice.notice_content}</textarea>
+										</div>
+										<!-- <div>
 				                          <label class="form-label"><strong>내용</strong></label>
 				                          <div class="form-control p-0 pt-1">
 				                            <div class="comment-toolbar border-0 border-bottom">
@@ -336,7 +336,7 @@
 				                              </div>
 				                            </div>
 				                          </div>
-				                        </div>
+				                        </div> -->
 										
 										<a class="btn btn-primary btn-sm mt-2" href="noticeList">목록</a>
 										<a class="btn btn-primary btn-sm mt-2" href="updateBoard?bno=${board.bno}">수정</a>

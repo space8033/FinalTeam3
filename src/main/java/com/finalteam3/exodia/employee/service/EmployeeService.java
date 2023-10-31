@@ -50,4 +50,6 @@ public interface EmployeeService {
 	public List<TransferDto> getFilteredUser(Map<String, Object> map);
 	public String getTeamDuty(String team_name);
 	public void teamManaging(EmpManageRequest request);
+	
+	public EmployeeInfo getEmpInfoByEmpInfoNo(int empInfoNo);
 }

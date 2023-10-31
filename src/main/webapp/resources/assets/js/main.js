@@ -22,13 +22,26 @@
 		
 		
 		
+		
+		
 	    var v_alarmIcon = document.querySelector("#alarmIcon");
 	    v_alarmIcon.classList.remove('d-none');
 	    v_alarmIcon.innerText = count;
-	    var alarmToast = document.querySelector("#alarmToast");
-	    alarmToast.classList.add('show');
-	    var alarmMsg = document.querySelector("#alarmMsg");
-	    alarmMsg.innerText = msg;
+	    var alarmContent = document.querySelector("#alarm");
+	    
+	    if (alarmContent.classList.contains("show")) {
+	        // "show" 클래스가 있을 때 실행할 작업
+	        console.log("alarmContent의 클래스에 'show'가 있습니다.");
+	        showAlarm();
+	        // 다른 작업 수행
+	    } 
+	    
+	    if(msg !== "") {
+	    	var alarmToast = document.querySelector("#alarmToast");
+	    	alarmToast.classList.add('show');
+	    	var alarmMsg = document.querySelector("#alarmMsg");
+	    	alarmMsg.innerText = msg;
+	    }
 	};
 
 	function wsSend() {
@@ -42,6 +55,157 @@
 	}
 
 
+	
+	
+	
+	
+	
+	
+	
+function pageMove(alarm_type, alarm_typeNo) {
+	var alarmType = alarm_type;
+	var noteReadNo = alarm_typeNo;
+	const clickedItem = event.currentTarget;
+	console.log(clickedItem);
+	const excludedItem = document.querySelector(".dropdown-notifications-archive");
+	if(alarmType === '쪽지' && clickedItem !==excludedItem) {
+		window.location.href="/exodia/note"
+	}
+}
+
+function alarmRemove(alarm_no) {
+	console.log(alarm_no+"오긴함/");
+	var postData = {
+			alarm_no: alarm_no
+	    };
+	    
+	    $.ajax({
+	    	url: "/exodia/alarmRemove",
+	        type: "POST",
+	        data: postData 
+	        
+	        }).done(function(result) {
+	        	console.log("결과확인");
+	        	
+	        }).fail(function (jqXHR, textStatus, errorThrown) {
+	        	console.log("에러");
+	        	console.log(jqXHR);
+	        	console.log(textStatus);
+	        	console.log(errorThrown);
+	        	
+	        });
+}
+
+function alarmRead(alarm_no) {
+	console.log(alarm_no+"오긴함/");
+	var postData = {
+			alarm_no: alarm_no
+	};
+	
+	$.ajax({
+		url: "/exodia/alarmRead",
+		type: "POST",
+		data: postData 
+		
+	}).done(function(result) {
+		console.log("결과확인");
+		
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		console.log("에러");
+		console.log(jqXHR);
+		console.log(textStatus);
+		console.log(errorThrown);
+		
+	});
+}
+
+function alarmAllRead() {
+	
+	var alarm_no = "alarmNo";
+	var postData = {
+			alarm_no: alarm_no
+	};
+	
+	$.ajax({
+		url: "/exodia/alarmAllRead",
+		type: "POST",
+		data: postData 
+		
+	}).done(function(result) {
+		console.log("결과확인");
+		
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		console.log("에러");
+		console.log(jqXHR);
+		console.log(textStatus);
+		console.log(errorThrown);
+		
+	});
+}
+	
+	
+function showAlarm() {
+	  			 
+	console.log("오긴하냐");
+	var empId = "dd";
+	var postData = {
+        empId: empId
+    };
+    
+    $.ajax({
+    	url: "/exodia/alarmDetail",
+        type: "GET",
+        data: postData 
+        
+        }).done(function(result) {
+        	console.log("결과확인");
+        	var html = jQuery('<ul>').html(result);
+        	var contents = html.find("ul#alarmContent").html();
+        	$("#alarm").html(contents);
+        	window.Helpers.initNavbarDropdownScrollbar();
+        	const notificationMarkAsReadAll = document.querySelector('.dropdown-notifications-all');
+        	  const notificationMarkAsReadList = document.querySelectorAll('.dropdown-notifications-read');
+
+        	  // Notification: Mark as all as read
+        	  if (notificationMarkAsReadAll) {
+        	    notificationMarkAsReadAll.addEventListener('click', event => {
+        	      notificationMarkAsReadList.forEach(item => {
+        	        item.closest('.dropdown-notifications-item').classList.add('marked-as-read');
+        	      });
+        	    });
+        	  }
+        	  // Notification: Mark as read/unread onclick of dot
+        	  if (notificationMarkAsReadList) {
+        	    notificationMarkAsReadList.forEach(item => {
+        	      item.addEventListener('click', event => {
+        	        item.closest('.dropdown-notifications-item').classList.toggle('marked-as-read');
+        	      });
+        	    });
+        	  }
+
+        	  // Notification: Mark as read/unread onclick of dot
+        	  const notificationArchiveMessageList = document.querySelectorAll('.dropdown-notifications-archive');
+        	  notificationArchiveMessageList.forEach(item => {
+        	    item.addEventListener('click', event => {
+        	      item.closest('.dropdown-notifications-item').remove();
+        	    });
+        	  });
+        	
+        	
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+        	console.log("에러");
+        	console.log(jqXHR);
+        	console.log(textStatus);
+        	console.log(errorThrown);
+        	
+        });
+	  	
+}
+	
+	
+	
+	
+	
 
 let isRtl = window.Helpers.isRtl(),
   isDarkStyle = window.Helpers.isDarkStyle(),

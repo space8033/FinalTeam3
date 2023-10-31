@@ -69,16 +69,14 @@ public class WebSocketHandler extends TextWebSocketHandler{
 				// 메시지 목록을 배열에 담습니다.
 				Message messageContent= new Message();
 				messageContent.setCount(uckCount);
-				messageContent.setMsg(memId+"님 새 알림이 있습니다.");
-
+				messageContent.setMsg("");
 				String jsonMessages = objectMapper.writeValueAsString(messageContent);
 				TextMessage textMessage = new TextMessage(jsonMessages);
 				session.sendMessage(textMessage);
 				
-				
-				
 			}
 			
+			//messageContent.setMsg(memId+"님 새 알림이 있습니다.");
 			
 		
 		}

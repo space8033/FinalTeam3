@@ -342,4 +342,10 @@ public class NoteServiceImpl implements NoteService{
 
 		
 	}
+
+	@Override
+	public NoteRead getNoteRead(int noteReadNo) {
+		NoteRead noteRead = noteDao.selectNoteReadByNoteReadNo(noteReadNo);
+		return noteRead;
+	}
 }

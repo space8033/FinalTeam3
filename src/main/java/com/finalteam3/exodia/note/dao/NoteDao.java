@@ -30,4 +30,5 @@ public interface NoteDao {
 	public void updateNoteStarred(NoteRead noteRead);
 	public void trashNote(int noteReadNo);
 	public void recoveryNotebyNoteRead(NoteRead noteRead);
+	public NoteRead selectNoteReadByNoteReadNo(int noteReadNo);
 }
