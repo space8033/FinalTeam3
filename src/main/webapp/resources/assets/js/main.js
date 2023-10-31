@@ -15,12 +15,20 @@
 
 	sock.onmessage = function(e) {
 		console.log("핸들러에서 전송한 메세지",e.data);
+		
+		const message = JSON.parse(e.data);
+		const msg = message.msg;
+		const count = message.count;
+		
+		
+		
 	    var v_alarmIcon = document.querySelector("#alarmIcon");
 	    v_alarmIcon.classList.remove('d-none');
+	    v_alarmIcon.innerText = count;
 	    var alarmToast = document.querySelector("#alarmToast");
 	    alarmToast.classList.add('show');
 	    var alarmMsg = document.querySelector("#alarmMsg");
-	    alarmMsg.innerText = e.data;
+	    alarmMsg.innerText = msg;
 	};
 
 	function wsSend() {

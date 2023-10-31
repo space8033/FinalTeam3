@@ -5,12 +5,12 @@ import lombok.Data;
 @Data
 public class AlarmRequest {
 	
-	private int alaram_no;
+	private int alarm_no;
 	private String alarm_createdAt;
 	private String alarm_deletedAt;
-	private boolean alaram_isRead;
-	private String alaram_type;
-	private int alaram_typeNo;
+	private boolean alarm_isRead;
+	private String alarm_type;
+	private int alarm_typeNo;
 	private int empinfo_no;
 
 }
