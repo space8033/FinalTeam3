@@ -3,7 +3,7 @@ package com.finalteam3.exodia.notice.dto;
 import lombok.Data;
 
 @Data
-public class Notice {
+public class NoticeDetail {
 	private int notice_no;
 	private int project_no;
 	private String notice_title;

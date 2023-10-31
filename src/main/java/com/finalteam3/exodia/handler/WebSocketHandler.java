@@ -1,12 +1,10 @@
 package com.finalteam3.exodia.handler;
 
-import java.lang.System.Logger;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.mybatis.logging.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.socket.CloseStatus;
