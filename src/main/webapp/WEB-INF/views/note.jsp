@@ -863,6 +863,7 @@
                                 	<option data-avatar="1.png" data-subtext="대리">김시온</option>
                                 	<option data-avatar="3.png">오우주</option>
                                 	<option data-avatar="5.png">박재홍</option>
+                                	<option data-avatar="5.png">오재온</option>
                                 </optgroup>
                                 <optgroup label="개발2팀">
                                 	<option data-avatar="7.png">성유진</option>
