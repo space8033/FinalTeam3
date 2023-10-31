@@ -34,4 +34,7 @@ public interface EmployeeDao {
 	public List<EmpSimpleResponse> selectTeamEmp(String team_name);
 	public EmpSimpleResponse selectTeamLeader(String team_name);
 	public void insertRole(int empinfo_no);
+	
+	//empinfo_no로 empinfo얻어오기
+	public EmployeeInfo selectEmpInfoByEmpInfoNo(int empinfo_no);
 }

@@ -51,9 +51,9 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		//알람
 		for(WebSocketSession single : sessions) {
 			String memId = message.getPayload();
-			//log.info(message+"나 메세지" + memId+"나 아이디"+single+"싱글이야?"+session.getId()+"세션에서 얻은 아이디"+single.getId()+"싱글에서얻은아이디");
+			log.info(message+"나 메세지" + memId+"나 아이디"+single+"싱글이야?"+session.getId()+"세션에서 얻은 아이디"+single.getId()+"싱글에서얻은아이디");
 			//int count = alarmDao.selectAlarmUchkCount(memId);
-			int count = 0;
+			int count = 3;
 			
 			if(single.getId().equals(session.getId()) && count != 0) {
 				TextMessage sendMsg = new TextMessage(memId + "님 새 알람이 있습니다");
