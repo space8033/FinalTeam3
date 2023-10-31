@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.finalteam3.exodia.notice.dao.NoticeDao">
-
+	
 	<select id="selectNoticeAll" resultType="Notice">
-		SELECT *
-		FROM NOTICE
-		WHERE NOTICE_TYPE = 'NOTICE'
-		AND PROJECT_NO = 0
+		SELECT empinfo.empinfo_name, notice.*
+		FROM empinfo
+		INNER JOIN notice ON empinfo.empinfo_no = notice.empinfo_no_writer
+		WHERE notice.notice_type = 'NOTICE'
+	</select>
+	
+	<select id="selectDetailByNoticeNo" parameterType="int" resultType="Notice">
+		SELECT notice.notice_no, empinfo.empinfo_name, notice.notice_title, notice.notice_content, notice.notice_createdat
+		FROM notice
+		INNER JOIN empinfo ON notice.empinfo_no_writer = empinfo.empinfo_no
+		where notice_no = #{notice_no}
 	</select>
 
 	

@@ -22,7 +22,7 @@ $(function () {
   var sharedNoticeNo = null;
   
   var dt_product_table = $('.datatables-products'),
-    productAdd = "qnaAdd",
+    productAdd = "noticeAdd",
     statusObj = {
       1: { title: 'Scheduled', class: 'bg-label-warning' },
       2: { title: 'Publish', class: 'bg-label-success' },
@@ -49,7 +49,7 @@ $(function () {
         // columns according to JSON
     	  { data: "notice_no" },
           { data: 'notice_title' },
-          { data: 'empinfo_no_writer' },
+          { data: 'empinfo_name' },
           { data: 'notice_createdat' }
       ],
       columnDefs: [
@@ -85,7 +85,7 @@ $(function () {
         		      '<div class="d-flex justify-content-start align-items-center product-name">' +
         		      '<div class="d-flex flex-column">' +
         		      '<h6 class="text-body text-nowrap mb-0">' +
-        		      '<a href="noticeDetail.jsp?no=' + sharedNoticeNo + '">' + $title + '</a>' +
+        		      '<a href="noticeDetail?notice_no=' + sharedNoticeNo + '">' + $title + '</a>' +
         		      '</h6>' +
         		      '</div>' +
         		      '</div>';
@@ -98,7 +98,7 @@ $(function () {
           targets: 3,
           responsivePriority: 5,
           render: function (data, type, full, meta) {
-        	  var $writerName = full['empinfo_no_writer']; //writer 필드에서 글쓴이 이름을 가져옴
+        	  var $writerName = full['empinfo_name']; //writer 필드에서 글쓴이 이름을 가져옴
         	    return "<span class='text-truncate d-flex align-items-center'>" + $writerName + '</span>';
           }
         },
@@ -131,7 +131,7 @@ $(function () {
       // Buttons with Dropdown
       buttons: [
         {
-          text: '<i class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">문의사항 등록</span>',
+          text: '<i class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">공지사항 등록</span>',
           className: 'add-new btn btn-primary',
           action: function () {
             window.location.href = productAdd;
