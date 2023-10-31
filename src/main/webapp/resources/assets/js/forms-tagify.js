@@ -28,9 +28,9 @@ $(document).ready(function() {
         teamname: teamname
       },
       success: function(data) {
-    	  console.log(data);
- 		  usersList = data;
- 		  
+    	 console.log(data);
+ 		 usersList = data;
+ 		 
  		 TagifyUserList.settings.whitelist = usersList;
          TagifyUserList.loading(false);
       },
@@ -39,22 +39,6 @@ $(document).ready(function() {
       }
     });
   }
-  /*var author = $('#selectpickerIcons').val();
-  var teamname = $('#selectpickerLiveSearch').val();
-  
-  $.ajax({
-	 type : "GET",
-	 url : "/exodia/employee/getFilteredUser",
-	 data : {
-		 author : author,
-		 teamname : teamname
-	 },
-	 async : false,
-	 success : function(data) {
-		 console.log(data);
-		 usersList = data;
-	 }
-  });*/
   // Basic
   //------------------------------------------------------
   const tagifyBasicEl = $('#TagifyBasic')[0];
