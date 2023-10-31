@@ -232,7 +232,7 @@ public class EmployeeController {
 		List<EmpManagementResponse> list = employeeService.getManagementResponse(0);
 		model.addAttribute("list", list);
 		String emp_id = loginResponse.getEmp_id();
-		model.addAttribute("emp_id", emp_id);
+		//model.addAttribute("emp_id", emp_id);
 		
 		return "/userManagement";
 	}
