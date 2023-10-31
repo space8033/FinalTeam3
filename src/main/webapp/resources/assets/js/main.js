@@ -22,13 +22,26 @@
 		
 		
 		
+		
+		
 	    var v_alarmIcon = document.querySelector("#alarmIcon");
 	    v_alarmIcon.classList.remove('d-none');
 	    v_alarmIcon.innerText = count;
-	    var alarmToast = document.querySelector("#alarmToast");
-	    alarmToast.classList.add('show');
-	    var alarmMsg = document.querySelector("#alarmMsg");
-	    alarmMsg.innerText = msg;
+	    var alarmContent = document.querySelector("#alarm");
+	    
+	    if (alarmContent.classList.contains("show")) {
+	        // "show" 클래스가 있을 때 실행할 작업
+	        console.log("alarmContent의 클래스에 'show'가 있습니다.");
+	        showAlarm();
+	        // 다른 작업 수행
+	    } 
+	    
+	    if(msg !== "") {
+	    	var alarmToast = document.querySelector("#alarmToast");
+	    	alarmToast.classList.add('show');
+	    	var alarmMsg = document.querySelector("#alarmMsg");
+	    	alarmMsg.innerText = msg;
+	    }
 	};
 
 	function wsSend() {

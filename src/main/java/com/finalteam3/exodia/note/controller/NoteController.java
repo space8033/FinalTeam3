@@ -46,6 +46,11 @@ public class NoteController {
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
 		
+		String emp_name = loginResponse.getEmpInfo_name();
+		model.addAttribute("empInfo_name", emp_name);
+		
+		
+		
 		if(pageNote == null) {
 			   //세션에 저장되어 있는지 확인
 			pageNote = (String) session.getAttribute("pageNote");

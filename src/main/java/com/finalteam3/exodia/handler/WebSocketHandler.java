@@ -59,8 +59,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 			String memId = message.getPayload();
 			//log.info(message+"나 메세지" + memId+"나 아이디"+single+"싱글이야?"+session.getId()+"세션에서 얻은 아이디"+single.getId()+"싱글에서얻은아이디");
 			
-			int uckCount = 0; 
-			//alarmDao.selectAlarmUchkCount(memId);
+			int uckCount = alarmDao.selectAlarmUchkCount(memId);
 			
 			if(single.getId().equals(session.getId()) && uckCount != 0) {
 				
@@ -69,16 +68,14 @@ public class WebSocketHandler extends TextWebSocketHandler{
 				// 메시지 목록을 배열에 담습니다.
 				Message messageContent= new Message();
 				messageContent.setCount(uckCount);
-				messageContent.setMsg(memId+"님 새 알림이 있습니다.");
-
+				messageContent.setMsg("");
 				String jsonMessages = objectMapper.writeValueAsString(messageContent);
 				TextMessage textMessage = new TextMessage(jsonMessages);
 				session.sendMessage(textMessage);
 				
-				
-				
 			}
 			
+			//messageContent.setMsg(memId+"님 새 알림이 있습니다.");
 			
 		
 		}
