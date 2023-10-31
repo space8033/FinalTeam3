@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.finalteam3.exodia.alarm.dao.AlarmDao;
+import com.finalteam3.exodia.alarm.dto.request.AlarmRequest;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.note.dao.NoteDao;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
@@ -25,6 +27,8 @@ public class NoteServiceImpl implements NoteService{
 	private NoteDao noteDao;
 	@Resource
 	private EmployeeDao employeeDao;
+	@Resource
+	private AlarmDao alarmDao;
 
 	@Override
 	public List<NoteAll> getNoteListByRno(Map<String, Object> map) {
@@ -46,6 +50,7 @@ public class NoteServiceImpl implements NoteService{
 	@Override
 	public void addNote(NoteRequest request) {
 		Note note = new Note();
+		AlarmRequest alarm = new AlarmRequest();
 		
 		//note테이블 insert
 		note.setNote_sender(request.getNote_sender());
@@ -81,6 +86,16 @@ public class NoteServiceImpl implements NoteService{
 					noteRead.setNote_no(noteNo);
 					log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
 					noteDao.insertNoteRead(noteRead);
+					
+					EmployeeInfo employeeInfo = employeeDao.selectInfoByEmpNo(receiverNoCC);
+					int empInfo_no = employeeInfo.getEmpinfo_no();
+					alarm.setAlarm_isRead(false);
+					alarm.setAlarm_type("쪽지");
+					alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
+					alarm.setEmpinfo_no(empInfo_no);
+					alarmDao.insertAlarm(alarm);
+					
+					
 				}
 			}
 		}
@@ -98,6 +113,14 @@ public class NoteServiceImpl implements NoteService{
 				noteRead.setNote_no(noteNo);
 				log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
 				noteDao.insertNoteRead(noteRead);
+				
+				EmployeeInfo employeeInfo = employeeDao.selectInfoByEmpNo(receiverNo);
+				int empInfo_no = employeeInfo.getEmpinfo_no();
+				alarm.setAlarm_isRead(false);
+				alarm.setAlarm_type("쪽지");
+				alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
+				alarm.setEmpinfo_no(empInfo_no);
+				alarmDao.insertAlarm(alarm);
 			}
 		}
 		
@@ -117,6 +140,14 @@ public class NoteServiceImpl implements NoteService{
 					noteRead.setNote_no(noteNo);
 					log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 bcc니");
 					noteDao.insertNoteRead(noteRead);
+					
+					EmployeeInfo employeeInfo = employeeDao.selectInfoByEmpNo(receiverBccNo);
+					int empInfo_no = employeeInfo.getEmpinfo_no();
+					alarm.setAlarm_isRead(false);
+					alarm.setAlarm_type("쪽지");
+					alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
+					alarm.setEmpinfo_no(empInfo_no);
+					alarmDao.insertAlarm(alarm);
 				}
 			}
 		}
@@ -225,7 +256,7 @@ public class NoteServiceImpl implements NoteService{
 	@Override
 	public void addReply(ReplyRequest request) {
 		Note note = new Note();
-		
+		AlarmRequest alarm = new AlarmRequest();
 		//note테이블 insert
 		note.setNote_sender(request.getNote_sender());
 		note.setNote_title("re: " + request.getNote_title());
@@ -258,6 +289,15 @@ public class NoteServiceImpl implements NoteService{
 		noteRead.setNoteRead_type("답장");
 		noteRead.setNote_no(noteNo);
 		noteDao.insertNoteRead(noteRead);
+		
+		EmployeeInfo employeeInfo = employeeDao.selectInfoByEmpNo(receiver);
+		int empInfo_no = employeeInfo.getEmpinfo_no();
+		alarm.setAlarm_isRead(false);
+		alarm.setAlarm_type("쪽지");
+		alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
+		alarm.setEmpinfo_no(empInfo_no);
+		alarmDao.insertAlarm(alarm);
+		
 	}
 
 	@Override

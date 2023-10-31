@@ -8,6 +8,7 @@ import com.finalteam3.exodia.alarm.dto.request.AlarmRequest;
 public interface AlarmDao {
 	public void insertAlarm(AlarmRequest alarmRequest);
 	
-	public int selectAlarmUchkCount(String mId);
+	//읽지 않은 알람 개수 가져오기
+	public int selectAlarmUchkCount(String emp_id);
 
 }
