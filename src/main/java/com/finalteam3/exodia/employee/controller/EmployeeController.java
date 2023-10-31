@@ -94,6 +94,8 @@ public class EmployeeController {
 	public String joinForm(Authentication authentication, Model model) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
+		String emp_id = loginResponse.getEmp_id();
+		model.addAttribute("emp_id", emp_id);
 		
 		String emp_name = loginResponse.getEmpInfo_name();
 		model.addAttribute("empInfo_name", emp_name);
@@ -136,6 +138,8 @@ public class EmployeeController {
 	public String getUserModify(Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
+		String emp_id = loginResponse.getEmp_id();
+		model.addAttribute("emp_id", emp_id);
 		
 		String emp_name = loginResponse.getEmpInfo_name();
 		String two_name = emp_name.substring(emp_name.length() - 2);	
@@ -222,9 +226,13 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/userManagement")
-	public String getUserManagement(Model model) {
+	public String getUserManagement(Authentication authentication, Model model) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
 		List<EmpManagementResponse> list = employeeService.getManagementResponse(0);
 		model.addAttribute("list", list);
+		String emp_id = loginResponse.getEmp_id();
+		model.addAttribute("emp_id", emp_id);
 		
 		return "/userManagement";
 	}

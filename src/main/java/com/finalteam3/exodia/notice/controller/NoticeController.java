@@ -25,35 +25,22 @@ import lombok.extern.slf4j.Slf4j;
 public class NoticeController {
 	@Autowired
 	NoticeService noticeService;
-		
-	@GetMapping("/noticeTest")
-	public String noticeTest(Model model){				
-        return "noticeTest";
-	}
-}
-
-/*@ResponseBody
-	@GetMapping("/notice/noticeTest")
-	public List<Notice> noticeTest(Model model) {
-		List<Notice> data = noticeService.getNoticeList();
-		model.addAttribute("data", data);
-		return data;
-	}*/
 	
-/*	
 	@GetMapping("/noticeList")
-    public String noticeList(Model model) throws JsonProcessingException {
-        List<Notice> data = noticeService.getNoticeList();
-        log.info("Data: " + data);
-        
-        //data를 json데이터로 바꾸기
+	public String noticeTest1(Model model){				
+        return "noticeList";
+	}
+
+	@ResponseBody
+	@GetMapping("/noticeListJson")
+	public String noticeTest(Model model) throws JsonProcessingException {
+		List<Notice> data = noticeService.getNoticeList();
+		
+		//data를 json데이터로 바꾸기
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonData = objectMapper.writeValueAsString(data);
         
-        log.info("jsonData: " + jsonData);      
-             
-        model.addAttribute("datas", data);
-        return "noticeList";
-    }
+		return jsonData;
+	}
 
-}*/
+}

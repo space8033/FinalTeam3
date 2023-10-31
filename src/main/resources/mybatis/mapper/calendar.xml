@@ -12,7 +12,7 @@
     </insert>
     
     <select id="selectCalendarTask" parameterType="int" resultType="CalendarResponse">
-		select task_no as id, task_name as title, task_startdate as "start", task_enddate as "end"
+		select task_no as id, task_name as title, task_startdate as "start", task_enddate as "end", emp_no
 		from task
 		where project_no = 0
 		and emp_no = #{emp_no}    

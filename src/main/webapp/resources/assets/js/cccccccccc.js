@@ -1,13 +1,13 @@
 /**
  * App Calendar
- */
+ *//*
 
-/**
+*//**
  * ! If both start and end dates are same Full calendar will nullify the end date value.
  * ! Full calendar will end the event on a day before at 12:00:00AM thus, event won't extend to the end date.
  * ! We are getting events from a separate file named app-calendar-events.js. You can add or remove events from there.
  *
- **/
+ **//*
 
 let direction = 'ltr';
 
@@ -225,6 +225,7 @@ document.addEventListener('DOMContentLoaded', function () {
           url: '/exodia/calendar1',
           type: 'GET',
           success: function (result) {
+        	  console.log("success랑 연결됐니?")
         	  var list = result;
         	  console.log(list);
         	  //console.log("result :" + JSON.stringify(result, null, 2));
@@ -233,8 +234,15 @@ document.addEventListener('DOMContentLoaded', function () {
             //var calendars = selectedCalendars();
         	  var events = list.map(function(item) {
         		  return {
+        			  id:,
+        			  url:'',
         			  title : item.reservationTitle,
-        			  start : item.reservationDate + "T" + item.reservationTime
+        			  start : item.reservationDate + "T" + item.reservationTime,
+        			  end:,
+        			  allDay:,
+        			  extendedProps:
+        			  
+        			  
         		  }
         	  });
         	  var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -245,7 +253,7 @@ document.addEventListener('DOMContentLoaded', function () {
         			  hour12: false
         		  }
         	  });
-        	  calendar.rendar();
+        	  calendar.render();
             
 
             //return [result.events.filter(event => calendars.includes(event.extendedProps.calendar))];
@@ -485,9 +493,9 @@ document.addEventListener('DOMContentLoaded', function () {
               description: eventDescription.value
             }
           };
-          /*if (eventUrl.value) {
+          if (eventUrl.value) {
             newEvent.url = eventUrl.value;
-          }*/
+          }
           if (allDaySwitch.checked) {
             newEvent.allDay = true;
           }
@@ -617,7 +625,7 @@ $(document).ready(function() {
     });
     
 //show task    
-   /* $.ajax({
+    $.ajax({
         type: 'get',
         url: '/exodia/calendar', 
         success: function(calendarResponse) {
@@ -631,7 +639,7 @@ $(document).ready(function() {
         error : function(error) {
         	console.log(error);
         }
-    }); */
+    }); 
 
 //update task
     $()
@@ -639,4 +647,4 @@ $(document).ready(function() {
     
 });
 
-
+*/

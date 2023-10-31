@@ -124,4 +124,11 @@
 		from empinfo
 		where emp_no = #{emp_no}
 	</select>
+	
+	<!-- empinfo 로 empinfo 얻어오기 -->
+	<select id="selectEmpInfoByEmpInfoNo" resultType="EmployeeInfo" parameterType="int">
+		select empinfo_no, empinfo_name, empinfo_position, empinfo_phone, empinfo_email, empinfo_createdat
+		from empinfo
+		where empinfo_no = #{empinfo_no}
+	</select>
 </mapper>
