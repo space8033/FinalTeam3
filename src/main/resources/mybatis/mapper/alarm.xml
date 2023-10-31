@@ -1,6 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.finalteam3.exodia.alarm.dao.AlarmDao">
+	<insert id="insertAlarm" parameterType="AlarmRequest">
+    <selectKey keyProperty="alarm_no" resultType="int" order="BEFORE">
+        select SEQ_ALARM.nextval from dual
+    </selectKey>
+    insert into ALARM(
+        ALARM_NO, ALARM_CREATEDAT, ALARM_ISREAD, ALARM_TYPE, ALARM_TYPENO, EMPINFO_NO
+    )
+    values(
+        #{alarm_no}, to_char(sysdate, 'yyyy.MM.dd HH24:mi:ss'), #{alarm_isRead}, #{alarm_type}, #{alarm_typeNo}, #{empinfo_no}
+    )
+	</insert>
+	
+	
+    <select id="selectAlarmUchkCount" parameterType="String" resultType="int">
+		SELECT count(*)
+		  FROM alarm a
+		  JOIN empinfo ei ON a.empinfo_no = ei.empinfo_no
+		  JOIN emp e ON ei.emp_no = e.emp_no
+		 WHERE e.emp_id = #{emp_id} AND a.alarm_isread = 0
+	</select>
 	
 	
 </mapper>

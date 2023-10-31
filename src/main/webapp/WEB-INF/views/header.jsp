@@ -185,7 +185,7 @@
                data-bs-auto-close="outside"
                aria-expanded="false">
                <i class="bx bx-bell bx-sm"></i> <input id="alarmId" type="hidden" value="${emp_id}">
-               <span id="alarmIcon" class="d-none badge bg-danger rounded-pill badge-notifications">5</span>
+               <span id="alarmIcon" class="d-none badge bg-danger rounded-pill badge-notifications"></span>
              </a>
        				 
              <ul class="dropdown-menu dropdown-menu-end py-0">
