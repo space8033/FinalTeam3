@@ -8,4 +8,5 @@ public class EmpSimpleResponse {
 	private String empinfo_email;
 	private String two_name;
 	private byte[] profile;
+	private String team_name;
 }
