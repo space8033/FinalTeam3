@@ -45,7 +45,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		//채팅
 		//log.info("#ChattingHandler, afterConnectionEstablished");
 		
-		log.info(session.getId()+"님이 입장하셨습니다.");
+		//log.info(session.getId()+"님이 입장하셨습니다.");
 	}
 	
 	@Override
@@ -57,7 +57,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 			
 			
 			String memId = message.getPayload();
-			log.info(message+"나 메세지" + memId+"나 아이디"+single+"싱글이야?"+session.getId()+"세션에서 얻은 아이디"+single.getId()+"싱글에서얻은아이디");
+			//log.info(message+"나 메세지" + memId+"나 아이디"+single+"싱글이야?"+session.getId()+"세션에서 얻은 아이디"+single.getId()+"싱글에서얻은아이디");
 			
 			int uckCount = alarmDao.selectAlarmUchkCount(memId);
 			
@@ -100,10 +100,10 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		//알람
 		
 		//채팅
-		log.info("#ChattingHandler, afterConnectionClosed");
+		//log.info("#ChattingHandler, afterConnectionClosed");
 
 		sessionList.remove(session);
 		
-		log.info(session.getId()+"님이 퇴장하셨습니다.");
+		//log.info(session.getId()+"님이 퇴장하셨습니다.");
 	}
 }
