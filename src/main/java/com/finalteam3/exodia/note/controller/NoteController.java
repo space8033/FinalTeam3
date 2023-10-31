@@ -38,7 +38,7 @@ public class NoteController {
 	
 	
 	@GetMapping("/note")
-	public String note(String pageNote, HttpSession session, @RequestParam(name= "inbox", required=false) String inbox, Model model, Authentication authentication) {
+	public String note(String pageNote, HttpSession session, @RequestParam(name= "inbox", required=false) String inbox, @RequestParam(name= "noteReadNo", required=false) String noteReadNo, Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		String emp_id = loginResponse.getEmp_id();
@@ -79,7 +79,9 @@ public class NoteController {
 			
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
-	
+		if(noteReadNo != null) {
+			model.addAttribute("noteReadNo", noteReadNo);
+		}
 		log.info("여기까지 ok4");
 		
 		return "/note";

@@ -312,6 +312,7 @@
                              <div class="badge bg-label-secondary rounded-pill">10</div>
                           </li>
                         </ul>
+                        <input type="hidden" id="conType" value="${noteReadNo}"/>
 
                         <!-- Email Filters: Labels -->
                         <div class="email-filter-labels">

@@ -231,4 +231,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 		
 		return list;
 	}
+
+	@Override
+	public EmployeeInfo getEmpInfoByEmpInfoNo(int empInfoNo) {
+
+		EmployeeInfo empInfo = employeeDao.selectEmpInfoByEmpInfoNo(empInfoNo);
+		
+		return empInfo;
+	}
 }

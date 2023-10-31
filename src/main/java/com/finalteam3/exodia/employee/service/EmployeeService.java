@@ -47,4 +47,6 @@ public interface EmployeeService {
 	public boolean confirmPassword(String emp_id, String emp_password);
 	public List<EmpManagementResponse> getManagementResponse(int project_no);
 	public List<TransferDto> getFilteredUser(Map<String, Object> map);
+	
+	public EmployeeInfo getEmpInfoByEmpInfoNo(int empInfoNo);
 }

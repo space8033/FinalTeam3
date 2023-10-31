@@ -217,6 +217,13 @@
 		   set noteRead_deletedAt= #{noteRead_deletedAt} 
   		 where noteRead_no = #{noteRead_no}
 	</update>
+	
+	<!-- noteRead 번호로 noteRead 얻어오기 작성자: 김시온 -->
+	<select id="selectNoteReadByNoteReadNo" parameterType="int" resultType="noteRead">
+		select emp_no_receiver
+  		  from noteRead
+  	 	 where noteRead_no = #{noteRead_no}
+	</select>
 
 	
 </mapper>

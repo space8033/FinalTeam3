@@ -22,5 +22,23 @@
 		 WHERE e.emp_id = #{emp_id} AND a.alarm_isread = 0
 	</select>
 	
+	<select id="selectAlarmList" parameterType="int" resultType="AlarmRequest">
+		select ALARM_NO, ALARM_CREATEDAT, ALARM_ISREAD, ALARM_TYPE, ALARM_TYPENO
+		  from alarm
+		 where empinfo_no = #{empinfo_no}
+		   and alarm_deletedAt IS NULL 
+	</select>
+	
+	<update id="deleteAlarmByAlarmNo" parameterType="int">
+		update alarm 
+		   set alarm_deletedAt=to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
+  		 where alarm_no = #{alarm_no}
+	</update>
+	
+	<update id="updateAlarmReadByAlarmNo" parameterType="AlarmRequest">
+		update alarm
+		   set alarm_isRead = #{alarm_isRead}
+  		 where alarm_no = #{alarm_no}
+	</update>
 	
 </mapper>
