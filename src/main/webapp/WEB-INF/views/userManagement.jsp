@@ -265,24 +265,28 @@
 			                        <td>${teams.team_leader}</td>
 			                        <td>
 			                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-			                          	<c:forEach var="members" items="${teams.team_members}">
-			                             	<li
-				                              data-bs-toggle="tooltip"
-				                              data-popup="tooltip-custom"
-				                              data-bs-placement="top"
-				                              class="avatar avatar-xs pull-up"
-				                              title="${members}">
-				                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
-				                            </li>
-				                             <!-- <li class="avatar avatar-xs col-md-3 col-sm-6">
+			                          	<c:forEach var="members" items="${teams.team_members}" varStatus="memberStatus">
+			                          		<c:if test="${memberStatus.count < 4}">
+				                             	<li
+					                              data-bs-toggle="tooltip"
+					                              data-popup="tooltip-custom"
+					                              data-bs-placement="top"
+					                              class="avatar avatar-xs pull-up"
+					                              title="${members}">
+					                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
+					                            </li>
+			                          		</c:if>
+				                            <c:if test="${memberStatus.count == 4}">
+				                               <li class="avatar avatar-xs col-md-3 col-sm-6">
 						                          <span
 						                            class="avatar-initial rounded-circle pull-up bg-secondary"
 						                            data-bs-toggle="tooltip"
 						                            data-bs-placement="bottom"
-						                            title="5 more"
-						                            >+5</span
+						                            title="${memberStatus.count-3} more"
+						                            >+${memberStatus.count-3}</span
 						                          >
-				                        	</li> -->
+				                        		</li>
+				                            </c:if>
 			                          	</c:forEach>
 			                          </ul>
 			                        </td>
@@ -309,7 +313,7 @@
 			                        </c:if>
 			                        <td>
 			                          <div class="dropdown">
-			                          	  <a class="dropdown-item" href="javascript:void(0);"
+			                          	  <a class="dropdown-item" href="javascript:deleteTeam('${teams.team_name}')"
 			                                ><i class="bx bx-trash me-1" style="margin-left: 5px;"></i></a
 			                              >
 			                            <!-- <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
@@ -357,6 +361,7 @@
 		                            data-style="btn-default">
 		                            <option data-icon="bx">-------권한을 선택해주세요-------</option>
 		                            <!-- <option data-icon="bx">ROLE_PM</option> -->
+		                            <option data-icon="bx">ROLE_PM</option>
 		                            <option data-icon="bx">ROLE_PL</option>
 		                            <option data-icon="bx">ROLE_EMP</option>
 		                          </select>

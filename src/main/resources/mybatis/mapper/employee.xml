@@ -129,6 +129,13 @@
 		update emp set emp_password = #{emp_password}, emp_isinit = #{emp_isinit} where emp_id = #{emp_id}
 	</update>
 	
+	<select id="selectRolePM" parameterType="Integer">
+		select empinfo_no
+		from role
+		where project_no = #{project_no}
+		and role_category = 'ROLE_PM'
+	</select>
+	
 	<update id="updateRole" parameterType="Map">
 		update role set role_category = #{role_category} where project_no = 0 and empinfo_no = #{empinfo_no}
 	</update>
@@ -163,6 +170,12 @@
 		where project_no = 0
 		and team_name = #{team_name}
 		and team_isleader = 1
+	</delete>
+	
+	<delete id="deleteAllTeam" parameterType="String">
+		delete from team
+		where project_no = 0
+		and team_name = #{team_name}
 	</delete>
 	
 	<insert id="insertNewTeamEmp" parameterType="Map">
