@@ -64,21 +64,22 @@
     <div class="authentication-wrapper authentication-cover">
       <div class="authentication-inner row m-0">
         <!-- /Left Text -->
-        <div class="d-none d-lg-flex col-lg-7 col-xl-8 align-items-center p-5" style="background-color:white">
-          <div class="w-100 d-flex justify-content-center">
+        <div class="d-none d-lg-flex col-lg-7 col-xl-6 align-items-center" style="background-color:white">
+          <div class="w-100 d-flex justify-content-end">
             <img
               src="${pageContext.request.contextPath}/resources/assets/img/illustrations/loginBackground.jpg"
               class="img-fluid"
               alt="Login image"
-              width="100%"
+              width="80%"
               />
           </div>
         </div>
         <!-- /Left Text -->
 
         <!-- Login -->
-        <div class="d-flex col-12 col-lg-5 col-xl-4 align-items-center authentication-bg p-sm-5 p-4">
-          <div class="w-px-400 mx-auto">
+        <div class="d-flex col-12 col-lg-5 col-xl-6 align-items-center authentication-bg justify-content-center">
+<!--           <div class="w-px-400 mx-auto"> -->
+          <div class="w-px-400">
             <!-- Logo -->
             <div class="app-brand mb-3">
               <a href="#" class="app-brand-link gap-2">
@@ -91,7 +92,6 @@
               </a>
             </div>
             <!-- /Logo -->
-            <p class="mb-4">PMS를 이용하시려면 로그인 해주세요</p>
             
             <form id="formAuthentication" class="mb-3" name="loginRequest" action="/exodia/login" method="POST">
                 <div class="mb-3">
