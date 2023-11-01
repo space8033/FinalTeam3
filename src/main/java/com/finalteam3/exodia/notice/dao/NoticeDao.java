@@ -13,4 +13,5 @@ public interface NoticeDao {
 	public List<Notice> selectNoticeAll();
 	public Notice selectDetailByNoticeNo(int notice_no);
 	public int insertNotice(Notice notice);
+	public void updateDetailByNoticeNo(Notice notice);
 }
