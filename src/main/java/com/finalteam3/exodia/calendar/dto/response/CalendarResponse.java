@@ -11,4 +11,5 @@ public class CalendarResponse {
 	private String start; //task_startdate
 	private String end; //task_enddate
 	private int emp_no;
+	private String task_type;
 }

@@ -42,4 +42,6 @@ public interface EmployeeDao {
 	public void deleteTeamEmpExceptAdmin(String team_name);
 	public void insertNewTeamEmp(Map<String, Object> map);
 	public void deleteTeamByEmpNo(String team_name);
+	public Integer selectRolePM(int project_no);
+	public void deleteAllTeam(String team_name);
 }

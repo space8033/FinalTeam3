@@ -308,5 +308,22 @@ $(document).ready(function() {
 		  }
 	  });
   });
+
 });
 
+function deleteTeam(team_name) {
+	console.log("dgaag");
+	$.ajax({
+		url: "/exodia/employee/deleteTeam",
+		method: "post",
+		data:{
+			"team_name": team_name
+		},
+		success: function(data) {
+			location.reload();
+		},
+		error: function(error) {
+			console.log("아왜");
+		}
+	});
+}

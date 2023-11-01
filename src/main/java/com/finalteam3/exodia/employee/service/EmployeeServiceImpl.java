@@ -269,7 +269,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 				//리스트에 있는 인원 팀 추가
 				employeeDao.insertNewTeamEmp(map);
 			}			
-		}else {
+		}else if(request.getSelected_role_category().equals("ROLE_PL")) {
 			employeeDao.deleteTeamByEmpNo(request.getSelected_team_name());
 			
 			for(TransferDto t : request.getSelected_userList()) {
@@ -282,7 +282,21 @@ public class EmployeeServiceImpl implements EmployeeService{
 				map.put("team_isleader", true);
 				employeeDao.insertNewTeamEmp(map);
 			}
+		}else if(request.getSelected_role_category().equals("ROLE_PM")){
+			Integer nowPM = employeeDao.selectRolePM(0);
+			if(nowPM != null) {
+				Map<String, Object> mapBefore = new HashMap<>();
+				mapBefore.put("role_category", "ROLE_EMP");
+				mapBefore.put("empinfo_no", nowPM);
+				employeeDao.updateRole(mapBefore);
+				
+			}
 			
+			int newPM = employeeDao.selectInfoNoByEmail(request.getSelected_userList().get(0).getEmail());
+			Map<String, Object> mapAfter = new HashMap<>();
+			mapAfter.put("role_category", "ROLE_PM");
+			mapAfter.put("empinfo_no", newPM);
+			employeeDao.updateRole(mapAfter);
 		}
 	}
 	public EmployeeInfo getEmpInfoByEmpInfoNo(int empInfoNo) {
@@ -290,5 +304,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 		EmployeeInfo empInfo = employeeDao.selectEmpInfoByEmpInfoNo(empInfoNo);
 		
 		return empInfo;
+	}
+	
+	public void deleteTeam(String team_name) {
+		employeeDao.deleteAllTeam(team_name);
 	}
 }

@@ -56,22 +56,6 @@ public class CalendarController {
 		
 		
 		List<CalendarResponse2> events = calendarService.getPersonalTask(emp_no);
-		log.info("캘린더 업무 리스트 가져오기 :"+ events);
-		
-		List<CalendarColor> responseresponse = new ArrayList<>();
-		CalendarColor calendarColor = new CalendarColor();
-		calendarColor.setCalendar("Business");
-		responseresponse.add(calendarColor);
-		for(CalendarResponse2 c: events) {
-			c.setExtendedProps(responseresponse);
-		}
-		
-		
-		ObjectMapper objectMapper = new ObjectMapper();
-		String calendarJsonData = objectMapper.writeValueAsString(events);
-		
-		log.info("json으로 변환한 캘린더 업무 리스트 : " + calendarJsonData);
-		
 		
 		return events;
 	}

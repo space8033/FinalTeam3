@@ -27,8 +27,8 @@ let events = [
     id: 2,
     url: '',
     title: 'Meeting With Client',
-    start: new Date(date.getFullYear(), date.getMonth() + 1, -11),
-    end: new Date(date.getFullYear(), date.getMonth() + 1, -10),
+    start: 1699196400000,
+    end: 1699455600000,
     allDay: true,
     extendedProps: {
       calendar: 'Business'

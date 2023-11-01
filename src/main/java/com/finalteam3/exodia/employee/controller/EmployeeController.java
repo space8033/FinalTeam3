@@ -268,4 +268,11 @@ public class EmployeeController {
 		
 		return "/userManagement";
 	}
+	
+	@PostMapping("/deleteTeam")
+	public String deleteTeam(String team_name) {
+		employeeService.deleteTeam(team_name);
+		
+		return "/userManagement";
+	}
 }

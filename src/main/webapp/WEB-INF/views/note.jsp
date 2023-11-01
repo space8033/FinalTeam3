@@ -983,7 +983,7 @@
                             class="email-compose-actions d-flex justify-content-between align-items-center my-2 py-1">
                             <div class="d-flex align-items-center">
                               <div class="btn-group">
-                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">
+                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close" onclick="javascript:sendMsg();">
                                   	보내기
                                 </button>
                                 <button
@@ -1000,10 +1000,13 @@
                                 </ul>
                               </div>
                               <label for="attach-file"><i class="bx bx-paperclip cursor-pointer ms-2"></i></label>
-                              <input type="file" name="file-input" class="d-none" id="attach-file" />
+                              <input type="file" name="file-input" class="d-none" id="attach-file" multiple/>
+                              <input value="첨부파일" type="text" id="filename" placeholder="첨부파일" class="text-muted ms-1 upload-name" style="border:none; width:400px;">
                             </div>
                             <div class="d-flex align-items-center">
-                              <div class="dropdown">
+                             <i id="label-select" class="me-1 badge badge-dot bg-primary"></i>
+                             <input type="hidden" id="note_label" name="note_label" value=""/>
+                              <div class="ms-2 dropdown">
                                 <button
                                   class="btn p-0"
                                   type="button"
@@ -1012,15 +1015,19 @@
                                   aria-haspopup="true"
                                   aria-expanded="false">
                                   <i class="bx bx-dots-vertical-rounded"></i>
+                                  
                                 </button>
                                 <ul class="dropdown-menu" aria-labelledby="dropdownMoreActions">
-                                  <li><button type="button" class="dropdown-item">라벨 추가</button></li>
-                                  <li><button type="button" class="dropdown-item">Plain text mode</button></li>
-                                  <li>
-                                    <hr class="dropdown-divider" />
-                                  </li>
-                                  <li><button type="button" class="dropdown-item">Print</button></li>
-                                  <li><button type="button" class="dropdown-item">Check Spelling</button></li>
+                                  <li class="dropdown-item">라벨 추가</li>
+                                   <hr class="dropdown-divider" />
+                                  <li><button type="button" class="dropdown-item" id="label-red"><i class="badge badge-dot bg-danger"></i>
+                                            <span class="align-middle ms-2">긴급 필독</span></button></li>
+                                  <li><button type="button" class="dropdown-item" id="label-yellow"><i class="badge badge-dot bg-warning"></i>
+                                            <span class="align-middle ms-2">공지 관련</span></button></li>
+                                  <li><button type="button" class="dropdown-item" id="label-green"><i class="badge badge-dot bg-success"></i>
+                                            <span class="align-middle ms-2">기능 문의</span></button></li>
+                                  <li><button type="button" class="dropdown-item" id="label-blue"><i class="badge badge-dot bg-primary"></i>
+                                            <span class="align-middle ms-2">일반 쪽지</span></button></li>
                                 </ul>
                               </div>
                               <button type="reset" class="btn" data-bs-dismiss="modal" aria-label="Close">
