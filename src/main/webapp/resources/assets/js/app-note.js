@@ -503,7 +503,13 @@ document.addEventListener('DOMContentLoaded', function () {
       starredNoteList = document.getElementById('starredNoteList'),
       inboxNoteList = document.getElementById('inboxNoteList'),
       trashNoteList = document.getElementById('trashNoteList'),
-      draftNoteList = document.getElementById('draftNoteList');
+      draftNoteList = document.getElementById('draftNoteList'),
+      sendMsg = document.getElementById('sendMsg'),
+      attachFile = document.getElementById('attach-file'),
+      labelRed = document.getElementById('label-red'),
+      labelYellow = document.getElementById('label-yellow'),
+      labelGreen = document.getElementById('label-green'),
+      labelBlue = document.getElementById('label-blue');
 
     // Initialize PerfectScrollbar
     // ------------------------------
@@ -843,6 +849,82 @@ document.addEventListener('DOMContentLoaded', function () {
     	
     }
     
+    //첨부파일 이름 변경
+    if(attachFile) {
+	    attachFile.addEventListener('change', function () {
+	        const fileName = attachFile.files[0].name;
+	        
+	        const fileCount = attachFile.files.length;
+	        if(fileCount > 1) {
+		        
+		        document.getElementById('filename').value = fileName+" 외 "+fileCount+"개";
+	        } else {
+		        document.getElementById('filename').value = fileName;
+	        }
+	        
+	    });
+    }
+    
+    labelRed.addEventListener('click', e => {
+      var labelSelect = document.getElementById('label-select');
+      console.log(labelSelect+"머가막혔니");
+      labelSelect.classList.remove('bg-primary');
+      labelSelect.classList.remove('bg-warning');
+      labelSelect.classList.remove('bg-success');
+      
+      labelSelect.classList.add('bg-danger');
+
+      var noteLabel = document.getElementById('note_label');
+      noteLabel.value = "긴급 필독";
+      
+      
+    });
+    
+    labelYellow.addEventListener('click', e => {
+    	var labelSelect = document.getElementById('label-select');
+    	labelSelect.classList.remove('bg-primary');
+    	labelSelect.classList.remove('bg-danger');
+    	labelSelect.classList.remove('bg-success');
+    	
+    	labelSelect.classList.add('bg-warning');
+    	
+    	var noteLabel = document.getElementById('note_label');
+    	noteLabel.value = "공지 관련";
+    	
+    	
+    });
+    
+    labelGreen.addEventListener('click', e => {
+    	var labelSelect = document.getElementById('label-select');
+    	labelSelect.classList.remove('bg-primary');
+    	labelSelect.classList.remove('bg-warning');
+    	labelSelect.classList.remove('bg-danger');
+    	
+    	labelSelect.classList.add('bg-success');
+    	
+    	var noteLabel = document.getElementById('note_label');
+    	noteLabel.value = "기능 문의";
+    	
+    	
+    });
+    
+    labelBlue.addEventListener('click', e => {
+    	var labelSelect = document.getElementById('label-select');
+    	labelSelect.classList.remove('bg-danger');
+    	labelSelect.classList.remove('bg-warning');
+    	labelSelect.classList.remove('bg-success');
+    	
+    	labelSelect.classList.add('bg-primary');
+    	
+    	var noteLabel = document.getElementById('note_label');
+    	noteLabel.value = "일반 쪽지";
+    	
+    });
+
+    
+    
+    
+    
     
     // Email list scrollbar
    
@@ -882,6 +964,8 @@ document.addEventListener('DOMContentLoaded', function () {
     	  console.log(inputElement.value+"그래서 넘어가는 값이 뭐냐");
       });
     }
+    
+    
 
 
     emailReplyContainers.forEach((container, index) => {
