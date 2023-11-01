@@ -65,8 +65,8 @@
           <div class="card">
             <div class="card-body">
               <!-- Logo -->
-              <div class="app-brand mb-5 d-flex justify-content-center ms-5">
-              <a href="/exodia/main" class="app-brand-link gap-2">
+              <div class="app-brand mb-3">
+              <a href="#" class="app-brand-link gap-2">
                   <img
 		              src="${pageContext.request.contextPath}/resources/assets/img/illustrations/otilogo.png"
 		              class="img-fluid"
@@ -76,56 +76,46 @@
               </a>
             </div>
               <!-- /Logo -->
+              <h4 class="mb-2">로그인 </h4>
 
-              <form id="formAuthentication" class="mb-3" action="initialPassword" method="POST">
+              <form id="formAuthentication" class="mb-3" name="loginRequest" action="/exodia/login" method="POST">
                 <div class="mb-3">
                   <label for="email" class="form-label">아이디</label>
                   <input
                     type="text"
                     class="form-control"
-                    id="loginId"
-                    name="loginId"
-                    value="${loginEmp}"
-                    disabled="disabled"
+                    id="email"
+                    name="emp_id"
+                    placeholder="아이디"
                     autofocus />
                 </div>
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">변경할 비밀번호</label>
-                   
+                    <label class="form-label" for="password">비밀번호</label>
                   </div>
                   <div class="input-group input-group-merge">
                     <input
                       type="password"
                       id="password"
                       class="form-control"
-                      name="newPassword"
+                      name="emp_password"
                       placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                       aria-describedby="password" />
                     <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                   </div>
                 </div>
-                 <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">변경할 비밀번호 확인</label>
-                   
-                  </div>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      name="confirmPassword"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password" />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
-                </div>
-                
                 <div class="mb-3">
-                  <button class="btn btn-primary d-grid w-100" type="submit">변경하기</button>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="remember-me" />
+                    <label class="form-check-label" for="remember-me"> 아이디 저장 </label>
+                  </div>
                 </div>
+                <div class="mb-3">
+                  <button class="login btn btn-primary d-grid w-100" type="submit" id="btnLogin">로그인</button>
+                </div>
+                <small>비밀번호 분실시 010-1212-3434</small>
               </form>
+
 
             </div>
           </div>
