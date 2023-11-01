@@ -9,8 +9,6 @@
  *
  **/
 
-'use strict';
-
 let direction = 'ltr';
 
 if (isRtl) {
@@ -18,8 +16,9 @@ if (isRtl) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+	console.log("시작");// HTML 문서의 내용이 완전히 로드되면 (DOMContentLoaded 이벤트) 실행되는 함수를 정의
   (function () {
-    const calendarEl = document.getElementById('calendar'),
+    const calendarEl = document.getElementById('calendar'), //document 객체를 사용하여 HTML 문서에서 ID가 'calendar'인 요소를 찾아서 calendarEl 변수에 할당, 웹 페이지에서 캘린더를 표시하는 부분
       appCalendarSidebar = document.querySelector('.app-calendar-sidebar'),
       addEventSidebar = document.getElementById('addEventSidebar'),
       appOverlay = document.querySelector('.app-overlay'),
@@ -39,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
       eventStartDate = document.querySelector('#eventStartDate'),
       eventEndDate = document.querySelector('#eventEndDate'),
       //eventUrl = document.querySelector('#eventURL'),
-      eventLabel = $('#eventLabel'), // ! Using jquery vars due to select2 jQuery dependency
+      eventLabel = $('#eventLabel'), // 분류 : 업무, 개인일정, 휴가 등  ! Using jquery vars due to select2 jQuery dependency
       eventGuests = $('#eventGuests'), // ! Using jquery vars due to select2 jQuery dependency
       //eventLocation = document.querySelector('#eventLocation'),
       eventDescription = document.querySelector('#eventDescription'),
@@ -49,11 +48,11 @@ document.addEventListener('DOMContentLoaded', function () {
       inlineCalendar = document.querySelector('.inline-calendar');
 
     let eventToUpdate,
-      currentEvents = events, // Assign app-calendar-events.js file events (assume events from API) to currentEvents (browser store/object) to manage and update calender events
+      currentEvents = events, // 캘린더 이벤트를 관리하고 업데이트 Assign app-calendar-events.js file events (assume events from API) to currentEvents (browser store/object) to manage and update calender events
       isFormValid = false,
       inlineCalInstance;
 
-    // Init event Offcanvas
+    // Init event Offcanvas 캘린더 클릭시 오른쪽 사이드 바 이벤트
     const bsAddEventSidebar = new bootstrap.Offcanvas(addEventSidebar);
 
     //! TODO: Update Event label and guest code to JS once select removes jQuery dependency
@@ -180,12 +179,12 @@ document.addEventListener('DOMContentLoaded', function () {
         ? (eventDescription.value = eventToUpdate.extendedProps.description)
         : null;
 
-      // // Call removeEvent function
-      // btnDeleteEvent.addEventListener('click', e => {
-      //   removeEvent(parseInt(eventToUpdate.id));
-      //   // eventToUpdate.remove();
-      //   bsAddEventSidebar.hide();
-      // });
+       // Call removeEvent function
+       btnDeleteEvent.addEventListener('click', e => {
+        removeEvent(parseInt(eventToUpdate.id));
+          eventToUpdate.remove();
+         bsAddEventSidebar.hide();
+       });
     }
 
     // Modify sidebar toggler
@@ -218,33 +217,54 @@ document.addEventListener('DOMContentLoaded', function () {
     // AXIOS: fetchEvents
     // * This will be called by fullCalendar to fetch events. Also this can be used to refetch events.
     // --------------------------------------------------------------------------------------------------
+    
     function fetchEvents(info, successCallback) {
       // Fetch Events from API endpoint reference
-      /* $.ajax(
+       $.ajax(
         {
-          url: '../../../app-assets/data/app-calendar-events.js',
+          url: '/exodia/calendar1',
           type: 'GET',
           success: function (result) {
+        	  var list = result;
+        	  console.log(list);
+        	  //console.log("result :" + JSON.stringify(result, null, 2));
             // Get requested calendars as Array
-            var calendars = selectedCalendars();
+        	  var calendarEl = document.getElementById('calendar');
+            //var calendars = selectedCalendars();
+        	  var events = list.map(function(item) {
+        		  return {
+        			  title : item.reservationTitle,
+        			  start : item.reservationDate + "T" + item.reservationTime
+        		  }
+        	  });
+        	  var calendar = new FullCalendar.Calendar(calendarEl, {
+        		  events : events,
+        		  eventTimeFormat : {
+        			  hour: '2-digit',
+        			  minute: '2-digit',
+        			  hour12: false
+        		  }
+        	  });
+        	  calendar.rendar();
+            
 
-            return [result.events.filter(event => calendars.includes(event.extendedProps.calendar))];
+            //return [result.events.filter(event => calendars.includes(event.extendedProps.calendar))];
           },
           error: function (error) {
             console.log(error);
           }
-        }
-      ); */
+        });
 
       let calendars = selectedCalendars();
       // We are reading event object from app-calendar-events.js file directly by including that file above app-calendar file.
       // You should make an API call, look into above commented API call for reference
       let selectedEvents = currentEvents.filter(function (event) {
+         console.log(event.extendedProps.calendar.toLowerCase());
         return calendars.includes(event.extendedProps.calendar.toLowerCase());
       });
-      if (selectedEvents.length > 0) {
-    	  successCallback(selectedEvents);
-      }
+       if (selectedEvents.length > 0) {
+      successCallback(selectedEvents);
+       }
     }
 
     // Init FullCalendar
@@ -368,9 +388,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function addEvent(eventData) {
       // ? Add new event data to current events object and refetch it to display on calender
       // ? You can write below code to AJAX call success response
-
+	// AJAX 호출을 통해 서버에서 새 이벤트 데이터를 가져옴
+    	
       currentEvents.push(eventData);
       calendar.refetchEvents();
+      
 
       // ? To add event directly to calender (won't update currentEvents object)
       // calendar.addEvent(eventData);
@@ -569,3 +591,55 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   })();
 });
+
+$(document).ready(function() {
+//add task
+	console.log("add시작");
+	console.log($('#message'));
+	console.log($('#messdafdsfs	age'));
+    $('#calendarsubmit').click(function() {
+    	console.log("submit 클릭 성공");
+        var eventData = {
+            task_name: $('input[name=eventTitle]').val(),
+            task_content: $('#eventDescription').val(),
+            task_type: $('#eventLabel').val(),
+            task_startdate: $('input[name=eventStartDate]').val(),
+            task_enddate: $('input[name=eventEndDate]').val()
+        };
+        console.log(eventData);
+
+        $.ajax({
+    
+            type: 'post',
+            url: '/exodia/calendar', 
+            data: eventData, 
+            success: function(data) {
+                console.log("나는 병신이다");
+            }
+        });
+    });
+    
+//show task    
+   /* $.ajax({
+        type: 'get',
+        url: '/exodia/calendar', 
+        success: function(calendarResponse) {
+        	
+        	$("calendar").html(calendarResponse);
+            // 서버에서 반환한 데이터를 사용하여 화면에 이벤트를 추가
+            var eventData = calendarResponse; // JSON 응답을 JavaScript 객체로 변환
+            console.log("calendarResponse :" + eventData);
+            calendar.addEvent(eventData); // 캘린더에 이벤트 추가
+        },
+        error : function(error) {
+        	console.log(error);
+        }
+    }); */
+
+//update task
+    $()
+    
+    
+});
+
+
