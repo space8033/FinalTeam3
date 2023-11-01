@@ -9,4 +9,5 @@ public class TransferDto {
 	private String email;
 	private String two_name;
 	private byte[] profile;
+	private String team_name;
 }

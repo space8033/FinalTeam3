@@ -19,10 +19,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.finalteam3.exodia.employee.dto.request.EmpManageRequest;
 import com.finalteam3.exodia.employee.dto.request.JoinList;
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
 import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
@@ -232,7 +234,7 @@ public class EmployeeController {
 		List<EmpManagementResponse> list = employeeService.getManagementResponse(0);
 		model.addAttribute("list", list);
 		String emp_id = loginResponse.getEmp_id();
-		model.addAttribute("emp_id", emp_id);
+		//model.addAttribute("emp_id", emp_id);
 		
 		return "/userManagement";
 	}
@@ -247,8 +249,23 @@ public class EmployeeController {
 		
 		List<TransferDto> list = employeeService.getFilteredUser(map);
 		
-		log.info("결과닷!" + list.toString());
-		
 		return list;
+	}
+	
+	@GetMapping(value = "/getTeamDuty", produces = "application/json; charset=UTF-8")
+	@ResponseBody
+	public String getTeamDuty(@RequestParam("teamname") String teamname) {
+		String duty = employeeService.getTeamDuty(teamname);
+		
+		return duty;
+	}
+	
+	@PostMapping(value= "/saveEmpManagement", produces = "application/json; charset=UTF-8")
+	public String saveEmpManagement(@RequestBody EmpManageRequest request, Model model) {
+		employeeService.teamManaging(request);
+		List<EmpManagementResponse> list = employeeService.getManagementResponse(0);
+		model.addAttribute("list", list);
+		
+		return "/userManagement";
 	}
 }

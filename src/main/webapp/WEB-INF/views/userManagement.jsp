@@ -356,9 +356,9 @@
 		                            data-tick-icon="bx-check"
 		                            data-style="btn-default">
 		                            <option data-icon="bx">-------권한을 선택해주세요-------</option>
-		                            <option data-icon="bx">PM</option>
-		                            <option data-icon="bx">PL</option>
-		                            <option data-icon="bx">EMP</option>
+		                            <!-- <option data-icon="bx">ROLE_PM</option> -->
+		                            <option data-icon="bx">ROLE_PL</option>
+		                            <option data-icon="bx">ROLE_EMP</option>
 		                          </select>
 		                        </div>
 		                        
@@ -385,7 +385,7 @@
 		                            class="form-control typeahead"
 		                            type="text"
 		                            autocomplete="off"
-		                            value="로그인" />
+		                           />
 		                        </div>
 		                        
 		                        <div class="col-md-10 mb-4">
@@ -394,12 +394,12 @@
 		                            id="TagifyUserList"
 		                            name="TagifyUserList"
 		                            class="form-control"
-		                            value="노노노"/>
+		                            />
 		                        </div>
 		               
 				               <hr>
 						        	<div class="mb-0">
-						            <button class="btn btn-primary" data-repeater-create>
+						            <button class="btn btn-primary" id="managementSaveButton">
 						               <span class="align-middle">저장</span>
 						             </button>
 						           </div>

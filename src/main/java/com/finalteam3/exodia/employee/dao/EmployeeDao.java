@@ -34,7 +34,12 @@ public interface EmployeeDao {
 	public List<EmpSimpleResponse> selectTeamEmp(String team_name);
 	public EmpSimpleResponse selectTeamLeader(String team_name);
 	public void insertRole(int empinfo_no);
-	
+	public String selectTeamDuty(String team_name);
 	//empinfo_no로 empinfo얻어오기
 	public EmployeeInfo selectEmpInfoByEmpInfoNo(int empinfo_no);
+	public int selectInfoNoByEmail(String empinfo_email);
+	public void updateRole(Map<String, Object> map);
+	public void deleteTeamEmpExceptAdmin(String team_name);
+	public void insertNewTeamEmp(Map<String, Object> map);
+	public void deleteTeamByEmpNo(String team_name);
 }

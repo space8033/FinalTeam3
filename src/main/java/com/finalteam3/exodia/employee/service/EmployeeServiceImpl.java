@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
+import com.finalteam3.exodia.employee.dto.request.EmpManageRequest;
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
 import com.finalteam3.exodia.employee.dto.request.LoginRequest;
 import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
@@ -195,7 +196,6 @@ public class EmployeeServiceImpl implements EmployeeService{
 			
 			//사람당 이미지파일 구하기(아직 구현 전)
 			emr.setTeam_members(teamMembers);
-			
 			list.add(emr);
 		}
 		
@@ -205,15 +205,18 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public List<TransferDto> getFilteredUser(Map<String, Object> map) {
 		List<EmpSimpleResponse> esrs = employeeDao.selectNoTeamEmp();
-		if(map.get("author").equals("EMP")) {
+		if(map.get("author").equals("ROLE_EMP")) {
 			List<EmpSimpleResponse> teamEmps = employeeDao.selectTeamEmp(map.get("teamname").toString());
 			for(EmpSimpleResponse t : teamEmps) {
 				if(!t.getEmpinfo_name().equals("관리자")) {
+					t.setTeam_name(map.get("teamname").toString());
 					esrs.add(t);					
 				}
 			}
-		}else if(map.get("author").equals("PL")) {
-			esrs.add(employeeDao.selectTeamLeader(map.get("teamname").toString()));
+		}else if(map.get("author").equals("ROLE_PL")) {
+			EmpSimpleResponse esr = employeeDao.selectTeamLeader(map.get("teamname").toString());
+			esr.setTeam_name(map.get("teamname").toString());
+			esrs.add(esr);
 		}
 		
 		List<TransferDto> list = new ArrayList<>();
@@ -224,6 +227,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 			t.setValue(index);
 			t.setName(esr.getEmpinfo_name());
 			t.setEmail(esr.getEmpinfo_email());
+			t.setTeam_name(esr.getTeam_name());
 			
 			index++;
 			list.add(t);
@@ -233,6 +237,54 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
+	public String getTeamDuty(String team_name) {
+		
+		return employeeDao.selectTeamDuty(team_name);
+	}
+
+	@Override
+	@Transactional
+	public void teamManaging(EmpManageRequest request) {
+		if(request.getSelected_role_category().equals("ROLE_EMP")) {
+			//현재 팀 전체 지우기
+			employeeDao.deleteTeamEmpExceptAdmin(request.getSelected_team_name());
+			//인원 리스트 no로 받기
+			List<Integer> list = new ArrayList<>();
+			for(TransferDto t : request.getSelected_userList()) {
+				int empinfo_no = employeeDao.selectInfoNoByEmail(t.getEmail());
+				list.add(empinfo_no);
+			}
+			
+			for(int i : list) {
+				Map<String, Object> map = new HashMap<>();
+				map.put("empinfo_no", i);
+				map.put("role_category", request.getSelected_role_category());
+				
+				//리스트에 있는 인원 권한 업데이트
+				employeeDao.updateRole(map);
+				
+				map.put("team_name", request.getSelected_team_name());
+				map.put("team_duty", request.getTyped_team_duty());
+				map.put("team_isleader", false);
+				//리스트에 있는 인원 팀 추가
+				employeeDao.insertNewTeamEmp(map);
+			}			
+		}else {
+			employeeDao.deleteTeamByEmpNo(request.getSelected_team_name());
+			
+			for(TransferDto t : request.getSelected_userList()) {
+				int leader_no = employeeDao.selectInfoNoByEmail(t.getEmail());
+				Map<String, Object> map = new HashMap<>();
+				map.put("empinfo_no", leader_no);
+				map.put("role_category", request.getSelected_role_category());
+				map.put("team_name", request.getSelected_team_name());
+				map.put("team_duty", request.getTyped_team_duty());
+				map.put("team_isleader", true);
+				employeeDao.insertNewTeamEmp(map);
+			}
+			
+		}
+	}
 	public EmployeeInfo getEmpInfoByEmpInfoNo(int empInfoNo) {
 
 		EmployeeInfo empInfo = employeeDao.selectEmpInfoByEmpInfoNo(empInfoNo);
