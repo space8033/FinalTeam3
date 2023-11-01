@@ -45,18 +45,19 @@
 	};
 
 	function wsSend() {
-	    setInterval(function() {
-	        // 3초마다 클라이언트로 메시지 전송
-	    	
-	    	var emp_id = document.getElementById('alarmId').value;
-	    	console.log(emp_id);
-	        sock.send(emp_id);
-	    }, 3000);
+	   
+	}
+	
+	function sendMsg() {
+		var msg = document.querySelector("#email-subject").value;
+		sock.send(msg);
+		console.log(msg+"가긴가니");
+		
 	}
 
 
 	
-	
+
 	
 	
 	

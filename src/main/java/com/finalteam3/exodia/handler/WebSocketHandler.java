@@ -41,6 +41,8 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		//알람
 		sessions.add(session);
+		String userId = session.getPrincipal().getName();
+		userSessionMap.put(userId, session);
 		
 		//채팅
 		//log.info("#ChattingHandler, afterConnectionEstablished");
@@ -54,9 +56,9 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		
 		//알람
 		for(WebSocketSession single : sessions) {
-			
-			
-			String memId = message.getPayload();
+			String memId = single.getPrincipal().getName();
+			String msg = message.getPayload();
+			log.info(msg+"나메세지임");
 			//log.info(message+"나 메세지" + memId+"나 아이디"+single+"싱글이야?"+session.getId()+"세션에서 얻은 아이디"+single.getId()+"싱글에서얻은아이디");
 			
 			int uckCount = 0; 
