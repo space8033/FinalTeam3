@@ -33,5 +33,10 @@ public class NoticeServiceImpl implements NoticeService{
 	public void write(Notice notice) {
 		noticeDao.insertNotice(notice);
 	}
+
+	@Override
+	public void updateByNotice(Notice notice) {
+		noticeDao.updateDetailByNoticeNo(notice);		
+	}
 	
 }
