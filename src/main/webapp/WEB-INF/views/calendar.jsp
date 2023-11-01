@@ -352,8 +352,8 @@
 													</select>
 												</div>
 												<div class="mb-3">
-													<label class="form-label" for="eventStartDate">시작
-														날짜</label> <input type="text" class="form-control"
+													<label class="form-label" for="eventStartDate">시작 날짜</label>
+													<input type="text" class="form-control"
 														id="eventStartDate" name="eventStartDate" />
 												</div>
 												<div class="mb-3">
@@ -458,11 +458,9 @@
 	<script
 		src="${pageContext.request.contextPath}/resources/assets/js/calendar-events.js"></script>
 	<script
-		src="${pageContext.request.contextPath}/resources/assets/js/cccccccccc.js"></script>
+		src="${pageContext.request.contextPath}/resources/assets/js/calendar.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
-		<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.css" rel="stylesheet" />
-		<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.js"></script>
 
 
 </body>

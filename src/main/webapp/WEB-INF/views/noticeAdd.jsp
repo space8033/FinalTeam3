@@ -252,7 +252,30 @@
                   <div class="d-flex align-content-center flex-wrap gap-3">
                     <!-- <button class="btn btn-label-secondary">Discard</button>
                     <button class="btn btn-label-primary">Save draft</button> -->
-                    <button type="submit" class="btn btn-primary">등록</button>
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					  취소
+					</button>
+					
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">나가시겠습니까?</h5>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body">
+							내용이 저장되지 않았습니다.
+							나가시겠습니까?
+					      </div>
+					      <div class="modal-footer">
+					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+					        <button type="button" class="btn btn-primary" onclick="location.href='noticeList'">나가기</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+                    <button type="submit" id="noticeSubmit" class="btn btn-primary">등록</button>
                   </div>
                 </div>
 
@@ -261,42 +284,29 @@
                   <div class="col-12 col-lg-12">
                     <!-- Product Information -->
                     <div class="card mb-4">
-                      <!-- <div class="card-header">
-                        <h5 class="card-tile mb-0">Product information</h5>
-                      </div> -->
                       <div class="card-body">
-                        <div class="mb-3">
-                          <label class="form-label" for="ecommerce-product-name">제목</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            id="ecommerce-product-name"
-                            placeholder="제목을 입력해 주세요"
-                            name="productTitle"
-                            aria-label="Product title" />
-                        </div>
-                        <!-- <div class="row mb-3">
-                          <div class="col">
-                            <label class="form-label" for="ecommerce-product-sku">SKU</label>
-                            <input
-                              type="number"
-                              class="form-control"
-                              id="ecommerce-product-sku"
-                              placeholder="SKU"
-                              name="productSku"
-                              aria-label="Product SKU" />
-                          </div>
-                          <div class="col">
-                            <label class="form-label" for="ecommerce-product-barcode">Barcode</label>
-                            <input
-                              type="text"
-                              class="form-control"
-                              id="ecommerce-product-barcode"
-                              placeholder="0123-4567"
-                              name="productBarcode"
-                              aria-label="Product barcode" />
-                          </div>
-                        </div> -->
+                        <div class="row">
+						  <div class="col-8 mb-3">
+						    <label class="form-label" for="ecommerce-product-name">제목</label>
+						    <input
+						      type="text"
+						      class="form-control"
+						      id="ecommerce-product-name"
+						      placeholder="제목을 입력해 주세요"
+						      name="noticeTitle"
+						      aria-label="Notice title" />
+						  </div>
+						  <!-- <div class="col-4 mb-3">
+						    <label class="form-label" for="form-repeater-1-1">팀</label>
+						    <select id="form-repeater-1-1" class="select2 form-select" data-placeholder="소속 팀">
+						      <option value="">소속 팀</option>
+						      <option value="size">개발1팀</option>
+						      <option value="color">개발2팀</option>
+						      <option value="weight">유지보수1팀</option>
+						      <option value="smell">유지보수2팀</option>
+						    </select>
+						  </div> -->
+						</div>
                         <!-- Description -->
                         <div>
                           <label class="form-label">내용</label>
@@ -315,6 +325,7 @@
                               </div>
                             </div>
                             <div class="comment-editor border-0 pb-4" id="ecommerce-category-description"></div>
+                            <textarea id="noticeContent" style="display:none"></textarea>
                           </div>
                         </div>
                       </div>
@@ -819,7 +830,7 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/app-ecommerce-product-add.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/noticeAdd.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
   </body>
 </html>
