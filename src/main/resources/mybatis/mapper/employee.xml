@@ -42,6 +42,12 @@
 		and emp_id=#{emp_id}
 	</select>
 	
+	<select id="selectInfoNoByEmail" parameterType="String" resultType="int">
+		select empinfo_no
+		from empinfo
+		where empinfo_email = #{empinfo_email}
+	</select>
+	
 	<select id="selectNoByEmpId" resultType="int" parameterType="String">
 		select emp_no
 		from emp
@@ -88,6 +94,7 @@
 		from empinfo i, team t
 		where t.empinfo_no = i.empinfo_no
 		and t.team_name = #{team_name}
+		and t.team_isleader = 0
 	</select>
 	
 	<select id="selectTeamLeader" resultType="EmpSimpleResponse" parameterType="String">
@@ -106,6 +113,13 @@
 		and t.team_name = #{team_name}
 	</select>
 	
+	<select id="selectTeamDuty" parameterType="String" resultType="String">
+		select team_duty
+		from team
+		where project_no = 0
+		and empinfo_no = 0
+		and team_name = #{team_name}
+	</select>
 	
 	<update id="updateStatus" parameterType="String">
 		update emp set emp_status = 'connected' where emp_id = #{emp_id}
@@ -113,6 +127,17 @@
 	
 	<update id="updatePassword" parameterType="Map">
 		update emp set emp_password = #{emp_password}, emp_isinit = #{emp_isinit} where emp_id = #{emp_id}
+	</update>
+	
+	<select id="selectRolePM" parameterType="Integer">
+		select empinfo_no
+		from role
+		where project_no = #{project_no}
+		and role_category = 'ROLE_PM'
+	</select>
+	
+	<update id="updateRole" parameterType="Map">
+		update role set role_category = #{role_category} where project_no = 0 and empinfo_no = #{empinfo_no}
 	</update>
 	
 	<select id="updateEmpInfo" parameterType="ModifyRequest">
@@ -125,10 +150,40 @@
 		where emp_no = #{emp_no}
 	</select>
 	
-	<!-- empinfo 로 empinfo 얻어오기 -->
+	<!-- empinfo_no 로 empinfo 얻어오기 -->
 	<select id="selectEmpInfoByEmpInfoNo" resultType="EmployeeInfo" parameterType="int">
 		select empinfo_no, empinfo_name, empinfo_position, empinfo_phone, empinfo_email, empinfo_createdat
 		from empinfo
 		where empinfo_no = #{empinfo_no}
 	</select>
+	
+	<delete id="deleteTeamEmpExceptAdmin" parameterType="String">
+		delete from team
+		where project_no = 0
+		and team_name = #{team_name}
+		and empinfo_no != 0
+		and team_isleader = 0
+	</delete>
+	
+	<delete id="deleteTeamByEmpNo" parameterType="String">
+		delete from team
+		where project_no = 0
+		and team_name = #{team_name}
+		and team_isleader = 1
+	</delete>
+	
+	<delete id="deleteAllTeam" parameterType="String">
+		delete from team
+		where project_no = 0
+		and team_name = #{team_name}
+	</delete>
+	
+	<insert id="insertNewTeamEmp" parameterType="Map">
+		<selectKey keyProperty="team_no" resultType="int" order="BEFORE">
+	         select seq_team.nextval from dual
+      	</selectKey>
+      	
+      	insert into team(team_no, project_no, empinfo_no, team_name, team_duty, team_isleader)
+      	values(#{team_no}, 0, #{empinfo_no}, #{team_name}, #{team_duty}, #{team_isleader})
+	</insert>
 </mapper>

@@ -252,7 +252,6 @@
                   <div class="d-flex align-content-center flex-wrap gap-3">
                     <!-- <button class="btn btn-label-secondary">Discard</button>
                     <button class="btn btn-label-primary">Save draft</button> -->
-                    <button type="submit" class="btn btn-primary">등록</button>
                   </div>
                 </div>
 
@@ -270,23 +269,23 @@
 									<div>
 										<div>
 											<p>
-												<span>번호:</span> 
-												<span>${notice.notice_no}</span>
+												<span style="font-size: 12px;">글 번호:</span> 
+												<span style="font-size: 12px;">${notice.notice_no}</span>
 											</p>
 											
 											<p>
-												<span>제목:</span> 
-												<span>${notice.notice_title}</span>
+												<span style="font-size: 18px;"><strong>제목:</strong></span> 
+												<span style="font-size: 18px;"><strong>${notice.notice_title}</strong></span>
 											</p>
 											
 											<p>
-												<span>글쓴이:</span> 
-												<span>${notice.empinfo_name}</span>
+												<span style="font-size: 12px;">글쓴이:</span> 
+												<span style="font-size: 12px;">${notice.empinfo_name}</span>
 											<p>
 											
 											<p>
-												<span>날짜:</span> 
-												<span>${notice.notice_createdat}</span> <br/>
+												<span style="font-size: 12px;">날짜:</span> 
+												<span style="font-size: 12px;">${notice.notice_createdat}</span> <br/>
 											</p>
 											
 											<%-- <c:if test="${board.battachoname !=null}">
@@ -322,12 +321,21 @@
 													</span>
 												</p>
 											</c:if> --%>
-										</div>
-										
-										 <div>
-											<span class="title">내용:</span> <br/>
-											<textarea style="width:100%" readonly>${notice.notice_content}</textarea>
-										</div>
+										</div>	
+										<div class="card email-card-last mx-sm-4 mx-3 mt-4 border">																	
+											<div class="card-body pt-3">
+					                            <%-- <p class="fw-medium py-2"><strong>${notice.notice_title}</strong></p> --%>
+					                            <p>
+					                            	 ${notice.notice_content}
+					                            </p>
+					                            <hr />
+					                            <p class="mb-2">첨부 파일</p>
+					                            <div class="cursor-pointer">
+					                              <i class="bx bx-file"></i>
+					                              <span class="align-middle ms-1">report.xlsx</span>
+					                            </div>
+					                          </div>
+				                          </div>
 										<!-- <div>
 				                          <label class="form-label"><strong>내용</strong></label>
 				                          <div class="form-control p-0 pt-1">
@@ -339,8 +347,8 @@
 				                        </div> -->
 										
 										<a class="btn btn-primary btn-sm mt-2" href="noticeList">목록</a>
-										<a class="btn btn-primary btn-sm mt-2" href="updateBoard?bno=${board.bno}">수정</a>
-										<a class="btn btn-primary btn-sm mt-2" href="deleteBoard?bno=${board.bno}">삭제</a>
+										<a class="btn btn-primary btn-sm mt-2" href="noticeUpdate?notice_no=${notice.notice_no}">수정</a>
+										<a class="btn btn-primary btn-sm mt-2" href="noticeDelete?notice_no=${notice.notice_no}">삭제</a>
 										
 									</div>
 								</div>

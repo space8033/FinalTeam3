@@ -15,6 +15,20 @@
 		INNER JOIN empinfo ON notice.empinfo_no_writer = empinfo.empinfo_no
 		where notice_no = #{notice_no}
 	</select>
+	
+	<insert id="insertNotice" parameterType="Notice">
+		<selectKey keyProperty="notice_no" resultType="int" order="BEFORE">
+	         select seq_noticeno.nextval from dual
+      	</selectKey>
+      	insert into notice(
+      		notice_no, notice_title, notice_content, notice_type,
+      		empinfo_no_writer, notice_createdat, project_no
+      	)
+      	values(
+      		#{notice_no}, #{notice_title}, #{notice_content}, 'NOTICE',
+      		#{empinfo_no_writer}, sysdate, 0
+      	)		
+	</insert>
 
 	
 </mapper>

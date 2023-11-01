@@ -10,6 +10,7 @@ $(document).ready(function() {
     var teamname = $('#selectpickerLiveSearch').val();
     
     sendAjaxRequest(author, teamname);
+    TagifyUserList.removeAllTags();
   });
 
   $('#selectpickerLiveSearch').on('change', function() {
@@ -17,6 +18,22 @@ $(document).ready(function() {
     var teamname = $(this).val();
     
     sendAjaxRequest(author, teamname);
+    TagifyUserList.removeAllTags();
+    
+    $.ajax({
+        type: "GET",
+        url: "/exodia/employee/getTeamDuty", // DB에서 값을 받아오는 엔드포인트 설정
+        data: {
+          teamname: teamname
+        },
+        success: function(data) {
+          // 받아온 데이터를 기반으로 값을 업데이트
+          $("#TypeaheadBasic").val(data); // 예시로 받아온 데이터 중 일부 사용
+        },
+        error: function(xhr, status, error) {
+        	$("#TypeaheadBasic").val(xhr.responseText);
+        }
+      });
   });
 
   function sendAjaxRequest(author, teamname) {
@@ -28,33 +45,24 @@ $(document).ready(function() {
         teamname: teamname
       },
       success: function(data) {
-    	  console.log(data);
- 		  usersList = data;
- 		  
+ 		 usersList = data;
  		 TagifyUserList.settings.whitelist = usersList;
          TagifyUserList.loading(false);
+         
+         var filteredUsers = usersList.filter(function(user) {
+	         return user.team_name === teamname;
+	     });
+	
+	     // TagifyUserList에 추가
+	     filteredUsers.forEach(function(user) {
+	       TagifyUserList.addTags([user.name]);
+	     });
       },
       error: function(xhr, status, error) {
         // 에러 처리를 수행합니다.
       }
     });
   }
-  /*var author = $('#selectpickerIcons').val();
-  var teamname = $('#selectpickerLiveSearch').val();
-  
-  $.ajax({
-	 type : "GET",
-	 url : "/exodia/employee/getFilteredUser",
-	 data : {
-		 author : author,
-		 teamname : teamname
-	 },
-	 async : false,
-	 success : function(data) {
-		 console.log(data);
-		 usersList = data;
-	 }
-  });*/
   // Basic
   //------------------------------------------------------
   const tagifyBasicEl = $('#TagifyBasic')[0];
@@ -162,60 +170,6 @@ $(document).ready(function() {
 	      name: 'Justinian Hattersley',
 	      avatar: 'https://i.pravatar.cc/80?img=1',
 	      email: 'jhattersley0@ucsd.edu'
-	    },
-	    {
-	      value: 2,
-	      name: 'Antons Esson',
-	      avatar: 'https://i.pravatar.cc/80?img=2',
-	      email: 'aesson1@ning.com'
-	    },
-	    {
-	      value: 3,
-	      name: 'Ardeen Batisse',
-	      avatar: 'https://i.pravatar.cc/80?img=3',
-	      email: 'abatisse2@nih.gov'
-	    },
-	    {
-	      value: 4,
-	      name: 'Graeme Yellowley',
-	      avatar: 'https://i.pravatar.cc/80?img=4',
-	      email: 'gyellowley3@behance.net'
-	    },
-	    {
-	      value: 5,
-	      name: 'Dido Wilford',
-	      avatar: 'https://i.pravatar.cc/80?img=5',
-	      email: 'dwilford4@jugem.jp'
-	    },
-	    {
-	      value: 6,
-	      name: 'Celesta Orwin',
-	      avatar: 'https://i.pravatar.cc/80?img=6',
-	      email: 'corwin5@meetup.com'
-	    },
-	    {
-	      value: 7,
-	      name: 'Sally Main',
-	      avatar: 'https://i.pravatar.cc/80?img=7',
-	      email: 'smain6@techcrunch.com'
-	    },
-	    {
-	      value: 8,
-	      name: 'Grethel Haysman',
-	      avatar: 'https://i.pravatar.cc/80?img=8',
-	      email: 'ghaysman7@mashable.com'
-	    },
-	    {
-	      value: 9,
-	      name: 'Marvin Mandrake',
-	      avatar: 'https://i.pravatar.cc/80?img=9',
-	      email: 'mmandrake8@sourceforge.net'
-	    },
-	    {
-	      value: 10,
-	      name: 'Corrie Tidey',
-	      avatar: 'https://i.pravatar.cc/80?img=10',
-	      email: 'ctidey9@youtube.com'
 	    }
   ];*/
 
@@ -291,39 +245,6 @@ $(document).ready(function() {
     whitelist: usersList
   });
 
-  //TagifyUserList.on('dropdown:show dropdown:updated', onDropdownShow);
-  //TagifyUserList.on('dropdown:select', onSelectSuggestion);
-
-  //let addAllSuggestionsEl;
-
-/*  function onDropdownShow(e) {
-	  let dropdownContentEl = e.detail.tagify.DOM.dropdown.content;
-
-	    if (TagifyUserList.suggestedListItems.length > 1) {
-	      addAllSuggestionsEl = getAddAllSuggestionsEl();
-
-	      // insert "addAllSuggestionsEl" as the first element in the suggestions list
-	      //dropdownContentEl.insertBefore(addAllSuggestionsEl, dropdownContentEl.firstChild);
-	    }
-  }*/
-
-/*  function onSelectSuggestion(e) {
-	  if (e.detail.elm == addAllSuggestionsEl) TagifyUserList.dropdown.selectAll.call(TagifyUserList);
-  }*/
-
-/*  function getAddAllSuggestionsEl() {
-	  return TagifyUserList.parseTemplate('dropdownItem', [
-	      {
-	        class: 'addAll',
-	        name: '전체 추가',
-	        email:
-	          TagifyUserList.settings.whitelist.reduce(function (remainingSuggestions, item) {
-	            return TagifyUserList.isTagDuplicate(item.value) ? remainingSuggestions : remainingSuggestions + 1;
-	          }, 0) + ' Members'
-	      }
-	    ]);
-  }*/
-
   // 이메일 리스트 제안
   //------------------------------------------------------
   let randomStringsArr = Array.apply(null, Array(100)).map(function () {
@@ -360,4 +281,49 @@ $(document).ready(function() {
   function onInvalidTag(e) {
     console.log('invalid', e.detail);
   }
+  
+  $("#managementSaveButton").on('click', function() {
+	  var selected_role_category = $('#selectpickerIcons').val();
+	  var selected_team_name = $('#selectpickerLiveSearch').val();
+	  var typed_team_duty = $('#TypeaheadBasic').val();
+	  var selected_userList = TagifyUserList.value;
+
+	  var data = {
+			  selected_role_category: selected_role_category,
+			  selected_team_name: selected_team_name,
+			  typed_team_duty: typed_team_duty,
+			  selected_userList : selected_userList
+	  }
+	  
+	  $.ajax({
+		  type: 'POST',
+		  url: '/exodia/employee/saveEmpManagement',
+		  contentType: 'application/json',
+		  data: JSON.stringify(data),
+		  success: function(response) {
+			  location.reload();
+		  },
+		  error: function(error) {
+			  console.log(error);
+		  }
+	  });
+  });
+
 });
+
+function deleteTeam(team_name) {
+	console.log("dgaag");
+	$.ajax({
+		url: "/exodia/employee/deleteTeam",
+		method: "post",
+		data:{
+			"team_name": team_name
+		},
+		success: function(data) {
+			location.reload();
+		},
+		error: function(error) {
+			console.log("아왜");
+		}
+	});
+}

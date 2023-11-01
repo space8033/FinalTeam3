@@ -3,6 +3,7 @@ package com.finalteam3.exodia.employee.service;
 import java.util.List;
 import java.util.Map;
 
+import com.finalteam3.exodia.employee.dto.request.EmpManageRequest;
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
 import com.finalteam3.exodia.employee.dto.request.LoginRequest;
 import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
@@ -47,6 +48,8 @@ public interface EmployeeService {
 	public boolean confirmPassword(String emp_id, String emp_password);
 	public List<EmpManagementResponse> getManagementResponse(int project_no);
 	public List<TransferDto> getFilteredUser(Map<String, Object> map);
-	
+	public String getTeamDuty(String team_name);
+	public void teamManaging(EmpManageRequest request);
+	public void deleteTeam(String team_name);
 	public EmployeeInfo getEmpInfoByEmpInfoNo(int empInfoNo);
 }

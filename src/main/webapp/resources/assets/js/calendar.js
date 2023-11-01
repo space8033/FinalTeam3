@@ -595,6 +595,8 @@ document.addEventListener('DOMContentLoaded', function () {
 $(document).ready(function() {
 //add task
 	console.log("add시작");
+	console.log($('#message'));
+	console.log($('#messdafdsfs	age'));
     $('#calendarsubmit').click(function() {
     	console.log("submit 클릭 성공");
         var eventData = {
@@ -607,11 +609,12 @@ $(document).ready(function() {
         console.log(eventData);
 
         $.ajax({
+    
             type: 'post',
             url: '/exodia/calendar', 
             data: eventData, 
             success: function(data) {
-                $('#message').html(data);
+                console.log("나는 병신이다");
             }
         });
     });
