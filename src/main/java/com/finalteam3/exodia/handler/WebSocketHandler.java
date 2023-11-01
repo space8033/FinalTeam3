@@ -59,8 +59,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 			String memId = message.getPayload();
 			//log.info(message+"나 메세지" + memId+"나 아이디"+single+"싱글이야?"+session.getId()+"세션에서 얻은 아이디"+single.getId()+"싱글에서얻은아이디");
 			
-			int uckCount = 0;
-					//alarmDao.selectAlarmUchkCount(memId);
+			int uckCount = 0; 
 			
 			if(single.getId().equals(session.getId()) && uckCount != 0) {
 				
