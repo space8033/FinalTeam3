@@ -306,7 +306,7 @@
                           
                           <li class="d-flex justify-content-between align-items-center" data-target="trash">
                             <a href="javascript:void(0);" id="trashNoteList" class="d-flex flex-wrap align-items-center">
-                              <i class="bx bx-trash-alt"></i>
+                              <i class="bx bx-trash"></i>
                               <span class="align-middle ms-2">휴지통</span>
                             </a>
                              <div class="badge bg-label-secondary rounded-pill">10</div>
@@ -403,7 +403,7 @@
                           <!-- Email List: Actions -->
                           <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex align-items-center">
-                              <div class="form-check me-2">
+                              <div class="-check me-2">
                                 <input class="form-check-input" type="checkbox" id="email-select-all" />
                                 <label class="form-check-label" for="email-select-all"></label>
                               </div>
@@ -987,7 +987,7 @@
                               </div>
                               <label for="attach-file"><i class="bx bx-paperclip cursor-pointer ms-2"></i></label>
                               <input type="file" name="files" class="d-none" id="attach-file" multiple/>
-                              <input value="첨부파일" type="text" id="filename" placeholder="첨부파일" class="text-muted ms-1 upload-name" style="border:none; width:400px;">
+                              <input value="첨부파일" readonly type="text" id="filename" placeholder="첨부파일" class="text-muted ms-1 upload-name" style="border:none; width:400px;outline: none;">
                             </div>
                             <div class="d-flex align-items-center">
                              <i id="label-select" class="me-1 badge badge-dot bg-primary"></i>
@@ -1017,7 +1017,7 @@
                                 </ul>
                               </div>
                               <button type="reset" class="btn" data-bs-dismiss="modal" aria-label="Close">
-                                <i class="bx bx-trash-alt"></i>
+                                <i class="bx bx-trash"></i>
                               </button>
                             </div>
                           </div>

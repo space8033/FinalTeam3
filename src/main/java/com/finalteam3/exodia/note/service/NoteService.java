@@ -27,7 +27,7 @@ public interface NoteService {
 	public int countByNoteTrashNo(int empNo);
 	public int countByNoteDraftNo(int empNo);
 	public void addNote(NoteRequest note) throws Exception;
-	public void addReply(ReplyRequest note);
+	public void addReply(ReplyRequest note) throws Exception;
 	public void updateRead(int noteNo);
 	public void updateStarred(int noteNo, String noteStarred);
 	public void checkTrash(String checkedIdsString);

@@ -146,7 +146,16 @@
                                 <input class="form-check-input" type="checkbox" id="email-select-all" onclick="javascript:checkAll()"/>
                                 <label class="form-check-label" for="email-select-all"></label>
                               </div>
-                              <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:trashCheck('${contentType}')"></i>
+                             
+                              
+                              <c:choose>
+                              	<c:when test ="${contentType eq '휴지통'}">
+	                               <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:trashCheck('${contentType}')"></i>
+	                          	</c:when>
+                              	<c:otherwise>
+                              		<i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:trashCheck('${contentType}')"></i>
+                              	</c:otherwise>
+                              </c:choose>
                               <i class="bx bx-envelope email-list-read cursor-pointer me-3 fs-4"></i>
                               <c:choose>
 	                              <c:when test ="${contentType eq '휴지통'}">
@@ -300,10 +309,30 @@
 			                                  >
 			                                </div>
 			                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
-			                                  <span
-			                                    class="email-list-item-label badge badge-dot bg-danger d-none d-md-inline-block me-2"
-			                                    data-label="private"></span>
-			                                   
+			                                  <c:if test="${note.media_isEmpty}">
+			                                  
+			                                  </c:if>
+			                                  <c:if test="${not note.media_isEmpty}">
+			                                  	<span class="email-list-item-attachment bx bx-paperclip cursor-pointer float-end float-sm-none me-2"></span>
+			                                  </c:if>
+			                                  
+						                         <c:choose>
+												    <c:when test="${note.note_label == '긴급 필독'}">
+												        <span class="email-list-item-label badge badge-dot bg-danger d-none d-md-inline-block me-2" data-label="private"></span>
+												    </c:when>
+												    <c:when test="${note.note_label == '공지 관련'}">
+												        <span class="email-list-item-label badge badge-dot bg-warning d-none d-md-inline-block me-2" data-label="important"></span>
+												    </c:when>
+												    <c:when test="${note.note_label == '기능 문의'}">
+												        <span class="email-list-item-label badge badge-dot bg-success d-none d-md-inline-block me-2" data-label="work"></span>
+												    </c:when>
+												    <c:when test="${note.note_label == '일반 쪽지'}">
+												        <span class="email-list-item-label badge badge-dot bg-primary d-none d-md-inline-block me-2" data-label="company"></span>
+												    </c:when>
+												    <c:otherwise>
+												        <!-- 다른 경우에 대한 처리 -->
+												    </c:otherwise>
+												</c:choose>
 			                                   
 			                                  <c:set var="today" value="<%=new java.util.Date()%>" />
 												<!-- 현재날짜 -->
@@ -322,7 +351,7 @@
 												  </c:if>
 												  
 			                                  <ul class="list-inline email-list-item-actions">
-			                                    <li class="list-inline-item email-delete"><i id="trash-${note.noteRead_no}" class="bx bx-trash-alt fs-4" onclick="javascript:trashSingleNote(${note.noteRead_no});"></i></li>
+			                                    <li class="list-inline-item email-delete"><i id="trash-${note.noteRead_no}" class="bx bx-trash fs-4" onclick="javascript:trashSingleNote(${note.noteRead_no});"></i></li>
 			                                     <c:if test ="${note.noteRead_read != null}">
 						                              <li id="li-${note.noteRead_no}" class="list-inline-item email-read"><i id="i-${note.noteRead_no}" class="bx bx-envelope-open fs-4"></i></li>
 						                         </c:if>

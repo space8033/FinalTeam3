@@ -2,8 +2,6 @@ package com.finalteam3.exodia.note.controller;
 
 import java.io.OutputStream;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +28,7 @@ import com.finalteam3.exodia.note.dto.EmployeeInfo;
 import com.finalteam3.exodia.note.dto.NoteAll;
 import com.finalteam3.exodia.note.dto.Pager;
 import com.finalteam3.exodia.note.dto.request.Note;
+import com.finalteam3.exodia.note.dto.request.NoteRead;
 import com.finalteam3.exodia.note.dto.request.NoteRequest;
 import com.finalteam3.exodia.note.dto.request.ReplyRequest;
 import com.finalteam3.exodia.note.service.NoteService;
@@ -364,7 +363,9 @@ public class NoteController {
 		
 		log.info(noteReadNo+"먼값이 들어오나 보자");
 		int noteRead_No = Integer.parseInt(noteReadNo);
-		
+		NoteRead noteRead = noteService.getNoteRead(noteRead_No);
+		log.info(noteRead.toString()+"모지?");
+		model.addAttribute("noteRead", noteRead);
 		
 		Note note = noteService.getNote(noteRead_No);
 		model.addAttribute("note", note);
@@ -423,7 +424,7 @@ public class NoteController {
 	
 	//답장 발송
 	@PostMapping("/replySend")
-	public String replySend(ReplyRequest request, Authentication authentication) {
+	public String replySend(ReplyRequest request, Authentication authentication) throws Exception {
 		log.info(request.toString());
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();

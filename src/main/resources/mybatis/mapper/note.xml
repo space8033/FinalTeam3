@@ -6,10 +6,10 @@
 			select SEQ_NOTE.nextval from dual
 		</selectKey>
 		insert into NOTE(
-            NOTE_NO, NOTE_TITLE, NOTE_CONTENT, NOTE_SENDER, NOTE_CREATEDAT, NOTE_RESTIME
+            NOTE_NO, NOTE_TITLE, NOTE_CONTENT, NOTE_SENDER, NOTE_CREATEDAT, NOTE_RESTIME, NOTE_LABEL
 	    )
 	    values(
-	        #{note_no}, #{note_title}, #{note_content}, #{note_sender}, to_char(sysdate,'yyyy.mm.dd hh24:mi:ss'), #{note_restime}
+	        #{note_no}, #{note_title}, #{note_content}, #{note_sender}, to_char(sysdate,'yyyy.mm.dd hh24:mi:ss'), #{note_restime}, #{note_label}
 	    )
 	</insert>
 	
@@ -179,7 +179,7 @@
 	
 	<!-- 쪽지 번호로 noteRead 얻어오기 작성자: 김시온 -->
 	<select id="selectNoteRead" parameterType="int" resultType="noteRead">
-		select noteRead_read, note_no
+		select noteRead_read, note_no, noteRead_starred
   		  from noteRead
   		 where noteRead_no = #{noteRead_no}
 	</select>
@@ -220,7 +220,7 @@
 	
 	<!-- noteRead 번호로 noteRead 얻어오기 작성자: 김시온 -->
 	<select id="selectNoteReadByNoteReadNo" parameterType="int" resultType="noteRead">
-		select emp_no_receiver
+		select emp_no_receiver, noteRead_starred
   		  from noteRead
   	 	 where noteRead_no = #{noteRead_no}
 	</select>

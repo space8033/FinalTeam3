@@ -3,6 +3,7 @@ package com.finalteam3.exodia.employee.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -31,6 +32,7 @@ import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
 import com.finalteam3.exodia.employee.dto.request.PasswordRequest;
 import com.finalteam3.exodia.employee.dto.response.EmpManagementResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
+import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.EmpSimpleResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.dto.response.TransferDto;
@@ -248,6 +250,27 @@ public class EmployeeController {
 		map.put("teamname", teamname);
 		
 		List<TransferDto> list = employeeService.getFilteredUser(map);
+		
+		return list;
+	}
+
+	@GetMapping("/getAllUser")
+	@ResponseBody
+	public List<EmpNote> getAllUser() {
+		List<EmpNote> getAll = employeeService.getAllEmp();
+		
+		List<EmpNote> list = new ArrayList<>();
+		for(EmpNote e : getAll) {
+			if(e.getEmp_no() != 0) {
+				list.add(e);
+			}
+		}
+		
+		int value = 1;
+		for(EmpNote e : list) {
+			e.setValue(value);
+			value++;
+		}
 		
 		return list;
 	}

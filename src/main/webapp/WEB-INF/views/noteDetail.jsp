@@ -289,8 +289,18 @@
                             </div>
                             <div class="d-flex align-items-center">
                               <small class="mb-0 me-3 text-muted">${note.note_createdAt}</small>
-                              <i class="bx bx-paperclip cursor-pointer me-2 bx-sm"></i>
-                              <i class="email-list-item-bookmark bx bx-star cursor-pointer me-2 bx-sm"></i>
+                              
+                              <c:if test="${not empty mediaList}">
+                              	<i class="bx bx-paperclip cursor-pointer me-2 bx-sm"></i>
+                              </c:if>
+                              <c:if test ="${noteRead.noteRead_starred == null}">
+                              	<i class="email-list-item-bookmark bx bx-star cursor-pointer me-2 bx-sm"></i>
+                              </c:if>
+                              <c:if test ="${noteRead.noteRead_starred != null}">
+                              	<i class="email-list-item-bookmark bx bx-star cursor-pointer me-2 bx-sm" style="color: #ffab00;"></i>
+                              </c:if>
+    
+                              
                               <div class="dropdown me-3">
                                 <button
                                   class="btn p-0"
@@ -341,7 +351,7 @@
                           </div>
                         </div>
                         
-                        <form name="ReplyRequest" action="replySend" id="replySend" method="POST">
+                        <form name="ReplyRequest" action="replySend" id="replySend" method="POST" enctype="multipart/form-data">
                         
                         <!-- Email View : Reply mail-->
 	                        <div class="email-reply card mt-4 mx-sm-4 mx-3 border">
@@ -368,8 +378,10 @@
 	                            <input type="hidden" name="note_receiver" value="${note.note_sender}"/>
 	                            <div class="d-flex justify-content-end align-items-center">
 	                              <div class="cursor-pointer me-3">
-	                                <i class="bx bx-paperclip"></i>
-	                                <span class="align-middle">첨부 파일</span>
+		                              <input value="" readonly type="text" id="reply-filename" placeholder="" class="text-muted ms-1 upload-name" style="border:none; width:400px; outline: none; text-align:right;">
+	                                  <label for="reply-attach-file"><i class="bx bx-paperclip"></i><span class="align-middle cursor-pointer" onclick="javascript:replyFileUpload()"> 첨부 파일</span></label>
+		                              <input type="file" name="reply_files" class="d-none" id="reply-attach-file" multiple/>
+	                                  
 	                              </div>
 	                              <button type="submit" class="btn btn-primary">
 	                                <i class="bx bx-paper-plane me-1"></i>

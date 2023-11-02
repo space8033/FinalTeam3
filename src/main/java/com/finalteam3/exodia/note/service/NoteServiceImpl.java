@@ -1,5 +1,6 @@
 package com.finalteam3.exodia.note.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.media.dao.MediaDao;
 import com.finalteam3.exodia.media.dto.MediaDto;
+import com.finalteam3.exodia.media.service.MediaService;
 import com.finalteam3.exodia.note.dao.NoteDao;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 import com.finalteam3.exodia.note.dto.NoteAll;
@@ -44,6 +46,18 @@ public class NoteServiceImpl implements NoteService{
 			int senderNo = noteAll.getNote_sender();
 			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
 			noteAll.setNote_sender_name(sender.getEmpinfo_name());
+			int noteNo = noteAll.getNote_no();
+			MediaDto media = new MediaDto();
+			media.setFrom_no(noteNo);
+			media.setMedia_from("NOTE");
+			List<MediaDto> mediaList = mediaDao.selectMedia(media);
+			if(mediaList.isEmpty()) {
+				noteAll.setMedia_isEmpty(true);
+			}else {
+				noteAll.setMedia_isEmpty(false);
+			}
+			
+			
 		}
 		return noteAllList;
 	}
@@ -65,6 +79,7 @@ public class NoteServiceImpl implements NoteService{
 		log.info(request.getNote_content().toString()+"내용알려줘엉");
 		log.info(request.getNote_content());
 		note.setNote_content(request.getNote_content());
+		note.setNote_label(request.getNote_label());
 		
 		
 		if(request.getNote_reserve_time() == null) {
@@ -199,6 +214,16 @@ public class NoteServiceImpl implements NoteService{
 			int senderNo = noteAll.getNote_sender();
 			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
 			noteAll.setNote_sender_name(sender.getEmpinfo_name());
+			int noteNo = noteAll.getNote_no();
+			MediaDto media = new MediaDto();
+			media.setFrom_no(noteNo);
+			media.setMedia_from("NOTE");
+			List<MediaDto> mediaList = mediaDao.selectMedia(media);
+			if(mediaList.isEmpty()) {
+				noteAll.setMedia_isEmpty(true);
+			}else {
+				noteAll.setMedia_isEmpty(false);
+			}
 		}
 		
 		
@@ -213,6 +238,16 @@ public class NoteServiceImpl implements NoteService{
 			int senderNo = noteAll.getNote_sender();
 			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
 			noteAll.setNote_sender_name(sender.getEmpinfo_name());
+			int noteNo = noteAll.getNote_no();
+			MediaDto media = new MediaDto();
+			media.setFrom_no(noteNo);
+			media.setMedia_from("NOTE");
+			List<MediaDto> mediaList = mediaDao.selectMedia(media);
+			if(mediaList.isEmpty()) {
+				noteAll.setMedia_isEmpty(true);
+			}else {
+				noteAll.setMedia_isEmpty(false);
+			}
 		}
 		return noteAllList;
 	}
@@ -225,6 +260,16 @@ public class NoteServiceImpl implements NoteService{
 			int senderNo = noteAll.getNote_sender();
 			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
 			noteAll.setNote_sender_name(sender.getEmpinfo_name());
+			int noteNo = noteAll.getNote_no();
+			MediaDto media = new MediaDto();
+			media.setFrom_no(noteNo);
+			media.setMedia_from("NOTE");
+			List<MediaDto> mediaList = mediaDao.selectMedia(media);
+			if(mediaList.isEmpty()) {
+				noteAll.setMedia_isEmpty(true);
+			}else {
+				noteAll.setMedia_isEmpty(false);
+			}
 		}
 		return noteAllList;
 	}
@@ -238,6 +283,16 @@ public class NoteServiceImpl implements NoteService{
 			int senderNo = noteAll.getNote_sender();
 			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
 			noteAll.setNote_sender_name(sender.getEmpinfo_name());
+			int noteNo = noteAll.getNote_no();
+			MediaDto media = new MediaDto();
+			media.setFrom_no(noteNo);
+			media.setMedia_from("NOTE");
+			List<MediaDto> mediaList = mediaDao.selectMedia(media);
+			if(mediaList.isEmpty()) {
+				noteAll.setMedia_isEmpty(true);
+			}else {
+				noteAll.setMedia_isEmpty(false);
+			}
 		}
 		
 		
@@ -281,7 +336,7 @@ public class NoteServiceImpl implements NoteService{
 	}
 
 	@Override
-	public void addReply(ReplyRequest request) {
+	public void addReply(ReplyRequest request) throws Exception {
 		Note note = new Note();
 		AlarmRequest alarm = new AlarmRequest();
 		//note테이블 insert
@@ -324,6 +379,24 @@ public class NoteServiceImpl implements NoteService{
 		alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
 		alarm.setEmpinfo_no(empInfo_no);
 		alarmDao.insertAlarm(alarm);
+		
+		
+		MultipartFile[] uploadFiles = request.getReply_files();
+		if(uploadFiles != null && uploadFiles.length > 0) {
+			for(MultipartFile noteFile : uploadFiles) {
+				if(!noteFile.isEmpty()) {
+					MediaDto noteMedia = new MediaDto();
+					noteMedia.setMedia_data(noteFile.getBytes());
+					noteMedia.setMedia_name(noteFile.getOriginalFilename());
+					noteMedia.setMedia_type(noteFile.getContentType());
+					noteMedia.setMedia_from("NOTE");
+					noteMedia.setFrom_no(noteNo);
+					mediaDao.insertMedia(noteMedia);
+				}
+			}
+		}
+		
+		
 		
 	}
 
