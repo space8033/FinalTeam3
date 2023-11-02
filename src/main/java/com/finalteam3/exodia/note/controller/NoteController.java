@@ -375,17 +375,7 @@ public class NoteController {
 		
 		List<MediaDto> mediaList = noteService.getMediaList(note.getNote_no());
 		
-		List<String> noteImg = new ArrayList<>();
-
-		if(mediaList != null) {
-			for(MediaDto media : mediaList) {
-				String base64Img = Base64.getEncoder().encodeToString(media.getMedia_data());
-				noteImg.add(base64Img);
-			}
-		}
-		
 		model.addAttribute("mediaList", mediaList);
-		model.addAttribute("noteImg", noteImg);
 		return "/noteDetail";
 	}
 	

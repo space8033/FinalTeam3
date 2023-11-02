@@ -166,13 +166,15 @@ public class NoteServiceImpl implements NoteService{
 		MultipartFile[] uploadFiles = request.getFiles();
 		if(uploadFiles != null && uploadFiles.length > 0) {
 			for(MultipartFile noteFile : uploadFiles) {
-				MediaDto noteMedia = new MediaDto();
-				noteMedia.setMedia_data(noteFile.getBytes());
-				noteMedia.setMedia_name(noteFile.getOriginalFilename());
-				noteMedia.setMedia_type(noteFile.getContentType());
-				noteMedia.setMedia_from("NOTE");
-				noteMedia.setFrom_no(noteNo);
-				mediaDao.insertMedia(noteMedia);
+				if(!noteFile.isEmpty()) {
+					MediaDto noteMedia = new MediaDto();
+					noteMedia.setMedia_data(noteFile.getBytes());
+					noteMedia.setMedia_name(noteFile.getOriginalFilename());
+					noteMedia.setMedia_type(noteFile.getContentType());
+					noteMedia.setMedia_from("NOTE");
+					noteMedia.setFrom_no(noteNo);
+					mediaDao.insertMedia(noteMedia);
+				}
 			}
 		}
 	}

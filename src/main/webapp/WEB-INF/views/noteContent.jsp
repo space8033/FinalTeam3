@@ -214,13 +214,17 @@
                               class="email-pagination d-sm-flex d-none align-items-center flex-wrap justify-content-between justify-sm-content-end">
                               <span class="d-sm-block d-none mx-3 text-muted">
                               
-                              		<c:if test="${pager.pageNo == 1}">
+                              		<c:if test="${pager.totalRows <= 10}">
+                              			${pager.totalRows} of ${pager.totalRows}
+                              		</c:if>
+                              		<c:if test="${pager.pageNo == 1 && pager.totalRows >= 10}">
                               			1-10 of ${pager.totalRows}
                               		</c:if>
+                             
                               		<c:if test="${pager.pageNo > 1 && pager.pageNo < pager.totalPageNo}">
                               			${pager.pageNo-1}1-${pager.pageNo}0 of ${pager.totalRows}
                               		</c:if>
-                              		<c:if test="${pager.pageNo == pager.totalPageNo}">
+                              		<c:if test="${pager.pageNo > 1 && pager.pageNo == pager.totalPageNo}">
                               			${pager.pageNo-1}1-${pager.totalRows} of ${pager.totalRows}
                               		</c:if>
                               </span>

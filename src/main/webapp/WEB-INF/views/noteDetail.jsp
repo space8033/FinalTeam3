@@ -334,7 +334,7 @@
 	        	                	       	</c:if>
 	        	                	       		<i class="bx bx-file"></i>
 	            	        	          		<a class="align-middle ms-1" href ="noteFileDownload?mno=${media.media_no}">${media.media_name}</a>
-	            	        	          	<%-- <img src="data:${media.media_type};base64, ${noteImg}" height="100"/> --%>
+	            	        	          	
 	                		              </div>
 	                              </c:forEach>
 	                         </c:if>

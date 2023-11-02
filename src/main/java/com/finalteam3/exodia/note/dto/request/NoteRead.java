@@ -11,4 +11,7 @@ public class NoteRead {
 	private String noteRead_type;
 	private String noteRead_starred;
 	private String noteRead_deletedAt;
+	private String noteRead_realDeletedAt;
+	private boolean note_isCanceled;
+	
 }
