@@ -24,6 +24,7 @@
 		<typeAlias alias="CalendarResponse" type="com.finalteam3.exodia.calendar.dto.response.CalendarResponse" />
 		<typeAlias alias="Media" type="com.finalteam3.exodia.media.dto.MediaDto" />
 		<typeAlias alias="AlarmRequest" type="com.finalteam3.exodia.alarm.dto.request.AlarmRequest" />
+		<typeAlias alias="ProgramRegisterRequest" type="com.finalteam3.exodia.task.dto.request.ProgramRegisterRequest" />
 
 	</typeAliases>
 </configuration>

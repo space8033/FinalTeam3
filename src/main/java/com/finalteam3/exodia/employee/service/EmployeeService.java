@@ -10,6 +10,7 @@ import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
 import com.finalteam3.exodia.employee.dto.request.PasswordRequest;
 import com.finalteam3.exodia.employee.dto.response.EmpManagementResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
+import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.dto.response.TransferDto;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
@@ -52,4 +53,5 @@ public interface EmployeeService {
 	public void teamManaging(EmpManageRequest request);
 	public void deleteTeam(String team_name);
 	public EmployeeInfo getEmpInfoByEmpInfoNo(int empInfoNo);
+	public List<EmpNote> getAllEmp();
 }

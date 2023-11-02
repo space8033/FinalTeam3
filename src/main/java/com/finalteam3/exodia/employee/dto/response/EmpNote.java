@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class EmpNote {
+	private int value;
 	private int emp_no;
 	private int empinfo_no;
 	private String empinfo_name;
