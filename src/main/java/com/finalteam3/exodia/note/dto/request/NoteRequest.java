@@ -15,5 +15,6 @@ public class NoteRequest {
 	private List<String> note_receiver_cc;
 	private List<String> note_receiver_bcc;
 	private String note_reserve_time;
+	private String note_label;
 	private MultipartFile[] files;
 }
