@@ -101,7 +101,7 @@ $(function () {
 	  
 	  $.ajax({
 		  type: 'POST', 
-		  url: '/exodia/noticeDetail',
+		  url: '/exodia/noticeDelete',
 		  data: noticeData,
 		  success: function (data) {
 			  console.log("성공이요 성공");

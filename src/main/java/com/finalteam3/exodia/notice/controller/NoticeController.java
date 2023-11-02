@@ -123,7 +123,7 @@ public class NoticeController {
 		return "noticeDetail";
 	}
 	
-	@PostMapping("/noticeDetail")
+	@PostMapping("/noticeDelte")
 	public String noticeDelete(Authentication authentication, int notice_no) {
 		log.info("내가 지울거야 noticeNo :" + notice_no);
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
