@@ -8,6 +8,7 @@ import lombok.Setter;
 
 @Data
 public class CalendarResponse2 {
+	private int task_no;
 	private int id; //task_no
 	private String url;
 	private String title; //task_name
@@ -15,7 +16,7 @@ public class CalendarResponse2 {
 	private Date end; //task_enddate
 	//private int emp_no;
 	private boolean allDay = true;
-	private List<CalendarColor> extendedProps;
+	private CalendarColor extendedProps;
 	
 	
 }

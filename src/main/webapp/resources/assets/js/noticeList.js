@@ -59,9 +59,10 @@ $(function () {
           searchable: false,
           orderable: false,
           responsivePriority: 2,
-          targets: 0,
-          render: function (data, type, full, meta) {
-            return '';
+          "targets": 0, // 첫 번째 열 (0부터 시작)에 행 번호를 표시
+          "data": null,
+          "render": function ( data, type, row, meta ) {
+              return meta.row + 1; // 행 번호를 표시
           }
         },
         

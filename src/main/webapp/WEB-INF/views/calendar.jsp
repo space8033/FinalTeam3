@@ -228,7 +228,7 @@
               </a> --%></li>
 
 					<li class="menu-item"><a
-						href="${pageContext.request.contextPath}/userManagement"
+						href="${pageContext.request.contextPath}/employee/userManagement"
 						class="menu-link"> <i class="menu-icon tf-icons bx bx-face"></i>
 							<div class="text-truncate">인력 관리</div>
 					</a></li>
@@ -257,8 +257,7 @@
 											<button class="btn btn-primary btn-toggle-sidebar"
 												data-bs-toggle="offcanvas" data-bs-target="#addEventSidebar"
 												aria-controls="addEventSidebar">
-												<i class="bx bx-plus me-1"></i> <span class="align-middle">일정
-													추가하기</span>
+												<i class="bx bx-plus me-1"></i> <span class="align-middle">일정 추가하기</span>
 											</button>
 										</div>
 									</div>
@@ -286,8 +285,7 @@
 											<div class="form-check form-check-danger mb-2">
 												<input class="form-check-input input-filter" type="checkbox"
 													id="select-personal" data-value="personal" checked /> <label
-													class="form-check-label" for="select-personal">개인
-													일정</label>
+													class="form-check-label" for="select-personal">개인 일정</label>
 											</div>
 											<div class="form-check mb-2">
 												<input class="form-check-input input-filter" type="checkbox"
@@ -455,8 +453,6 @@
 		src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
 	<!-- Page JS -->
-	<script
-		src="${pageContext.request.contextPath}/resources/assets/js/calendar-events.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/assets/js/calendar.js"></script>
 	<script

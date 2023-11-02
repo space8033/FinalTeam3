@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.finalteam3.exodia.calendar.dao.CalendarDao;
 import com.finalteam3.exodia.calendar.dto.request.CalendarRequest;
+import com.finalteam3.exodia.calendar.dto.response.CalendarColor;
 import com.finalteam3.exodia.calendar.dto.response.CalendarResponse;
 import com.finalteam3.exodia.calendar.dto.response.CalendarResponse2;
 
@@ -37,11 +38,17 @@ public class CalendarServiceImpl implements CalendarService{
 	    List<CalendarResponse2> responseList = new ArrayList<>();
 
 	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
+	    int id = 1;
 	    for (CalendarResponse response : originalResponseList) {
+	    	CalendarColor cc = new CalendarColor();
+	    	cc.setCalendar(response.getTask_type());
+	    	
 	        CalendarResponse2 response2 = new CalendarResponse2();
-	        response2.setId(response.getId());
+	        response2.setTask_no(response.getId());
+	        response2.setId(id);
+	        id++;
 	        response2.setTitle(response.getTitle());
+	        response2.setExtendedProps(cc);
 	        //response2.setEmp_no(response.getEmp_no());
 	        response2.setUrl("");
 

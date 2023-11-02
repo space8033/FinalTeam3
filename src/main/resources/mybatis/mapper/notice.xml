@@ -29,6 +29,11 @@
       		#{empinfo_no_writer}, sysdate, 0
       	)		
 	</insert>
+	
+	<update id="updateDetailByNoticeNo" parameterType="Notice">  
+		update notice set notice_title = #{notice_title}, notice_content = #{notice_content}, notice_modifiedat = sysdate
+		where notice_no = #{notice_no}
+	</update>
 
 	
 </mapper>
