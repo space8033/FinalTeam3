@@ -20,10 +20,6 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public List<Notice> getNoticeList() {
 		List<Notice> list = noticeDao.selectNoticeAll();
-		
-		
-		
-		
 		return list;
 	}
 	
