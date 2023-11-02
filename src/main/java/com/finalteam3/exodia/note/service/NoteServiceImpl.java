@@ -1,5 +1,6 @@
 package com.finalteam3.exodia.note.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.finalteam3.exodia.alarm.dao.AlarmDao;
 import com.finalteam3.exodia.alarm.dto.request.AlarmRequest;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
+import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.note.dao.NoteDao;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 import com.finalteam3.exodia.note.dto.NoteAll;
@@ -73,14 +75,14 @@ public class NoteServiceImpl implements NoteService{
 		
 		//참조 수신자 분할/추가
 		List<String> receiverCC = request.getNote_receiver_cc();
-		if(request.getNote_receiver_bcc() == null) {
+		if(request.getNote_receiver_cc() == null) {
 
 		} else {
-			for(String receiverCCName : receiverCC) {
-				String[] parts = receiverCCName.split(",");
-				for(String nameCC : parts) {
+			for(String receiverCCNo : receiverCC) {
+				String[] parts = receiverCCNo.split(",");
+				for(String noCC : parts) {
 					NoteRead noteRead = new NoteRead();
-					int receiverNoCC = employeeDao.selectNoByEmpName(nameCC);
+					int receiverNoCC = Integer.parseInt(noCC);
 					noteRead.setEmp_no_receiver(receiverNoCC);
 					noteRead.setNoteRead_type("참조");
 					noteRead.setNote_no(noteNo);
@@ -102,28 +104,30 @@ public class NoteServiceImpl implements NoteService{
 		
 		//수신자 분할/추가
 		List<String> receiverList = request.getNote_receiver();
+		if(request.getNote_receiver() == null) {
 
-		for(String receiver : receiverList) {
-			String[] parts = receiver.split(",");
-			for(String name : parts) {
-				NoteRead noteRead = new NoteRead();
-				int receiverNo = employeeDao.selectNoByEmpName(name);
-				noteRead.setEmp_no_receiver(receiverNo);
-				noteRead.setNoteRead_type("수신");
-				noteRead.setNote_no(noteNo);
-				log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
-				noteDao.insertNoteRead(noteRead);
-				
-				EmployeeInfo employeeInfo = employeeDao.selectInfoByEmpNo(receiverNo);
-				int empInfo_no = employeeInfo.getEmpinfo_no();
-				alarm.setAlarm_isRead(false);
-				alarm.setAlarm_type("쪽지");
-				alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
-				alarm.setEmpinfo_no(empInfo_no);
-				alarmDao.insertAlarm(alarm);
+		} else {
+			for(String receiver : receiverList) {
+				String[] parts = receiver.split(",");
+				for(String no : parts) {
+					NoteRead noteRead = new NoteRead();
+					int receiverNo = Integer.parseInt(no);
+					noteRead.setEmp_no_receiver(receiverNo);
+					noteRead.setNoteRead_type("수신");
+					noteRead.setNote_no(noteNo);
+					log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
+					noteDao.insertNoteRead(noteRead);
+					
+					EmployeeInfo employeeInfo = employeeDao.selectInfoByEmpNo(receiverNo);
+					int empInfo_no = employeeInfo.getEmpinfo_no();
+					alarm.setAlarm_isRead(false);
+					alarm.setAlarm_type("쪽지");
+					alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
+					alarm.setEmpinfo_no(empInfo_no);
+					alarmDao.insertAlarm(alarm);
+				}
 			}
 		}
-		
 		//비밀참조 분할/추가
 		List<String> receiverBCC = request.getNote_receiver_bcc();
 		
@@ -132,9 +136,9 @@ public class NoteServiceImpl implements NoteService{
 		} else {
 			for(String receiverBccName : receiverBCC) {
 				String[] parts = receiverBccName.split(",");
-				for(String namebcc : parts) {
+				for(String nobcc : parts) {
 					NoteRead noteRead = new NoteRead();
-					int receiverBccNo = employeeDao.selectNoByEmpName(namebcc);
+					int receiverBccNo = Integer.parseInt(nobcc);
 					noteRead.setEmp_no_receiver(receiverBccNo);
 					noteRead.setNoteRead_type("비밀참조");
 					noteRead.setNote_no(noteNo);
@@ -347,5 +351,19 @@ public class NoteServiceImpl implements NoteService{
 	public NoteRead getNoteRead(int noteReadNo) {
 		NoteRead noteRead = noteDao.selectNoteReadByNoteReadNo(noteReadNo);
 		return noteRead;
+	}
+
+	@Override
+	public List<EmpNote> getEmpList() {
+		List<EmpNote> empList = employeeDao.selectEmployeeForNote();
+		
+		
+		return empList;
+	}
+
+	@Override
+	public List<String> getTeamList() {
+		List<String> team = employeeDao.selectTeamname(0);
+		return team;
 	}
 }

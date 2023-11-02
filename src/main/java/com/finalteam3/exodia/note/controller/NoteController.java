@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
@@ -49,6 +50,10 @@ public class NoteController {
 		String emp_name = loginResponse.getEmpInfo_name();
 		model.addAttribute("empInfo_name", emp_name);
 		
+		List<String> teamList = noteService.getTeamList();
+		List<EmpNote> empList = noteService.getEmpList();
+		model.addAttribute("teamList", teamList);
+		model.addAttribute("empList", empList);
 		
 		
 		if(pageNote == null) {
@@ -372,7 +377,9 @@ public class NoteController {
 		log.info(request.toString());
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
-		request.setNote_sender(loginResponse.getEmp_no());
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+	
+		request.setNote_sender(empInfo.getEmpinfo_no());
 		
 		noteService.addNote(request);
 		

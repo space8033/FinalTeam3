@@ -466,6 +466,38 @@ function trashSingleNote(noteReadNo) {
 	
 }
 
+function sendCCList() {
+	/*
+	// 선택한 옵션 가져오기
+	const selectedOptions = $('#note_receiver').val();
+	const receiverValues = selectedOptions.split(',');
+
+	// 다른 select 엘리먼트 가져오기
+	const otherSelectElement = $('#selectpickerSelectDeselect');
+
+	// 다른 select 엘리먼트에서 option 가져오기
+	const options = otherSelectElement.find('option');
+
+	options.each(function() {
+	    var option = $(this);
+	    if (receiverValues.includes(option.val())) {
+	        console.log(option.val() + " ㅇㅇㅇㅇ옵션포함됨!!");
+	        option.attr('disabled',true);
+	    } else {
+	        console.log(option.val() + " 응 나 옵션값들 포함안됨");
+	    }
+	});
+	$('#selectpickerSelectDeselect').selectpicker('refresh');
+	*/
+	/*$('#selectpickerSelectDeselect').selectpicker('refresh');*/
+    
+	
+	
+}
+
+
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
 	
@@ -1290,17 +1322,192 @@ document.addEventListener('DOMContentLoaded', function () {
           }
         });
         
+      //수신 인원 변경시 나머지 인원 select disabled
         emailContacts.on('change', function () {
+        	 
             const selectedOptions = emailContacts.val();
             console.log(selectedOptions + " 값은 가져오냐잉");
             receiverInput.value = selectedOptions;
             console.log(receiverInput.value + " 값은 들어가냐잉");
+            //const selectedOptions = document.getElementById('note_receiver').value;
+            const selectOptions = String(selectedOptions);
+
+            var receiverValues = selectOptions.split(',');
+            console.log(receiverValues + " 응 나 리시버 밸류 쪼개진 값");
+            var otherSelectElement = document.getElementById('selectpickerSelectDeselect'); // 다른 select 엘리먼트의 ID를 입력
+            var theotherSelectElement = document.getElementById('selecBcc'); // 다른 select 엘리먼트의 ID를 입력
+            
+                var options = otherSelectElement.getElementsByTagName('option');
+                var bccoptions = theotherSelectElement.getElementsByTagName('option');
+                console.log(options + " 응 나 옵션들");
+
+                for (var i = 0; i < options.length; i++) {
+                    var option = options[i];
+                    
+                    if (receiverValues.includes(option.value)) {
+                    	console.log(option.value + " ㅇㅇㅇㅇ옵션포함됨!!");
+                    	option.setAttribute('disabled', 'true');
+                    	
+                    } else {
+                    	console.log(option.value + " 응 나 옵션값들 포함안됨");
+                    	if (option.hasAttribute('disabled')) {
+                    	    // option이 disabled인 경우
+                    	    // 이곳에 수행할 작업 추가
+                    	} else {
+                    		option.removeAttribute('disabled');
+                    	}
+                    }
+                }
+
+                $('#selectpickerSelectDeselect').selectpicker('refresh');
+                $('#selectpickerSelectDeselect').selectpicker('destroy');
+                $('#selectpickerSelectDeselect').selectpicker(''); 
+                for (var i = 0; i < bccoptions.length; i++) {
+                	var bccoption = bccoptions[i];
+                	
+                	if (receiverValues.includes(bccoption.value)) {
+                		console.log(bccoption.value + " ㅇㅇㅇㅇ옵션포함됨!!");
+                		bccoption.setAttribute('disabled', 'true');
+                		
+                	} else {
+                		console.log(bccoption.value + " 응 나 옵션값들 포함안됨");
+                		if (bccoption.hasAttribute('disabled')) {
+                    	    // option이 disabled인 경우
+                    	    // 이곳에 수행할 작업 추가
+                    	} else {
+                    		bccoption.removeAttribute('disabled');
+                    	}
+                		
+                		
+                	}
+                }
+        	
+                $('#selecBcc').selectpicker('refresh'); 
+                $('#selecBcc').selectpicker('destroy');
+                $('#selecBcc').selectpicker(''); 
+            
         });
       }
     }
     initSelect2();
     
+    //참조 인원 변경시 나머지 인원 select disabled
+    let selectpickerSelectDeselect = $('#selectpickerSelectDeselect');
+    if(selectpickerSelectDeselect) {
+    	selectpickerSelectDeselect.on('change', function(){
+	    	console.log("여 히사시부리 ㅋ");
+	    	
+	    	const selectedOption = $('#selectpickerSelectDeselect').val();
 
+	    	
+	    	const selectedOptions = String(selectedOption);
+	    	const receiverValues = selectedOptions.split(',');
+	
+	    	// 비밀참조 select 엘리먼트 가져오기
+	    	const otherSelectElement = $('#selecBcc');
+	    	
+	    	//수신자
+	    	const SelectElement = $('#emailContacts');
+	
+	    	// 다른 select 엘리먼트에서 option 가져오기
+	    	const options = otherSelectElement.find('option');
+	    	const receiveroptions = SelectElement.find('option');
+	
+	    	options.each(function() {
+	    	    var option = $(this);
+	    	    if (receiverValues.includes(option.val())) {
+	    	        console.log(option.val() + " ㅇㅇㅇㅇ옵션포함됨!!");
+	    	        option.attr('disabled',true);
+	    	    } else {
+	    	        console.log(option.val() + " 응 나 옵션값들 포함안됨");
+	    	        if(option.attr('disabled')) {
+	    	        	
+	    			} else {
+	    				option.attr('disabled',false);
+	    			}
+	    	    }
+	    	});
+	    	
+	    	receiveroptions.each(function() {
+	    		var receiveroption = $(this);
+	    		if (receiverValues.includes(receiveroption.val())) {
+	    			console.log(receiveroption.val() + " ㅇㅇㅇㅇ옵션포함됨!!");
+	    			receiveroption.attr('disabled',true);
+	    		} else {
+	    			console.log(receiveroption.val() + " 응 나 옵션값들 포함안됨");
+	    			if(receiveroption.attr('disabled')) {
+	    				
+	    			} else {
+	    				receiveroption.attr('disabled',false);
+	    			}
+	    		}
+	    	});
+	    	
+	    	 $('#selecBcc').selectpicker('refresh');
+             $('#selecBcc').selectpicker('destroy');
+             $('#selecBcc').selectpicker(''); 
+	    	
+	    });
+    
+    }
+    
+    //비밀참조 인원 변경시 disabled
+    let selecBcc = $('#selecBcc');
+    if(selecBcc) {
+    	selecBcc.on('change', function(){
+    		
+    		const selectedOption = $('#selecBcc').val();
+    		const selectedOptions = String(selectedOption);
+    		const receiverValues = selectedOptions.split(',');
+    		
+    		// 다른 select 엘리먼트 가져오기
+    		const otherSelectElement = $('#selectpickerSelectDeselect');
+    		
+    		//수신자
+	    	const SelectElement = $('#emailContacts');
+    		
+    		// 다른 select 엘리먼트에서 option 가져오기
+    		const options = otherSelectElement.find('option');
+    		
+    		const receiveroptions = SelectElement.find('option');
+    		
+    		options.each(function() {
+    			var option = $(this);
+    			if (receiverValues.includes(option.val())) {
+    				console.log(option.val() + " ㅇㅇㅇㅇ옵션포함됨!!");
+    				option.attr('disabled',true);
+    			} else {
+    				console.log(option.val() + " 응 나 옵션값들 포함안됨");
+    				if(option.attr('disabled')) {
+    					
+	    			} else {
+	    				option.attr('disabled',false);
+	    			}
+    				
+    			}
+    		});
+    		receiveroptions.each(function() {
+	    		var receiveroption = $(this);
+	    		if (receiverValues.includes(receiveroption.val())) {
+	    			console.log(receiveroption.val() + " ㅇㅇㅇㅇ옵션포함됨!!");
+	    			receiveroption.attr('disabled',true);
+	    		} else {
+	    			if(receiveroption.attr('disabled')) {
+	    				
+	    			} else {
+	    				receiveroption.attr('disabled',false);
+	    			}
+	    			
+	    		}
+	    	});
+    		
+    		$('#selectpickerSelectDeselect').selectpicker('refresh');
+    		$('#selectpickerSelectDeselect').selectpicker('destroy');
+    		$('#selectpickerSelectDeselect').selectpicker(''); 
+    		
+    	});
+    	
+    }
 
     // Scroll to bottom on reply click
     // ? Using jquery vars due to jQuery animation dependency

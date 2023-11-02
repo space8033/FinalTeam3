@@ -860,17 +860,15 @@
                                 id="emailContacts"
                                 name="emailContacts"
                                 multiple>
-                                <optgroup label="개발1팀">
-                                	<option data-avatar="1.png" data-subtext="대리">김시온</option>
-                                	<option data-avatar="3.png">오우주</option>
-                                	<option data-avatar="5.png">박재홍</option>
-                                	<option data-avatar="5.png">오재온</option>
-                                </optgroup>
-                                <optgroup label="개발2팀">
-                                	<option data-avatar="7.png">성유진</option>
-                                	<option data-avatar="9.png" >송원석</option>
-                                	<option data-avatar="11.png" >성유진</option>
-                                </optgroup>
+                                <c:forEach var="team" items="${teamList}">
+		                           <optgroup label="${team}">
+                                      <c:forEach var="emp" items="${empList}">
+                                         <c:if test ="${emp.team_name == team}">
+		                                	<option data-avatar="1.png" value="${emp.emp_no}" data-subtext=" ${emp.empinfo_position}">${emp.empinfo_name}</option>
+	                                	 </c:if>
+                                      </c:forEach>
+		                           </optgroup>
+                                </c:forEach>
                               </select>
                               <input type="hidden" name="note_receiver" id="note_receiver" value="">
                             </div>
@@ -879,19 +877,8 @@
                               |<a class="email-compose-toggle-bcc text-body mx-1" href="javascript:void(0);"> 비밀참조</a>
                             </div>
                           </div>
-                         <!--  <div class="email-compose-cc d-none">
-                            <hr class="mx-n4 my-2" />
-                            <div class="d-flex justify-content-between align-items-center">
-                               <label for="TagifyUserList" class="form-label me-3" style="width: 35px;">참조 :</label>
-		                          <input
-		                            id="TagifyUserList"
-		                            name="note_receiver_cc"
-		                            class="form-control my-2 mb-2"
-		                            value="" 
-		                            />
-                            </div>
-                          </div>  -->
-                           <div class="email-compose-cc d-none">
+                         
+                           <div class="email-compose-cc d-none" onclick="javascript:sendCCList();">
                             <hr class="mx-n4 my-2" />
                             <div class="d-flex justify-content-between align-items-center">
                                <label for="selectpickerSelectDeselect" class="form-label me-1" style="width: 40px;">참조 :</label>
@@ -902,15 +889,15 @@
 		                         	 data-style="btn-default"
 		                        	  name="note_receiver_cc"
 		                        	  data-live-search="true">
-		                           	<optgroup label="개발1팀">	
-		                           		<option data-avatar="1.png" data-subtext="대리">김시온</option>
-		                           		<option data-avatar="7.png">이은지</option>
-		                           	</optgroup>
-		                           	<optgroup label="개발2팀">
-		                           		<option data-avatar="2.png">오우주</option>
-		                           		<option data-avatar="5.png">박재홍</option>
-		                           		<option data-avatar="6.png">누구씨</option>
-		                           	</optgroup>
+		                           <c:forEach var="team" items="${teamList}">
+			                           <optgroup label="${team}">
+	                                      <c:forEach var="emp" items="${empList}">
+	                                         <c:if test ="${emp.team_name == team}">
+			                                	<option class="ccReceiver" id="cc-${emp.emp_no}" data-avatar="1.png" value="${emp.emp_no}" data-subtext=" ${emp.empinfo_position}">${emp.empinfo_name}</option>
+		                                	 </c:if>
+	                                      </c:forEach>
+			                           </optgroup>
+	                                </c:forEach>
 		                          </select> 
                             </div>
                           </div>
@@ -926,16 +913,15 @@
 		                            data-live-search="true"
 		                            multiple
 		                            data-actions-box="true">
-		                            <optgroup label="개발1팀">	
-			                            <option data-subtext="나는로키" data-avatar="2.png">오우주</option>
-			                            <option>박재홍</option>
-			                            <option>김시온</option>
-			                        </optgroup>
-			                        <optgroup label="개발2팀">	
-			                            <option data-avatar="2.png">오우주</option>
-		                           		<option data-avatar="5.png">박재홍</option>
-		                           		<option data-avatar="6.png">누구씨</option>
-			                        </optgroup>
+		                           <c:forEach var="team" items="${teamList}">
+			                           <optgroup label="${team}">
+	                                      <c:forEach var="emp" items="${empList}">
+	                                         <c:if test ="${emp.team_name == team}">
+			                                	<option data-avatar="1.png" value="${emp.emp_no}" data-subtext=" ${emp.empinfo_position}">${emp.empinfo_name}</option>
+		                                	 </c:if>
+	                                      </c:forEach>
+			                           </optgroup>
+                                  </c:forEach>
 		                          </select>
                             </div>
                           </div> 
