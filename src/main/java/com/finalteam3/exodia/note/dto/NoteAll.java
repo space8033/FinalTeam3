@@ -9,9 +9,10 @@ public class NoteAll {
 	private String note_content;
 	private String note_draft;
 	private int note_sender;
-	private boolean note_isCanceled;
+	private boolean noteRead_isCanceled;
 	private String note_createdAt;
 	private String noteRead_deletedAt;
+	private String noteRead_realDeletedAt;
 	private String note_label;
 	private int noteRead_no;
 	private int emp_no_receiver;
@@ -19,4 +20,5 @@ public class NoteAll {
 	private String noteRead_type;
 	private String noteRead_starred;
 	private String note_sender_name;
+	private boolean media_isEmpty;
 }

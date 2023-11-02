@@ -6,7 +6,8 @@
 		SELECT empinfo.empinfo_name, notice.*
 		FROM empinfo
 		INNER JOIN notice ON empinfo.empinfo_no = notice.empinfo_no_writer
-		WHERE notice.notice_type = 'NOTICE'
+		WHERE notice.notice_type = 'NOTICE' AND notice.notice_deletedat IS NULL
+		ORDER BY notice.notice_no DESC
 	</select>
 	
 	<select id="selectDetailByNoticeNo" parameterType="int" resultType="Notice">
@@ -32,6 +33,11 @@
 	
 	<update id="updateDetailByNoticeNo" parameterType="Notice">  
 		update notice set notice_title = #{notice_title}, notice_content = #{notice_content}, notice_modifiedat = sysdate
+		where notice_no = #{notice_no}
+	</update>
+	
+	<update id="deleteByNoticeNo" parameterType="int">  
+		update notice set notice_deletedat = sysdate
 		where notice_no = #{notice_no}
 	</update>
 

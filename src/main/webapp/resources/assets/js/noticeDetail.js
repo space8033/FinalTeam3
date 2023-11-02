@@ -91,6 +91,27 @@ $(function () {
       });
     });
   }
+  
+ 
+  $('#deleteButton').click(function() {
+	  console.log("공지사항 삭제버튼 누름");
+	  var noticeData = {
+			  notice_no: $('#noticeNo').val()
+	  };
+	  
+	  $.ajax({
+		  type: 'POST', 
+		  url: '/exodia/noticeDelete',
+		  data: noticeData,
+		  success: function (data) {
+			  console.log("성공이요 성공");
+			  window.location.href = '/exodia/noticeList';
+		  },
+		  error: function (error) {
+			  console.error('오류 발생:', error);
+		  }
+	  });
+  });
 
   var formRepeater = $('.form-repeater');
 

@@ -14,4 +14,5 @@ public interface NoticeDao {
 	public Notice selectDetailByNoticeNo(int notice_no);
 	public int insertNotice(Notice notice);
 	public void updateDetailByNoticeNo(Notice notice);
+	public void deleteByNoticeNo(int notice_no);
 }

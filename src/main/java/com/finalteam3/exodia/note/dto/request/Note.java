@@ -8,7 +8,7 @@ public class Note {
 	private String note_title;
 	private String note_content;
 	private int note_sender;
-	private boolean note_isCanceled;
+	
 	private String note_createdAt;
 	private String note_label;
 	private String note_draft;

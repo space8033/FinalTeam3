@@ -1,10 +1,14 @@
 package com.finalteam3.exodia.note.controller;
 
+import java.io.OutputStream;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
@@ -18,10 +22,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
+import com.finalteam3.exodia.media.dto.MediaDto;
+import com.finalteam3.exodia.media.service.MediaService;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 import com.finalteam3.exodia.note.dto.NoteAll;
 import com.finalteam3.exodia.note.dto.Pager;
 import com.finalteam3.exodia.note.dto.request.Note;
+import com.finalteam3.exodia.note.dto.request.NoteRead;
 import com.finalteam3.exodia.note.dto.request.NoteRequest;
 import com.finalteam3.exodia.note.dto.request.ReplyRequest;
 import com.finalteam3.exodia.note.service.NoteService;
@@ -36,6 +43,8 @@ public class NoteController {
 	private EmployeeService employeeService;
 	@Resource
 	private NoteService noteService;
+	@Resource
+	private MediaService mediaService;
 	
 	
 	@GetMapping("/note")
@@ -104,7 +113,7 @@ public class NoteController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
-	
+		log.info("내 페이지 넘버는 ?" + pageInbox);
 		if(pageInbox == null) {
 			//세션에 저장되어 있는지 확인
 			pageInbox = (String) session.getAttribute("pageInbox");
@@ -121,9 +130,8 @@ public class NoteController {
 		int intPageNo = Integer.parseInt(pageInbox);
 		//세션에 pageNo를 저장
 		session.setAttribute("pageInbox", String.valueOf(pageInbox));
-		log.info("여기까지 ok2");
 		int totalRows = noteService.countByNoteNo(empNo);
-		log.info(totalRows+"나전체숫자");
+		log.info("내 totalRows 넘버는 ?" + totalRows);
 		
 		Pager pager = new Pager(10, 5, totalRows, intPageNo);
 		
@@ -131,17 +139,15 @@ public class NoteController {
 		map.put("startRowNo", pager.getStartRowNo());
 		map.put("endRowNo", pager.getEndRowNo());
 		map.put("empNo", empNo);
-		log.info(map+"여기까지 맵임ok3");
 		
 		List<NoteAll> list = noteService.getNoteListByRno(map);
-		log.info(list+"여기까지 ok3");
+		
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
 		String contentType = "수신";
 		model.addAttribute("contentType", contentType);
 		
-		log.info("여기까지 ok4");
 		
 		return "/noteContent";
 	}
@@ -357,7 +363,9 @@ public class NoteController {
 		
 		log.info(noteReadNo+"먼값이 들어오나 보자");
 		int noteRead_No = Integer.parseInt(noteReadNo);
-		
+		NoteRead noteRead = noteService.getNoteRead(noteRead_No);
+		log.info(noteRead.toString()+"모지?");
+		model.addAttribute("noteRead", noteRead);
 		
 		Note note = noteService.getNote(noteRead_No);
 		model.addAttribute("note", note);
@@ -366,14 +374,41 @@ public class NoteController {
 				
 		model.addAttribute("name", name);
 		
+		List<MediaDto> mediaList = noteService.getMediaList(note.getNote_no());
 		
+		model.addAttribute("mediaList", mediaList);
 		return "/noteDetail";
+	}
+	
+	//쪽지 파일 다운로드
+	@GetMapping("/noteFileDownload")
+	public void noteFileDownload(int mno, HttpServletRequest request, HttpServletResponse response) throws Exception{
+		MediaDto media = mediaService.getMedia(mno);
+		String fileOriginalName = media.getMedia_name();
+		String mimeType = media.getMedia_type();
+		response.setContentType(mimeType);
+		
+		String userAgent = request.getHeader("User-Agent");
+		if(userAgent.contains("Trident") || userAgent.contains("MSIE")) {
+			fileOriginalName = URLEncoder.encode(fileOriginalName, "UTF-8");
+			
+		} else {
+			fileOriginalName = new String(fileOriginalName.getBytes("UTF-8"), "ISO-8859-1");
+			
+		}
+		response.setHeader("Content-Disposition", "attachment; filename=\"" + fileOriginalName + "\"");
+		
+		OutputStream os = response.getOutputStream();
+		os.write(media.getMedia_data());
+		os.flush();
+		os.close();
+		
 	}
 	
 	
 	//쪽지 발송
 	@PostMapping("/noteSend")
-	public String noteSend(NoteRequest request, Authentication authentication) {
+	public String noteSend(NoteRequest request, Authentication authentication) throws Exception {
 		log.info(request.toString());
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
@@ -383,12 +418,13 @@ public class NoteController {
 		
 		noteService.addNote(request);
 		
+		
 		return "redirect:/note";
 	}
 	
 	//답장 발송
 	@PostMapping("/replySend")
-	public String replySend(ReplyRequest request, Authentication authentication) {
+	public String replySend(ReplyRequest request, Authentication authentication) throws Exception {
 		log.info(request.toString());
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();

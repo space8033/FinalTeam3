@@ -4020,8 +4020,8 @@ textarea.form-control-lg {
   --bs-pagination-padding-x: 0.5125rem;
   --bs-pagination-padding-y: 0.625rem;
   --bs-pagination-font-size: 0.9375rem;
-  --bs-pagination-color: #697a8d;
-  --bs-pagination-bg: #f0f2f4;
+  --bs-pagination-color: #ffffff;
+  --bs-pagination-bg: #ffffff;
   --bs-pagination-border-width: 0px;
   --bs-pagination-border-color: #d9dee3;
   --bs-pagination-border-radius: 0.25rem;

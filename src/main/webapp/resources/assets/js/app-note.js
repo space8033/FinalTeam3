@@ -98,6 +98,24 @@ function showDetail(noteReadNo) {
 		     	        suppressScrollX: true
 		     	    });
 		        	
+		        	
+		        	document.getElementById('reply-attach-file').addEventListener('change', function () {
+		        	    const fileName = document.getElementById('reply-attach-file').files[0].name;
+		        	    
+		        	    const fileCount = document.getElementById('reply-attach-file').files.length;
+		        	    if (fileCount > 1) {
+		        	        document.getElementById('reply-filename').value = fileName + " 외 " + (fileCount - 1) + "개";
+		        	    } else {
+		        	        document.getElementById('reply-filename').value = fileName;
+		        	    }
+		        	});
+
+
+		        	
+		        	
+		        	
+		        	
+		        	
 		        }).fail(function (jqXHR, textStatus, errorThrown) {
 		        	console.log("에러");
 		        	console.log(jqXHR);
@@ -538,6 +556,7 @@ document.addEventListener('DOMContentLoaded', function () {
       draftNoteList = document.getElementById('draftNoteList'),
       sendMsg = document.getElementById('sendMsg'),
       attachFile = document.getElementById('attach-file'),
+      
       labelRed = document.getElementById('label-red'),
       labelYellow = document.getElementById('label-yellow'),
       labelGreen = document.getElementById('label-green'),
@@ -889,13 +908,15 @@ document.addEventListener('DOMContentLoaded', function () {
 	        const fileCount = attachFile.files.length;
 	        if(fileCount > 1) {
 		        
-		        document.getElementById('filename').value = fileName+" 외 "+fileCount+"개";
+		        document.getElementById('filename').value = fileName+" 외 "+(fileCount-1)+"개";
 	        } else {
 		        document.getElementById('filename').value = fileName;
 	        }
 	        
 	    });
     }
+    
+   
     
     labelRed.addEventListener('click', e => {
       var labelSelect = document.getElementById('label-select');
@@ -908,6 +929,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       var noteLabel = document.getElementById('note_label');
       noteLabel.value = "긴급 필독";
+      console.log(noteLabel.value+"ㅇㅇ");
       
       
     });
@@ -922,6 +944,7 @@ document.addEventListener('DOMContentLoaded', function () {
     	
     	var noteLabel = document.getElementById('note_label');
     	noteLabel.value = "공지 관련";
+    	console.log(noteLabel.value+"ㅇㅇ");
     	
     	
     });
@@ -936,6 +959,7 @@ document.addEventListener('DOMContentLoaded', function () {
     	
     	var noteLabel = document.getElementById('note_label');
     	noteLabel.value = "기능 문의";
+    	console.log(noteLabel.value+"ㅇㅇ");
     	
     	
     });
@@ -950,6 +974,7 @@ document.addEventListener('DOMContentLoaded', function () {
     	
     	var noteLabel = document.getElementById('note_label');
     	noteLabel.value = "일반 쪽지";
+    	console.log(noteLabel.value+"ㅇㅇ");
     	
     });
 
@@ -1362,6 +1387,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 $('#selectpickerSelectDeselect').selectpicker('refresh');
                 $('#selectpickerSelectDeselect').selectpicker('destroy');
                 $('#selectpickerSelectDeselect').selectpicker(''); 
+                
                 for (var i = 0; i < bccoptions.length; i++) {
                 	var bccoption = bccoptions[i];
                 	

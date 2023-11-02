@@ -168,6 +168,7 @@ $(document).ready(function() {
 	            data: noticeData, 
 	            success: function(data) {
 	            	console.log("ajax부분 -> 공지사항 입력값 db로 잘 들어감");
+	            	window.location.href = '/exodia/noticeDetail?notice_no='+noticeData.notice_no;
 	            }
 	        });
 	    });
