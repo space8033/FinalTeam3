@@ -7,6 +7,7 @@
 		FROM empinfo
 		INNER JOIN notice ON empinfo.empinfo_no = notice.empinfo_no_writer
 		WHERE notice.notice_type = 'NOTICE'
+		ORDER BY notice.notice_no DESC
 	</select>
 	
 	<select id="selectDetailByNoticeNo" parameterType="int" resultType="Notice">
