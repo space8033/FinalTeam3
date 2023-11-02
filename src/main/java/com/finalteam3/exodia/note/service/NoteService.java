@@ -3,6 +3,7 @@ package com.finalteam3.exodia.note.service;
 import java.util.List;
 import java.util.Map;
 
+import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.note.dto.NoteAll;
 import com.finalteam3.exodia.note.dto.request.Note;
 import com.finalteam3.exodia.note.dto.request.NoteRead;
@@ -15,6 +16,8 @@ public interface NoteService {
 	public List<NoteAll> getNoteStarredListByRno(Map<String, Object> map);
 	public List<NoteAll> getNoteTrashListByRno(Map<String, Object> map);
 	public List<NoteAll> getNoteDraftListByRno(Map<String, Object> map);
+	public List<EmpNote> getEmpList();
+	public List<String> getTeamList();
 	public Note getNote(int noteNo);
 	public int countByNoteNo(int empNo);
 	public int countByNoteSenderNo(int empNo);

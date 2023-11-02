@@ -9,6 +9,7 @@ import com.finalteam3.exodia.employee.dto.request.JoinRequest;
 import com.finalteam3.exodia.employee.dto.request.LoginRequest;
 import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
 import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
+import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.EmpSimpleResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.dto.response.TeamBasicResponse;
@@ -44,4 +45,5 @@ public interface EmployeeDao {
 	public void deleteTeamByEmpNo(String team_name);
 	public Integer selectRolePM(int project_no);
 	public void deleteAllTeam(String team_name);
+	public List<EmpNote> selectEmployeeForNote();
 }

@@ -12,6 +12,7 @@
 		<typeAlias alias="EmpManagementResponse" type="com.finalteam3.exodia.employee.dto.response.EmpManagementResponse" />
 		<typeAlias alias="EmployeeInfo" type="com.finalteam3.exodia.note.dto.EmployeeInfo" />
 		<typeAlias alias="EmpSimpleResponse" type="com.finalteam3.exodia.employee.dto.response.EmpSimpleResponse" />
+		<typeAlias alias="EmpNote" type="com.finalteam3.exodia.employee.dto.response.EmpNote" />
 		<typeAlias alias="TeamBasicResponse" type="com.finalteam3.exodia.employee.dto.response.TeamBasicResponse" />
 		<typeAlias alias="Note" type="com.finalteam3.exodia.note.dto.request.Note" />
 		<typeAlias alias="NoteRead" type="com.finalteam3.exodia.note.dto.request.NoteRead" />
