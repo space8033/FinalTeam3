@@ -277,39 +277,7 @@
 					  </div>
 					</div>
                     <button type="submit" id="noticeSubmit" class="btn btn-primary">수정</button>
-                    <script>
-                    	function updateNotice() {
-                    		// notice_no 값을 가져오기
-                            var notice_no = document.getElementById('noticeNo').value;
-
-                            // Notice 객체의 내용을 가져오기 (예: 제목, 내용 등)
-
-                            // 데이터를 서버로 전송
-                            $.ajax({
-                                type: 'POST',
-                                url: '/exodia/noticeUpdate', // 또는 원하는 엔드포인트로 변경
-                                data: {
-                                    notice_no: notice_no,
-                                    // Notice 객체의 내용을 여기에 추가
-                                },
-                                success: function(data) {
-                                    // 성공한 경우, noticeList 페이지로 이동
-                                    redirectToNoticeList();
-                                }
-                            });
-                        }
-                    	
-				        function redirectToNoticeList() {
-				            // noticeList 페이지 설정
-				            var noticeListUrl = '/exodia/noticeList';
-				
-				            // 페이지 redirection
-				            window.location.href = noticeListUrl;
-				        }
-				
-				        // 버튼에 클릭 이벤트
-				        document.getElementById('noticeSubmit').addEventListener('click', redirectToNoticeList);
-				    </script>
+                    
                   </div>
                 </div>
 

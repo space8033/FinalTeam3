@@ -86,7 +86,7 @@ $(function () {
         		      '<div class="d-flex justify-content-start align-items-center product-name">' +
         		      '<div class="d-flex flex-column">' +
         		      '<h6 class="text-body text-nowrap mb-0">' +
-        		      '<a href="noticeDetail?notice_no=' + sharedNoticeNo + '">' + $title + '</a>' +
+        		      '<a href="noticeDetail?notice_no=' + sharedNoticeNo + '" style="text-decoration: none; color: black;">' + $title + '</a>' +
         		      '</h6>' +
         		      '</div>' +
         		      '</div>';
@@ -112,7 +112,7 @@ $(function () {
         	}
         }
       ],
-      order: [2, 'asc'], //set any columns order asc/desc
+      order: [1, 'desc'], //set any columns order asc/desc
       dom:
         '<"card-header d-flex border-top rounded-0 flex-wrap py-md-0"' +
         '<"me-5 ms-n2 pe-5"f>' +

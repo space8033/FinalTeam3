@@ -9,5 +9,5 @@ public interface NoticeService {
 	public Notice getNoticeDetail(int notice_no); //공지사항 세부내용
 	public void write(Notice notice); //공지사항 작성
 	public void updateByNotice(Notice notice); //공지사항 내용 업데이트
-
+	public void deleteByNoticeNo(int notice_no);//공지사항 삭제(update임) -> deletedat을 업데이트
 }

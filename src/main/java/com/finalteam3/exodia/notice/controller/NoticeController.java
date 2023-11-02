@@ -46,7 +46,9 @@ public class NoticeController {
 	public String noticeListJson(Authentication authentication, Model model) throws JsonProcessingException {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
 		List<Notice> data = noticeService.getNoticeList();
+		log.info("delete하고 list받기 : "+ data.toString());
 		
 		
 		//data를 json데이터로 바꾸기
@@ -57,17 +59,6 @@ public class NoticeController {
 		return jsonData;
 	}
 	
-	@GetMapping("/noticeDetail")
-	public String noticeDetail(Authentication authentication, int notice_no, Model model){
-		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		LoginResponse loginResponse = empDetails.getLoginResponse();
-		log.info("noticeno :" + notice_no);
-		Notice notice = noticeService.getNoticeDetail(notice_no);
-		log.info("noticedetail : " + notice);
-		model.addAttribute("notice", notice);
-		
-        return "noticeDetail";
-	}
 	
 	@GetMapping("/noticeAdd")
 	public String noticeAddForm(Authentication authentication, Model model) {
@@ -111,7 +102,7 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/noticeUpdate")
-	public String noticeUpdate(Authentication authentication, int notice_no, Notice notice) {
+	public String noticeUpdateForm(Authentication authentication, int notice_no, Notice notice) {
 		log.info("noticeNo :" + notice_no);
 		log.info("업데이트잘됏니?" + notice.toString());
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
@@ -121,7 +112,26 @@ public class NoticeController {
 		return "noticeList";
 	}
 	
+	@GetMapping("/noticeDetail")
+	public String noticeDetail(Authentication authentication, int notice_no, Model model){
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+
+		Notice notice = noticeService.getNoticeDetail(notice_no);
+		model.addAttribute("notice", notice);
+		
+		return "noticeDetail";
+	}
 	
-	
+	@PostMapping("/noticeDelte")
+	public String noticeDelete(Authentication authentication, int notice_no) {
+		log.info("내가 지울거야 noticeNo :" + notice_no);
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		noticeService.deleteByNoticeNo(notice_no);
+		
+		return "noticeList";
+	}
 
 }
