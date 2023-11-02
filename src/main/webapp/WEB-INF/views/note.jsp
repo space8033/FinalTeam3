@@ -851,7 +851,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body flex-grow-1 pb-sm-0 p-4 py-2">
-                        <form class="email-compose-form" name="NoteRequest" action="noteSend" id="noteSend" method="POST">
+                        <form class="email-compose-form" name="NoteRequest" action="noteSend" id="noteSend" method="POST" enctype="multipart/form-data">
                           <div class="email-compose-to d-flex justify-content-between align-items-center">
                             <label class="form-label mb-2" for="emailContacts" style="width: 90px;">받는 사람 :</label>
                             <div class="select2-primary border-0 shadow-none flex-grow-1 mx-1">
@@ -986,7 +986,7 @@
                                 </ul>
                               </div>
                               <label for="attach-file"><i class="bx bx-paperclip cursor-pointer ms-2"></i></label>
-                              <input type="file" name="file-input" class="d-none" id="attach-file" multiple/>
+                              <input type="file" name="files" class="d-none" id="attach-file" multiple/>
                               <input value="첨부파일" type="text" id="filename" placeholder="첨부파일" class="text-muted ms-1 upload-name" style="border:none; width:400px;">
                             </div>
                             <div class="d-flex align-items-center">

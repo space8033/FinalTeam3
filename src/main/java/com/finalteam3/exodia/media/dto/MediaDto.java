@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class MediaDto {
+	private int media_no;
 	private String media_name;
 	private byte[] media_data;
 	private String media_type;

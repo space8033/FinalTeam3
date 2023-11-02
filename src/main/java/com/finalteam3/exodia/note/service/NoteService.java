@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
+import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.note.dto.NoteAll;
 import com.finalteam3.exodia.note.dto.request.Note;
 import com.finalteam3.exodia.note.dto.request.NoteRead;
@@ -18,13 +19,14 @@ public interface NoteService {
 	public List<NoteAll> getNoteDraftListByRno(Map<String, Object> map);
 	public List<EmpNote> getEmpList();
 	public List<String> getTeamList();
+	public List<MediaDto> getMediaList(int noteNo);
 	public Note getNote(int noteNo);
 	public int countByNoteNo(int empNo);
 	public int countByNoteSenderNo(int empNo);
 	public int countByNoteStarredNo(int empNo);
 	public int countByNoteTrashNo(int empNo);
 	public int countByNoteDraftNo(int empNo);
-	public void addNote(NoteRequest note);
+	public void addNote(NoteRequest note) throws Exception;
 	public void addReply(ReplyRequest note);
 	public void updateRead(int noteNo);
 	public void updateStarred(int noteNo, String noteStarred);

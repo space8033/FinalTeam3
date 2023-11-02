@@ -1,17 +1,19 @@
 package com.finalteam3.exodia.note.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.finalteam3.exodia.alarm.dao.AlarmDao;
 import com.finalteam3.exodia.alarm.dto.request.AlarmRequest;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
+import com.finalteam3.exodia.media.dao.MediaDao;
+import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.note.dao.NoteDao;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 import com.finalteam3.exodia.note.dto.NoteAll;
@@ -31,6 +33,8 @@ public class NoteServiceImpl implements NoteService{
 	private EmployeeDao employeeDao;
 	@Resource
 	private AlarmDao alarmDao;
+	@Resource
+	private MediaDao mediaDao;
 
 	@Override
 	public List<NoteAll> getNoteListByRno(Map<String, Object> map) {
@@ -50,7 +54,7 @@ public class NoteServiceImpl implements NoteService{
 	}
 
 	@Override
-	public void addNote(NoteRequest request) {
+	public void addNote(NoteRequest request) throws Exception {
 		Note note = new Note();
 		AlarmRequest alarm = new AlarmRequest();
 		
@@ -155,6 +159,22 @@ public class NoteServiceImpl implements NoteService{
 				}
 			}
 		}
+		
+		
+		
+		
+		MultipartFile[] uploadFiles = request.getFiles();
+		if(uploadFiles != null && uploadFiles.length > 0) {
+			for(MultipartFile noteFile : uploadFiles) {
+				MediaDto noteMedia = new MediaDto();
+				noteMedia.setMedia_data(noteFile.getBytes());
+				noteMedia.setMedia_name(noteFile.getOriginalFilename());
+				noteMedia.setMedia_type(noteFile.getContentType());
+				noteMedia.setMedia_from("NOTE");
+				noteMedia.setFrom_no(noteNo);
+				mediaDao.insertMedia(noteMedia);
+			}
+		}
 	}
 
 	@Override
@@ -253,6 +273,7 @@ public class NoteServiceImpl implements NoteService{
 		NoteRead noteRead = noteDao.selectNoteRead(noteReadNo);
 		int noteNo = noteRead.getNote_no();
 		Note note = noteDao.selectNoteByNoteNo(noteNo);
+		
 		
 		return note;
 	}
@@ -365,5 +386,17 @@ public class NoteServiceImpl implements NoteService{
 	public List<String> getTeamList() {
 		List<String> team = employeeDao.selectTeamname(0);
 		return team;
+	}
+
+	@Override
+	public List<MediaDto> getMediaList(int noteNo) {
+		MediaDto media = new MediaDto();
+		media.setMedia_from("NOTE");
+		media.setFrom_no(noteNo);
+		
+		List<MediaDto> mediaList = mediaDao.selectMedia(media);
+		
+		return mediaList;
+
 	}
 }

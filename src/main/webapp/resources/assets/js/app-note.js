@@ -1362,6 +1362,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 $('#selectpickerSelectDeselect').selectpicker('refresh');
                 $('#selectpickerSelectDeselect').selectpicker('destroy');
                 $('#selectpickerSelectDeselect').selectpicker(''); 
+                
                 for (var i = 0; i < bccoptions.length; i++) {
                 	var bccoption = bccoptions[i];
                 	

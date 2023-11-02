@@ -323,12 +323,21 @@
                             <p>
                             	 ${note.note_content}
                             </p>
-                            <hr />
-                            <p class="mb-2">첨부 파일</p>
-                            <div class="cursor-pointer">
-                              <i class="bx bx-file"></i>
-                              <span class="align-middle ms-1">report.xlsx</span>
-                            </div>
+                            <c:if test="${not empty mediaList}">
+	                            <hr />
+	                            <p class="mb-2 ">첨부 파일</p> 
+	                              <c:forEach var="media" items="${mediaList}" varStatus="a">
+			                              <div class="cursor-pointer">
+	        	                	       	
+	        	                	       	<c:if test="${media.media_type}">
+	        	                	       		<i class="bx bx-file-image"></i>
+	        	                	       	</c:if>
+	        	                	       		<i class="bx bx-file"></i>
+	            	        	          		<a class="align-middle ms-1" href ="noteFileDownload?mno=${media.media_no}">${media.media_name}</a>
+	            	        	          	<%-- <img src="data:${media.media_type};base64, ${noteImg}" height="100"/> --%>
+	                		              </div>
+	                              </c:forEach>
+	                         </c:if>
                           </div>
                         </div>
                         

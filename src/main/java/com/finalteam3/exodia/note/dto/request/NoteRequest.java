@@ -2,7 +2,7 @@ package com.finalteam3.exodia.note.dto.request;
 
 import java.util.List;
 
-import org.json.JSONArray;
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -15,4 +15,5 @@ public class NoteRequest {
 	private List<String> note_receiver_cc;
 	private List<String> note_receiver_bcc;
 	private String note_reserve_time;
+	private MultipartFile[] files;
 }
