@@ -275,71 +275,76 @@
 					    </div>
 					  </div>
 					</div>
-                    <button type="submit" id="noticeSubmit" class="btn btn-primary">등록</button>
-                    <script>
-				        function redirectToNoticeList() {
-				            // noticeList 페이지 설정
-				            var noticeListUrl = '/exodia/noticeList';
-				
-				            // 페이지 redirection
-				            window.location.href = noticeListUrl;
-				        }
-				
-				        // 버튼에 클릭 이벤트
-				        document.getElementById('noticeSubmit').addEventListener('click', redirectToNoticeList);
-				    </script>
                   </div>
                 </div>
-
-                <div class="row">
-                  <!-- First column-->
-                  <div class="col-12 col-lg-12">
-                    <!-- Product Information -->
-                    <div class="card mb-4">
-                      <div class="card-body">
-                        <div class="row">
-						  <div class="col-8 mb-3">
-						    <label class="form-label" for="ecommerce-product-name">제목</label>
-						    <input
-						      type="text"
-						      class="form-control"
-						      id="ecommerce-product-name"
-						      placeholder="제목을 입력해 주세요"
-						      name="noticeTitle"
-						      aria-label="Notice title" />
-						  </div>
-						  <!-- <div class="col-4 mb-3">
-						    <label class="form-label" for="form-repeater-1-1">팀</label>
-						    <select id="form-repeater-1-1" class="select2 form-select" data-placeholder="소속 팀">
-						      <option value="">소속 팀</option>
-						      <option value="size">개발1팀</option>
-						      <option value="color">개발2팀</option>
-						      <option value="weight">유지보수1팀</option>
-						      <option value="smell">유지보수2팀</option>
-						    </select>
-						  </div> -->
-						</div>
-                        <!-- Description -->
-                        <div>
-                          <label class="form-label">내용</label>
-                          <div class="form-control p-0 pt-1">
-                            <div class="comment-toolbar border-0 border-bottom">
-                              <div class="d-flex justify-content-start">
-                                <span class="ql-formats me-0">
-                                  <button class="ql-bold"></button>
-                                  <button class="ql-italic"></button>
-                                  <button class="ql-underline"></button>
-                                  <button class="ql-list" value="ordered"></button>
-                                  <button class="ql-list" value="bullet"></button>
-                                  <button class="ql-link"></button>
-                                  <button class="ql-image"></button>
-                                </span>
-                              </div>
-                            </div>
-                            <div class="comment-editor border-0 pb-4" id="ecommerce-category-description"></div>
-                            <textarea id="noticeContent" style="display:none"></textarea>
-                          </div>
-                        </div>
+					<form action="noticeAdd" method="post" enctype="multipart/form-data">
+	                    <button type="submit" id="noticeSubmit234" class="btn btn-primary">등록</button>
+	                   <!--  <script>
+					        function redirectToNoticeList() {
+					            // noticeList 페이지 설정
+					            var noticeListUrl = '/exodia/noticeList';
+					
+					            // 페이지 redirection
+					            window.location.href = noticeListUrl;
+					        }
+					
+					        // 버튼에 클릭 이벤트
+					        document.getElementById('noticeSubmit').addEventListener('click', redirectToNoticeList);
+					    </script> -->
+	
+	                <div class="row">
+	                  <!-- First column-->
+	                  <div class="col-12 col-lg-12">
+	                    <!-- Product Information -->
+	                    <div class="card mb-4">
+	                      <div class="card-body">
+	                        <div class="row">
+							  <div class="col-8 mb-3">
+							    <label class="form-label" for="ecommerce-product-name">제목</label>
+							    <input
+							      type="text"
+							      class="form-control"
+							      id="ecommerce-product-name"
+							      placeholder="제목을 입력해 주세요"
+							      name="noticeTitle"
+							      aria-label="Notice title" />
+							  </div>
+							  <!-- <div class="col-4 mb-3">
+							    <label class="form-label" for="form-repeater-1-1">팀</label>
+							    <select id="form-repeater-1-1" class="select2 form-select" data-placeholder="소속 팀">
+							      <option value="">소속 팀</option>
+							      <option value="size">개발1팀</option>
+							      <option value="color">개발2팀</option>
+							      <option value="weight">유지보수1팀</option>
+							      <option value="smell">유지보수2팀</option>
+							    </select>
+							  </div> -->
+							</div>
+	                        <!-- Description -->
+	                        <div>
+	                          <label class="form-label">내용</label>
+	                          <div class="form-control p-0 pt-1">
+	                            <div class="comment-toolbar border-0 border-bottom">
+	                              <div class="d-flex justify-content-start">
+	                                <span class="ql-formats me-0">
+	                                  <button class="ql-bold"></button>
+	                                  <button class="ql-italic"></button>
+	                                  <button class="ql-underline"></button>
+	                                  <button class="ql-list" value="ordered"></button>
+	                                  <button class="ql-list" value="bullet"></button>
+	                                  <button class="ql-link"></button>
+	                                  <button class="ql-image"></button>
+	                                </span>
+	                              </div>
+	                            </div>
+	                            <div class="comment-editor border-0 pb-4" id="ecommerce-category-description"></div>
+	                            <textarea id="noticeContent" name="noticeContent" style="display:none"></textarea>
+	                            <div class="input-group">							
+									<input type="file" name="files" class="form-control" id="attach-file" multiple/>
+								</div>
+	                          </div>
+	                        </div>
+                      	</form>
                       </div>
                     </div>
                     <!-- /Product Information -->

@@ -330,10 +330,35 @@
 					                            </p>
 					                            <hr />
 					                            <p class="mb-2">첨부 파일</p>
-					                            <div class="cursor-pointer">
-					                              <i class="bx bx-file"></i>
-					                              <span class="align-middle ms-1">report.xlsx</span>
+					                            <span>
+					                            	<div class="cursor-pointer">
+						                              <i class="bx bx-file"></i>
+						                              <!-- <span class="align-middle ms-1">report.xlsx</span> -->
+						                              <c:if test="${board.battachoname !=null}">
+														<p> 
+															<span class="align-middle ms-1">
+																${board.battachoname}		
+																<!-- 첨부파일이 DB에 저장되어 있는 경우 --> 
+																<c:if test="${board.battachdata != null}">
+																	<a href="filedownload2?bno=${board.bno}"
+																	 class="btn btn-info btn-sm ml-2">다운로드</a>
+																	 <!-- 
+																	  src의 속성값은 완전한 응답 HTTP가 되어야 함 
+																	  (jpg,png 나 filedownload1?bno=${board.bno} 요청으로 완전한 http를 받는다)
+																	  
+																	   1) 서버의 정적을 요청해서 응답을 받는 경우, 예) photo1.jpg
+																	   2) 요청경로를 이용해서 컨트롤러에서 응답을 생성하는 경우, 예) filedownload1?bno=${board.bno}
+																	   
+																	   데이터를 직접 주면 안됨! 만약 데이터를 직접 넣어야할 경우 아래와 같음
+																	  src="data:MIME;base64, base64로 인코딩된 데이터"
+																	 -->
+																</c:if>
+																 
+															</span>
+														</p>
+													</c:if>
 					                            </div>
+					                           </span>
 					                          </div>
 				                          </div>
 										<!-- <div>

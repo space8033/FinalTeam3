@@ -148,7 +148,7 @@ $(function () {
   }
 });
 
-$(document).ready(function() {
+/*$(document).ready(function() {
 	//add task
 		console.log("insert시작");
 	    $('#noticeSubmit').click(function() {
@@ -171,4 +171,4 @@ $(document).ready(function() {
 	            }
 	        });
 	    });
-});
+});*/
