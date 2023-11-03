@@ -343,10 +343,9 @@ public class NoteServiceImpl implements NoteService{
 		note.setNote_sender(request.getNote_sender());
 		note.setNote_title("re: " + request.getNote_title());
 		
-		log.info(request.getNote_content().toString()+"내용알려줘엉");
 		note.setNote_content(request.getNote_content());
 		
-		
+		note.setNote_label("일반 쪽지");
 		if(request.getNote_reserve_time() == null) {
 			note.setNote_restime("");
 		} else {

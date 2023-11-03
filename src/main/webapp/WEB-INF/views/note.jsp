@@ -991,7 +991,7 @@
                             </div>
                             <div class="d-flex align-items-center">
                              <i id="label-select" class="me-1 badge badge-dot bg-primary"></i>
-                             <input type="hidden" id="note_label" name="note_label" value=""/>
+                             <input type="hidden" id="note_label" name="note_label" value="일반 쪽지"/>
                               <div class="ms-2 dropdown">
                                 <button
                                   class="btn p-0"
