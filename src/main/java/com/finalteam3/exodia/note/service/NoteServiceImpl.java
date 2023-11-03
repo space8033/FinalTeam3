@@ -421,6 +421,19 @@ public class NoteServiceImpl implements NoteService{
 			noteDao.trashNote(noteReadNo);
 		}
 	}
+	
+	@Override
+	public void deleteTrash(String checkedIdsString) {
+		
+		String[] numberStrings = checkedIdsString.split(", ");
+		int[] numberArray = new int[numberStrings.length];
+		for(int i = 0; i < numberStrings.length; i++) {
+			numberArray[i] = Integer.parseInt(numberStrings[i].trim());
+		}
+		for(int noteReadNo : numberArray) {
+			noteDao.deleteTrashNote(noteReadNo);
+		}
+	}
 
 	@Override
 	public void recoverTrashNote(String checkedIdsString) {

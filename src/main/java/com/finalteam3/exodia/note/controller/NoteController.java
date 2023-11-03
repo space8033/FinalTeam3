@@ -469,6 +469,16 @@ public class NoteController {
 		return "redirect:/note";
 	}
 	
+	//쪽지 휴지통 비우기
+	@PostMapping("/deleteTrashNote")
+	@ResponseBody
+	public String deleteTrashNote(String checkedIdsString, String contentType) {
+		
+		noteService.deleteTrash(checkedIdsString);
+		
+		return "redirect:/note";
+	}
+	
 	//휴지통 쪽지 복구하기
 	@PostMapping("/recoveryNote")
 	@ResponseBody

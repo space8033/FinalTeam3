@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html
@@ -287,40 +288,6 @@
 												<span style="font-size: 12px;">날짜:</span> 
 												<span style="font-size: 12px;">${notice.notice_createdat}</span> <br/>
 											</p>
-											
-											<%-- <c:if test="${board.battachoname !=null}">
-												<p>
-												 <span>첨부:</span> 
-													<span>
-														${board.battachoname}
-														
-														<!-- 첨부파일이 파일 시스템에 저장되어 있는 경우 -->
-														<c:if test="${board.battachoname != null}">
-															<a href="filedownload1?bno=${board.bno}"
-															 class="btn btn-info btn-sm ml-2">다운로드</a>
-															<img src="filedownload1?bno=${board.bno}" height="100"/>
-														</c:if>
-														
-														<!-- 첨부파일이 DB에 저장되어 있는 경우 --> 
-														<c:if test="${board.battachdata != null}">
-															<a href="filedownload2?bno=${board.bno}"
-															 class="btn btn-info btn-sm ml-2">다운로드</a>
-															 <!-- 
-															  src의 속성값은 완전한 응답 HTTP가 되어야 함 
-															  (jpg,png 나 filedownload1?bno=${board.bno} 요청으로 완전한 http를 받는다)
-															  
-															   1) 서버의 정적을 요청해서 응답을 받는 경우, 예) photo1.jpg
-															   2) 요청경로를 이용해서 컨트롤러에서 응답을 생성하는 경우, 예) filedownload1?bno=${board.bno}
-															   
-															   데이터를 직접 주면 안됨! 만약 데이터를 직접 넣어야할 경우 아래와 같음
-															  src="data:MIME;base64, base64로 인코딩된 데이터"
-															 -->
-															<img src="data:${board.battachtype};base64, ${base64Img}" height="100"/>
-														</c:if>
-														 
-													</span>
-												</p>
-											</c:if> --%>
 										</div>	
 										<div class="card email-card-last mx-sm-4 mx-3 mt-4 border">																	
 											<div class="card-body pt-3">
@@ -328,36 +295,21 @@
 					                            <p>
 					                            	 ${notice.notice_content}
 					                            </p>
-					                            <hr />
-					                            <p class="mb-2">첨부 파일</p>
 					                            <span>
-					                            	<div class="cursor-pointer">
-						                              <i class="bx bx-file"></i>
-						                              <!-- <span class="align-middle ms-1">report.xlsx</span> -->
-						                              <c:if test="${board.battachoname !=null}">
-														<p> 
-															<span class="align-middle ms-1">
-																${board.battachoname}		
-																<!-- 첨부파일이 DB에 저장되어 있는 경우 --> 
-																<c:if test="${board.battachdata != null}">
-																	<a href="filedownload2?bno=${board.bno}"
-																	 class="btn btn-info btn-sm ml-2">다운로드</a>
-																	 <!-- 
-																	  src의 속성값은 완전한 응답 HTTP가 되어야 함 
-																	  (jpg,png 나 filedownload1?bno=${board.bno} 요청으로 완전한 http를 받는다)
-																	  
-																	   1) 서버의 정적을 요청해서 응답을 받는 경우, 예) photo1.jpg
-																	   2) 요청경로를 이용해서 컨트롤러에서 응답을 생성하는 경우, 예) filedownload1?bno=${board.bno}
-																	   
-																	   데이터를 직접 주면 안됨! 만약 데이터를 직접 넣어야할 경우 아래와 같음
-																	  src="data:MIME;base64, base64로 인코딩된 데이터"
-																	 -->
-																</c:if>
-																 
-															</span>
-														</p>
-													</c:if>
-					                            </div>
+					                            	<c:if test="${not empty mediaList}">
+							                            <hr />
+							                            <p class="mb-2 ">첨부 파일</p> 
+							                              <c:forEach var="media" items="${mediaList}" varStatus="a">
+									                              <div class="cursor-pointer">
+							        	                	       	
+							        	                	       	<c:if test="${media.media_type}">
+							        	                	       		<i class="bx bx-file-image"></i>
+							        	                	       	</c:if>
+							        	                	       		<i class="bx bx-file"></i>
+							            	        	          		<a class="align-middle ms-1" href ="noticeFileDownload?mno=${media.media_no}">${media.media_name}</a> 	
+							                		              </div>
+							                              </c:forEach>
+							                         </c:if>
 					                           </span>
 					                          </div>
 				                          </div>
@@ -388,13 +340,11 @@
 										      <div class="modal-footer">
 										      	<textarea id="noticeNo" style="display: none">${notice.notice_no}</textarea>
 										        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-										        <button type="button" class="btn btn-primary" id="deleteButton">삭제</button>
-										        
+										        <button type="button" class="btn btn-primary" id="deleteButton">삭제</button> 
 										      </div>
 										    </div>
 										  </div>
 										</div>
-										
 									</div>
 								</div>
 							</div>
