@@ -1,31 +1,26 @@
 package com.finalteam3.exodia.notice.controller;
 
-import java.io.File;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpSession;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
+import com.finalteam3.exodia.media.dto.MediaDto;
+import com.finalteam3.exodia.media.service.MediaService;
 import com.finalteam3.exodia.notice.dto.Notice;
 import com.finalteam3.exodia.notice.service.NoticeService;
 import com.finalteam3.exodia.security.dto.EmpDetails;
-
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -35,6 +30,9 @@ import lombok.extern.slf4j.Slf4j;
 public class NoticeController {
 	@Resource
 	private NoticeService noticeService;
+
+	@Resource
+	private MediaService mediaService;
 	
 	@GetMapping("/noticeList")
 	public String noticeList(Model model){				
@@ -59,7 +57,7 @@ public class NoticeController {
 		return jsonData;
 	}
 	
-	
+	//공지사항 추가
 	@GetMapping("/noticeAdd")
 	public String noticeAddForm(Authentication authentication, Model model) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
@@ -73,16 +71,34 @@ public class NoticeController {
 	}
 	
 	@PostMapping("/noticeAdd")
-	public String noticeAdd(Authentication authentication, Notice notice) {
+	public String noticeAdd(Authentication authentication,
+			@RequestParam("noticeTitle") String noticeTitle,
+			@RequestParam("noticeContent") String noticeContent,
+			@RequestParam("files") List<MultipartFile> mfs) throws Exception {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		int emp_no = loginResponse.getEmp_no();
+		Notice notice = new Notice();
+		notice.setNotice_title(noticeTitle);
+		notice.setNotice_content(noticeContent);
 		notice.setEmpinfo_no_writer(emp_no);
-		log.info("저장성공 : " + notice);		
 		noticeService.write(notice);
-		log.info("공지사항 입력 시 db로 넘어가는 값들 :" + notice);
 		
-		return "redirect:/noticeList";
+		int noticeNo = notice.getNotice_no();
+		log.info("" + noticeNo);
+		
+		for(MultipartFile mf : mfs) {
+			MediaDto mediaDto = new MediaDto();
+			mediaDto.setFrom_no(noticeNo);
+			mediaDto.setMedia_name(mf.getOriginalFilename());
+			mediaDto.setMedia_type(mf.getContentType());
+			mediaDto.setMedia_data(mf.getBytes());
+			mediaDto.setMedia_from("NOTICE");
+			
+			mediaService.insertNoticeFile(mediaDto);
+		}
+		log.info("공지사항 입력 시 db로 넘어가는 값들 :" + notice);	
+		return "noticeList";
 	}
 	
 	

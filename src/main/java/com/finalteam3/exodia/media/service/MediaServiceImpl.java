@@ -24,4 +24,12 @@ public class MediaServiceImpl implements MediaService {
 		return media;
 	}
 
+
+
+	@Override
+	public void insertNoticeFile(MediaDto mediaDto) {
+		mediaDao.insertMedia(mediaDto);
+		
+	}
+
 }

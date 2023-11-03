@@ -24,6 +24,7 @@ import com.finalteam3.exodia.employee.dto.request.ModifyRequest;
 import com.finalteam3.exodia.employee.dto.request.PasswordRequest;
 import com.finalteam3.exodia.employee.dto.response.EmpManagementResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
+import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.EmpSimpleResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.dto.response.TeamBasicResponse;
@@ -308,5 +309,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	public void deleteTeam(String team_name) {
 		employeeDao.deleteAllTeam(team_name);
+	}
+
+	@Override
+	public List<EmpNote> getAllEmp() {
+		List<EmpNote> list = employeeDao.selectEmployeeForNote();
+		
+		return list;
 	}
 }

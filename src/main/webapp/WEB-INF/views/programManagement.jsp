@@ -50,13 +50,14 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery-timepicker/jquery-timepicker.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/pickr/pickr-themes.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
 
     <!-- Page CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/pages/page-faq.css" />
 
-    <!-- Vendors CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
 
     <!-- Helpers -->
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/helpers.js"></script>
@@ -304,14 +305,14 @@
                       </div>
                       
                       <div class="row form-password-toggle mb-3">
-                        <label class="col-sm-3 col-form-label" for="multicol-password">업무구분</label>
+                        <label class="col-sm-3 col-form-label" for="multicol-password">URL</label>
                         <div class="col-sm-9">
                           <div class="input-group input-group-merge">
                             <input
                               type="text"
                               id="multicol-password"
                               class="form-control"
-                              placeholder="업무구분"
+                              placeholder="URL"
                               aria-describedby="multicol-password2" />
                           </div>
                         </div>
@@ -334,8 +335,9 @@
                         <div class="col-sm-9">
                           <select id="multicol-country" class="select2 form-select" data-allow-clear="true">
                             <option value="">Select</option>
-                            <option value="Australia">Australia</option>
-                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="온라인">온라인</option>
+                            <option value="배치">배치</option>
+                            <option value="선택">선택</option>
                          
                           </select>
                         </div>
@@ -345,8 +347,12 @@
                         <div class="col-sm-9">
                           <select id="detail-category" class="select2 form-select" data-allow-clear="true">
                             <option value="">Select</option>
-                            <option value="Australia">Australia</option>
-                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="선택">선택</option>
+                            <option value="화면(메인)">화면(메인)</option>
+                            <option value="화면(탭)">화면(탭)</option>
+                            <option value="화면(팝업)">화면(팝업)</option>
+                            <option value="보고서">보고서</option>
+                            <option value="배치">배치</option>
                          
                           </select>
                         </div>
@@ -361,21 +367,27 @@
                             id="flatpickr-range" />
                         </div>
                       </div>
-                      <div class="row mb-3">
-                           <label for="bs-rangepicker-basic" class="col-sm-3 col-form-label">실적 기간</label>
-                           <div class="col-sm-9">
-                           	<input type="text" id="bs-rangepicker-basic" class="form-control" />
-                           </div>
-                      </div>
+	                  <div class="row mb-3">
+						  <label class="col-sm-3 form-label" for="flatpickr-date">실적 시작</label>
+						  <div class="col-sm-9">
+							  <input type="text" class="form-control" placeholder="YYYY-MM-DD" id="flatpickr-date"/>
+						  </div>
+					  </div>
+	                  <div class="row mb-3">
+						  <label class="col-sm-3 form-label" for="flatpickr-disabled-range">실적 종료</label>
+						  <div class="col-sm-9">
+						  	<input type="text" class="form-control" placeholder="YYYY-MM-DD" id="flatpickr-disabled-range" />
+						  </div>
+					  </div>
                       <div class="row mb-3">
                         <label class="col-sm-3 col-form-label" for="task-progress">작업진척율</label>
                         <div class="col-sm-9">
                           <select id="task-progress" class="select2 form-select" data-allow-clear="true">
                           	<option value="">선택</option>
-                            <option value="undone">미진행</option>
-                            <option value="screen">화면개발</option>
-                            <option value="test">단위테스트</option>
-                            <option value="pltest">pl테스트</option>
+                            <option value="미진행">미진행</option>
+                            <option value="화면개발">화면개발</option>
+                            <option value="단위테스트">단위테스트</option>
+                            <option value="pl테스트">pl테스트</option>
                             
                           </select>
                         </div>
@@ -396,7 +408,8 @@
                   class="offcanvas offcanvas-end"
                   tabindex="-1"
                   id="offcanvasEcommerceCategoryList"
-                  aria-labelledby="offcanvasEcommerceCategoryListLabel">
+                  aria-labelledby="offcanvasEcommerceCategoryListLabel"
+                  >
                   <!-- Offcanvas Header -->
                   <div class="offcanvas-header py-4">
                     <h5 id="offcanvasEcommerceCategoryListLabel" class="offcanvas-title">프로그램 등록</h5>
@@ -408,7 +421,7 @@
                   </div> 
                   <!-- Offcanvas Body -->
                   <div class="offcanvas-body border-top">
-                    <form class="pt-0" id="eCommerceCategoryListForm" onsubmit="return true">
+                    <form class="pt-0" id="eCommerceCategoryListForm" action="exodia/task/registerProgram" method="post" onsubmit="return true">
                       <!-- Title -->
                       <div class="row mb-4 mt-3">
                         <label class="col-sm-4 col-form-label" for="multicol-program">프로그램명</label>
@@ -418,21 +431,23 @@
                               type="text"
                               id="multicol-program"
                               class="form-control"
+                              name="task_name"
                               placeholder="프로그램명"
                               aria-label="john.doe"
                               aria-describedby="multicol-email2" />
                           </div>
                         </div>
                       </div>
+
                       <div class="row mb-4">
-                        <label class="col-sm-4 col-form-label" for="multicol-name">담당자</label>
+                        <label class="col-sm-4 col-form-label" for="TagifyUserList">담당자</label>
                         <div class="col-sm-8">
-                          <input type="text" id="multicol-name" class="form-control" placeholder="담당자" />
+                          <input type="text" id="TagifyUserList" class="form-control" name="emp_note" />
                         </div>
                       </div>
                       
                       <div class="row mb-4">
-                        <label class="col-sm-4 col-form-label" for="multicol-task">업무구분</label>
+                        <label class="col-sm-4 col-form-label" for="multicol-task">URL</label>
                         <div class="col-sm-8">
                           <div class="input-group input-group-merge">
                             <input
@@ -440,6 +455,7 @@
                               id="multicol-task"
                               class="form-control"
                               placeholder="업무구분"
+                              name="task_url"
                               aria-describedby="multicol-password2" />
                           </div>
                         </div>
@@ -448,7 +464,7 @@
                         <label class="col-sm-4 col-form-label" for="task-priority-plus">작업 중요도</label>
                         
                         <div class="col-sm-8">
-                          <select id="task-priority-plus" class="select2 form-select" data-allow-clear="true">
+                          <select id="task-priority-plus" name="task_importance" class="select2 form-select" data-allow-clear="true">
                           	<option value="">선택</option>
                             <option value="상">상</option>
                             <option value="중">중</option>
@@ -460,10 +476,11 @@
                       <div class="row mb-4">
                         <label class="col-sm-4 col-form-label" for="multicol-category">프로그램 유형</label>
                         <div class="col-sm-8">
-                          <select id="multicol-category" class="select2 form-select" data-allow-clear="true">
+                          <select id="multicol-category" name="task_category" class="select2 form-select" data-allow-clear="true">
                             <option value="">Select</option>
-                            <option value="Australia">Australia</option>
-                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="온라인">온라인</option>
+                            <option value="배치">배치</option>
+                            <option value="선택">선택</option>
                          
                           </select>
                         </div>
@@ -471,31 +488,36 @@
                       <div class="row mb-4">
                         <label class="col-sm-4 col-form-label" for="detail-category2">세부 유형</label>
                         <div class="col-sm-8">
-                          <select id="detail-category2" class="select2 form-select" data-allow-clear="true">
+                          <select id="detail-category2" name="task_detail" class="select2 form-select" data-allow-clear="true">
                             <option value="">Select</option>
-                            <option value="Australia">Australia</option>
-                            <option value="Bangladesh">Bangladesh</option>
+                            <option value="선택">선택</option>
+                            <option value="화면(메인)">화면(메인)</option>
+                            <option value="화면(탭)">화면(탭)</option>
+                            <option value="화면(팝업)">화면(팝업)</option>
+                            <option value="보고서">보고서</option>
+                            <option value="배치">배치</option>
                          
                           </select>
                         </div>
                       </div>
                       <div class="row mb-4 com-sm-12">
                          <label for="bs-rangepicker-week-num" class="form-label col-sm-4">개발 예정 기간</label>
-                          <input type="text" id="bs-rangepicker-week-num" class="form-control col-sm-8" />
+                          <div class="col-sm-8">
+                          	<input type="text" id="bs-rangepicker-week-num" class="form-control col-sm-8" />
+                          </div>
                       </div>
-                      <div class="row mb-4">
-                            <label for="bs-rangepicker-dropdown" class="form-label col-sm-4">실적 기간</label>
-                          <input type="text" id="bs-rangepicker-dropdown" class="form-control col-sm-8" />
-                      </div>
+                      
+                      
+
                       <div class="row mb-5">
                         <label class="col-sm-4 col-form-label" for="task-progress2">작업진척율</label>
                         <div class="col-sm-8">
-                          <select id="task-progress2" class="select2 form-select" data-allow-clear="true">
+                          <select id="task-progress2" name="task_status" class="select2 form-select" data-allow-clear="true">
                           	<option value="">선택</option>
-                            <option value="undone">미진행</option>
-                            <option value="screen">화면개발</option>
-                            <option value="test">단위테스트</option>
-                            <option value="pltest">pl테스트</option>
+                            <option value="미진행">미진행</option>
+                            <option value="화면개발">화면개발</option>
+                            <option value="단위테스트">단위테스트</option>
+                            <option value="PL테스트">PL테스트</option>
                             
                           </select>
                         </div>
@@ -555,36 +577,34 @@
 
     <!-- Vendors JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
-
-    <!-- Main JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
-
-    <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/app-access-roles.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/modal-add-role.js"></script>
-    
-
-
-    <!-- Vendors JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/moment/moment.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.js"></script>
-    
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery-timepicker/jquery-timepicker.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/pickr/pickr.js"></script>
-
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-pickers.js"></script>
-
+	<script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
+	    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bloodhound/bloodhound.js"></script>
+	
+	<!-- Main JS -->
+    <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
+    
     <!-- Page JS -->
+    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-pickers.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/form-layouts.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-selects.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-typeahead.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/app-access-roles.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/modal-add-role.js"></script>
+    
   </body>
 </html>

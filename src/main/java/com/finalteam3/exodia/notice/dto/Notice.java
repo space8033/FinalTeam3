@@ -1,5 +1,7 @@
 package com.finalteam3.exodia.notice.dto;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.Data;
 
 @Data
@@ -15,5 +17,6 @@ public class Notice {
 	private String notice_team;
 	private int empinfo_no_writer;
 	private String empinfo_name;
+	private MultipartFile[] notice_files;
 
 }

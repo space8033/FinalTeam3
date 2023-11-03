@@ -1,11 +1,15 @@
 package com.finalteam3.exodia.notice.service;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.finalteam3.exodia.media.dao.MediaDao;
+import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.notice.dao.NoticeDao;
 import com.finalteam3.exodia.notice.dto.Notice;
 
@@ -16,6 +20,9 @@ import lombok.extern.slf4j.Slf4j;
 public class NoticeServiceImpl implements NoticeService{
 	@Resource
 	private NoticeDao noticeDao;
+	@Resource
+	private MediaDao mediaDao;
+	
 
 	@Override
 	public List<Notice> getNoticeList() {
@@ -30,8 +37,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public void write(Notice notice) {
-		noticeDao.insertNotice(notice);
+	public int write(Notice notice){
+		return noticeDao.insertNotice(notice);
 	}
 
 	@Override
