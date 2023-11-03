@@ -25,6 +25,7 @@
 		<typeAlias alias="Media" type="com.finalteam3.exodia.media.dto.MediaDto" />
 		<typeAlias alias="AlarmRequest" type="com.finalteam3.exodia.alarm.dto.request.AlarmRequest" />
 		<typeAlias alias="ProgramRegisterRequest" type="com.finalteam3.exodia.task.dto.request.ProgramRegisterRequest" />
+		<typeAlias alias="ProgramListResponse" type="com.finalteam3.exodia.task.dto.response.ProgramListResponse" />
 
 	</typeAliases>
 </configuration>

@@ -1,17 +1,28 @@
 package com.finalteam3.exodia.task.controller;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finalteam3.exodia.task.dto.request.ProgramRegisterRequest;
+import com.finalteam3.exodia.task.dto.response.ProgramListResponse;
 import com.finalteam3.exodia.task.service.TaskService;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Controller
 @RequestMapping("/task")
+@Slf4j
 public class TaskController {
 	@Resource
 	private TaskService taskService;
@@ -22,8 +33,21 @@ public class TaskController {
 		return "/programManagement";
 	}
 	
-	@PostMapping("/registerProgram")
-	public String registerProgram(ProgramRegisterRequest request) {
+	@GetMapping("/getPrograms")
+	@ResponseBody
+	public String getPrograms() throws JsonProcessingException{
+		List<ProgramListResponse> list = taskService.getAllBusinessProgram();
+		log.info("카쟈!" + list.toString());
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		String jsonData = objectMapper.writeValueAsString(list);
+		log.info("아먼디이거" + jsonData);
+		return jsonData;
+	}
+	
+	@PostMapping(value = "/registerProgram", produces = "application/json; charset=UTF-8")
+	public String registerProgram(@RequestBody ProgramRegisterRequest request) {
+		log.info(request.toString());
 		taskService.registerProgram(request);
 		
 		return "redirect:/task/programManagement";

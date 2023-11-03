@@ -387,7 +387,8 @@
                             <option value="미진행">미진행</option>
                             <option value="화면개발">화면개발</option>
                             <option value="단위테스트">단위테스트</option>
-                            <option value="pl테스트">pl테스트</option>
+                            <option value="PL테스트">PL테스트</option>
+                            <option value="완료">완료</option>
                             
                           </select>
                         </div>
@@ -421,7 +422,7 @@
                   </div> 
                   <!-- Offcanvas Body -->
                   <div class="offcanvas-body border-top">
-                    <form class="pt-0" id="eCommerceCategoryListForm" action="exodia/task/registerProgram" method="post" onsubmit="return true">
+                    <form class="pt-0" id="eCommerceCategoryListForm">
                       <!-- Title -->
                       <div class="row mb-4 mt-3">
                         <label class="col-sm-4 col-form-label" for="multicol-program">프로그램명</label>
@@ -465,7 +466,7 @@
                         
                         <div class="col-sm-8">
                           <select id="task-priority-plus" name="task_importance" class="select2 form-select" data-allow-clear="true">
-                          	<option value="">선택</option>
+                          	<option value="">Select</option>
                             <option value="상">상</option>
                             <option value="중">중</option>
                             <option value="하">하</option>
@@ -490,7 +491,6 @@
                         <div class="col-sm-8">
                           <select id="detail-category2" name="task_detail" class="select2 form-select" data-allow-clear="true">
                             <option value="">Select</option>
-                            <option value="선택">선택</option>
                             <option value="화면(메인)">화면(메인)</option>
                             <option value="화면(탭)">화면(탭)</option>
                             <option value="화면(팝업)">화면(팝업)</option>
@@ -513,12 +513,12 @@
                         <label class="col-sm-4 col-form-label" for="task-progress2">작업진척율</label>
                         <div class="col-sm-8">
                           <select id="task-progress2" name="task_status" class="select2 form-select" data-allow-clear="true">
-                          	<option value="">선택</option>
+                          	<option value="">Select</option>
                             <option value="미진행">미진행</option>
                             <option value="화면개발">화면개발</option>
                             <option value="단위테스트">단위테스트</option>
                             <option value="PL테스트">PL테스트</option>
-                            
+                            <option value="완료">완료</option>
                           </select>
                         </div>
                       </div>

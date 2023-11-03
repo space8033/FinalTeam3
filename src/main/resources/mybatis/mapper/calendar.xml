@@ -7,8 +7,8 @@
 	         select seq_taskno.nextval from dual
       	</selectKey>
       	
-		INSERT INTO task(task_no, task_name, task_content, task_type, task_startdate, task_enddate, emp_no, project_no)
-        VALUES (#{task_no}, #{task_name}, #{task_content}, #{task_type}, #{task_startdate}, #{task_enddate}, #{emp_no}, 0)
+		INSERT INTO task(task_no, task_name, task_content, task_type, task_startdate, task_enddate, emp_no, project_no, task_status)
+        VALUES (#{task_no}, #{task_name}, #{task_content}, #{task_type}, #{task_startdate}, #{task_enddate}, #{emp_no}, 0, #{task_status})
     </insert>
     
     <select id="selectCalendarTask" parameterType="int" resultType="CalendarResponse">
