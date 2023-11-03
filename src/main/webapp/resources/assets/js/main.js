@@ -147,8 +147,7 @@ function alarmAllRead() {
 	
 function showAlarm() {
 	  			 
-	console.log("오긴하냐");
-	var empId = "dd";
+	var empId = "sion";
 	var postData = {
         empId: empId
     };

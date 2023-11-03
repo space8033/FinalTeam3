@@ -29,6 +29,7 @@ public interface NoteDao {
 	public NoteRead selectNoteRead(int noteReadNo);
 	public void updateNoteStarred(NoteRead noteRead);
 	public void trashNote(int noteReadNo);
+	public void deleteTrashNote(int noteReadNo);
 	public void recoveryNotebyNoteRead(NoteRead noteRead);
 	public NoteRead selectNoteReadByNoteReadNo(int noteReadNo);
 }

@@ -150,7 +150,7 @@
                               
                               <c:choose>
                               	<c:when test ="${contentType eq '휴지통'}">
-	                               <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:trashCheck('${contentType}')"></i>
+	                               <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:trashDelete('${contentType}')"></i>
 	                          	</c:when>
                               	<c:otherwise>
                               		<i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:trashCheck('${contentType}')"></i>
@@ -351,7 +351,16 @@
 												  </c:if>
 												  
 			                                  <ul class="list-inline email-list-item-actions">
-			                                    <li class="list-inline-item email-delete"><i id="trash-${note.noteRead_no}" class="bx bx-trash fs-4" onclick="javascript:trashSingleNote(${note.noteRead_no});"></i></li>
+												<c:choose>		                                  
+													<c:when test ="${contentType eq '휴지통'}">
+			                                    		<li class="list-inline-item email-delete"><i id="trash-${note.noteRead_no}" class="bx bx-trash-alt fs-4" onclick="javascript:deleteTrashSingleNote(${note.noteRead_no});"></i></li>
+	                          						</c:when>
+	                          						<c:otherwise>			                                  
+			                                    		<li class="list-inline-item email-delete"><i id="trash-${note.noteRead_no}" class="bx bx-trash fs-4" onclick="javascript:trashSingleNote(${note.noteRead_no});"></i></li>
+			                                    	</c:otherwise>
+			                                    </c:choose>
+			                                    
+			                                    
 			                                     <c:if test ="${note.noteRead_read != null}">
 						                              <li id="li-${note.noteRead_no}" class="list-inline-item email-read"><i id="i-${note.noteRead_no}" class="bx bx-envelope-open fs-4"></i></li>
 						                         </c:if>

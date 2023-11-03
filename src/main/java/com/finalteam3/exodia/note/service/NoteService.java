@@ -31,6 +31,7 @@ public interface NoteService {
 	public void updateRead(int noteNo);
 	public void updateStarred(int noteNo, String noteStarred);
 	public void checkTrash(String checkedIdsString);
+	public void deleteTrash(String checkedIdsString);
 	public void recoverTrashNote(String checkedIdsString);
 	public NoteRead getNoteRead(int noteReadNo);
 	
