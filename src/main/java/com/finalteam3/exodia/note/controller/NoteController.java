@@ -399,6 +399,38 @@ public class NoteController {
 		return "/noteDetail";
 	}
 	
+	//쪽지 상세 발신 불러오기
+	@GetMapping("/noteDetailSent")
+	public String noteDetailSent(String noteNo, HttpSession session, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+		
+		log.info(noteNo+"먼값이 들어오나 보자");
+		int note_no = Integer.parseInt(noteNo);
+		Note note = noteService.getNoteSent(note_no);
+		
+		model.addAttribute("note", note);
+		EmployeeInfo sender = employeeService.getEmpInfo(note.getNote_sender());
+		String name = sender.getEmpinfo_name();
+		
+		model.addAttribute("name", name);
+		
+		List<MediaDto> mediaList = noteService.getMediaList(note.getNote_no());
+		
+		model.addAttribute("mediaList", mediaList);
+		
+		String contentType = "발신";
+		model.addAttribute("contentType", contentType);
+		
+		List<NoteResponse> noteResponseList = noteService.getNoteReceiver(note.getNote_no(), loginResponse.getEmp_no());
+		model.addAttribute("list", noteResponseList);
+		
+		
+		return "/noteDetail";
+	}
+	
 	//쪽지 파일 다운로드
 	@GetMapping("/noteFileDownload")
 	public void noteFileDownload(int mno, HttpServletRequest request, HttpServletResponse response) throws Exception{

@@ -24,7 +24,8 @@ public interface NoteService {
 	
 	//쪽지 번호로 수신/참조/비밀참조 얻어오기
 	public List<NoteResponse> getNoteReceiver(int noteNo, int empNo);
-	public Note getNote(int noteNo);
+	public Note getNote(int noteReadNo);
+	public Note getNoteSent(int noteNo);
 	public int countByNoteNo(int empNo);
 	public int countByNoteSenderNo(int empNo);
 	public int countByNoteStarredNo(int empNo);

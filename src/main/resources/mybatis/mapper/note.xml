@@ -36,6 +36,7 @@
 			           and note_draft IS NULL
 			           and noteRead_deletedAt IS NULL
 			           and noteRead_realDeletedAt IS NULL
+			           and note_draft IS NULL
 			      order by note_createdAt desc
 			    )
 			    where rownum <= #{endRowNo}
@@ -47,17 +48,14 @@
 	<!-- 발신 쪽지 목록 -->
 	<select id="selectSentNoteByEmpNo" resultType="NoteAll" parameterType="Map">
 		<![CDATA[
-	       select rnum, note_no, note_title, note_content, note_sender, note_draft, noteRead_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+	       select rnum, note_no, note_title, note_content, note_sender, note_createdAt, note_label
 			 from (
-			    select rownum as rnum, note_no, note_title, note_content, note_sender, note_draft, noteRead_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			    select rownum as rnum, note_no, note_title, note_content, note_sender, note_createdAt, note_label
 			    from(
-			        select n.note_no, note_title, note_content, note_sender, note_draft, noteRead_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
-			          from note n, noteRead nr
+			        select n.note_no, note_title, note_content, note_sender, note_createdAt, note_label
+			          from note n
 			         where note_sender = #{empNo}
-			           and n.note_no = nr.note_no 
 			           and note_draft IS NULL
-			           and noteRead_deletedAt IS NULL
-			           and noteRead_realDeletedAt IS NULL
 			      order by note_createdAt desc
 			    )
 			    where rownum <= #{endRowNo}
@@ -140,7 +138,8 @@
   	       and note_draft IS NULL 
   	       and n.note_no = nr.note_no 
   	       and noteRead_deletedAt IS NULL 
-  	       and noteRead_realDeletedAt IS NULL 
+  	       and noteRead_realDeletedAt IS NULL
+  	       and note_draft IS NULL
 	</select>
 
 	<!-- 안읽은 수신 쪽지 갯수 가져오기 -->
@@ -152,18 +151,16 @@
   	       and n.note_no = nr.note_no 
   	       and noteRead_deletedAt IS NULL 
   	       and noteRead_realDeletedAt IS NULL 
-  	       and noteRead_read IS NULL 
+  	       and noteRead_read IS NULL
+  	       and note_draft IS NULL
 	</select>
 	
 	<!-- 발신 쪽지 갯수 가져오기 -->
 	<select id="countBySentEmpno" parameterType="int" resultType="int">
 		select count(*)
-  		  from note n, noteRead nr
+  		  from note n
   	     where note_sender = #{note_sender} 
   	       and note_draft IS NULL 
-  	       and noteRead_deletedAt IS NULL
-  	       and n.note_no = nr.note_no 
-  	       and noteRead_realDeletedAt IS NULL 
 	</select>
 	
 	<!-- 임시저장 쪽지 갯수 가져오기 -->
@@ -182,11 +179,11 @@
 		select count(*)
   		  from note n, noteRead nr
   		 where emp_no_receiver = #{emp_no_receiver} 
-  		   and noteRead_starred = 'starred' 
+  		   and noteRead_starred = 'starred'
   		   and note_draft IS NULL 
   		   and n.note_no = nr.note_no 
   		   and noteRead_deletedAt IS NULL 
-  		   and noteRead_realDeletedAt IS NULL 
+  		   and noteRead_realDeletedAt IS NULL
 	</select>
 	
 	<!-- 휴지통 쪽지 갯수 가져오기 -->

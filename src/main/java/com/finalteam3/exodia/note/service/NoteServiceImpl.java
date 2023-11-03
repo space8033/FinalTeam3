@@ -342,6 +342,15 @@ public class NoteServiceImpl implements NoteService{
 		
 		return note;
 	}
+	
+	@Override
+	public Note getNoteSent(int noteNo) {
+		
+		Note note = noteDao.selectNoteByNoteNo(noteNo);
+		
+		
+		return note;
+	}
 
 	@Override
 	public void addReply(ReplyRequest request) throws Exception {

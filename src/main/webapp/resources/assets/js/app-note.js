@@ -125,10 +125,119 @@ function showDetail(noteReadNo) {
 		        });
   	
 }
+function showDetailSent(noteNo) {
+	var data = {
+			noteNo: noteNo
+	};
+	
+	
+	$.ajax({
+		url: "/exodia/noteDetailSent",
+		type: "GET",
+		data: data 
+		
+	}).done(function(result) {
+		console.log("결과확인");
+		var html = jQuery('<div>').html(result);
+		var contents = html.find("div#noteDetail").html();
+		$("#app-email-view").html(contents);
+		$("#app-email-view").addClass("show");
+		/*$("#refreshNoteContent").hide();*/
+		var quill = new Quill('.email-reply-editor', {
+			modules: {
+				toolbar: '.email-reply-toolbar'
+			},
+			placeholder: 'Write your message... ',
+			theme: 'snow'
+		});
+		let lastEditorContents = null;
+		quill.on('text-change', function() {
+			const editorContents = quill.getContents();
+			
+			const htmlContent = quill.root.innerHTML;
+			const inputElement = document.getElementById('reply');
+			if(JSON.stringify(editorContents) !== JSON.stringify(lastEditorContents)) {
+				lastEditorContents = editorContents;
+				inputElement.value = htmlContent;
+				
+			}
+			
+			console.log(htmlContent+"뭐라 나오는지 좀 보자");
+			console.log(inputElement.value+"그래서 넘어가는 값이 뭐냐");
+		});
+		
+		//이전 메세지 클릭시 내용 보기
+		let earlierMsg = $('.email-earlier-msgs');
+		earlierMsg.on('click', function () {
+			let $this = $(this);
+			$this.parents().find('.email-card-last').addClass('hide-pseudo');
+			$this.next('.email-card-prev').slideToggle();
+			$this.remove();
+		});
+		
+		//답장 클릭시 스크롤 내림
+		let emailViewContent = $('.app-email-view-content');
+		emailViewContent.find('.scroll-to-reply').on('click', function () {
+			if (emailViewContent[0].scrollTop === 0) {
+				emailViewContent.animate(
+						{
+							scrollTop: emailViewContent[0].scrollHeight
+						},
+						1500
+				);
+			}
+		});
+		
+		
+		
+		var scrollbar = new PerfectScrollbar('.app-email-view-content', {
+			wheelPropagation: false,
+			suppressScrollX: true
+		});
+		
+		
+		document.getElementById('reply-attach-file').addEventListener('change', function () {
+			const fileName = document.getElementById('reply-attach-file').files[0].name;
+			
+			const fileCount = document.getElementById('reply-attach-file').files.length;
+			if (fileCount > 1) {
+				document.getElementById('reply-filename').value = fileName + " 외 " + (fileCount - 1) + "개";
+			} else {
+				document.getElementById('reply-filename').value = fileName;
+			}
+		});
+		
+		
+		
+		
+		
+		
+		
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		console.log("에러");
+		console.log(jqXHR);
+		console.log(textStatus);
+		console.log(errorThrown);
+		
+	});
+	
+}
 
 //상세보기에서 뒤로가기 클릭시
 function showNoteList() {
 	$("#app-email-view").removeClass("show");
+}
+
+//발송 취소
+function sentCancel(noteNo) {
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
 //쪽지함별 페이징처리
