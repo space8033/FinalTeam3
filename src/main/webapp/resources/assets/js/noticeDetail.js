@@ -107,9 +107,11 @@ $(function () {
 			  console.log("성공이요 성공");
 			  window.location.href = '/exodia/noticeList';
 		  },
-		  error: function (error) {
-			  console.error('오류 발생:', error);
-		  }
+		  error: function (xhr, status, error) {
+		        console.error('오류 발생:');
+		        console.error('상태 코드: ' + xhr.status);
+		        console.error('에러 메시지: ' + error);
+		    }
 	  });
   });
 

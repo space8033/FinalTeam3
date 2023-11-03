@@ -275,10 +275,10 @@
 					    </div>
 					  </div>
 					</div>
+                    <button type="submit" form="noticeAdd" id="noticeSubmit" class="btn btn-primary">등록</button>
                   </div>
                 </div>
-					<form action="noticeAdd" method="post" enctype="multipart/form-data">
-	                    <button type="submit" id="noticeSubmit234" class="btn btn-primary">등록</button>
+					<form action="noticeAdd" id="noticeAdd" method="post" enctype="multipart/form-data">
 	                   <!--  <script>
 					        function redirectToNoticeList() {
 					            // noticeList 페이지 설정
