@@ -226,7 +226,7 @@
                               		<c:if test="${pager.totalRows <= 10}">
                               			${pager.totalRows} of ${pager.totalRows}
                               		</c:if>
-                              		<c:if test="${pager.pageNo == 1 && pager.totalRows >= 10}">
+                              		<c:if test="${pager.pageNo == 1 && pager.totalRows > 10}">
                               			1-10 of ${pager.totalRows}
                               		</c:if>
                              
@@ -246,7 +246,7 @@
 			                              </i>
 	                              		</a>
                                    </c:if>
-                                   <c:if test="${pager.pageNo == 1}">
+                                   <c:if test="${pager.pageNo <= 1}">
 			                              <i
 			                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
 			                              </i>
@@ -284,7 +284,6 @@
 					                          <c:if test ="${note.noteRead_starred != null}">
 					                          data-starred="true"
 					                          </c:if>
-					                      data-sent="true"
 					                      id="${note.noteRead_no}"
 			                              data-bs-toggle="sidebar"
 			                              data-target="#app-email-view-${note.noteRead_no}"

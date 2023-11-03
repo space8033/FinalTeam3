@@ -550,42 +550,54 @@ function deleteTrashSingleNote(noteReadNo) {
 	
 }
 
-function sendCCList() {
-	/*
-	// 선택한 옵션 가져오기
-	const selectedOptions = $('#note_receiver').val();
-	const receiverValues = selectedOptions.split(',');
+function showdraft() {
+	  var note_receiver = $("#emailContacts").val();
+	  var note_receiver_cc = $("#selectpickerSelectDeselect").val();
+	  var note_receiver_bcc = $("#selecBcc").val();
+	  var note_title = $("#email-subject").val();
+	  var note_content = $("#note-content").val();
+	  const fileInput = $("#attach-file");
 
-	// 다른 select 엘리먼트 가져오기
-	const otherSelectElement = $('#selectpickerSelectDeselect');
+	  const formData = new FormData();
+	  formData.append('note_receiver', note_receiver);
+	  formData.append('note_receiver_cc', note_receiver_cc);
+	  formData.append('note_receiver_bcc', note_receiver_bcc);
+	  formData.append('note_title', note_title);
+	  formData.append('note_content', note_content);
+	  
+	  for(var i=0; i<fileInput.length; i++) {
+		  console.log("뭐냐고 파일 들어오지도않냐");
+		  if(fileInput[i].files.length >0) {
+			  for(var j = 0; j < fileInput[i].files.length; j++) {
+				  formData.append('files', $("#attach-file")[i].files[j]);
+				  console.log($("#attach-file")[i].files[j]+"뭐냐고 파일");
+			  }
+			  
+		  }
+	  }
 
-	// 다른 select 엘리먼트에서 option 가져오기
-	const options = otherSelectElement.find('option');
+	  //formData.append('files', files);
 
-	options.each(function() {
-	    var option = $(this);
-	    if (receiverValues.includes(option.val())) {
-	        console.log(option.val() + " ㅇㅇㅇㅇ옵션포함됨!!");
-	        option.attr('disabled',true);
-	    } else {
-	        console.log(option.val() + " 응 나 옵션값들 포함안됨");
+	  console.log([...formData]+"폼데이터뭔데");
+	  // AJAX 요청으로 데이터 전송
+	  $.ajax({
+	    url: "/exodia/draftNote",
+	    type: "POST",
+	    data: formData,
+	    processData: false,
+	    contentType: false,
+	    enctype : 'multipart/form-data',
+	    success: function (response) {
+	      // 성공 처리
+	    },
+	    error: function () {
+	      // 오류 처리
+	      alert("데이터 전송 중 오류가 발생했습니다.");
 	    }
-	});
-	$('#selectpickerSelectDeselect').selectpicker('refresh');
-	*/
-	/*$('#selectpickerSelectDeselect').selectpicker('refresh');*/
-    
-	
-	
+	  });
 }
 
-
-
-
-
 document.addEventListener('DOMContentLoaded', function () {
-	
-
   
   (function () {
     const emailList = document.querySelector('.email-list'),
@@ -1231,13 +1243,7 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
     
-   
-   
-    
-
-    
-    
-    
+ 
     if (emailListItems) {
     	emailListItems.forEach(emailListItem => {
     		emailListItem.addEventListener('click', e => {
@@ -1589,20 +1595,16 @@ document.addEventListener('DOMContentLoaded', function () {
 	    			} else {
 	    				receiveroption.attr('disabled',false);
 	    			}
-	    			
 	    		}
 	    	});
     		
     		$('#selectpickerSelectDeselect').selectpicker('refresh');
     		$('#selectpickerSelectDeselect').selectpicker('destroy');
     		$('#selectpickerSelectDeselect').selectpicker(''); 
-    		
     	});
-    	
     }
 
-    // Scroll to bottom on reply click
-    // ? Using jquery vars due to jQuery animation dependency
+  
     let emailViewContent = $('.app-email-view-content');
     emailViewContent.find('.scroll-to-reply').on('click', function () {
       if (emailViewContent[0].scrollTop === 0) {
@@ -1614,19 +1616,7 @@ document.addEventListener('DOMContentLoaded', function () {
         );
       }
     });
-
-    // Close view on email filter folder list click
-    /*if (emailFilterFolderLists) {
-        emailFilterFolderLists.forEach(emailFilterFolderList => {
-          emailFilterFolderList.addEventListener('click', e => {
-            emailViewContainers.forEach(container => {
-            	container.classList.remove('show');
-            });
-          });
-        });
-    }*/
-
-    // Email List Items Actions
+  
     if (emailListItemActions) {
       emailListItemActions.forEach(emailListItemAction => {
         emailListItemAction.addEventListener('click', e => {

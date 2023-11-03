@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
@@ -31,6 +32,7 @@ import com.finalteam3.exodia.note.dto.request.Note;
 import com.finalteam3.exodia.note.dto.request.NoteRead;
 import com.finalteam3.exodia.note.dto.request.NoteRequest;
 import com.finalteam3.exodia.note.dto.request.ReplyRequest;
+import com.finalteam3.exodia.note.dto.response.NoteResponse;
 import com.finalteam3.exodia.note.service.NoteService;
 import com.finalteam3.exodia.security.dto.EmpDetails;
 
@@ -64,6 +66,14 @@ public class NoteController {
 		model.addAttribute("teamList", teamList);
 		model.addAttribute("empList", empList);
 		
+		int unReadCount = noteService.countByUnreadNoteNo(loginResponse.getEmp_no());
+		model.addAttribute("unReadCount", unReadCount);
+		int draftCount = noteService.countByNoteDraftNo(loginResponse.getEmp_no());
+		model.addAttribute("draftCount", draftCount);
+		int starredCount = noteService.countByNoteStarredNo(loginResponse.getEmp_no());
+		model.addAttribute("starredCount", starredCount);
+		int trashCount = noteService.countByNoteTrashNo(loginResponse.getEmp_no());
+		model.addAttribute("trashCount", trashCount);
 		
 		if(pageNote == null) {
 			   //세션에 저장되어 있는지 확인
@@ -113,15 +123,19 @@ public class NoteController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
-		log.info("내 페이지 넘버는 ?" + pageInbox);
+		log.info("내 페이지 넘버는 1?" + pageInbox);
 		if(pageInbox == null) {
 			//세션에 저장되어 있는지 확인
 			pageInbox = (String) session.getAttribute("pageInbox");
 			//저장되어있지 않다면 "1"로 초기화
-			if(pageInbox == null) {
+			log.info("내 페이지 넘버는 2?" + pageInbox);
+			
+			if(pageInbox == null || pageInbox == "0") {
 				pageInbox = "1";
 			}
+			
 		}
+		log.info("내 페이지 넘버는 3?" + pageInbox);
 		
 		int empNo = empInfo.getEmpinfo_no();
 		
@@ -141,7 +155,7 @@ public class NoteController {
 		map.put("empNo", empNo);
 		
 		List<NoteAll> list = noteService.getNoteListByRno(map);
-		
+		log.info("내 list 가온나 " + list.toString());
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
@@ -377,6 +391,11 @@ public class NoteController {
 		List<MediaDto> mediaList = noteService.getMediaList(note.getNote_no());
 		
 		model.addAttribute("mediaList", mediaList);
+		
+		List<NoteResponse> noteResponseList = noteService.getNoteReceiver(note.getNote_no(), loginResponse.getEmp_no());
+		model.addAttribute("list", noteResponseList);
+		
+		
 		return "/noteDetail";
 	}
 	
@@ -485,6 +504,25 @@ public class NoteController {
 	public String recoveryNote(String checkedIdsString) {
 		
 		noteService.recoverTrashNote(checkedIdsString);
+		
+		return "redirect:/note";
+	}
+	
+	//임시저장
+	@PostMapping("/draftNote")
+	@ResponseBody
+	public String draftNote(NoteRequest request, Authentication authentication) throws Exception {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		request.setNote_sender(loginResponse.getEmp_no());
+		log.info(request.getNote_receiver()+"수신자");
+		log.info(request.getNote_receiver_cc()+"씨씨");
+		log.info(request.getNote_receiver_bcc()+"비씨씨");
+		log.info(request.getNote_title()+"주제");
+		log.info(request.getNote_content()+"내용");
+		log.info(request.getFiles()+"파일들");
+		
+		noteService.addDraft(request);
 		
 		return "redirect:/note";
 	}

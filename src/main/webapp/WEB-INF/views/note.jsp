@@ -281,7 +281,7 @@
                               <i class="bx bx-envelope"></i>
                               <span class="align-middle ms-2">수신 쪽지함</span>
                             </a>
-                            <div class="badge bg-label-primary rounded-pill">21</div>
+                            <div class="badge bg-label-primary rounded-pill">${unReadCount}</div>
                           </li>
                           <li class="d-flex justify-content-between" data-target="sent">
                             <a href="javascript:void(0);" id="sentNoteList" class="d-flex flex-wrap align-items-center">
@@ -294,14 +294,14 @@
                               <i class="bx bx-edit"></i>
                               <span class="align-middle ms-2">임시 저장함</span>
                             </a>
-                            <div class="badge bg-label-success rounded-pill">1</div>
+                            <div class="badge bg-label-success rounded-pill">${draftCount}</div>
                           </li>
                           <li class="d-flex justify-content-between" data-target="starred">
                             <a href="javascript:void(0);" id="starredNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-star"></i>
                               <span class="align-middle ms-2">중요 쪽지함</span>
                             </a>
-                              <div class="badge bg-label-warning rounded-pill">3</div>
+                              <div class="badge bg-label-warning rounded-pill">${starredCount}</div>
                           </li>
                           
                           <li class="d-flex justify-content-between align-items-center" data-target="trash">
@@ -309,7 +309,7 @@
                               <i class="bx bx-trash"></i>
                               <span class="align-middle ms-2">휴지통</span>
                             </a>
-                             <div class="badge bg-label-secondary rounded-pill">10</div>
+                             <div class="badge bg-label-secondary rounded-pill">${trashCount}</div>
                           </li>
                         </ul>
                         <input type="hidden" id="conType" value="${noteReadNo}"/>
@@ -982,7 +982,7 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                   <li><a class="send-toggle-reserv dropdown-item" href="javascript:void(0);">예약 전송</a></li>
-                                  <li><a class="dropdown-item" href="javascript:void(0);">임시 저장</a></li>
+                                  <li><a class="dropdown-item" href="javascript:showdraft();">임시 저장</a></li>
                                 </ul>
                               </div>
                               <label for="attach-file"><i class="bx bx-paperclip cursor-pointer ms-2"></i></label>
