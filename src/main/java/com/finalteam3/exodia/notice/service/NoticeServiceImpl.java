@@ -50,5 +50,16 @@ public class NoticeServiceImpl implements NoticeService{
 	public void deleteByNoticeNo(int notice_no) {
 		noticeDao.deleteByNoticeNo(notice_no);		
 	}
+
+	@Override
+	public List<MediaDto> getMediaList(int noticeNo) {
+		MediaDto media = new MediaDto();
+		media.setMedia_from("NOTICE");
+		media.setFrom_no(noticeNo);
+		
+		List<MediaDto> mediaList = mediaDao.selectMedia(media);
+		
+		return mediaList;
+	}
 	
 }

@@ -6,7 +6,7 @@ import lombok.Data;
 public class CalendarRequest {
 	private int task_no;
 	private String task_name;
-	private String task_status;
+	private String task_status = "미진행";
 	private String task_startdate;
 	private String task_enddate;
 	private String task_unit;
