@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.finalteam3.exodia.task.dto.request.ProgramModifyRequest;
 import com.finalteam3.exodia.task.dto.request.ProgramRegisterRequest;
 import com.finalteam3.exodia.task.dto.response.ProgramListResponse;
 import com.finalteam3.exodia.task.service.TaskService;
@@ -37,11 +38,9 @@ public class TaskController {
 	@ResponseBody
 	public String getPrograms() throws JsonProcessingException{
 		List<ProgramListResponse> list = taskService.getAllBusinessProgram();
-		log.info("카쟈!" + list.toString());
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonData = objectMapper.writeValueAsString(list);
-		log.info("아먼디이거" + jsonData);
 		return jsonData;
 	}
 	
@@ -53,4 +52,12 @@ public class TaskController {
 		return "redirect:/task/programManagement";
 	}
 	
+	@GetMapping("/getProgramDetail")
+	public String getProgramDetail(int task_no, Model model) {
+		ProgramModifyRequest programModify = taskService.getProgramDetail(task_no);
+		log.info("agag" + programModify.toString());
+		model.addAttribute("programModify", programModify);
+		
+		return "/programModifyAjax";
+	}
 }

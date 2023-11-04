@@ -19,6 +19,15 @@
 		and i.empinfo_no = t.empinfo_no
 		and p.task_type = 'Business'
         order by p.task_no desc
-       
+	</select>
+
+	<select id="selectDetailByTaskNo" resultType="ProgramModifyRequest" parameterType="int">
+		select t.task_no, t.task_name, i.empinfo_name, i.empinfo_email, e.emp_no, t.task_url, t.task_importance, t.task_category, t.task_detail, t.task_startdate, t.task_enddate, t.task_realstart, t.task_realend, t.task_status
+		from empinfo i, task t, emp e
+		where t.project_no = 0
+		and t.emp_no = i.emp_no
+		and i.emp_no = e.emp_no
+		and t.task_type = 'Business'
+		and t.task_no = #{task_no}
 	</select>
 </mapper>
