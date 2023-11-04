@@ -260,7 +260,7 @@
                   <!-- Role Table -->
                   <div class="card">
                     <div class="card-datatable table-responsive">
-                      <table class="datatables-users table border-top">
+                      <table class="datatables-users table border-top" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
                         <thead>
                           <tr>
                           	<th></th>

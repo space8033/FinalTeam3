@@ -407,23 +407,6 @@ $(document).ready(function() {
 	      </div>
 	    </tag>
 	  `;
-/*	  return `
-	    <tag title="${tagData.title || tagData.email}"
-	      contenteditable='false'
-	      spellcheck='false'
-	      tabIndex="-1"
-	      class="${this.settings.classNames.tag} ${tagData.class ? tagData.class : ''}"
-	      ${this.getAttributes(tagData)}
-	    >
-	      <x title='' class='tagify__tag__removeBtn' role='button' aria-label='remove tag'></x>
-	      <div>
-	        <div class='tagify__tag__avatar-wrap'>
-	          <img onerror="this.style.visibility='hidden'" src="${tagData.avatar}">
-	        </div>
-	        <span class='tagify__tag-text'>${tagData.name}</span>
-	      </div>
-	    </tag>
-	  `;*/
   }
 
   function suggestionItemTemplate(tagData) {
@@ -439,24 +422,7 @@ $(document).ready(function() {
 	    </div>
 	    </div>
 	  `;
-/*	  return `
-	  <div ${this.getAttributes(tagData)}
-	  class='tagify__dropdown__item align-items-center ${tagData.class ? tagData.class : ''}'
-	  tabindex="0"
-	  role="option"
-	  >
-	  ${
-	  tagData.avatar
-	  ? `<div class='tagify__dropdown__item__avatar-wrap'>
-	  <img onerror="this.style.visibility='hidden'" src="${tagData.avatar}">
-	  </div>`
-	  : ''
-	  }
-	  <div class="fw-medium">${tagData.name}</div>
-	  <span>${tagData.email}</span>
-	  </div>
-	  `;
-*/  }
+  }
 
   let TagifyUserList = new Tagify(TagifyUserListEl, {
     tagTextProp: 'empinfo_name',
