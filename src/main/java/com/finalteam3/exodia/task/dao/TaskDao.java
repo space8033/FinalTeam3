@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.finalteam3.exodia.task.dto.request.ProgramModifyRequest;
 import com.finalteam3.exodia.task.dto.request.ProgramRegisterRequest;
 import com.finalteam3.exodia.task.dto.response.ProgramListResponse;
 
@@ -11,4 +12,5 @@ import com.finalteam3.exodia.task.dto.response.ProgramListResponse;
 public interface TaskDao {
 	public void insertProgram(ProgramRegisterRequest request);
 	public List<ProgramListResponse> selectBusinessTask();
+	public ProgramModifyRequest selectDetailByTaskNo(int task_no);
 }

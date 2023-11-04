@@ -15,8 +15,6 @@ $(function () {
       3: { title: 'Inactive', class: 'bg-label-secondary' }
     };
 
-  var userView = 'app-user-view-account.html';
-
   // Users List datatable
   if (dtUserTable.length) {
     dtUserTable.DataTable({
@@ -27,6 +25,7 @@ $(function () {
       }, // JSON file to add data
       columns: [
         // columns according to JSON
+    	{ data: 'task_no' },
     	{ data: 'team_name' },
     	{ data: 'task_name' },
         { data: 'empinfo_name' },
@@ -51,12 +50,12 @@ $(function () {
           responsivePriority: 4,
           render: function (data, type, full, meta) {
             var $name = full['task_name'];
+            var $no = full['task_no'];
             // Creates full output for row
             var $row_output =
               '<div class="d-flex justify-content-left align-items-center">' +
               '<div class="d-flex flex-column">' +
-              '<a href="' +
-              userView +
+              '<a href="javascript:getModifyDetail(' + $no + ')"' +
               '" class="text-body text-truncate"><span class="fw-medium">' +
               $name +
               '</span></a>' +
@@ -518,3 +517,19 @@ $(document).ready(function() {
 	  });
   });
 });
+
+function getModifyDetail(task_no) {
+	$.ajax({
+		url: "/exodia/task/getProgramDetail",
+		method: "get",
+		data:{
+			"task_no": task_no
+		},
+		success: function(programModifiy) {
+			$("#programModifyContainer").html(programModifiy);
+		},
+		error: function(error) {
+			console.log("아왜안떠왜왜왜");
+		}
+	});
+}

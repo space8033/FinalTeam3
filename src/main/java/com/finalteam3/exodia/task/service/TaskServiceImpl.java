@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.finalteam3.exodia.task.dao.TaskDao;
+import com.finalteam3.exodia.task.dto.request.ProgramModifyRequest;
 import com.finalteam3.exodia.task.dto.request.ProgramRegisterRequest;
 import com.finalteam3.exodia.task.dto.response.ProgramListResponse;
 
@@ -107,5 +108,15 @@ public class TaskServiceImpl implements TaskService{
 		}
 		
 		return list;
+	}
+
+	@Override
+	public ProgramModifyRequest getProgramDetail(int task_no) {
+		ProgramModifyRequest request = taskDao.selectDetailByTaskNo(task_no);
+		
+		String task_date = request.getTask_startdate() + " to " + request.getTask_enddate();
+		request.setTask_date(task_date);
+		
+		return request;
 	}
 }
