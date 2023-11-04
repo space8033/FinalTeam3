@@ -59,6 +59,9 @@ public interface NoteDao {
 	public void deleteTrashNote(int noteReadNo);
 	public void recoveryNotebyNoteRead(NoteRead noteRead);
 	
+	//발송취소
+	public void sentCancelNote(int noteReadNo);
+	
 	//noteReadNo로 noteRead불러오기
 	public NoteRead selectNoteReadByNoteReadNo(int noteReadNo);
 }

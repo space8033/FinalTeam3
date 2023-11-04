@@ -94,11 +94,6 @@ public class NoteServiceImpl implements NoteService{
 		log.info(noteNo+"노트넘버 삽입됐낭");
 		
 		
-		NoteRead noteRead1 = new NoteRead();
-		noteRead1.setEmp_no_receiver(request.getNote_sender());
-		noteRead1.setNoteRead_type("임시저장");
-		noteRead1.setNote_no(noteNo);
-		noteDao.insertNoteRead(noteRead1);
 		
 		
 		//참조 수신자 분할/추가
@@ -509,6 +504,7 @@ public class NoteServiceImpl implements NoteService{
 		return noteDao.countByUnreadInbox(empNo);
 	}
 
+	//수신자 목록 불러오기
 	@Override
 	public List<NoteResponse> getNoteReceiver(int noteNo, int empNo) {
 		List<NoteRead> noteReadList = noteDao.selectNoteReadByNoteNo(noteNo);
@@ -544,14 +540,34 @@ public class NoteServiceImpl implements NoteService{
 		
 		return noteResponseList;
 	}
+	
+	//발송취소 인원 불러오기
+	@Override
+	public List<NoteResponse> getNoteSentList(int noteNo) {
+		List<NoteRead> noteReadList = noteDao.selectNoteReadByNoteNo(noteNo);
+		List<NoteResponse> noteResponseList = new ArrayList<>();
+		
+		for(NoteRead noteRead : noteReadList) {
+			NoteResponse noteResponse = new NoteResponse();
+			int emp_No = noteRead.getEmp_no_receiver();
+			EmployeeInfo empInfo = employeeDao.selectInfoByEmpNo(emp_No);
+			noteResponse.setEmp_name(empInfo.getEmpinfo_name());
+			noteResponse.setEmp_email(empInfo.getEmpinfo_email());
+			noteResponse.setEmp_no_receiver(noteRead.getEmp_no_receiver());
+			noteResponse.setNoteRead_type(noteRead.getNoteRead_type());
+			noteResponse.setNoteRead_read(noteRead.getNoteRead_read());
+			noteResponse.setNoteRead_no(noteRead.getNoteRead_no());
+			noteResponse.setNoteRead_isCanceled(noteRead.isNoteRead_isCanceled());
+			noteResponseList.add(noteResponse);
+		}
+		
+		return noteResponseList;
+	}
 
 	@Override
 	public void addDraft(NoteRequest request) throws Exception {
 
 		Note note = new Note();
-		
-		
-		
 		note.setNote_sender(request.getNote_sender());
 		if(request.getNote_title() != null) {
 			note.setNote_title(request.getNote_title());
@@ -589,7 +605,6 @@ public class NoteServiceImpl implements NoteService{
 					noteRead.setNote_no(noteNo);
 					log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
 					noteDao.insertNoteRead(noteRead);
-					
 					
 				}
 			}
@@ -650,6 +665,29 @@ public class NoteServiceImpl implements NoteService{
 				}
 			}
 		}
+		
+	}
+
+	//발송 취소
+	@Override
+	public String noteSentCancel(String checkedIdsString) {
+		String[] numberStrings = checkedIdsString.split(", ");
+		String noCancel = "발송 취소";
+		int[] numberArray = new int[numberStrings.length];
+		for(int i = 0; i < numberStrings.length; i++) {
+			numberArray[i] = Integer.parseInt(numberStrings[i].trim());
+		}
+		for(int noteReadNo : numberArray) {
+			NoteRead noteRead = noteDao.selectNoteReadByNoteReadNo(noteReadNo);
+			if(noteRead.isNoteRead_isCanceled()) {
+				noCancel = "발송취소할 목록이 없습니다.";
+			} else {
+				noteDao.sentCancelNote(noteReadNo);
+				noCancel = "발송취소 완료";
+			}
+		}
+		
+		return noCancel;
 		
 	}
 }

@@ -311,7 +311,7 @@
 				                                </div>
 			                                </c:if>
 			                                
-			                                <c:if test ="${contentType eq '수신'}">
+			                                <c:if test ="${contentType ne '발신'}">
 				                                <div class="email-list-item-content ms-2 ms-sm-0 me-2"  onclick="javascript:showDetail(${note.noteRead_no});">
 				                                  <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
 				                                  <span class="email-list-item-subject d-xl-inline-block d-block">
@@ -414,117 +414,17 @@
                       		
                        <div class="modal fade" id="shareProject" tabindex="-1" aria-hidden="true">
 		                <div class="modal-dialog modal-lg modal-simple modal-enable-otp modal-dialog-centered">
-		                  <div class="modal-content p-3 p-md-5">
-		                    <div class="modal-body">
-		                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		                      <div class="text-center">
-		                        <h3 class="mb-2">수신자 명단</h3>
-		                      </div>
-		                    </div>
-		                    <div class="mb-4 pb-2">
-		                      <label for="select2Basic" class="form-label">수신자 찾기</label>
-		                      <select
-		                        id="select2Basic"
-		                        class="form-select form-select-lg share-project-select"
-		                        data-allow-clear="true">
-		                        <option data-name="Adelaide Nichols" data-image="img/avatars/20.png" selected>
-		                          	 김시온
-		                        </option>
-		                        <option data-name="Julian Murphy" data-image="img/avatars/9.png">Julian Murphy</option>
-		                        <option data-name="Sophie Gilbert" data-image="img/avatars/10.png">Sophie Gilbert</option>
-		                        <option data-name="Marvin Wheeler" data-image="img/avatars/17.png">Marvin Wheeler</option>
-		                      </select>
-		                    </div>
-		                    <h4 class="mb-4 pb-2">수신자</h4>
-		                    <ul class="p-0 m-0">
-		                      <li class="d-flex flex-wrap mb-3">
-		                        <div class="avatar me-3">
-		                          <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt="avatar" class="rounded-circle" />
-		                        </div>
-		                        <div class="d-flex justify-content-between flex-grow-1">
-		                          <div class="me-2">
-		                            <p class="mb-0">Lester Palmer</p>
-		                            <p class="mb-0 text-muted">pe@vogeiz.net</p>
-		                          </div>
-		                          <div class="dropdown">
-		                            <button type="button" class="btn btn-outline-primary">발송 취소
-		                            </button>
-		                          </div>
-		                        </div>
-		                      </li>
-		                      <li class="d-flex flex-wrap mb-3">
-		                        <div class="avatar me-3">
-		                          <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt="avatar" class="rounded-circle" />
-		                        </div>
-		                        <div class="d-flex justify-content-between flex-grow-1">
-		                          <div class="me-2">
-		                            <p class="mb-0">Mattie Blair</p>
-		                            <p class="mb-0 text-muted">peromak@zukedohik.gov</p>
-		                          </div>
-		                          <div class="dropdown">
-		                            
-		                              <i class="bx bx-envelope-open me-2">
-		                              </i><span class="text-muted fw-normal me-2 d-none d-sm-inline-block">2023.11.10.13:11 읽음</span>
-		                          </div>
-		                        </div>
-		                      </li>
-		                      <li class="d-flex flex-wrap mb-3">
-		                        <div class="avatar me-3">
-		                          <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/3.png" alt="avatar" class="rounded-circle" />
-		                        </div>
-		                        <div class="d-flex justify-content-between flex-grow-1">
-		                          <div class="me-2">
-		                            <p class="mb-0">Marvin Wheeler</p>
-		                            <p class="mb-0 text-muted">rumet@jujpejah.net</p>
-		                          </div>
-		                          <div class="dropdown">
-		                           
-		                           	  <i class="bx bx-envelope-open me-1">
-		                              </i>
-		                              <span class="text-muted fw-normal me-2 d-none d-sm-inline-block">2023.11.10.13:11 읽음</span>
-		                          </div>
-		                        </div>
-		                      </li>
-		                      <li class="d-flex flex-wrap mb-3">
-		                        <div class="avatar me-3">
-		                          <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/4.png" alt="avatar" class="rounded-circle" />
-		                        </div>
-		                        <div class="d-flex justify-content-between flex-grow-1">
-		                          <div class="me-2">
-		                            <p class="mb-0">Nannie Ford</p>
-		                            <p class="mb-0 text-muted">negza@nuv.io</p>
-		                          </div>
-		                          <div class="dropdown">
-		                            <button
-		                              type="button"
-		                              class="btn dropdown-toggle p-2"
-		                              data-bs-toggle="dropdown"
-		                              aria-expanded="false">
-		                              <span class="text-muted fw-normal me-2 d-none d-sm-inline-block">Can Comment</span>
-		                            </button>
-		                          </div>
-		                        </div>
-		                      </li>
-		                      
-		                    </ul>
-		                    <div class="d-flex align-items-center mt-4 align-items-sm-center">
-		                      <div class="d-flex justify-content-between flex-grow-1 align-items-center flex-wrap gap-2">
-		                      </div>
-		                    </div>
+		                  <div class="modal-content p-3 p-md-5" id="sendCancel">
+	
+	
+	
+	
 		                  </div>
 		                </div>
 		              </div>
-         
-        </div>
-        
-        
-        
-        
-        
-        
-        
-        </div>
-        </div>
+        			</div>
+        		</div>
+       		 </div>
         </div>
             <!-- / Content -->
 

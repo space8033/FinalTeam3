@@ -37,6 +37,7 @@
 			           and noteRead_deletedAt IS NULL
 			           and noteRead_realDeletedAt IS NULL
 			           and note_draft IS NULL
+			           and noteRead_isCanceled IS NULL
 			      order by note_createdAt desc
 			    )
 			    where rownum <= #{endRowNo}
@@ -79,6 +80,7 @@
 			           and note_draft IS NULL
 			           and noteRead_deletedAt IS NULL
 			           and noteRead_realDeletedAt IS NULL
+			           and noteRead_isCanceled IS NULL
 			      order by note_createdAt desc
 			    )
 			    where rownum <= #{endRowNo}
@@ -140,6 +142,7 @@
   	       and noteRead_deletedAt IS NULL 
   	       and noteRead_realDeletedAt IS NULL
   	       and note_draft IS NULL
+  	       and noteRead_isCanceled IS NULL
 	</select>
 
 	<!-- 안읽은 수신 쪽지 갯수 가져오기 -->
@@ -153,6 +156,7 @@
   	       and noteRead_realDeletedAt IS NULL 
   	       and noteRead_read IS NULL
   	       and note_draft IS NULL
+  	       and noteRead_isCanceled IS NULL
 	</select>
 	
 	<!-- 발신 쪽지 갯수 가져오기 -->
@@ -184,6 +188,7 @@
   		   and n.note_no = nr.note_no 
   		   and noteRead_deletedAt IS NULL 
   		   and noteRead_realDeletedAt IS NULL
+  		   and noteRead_isCanceled IS NULL
 	</select>
 	
 	<!-- 휴지통 쪽지 갯수 가져오기 -->
@@ -244,16 +249,23 @@
   		 where noteRead_no = #{noteRead_no}
 	</update>
 	
+	<!-- 쪽지 번호로 noteRead 발송 취소 쪽지 업데이트 작성자: 김시온 -->
+	<update id="sentCancelNote" parameterType="noteRead">
+		update noteRead 
+		   set noteRead_isCanceled = 1
+  		 where noteRead_no = #{noteRead_no}
+	</update>
+	
 	<!-- noteRead 번호로 noteRead 얻어오기 작성자: 김시온 -->
 	<select id="selectNoteReadByNoteReadNo" parameterType="int" resultType="noteRead">
-		select emp_no_receiver, noteRead_starred
+		select emp_no_receiver, noteRead_starred, noteRead_isCanceled
   		  from noteRead
   	 	 where noteRead_no = #{noteRead_no}
 	</select>
 	
 	<!-- note 번호로 수신자 정보 얻어오기 작성자: 김시온 -->
 	<select id="selectNoteReadByNoteNo" parameterType="int" resultType="noteRead">
-		select emp_no_receiver, noteRead_type
+		select emp_no_receiver, noteRead_type, noteRead_read, noteRead_no, noteRead_isCanceled
   		  from noteRead
   	 	 where note_no = #{note_no}
 	</select>
