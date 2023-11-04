@@ -10,4 +10,6 @@ public interface TaskService {
 	public void registerProgram(ProgramRegisterRequest request);
 	public List<ProgramListResponse> getAllBusinessProgram();
 	public ProgramModifyRequest getProgramDetail(int task_no);
+	public void updateProgram(ProgramModifyRequest request);
+	public void deleteProgram(int task_no);
 }

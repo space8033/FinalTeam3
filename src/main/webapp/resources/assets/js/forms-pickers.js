@@ -417,3 +417,35 @@ $(function () {
     });
   }
 })();
+
+function modifyProgram(task_no) {
+	$.ajax({
+		url: "/exodia/task/modifyProgram",
+		method: "post",
+		data:{
+			"task_no": task_no
+		},
+		success: function(programModifiy) {
+			console.log("Df");
+		},
+		error: function(error) {
+			console.log("아왜안떠왜왜왜");
+		}
+	});
+}
+
+function deleteProgram(task_no) {
+	$.ajax({
+		url: "/exodia/task/deleteProgram",
+		method: "post",
+		data:{
+			"task_no": task_no
+		},
+		success: function(programModifiy) {
+			location.reload();
+		},
+		error: function(error) {
+			console.log("아왜안떠왜왜왜");
+		}
+	});
+}

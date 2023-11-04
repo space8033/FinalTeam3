@@ -4,6 +4,7 @@
 <div class="card mb-5">
     <h5 class="card-header mb-4">프로그램 상세정보 </h5>
     <form class="card-body">
+       <div><input type="hidden" value="${programModify.task_no}" id="taskNoBox"/></div>
        <div class="row mb-3">
          <label class="col-sm-3 col-form-label" for="multicol-email">프로그램명</label>
          <div class="col-sm-9">
@@ -239,7 +240,8 @@
     <div class="pt-4">
       <div class="row justify-content-end">
         <div class="col-sm-12 col-md-8 ps-4">
-          <button type="submit" class="btn btn-primary me-sm-2 me-1 mb-2">수정</button>
+          <button id="programModify" type="submit" class="btn btn-primary me-sm-2 me-1 mb-2" onclick="modifyProgram()">수정</button>
+          <button id="programDelete" type="button" class="btn btn-danger me-sm-2 me-1 mb-2" onclick="javascript:deleteProgram(${programModify.task_no})">삭제</button>
           <button type="reset" class="btn btn-label-secondary mb-2 me-1">취소</button>
         </div>
       </div>
@@ -247,41 +249,7 @@
   </form>
 </div>
 
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
 
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/popper/popper.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/bootstrap.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/hammer/hammer.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/i18n/i18n.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/menu.js"></script>
-
-    <!-- endbuild -->
-
-    <!-- Vendors JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/moment/moment.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-daterangepicker/bootstrap-daterangepicker.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery-timepicker/jquery-timepicker.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/pickr/pickr.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
-	    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bloodhound/bloodhound.js"></script>
-	
-	<!-- Main JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
     
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-pickers.js"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/js/forms-pickers.js"></script>
