@@ -431,6 +431,32 @@ public class NoteController {
 		return "/noteDetail";
 	}
 	
+	//발송취소 목록 불러오기
+	@GetMapping("/noteSentCancelList")
+	public String noteSentCancelList(String noteNo, HttpSession session, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+		
+		log.info(noteNo+"먼값이 들어오나 보자");
+		int note_no = Integer.parseInt(noteNo);
+		List<NoteResponse> list = noteService.getNoteSentList(note_no);
+		model.addAttribute("list", list);
+		boolean hasNoReferenceTypeCC = list.stream()
+			    .noneMatch(noteResponse -> "참조".equals(noteResponse.getNoteRead_type()));
+		
+		model.addAttribute("noCC", hasNoReferenceTypeCC);
+		boolean hasNoReferenceTypeBCC = list.stream()
+			    .noneMatch(noteResponse -> "비밀참조".equals(noteResponse.getNoteRead_type()));
+		model.addAttribute("noBCC", hasNoReferenceTypeBCC);
+		
+		
+		
+		return "/noteContentModal";
+	}
+	
+	
 	//쪽지 파일 다운로드
 	@GetMapping("/noteFileDownload")
 	public void noteFileDownload(int mno, HttpServletRequest request, HttpServletResponse response) throws Exception{
@@ -495,6 +521,16 @@ public class NoteController {
 		noteService.updateRead(readUpdateIdNo);
 		
 		return "redirect:/note";
+	}
+	
+	//발송 취소
+	@PostMapping("/noteSentCancel")
+	@ResponseBody
+	public Map<String, String> noteSentCancel(String noteReadNo) {
+		 Map<String, String> response = new HashMap<>();
+		String noCancel = noteService.noteSentCancel(noteReadNo);
+		response.put("noCancel", noCancel);
+	    return response;
 	}
 	
 	

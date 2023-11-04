@@ -230,15 +230,115 @@ function showNoteList() {
 
 //발송 취소
 function sentCancel(noteNo) {
+	console.log("발송취소 넘어는 오나");
 	
 	
-	
-	
-	
-	
+	    var data = {
+			  noteNo: noteNo
+	    };
+	    
+	    
+  		$.ajax({
+	  	    url: "/exodia/noteSentCancelList",
+	        type: "GET",
+	        data: data 
+      
+        }).done(function(result) {
+        	console.log("결과확인");
+        	var html = jQuery('<div>').html(result);
+        	var contents = html.find("div#sendCancelContent").html();
+        	$("#sendCancel").html(contents);
+
+        	
+        	
+        }).fail(function (jqXHR, textStatus, errorThrown) {
+        	console.log("에러");
+        	console.log(jqXHR);
+        	console.log(textStatus);
+        	console.log(errorThrown);
+        	
+        });
 	
 	
 }
+
+function sentCancelNo(noteReadNo) {
+	
+	var data = {
+			noteReadNo: noteReadNo
+	};
+	  
+	$.ajax({
+    url: "/exodia/noteSentCancel",
+    type: "POST",
+    data: data 
+  
+    }).done(function(result) {
+    	
+    	console.log("결과확인");
+    	$("#s-" + noteReadNo).removeClass("d-none");
+    	$("#b-" + noteReadNo).addClass("d-none");
+
+    	
+    	
+    }).fail(function (jqXHR, textStatus, errorThrown) {
+    	console.log("에러");
+    	console.log(jqXHR);
+    	console.log(textStatus);
+    	console.log(errorThrown);
+    	
+    });
+	
+	
+}
+
+function sentCancelAll() {
+	console.log("일괄취소요.");
+	var elementIds = [];
+	$(".cancelList").each(function() {
+	    elementIds.push($(this).attr("id"));
+	});
+	
+	console.log(elementIds+"ㅇㅇ머머있나 아이디 보자");
+	// 체크된 체크박스의 ID를 가져오고 배열에 저장
+	var checkedIds = elementIds.map(element => element.replace('b-', ''));
+
+	// 체크된 체크박스의 ID 배열을 문자열로 조인
+	var noteReadNo = checkedIds.join(', ');
+	
+	if(noteReadNo === "") {
+		alert("발송취소할 목록이 없습니다.");
+	} else {
+		var data = {
+				noteReadNo: noteReadNo
+		};
+		
+		$.ajax({
+			url: "/exodia/noteSentCancel",
+			type: "POST",
+			data: data 
+			
+		}).done(function(result) {
+			 console.log("발송취소 성공");
+			 console.log(result.noCancel+"넌 값이뭐냐 대체"); 
+			 alert(result.noCancel);
+			$(".cancelComplete").removeClass("d-none");
+			$(".cancelList").addClass("d-none");
+			
+		
+			
+		}).fail(function (jqXHR, textStatus, errorThrown) {
+			console.log("에러");
+			console.log(jqXHR);
+			console.log(textStatus);
+			console.log(errorThrown);
+			
+		});
+	}
+	
+	
+}
+
 
 //쪽지함별 페이징처리
 function showEmailList(contentType, pageNo) {

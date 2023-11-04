@@ -24,6 +24,7 @@ public interface NoteService {
 	
 	//쪽지 번호로 수신/참조/비밀참조 얻어오기
 	public List<NoteResponse> getNoteReceiver(int noteNo, int empNo);
+	public List<NoteResponse> getNoteSentList(int noteNo);
 	public Note getNote(int noteReadNo);
 	public Note getNoteSent(int noteNo);
 	public int countByNoteNo(int empNo);
@@ -41,6 +42,9 @@ public interface NoteService {
 	public void updateRead(int noteNo);
 	public void updateStarred(int noteNo, String noteStarred);
 	public void checkTrash(String checkedIdsString);
+	
+	//발송 취소
+	public String noteSentCancel(String checkedIdsString);
 	public void deleteTrash(String checkedIdsString);
 	public void recoverTrashNote(String checkedIdsString);
 	public NoteRead getNoteRead(int noteReadNo);
