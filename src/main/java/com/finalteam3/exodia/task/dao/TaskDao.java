@@ -13,4 +13,6 @@ public interface TaskDao {
 	public void insertProgram(ProgramRegisterRequest request);
 	public List<ProgramListResponse> selectBusinessTask();
 	public ProgramModifyRequest selectDetailByTaskNo(int task_no);
+	public void updateProgram(ProgramModifyRequest request);
+	public void deleteProgram(int task_no);
 }

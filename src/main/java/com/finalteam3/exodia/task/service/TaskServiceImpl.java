@@ -119,4 +119,14 @@ public class TaskServiceImpl implements TaskService{
 		
 		return request;
 	}
+
+	@Override
+	public void updateProgram(ProgramModifyRequest request) {
+		taskDao.updateProgram(request);
+	}
+
+	@Override
+	public void deleteProgram(int task_no) {
+		taskDao.deleteProgram(task_no);
+	}
 }

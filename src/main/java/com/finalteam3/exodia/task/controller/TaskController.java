@@ -46,7 +46,6 @@ public class TaskController {
 	
 	@PostMapping(value = "/registerProgram", produces = "application/json; charset=UTF-8")
 	public String registerProgram(@RequestBody ProgramRegisterRequest request) {
-		log.info(request.toString());
 		taskService.registerProgram(request);
 		
 		return "redirect:/task/programManagement";
@@ -59,5 +58,20 @@ public class TaskController {
 		model.addAttribute("programModify", programModify);
 		
 		return "/programModifyAjax";
+	}
+	
+	@PostMapping("/modifyProgram")
+	public String modifyProgram(@RequestBody ProgramModifyRequest request) {
+		log.info(request.toString());
+		
+		return "redirect:/task/programManagement";
+	}
+	
+	@PostMapping("/deleteProgram")
+	public String deleteProgram(int task_no) {
+		log.info("agaga");
+		taskService.deleteProgram(task_no);
+		
+		return "redirect:/task/programManagement";
 	}
 }
