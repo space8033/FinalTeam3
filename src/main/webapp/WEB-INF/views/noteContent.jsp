@@ -348,22 +348,27 @@
 												        <!-- 다른 경우에 대한 처리 -->
 												    </c:otherwise>
 												</c:choose>
-			                                   
-			                                  <c:set var="today" value="<%=new java.util.Date()%>" />
-												<!-- 현재날짜 -->
-												<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy.MM.dd" /></c:set>
-												  <c:if test="${note.note_createdAt.substring(0, 10) eq date}">
-												  	<c:if test="${note.note_createdAt.substring(11, 13) ge '0' && note.note_createdAt.substring(11, 13) le '11'}">
-												      <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} AM</small>
-												    </c:if>
-												  	<c:if test="${note.note_createdAt.substring(11, 13) ge '12' && note.note_createdAt.substring(11, 13) le '23'}">
-												      <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} PM</small>
-												    </c:if>
-												  </c:if>
-												 
-												  <c:if test="${note.note_createdAt.substring(0, 10) ne date}">
-												    <small class="email-list-item-time text-muted">${note.note_createdAt.substring(2, 10)}</small>
-												  </c:if>
+			                                  
+			                                  <c:if test ="${note.note_createdAt != null}">
+				                                  <c:set var="today" value="<%=new java.util.Date()%>" />
+													<!-- 현재날짜 -->
+													<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy.MM.dd" /></c:set>
+													  <c:if test="${note.note_createdAt.substring(0, 10) eq date}">
+													  	<c:if test="${note.note_createdAt.substring(11, 13) ge '0' && note.note_createdAt.substring(11, 13) le '11'}">
+													      <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} AM</small>
+													    </c:if>
+													  	<c:if test="${note.note_createdAt.substring(11, 13) ge '12' && note.note_createdAt.substring(11, 13) le '23'}">
+													      <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} PM</small>
+													    </c:if>
+													  </c:if>
+													 
+													  <c:if test="${note.note_createdAt.substring(0, 10) ne date}">
+													    <small class="email-list-item-time text-muted">${note.note_createdAt.substring(2, 10)}</small>
+													  </c:if>
+											  </c:if>
+											  <c:if test ="${note.note_createdAt == null}">
+											  	 <small class="email-list-item-time text-muted">발송 예약</small>
+											  </c:if>
 												  
 			                                  <ul class="list-inline email-list-item-actions">
 												<c:choose>		                                  

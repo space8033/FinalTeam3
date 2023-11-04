@@ -199,9 +199,9 @@
                             </div>
                           </div>
                           <div class="d-flex align-items-center flex-wrap justify-content-end">
-                            <span class="d-sm-block d-none mx-3 text-muted">1-10 of 653</span>
+                           <!--  <span class="d-sm-block d-none mx-3 text-muted">1-10 of 653</span>
                             <i class="bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4"></i>
-                            <i class="bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i>
+                            <i class="bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i> -->
                           </div>
                         </div>
                       </div>
@@ -211,7 +211,7 @@
                       
                       <!-- Email View : Content-->
                       <div class="app-email-view-content py-4">
-                        <p class="email-earlier-msgs text-center text-muted cursor-pointer mb-5">이전 메세지 1개</p>
+                        <!-- <p class="email-earlier-msgs text-center text-muted cursor-pointer mb-5">이전 메세지 1개</p> -->
                         <!-- Email View : Previous mails-->
                         <div class="card email-card-prev mx-sm-4 mx-3 border">
                           <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
@@ -306,7 +306,15 @@
                               </div>
                             </div>
                             <div class="d-flex align-items-center">
-                              <small class="mb-0 me-3 text-muted">${note.note_createdAt}</small>
+                            
+                              <c:if test="${note.note_createdAt != null}">
+                              	<small class="mb-0 me-3 text-muted">${note.note_createdAt} ${note.note_restime}</small>
+                              </c:if>
+                              <c:if test="${note.note_createdAt == null}">
+                              
+                             	 <small class="mb-0 me-3 text-muted">${note.note_restime} 에 보내기 예약됨</small>
+                              </c:if>
+                              
                               
                               <c:if test="${not empty mediaList}">
                               	<i class="bx bx-paperclip cursor-pointer me-2 bx-sm"></i>

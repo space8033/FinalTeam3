@@ -34,12 +34,18 @@
 
   // Datetime
   if (flatpickrDateTime) {
-    flatpickrDateTime.flatpickr({
-      enableTime: true,
-      dateFormat: 'Y-m-d H:i'
-    });
-  }
+	  const currentDate = new Date();
+	  const fromDate = new Date(currentDate.getTime()); 
 
+	  flatpickrDateTime.flatpickr({
+	    enableTime: true,
+	    dateFormat: 'Y-m-d H:i',
+	    minDate: fromDate,
+	    minuteIncrement: 1,
+	    defaultDate: [fromDate],
+	  });
+	}
+  
   // Multi Date Select
   if (flatpickrMulti) {
     flatpickrMulti.flatpickr({

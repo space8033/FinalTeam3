@@ -9,7 +9,7 @@
             NOTE_NO, NOTE_TITLE, NOTE_CONTENT, NOTE_SENDER, NOTE_CREATEDAT, NOTE_RESTIME, NOTE_LABEL, NOTE_DRAFT
 	    )
 	    values(
-	        #{note_no}, #{note_title}, #{note_content}, #{note_sender}, to_char(sysdate,'yyyy.mm.dd hh24:mi:ss'), #{note_restime}, #{note_label}, #{note_draft}
+	        #{note_no}, #{note_title}, #{note_content}, #{note_sender}, #{note_createdAt}, #{note_restime}, #{note_label}, #{note_draft}
 	    )
 	</insert>
 	
@@ -37,6 +37,7 @@
 			           and noteRead_deletedAt IS NULL
 			           and noteRead_realDeletedAt IS NULL
 			           and note_draft IS NULL
+			           and note_createdAt IS NOT NULL
 			           and noteRead_isCanceled IS NULL
 			      order by note_createdAt desc
 			    )
@@ -49,11 +50,11 @@
 	<!-- 발신 쪽지 목록 -->
 	<select id="selectSentNoteByEmpNo" resultType="NoteAll" parameterType="Map">
 		<![CDATA[
-	       select rnum, note_no, note_title, note_content, note_sender, note_createdAt, note_label
+	       select rnum, note_no, note_title, note_content, note_sender, note_createdAt, note_label, note_restime
 			 from (
-			    select rownum as rnum, note_no, note_title, note_content, note_sender, note_createdAt, note_label
+			    select rownum as rnum, note_no, note_title, note_content, note_sender, note_createdAt, note_label, note_restime
 			    from(
-			        select n.note_no, note_title, note_content, note_sender, note_createdAt, note_label
+			        select n.note_no, note_title, note_content, note_sender, note_createdAt, note_label, note_restime
 			          from note n
 			         where note_sender = #{empNo}
 			           and note_draft IS NULL
@@ -81,6 +82,7 @@
 			           and noteRead_deletedAt IS NULL
 			           and noteRead_realDeletedAt IS NULL
 			           and noteRead_isCanceled IS NULL
+			           and note_createdAt IS NOT NULL
 			      order by note_createdAt desc
 			    )
 			    where rownum <= #{endRowNo}
@@ -143,6 +145,7 @@
   	       and noteRead_realDeletedAt IS NULL
   	       and note_draft IS NULL
   	       and noteRead_isCanceled IS NULL
+  	       and note_createdAt IS NOT NULL
 	</select>
 
 	<!-- 안읽은 수신 쪽지 갯수 가져오기 -->
@@ -157,6 +160,7 @@
   	       and noteRead_read IS NULL
   	       and note_draft IS NULL
   	       and noteRead_isCanceled IS NULL
+  	       and note_createdAt IS NOT NULL
 	</select>
 	
 	<!-- 발신 쪽지 갯수 가져오기 -->
@@ -269,6 +273,20 @@
   		  from noteRead
   	 	 where note_no = #{note_no}
 	</select>
-
+	
+	<!-- 노트예약 시간 가져오기 -->
+	<select id="selectNoteByNoteRestime" resultType="Note" parameterType="String">
+		select note_restime, note_no
+  		  from note
+  	 	 where note_Restime = #{currentDate}
+	</select>
+	
+	<!-- 쪽지 번호로 noteRead 발송 취소 쪽지 업데이트 작성자: 김시온 -->
+	<update id="updateNoteRestime" parameterType="note">
+		update note
+		   set note_createdAt = #{note_createdAt},
+      		   note_restime = #{note_restime}
+  		 where note_no = #{note_no}
+	</update>
 	
 </mapper>
