@@ -431,6 +431,38 @@ public class NoteController {
 		return "/noteDetail";
 	}
 	
+	//쪽지 상세 임시저장 불러오기
+	@GetMapping("/noteDetailDraft")
+	public String noteDetailDraft(String noteNo, HttpSession session, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+		
+		log.info(noteNo+"먼값이 들어오나 보자");
+		int note_no = Integer.parseInt(noteNo);
+		Note note = noteService.getNoteSent(note_no);
+		
+		model.addAttribute("note", note);
+		EmployeeInfo sender = employeeService.getEmpInfo(note.getNote_sender());
+		String name = sender.getEmpinfo_name();
+		
+		model.addAttribute("name", name);
+		
+		List<MediaDto> mediaList = noteService.getMediaList(note.getNote_no());
+		
+		model.addAttribute("mediaList", mediaList);
+		
+		String contentType = "임시저장";
+		model.addAttribute("contentType", contentType);
+		
+		List<NoteResponse> noteResponseList = noteService.getNoteReceiver(note.getNote_no(), loginResponse.getEmp_no());
+		model.addAttribute("list", noteResponseList);
+		
+		
+		return "/noteDetail";
+	}
+	
 	//발송취소 목록 불러오기
 	@GetMapping("/noteSentCancelList")
 	public String noteSentCancelList(String noteNo, HttpSession session, Model model, Authentication authentication) {

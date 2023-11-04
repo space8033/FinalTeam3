@@ -96,7 +96,6 @@
                               data-target="#app-email-view"
                               onclick="javascript:showNoteList();"></i>
                             <h6 class="text-truncate mb-0 me-2">뒤로가기 </h6>
-                            <span class="badge bg-label-warning">Important</span>
                           </div>
                           <!-- Email View : Action  bar-->
                           <div class="d-flex">
@@ -141,7 +140,7 @@
                           </div>
                         </div>
                         <hr class="app-email-view-hr mx-n3 mb-2" />
-                        <div class="d-flex justify-content-between align-items-center">
+                        <!-- <div class="d-flex justify-content-between align-items-center">
                           <div class="d-flex align-items-center">
                             <i
                               class="bx bx-trash-alt cursor-pointer me-3 fs-4"
@@ -200,13 +199,13 @@
                             </div>
                           </div>
                           <div class="d-flex align-items-center flex-wrap justify-content-end">
-                           <!--  <span class="d-sm-block d-none mx-3 text-muted">1-10 of 653</span>
+                            <span class="d-sm-block d-none mx-3 text-muted">1-10 of 653</span>
                             <i class="bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4"></i>
-                            <i class="bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i> -->
+                            <i class="bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i>
                           </div>
-                        </div>
+                        </div> -->
                       </div>
-                      <hr class="m-0" />
+                    <!--   <hr class="m-0" /> -->
                      
                       
                       
@@ -308,21 +307,33 @@
                             </div>
                             <div class="d-flex align-items-center">
                             
-                              <c:if test="${note.note_createdAt != null}">
-                              	<small class="mb-0 me-3 text-muted">${note.note_createdAt} ${note.note_restime}</small>
-                              </c:if>
-                             	<c:choose>
-								  <c:when test="${fn:length(note.note_restime) >= 20}">
-								    <!-- 글자 수가 20 이상인 경우 -->
-								   <small class="mb-0 me-3 text-muted">${note.note_restime}</small>
-								  </c:when>
-								  <c:otherwise>
-								    <!-- 글자 수가 20 미만인 경우 -->
-                             	 	<small class="mb-0 me-3 text-muted">${note.note_restime} 에 보내기 예약됨</small>
-								  </c:otherwise>
-								</c:choose>
+                            <c:choose>		                                  
+								<c:when test ="${contentType eq '발신'}">
+								
+								 	<c:if test="${note.note_createdAt != null}">
+		                              	<small class="mb-0 me-3 text-muted">${note.note_createdAt} ${note.note_restime}</small>
+		                          	</c:if>
+	                             	<c:choose>
+									  <c:when test="${fn:length(note.note_restime) >= 20}">
+									    <!-- 글자 수가 20 이상인 경우 -->
+									   <small class="mb-0 me-3 text-muted">${note.note_restime}</small>
+									  </c:when>
+									  <c:otherwise>
+									  	<c:if test="${note.note_restime != null}">
+									    <!-- 글자 수가 20 미만인 경우 -->
+	                             	 		<small class="mb-0 me-3 text-muted">${note.note_restime} 에 보내기 예약됨</small>
+	                             	 	</c:if>
+									  </c:otherwise>
+									</c:choose>
+	                     		</c:when>
+	                     		<c:when test ="${contentType ne '발신'}">
+	                     			<small class="mb-0 me-3 text-muted">${note.note_createdAt}</small>
+	                     		
+	                     		</c:when>
+                            
+                             
                               
-                             	 
+                            </c:choose> 	 
                              	 
                              	 
                               
@@ -372,7 +383,7 @@
                           <div class="card-body pt-3">
 	                          <div class="collapse" id="collapseExample">
 	                          	<div class="d-flex">
-	                          		<div class="me-1" style="width:70px;">수신자 : </div>
+	                          		<div class="" style="width:60px;">수신자 : </div>
 	                          		<div>
 		                          			<c:forEach var="list" items="${list}">
 		                          				<c:if test="${list.noteRead_type == '수신'}">
@@ -382,7 +393,7 @@
 	                          		</div>
 	                          	</div>
 								<div class="d-flex">
-	                          	 	<div class="me-1" style="width:60px;"> 참조 : </div>
+	                          	 	<div class="" style="width:50px;"> 참조 : </div>
 	                          	 	<div>
 	                          	 		<c:forEach var="list" items="${list}">
 		                          				<c:if test="${list.noteRead_type == '참조'}">
@@ -393,7 +404,7 @@
 	                          	 	</div>
 	                          	</div>
 	                          	<div class="d-flex">
-	                          		<div class="me-1" style="width:80px;">비밀 참조 : </div>
+	                          		<div class="" style="width:80px;">비밀 참조 : </div>
 	                          		<div>
 	                          		<c:forEach var="list" items="${list}">
 		                          				<c:if test="${list.noteRead_type == '비밀참조'}">
@@ -428,50 +439,68 @@
                           </div>
                         </div>
                         
-                        <form name="ReplyRequest" action="replySend" id="replySend" method="POST" enctype="multipart/form-data">
                         
-                        <!-- Email View : Reply mail-->
-	                        <div class="email-reply card mt-4 mx-sm-4 mx-3 border">
-	                          <h6 class="card-header border mb-2"><strong>'${name}' 님께 답장</strong></h6>
-	                          <div class="card-body pt-0 px-3">
-	                            <div class="d-flex justify-content-start">
-	                              <div class="email-reply-toolbar border-0 w-100 ps-0" id="toolbar">
-	                                <span class="ql-formats me-0">
-	                                  <button class="ql-bold"></button>
-	                                  <button class="ql-italic"></button>
-	                                  <button class="ql-underline"></button>
-	                                  <button class="ql-list" value="ordered"></button>
-	                                  <button class="ql-list" value="bullet"></button>
-	                                  <button class="ql-link"></button>
-	                                  <button class="ql-image"></button>
-	                                </span>
-	                              </div>
-	                            </div>
-	                            <div class="email-reply-editor" id="editor"></div>
-	                            
-	                            <input type="hidden" name="note_content" id="reply"/>
-	                            <input type="hidden" name="note_no" value="${note.note_no}"/>
-	                            <input type="hidden" name="note_title" value="${note.note_title}"/>
-	                            <input type="hidden" name="note_receiver" value="${note.note_sender}"/>
-	                            <div class="d-flex justify-content-end align-items-center">
-	                              <div class="cursor-pointer me-3">
-		                              <input value="" readonly type="text" id="reply-filename" placeholder="" class="text-muted ms-1 upload-name" style="border:none; width:400px; outline: none; text-align:right;">
-	                                  <label for="reply-attach-file"><i class="bx bx-paperclip"></i><span class="align-middle cursor-pointer" onclick="javascript:replyFileUpload()"> 첨부 파일</span></label>
-		                              <input type="file" name="reply_files" class="d-none" id="reply-attach-file" multiple/>
-	                                  
-	                              </div>
-	                              <button type="submit" class="btn btn-primary">
-	                                <i class="bx bx-paper-plane me-1"></i>
-	                                <span class="align-middle">보내기</span>
-	                              </button>
-	                            </div>
-	                          </div>
-	                        </div>
-	                        
-                        </form>
-                      </div>
-                    </div>
-                    <!-- Email View -->
+                        
+                        <c:choose>		                                  
+								<c:when test ="${contentType eq '발신'}">
+								
+								 	
+	                     		</c:when>
+	                     		<c:when test ="${contentType eq '임시저장'}">
+	                     			
+	                     		
+	                     		</c:when>
+                            
+                             	<c:otherwise>
+		                          <form name="ReplyRequest" action="replySend" id="replySend" method="POST" enctype="multipart/form-data">
+		                        
+		                        <!-- Email View : Reply mail-->
+			                        <div class="email-reply card mt-4 mx-sm-4 mx-3 border">
+			                          <h6 class="card-header border mb-2"><strong>'${name}' 님께 답장</strong></h6>
+			                          <div class="card-body pt-0 px-3">
+			                            <div class="d-flex justify-content-start">
+			                              <div class="email-reply-toolbar border-0 w-100 ps-0" id="toolbar">
+			                                <span class="ql-formats me-0">
+			                                  <button class="ql-bold"></button>
+			                                  <button class="ql-italic"></button>
+			                                  <button class="ql-underline"></button>
+			                                  <button class="ql-list" value="ordered"></button>
+			                                  <button class="ql-list" value="bullet"></button>
+			                                  <button class="ql-link"></button>
+			                                  <button class="ql-image"></button>
+			                                </span>
+			                              </div>
+			                            </div>
+			                            <div class="email-reply-editor" id="editor"></div>
+			                            
+			                            <input type="hidden" name="note_content" id="reply"/>
+			                            <input type="hidden" name="note_no" value="${note.note_no}"/>
+			                            <input type="hidden" name="note_title" value="${note.note_title}"/>
+			                            <input type="hidden" name="note_receiver" value="${note.note_sender}"/>
+			                            <div class="d-flex justify-content-end align-items-center">
+			                              <div class="cursor-pointer me-3">
+				                              <input value="" readonly type="text" id="reply-filename" placeholder="" class="text-muted ms-1 upload-name" style="border:none; width:400px; outline: none; text-align:right;">
+			                                  <label for="reply-attach-file"><i class="bx bx-paperclip"></i><span class="align-middle cursor-pointer" onclick="javascript:replyFileUpload()"> 첨부 파일</span></label>
+				                              <input type="file" name="reply_files" class="d-none" id="reply-attach-file" multiple/>
+			                                  
+			                              </div>
+			                              <button type="submit" class="btn btn-primary">
+			                                <i class="bx bx-paper-plane me-1"></i>
+			                                <span class="align-middle">보내기</span>
+			                              </button>
+			                            </div>
+			                          </div>
+			                        </div>
+			                        
+		                        </form>
+		                      
+		                    <!-- Email View -->
+                           </c:otherwise>
+                              
+                        </c:choose> 	 
+                        </div>
+		               </div>
+                       
                      
                       <div class="app-overlay"></div>
 

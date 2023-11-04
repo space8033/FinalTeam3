@@ -395,7 +395,11 @@ public class NoteServiceImpl implements NoteService{
 		note.setNote_title("re: " + request.getNote_title());
 		
 		note.setNote_content(request.getNote_content());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+        String formattedDate = sdf.format(new Date());
+
 		
+		note.setNote_createdAt(formattedDate);
 		note.setNote_label("일반 쪽지");
 		if(request.getNote_reserve_time() == null) {
 			note.setNote_restime("");
