@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 
 <html
@@ -152,6 +153,9 @@
                               	<c:when test ="${contentType eq '휴지통'}">
 	                               <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:trashDelete('${contentType}')"></i>
 	                          	</c:when>
+                              	<c:when test ="${contentType eq '발신'}">
+	                               <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:deleteSentNote('${contentType}')"></i>
+	                          	</c:when>
                               	<c:otherwise>
                               		<i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:trashCheck('${contentType}')"></i>
                               	</c:otherwise>
@@ -284,15 +288,37 @@
 					                          <c:if test ="${note.noteRead_starred != null}">
 					                          data-starred="true"
 					                          </c:if>
-					                      id="${note.noteRead_no}"
+					                          
+					                           <c:choose>
+				                              	<c:when test ="${contentType eq '발신'}">
+				                              		 id="${note.note_no}"
+					                          	</c:when>
+				                              	<c:otherwise>
+				                              	 	 id="${note.noteRead_no}"
+				                              	</c:otherwise>
+				                              </c:choose>
+					                     
 			                              data-bs-toggle="sidebar"
 			                              data-target="#app-email-view-${note.noteRead_no}"
 			                              >
 			                              <div class="d-flex align-items-center">
-			                                <div class="form-check">
-			                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-${note.noteRead_no}" />
-			                                  <label class="form-check-label" for="email-${note.noteRead_no}"></label>
-			                                </div>
+			                                 <c:choose>
+				                              
+				                              	<c:when test ="${contentType eq '발신'}">
+				                              	
+				                              		<div class="form-check">
+					                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-${note.note_no}" />
+					                                  <label class="form-check-label" for="email-${note.note_no}"></label>
+					                                </div>
+					                          	</c:when>
+				                              	<c:otherwise>
+				                              	 	<div class="form-check">
+					                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-${note.noteRead_no}" />
+					                                  <label class="form-check-label" for="email-${note.noteRead_no}"></label>
+					                                </div>
+				                              	</c:otherwise>
+				                              </c:choose>
+			                                
 			                                <i
 			                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"  onclick="javascript:bookMark(${note.noteRead_no})"></i>
 			                                <img
@@ -367,13 +393,25 @@
 													  </c:if>
 											  </c:if>
 											  <c:if test ="${note.note_createdAt == null}">
-											  	 <small class="email-list-item-time text-muted">발송 예약</small>
+											  	<c:choose>
+												  <c:when test="${fn:length(note.note_restime) >= 20}">
+												    <!-- 글자 수가 20 이상인 경우 -->
+												    <small class="email-list-item-time text-muted">예약 취소</small>
+												  </c:when>
+												  <c:otherwise>
+												    <!-- 글자 수가 20 미만인 경우 -->
+				                             	 	<small class="email-list-item-time text-muted">발송 예약</small>
+												  </c:otherwise>
+												</c:choose>
 											  </c:if>
 												  
 			                                  <ul class="list-inline email-list-item-actions">
 												<c:choose>		                                  
 													<c:when test ="${contentType eq '휴지통'}">
 			                                    		<li class="list-inline-item email-delete"><i id="trash-${note.noteRead_no}" class="bx bx-trash-alt fs-4" onclick="javascript:deleteTrashSingleNote(${note.noteRead_no});"></i></li>
+	                          						</c:when>
+													<c:when test ="${contentType eq '발신'}">
+			                                    		<li class="list-inline-item email-delete"><i id="trash-${note.note_no}" class="bx bx-trash-alt fs-4" onclick="javascript:deleteSentSingleNote(${note.note_no});"></i></li>
 	                          						</c:when>
 	                          						<c:otherwise>			                                  
 			                                    		<li class="list-inline-item email-delete"><i id="trash-${note.noteRead_no}" class="bx bx-trash fs-4" onclick="javascript:trashSingleNote(${note.noteRead_no});"></i></li>

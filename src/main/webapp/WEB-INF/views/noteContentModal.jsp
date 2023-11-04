@@ -183,7 +183,7 @@
 		                </c:if>
 	                </c:if>
 	                <c:if test="${list.noteRead_read != null}">
-	                    <i class="bx bx-envelope-open me-2 mt-2">
+	                    <i class="bx bx-envelope-open me-2">
                      	</i><span class="mt-2 text-muted fw-normal me-2 d-none d-sm-inline-block">${list.noteRead_read} 읽음</span>
 	                </c:if>
 	                

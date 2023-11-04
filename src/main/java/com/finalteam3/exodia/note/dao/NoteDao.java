@@ -60,6 +60,7 @@ public interface NoteDao {
 	
 	//휴지통에 넣기, 휴지통 비우기 / 휴지통 복구
 	public void trashNote(int noteReadNo);
+	public void trashNoteSent(int noteNo);
 	public void deleteTrashNote(int noteReadNo);
 	public void recoveryNotebyNoteRead(NoteRead noteRead);
 	

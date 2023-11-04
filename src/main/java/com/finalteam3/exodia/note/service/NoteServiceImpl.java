@@ -473,6 +473,20 @@ public class NoteServiceImpl implements NoteService{
 		}
 	}
 	
+	//발신 쪽지 삭제
+	@Override
+	public void checkTrashSent(String checkedIdsString) {
+		
+		String[] numberStrings = checkedIdsString.split(", ");
+		int[] numberArray = new int[numberStrings.length];
+		for(int i = 0; i < numberStrings.length; i++) {
+			numberArray[i] = Integer.parseInt(numberStrings[i].trim());
+		}
+		for(int noteNo : numberArray) {
+			noteDao.trashNoteSent(noteNo);
+		}
+	}
+	
 	@Override
 	public void deleteTrash(String checkedIdsString) {
 		
@@ -716,18 +730,45 @@ public class NoteServiceImpl implements NoteService{
 		for(int i = 0; i < numberStrings.length; i++) {
 			numberArray[i] = Integer.parseInt(numberStrings[i].trim());
 		}
+		
+		
 		for(int noteReadNo : numberArray) {
-			NoteRead noteRead = noteDao.selectNoteReadByNoteReadNo(noteReadNo);
+			NoteRead noteReadEx = noteDao.selectNoteReadByNoteReadNo(noteReadNo);
 			
-			
-			
-			if(noteRead.isNoteRead_isCanceled()) {
+			if(noteReadEx.isNoteRead_isCanceled()) {
 				noCancel = "발송취소할 목록이 없습니다.";
 			} else {
 				noteDao.sentCancelNote(noteReadNo);
 				noCancel = "발송취소 완료";
+				
+				//예약 전송 취소
+				NoteRead noteReadAll = noteDao.selectNoteReadByNoteReadNo(noteReadNo);
+				int noteNo = noteReadAll.getNote_no();
+				Note note = noteDao.selectNoteByNoteNo(noteNo);
+				if(note.getNote_restime() != null) {
+					List<NoteRead> noteReadList = noteDao.selectNoteReadByNoteNo(noteNo);
+					boolean hasNoReferenceCanceled = noteReadList.stream()
+						    .noneMatch(noteRead -> !noteRead.isNoteRead_isCanceled());
+					
+					log.info(hasNoReferenceCanceled+"참이냐 거짓이냐");
+					if(hasNoReferenceCanceled) {
+						Note newNote = new Note();
+						newNote.setNote_no(noteNo);
+						
+						SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+						String currentDate = sdf.format(new Date());
+						
+						newNote.setNote_restime(currentDate+" 예악 발송 취소됨");
+						newNote.setNote_createdAt("");
+						noteDao.updateNoteRestime(newNote);
+						
+					}
+				}
+				
 			}
 		}
+		
+		
 		
 		return noCancel;
 		

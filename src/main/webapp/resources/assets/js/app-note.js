@@ -130,7 +130,6 @@ function showDetailSent(noteNo) {
 			noteNo: noteNo
 	};
 	
-	
 	$.ajax({
 		url: "/exodia/noteDetailSent",
 		type: "GET",
@@ -278,7 +277,8 @@ function sentCancelNo(noteReadNo) {
     	console.log("결과확인");
     	$("#s-" + noteReadNo).removeClass("d-none");
     	$("#b-" + noteReadNo).addClass("d-none");
-
+    	
+    
     	
     	
     }).fail(function (jqXHR, textStatus, errorThrown) {
@@ -324,6 +324,7 @@ function sentCancelAll() {
 			 alert(result.noCancel);
 			$(".cancelComplete").removeClass("d-none");
 			$(".cancelList").addClass("d-none");
+			
 			
 		
 			
@@ -585,7 +586,7 @@ function checkAll() {
 	    }
 }
 
-//선택된 항목 휴지통보내기
+//수신함 선택된 항목 휴지통보내기
 function trashCheck(type) {
 	console.log("체크삭제");
 	var contentType = type;
@@ -614,9 +615,39 @@ function trashCheck(type) {
             type: "POST",
             data: postData,
             success: function(response) {
-            	$.each(checkedIds, function(index, id) {
-            	    $('#' + id).hide();
-            	});
+            	 let inbox = "수신";
+     			var postData = {
+     				inbox: inbox
+     		    };
+     		    
+     		    // AJAX 요청으로 데이터 전송
+     		    $.ajax({
+     		    	url: "/exodia/noteInbox",
+     		        type: "GET",
+     		        data: postData
+     		       
+     		    }).done(function(result) {
+     		    	console.log("결과확인");
+     		    	var html = jQuery('<div>').html(result);
+     		    	var contents = html.find("div#noteContent").html();
+     		    	$("#refreshNoteContent").html(contents);
+     		    	$("#app-email-view").removeClass("show");
+     		    	
+     		    	var emailListInstance = new PerfectScrollbar('.email-list', {
+     		    	        wheelPropagation: false,
+     		    	        suppressScrollX: true
+     		    	});
+     		    	
+
+     		    	
+     		    	
+     		    }).fail(function (jqXHR, textStatus, errorThrown) {
+     		    	console.log("에러");
+     		    	console.log(jqXHR);
+     		    	console.log(textStatus);
+     		    	console.log(errorThrown);
+     		    	
+     		    });
 	        
             },
             error: function() {
@@ -658,9 +689,36 @@ function trashDelete(type) {
 		type: "POST",
 		data: postData,
 		success: function(response) {
-			$.each(checkedIds, function(index, id) {
-				$('#' + id).hide();
-			});
+			let noteTrash = "휴지통";
+    		var postData = {
+    				noteTrash: noteTrash
+    		};
+    		
+    		// AJAX 요청으로 데이터 전송
+    		$.ajax({
+    			url: "/exodia/noteTrash",
+    			type: "GET",
+    			data: postData
+    			
+    		}).done(function(result) {
+    			console.log("결과확인");
+    			var html = jQuery('<div>').html(result);
+    			var contents = html.find("div#noteContent").html();
+    			$("#refreshNoteContent").html(contents);
+    			$("#app-email-view").removeClass("show");
+    			
+    			var emailListInstance = new PerfectScrollbar('.email-list', {
+    				wheelPropagation: false,
+    				suppressScrollX: true
+    			});
+    			
+    		}).fail(function (jqXHR, textStatus, errorThrown) {
+    			console.log("에러");
+    			console.log(jqXHR);
+    			console.log(textStatus);
+    			console.log(errorThrown);
+    			
+    		});
 			
 		},
 		error: function() {
@@ -700,9 +758,36 @@ function recoveryCheck() {
 		type: "POST",
 		data: postData,
 		success: function(response) {
-			$.each(checkedIds, function(index, id) {
-				$('#' + id).hide();
-			});
+			let noteTrash = "휴지통";
+    		var postData = {
+    				noteTrash: noteTrash
+    		};
+    		
+    		// AJAX 요청으로 데이터 전송
+    		$.ajax({
+    			url: "/exodia/noteTrash",
+    			type: "GET",
+    			data: postData
+    			
+    		}).done(function(result) {
+    			console.log("결과확인");
+    			var html = jQuery('<div>').html(result);
+    			var contents = html.find("div#noteContent").html();
+    			$("#refreshNoteContent").html(contents);
+    			$("#app-email-view").removeClass("show");
+    			
+    			var emailListInstance = new PerfectScrollbar('.email-list', {
+    				wheelPropagation: false,
+    				suppressScrollX: true
+    			});
+    			
+    		}).fail(function (jqXHR, textStatus, errorThrown) {
+    			console.log("에러");
+    			console.log(jqXHR);
+    			console.log(textStatus);
+    			console.log(errorThrown);
+    			
+    		});
 			
 		},
 		error: function() {
@@ -714,7 +799,7 @@ function recoveryCheck() {
 	
 	
 }
-
+//수신함 휴지통 보내기
 function trashSingleNote(noteReadNo) {
 	  var postData = {
 			  checkedIdsString: noteReadNo
@@ -726,7 +811,39 @@ function trashSingleNote(noteReadNo) {
 	            type: "POST",
 	            data: postData,
 	            success: function(response) {
-	            	$('#' + noteReadNo).hide();
+	            	 let inbox = "수신";
+	     			var postData = {
+	     				inbox: inbox
+	     		    };
+	     		    
+	     		    // AJAX 요청으로 데이터 전송
+	     		    $.ajax({
+	     		    	url: "/exodia/noteInbox",
+	     		        type: "GET",
+	     		        data: postData
+	     		       
+	     		    }).done(function(result) {
+	     		    	console.log("결과확인");
+	     		    	var html = jQuery('<div>').html(result);
+	     		    	var contents = html.find("div#noteContent").html();
+	     		    	$("#refreshNoteContent").html(contents);
+	     		    	$("#app-email-view").removeClass("show");
+	     		    	
+	     		    	var emailListInstance = new PerfectScrollbar('.email-list', {
+	     		    	        wheelPropagation: false,
+	     		    	        suppressScrollX: true
+	     		    	});
+	     		    	
+
+	     		    	
+	     		    	
+	     		    }).fail(function (jqXHR, textStatus, errorThrown) {
+	     		    	console.log("에러");
+	     		    	console.log(jqXHR);
+	     		    	console.log(textStatus);
+	     		    	console.log(errorThrown);
+	     		    	
+	     		    });
 	            	
 	            },
 	            error: function() {
@@ -737,6 +854,7 @@ function trashSingleNote(noteReadNo) {
 	
 }
 
+//휴지통 개별항목 지우기
 function deleteTrashSingleNote(noteReadNo) {
 	var postData = {
 			checkedIdsString: noteReadNo
@@ -748,7 +866,36 @@ function deleteTrashSingleNote(noteReadNo) {
 		type: "POST",
 		data: postData,
 		success: function(response) {
-			$('#' + noteReadNo).hide();
+			let noteTrash = "휴지통";
+    		var postData = {
+    				noteTrash: noteTrash
+    		};
+    		
+    		// AJAX 요청으로 데이터 전송
+    		$.ajax({
+    			url: "/exodia/noteTrash",
+    			type: "GET",
+    			data: postData
+    			
+    		}).done(function(result) {
+    			console.log("결과확인");
+    			var html = jQuery('<div>').html(result);
+    			var contents = html.find("div#noteContent").html();
+    			$("#refreshNoteContent").html(contents);
+    			$("#app-email-view").removeClass("show");
+    			
+    			var emailListInstance = new PerfectScrollbar('.email-list', {
+    				wheelPropagation: false,
+    				suppressScrollX: true
+    			});
+    			
+    		}).fail(function (jqXHR, textStatus, errorThrown) {
+    			console.log("에러");
+    			console.log(jqXHR);
+    			console.log(textStatus);
+    			console.log(errorThrown);
+    			
+    		});
 			
 		},
 		error: function() {
@@ -756,6 +903,130 @@ function deleteTrashSingleNote(noteReadNo) {
 			alert("데이터 전송 중 오류가 발생했습니다.");
 		}
 	});
+	
+}
+
+//발신 개별 메세지 지우기
+function deleteSentSingleNote(noteNo) {
+	var postData = {
+			checkedIdsString: noteNo
+	};
+	
+	// AJAX 요청으로 데이터 전송
+	$.ajax({
+		url: "/exodia/deleteSentNote",
+		type: "POST",
+		data: postData,
+		success: function(response) {
+			
+			
+			let noteSent = "발신";
+			var postData = {
+				noteSent: noteSent
+	        };
+	        
+	        // AJAX 요청으로 데이터 전송
+	        $.ajax({
+	        	url: "/exodia/noteSent",
+	            type: "GET",
+	            data: postData
+	           
+	        }).done(function(result) {
+	        	console.log("발신메세지함 넘어오니");
+	        	var html = jQuery('<div>').html(result);
+	        	var contents = html.find("div#noteContent").html();
+	        	$("#refreshNoteContent").html(contents);
+	        	$("#app-email-view").removeClass("show");
+	        	var emailListInstance = new PerfectScrollbar('.email-list', {
+	    	        wheelPropagation: false,
+	    	        suppressScrollX: true
+	        	});
+	    	
+	        	
+	        }).fail(function (jqXHR, textStatus, errorThrown) {
+	        	console.log("에러");
+	        	console.log(jqXHR);
+	        	console.log(textStatus);
+	        	console.log(errorThrown);
+	        	
+	        });
+			
+		},
+		error: function() {
+			// 오류 처리
+			alert("데이터 전송 중 오류가 발생했습니다.");
+		}
+	});
+	
+}
+
+//선택된 항목 발신 메세지 지우기
+function deleteSentNote(type) {
+	console.log("체크삭제");
+	var contentType = type;
+	
+	// 모든 체크된 체크박스를 선택
+	var checkedCheckboxes = $('input[type="checkbox"]:checked').not('#email-select-all');
+	
+	// 체크된 체크박스의 ID를 가져오고 배열에 저장
+	var checkedIds = checkedCheckboxes.map(function() {
+		return this.id.replace('email-', '');
+	}).get();
+	
+	// 체크된 체크박스의 ID 배열을 문자열로 조인
+	var checkedIdsString = checkedIds.join(', ');
+	
+	
+	var postData = {
+			checkedIdsString: checkedIdsString,
+			contentType: contentType
+	};
+	
+	console.log("체크된 체크박스의 ID: " + checkedIdsString);
+	// AJAX 요청으로 데이터 전송
+	$.ajax({
+		url: "/exodia/deleteSentNote",
+		type: "POST",
+		data: postData,
+		success: function(response) {
+			let noteSent = "발신";
+			var postData = {
+				noteSent: noteSent
+	        };
+	        
+	        // AJAX 요청으로 데이터 전송
+	        $.ajax({
+	        	url: "/exodia/noteSent",
+	            type: "GET",
+	            data: postData
+	           
+	        }).done(function(result) {
+	        	console.log("발신메세지함 넘어오니");
+	        	var html = jQuery('<div>').html(result);
+	        	var contents = html.find("div#noteContent").html();
+	        	$("#refreshNoteContent").html(contents);
+	        	$("#app-email-view").removeClass("show");
+	        	var emailListInstance = new PerfectScrollbar('.email-list', {
+	    	        wheelPropagation: false,
+	    	        suppressScrollX: true
+	        	});
+	    	
+	        	
+	        }).fail(function (jqXHR, textStatus, errorThrown) {
+	        	console.log("에러");
+	        	console.log(jqXHR);
+	        	console.log(textStatus);
+	        	console.log(errorThrown);
+	        	
+	        });
+		},
+		error: function() {
+			// 오류 처리
+			alert("데이터 전송 중 오류가 발생했습니다.");
+		}
+	});
+	// 체크된 체크박스의 ID 출력
+	
 	
 }
 
@@ -1265,10 +1536,6 @@ document.addEventListener('DOMContentLoaded', function () {
     	
     });
 
-    
-    
-    
-    
     
     // Email list scrollbar
    

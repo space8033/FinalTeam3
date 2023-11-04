@@ -58,6 +58,7 @@
 			          from note n
 			         where note_sender = #{empNo}
 			           and note_draft IS NULL
+			           and note_deletedAt IS NULL
 			      order by note_createdAt desc
 			    )
 			    where rownum <= #{endRowNo}
@@ -168,7 +169,8 @@
 		select count(*)
   		  from note n
   	     where note_sender = #{note_sender} 
-  	       and note_draft IS NULL 
+  	       and note_draft IS NULL
+  	       and note_deletedAt IS NULL
 	</select>
 	
 	<!-- 임시저장 쪽지 갯수 가져오기 -->
@@ -239,6 +241,13 @@
   		 where noteRead_no = #{noteRead_no}
 	</update>
 	
+	<!-- 쪽지 번호로 note 쪽지 삭제(발신) 업데이트 작성자: 김시온 -->
+	<update id="trashNoteSent" parameterType="int">
+		update note
+		   set note_deletedAt=to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
+  		 where note_no = #{note_no}
+	</update>
+	
 	<!-- 쪽지 번호로 noteRead 휴지통 비우기 업데이트 작성자: 김시온 -->
 	<update id="deleteTrashNote" parameterType="int">
 		update noteRead
@@ -262,7 +271,7 @@
 	
 	<!-- noteRead 번호로 noteRead 얻어오기 작성자: 김시온 -->
 	<select id="selectNoteReadByNoteReadNo" parameterType="int" resultType="noteRead">
-		select emp_no_receiver, noteRead_starred, noteRead_isCanceled
+		select emp_no_receiver, noteRead_starred, noteRead_isCanceled, note_no
   		  from noteRead
   	 	 where noteRead_no = #{noteRead_no}
 	</select>

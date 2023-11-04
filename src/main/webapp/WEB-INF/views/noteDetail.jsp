@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 
 <html
@@ -310,11 +311,20 @@
                               <c:if test="${note.note_createdAt != null}">
                               	<small class="mb-0 me-3 text-muted">${note.note_createdAt} ${note.note_restime}</small>
                               </c:if>
-                              <c:if test="${note.note_createdAt == null}">
+                             	<c:choose>
+								  <c:when test="${fn:length(note.note_restime) >= 20}">
+								    <!-- 글자 수가 20 이상인 경우 -->
+								   <small class="mb-0 me-3 text-muted">${note.note_restime}</small>
+								  </c:when>
+								  <c:otherwise>
+								    <!-- 글자 수가 20 미만인 경우 -->
+                             	 	<small class="mb-0 me-3 text-muted">${note.note_restime} 에 보내기 예약됨</small>
+								  </c:otherwise>
+								</c:choose>
                               
-                             	 <small class="mb-0 me-3 text-muted">${note.note_restime} 에 보내기 예약됨</small>
-                              </c:if>
-                              
+                             	 
+                             	 
+                             	 
                               
                               <c:if test="${not empty mediaList}">
                               	<i class="bx bx-paperclip cursor-pointer me-2 bx-sm"></i>
