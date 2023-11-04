@@ -1,11 +1,14 @@
 package com.finalteam3.exodia.note.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -68,6 +71,26 @@ public class NoteServiceImpl implements NoteService{
 	}
 
 	@Override
+	@Scheduled(cron = "0 * * * * ?")
+	public void restimeSend() {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+		String currentDate = sdf.format(new Date());
+		List<Note> noteRestimes = noteDao.selectNoteByNoteRestime(currentDate);
+		
+		for (Note noteRestime : noteRestimes) {
+			Note note = new Note();
+			note.setNote_createdAt(noteRestime.getNote_restime());
+			note.setNote_restime("예약 전송 완료");
+			note.setNote_no(noteRestime.getNote_no());
+			noteDao.updateNoteRestime(note);
+			log.info("예약전송완료");
+			
+		}
+	}
+	
+	
+	@Override
 	public void addNote(NoteRequest request) throws Exception {
 		Note note = new Note();
 		AlarmRequest alarm = new AlarmRequest();
@@ -85,8 +108,24 @@ public class NoteServiceImpl implements NoteService{
 		
 		if(request.getNote_reserve_time() == null) {
 			note.setNote_restime("");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+	        String formattedDate = sdf.format(new Date());
+
+			
+			note.setNote_createdAt(formattedDate);
 		} else {
-			note.setNote_restime(request.getNote_reserve_time());
+			note.setNote_createdAt("");
+			
+			String inputDate = request.getNote_reserve_time();
+	        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	        SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+	        
+	        Date date = inputFormat.parse(inputDate);
+	        String outputDate = outputFormat.format(date);
+			
+			
+			note.setNote_restime(outputDate);
+			
 		}
 		noteDao.insertNote(note);
 		
@@ -679,6 +718,9 @@ public class NoteServiceImpl implements NoteService{
 		}
 		for(int noteReadNo : numberArray) {
 			NoteRead noteRead = noteDao.selectNoteReadByNoteReadNo(noteReadNo);
+			
+			
+			
 			if(noteRead.isNoteRead_isCanceled()) {
 				noCancel = "발송취소할 목록이 없습니다.";
 			} else {

@@ -19,6 +19,10 @@ public interface NoteDao {
 	public List<NoteAll> selectTrashNoteByEmpNo(Map<String, Object> map);
 	public List<NoteAll> selectDraftNoteByEmpNo(Map<String, Object> map);
 	
+	//예약 전송
+	public List<Note> selectNoteByNoteRestime(String currentDate);
+	public void updateNoteRestime(Note noteNo);
+	
 	//쪽지 상세에서 참조/비밀참조 인원불러오기
 	public List<NoteRead> selectNoteReadByNoteNo(int noteNo);
 	
