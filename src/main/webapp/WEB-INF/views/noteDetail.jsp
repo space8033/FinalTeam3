@@ -283,7 +283,25 @@
                                 height="38"
                                 width="38" />
                               <div class="flex-grow-1 ms-1">
-                                <h6 class="m-0">${name}</h6>
+                                <h6 class="m-0">
+                                <label for="receiverList"
+                                data-bs-toggle="tooltip"
+		                        data-bs-offset="0,4"
+		                        data-bs-placement="right"
+		                        data-bs-html="true"
+		                        >
+                                ${name} <i id="receiverList"
+                                	       class="mb-1 bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-5"
+				                           data-bs-toggle="collapse"
+				                           data-bs-target="#collapseExample"
+				                           aria-expanded="false"
+				                           aria-controls="collapseExample"
+				                           title="수신자 목록"
+				                           style="transform: rotate(90deg)"></i>
+				                </label>
+							    </h6> 
+									                        
+									                        
                                 <small class="text-muted">iAmAhoot@email.com</small>
                               </div>
                             </div>
@@ -326,28 +344,69 @@
                                   </a>
                                 </div>
                               </div>
+                              
+                             
                             </div>
+                             
+	                  
+                            
                           </div>
                           <div class="card-body pt-3">
-                            <p class="fw-medium py-2"><strong>제목 : ${note.note_title}</strong></p>
-                            <p>
-                            	 ${note.note_content}
-                            </p>
-                            <c:if test="${not empty mediaList}">
-	                            <hr />
-	                            <p class="mb-2 ">첨부 파일</p> 
-	                              <c:forEach var="media" items="${mediaList}" varStatus="a">
-			                              <div class="cursor-pointer">
-	        	                	       	
-	        	                	       	<c:if test="${media.media_type}">
-	        	                	       		<i class="bx bx-file-image"></i>
-	        	                	       	</c:if>
-	        	                	       		<i class="bx bx-file"></i>
-	            	        	          		<a class="align-middle ms-1" href ="noteFileDownload?mno=${media.media_no}">${media.media_name}</a>
-	            	        	          	
-	                		              </div>
-	                              </c:forEach>
-	                         </c:if>
+	                          <div class="collapse" id="collapseExample">
+	                          	<div class="d-flex">
+	                          		<div class="me-1" style="width:70px;">수신자 : </div>
+	                          		<div>
+		                          			<c:forEach var="list" items="${list}">
+		                          				<c:if test="${list.noteRead_type == '수신'}">
+		                          					${list.emp_name} (${list.emp_email}) 
+		                          				</c:if>
+		                          			</c:forEach>
+	                          		</div>
+	                          	</div>
+								<div class="d-flex">
+	                          	 	<div class="me-1" style="width:60px;"> 참조 : </div>
+	                          	 	<div>
+	                          	 		<c:forEach var="list" items="${list}">
+		                          				<c:if test="${list.noteRead_type == '참조'}">
+		                          					${list.emp_name} (${list.emp_email}) 
+		                          				</c:if>
+		                          	    </c:forEach>
+	                          	 	
+	                          	 	</div>
+	                          	</div>
+	                          	<div class="d-flex">
+	                          		<div class="me-1" style="width:80px;">비밀 참조 : </div>
+	                          		<div>
+	                          		<c:forEach var="list" items="${list}">
+		                          				<c:if test="${list.noteRead_type == '비밀참조'}">
+		                          					${list.emp_name} (${list.emp_email}) 
+		                          				</c:if>
+		                          	</c:forEach>	                          		
+		                          	</div>
+	                          	</div>
+	                          <hr />
+	                          </div>
+	                          <div>
+	                            <p class="fw-medium py-2"><strong>제목 : ${note.note_title}</strong></p>
+	                            <p>
+	                            	 ${note.note_content}
+	                            </p>
+	                            <c:if test="${not empty mediaList}">
+		                            <hr />
+		                            <p class="mb-2 ">첨부 파일</p> 
+		                              <c:forEach var="media" items="${mediaList}" varStatus="a">
+				                              <div class="cursor-pointer">
+		        	                	       	
+		        	                	       	<c:if test="${media.media_type}">
+		        	                	       		<i class="bx bx-file-image"></i>
+		        	                	       	</c:if>
+		        	                	       		<i class="bx bx-file"></i>
+		            	        	          		<a class="align-middle ms-1" href ="noteFileDownload?mno=${media.media_no}">${media.media_name}</a>
+		            	        	          	
+		                		              </div>
+		                              </c:forEach>
+		                         </c:if>
+		                       </div>
                           </div>
                         </div>
                         
@@ -458,5 +517,6 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/forms-pickers.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/forms-tagify.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/assets/js/ui-popover.js"></script>
   </body>
 </html>

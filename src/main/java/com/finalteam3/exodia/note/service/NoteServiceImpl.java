@@ -15,7 +15,6 @@ import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.media.dao.MediaDao;
 import com.finalteam3.exodia.media.dto.MediaDto;
-import com.finalteam3.exodia.media.service.MediaService;
 import com.finalteam3.exodia.note.dao.NoteDao;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 import com.finalteam3.exodia.note.dto.NoteAll;
@@ -23,6 +22,7 @@ import com.finalteam3.exodia.note.dto.request.Note;
 import com.finalteam3.exodia.note.dto.request.NoteRead;
 import com.finalteam3.exodia.note.dto.request.NoteRequest;
 import com.finalteam3.exodia.note.dto.request.ReplyRequest;
+import com.finalteam3.exodia.note.dto.response.NoteResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -80,6 +80,7 @@ public class NoteServiceImpl implements NoteService{
 		log.info(request.getNote_content());
 		note.setNote_content(request.getNote_content());
 		note.setNote_label(request.getNote_label());
+		note.setNote_draft("");
 		
 		
 		if(request.getNote_reserve_time() == null) {
@@ -91,6 +92,14 @@ public class NoteServiceImpl implements NoteService{
 		
 		int noteNo = note.getNote_no();
 		log.info(noteNo+"노트넘버 삽입됐낭");
+		
+		
+		NoteRead noteRead1 = new NoteRead();
+		noteRead1.setEmp_no_receiver(request.getNote_sender());
+		noteRead1.setNoteRead_type("임시저장");
+		noteRead1.setNote_no(noteNo);
+		noteDao.insertNoteRead(noteRead1);
+		
 		
 		//참조 수신자 분할/추가
 		List<String> receiverCC = request.getNote_receiver_cc();
@@ -115,7 +124,6 @@ public class NoteServiceImpl implements NoteService{
 					alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
 					alarm.setEmpinfo_no(empInfo_no);
 					alarmDao.insertAlarm(alarm);
-					
 					
 				}
 			}
@@ -334,6 +342,15 @@ public class NoteServiceImpl implements NoteService{
 		
 		return note;
 	}
+	
+	@Override
+	public Note getNoteSent(int noteNo) {
+		
+		Note note = noteDao.selectNoteByNoteNo(noteNo);
+		
+		
+		return note;
+	}
 
 	@Override
 	public void addReply(ReplyRequest request) throws Exception {
@@ -485,5 +502,154 @@ public class NoteServiceImpl implements NoteService{
 		
 		return mediaList;
 
+	}
+
+	@Override
+	public int countByUnreadNoteNo(int empNo) {
+		return noteDao.countByUnreadInbox(empNo);
+	}
+
+	@Override
+	public List<NoteResponse> getNoteReceiver(int noteNo, int empNo) {
+		List<NoteRead> noteReadList = noteDao.selectNoteReadByNoteNo(noteNo);
+		List<NoteResponse> noteResponseList = new ArrayList<>();
+		
+		for(NoteRead noteRead : noteReadList) {
+			NoteResponse noteResponse = new NoteResponse();
+			if("비밀참조".equals(noteRead.getNoteRead_type())) {
+				
+				
+				if(noteRead.getEmp_no_receiver() == empNo) {
+					EmployeeInfo empInfo = employeeDao.selectInfoByEmpNo(empNo);
+					noteResponse.setEmp_name(empInfo.getEmpinfo_name());
+					noteResponse.setEmp_email(empInfo.getEmpinfo_email());
+					noteResponse.setEmp_no_receiver(noteRead.getEmp_no_receiver());
+					noteResponse.setNoteRead_type(noteRead.getNoteRead_type());
+					noteResponseList.add(noteResponse);
+				}
+				
+			} else {
+			
+				int emp_No = noteRead.getEmp_no_receiver();
+				EmployeeInfo empInfo = employeeDao.selectInfoByEmpNo(emp_No);
+				noteResponse.setEmp_name(empInfo.getEmpinfo_name());
+				noteResponse.setEmp_email(empInfo.getEmpinfo_email());
+				noteResponse.setEmp_no_receiver(noteRead.getEmp_no_receiver());
+				noteResponse.setNoteRead_type(noteRead.getNoteRead_type());
+				noteResponseList.add(noteResponse);
+			}
+			
+		}
+		
+		
+		return noteResponseList;
+	}
+
+	@Override
+	public void addDraft(NoteRequest request) throws Exception {
+
+		Note note = new Note();
+		
+		
+		
+		note.setNote_sender(request.getNote_sender());
+		if(request.getNote_title() != null) {
+			note.setNote_title(request.getNote_title());
+		} else {
+			note.setNote_title("(제목 없음)");
+		}
+
+			
+		if(request.getNote_content() != null) {
+			note.setNote_content(request.getNote_content());
+		} else {
+			note.setNote_content("(내용 없음)");
+		}
+		note.setNote_draft("draft");
+		note.setNote_restime("");
+		note.setNote_label("");
+		
+		noteDao.insertNote(note);
+		
+		int noteNo = note.getNote_no();
+		log.info(noteNo+"노트넘버 삽입됐낭");
+		
+		//참조 수신자 분할/추가
+		List<String> receiverCC = request.getNote_receiver_cc();
+		if(request.getNote_receiver_cc() == null) {
+
+		} else {
+			for(String receiverCCNo : receiverCC) {
+				String[] parts = receiverCCNo.split(",");
+				for(String noCC : parts) {
+					NoteRead noteRead = new NoteRead();
+					int receiverNoCC = Integer.parseInt(noCC);
+					noteRead.setEmp_no_receiver(receiverNoCC);
+					noteRead.setNoteRead_type("참조");
+					noteRead.setNote_no(noteNo);
+					log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
+					noteDao.insertNoteRead(noteRead);
+					
+					
+				}
+			}
+		}
+		
+		//수신자 분할/추가
+		List<String> receiverList = request.getNote_receiver();
+		if(request.getNote_receiver() == null) {
+
+		} else {
+			for(String receiver : receiverList) {
+				String[] parts = receiver.split(",");
+				for(String no : parts) {
+					NoteRead noteRead = new NoteRead();
+					int receiverNo = Integer.parseInt(no);
+					noteRead.setEmp_no_receiver(receiverNo);
+					noteRead.setNoteRead_type("수신");
+					noteRead.setNote_no(noteNo);
+					log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
+					noteDao.insertNoteRead(noteRead);
+				
+				}
+			}
+		}
+		//비밀참조 분할/추가
+		List<String> receiverBCC = request.getNote_receiver_bcc();
+		
+		if(request.getNote_receiver_bcc() == null) {
+
+		} else {
+			for(String receiverBccName : receiverBCC) {
+				String[] parts = receiverBccName.split(",");
+				for(String nobcc : parts) {
+					NoteRead noteRead = new NoteRead();
+					int receiverBccNo = Integer.parseInt(nobcc);
+					noteRead.setEmp_no_receiver(receiverBccNo);
+					noteRead.setNoteRead_type("비밀참조");
+					noteRead.setNote_no(noteNo);
+					log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 bcc니");
+					noteDao.insertNoteRead(noteRead);
+					
+					
+				}
+			}
+		}
+		
+		MultipartFile[] uploadFiles = request.getFiles();
+		if(uploadFiles != null && uploadFiles.length > 0) {
+			for(MultipartFile noteFile : uploadFiles) {
+				if(!noteFile.isEmpty()) {
+					MediaDto noteMedia = new MediaDto();
+					noteMedia.setMedia_data(noteFile.getBytes());
+					noteMedia.setMedia_name(noteFile.getOriginalFilename());
+					noteMedia.setMedia_type(noteFile.getContentType());
+					noteMedia.setMedia_from("NOTE");
+					noteMedia.setFrom_no(noteNo);
+					mediaDao.insertMedia(noteMedia);
+				}
+			}
+		}
+		
 	}
 }

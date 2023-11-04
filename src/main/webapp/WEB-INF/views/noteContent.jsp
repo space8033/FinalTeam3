@@ -226,7 +226,7 @@
                               		<c:if test="${pager.totalRows <= 10}">
                               			${pager.totalRows} of ${pager.totalRows}
                               		</c:if>
-                              		<c:if test="${pager.pageNo == 1 && pager.totalRows >= 10}">
+                              		<c:if test="${pager.pageNo == 1 && pager.totalRows > 10}">
                               			1-10 of ${pager.totalRows}
                               		</c:if>
                              
@@ -246,7 +246,7 @@
 			                              </i>
 	                              		</a>
                                    </c:if>
-                                   <c:if test="${pager.pageNo == 1}">
+                                   <c:if test="${pager.pageNo <= 1}">
 			                              <i
 			                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
 			                              </i>
@@ -284,7 +284,6 @@
 					                          <c:if test ="${note.noteRead_starred != null}">
 					                          data-starred="true"
 					                          </c:if>
-					                      data-sent="true"
 					                      id="${note.noteRead_no}"
 			                              data-bs-toggle="sidebar"
 			                              data-target="#app-email-view-${note.noteRead_no}"
@@ -302,12 +301,28 @@
 			                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
 			                                  height="32"
 			                                  width="32" />
-			                                <div class="email-list-item-content ms-2 ms-sm-0 me-2"  onclick="javascript:showDetail(${note.noteRead_no});">
-			                                  <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
-			                                  <span class="email-list-item-subject d-xl-inline-block d-block">
-			                               	     ${note.note_title}</span
-			                                  >
-			                                </div>
+			                                
+			                                <c:if test ="${contentType eq '발신'}">
+				                                <div class="email-list-item-content ms-2 ms-sm-0 me-2"  onclick="javascript:showDetailSent(${note.note_no});">
+				                                  <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
+				                                  <span class="email-list-item-subject d-xl-inline-block d-block">
+				                               	     ${note.note_title}</span
+				                                  >
+				                                </div>
+			                                </c:if>
+			                                
+			                                <c:if test ="${contentType eq '수신'}">
+				                                <div class="email-list-item-content ms-2 ms-sm-0 me-2"  onclick="javascript:showDetail(${note.noteRead_no});">
+				                                  <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
+				                                  <span class="email-list-item-subject d-xl-inline-block d-block">
+				                               	     ${note.note_title}</span
+				                                  >
+				                                </div>
+			                                </c:if>
+			                                
+			                                
+			                                
+			                                
 			                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
 			                                  <c:if test="${note.media_isEmpty}">
 			                                  
@@ -371,13 +386,11 @@
 			                                      
 			                                      <!-- 발신 쪽지함일 경우 : 발송취소/읽음-->
 			                                      <c:if test ="${contentType eq '발신'}">
-			                                          <c:if test ="${note.noteRead_read != null}">
 			                                    	     <li class="list-inline-item"> 
-			                                    	        <a class="text-primary text-mute" data-bs-toggle="modal" data-bs-target="#shareProject">발송취소</a> 
+			                                    	        <a class="text-primary text-mute" data-bs-toggle="modal" data-bs-target="#shareProject" onclick="javascript:sentCancel(${note.note_no});">발송취소</a> 
 			                                    	       
 			                                    	        
 			                                    	     </li>
-			                                    	  </c:if>
 			                                      </c:if>
 			                                  </ul>
 			                                </div>
