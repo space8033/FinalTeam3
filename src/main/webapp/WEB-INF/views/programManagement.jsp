@@ -515,14 +515,7 @@
 					        </select>
 					      </div>
 					    </div>
-					    <div class="pt-4">
-					      <div class="row justify-content-end">
-					        <div class="col-sm-12 col-md-8 ps-4">
-					          <button type="submit" class="btn btn-primary me-sm-2 me-1 mb-2">수정</button>
-					          <button type="reset" class="btn btn-label-secondary mb-2 me-1">취소</button>
-					        </div>
-					      </div>
-					    </div>
+					    
 					  </form>
 					</div>
                	</div>
