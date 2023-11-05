@@ -129,9 +129,6 @@
 		   and e.emp_no = i.emp_no
 	</select>
 	
-	
-	
-	
 	<update id="updateStatus" parameterType="String">
 		update emp set emp_status = 'connected' where emp_id = #{emp_id}
 	</update>

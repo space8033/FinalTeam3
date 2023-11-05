@@ -54,7 +54,6 @@ public class TaskController {
 	@GetMapping("/getProgramDetail")
 	public String getProgramDetail(int task_no, Model model) {
 		ProgramModifyRequest programModify = taskService.getProgramDetail(task_no);
-		log.info("agag" + programModify.toString());
 		model.addAttribute("programModify", programModify);
 		
 		return "/programModifyAjax";

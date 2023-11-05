@@ -122,6 +122,8 @@ public class TaskServiceImpl implements TaskService{
 
 	@Override
 	public void updateProgram(ProgramModifyRequest request) {
+		int emp_no = request.getEmp_notes().get(0).getEmp_no();
+		
 		String task_startdate; 
 		String task_enddate; 
 
@@ -133,6 +135,7 @@ public class TaskServiceImpl implements TaskService{
 			task_enddate = request.getTask_date().split(" to ")[1];
 		}
 		
+		request.setEmp_no(emp_no);
 		request.setTask_startdate(task_startdate);
 		request.setTask_enddate(task_enddate);
 		
