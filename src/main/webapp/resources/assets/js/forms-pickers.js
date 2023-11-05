@@ -83,8 +83,8 @@
 
   // Disabled Date Range
   if (flatpickrDisabledRange) {
-    const fromDate = new Date(Date.now() - 3600 * 1000 * 48);
-    const toDate = new Date(Date.now() + 3600 * 1000 * 48);
+    const fromDate = new Date(Date.now() - 3600 * 1000 * 48 * 15);
+    const toDate = new Date(Date.now() - 3600 * 1000 * 48 * 14);
 
     flatpickrDisabledRange.flatpickr({
       dateFormat: 'Y-m-d',
@@ -418,15 +418,44 @@ $(function () {
   }
 })();
 
-function modifyProgram(task_no) {
+function modifyProgram() {
+	var task_no = $("#taskNoBox").val();
+	var emp_no = $("#empNoBox").val();
+	var task_name = $("#multicol-email").val();
+	var empinfo_name = $("#multicol-user").val();
+	var task_url = $("#multicol-password").val();
+	var task_importance = $("#task-priority").val();
+	var task_category = $("#multicol-country").val();
+	var task_detail = $("#detail-category").val();
+	var task_date = $("#flatpickr-range").val();
+	var task_realstart = $("#flatpickr-date").val();
+	var task_realend = $("#flatpickr-disabled-range").val();
+	var task_status = $("#task-progress").val();
+	
+	var data = {
+			task_no : task_no,
+			emp_no : emp_no,
+			task_name : task_name,
+			empinfo_name : empinfo_name,
+			task_url : task_url,
+			task_importance : task_importance,
+			task_category : task_category,
+			task_detail : task_detail,
+			task_date : task_date,
+			task_realstart : task_realstart,
+			task_realend : task_realend,
+			task_status : task_status
+			
+	}
+	console.log(JSON.stringify(data));
+	
 	$.ajax({
 		url: "/exodia/task/modifyProgram",
 		method: "post",
-		data:{
-			"task_no": task_no
-		},
-		success: function(programModifiy) {
-			console.log("Df");
+		contentType: 'application/json',
+		data: JSON.stringify(data),
+		success: function(data) {
+			location.reload();
 		},
 		error: function(error) {
 			console.log("아왜안떠왜왜왜");
@@ -441,7 +470,7 @@ function deleteProgram(task_no) {
 		data:{
 			"task_no": task_no
 		},
-		success: function(programModifiy) {
+		success: function(data) {
 			location.reload();
 		},
 		error: function(error) {

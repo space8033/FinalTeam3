@@ -29,8 +29,8 @@ public class TaskServiceImpl implements TaskService{
 		String date = request.getTask_date();
 		
 		request.setStartDate(makeStartDate(date));
-		request.setEndDate(makeEndDate(date));
-		
+		request.setEndDate(makeEndDate(date));			
+
 		int emp_no = request.getEmp_notes().get(0).getEmp_no();
 		request.setEmp_no(emp_no);
 		
@@ -122,6 +122,20 @@ public class TaskServiceImpl implements TaskService{
 
 	@Override
 	public void updateProgram(ProgramModifyRequest request) {
+		String task_startdate; 
+		String task_enddate; 
+
+		if(request.getTask_date().length() == 10) {
+			task_startdate = request.getTask_date();
+			task_enddate = request.getTask_date();
+		}else {
+			task_startdate = request.getTask_date().split(" to ")[0];
+			task_enddate = request.getTask_date().split(" to ")[1];
+		}
+		
+		request.setTask_startdate(task_startdate);
+		request.setTask_enddate(task_enddate);
+		
 		taskDao.updateProgram(request);
 	}
 

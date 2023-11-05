@@ -60,16 +60,16 @@ public class TaskController {
 		return "/programModifyAjax";
 	}
 	
-	@PostMapping("/modifyProgram")
+	@PostMapping(value = "/modifyProgram", produces = "application/json; charset=UTF-8")
 	public String modifyProgram(@RequestBody ProgramModifyRequest request) {
 		log.info(request.toString());
+		taskService.updateProgram(request);
 		
 		return "redirect:/task/programManagement";
 	}
 	
 	@PostMapping("/deleteProgram")
 	public String deleteProgram(int task_no) {
-		log.info("agaga");
 		taskService.deleteProgram(task_no);
 		
 		return "redirect:/task/programManagement";
