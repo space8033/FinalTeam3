@@ -19,12 +19,13 @@
 		<typeAlias alias="NoteAll" type="com.finalteam3.exodia.note.dto.NoteAll" />
 		<typeAlias alias="ProjectAddRequest" type="com.finalteam3.exodia.project.dto.request.ProjectAddRequest" />
 		<typeAlias alias="ProjectResponse" type="com.finalteam3.exodia.project.dto.response.ProjectResponse" />
-		<typeAlias alias="Notice" type="com.finalteam3.exodia.notice.dto.Notice" />
 		<typeAlias alias="Calendar" type="com.finalteam3.exodia.calendar.dto.request.CalendarRequest" />
 		<typeAlias alias="CalendarResponse" type="com.finalteam3.exodia.calendar.dto.response.CalendarResponse" />
 		<typeAlias alias="Media" type="com.finalteam3.exodia.media.dto.MediaDto" />
 		<typeAlias alias="AlarmRequest" type="com.finalteam3.exodia.alarm.dto.request.AlarmRequest" />
 		<typeAlias alias="ProgramRegisterRequest" type="com.finalteam3.exodia.task.dto.request.ProgramRegisterRequest" />
-
+		<typeAlias alias="Notice" type="com.finalteam3.exodia.notice.dto.Notice" />
+		<typeAlias alias="Inquiry" type="com.finalteam3.exodia.inquiry.dto.Inquiry" />
+		<typeAlias alias="Reply" type="com.finalteam3.exodia.inquiry.dto.Reply" />
 	</typeAliases>
 </configuration>

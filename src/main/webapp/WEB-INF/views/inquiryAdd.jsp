@@ -1,7 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <!DOCTYPE html>
 
 <html
@@ -10,14 +7,14 @@
   dir="ltr"
   data-theme="theme-default"
   data-assets-path="${pageContext.request.contextPath}/resources/assets/"
-  data-template="vertical-menu-template-no-customizer">
+  data-template="vertical-menu-template">
   <head>
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Product List - eCommerce | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>eCommerce Add Product - Apps | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content="" />
 
@@ -37,23 +34,28 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/fonts/flag-icons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/core.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/theme-default.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/typography.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/katex.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/editor.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/dropzone/dropzone.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.css" />
 
     <!-- Page CSS -->
 
     <!-- Helpers -->
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
+    <!--? Template customizer: To hide customizer set displayCustomizer value false in config.js.  -->
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/template-customizer.js"></script>
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
   </head>
@@ -118,7 +120,7 @@
               <span class="app-brand-text demo menu-text fw-bold ms-2">pms</span>
             </a>
 
-             <a href="${pageContext.request.contextPath}/main" class="layout-menu-toggle menu-link text-large ms-auto">
+            <a href="${pageContext.request.contextPath}/main" class="layout-menu-toggle menu-link text-large ms-auto">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
             </a>
           </div>
@@ -154,13 +156,13 @@
                 </li>
               </ul>
             </li>
-            <li class="menu-item active">
+            <li class="menu-item">
               <a href="${pageContext.request.contextPath}/noticeList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bell"></i>
                 <div class="text-truncate">공지사항</div>
               </a>
             </li>
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="${pageContext.request.contextPath}/inquiryList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-conversation"></i>
                 <div class="text-truncate">문의하기</div>
@@ -203,18 +205,18 @@
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
+            <%-- <li class="menu-item">
+              <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div class="text-truncate">사용자 등록</div>
+              </a>
+            </li> --%>
             <li class="menu-item">
               <a href="${pageContext.request.contextPath}/employee/jjoin" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
               </a>
             </li>
-<%--             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user"></i>
-                <div class="text-truncate">사용자 등록</div>
-              </a>
-            </li> --%>
             
             <li class="menu-item">
               <a href="${pageContext.request.contextPath}/employee/userManagement" class="menu-link">
@@ -230,40 +232,159 @@
         <div class="layout-page">
           <!-- Navbar -->
 
-           <%@ include file="/WEB-INF/views/header.jsp" %>
+          <%@ include file="/WEB-INF/views/header.jsp" %>
           <!-- / Navbar -->
 
           <!-- Content wrapper -->
           <div class="content-wrapper">
-            <!-- Content -->
-
+          	            <!-- Content -->
             <div class="container-xxl flex-grow-1 container-p-y">
-
-              <!-- Product List Table -->
-              <div class="card2">
-                <div class="card-header">
-                  <h5 class="card-title"></h5>
-                  <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
-                    <div class="col-md-4 product_category" style = "margin-left: 20px"><h3><strong>공지사항🚨</strong></h3></div>
+              <!-- <h4 class="py-3 mb-4"><span class="text-muted fw-light">eCommerce /</span><span> Add Product</span></h4> -->
+              <div class="app-ecommerce">
+                <!-- Add Product -->
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                  <div class="d-flex flex-column justify-content-center">
+                    <h4 class="mb-1 mt-3">
+                      <strong>문의 작성하기📝</strong>
+                    </h4>
+                    <!-- <p class="text-muted">Orders placed across your store</p> -->
+                  </div>
+                  <div class="d-flex align-content-center flex-wrap gap-3">
+                    <!-- <button class="btn btn-label-secondary">Discard</button><button class="btn btn-label-primary">Save draft</button> -->
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal"> 취소 </button>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">나가시겠습니까?</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body"> 내용이 저장되지 않았습니다. 나가시겠습니까? </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+                            <button type="button" class="btn btn-primary" onclick="location.href='noticeList'">나가기</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button type="submit" form="noticeAdd" id="noticeSubmit" class="btn btn-primary">등록</button>
+                    <!-- 모달 -->
+                    <div class="modal" id="modal-no-content">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">내용을 입력하세요</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body"> 제목이나 내용을 입력해주세요. </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <script>
+                      // 등록 버튼 클릭 이벤트
+                      document.getElementById('noticeSubmit').addEventListener('click', function() {
+                        var title = document.getElementById('ecommerce-product-name').value;
+                        var content = document.getElementById('noticeContent').value;
+                        // 제목이나 내용이 없음
+                        if (!title || !content) {
+                          $('#modal-no-content').modal('show');
+                        } else {
+                          //폼 제출
+                          document.getElementById('inquiryAdd').submit();
+                        }
+                      });
+                    </script>
                   </div>
                 </div>
-                <div class="card-datatable table-responsive">
-                  <table id="noticeTable" class="datatables-products table border-top">
-                    <thead>
-                      <tr>
-                        <th></th>
-                        <th>번호</th>
-                        <th>제목</th>
-                        <th>글쓴이</th>
-                        <th>날짜</th>
-                      </tr>
-                    </thead>
+                <form action="inquiryAdd" id="inquiryAdd" method="post" enctype="multipart/form-data">
+                  <div class="row">
+                    <!-- First column-->
+                    <div class="col-12 col-lg-12">
+                      <!-- Product Information -->
+                      <div class="card mb-4">
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col-8 mb-3">
+                              <label class="form-label" for="ecommerce-product-name">제목</label>
+                              <input type="text" class="form-control" id="ecommerce-product-name" placeholder="제목을 입력해 주세요" name="noticeTitle" aria-label="Notice title" />
+                            </div>
+                            <div class="col-4 mb-3">
+                              <label class="form-label" for="form-repeater-1-1">팀</label>
+                              <select id="form-repeater-1-1" class="select2 form-select" data-placeholder="소속 팀">
+                                <option value="">소속 팀</option>
+                                <option value="size">개발1팀</option>
+                                <option value="color">개발2팀</option>
+                                <option value="weight">유지보수1팀</option>
+                                <option value="smell">유지보수2팀</option>
+                              </select>
+                            </div>
+                          </div>
+                          <!-- Description -->
+                          <div>
+                            <label class="form-label">내용</label>
+                            <div class="form-control p-0 pt-1">
+                              <div class="comment-toolbar border-0 border-bottom">
+                                <div class="d-flex justify-content-start">
+                                  <span class="ql-formats me-0">
+                                    <button class="ql-bold"></button>
+                                    <button class="ql-italic"></button>
+                                    <button class="ql-underline"></button>
+                                    <button class="ql-list" value="ordered"></button>
+                                    <button class="ql-list" value="bullet"></button>
+                                    <button class="ql-link"></button>
+                                    <button class="ql-image"></button>
+                                  </span>
+                                </div>
+                              </div>
+                              <div class="comment-editor border-0 pb-4" id="ecommerce-category-description"></div>
+                              <textarea id="noticeContent" name="noticeContent" style="display:none"></textarea>
+                              <div class="input-group">
+                                <input type="file" name="files" class="form-control" id="attach-file" multiple />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            <!-- / Content -->
+            <!-- Footer -->
+            <footer class="content-footer footer bg-footer-theme">
+              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div class="mb-2 mb-md-0">
+                  Â©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  , made with â¤ï¸ by
+                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">ThemeSelection</a>
+                </div>
+                <div class="d-none d-lg-inline-block">
+                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
 
-                  </table>
+                  <a
+                    href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
+                    target="_blank"
+                    class="footer-link me-4"
+                    >Documentation</a
+                  >
+
+                  <a
+                    href="https://themeselection.com/support/"
+                    target="_blank"
+                    class="footer-link d-none d-sm-inline-block"
+                    >Support</a>
                 </div>
               </div>
-            </div>
-            <!-- / Content -->
+            </footer>
+            <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
           </div>
@@ -295,14 +416,19 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/katex.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/quill.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/dropzone/dropzone.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.js"></script>
 
     <!-- Main JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/noticeList.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/inquiryAdd.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
   </body>
 </html>

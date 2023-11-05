@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html
@@ -163,7 +164,7 @@
               </a>
             </li>
             <li class="menu-item active">
-              <a href="${pageContext.request.contextPath}/qnaList" class="menu-link">
+              <a href="${pageContext.request.contextPath}/inquiryList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-conversation"></i>
                 <div class="text-truncate">문의하기</div>
               </a>
@@ -211,7 +212,7 @@
                 <div class="text-truncate">사용자 등록</div>
               </a>
             </li>
-<%--             <li class="menu-item">
+            <%-- <li class="menu-item">
               <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
@@ -232,7 +233,7 @@
         <div class="layout-page">
           <!-- Navbar -->
 
-           <%@ include file="/WEB-INF/views/header.jsp" %>
+         <%@ include file="/WEB-INF/views/header.jsp" %>
           <!-- / Navbar -->
 
           <!-- Content wrapper -->
@@ -246,13 +247,12 @@
                 <!-- Add Product -->
                 <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
                   <div class="d-flex flex-column justify-content-center">
-                    <h4 class="mb-1 mt-3"><strong>문의사항 내용🍣</strong></h4>
+                    <h4 class="mb-1 mt-3"><strong>문의사항 내용🎃🍠</strong></h4>
                     <!-- <p class="text-muted">Orders placed across your store</p> -->
                   </div>
                   <div class="d-flex align-content-center flex-wrap gap-3">
                     <!-- <button class="btn btn-label-secondary">Discard</button>
                     <button class="btn btn-label-primary">Save draft</button> -->
-                    <button type="submit" class="btn btn-primary">등록</button>
                   </div>
                 </div>
 
@@ -270,108 +270,151 @@
 									<div>
 										<div>
 											<p>
-												<span>번호:</span> 
-												<span>${board.bno}</span>
+												<span style="font-size: 12px;">글 번호:</span> 
+												<span style="font-size: 12px;">${notice.notice_no}</span>
 											</p>
 											
 											<p>
-												<span>제목:</span> 
-												<span>${board.btitle}</span>
+												<span style="font-size: 18px;"><strong>제목:</strong></span> 
+												<span style="font-size: 18px;"><strong>${notice.notice_title}</strong></span>
 											</p>
 											
 											<p>
-												<span>글쓴이:</span> 
-												<span>${board.mid}</span>
+												<span style="font-size: 12px;">글쓴이:</span> 
+												<span style="font-size: 12px;">${notice.empinfo_name}</span>
 											<p>
 											
 											<p>
-												<span>날짜:</span> 
-												<span><fmt:formatDate value="${board.bdate}" pattern="yyyy-MM-dd HH.mm.ss"/></span> <br/>
+												<span style="font-size: 12px;">날짜:</span> 
+												<span style="font-size: 12px;">${notice.notice_createdat}</span> <br/>
 											</p>
-											
-											<c:if test="${board.battachoname !=null}">
-												<p>
-													<%-- <span>첨부:</span> 
-													<span>
-														${board.battachoname}
-														
-														<!-- 첨부파일이 파일 시스템에 저장되어 있는 경우 -->
-														<c:if test="${board.battachoname != null}">
-															<a href="filedownload1?bno=${board.bno}"
-															 class="btn btn-info btn-sm ml-2">다운로드</a>
-															<img src="filedownload1?bno=${board.bno}" height="100"/>
-														</c:if>
-														
-														<!-- 첨부파일이 DB에 저장되어 있는 경우 --> 
-														<c:if test="${board.battachdata != null}">
-															<a href="filedownload2?bno=${board.bno}"
-															 class="btn btn-info btn-sm ml-2">다운로드</a>
-															 <!-- 
-															  src의 속성값은 완전한 응답 HTTP가 되어야 함 
-															  (jpg,png 나 filedownload1?bno=${board.bno} 요청으로 완전한 http를 받는다)
-															  
-															   1) 서버의 정적을 요청해서 응답을 받는 경우, 예) photo1.jpg
-															   2) 요청경로를 이용해서 컨트롤러에서 응답을 생성하는 경우, 예) filedownload1?bno=${board.bno}
-															   
-															   데이터를 직접 주면 안됨! 만약 데이터를 직접 넣어야할 경우 아래와 같음
-															  src="data:MIME;base64, base64로 인코딩된 데이터"
-															 -->
-															<img src="data:${board.battachtype};base64, ${base64Img}" height="100"/>
-														</c:if>
-														 
-													</span> --%>
-												</p>
-											</c:if>
-										</div>
-										
-										<%-- <div>
-											<span class="title">내용:</span> <br/>
-											<textarea style="width:100%" readonly>${board.bcontent}</textarea>
-										</div> --%>
-										<div>
-				                          <label class="form-label"><strong>내용</strong></label>
-				                          <div class="form-control p-0 pt-1">
-				                            <div class="comment-toolbar border-0 border-bottom">
-				                              <div class="d-flex justify-content-start">
-				                              </div>
-				                            </div>
-				                          </div>
-				                        </div>
-										
-										<a class="btn btn-primary btn-sm mt-2" href="noticeList">목록</a>
-										<a class="btn btn-primary btn-sm mt-2" href="updateBoard?bno=${board.bno}">수정</a>
-										<a class="btn btn-primary btn-sm mt-2" href="deleteBoard?bno=${board.bno}">삭제</a>
-										
+										</div>	
+										<div class="card email-card-last mx-sm-4 mx-3 mt-4 border">																	
+											<div class="card-body pt-3">
+					                            <p>
+					                            	 ${notice.notice_content}
+					                            </p>
+					                            <span>
+					                            	<c:if test="${not empty mediaList}">
+							                            <hr />
+							                            <p class="mb-2 ">첨부 파일</p> 
+							                              <c:forEach var="media" items="${mediaList}" varStatus="a">
+									                              <div class="cursor-pointer"> 	
+							        	                	       	<c:if test="${media.media_type}">
+							        	                	       		<i class="bx bx-file-image"></i>
+							        	                	       	</c:if>
+							        	                	       		<i class="bx bx-file"></i>
+							            	        	          		<a class="align-middle ms-1" href ="inquiryFileDownload?mno=${media.media_no}">${media.media_name}</a> 	
+							                		              </div>
+							                              </c:forEach>
+							                         </c:if>
+					                            </span>
+					                          </div>
+				                          </div>										
+										<a class="btn btn-primary btn-sm mt-2" href="inquiryList">목록</a>
+										<a class="btn btn-primary btn-sm mt-2" href="inquiryUpdate?notice_no=${notice.notice_no}">수정</a>
+										<a class="btn btn-primary btn-sm mt-2"data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">삭제</a>									
+										<!-- Modal -->
+										<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+										  <div class="modal-dialog">
+										    <div class="modal-content">
+										      <div class="modal-header">
+										        <h5 class="modal-title" id="exampleModalLabel">삭제하시겠습니까?</h5>
+										        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										      </div>
+										      <div class="modal-body">
+												게시물이 삭제됩니다.
+										      </div>
+										      <div class="modal-footer">
+										      	<textarea id="noticeNo" style="display: none">${notice.notice_no}</textarea>
+										        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+										        <button type="button" class="btn btn-primary" id="deleteButton">삭제</button> 
+										      </div>
+										    </div>
+										  </div>
+										</div>	
+																	
 										<!-- 댓글 -->
-										<hr />
-	
-										<ul>
-										    <li>
-										    	<div>
-										    		<p>첫번째 작성자</p>
-										    		<p>첫번째 댓글</p>
-										    	</div>
-										    </li>
-										    <li>
-										    	<div>
-										    		<p>두번째 작성자</p>
-										    		<p>두번째 댓글</p>
-										    	</div>
-										    </li>
-										    
-										</ul>
-										
-										<div>
-										    <p>
-										        <span class="title">댓글</span> <br/>
-												<textarea rows="4" style="width:100%"></textarea>
-										    </p>
-										    <p>
-										        <a class="btn btn-primary btn-sm mt-2" onclick="saveComment()" style="color: white;">댓글 작성</a>
-										    </p>
-										</div>
+										  <hr />
+										  <p>
+									         <span class="title"><strong>댓글</strong></span> <br/>
+									     </p>  
+									     <c:forEach var="reply" items="${replyList}" varStatus="a">
+										  <div class="card email-card-last mx-sm-4 mx-3 mt-4 border" id="reply${reply.reply_no}">
+										    <div class="card-header d-flex justify-content-between align-items-center flex-wrap border-bottom">
+											  <div class="d-flex align-items-center mb-sm-0 mb-3">
+											    <img
+											      src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
+												  alt="user-avatar"
+												  class="flex-shrink-0 rounded-circle me-2"
+												  height="38"
+												  width="38" />
+												<div class="flex-grow-1 ms-1">
+												  <h6 class="m-0" id="replyWriter" name="replyWriter">${loginResponse.empInfo_name}</h6>
+												  <small class="text-muted" id="replyWriterEmail" name="replyWriterEmail">${reply.empinfo_email}</small>
+												</div>
+											  </div>
+												<div class="d-flex align-items-center">
+												  <small class="mb-0 me-3 text-muted" id="replyCreatedat" name="replyCreatedat">${reply.reply_createdat}</small>											    
+												<div class="dropdown me-3">
+											      <button
+											        class="btn p-0"
+											        type="button"
+											        id="dropdownEmailTwo"
+											        data-bs-toggle="dropdown"
+											        aria-haspopup="true"
+											        aria-expanded="false">
+											        <i class="bx bx-dots-vertical-rounded bx-sm"></i>
+											      </button>
+											      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownEmailTwo">
+					                                  <a class="dropdown-item" href="javascript:void(0)">
+					                                    <span class="align-middle">쪽지하기</span>
+					                                  </a>   
+					                                  <a class="dropdown-item" href="#" onclick="replyDelete(${reply.reply_no})">
+														    <span class="align-middle">삭제</span>
+														</a>                         
+				                                </div>
+											    </div>
+											    </div>
+											</div>
+					                          <div class="card-body pt-3">
+					                            <p>
+					                            	${reply.reply_content}
+					                            </p>
+					                          </div>
+				                          </div>
+			                             </c:forEach>
+ 
+									     	<form action="#" id="replyDetail" enctype="multipart/form-data">
+							                        <div class="card email-card-last mx-sm-4 mx-3 mt-4 border">
+														<div class="card-body pt-3" style="padding-bottom:0px;">											
+									                        <div style="padding-top:10px;"><strong id="replyName">${loginResponse.empInfo_name}</strong></div>
+									                        <div style="padding-top:10px;">
+									                        	<input type="hidden" name="noticeNo" value="${inquiry.notice_no}"/>
+										                        <textarea id="replyContent" name="replyContent" rows="4" style="width:100%; border: none; height: 40px; outline: none;" placeholder="댓글을 작성해주세요"></textarea>
+									                        </div>
+															<div style="text-align: right;">
+															        <button type="button" form="replyAdd" onclick="" id="replyAdd" class="btn btn-primary btn-sm mt-2" style="margin-bottom:10px;">댓글 작성</button>
+															        <!-- 모달 -->
+												                    <div class="modal" id="modal-no-content">
+												                      <div class="modal-dialog">
+												                        <div class="modal-content">
+												                          <div class="modal-header">
+												                            <h5 class="modal-title">댓글을 입력하세요</h5>
+												                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												                          </div>
+												                          <div class="modal-body text-start">내용을 작성해주세요.</div>
+												                          <div class="modal-footer">
+												                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+												                          </div>
+												                        </div>
+												                      </div>
+												                    </div>
+															</div>
+														</div>
+							                        </div>																				     	
+									     	</form>
 									</div>
-									
 								</div>
 							</div>
                       </div>
@@ -380,6 +423,10 @@
               </div>
             </div>
             <!-- / Content -->
+
+            <!-- Footer -->
+
+            <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
           </div>
@@ -423,7 +470,7 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/qnaDetail.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/inquiryDetail.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
   </body>
 </html>

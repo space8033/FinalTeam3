@@ -135,7 +135,7 @@ public class Main {
 		return "projectList";
 	}
 	
-	@RequestMapping("/qnaList")
+	/*@RequestMapping("/qnaList")
 	public String qnaList(Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
@@ -185,7 +185,7 @@ public class Main {
 		model.addAttribute("empInfo_name", emp_name);
 		
 		return "noticeDetail";
-	}
+	}*/
 	
 	@RequestMapping("/main")
 	public String main(Model model, Authentication authentication) {

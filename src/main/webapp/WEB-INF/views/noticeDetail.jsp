@@ -164,7 +164,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/qnaList" class="menu-link">
+              <a href="${pageContext.request.contextPath}/inquiryList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-conversation"></i>
                 <div class="text-truncate">문의하기</div>
               </a>
@@ -300,8 +300,7 @@
 							                            <hr />
 							                            <p class="mb-2 ">첨부 파일</p> 
 							                              <c:forEach var="media" items="${mediaList}" varStatus="a">
-									                              <div class="cursor-pointer">
-							        	                	       	
+									                              <div class="cursor-pointer"> 	
 							        	                	       	<c:if test="${media.media_type}">
 							        	                	       		<i class="bx bx-file-image"></i>
 							        	                	       	</c:if>
@@ -345,6 +344,11 @@
 										    </div>
 										  </div>
 										</div>
+										
+										
+										
+										
+										
 									</div>
 								</div>
 							</div>
