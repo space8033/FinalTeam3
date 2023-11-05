@@ -42,6 +42,7 @@ public interface NoteService {
 	public void updateRead(int noteNo);
 	public void updateStarred(int noteNo, String noteStarred);
 	public void checkTrash(String checkedIdsString);
+	public void checkTrashSent(String checkedIdsString);
 	
 	//발송 취소
 	public String noteSentCancel(String checkedIdsString);

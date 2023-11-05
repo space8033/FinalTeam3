@@ -276,27 +276,27 @@
                       <div class="email-filters py-2">
                         <!-- Email Filters: Folder -->
                         <ul class="email-filter-folders list-unstyled pb-1">
-                          <li class="active d-flex justify-content-between" data-target="inbox">
+                          <li class="active d-flex justify-content-between" data-target="inbox" id="inboxTab">
                             <a href="javascript:void(0);" id="inboxNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-envelope"></i>
                               <span class="align-middle ms-2">수신 쪽지함</span>
                             </a>
                             <div class="badge bg-label-primary rounded-pill">${unReadCount}</div>
                           </li>
-                          <li class="d-flex justify-content-between" data-target="sent">
+                          <li class="d-flex justify-content-between" data-target="sent" id="sentTab">
                             <a href="javascript:void(0);" id="sentNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-send"></i>
                               <span class="align-middle ms-2">발신 쪽지함</span>
                             </a>
                           </li>
-                          <li class="d-flex justify-content-between" data-target="draft">
+                          <li class="d-flex justify-content-between" data-target="draft" id="draftTab">
                             <a href="javascript:void(0);" id="draftNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-edit"></i>
                               <span class="align-middle ms-2">임시 저장함</span>
                             </a>
                             <div class="badge bg-label-success rounded-pill">${draftCount}</div>
                           </li>
-                          <li class="d-flex justify-content-between" data-target="starred">
+                          <li class="d-flex justify-content-between" data-target="starred" id="starredTab">
                             <a href="javascript:void(0);" id="starredNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-star"></i>
                               <span class="align-middle ms-2">중요 쪽지함</span>
@@ -304,7 +304,7 @@
                               <div class="badge bg-label-warning rounded-pill">${starredCount}</div>
                           </li>
                           
-                          <li class="d-flex justify-content-between align-items-center" data-target="trash">
+                          <li class="d-flex justify-content-between align-items-center" data-target="trash" id="trashTab">
                             <a href="javascript:void(0);" id="trashNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-trash"></i>
                               <span class="align-middle ms-2">휴지통</span>
@@ -954,14 +954,20 @@
                           <hr class="mx-n4 mt-0 mb-2" />
 		                           <!-- 보내기 예약 -->
 		                           
-		                        <div class="send-reserv col-md-6 col-12 mb-4 d-none">
-		                          <label for="flatpickr-datetime" class="form-label">보내기 예약</label>
-		                          <input
-		                            type="text"
-		                            class="form-control"
-		                            name="note_reserve_time"
-		                            placeholder="YYYY-MM-DD HH:MM"
-		                            id="flatpickr-datetime" />
+		                        <div class="d-flex col-md-8 col-12 mb-4 d-none" id="send-reserv">
+		                         	<div class="col-md-6"> 
+			                         	<label for="flatpickr-datetime" class="form-label">보내기 예약</label>
+			                          <input
+			                            type="text"
+			                            class="form-control"
+			                            name=""
+			                            placeholder="YYYY-MM-DD HH:MM"
+			                            id="flatpickr-datetime" />
+			                           
+		                           	</div>
+		                           	<div class="col-md-2 mt-4 ms-2 pt-2 mb-2 align-items-center">
+		                           		<button type="button" class="btn btn-label-secondary btn-sm" onclick="javascript:hideReserv();">X</button>
+		                           	</div>
 		                        </div>
 		                        <!-- /Datetime Picker-->
 		                        
@@ -981,7 +987,7 @@
                                   <span class="visually-hidden">Toggle Dropdown</span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                  <li><a class="send-toggle-reserv dropdown-item" href="javascript:void(0);">예약 전송</a></li>
+                                  <li><a class="dropdown-item" href="javascript:showReserv();">예약 전송</a></li>
                                   <li><a class="dropdown-item" href="javascript:showdraft();">임시 저장</a></li>
                                 </ul>
                               </div>

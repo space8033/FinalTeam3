@@ -58,6 +58,7 @@
 			          from note n
 			         where note_sender = #{empNo}
 			           and note_draft IS NULL
+			           and note_deletedAt IS NULL
 			      order by note_createdAt desc
 			    )
 			    where rownum <= #{endRowNo}
@@ -115,18 +116,17 @@
 	<!-- 임시저장 쪽지 목록 -->
 	<select id="selectDraftNoteByEmpNo" resultType="NoteAll" parameterType="Map">
 		<![CDATA[
-	       select rnum, note_no, note_title, note_content, note_draft, note_sender, noteRead_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			 select rnum, note_no, note_title, note_content, note_sender, note_createdAt, note_label, note_restime, note_draft
 			 from (
-			    select rownum as rnum, note_no, note_title, note_content, note_draft, note_sender, noteRead_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
+			    select rownum as rnum, note_no, note_title, note_content, note_sender, note_createdAt, note_label, note_restime, note_draft
 			    from(
-			        select n.note_no, note_title, note_content, note_draft, note_sender, noteRead_isCanceled, note_createdAt, note_label, noteRead_no, emp_no_receiver, noteRead_read, noteRead_type, noteRead_starred
-			          from note n, noteRead nr
+			        select n.note_no, note_title, note_content, note_sender, note_createdAt, note_label, note_restime, note_draft
+			          from note n
 			         where note_sender = #{empNo}
 			           and note_draft IS NOT NULL
-			           and n.note_no = nr.note_no
-			           and noteRead_deletedAt IS NULL
-			           and noteRead_realDeletedAt IS NULL
+			           and note_deletedAt IS NULL
 			      order by note_createdAt desc
+			      
 			    )
 			    where rownum <= #{endRowNo}
 			 )
@@ -168,18 +168,17 @@
 		select count(*)
   		  from note n
   	     where note_sender = #{note_sender} 
-  	       and note_draft IS NULL 
+  	       and note_draft IS NULL
+  	       and note_deletedAt IS NULL
 	</select>
 	
 	<!-- 임시저장 쪽지 갯수 가져오기 -->
 	<select id="countByDraftEmpno" parameterType="int" resultType="int">
 		select count(*)
-  		  from note n, noteRead nr
+  		  from note n
   		 where note_sender = #{note_sender} 
   		   and note_draft IS NOT NULL 
-  		   and noteRead_deletedAt IS NULL 
-  		   and n.note_no = nr.note_no 
-  		   and noteRead_realDeletedAt IS NULL 
+  		   and note_deletedAt IS NULL
 	</select>
 
 	<!-- 중요 쪽지 갯수 가져오기 -->
@@ -239,6 +238,13 @@
   		 where noteRead_no = #{noteRead_no}
 	</update>
 	
+	<!-- 쪽지 번호로 note 쪽지 삭제(발신) 업데이트 작성자: 김시온 -->
+	<update id="trashNoteSent" parameterType="int">
+		update note
+		   set note_deletedAt=to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
+  		 where note_no = #{note_no}
+	</update>
+	
 	<!-- 쪽지 번호로 noteRead 휴지통 비우기 업데이트 작성자: 김시온 -->
 	<update id="deleteTrashNote" parameterType="int">
 		update noteRead
@@ -262,7 +268,7 @@
 	
 	<!-- noteRead 번호로 noteRead 얻어오기 작성자: 김시온 -->
 	<select id="selectNoteReadByNoteReadNo" parameterType="int" resultType="noteRead">
-		select emp_no_receiver, noteRead_starred, noteRead_isCanceled
+		select emp_no_receiver, noteRead_starred, noteRead_isCanceled, note_no
   		  from noteRead
   	 	 where noteRead_no = #{noteRead_no}
 	</select>

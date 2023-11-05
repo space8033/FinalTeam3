@@ -12,7 +12,9 @@ public class NoteAll {
 	private boolean noteRead_isCanceled;
 	private String note_createdAt;
 	private String noteRead_deletedAt;
+	private String note_deletedAt;
 	private String noteRead_realDeletedAt;
+	private String note_restime;
 	private String note_label;
 	private int noteRead_no;
 	private int emp_no_receiver;
