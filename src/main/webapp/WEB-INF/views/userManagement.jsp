@@ -276,7 +276,7 @@
 					                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
 					                            </li>
 			                          		</c:if>
-				                            <c:if test="${memberStatus.count == 4}">
+				                            <c:if test="${memberStatus.last}">
 				                               <li class="avatar avatar-xs col-md-3 col-sm-6">
 						                          <span
 						                            class="avatar-initial rounded-circle pull-up bg-secondary"

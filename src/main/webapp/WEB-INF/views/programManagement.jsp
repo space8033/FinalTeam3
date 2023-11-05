@@ -515,14 +515,7 @@
 					        </select>
 					      </div>
 					    </div>
-					    <div class="pt-4">
-					      <div class="row justify-content-end">
-					        <div class="col-sm-12 col-md-8 ps-4">
-					          <button type="submit" class="btn btn-primary me-sm-2 me-1 mb-2">수정</button>
-					          <button type="reset" class="btn btn-label-secondary mb-2 me-1">취소</button>
-					        </div>
-					      </div>
-					    </div>
+					    
 					  </form>
 					</div>
                	</div>
@@ -713,7 +706,7 @@
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/pickr/pickr.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
-	    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bloodhound/bloodhound.js"></script>
 	
 	<!-- Main JS -->
