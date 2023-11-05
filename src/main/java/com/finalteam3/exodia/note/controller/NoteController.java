@@ -385,8 +385,10 @@ public class NoteController {
 		model.addAttribute("note", note);
 		EmployeeInfo sender = employeeService.getEmpInfo(note.getNote_sender());
 		String name = sender.getEmpinfo_name();
+		String email = sender.getEmpinfo_email();
 				
 		model.addAttribute("name", name);
+		model.addAttribute("email", email);
 		
 		List<MediaDto> mediaList = noteService.getMediaList(note.getNote_no());
 		

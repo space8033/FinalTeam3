@@ -276,27 +276,27 @@
                       <div class="email-filters py-2">
                         <!-- Email Filters: Folder -->
                         <ul class="email-filter-folders list-unstyled pb-1">
-                          <li class="active d-flex justify-content-between" data-target="inbox">
+                          <li class="active d-flex justify-content-between" data-target="inbox" id="inboxTab">
                             <a href="javascript:void(0);" id="inboxNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-envelope"></i>
                               <span class="align-middle ms-2">수신 쪽지함</span>
                             </a>
                             <div class="badge bg-label-primary rounded-pill">${unReadCount}</div>
                           </li>
-                          <li class="d-flex justify-content-between" data-target="sent">
+                          <li class="d-flex justify-content-between" data-target="sent" id="sentTab">
                             <a href="javascript:void(0);" id="sentNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-send"></i>
                               <span class="align-middle ms-2">발신 쪽지함</span>
                             </a>
                           </li>
-                          <li class="d-flex justify-content-between" data-target="draft">
+                          <li class="d-flex justify-content-between" data-target="draft" id="draftTab">
                             <a href="javascript:void(0);" id="draftNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-edit"></i>
                               <span class="align-middle ms-2">임시 저장함</span>
                             </a>
                             <div class="badge bg-label-success rounded-pill">${draftCount}</div>
                           </li>
-                          <li class="d-flex justify-content-between" data-target="starred">
+                          <li class="d-flex justify-content-between" data-target="starred" id="starredTab">
                             <a href="javascript:void(0);" id="starredNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-star"></i>
                               <span class="align-middle ms-2">중요 쪽지함</span>
@@ -304,7 +304,7 @@
                               <div class="badge bg-label-warning rounded-pill">${starredCount}</div>
                           </li>
                           
-                          <li class="d-flex justify-content-between align-items-center" data-target="trash">
+                          <li class="d-flex justify-content-between align-items-center" data-target="trash" id="trashTab">
                             <a href="javascript:void(0);" id="trashNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-trash"></i>
                               <span class="align-middle ms-2">휴지통</span>

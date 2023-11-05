@@ -406,6 +406,7 @@ public class NoteServiceImpl implements NoteService{
 		} else {
 			note.setNote_restime(request.getNote_reserve_time());
 		}
+		note.setNote_draft("");
 		noteDao.insertNote(note);
 		
 		int noteNo = note.getNote_no();
@@ -641,6 +642,12 @@ public class NoteServiceImpl implements NoteService{
 		note.setNote_draft("draft");
 		note.setNote_restime("");
 		note.setNote_label("");
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+        String formattedDate = sdf.format(new Date());
+
+		
+		note.setNote_createdAt(formattedDate);
+		
 		
 		noteDao.insertNote(note);
 		

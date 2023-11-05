@@ -99,7 +99,7 @@
                           </div>
                           <!-- Email View : Action  bar-->
                           <div class="d-flex">
-                            <i class="bx bx-printer d-sm-block d-none fs-4"></i>
+                           <!--  <i class="bx bx-printer d-sm-block d-none fs-4"></i>
                             <div class="dropdown ms-3">
                               <button
                                 class="btn p-0"
@@ -136,7 +136,7 @@
                                   <span class="align-middle">Print</span>
                                 </a>
                               </div>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                         <hr class="app-email-view-hr mx-n3 mb-2" />
@@ -246,10 +246,10 @@
                                     <i class="bx bx-share me-1"></i>
                                     <span class="align-middle">답장</span>
                                   </a>
-                                  <a class="dropdown-item" href="javascript:void(0)">
+                                  <!-- <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="bx bx-share scaleX-n1 scaleX-n1-rtl me-1"></i>
                                     <span class="align-middle">전달</span>
-                                  </a>
+                                  </a> -->
                                   <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="bx bx-info-circle me-1"></i>
                                     <span class="align-middle">팝업 창 띄우기</span>
@@ -302,7 +302,7 @@
 							    </h6> 
 									                        
 									                        
-                                <small class="text-muted">iAmAhoot@email.com</small>
+                                <small class="text-muted">${email}</small>
                               </div>
                             </div>
                             <div class="d-flex align-items-center">
@@ -340,13 +340,27 @@
                               <c:if test="${not empty mediaList}">
                               	<i class="bx bx-paperclip cursor-pointer me-2 bx-sm"></i>
                               </c:if>
-                              <c:if test ="${noteRead.noteRead_starred == null}">
-                              	<i class="email-list-item-bookmark bx bx-star cursor-pointer me-2 bx-sm"></i>
-                              </c:if>
-                              <c:if test ="${noteRead.noteRead_starred != null}">
-                              	<i class="email-list-item-bookmark bx bx-star cursor-pointer me-2 bx-sm" style="color: #ffab00;"></i>
-                              </c:if>
-    
+                              
+                              
+                                <c:choose>		                                  
+										<c:when test ="${contentType eq '발신'}">
+										
+										 	
+			                     		</c:when>
+			                     		<c:when test ="${contentType eq '임시저장'}">
+		                     			
+		                     		
+		                     			</c:when>
+		                     			<c:otherwise>
+		                     			  <c:if test ="${noteRead.noteRead_starred == null}">
+			                              	<i class="email-list-item-bookmark bx bx-star cursor-pointer me-2 bx-sm"></i>
+			                              </c:if>
+			                              <c:if test ="${noteRead.noteRead_starred != null}">
+			                              	<i class="email-list-item-bookmark bx bx-star cursor-pointer me-2 bx-sm" style="color: #ffab00;"></i>
+			                              </c:if>
+		                     			</c:otherwise>
+		                     		</c:choose>
+                              
                               
                               <div class="dropdown me-3">
                                 <button
@@ -359,14 +373,31 @@
                                   <i class="bx bx-dots-vertical-rounded bx-sm"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownEmailTwo">
-                                  <a class="dropdown-item scroll-to-reply" href="javascript:void(0)">
-                                    <i class="bx bx-share me-1"></i>
-                                    <span class="align-middle">답장</span>
-                                  </a>
-                                  <a class="dropdown-item" href="javascript:void(0)">
+	                                 <c:choose>		                                  
+										<c:when test ="${contentType eq '발신'}">
+										
+										 	
+			                     		</c:when>
+			                     		<c:when test ="${contentType eq '임시저장'}">
+		                     			 <a class="dropdown-item scroll-to-reply" href="javascript:void(0)">
+		                                     <i class="bx bx-share me-1 scaleX-n1 scaleX-n1-rtl"></i>
+		                                    <span class="align-middle">전송</span>
+		                                 </a>
+		                     		
+		                     			</c:when>
+		                     			<c:otherwise>
+		                     			 <a class="dropdown-item scroll-to-reply" href="javascript:void(0)">
+		                                    <i class="bx bx-share me-1"></i>
+		                                    <span class="align-middle">답장</span>
+		                                 </a>
+		                     			</c:otherwise>
+		                     		</c:choose>
+                                
+                                 
+                                  <!-- <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="bx bx-share me-1 scaleX-n1 scaleX-n1-rtl"></i>
                                     <span class="align-middle">전달</span>
-                                  </a>
+                                  </a> -->
                                   <a class="dropdown-item" href="javascript:void(0)">
                                     <i class="bx bx-info-circle me-1"></i>
                                     <span class="align-middle">팝업 창 띄우기</span>

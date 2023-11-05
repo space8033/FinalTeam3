@@ -1410,7 +1410,42 @@ function showdraft() {
 	    contentType: false,
 	    enctype : 'multipart/form-data',
 	    success: function (response) {
-	      // 성공 처리
+	    	let noteDraft = "임시저장";
+    		var postData = {
+    				noteDraft: noteDraft
+    		};
+    		
+    		// AJAX 요청으로 데이터 전송
+    		$.ajax({
+    			url: "/exodia/noteDraft",
+    			type: "GET",
+    			data: postData
+    			
+    		}).done(function(result) {
+    			console.log("결과확인");
+    			var html = jQuery('<div>').html(result);
+    			var contents = html.find("div#noteContent").html();
+    			$("#refreshNoteContent").html(contents);
+    			$("#app-email-view").removeClass("show");
+    			var emailListInstance = new PerfectScrollbar('.email-list', {
+    				wheelPropagation: false,
+    				suppressScrollX: true
+    			});
+    			
+    			$("#inboxTab").removeClass("active");
+    			$("#sentTab").removeClass("active");
+    			$("#starredTab").removeClass("active");
+    			$("#trashTab").removeClass("active");
+    			$("#draftTab").addClass("active");
+    			
+    			
+    		}).fail(function (jqXHR, textStatus, errorThrown) {
+    			console.log("에러");
+    			console.log(jqXHR);
+    			console.log(textStatus);
+    			console.log(errorThrown);
+    			
+    		});
 	    },
 	    error: function () {
 	      // 오류 처리
