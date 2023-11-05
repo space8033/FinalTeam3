@@ -15,20 +15,22 @@ $(function () {
       3: { title: 'Inactive', class: 'bg-label-secondary' }
     };
 
-  var userView = 'app-user-view-account.html';
-
   // Users List datatable
   if (dtUserTable.length) {
     dtUserTable.DataTable({
-      ajax: assetsPath + 'json/user-list.json', // JSON file to add data
+      ajax: {
+          url: '/exodia/task/getPrograms',
+          type : "GET",
+          dataSrc: ''
+      }, // JSON file to add data
       columns: [
         // columns according to JSON
-    	{ data: '' },
-    	{ data: 'full_name' },
-        { data: 'role' },
-        { data: 'current_plan' },
-        { data: 'billing' },
-        { data: 'status' }
+    	{ data: 'task_no' },
+    	{ data: 'team_name' },
+    	{ data: 'task_name' },
+        { data: 'empinfo_name' },
+        { data: 'task_date' },
+        { data: 'task_progress' }
       ],
       columnDefs: [
         {
@@ -47,13 +49,13 @@ $(function () {
           targets: 2,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            var $name = full['full_name'];
+            var $name = full['task_name'];
+            var $no = full['task_no'];
             // Creates full output for row
             var $row_output =
               '<div class="d-flex justify-content-left align-items-center">' +
               '<div class="d-flex flex-column">' +
-              '<a href="' +
-              userView +
+              '<a href="javascript:getModifyDetail(' + $no + ')"' +
               '" class="text-body text-truncate"><span class="fw-medium">' +
               $name +
               '</span></a>' +
@@ -66,7 +68,7 @@ $(function () {
           // User Role
           targets: 1,
           render: function (data, type, full, meta) {
-            var $role = full['role'];
+            var $role = full['team_name'];
             return "<span class='text-truncate d-flex align-items-center'>" + $role + '</span>';
           }
         },
@@ -74,24 +76,34 @@ $(function () {
           // Plans
           targets: 3,
           render: function (data, type, full, meta) {
-            var $plan = full['current_plan'];
+            var $plan = full['empinfo_name'];
 
             return '<span class="fw-medium">' + $plan + '</span>';
           }
         },
+	    {
+	    	// Plans
+	    	targets: 4,
+	    	render: function (data, type, full, meta) {
+	    		var $period = full['task_date'];
+	    		
+	    		return '<span class="fw-medium">' + $period + '</span>';
+	    	}
+	    },
         
         {
           // Actions
           targets: 5,
           title: '상태',
-          searchable: false,
           orderable: false,
           render: function (data, type, full, meta) {
-            return '<a href="' + userView + '" class="btn btn-sm btn-icon"><i class="bx bx-show-alt"></i></a>';
+        	var $status = full['task_progress']
+            
+        	return '<span class="fw-medium">' + $status + '</span>';
           }
         }
       ],
-      order: [[1, 'desc']],
+      order: [[1, 'asc']],
       dom:
     	  '<"card-header d-flex flex-wrap py-0"' +
           '<"me-5 ms-n2 pe-5"f>' +
@@ -394,23 +406,6 @@ $(document).ready(function() {
 	      </div>
 	    </tag>
 	  `;
-/*	  return `
-	    <tag title="${tagData.title || tagData.email}"
-	      contenteditable='false'
-	      spellcheck='false'
-	      tabIndex="-1"
-	      class="${this.settings.classNames.tag} ${tagData.class ? tagData.class : ''}"
-	      ${this.getAttributes(tagData)}
-	    >
-	      <x title='' class='tagify__tag__removeBtn' role='button' aria-label='remove tag'></x>
-	      <div>
-	        <div class='tagify__tag__avatar-wrap'>
-	          <img onerror="this.style.visibility='hidden'" src="${tagData.avatar}">
-	        </div>
-	        <span class='tagify__tag-text'>${tagData.name}</span>
-	      </div>
-	    </tag>
-	  `;*/
   }
 
   function suggestionItemTemplate(tagData) {
@@ -426,24 +421,7 @@ $(document).ready(function() {
 	    </div>
 	    </div>
 	  `;
-/*	  return `
-	  <div ${this.getAttributes(tagData)}
-	  class='tagify__dropdown__item align-items-center ${tagData.class ? tagData.class : ''}'
-	  tabindex="0"
-	  role="option"
-	  >
-	  ${
-	  tagData.avatar
-	  ? `<div class='tagify__dropdown__item__avatar-wrap'>
-	  <img onerror="this.style.visibility='hidden'" src="${tagData.avatar}">
-	  </div>`
-	  : ''
-	  }
-	  <div class="fw-medium">${tagData.name}</div>
-	  <span>${tagData.email}</span>
-	  </div>
-	  `;
-*/  }
+  }
 
   let TagifyUserList = new Tagify(TagifyUserListEl, {
     tagTextProp: 'empinfo_name',
@@ -499,5 +477,59 @@ $(document).ready(function() {
   function onInvalidTag(e) {
     console.log('invalid', e.detail);
   }
+  
+  
+  $(".data-submit").on('click', function(e) {
+	  e.preventDefault();
+	  
+	  var task_name = $('#multicol-program').val();
+	  var emp_notes = TagifyUserList.value;
+	  var task_url = $('#multicol-task').val();
+	  var task_importance = $('#task-priority-plus').val();
+	  var task_category = $('#multicol-category').val();
+	  var task_detail = $('#detail-category2').val();
+	  var task_date = $('#bs-rangepicker-week-num').val();
+	  var task_status = $('#task-progress2').val();
 
+	  var data = {
+			  task_name: task_name,
+			  emp_notes: emp_notes,
+			  task_url: task_url,
+			  task_importance : task_importance,
+			  task_category: task_category,
+			  task_detail: task_detail,
+			  task_date: task_date,
+			  task_status: task_status
+	  }
+	  
+	  console.log(JSON.stringify(data));
+	  $.ajax({
+		  type: 'POST',
+		  url: '/exodia/task/registerProgram',
+		  contentType: 'application/json',
+		  data: JSON.stringify(data),
+		  success: function(response) {
+			  location.reload();
+		  },
+		  error: function(error) {
+			  console.log(error);
+		  }
+	  });
+  });
 });
+
+function getModifyDetail(task_no) {
+	$.ajax({
+		url: "/exodia/task/getProgramDetail",
+		method: "get",
+		data:{
+			"task_no": task_no
+		},
+		success: function(programModifiy) {
+			$("#programModifyContainer").html(programModifiy);
+		},
+		error: function(error) {
+			console.log("아왜안떠왜왜왜");
+		}
+	});
+}

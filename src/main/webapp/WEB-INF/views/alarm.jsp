@@ -75,12 +75,12 @@
 		                   <li class="list-group-item list-group-item-action dropdown-notifications-item">
 		                </c:if>
 	                     <div class="d-flex">
-	                       <div class="flex-shrink-0 me-3" onclick="javascript:pageMove('${alarm.alarm_type}', ${alarm.alarm_typeNo});">
+	                       <div class="flex-shrink-0 me-3" onclick="javascript:pageMove('${alarm.alarm_no}', '${alarm.alarm_type}', '${alarm.alarm_typeNo}');">
 	                         <div class="avatar">
 	                           <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle" />
 	                         </div>
 	                       </div>
-	                       <div class="flex-grow-1" onclick="javascript:pageMove('${alarm.alarm_type}', ${alarm.alarm_typeNo});">
+	                       <div class="flex-grow-1" onclick="javascript:pageMove('${alarm.alarm_no}', '${alarm.alarm_type}', '${alarm.alarm_typeNo}');">
 	                         <c:if test="${alarm.alarm_type == '쪽지'}">
 	                         	<h6 class="mb-1">새 메세지 ✉️</h6>
 	                         </c:if>

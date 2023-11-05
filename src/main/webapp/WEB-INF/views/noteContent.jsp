@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 
 <html
@@ -105,20 +106,39 @@
                               <div class="mb-0 mb-lg-2 w-100">
                                 <div class="input-group input-group-merge shadow-none">
                                   <span class="input-group-text border-0 ps-0 py-0" id="email-search">
-                                    <i class="bx bx-search fs-4 text-muted"></i>
+		                              <c:choose>
+		                              	<c:when test ="${contentType eq '휴지통'}">
+		                              		 <i class="bx bx-search cursor-pointer fs-4 text-muted" onclick="javascript:searchTrashMail();"></i>
+			                          	</c:when>
+		                              	<c:when test ="${contentType eq '발신'}">
+		                              		 <i class="bx bx-search cursor-pointer fs-4 text-muted" onclick="javascript:searchSentMail();"></i>
+			                          	</c:when>
+		                              	<c:when test ="${contentType eq '임시저장'}">
+		                              		 <i class="bx bx-search cursor-pointer fs-4 text-muted" onclick="javascript:searchDraftMail();"></i>
+			                          	</c:when>
+		                              	<c:when test ="${contentType eq '중요'}">
+		                              		 <i class="bx bx-search cursor-pointer fs-4 text-muted" onclick="javascript:searchStarredMail();"></i>
+			                          	</c:when>
+		                              	<c:otherwise>
+		                              		 <i class="bx bx-search cursor-pointer fs-4 text-muted" onclick="javascript:searchInboxMail();"></i>
+		                              	</c:otherwise>
+		                              </c:choose>
                                   </span>
+                                  
                                   <input
+                                  	id="searchNote"
                                     type="text"
                                     class="form-control email-search-input border-0 py-0"
                                     placeholder="Search mail"
                                     aria-label="Search..."
                                     aria-describedby="email-search" />
+                                    
                                 </div>
                               </div>
                             </div>
                             <div class="d-flex align-items-center mb-0 mb-md-2">
-                              <i
-                                class="bx bx-refresh scaleX-n1-rtl cursor-pointer email-refresh me-2 bx-sm text-muted"></i>
+                             <!--  <i
+                                class="bx bx-refresh scaleX-n1-rtl cursor-pointer email-refresh me-2 bx-sm text-muted"></i> -->
                               <div class="dropdown">
                                 <button
                                   class="btn p-0"
@@ -130,10 +150,9 @@
                                   <i class="bx bx-dots-vertical-rounded bx-sm text-muted"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="emailsActions">
-                                  <a class="dropdown-item" href="javascript:void(0)">확인 </a>
+                                  <a class="dropdown-item" href="javascript:void(0)">전체 </a>
                                   <a class="dropdown-item" href="javascript:void(0)">미확인</a>
-                                  <a class="dropdown-item" href="javascript:void(0)">삭제</a>
-                                  <a class="dropdown-item" href="javascript:void(0)">Archive</a>
+                                  <a class="dropdown-item" href="javascript:void(0)">전체 삭제</a>
                                 </div>
                               </div>
                             </div>
@@ -152,11 +171,20 @@
                               	<c:when test ="${contentType eq '휴지통'}">
 	                               <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:trashDelete('${contentType}')"></i>
 	                          	</c:when>
+                              	<c:when test ="${contentType eq '발신'}">
+	                               <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:deleteSentNote('${contentType}')"></i>
+	                          	</c:when>
+                              	<c:when test ="${contentType eq '임시저장'}">
+	                               <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:deleteDraftNote('${contentType}')"></i>
+	                          	</c:when>
+                              	<c:when test ="${contentType eq '중요'}">
+	                               <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:deleteStarredNote('${contentType}')"></i>
+	                          	</c:when>
                               	<c:otherwise>
                               		<i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:trashCheck('${contentType}')"></i>
                               	</c:otherwise>
                               </c:choose>
-                              <i class="bx bx-envelope email-list-read cursor-pointer me-3 fs-4"></i>
+                             <!--  <i class="bx bx-envelope email-list-read cursor-pointer me-3 fs-4"></i> -->
                               <c:choose>
 	                              <c:when test ="${contentType eq '휴지통'}">
 	                               	<i class="bx bx-rotate-left email-list-read cursor-pointer me-3 fs-4" onclick="javascript:recoveryCheck()"></i>
@@ -165,7 +193,7 @@
 	                              </c:otherwise>
                               </c:choose>
                               <div class="dropdown">
-                                <button
+                                <!-- <button
                                   class="btn p-0"
                                   type="button"
                                   id="dropdownMenuFolderOne"
@@ -187,10 +215,10 @@
                                     <i class="bx bx-trash-alt me-1"></i>
                                     <span class="align-middle">Trash</span>
                                   </a>
-                                </div>
+                                </div> -->
                               </div>
                               <div class="dropdown">
-                                <button
+                              <!--   <button
                                   class="btn p-0"
                                   type="button"
                                   id="dropdownLabelOne"
@@ -216,54 +244,107 @@
                                     <i class="badge badge-dot bg-danger me-1"></i>
                                     <span class="align-middle">Private</span>
                                   </a>
-                                </div>
+                                </div> -->
                               </div>
                             </div>
-                            <div
-                              class="email-pagination d-sm-flex d-none align-items-center flex-wrap justify-content-between justify-sm-content-end">
-                              <span class="d-sm-block d-none mx-3 text-muted">
-                              
-                              		<c:if test="${pager.totalRows <= 10}">
-                              			${pager.totalRows} of ${pager.totalRows}
-                              		</c:if>
-                              		<c:if test="${pager.pageNo == 1 && pager.totalRows >= 10}">
-                              			1-10 of ${pager.totalRows}
-                              		</c:if>
-                             
-                              		<c:if test="${pager.pageNo > 1 && pager.pageNo < pager.totalPageNo}">
-                              			${pager.pageNo-1}1-${pager.pageNo}0 of ${pager.totalRows}
-                              		</c:if>
-                              		<c:if test="${pager.pageNo > 1 && pager.pageNo == pager.totalPageNo}">
-                              			${pager.pageNo-1}1-${pager.totalRows} of ${pager.totalRows}
-                              		</c:if>
-                              </span>
-                              <span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="javascript:showEmailList('${contentType}', 1)">처음</a></span>
-                                   <c:if test="${pager.pageNo>1}">
-	                                   <a href="javascript:showEmailList('${contentType}', ${pager.pageNo-1})">
-			                              <i
-			                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
-			                                       
-			                              </i>
-	                              		</a>
-                                   </c:if>
-                                   <c:if test="${pager.pageNo == 1}">
-			                              <i
-			                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
-			                              </i>
-                                   </c:if>
-                              
-                              
-                              <c:if test="${pager.pageNo >= pager.totalPageNo}">
-                              	 <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i>
-                              </c:if>
-                              
-                              <c:if test="${pager.pageNo < pager.totalPageNo}">
-                              	 <a href="javascript:showEmailList('${contentType}', ${pager.pageNo+1})"> <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i></a>
-                              </c:if>
-                              	
-                              	
-                              	<span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="javascript:showEmailList('${contentType}', ${pager.totalPageNo})">맨끝</a></span>
-                            </div>
+                            
+                            <c:if test ="${!empty searchKeyword}">
+	                            <div
+	                              class="email-pagination d-sm-flex d-none align-items-center flex-wrap justify-content-between justify-sm-content-end">
+	                              <span class="d-sm-block d-none mx-3 text-muted">
+	                              
+	                              		<c:if test="${pager.totalRows <= 10}">
+	                              			${pager.totalRows} of ${pager.totalRows}
+	                              		</c:if>
+	                              		<c:if test="${pager.pageNo == 1 && pager.totalRows > 10}">
+	                              			1-10 of ${pager.totalRows}
+	                              		</c:if>
+	                             
+	                              		<c:if test="${pager.pageNo > 1 && pager.pageNo < pager.totalPageNo}">
+	                              			${pager.pageNo-1}1-${pager.pageNo}0 of ${pager.totalRows}
+	                              		</c:if>
+	                              		<c:if test="${pager.pageNo > 1 && pager.pageNo == pager.totalPageNo}">
+	                              			${pager.pageNo-1}1-${pager.totalRows} of ${pager.totalRows}
+	                              		</c:if>
+	                              </span>
+	                              <span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="javascript:showSearchEmailList('${searchKeyword}','${contentType}', 1)">처음</a></span>
+	                                   <c:if test="${pager.pageNo>1}">
+		                                   <a href="javascript:showSearchEmailList('${searchKeyword}','${contentType}', ${pager.pageNo-1})">
+				                              <i
+				                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
+				                                       
+				                              </i>
+		                              		</a>
+	                                   </c:if>
+	                                   <c:if test="${pager.pageNo <= 1}">
+				                              <i
+				                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
+				                              </i>
+	                                   </c:if>
+	                              
+	                              
+	                              <c:if test="${pager.pageNo >= pager.totalPageNo}">
+	                              	 <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i>
+	                              </c:if>
+	                              
+	                              <c:if test="${pager.pageNo < pager.totalPageNo}">
+	                              	 <a href="javascript:showSearchEmailList('${searchKeyword}','${contentType}', ${pager.pageNo+1})"> <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i></a>
+	                              </c:if>
+	                              	
+	                              	
+	                              	<span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="javascript:showSearchEmailList('${searchKeyword}','${contentType}', ${pager.totalPageNo})">맨끝</a></span>
+	                            </div>
+                            </c:if>
+                            
+                             <c:if test ="${empty searchKeyword}">
+	                            <div
+	                              class="email-pagination d-sm-flex d-none align-items-center flex-wrap justify-content-between justify-sm-content-end">
+	                              <span class="d-sm-block d-none mx-3 text-muted">
+	                              
+	                              		<c:if test="${pager.totalRows <= 10}">
+	                              			${pager.totalRows} of ${pager.totalRows}
+	                              		</c:if>
+	                              		<c:if test="${pager.pageNo == 1 && pager.totalRows > 10}">
+	                              			1-10 of ${pager.totalRows}
+	                              		</c:if>
+	                             
+	                              		<c:if test="${pager.pageNo > 1 && pager.pageNo < pager.totalPageNo}">
+	                              			${pager.pageNo-1}1-${pager.pageNo}0 of ${pager.totalRows}
+	                              		</c:if>
+	                              		<c:if test="${pager.pageNo > 1 && pager.pageNo == pager.totalPageNo}">
+	                              			${pager.pageNo-1}1-${pager.totalRows} of ${pager.totalRows}
+	                              		</c:if>
+	                              </span>
+	                              <span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="javascript:showEmailList('${contentType}', 1)">처음</a></span>
+	                                   <c:if test="${pager.pageNo>1}">
+		                                   <a href="javascript:showEmailList('${contentType}', ${pager.pageNo-1})">
+				                              <i
+				                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
+				                                       
+				                              </i>
+		                              		</a>
+	                                   </c:if>
+	                                   <c:if test="${pager.pageNo <= 1}">
+				                              <i
+				                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
+				                              </i>
+	                                   </c:if>
+	                              
+	                              
+	                              <c:if test="${pager.pageNo >= pager.totalPageNo}">
+	                              	 <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i>
+	                              </c:if>
+	                              
+	                              <c:if test="${pager.pageNo < pager.totalPageNo}">
+	                              	 <a href="javascript:showEmailList('${contentType}', ${pager.pageNo+1})"> <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i></a>
+	                              </c:if>
+	                              	
+	                              	
+	                              	<span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="javascript:showEmailList('${contentType}', ${pager.totalPageNo})">맨끝</a></span>
+	                            </div>
+                            
+                            </c:if>
+                            
                           </div>
                         </div>
                         <hr class="container-m-nx m-0" />
@@ -284,30 +365,127 @@
 					                          <c:if test ="${note.noteRead_starred != null}">
 					                          data-starred="true"
 					                          </c:if>
-					                      data-sent="true"
-					                      id="${note.noteRead_no}"
+					                          
+					                           <c:choose>
+				                              	<c:when test ="${contentType eq '발신'}">
+				                              		 id="${note.note_no}"
+					                          	</c:when>
+				                              	<c:when test ="${contentType eq '임시저장'}">
+				                              		 id="${note.note_no}"
+					                          	</c:when>
+				                              	<c:otherwise>
+				                              	 	 id="${note.noteRead_no}"
+				                              	</c:otherwise>
+				                              </c:choose>
+					                     
 			                              data-bs-toggle="sidebar"
 			                              data-target="#app-email-view-${note.noteRead_no}"
 			                              >
 			                              <div class="d-flex align-items-center">
-			                                <div class="form-check">
-			                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-${note.noteRead_no}" />
-			                                  <label class="form-check-label" for="email-${note.noteRead_no}"></label>
-			                                </div>
-			                                <i
-			                                  class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"  onclick="javascript:bookMark(${note.noteRead_no})"></i>
-			                                <img
-			                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
-			                                  alt="user-avatar"
-			                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
-			                                  height="32"
-			                                  width="32" />
-			                                <div class="email-list-item-content ms-2 ms-sm-0 me-2"  onclick="javascript:showDetail(${note.noteRead_no});">
-			                                  <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
-			                                  <span class="email-list-item-subject d-xl-inline-block d-block">
-			                               	     ${note.note_title}</span
-			                                  >
-			                                </div>
+			                                 <c:choose>
+				                              
+				                              	<c:when test ="${contentType eq '발신'}">
+				                              	
+				                              		<div class="form-check">
+					                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-${note.note_no}" />
+					                                  <label class="form-check-label" for="email-${note.note_no}"></label>
+					                                </div>
+					                          	</c:when>
+				                              	<c:when test ="${contentType eq '임시저장'}">
+				                              	
+				                              		<div class="form-check">
+					                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-${note.note_no}" />
+					                                  <label class="form-check-label" for="email-${note.note_no}"></label>
+					                                </div>
+					                          	</c:when>
+				                              	<c:otherwise>
+				                              	 	<div class="form-check">
+					                                  <input class="email-list-item-input form-check-input" type="checkbox" id="email-${note.noteRead_no}" />
+					                                  <label class="form-check-label" for="email-${note.noteRead_no}"></label>
+					                                </div>
+				                              	</c:otherwise>
+				                              </c:choose>
+			                                
+			                                
+			                                <c:choose>
+				                              
+				                              	<c:when test ="${contentType eq '발신'}">
+				                              	
+				                              		
+					                          	</c:when>
+				                              	<c:when test ="${contentType eq '임시저장'}">
+				                              	
+				                              		
+					                          	</c:when>
+				                              	<c:otherwise>
+				                              	 	 <i
+			                                  			class="email-list-item-bookmark bx bx-star d-sm-inline-block d-none cursor-pointer mx-4 bx-sm"  onclick="javascript:bookMark(${note.noteRead_no})"></i>
+			                                
+				                              	</c:otherwise>
+				                              </c:choose>
+			                               
+			                                 <c:choose>
+				                              
+				                              	<c:when test ="${contentType eq '발신'}">
+					                              	<img
+					                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
+					                                  alt="user-avatar"
+					                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0 ms-4"
+					                                  height="32"
+					                                  width="32" />
+				                              		
+					                          	</c:when>
+				                              	<c:when test ="${contentType eq '임시저장'}">
+				                              		<img
+				                               	   		src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
+					                                  alt="user-avatar"
+					                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0 ms-4"
+					                                  height="32"
+					                                  width="32" />
+					                              		
+					                          	</c:when>
+				                              	<c:otherwise>
+				                              	 	<img
+					                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
+					                                  alt="user-avatar"
+					                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
+					                                  height="32"
+					                                  width="32" />
+			                                
+				                              	</c:otherwise>
+				                              </c:choose>
+			                                
+			                                <c:if test ="${contentType eq '발신'}">
+				                                <div class="email-list-item-content ms-2 ms-sm-0 me-2"  onclick="javascript:showDetailSent(${note.note_no});">
+				                                  <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
+				                                  <span class="email-list-item-subject d-xl-inline-block d-block">
+				                               	     ${note.note_title}</span
+				                                  >
+				                                </div>
+			                                </c:if>
+			                                
+			                                <c:if test ="${contentType ne '발신'}">
+			                                 	<c:if test ="${contentType eq '임시저장'}">
+				                              	  <div class="email-list-item-content ms-2 ms-sm-0 me-2"  onclick="javascript:showDetailDraft(${note.note_no});">
+				                               	   <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
+				                                	  <span class="email-list-item-subject d-xl-inline-block d-block">
+				                               	     ${note.note_title}</span
+				                               		   >
+				                                  </div>
+			                                	</c:if>
+			                                	<c:if test ="${contentType ne '임시저장'}">
+					                                <div class="email-list-item-content ms-2 ms-sm-0 me-2"  onclick="javascript:showDetail(${note.noteRead_no});">
+					                                  <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
+					                                  <span class="email-list-item-subject d-xl-inline-block d-block">
+					                               	     ${note.note_title}</span
+					                                  >
+					                                </div>
+				                                </c:if>
+			                                </c:if>
+			                                
+			                                
+			                                
+			                                
 			                                <div class="email-list-item-meta ms-auto d-flex align-items-center">
 			                                  <c:if test="${note.media_isEmpty}">
 			                                  
@@ -333,27 +511,50 @@
 												        <!-- 다른 경우에 대한 처리 -->
 												    </c:otherwise>
 												</c:choose>
-			                                   
-			                                  <c:set var="today" value="<%=new java.util.Date()%>" />
-												<!-- 현재날짜 -->
-												<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy.MM.dd" /></c:set>
-												  <c:if test="${note.note_createdAt.substring(0, 10) eq date}">
-												  	<c:if test="${note.note_createdAt.substring(11, 13) ge '0' && note.note_createdAt.substring(11, 13) le '11'}">
-												      <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} AM</small>
-												    </c:if>
-												  	<c:if test="${note.note_createdAt.substring(11, 13) ge '12' && note.note_createdAt.substring(11, 13) le '23'}">
-												      <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} PM</small>
-												    </c:if>
-												  </c:if>
-												 
-												  <c:if test="${note.note_createdAt.substring(0, 10) ne date}">
-												    <small class="email-list-item-time text-muted">${note.note_createdAt.substring(2, 10)}</small>
-												  </c:if>
+			                                  
+			                                  <c:if test ="${note.note_createdAt != null}">
+				                                  <c:set var="today" value="<%=new java.util.Date()%>" />
+													<!-- 현재날짜 -->
+													<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy.MM.dd" /></c:set>
+													  <c:if test="${note.note_createdAt.substring(0, 10) eq date}">
+													  	<c:if test="${note.note_createdAt.substring(11, 13) ge '0' && note.note_createdAt.substring(11, 13) le '11'}">
+													      <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} AM</small>
+													    </c:if>
+													  	<c:if test="${note.note_createdAt.substring(11, 13) ge '12' && note.note_createdAt.substring(11, 13) le '23'}">
+													      <small class="email-list-item-time text-muted">${note.note_createdAt.substring(11, 16)} PM</small>
+													    </c:if>
+													  </c:if>
+													 
+													  <c:if test="${note.note_createdAt.substring(0, 10) ne date}">
+													    <small class="email-list-item-time text-muted">${note.note_createdAt.substring(2, 10)}</small>
+													  </c:if>
+											  </c:if>
+											  <c:if test ="${note.note_createdAt == null}">
+											  	<c:choose>
+												  <c:when test="${fn:length(note.note_restime) >= 20}">
+												    <!-- 글자 수가 20 이상인 경우 -->
+												    <small class="email-list-item-time text-muted">예약 취소</small>
+												  </c:when>
+												  <c:otherwise>
+												    <!-- 글자 수가 20 미만인 경우 -->
+				                             	 	<small class="email-list-item-time text-muted">발송 예약</small>
+												  </c:otherwise>
+												</c:choose>
+											  </c:if>
 												  
 			                                  <ul class="list-inline email-list-item-actions">
 												<c:choose>		                                  
 													<c:when test ="${contentType eq '휴지통'}">
 			                                    		<li class="list-inline-item email-delete"><i id="trash-${note.noteRead_no}" class="bx bx-trash-alt fs-4" onclick="javascript:deleteTrashSingleNote(${note.noteRead_no});"></i></li>
+	                          						</c:when>
+													<c:when test ="${contentType eq '발신'}">
+			                                    		<li class="list-inline-item email-delete"><i id="trash-${note.note_no}" class="bx bx-trash-alt fs-4" onclick="javascript:deleteSentSingleNote(${note.note_no});"></i></li>
+	                          						</c:when>
+													<c:when test ="${contentType eq '임시저장'}">
+			                                    		<li class="list-inline-item email-delete"><i id="trash-${note.note_no}" class="bx bx-trash-alt fs-4" onclick="javascript:deleteDraftSingleNote(${note.note_no});"></i></li>
+	                          						</c:when>
+													<c:when test ="${contentType eq '중요'}">
+			                                    		<li class="list-inline-item email-delete"><i id="trash-${note.noteRead_no}" class="bx bx-trash fs-4" onclick="javascript:deleteStarredSingleNote(${note.noteRead_no});"></i></li>
 	                          						</c:when>
 	                          						<c:otherwise>			                                  
 			                                    		<li class="list-inline-item email-delete"><i id="trash-${note.noteRead_no}" class="bx bx-trash fs-4" onclick="javascript:trashSingleNote(${note.noteRead_no});"></i></li>
@@ -361,23 +562,36 @@
 			                                    </c:choose>
 			                                    
 			                                    
-			                                     <c:if test ="${note.noteRead_read != null}">
-						                              <li id="li-${note.noteRead_no}" class="list-inline-item email-read"><i id="i-${note.noteRead_no}" class="bx bx-envelope-open fs-4"></i></li>
-						                         </c:if>
-						                          <c:if test ="${note.noteRead_read == null}">
-			                                          <li id="li-${note.noteRead_no}" class="list-inline-item email-unread"><i id="i-${note.noteRead_no}" class="bx bx-envelope fs-4"></i></li>
-			                                      </c:if>
+			                                     <c:choose>
+				                              
+				                              	<c:when test ="${contentType eq '발신'}">
+				                              	
+				                              		
+					                          	</c:when>
+				                              	<c:when test ="${contentType eq '임시저장'}">
+				                              	
+				                              		<li id="li-${note.noteRead_no}" class="list-inline-item email-unread"><i id="i-${note.note_no}" class="bx bx-envelope fs-4" title="전송" onclick="javascript:sendDraft(${note.note_no})"></i></li>
+					                          	</c:when>
+				                              	<c:otherwise>
+				                              	 	   <c:if test ="${note.noteRead_read != null}">
+								                              <li id="li-${note.noteRead_no}" class="list-inline-item email-read"><i id="i-${note.noteRead_no}" class="bx bx-envelope-open fs-4"></i></li>
+								                        </c:if>
+								                        <c:if test ="${note.noteRead_read == null}">
+					                                          <li id="li-${note.noteRead_no}" class="list-inline-item email-unread"><i id="i-${note.noteRead_no}" class="bx bx-envelope fs-4"></i></li>
+					                                    </c:if>
+				                              	</c:otherwise>
+				                              </c:choose>
+			                                    
+			                                  
 			                                      
 			                                      
 			                                      <!-- 발신 쪽지함일 경우 : 발송취소/읽음-->
 			                                      <c:if test ="${contentType eq '발신'}">
-			                                          <c:if test ="${note.noteRead_read != null}">
 			                                    	     <li class="list-inline-item"> 
-			                                    	        <a class="text-primary text-mute" data-bs-toggle="modal" data-bs-target="#shareProject">발송취소</a> 
+			                                    	        <a class="text-primary text-mute" data-bs-toggle="modal" data-bs-target="#shareProject" onclick="javascript:sentCancel(${note.note_no});">발송취소</a> 
 			                                    	       
 			                                    	        
 			                                    	     </li>
-			                                    	  </c:if>
 			                                      </c:if>
 			                                  </ul>
 			                                </div>
@@ -386,10 +600,12 @@
 		                        </c:forEach>
 	
                           </ul>
-                          <ul class="list-unstyled m-0">
-                            <li class="email-list-empty text-center d-none">쪽지가 없습니다.</li>
-                          </ul>
                           
+                          <c:if test="${empty list}">
+	                          <ul class="list-unstyled m-0">
+	                            <li class="email-list-empty text-center">쪽지가 없습니다.</li>
+	                          </ul>
+						  </c:if>                          
                         </div>
                       </div>
                      
@@ -401,117 +617,17 @@
                       		
                        <div class="modal fade" id="shareProject" tabindex="-1" aria-hidden="true">
 		                <div class="modal-dialog modal-lg modal-simple modal-enable-otp modal-dialog-centered">
-		                  <div class="modal-content p-3 p-md-5">
-		                    <div class="modal-body">
-		                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-		                      <div class="text-center">
-		                        <h3 class="mb-2">수신자 명단</h3>
-		                      </div>
-		                    </div>
-		                    <div class="mb-4 pb-2">
-		                      <label for="select2Basic" class="form-label">수신자 찾기</label>
-		                      <select
-		                        id="select2Basic"
-		                        class="form-select form-select-lg share-project-select"
-		                        data-allow-clear="true">
-		                        <option data-name="Adelaide Nichols" data-image="img/avatars/20.png" selected>
-		                          	 김시온
-		                        </option>
-		                        <option data-name="Julian Murphy" data-image="img/avatars/9.png">Julian Murphy</option>
-		                        <option data-name="Sophie Gilbert" data-image="img/avatars/10.png">Sophie Gilbert</option>
-		                        <option data-name="Marvin Wheeler" data-image="img/avatars/17.png">Marvin Wheeler</option>
-		                      </select>
-		                    </div>
-		                    <h4 class="mb-4 pb-2">수신자</h4>
-		                    <ul class="p-0 m-0">
-		                      <li class="d-flex flex-wrap mb-3">
-		                        <div class="avatar me-3">
-		                          <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt="avatar" class="rounded-circle" />
-		                        </div>
-		                        <div class="d-flex justify-content-between flex-grow-1">
-		                          <div class="me-2">
-		                            <p class="mb-0">Lester Palmer</p>
-		                            <p class="mb-0 text-muted">pe@vogeiz.net</p>
-		                          </div>
-		                          <div class="dropdown">
-		                            <button type="button" class="btn btn-outline-primary">발송 취소
-		                            </button>
-		                          </div>
-		                        </div>
-		                      </li>
-		                      <li class="d-flex flex-wrap mb-3">
-		                        <div class="avatar me-3">
-		                          <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt="avatar" class="rounded-circle" />
-		                        </div>
-		                        <div class="d-flex justify-content-between flex-grow-1">
-		                          <div class="me-2">
-		                            <p class="mb-0">Mattie Blair</p>
-		                            <p class="mb-0 text-muted">peromak@zukedohik.gov</p>
-		                          </div>
-		                          <div class="dropdown">
-		                            
-		                              <i class="bx bx-envelope-open me-2">
-		                              </i><span class="text-muted fw-normal me-2 d-none d-sm-inline-block">2023.11.10.13:11 읽음</span>
-		                          </div>
-		                        </div>
-		                      </li>
-		                      <li class="d-flex flex-wrap mb-3">
-		                        <div class="avatar me-3">
-		                          <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/3.png" alt="avatar" class="rounded-circle" />
-		                        </div>
-		                        <div class="d-flex justify-content-between flex-grow-1">
-		                          <div class="me-2">
-		                            <p class="mb-0">Marvin Wheeler</p>
-		                            <p class="mb-0 text-muted">rumet@jujpejah.net</p>
-		                          </div>
-		                          <div class="dropdown">
-		                           
-		                           	  <i class="bx bx-envelope-open me-1">
-		                              </i>
-		                              <span class="text-muted fw-normal me-2 d-none d-sm-inline-block">2023.11.10.13:11 읽음</span>
-		                          </div>
-		                        </div>
-		                      </li>
-		                      <li class="d-flex flex-wrap mb-3">
-		                        <div class="avatar me-3">
-		                          <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/4.png" alt="avatar" class="rounded-circle" />
-		                        </div>
-		                        <div class="d-flex justify-content-between flex-grow-1">
-		                          <div class="me-2">
-		                            <p class="mb-0">Nannie Ford</p>
-		                            <p class="mb-0 text-muted">negza@nuv.io</p>
-		                          </div>
-		                          <div class="dropdown">
-		                            <button
-		                              type="button"
-		                              class="btn dropdown-toggle p-2"
-		                              data-bs-toggle="dropdown"
-		                              aria-expanded="false">
-		                              <span class="text-muted fw-normal me-2 d-none d-sm-inline-block">Can Comment</span>
-		                            </button>
-		                          </div>
-		                        </div>
-		                      </li>
-		                      
-		                    </ul>
-		                    <div class="d-flex align-items-center mt-4 align-items-sm-center">
-		                      <div class="d-flex justify-content-between flex-grow-1 align-items-center flex-wrap gap-2">
-		                      </div>
-		                    </div>
+		                  <div class="modal-content p-3 p-md-5" id="sendCancel">
+	
+	
+	
+	
 		                  </div>
 		                </div>
 		              </div>
-         
-        </div>
-        
-        
-        
-        
-        
-        
-        
-        </div>
-        </div>
+        			</div>
+        		</div>
+       		 </div>
         </div>
             <!-- / Content -->
 

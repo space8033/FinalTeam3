@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
@@ -31,6 +32,7 @@ import com.finalteam3.exodia.note.dto.request.Note;
 import com.finalteam3.exodia.note.dto.request.NoteRead;
 import com.finalteam3.exodia.note.dto.request.NoteRequest;
 import com.finalteam3.exodia.note.dto.request.ReplyRequest;
+import com.finalteam3.exodia.note.dto.response.NoteResponse;
 import com.finalteam3.exodia.note.service.NoteService;
 import com.finalteam3.exodia.security.dto.EmpDetails;
 
@@ -64,6 +66,14 @@ public class NoteController {
 		model.addAttribute("teamList", teamList);
 		model.addAttribute("empList", empList);
 		
+		int unReadCount = noteService.countByUnreadNoteNo(loginResponse.getEmp_no());
+		model.addAttribute("unReadCount", unReadCount);
+		int draftCount = noteService.countByNoteDraftNo(loginResponse.getEmp_no());
+		model.addAttribute("draftCount", draftCount);
+		int starredCount = noteService.countByNoteStarredNo(loginResponse.getEmp_no());
+		model.addAttribute("starredCount", starredCount);
+		int trashCount = noteService.countByNoteTrashNo(loginResponse.getEmp_no());
+		model.addAttribute("trashCount", trashCount);
 		
 		if(pageNote == null) {
 			   //세션에 저장되어 있는지 확인
@@ -106,6 +116,69 @@ public class NoteController {
 		return "/note";
 	}
 	
+	//노트 디테일 팝업
+	@GetMapping("/noteDetailView")
+	public String noteDetailView(HttpSession session, @RequestParam(name= "noteReadNo", required=false) String noteReadNo, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+		
+		log.info(noteReadNo+"먼값이 들어오나 보자");
+		int noteRead_No = Integer.parseInt(noteReadNo);
+		NoteRead noteRead = noteService.getNoteRead(noteRead_No);
+		log.info(noteRead.toString()+"모지?");
+		model.addAttribute("noteRead", noteRead);
+		
+		Note note = noteService.getNote(noteRead_No);
+		model.addAttribute("note", note);
+		EmployeeInfo sender = employeeService.getEmpInfo(note.getNote_sender());
+		String name = sender.getEmpinfo_name();
+		String email = sender.getEmpinfo_email();
+				
+		model.addAttribute("name", name);
+		model.addAttribute("email", email);
+		
+		List<MediaDto> mediaList = noteService.getMediaList(note.getNote_no());
+		
+		model.addAttribute("mediaList", mediaList);
+		
+		List<NoteResponse> noteResponseList = noteService.getNoteReceiver(note.getNote_no(), loginResponse.getEmp_no());
+		model.addAttribute("list", noteResponseList);
+		
+		return "/noteDetailView";
+	}
+	
+	@GetMapping("/sentNoteDetailView")
+	public String sentNoteDetailView(HttpSession session, @RequestParam(name= "noteNo", required=false) String noteNo, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+		
+		log.info(noteNo+"먼값이 들어오나 보자");
+		int note_no = Integer.parseInt(noteNo);
+		Note note = noteService.getNoteSent(note_no);
+		
+		model.addAttribute("note", note);
+		EmployeeInfo sender = employeeService.getEmpInfo(note.getNote_sender());
+		String name = sender.getEmpinfo_name();
+		
+		model.addAttribute("name", name);
+		
+		List<MediaDto> mediaList = noteService.getMediaList(note.getNote_no());
+		
+		model.addAttribute("mediaList", mediaList);
+		
+		String contentType = "발신";
+		model.addAttribute("contentType", contentType);
+		
+		List<NoteResponse> noteResponseList = noteService.getNoteReceiver(note.getNote_no(), loginResponse.getEmp_no());
+		model.addAttribute("list", noteResponseList);
+		
+		return "/noteDetailView";
+	}
+	
 	//수신 쪽지함 불러오기
 	@GetMapping("/noteInbox")
 	public String noteInbox(String pageInbox, HttpSession session, @RequestParam(name= "inbox", required=false) String inbox, Model model, Authentication authentication) {
@@ -113,15 +186,19 @@ public class NoteController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
-		log.info("내 페이지 넘버는 ?" + pageInbox);
+		log.info("내 페이지 넘버는 1?" + pageInbox);
 		if(pageInbox == null) {
 			//세션에 저장되어 있는지 확인
 			pageInbox = (String) session.getAttribute("pageInbox");
 			//저장되어있지 않다면 "1"로 초기화
-			if(pageInbox == null) {
+			log.info("내 페이지 넘버는 2?" + pageInbox);
+			
+			if(pageInbox == null || pageInbox == "0") {
 				pageInbox = "1";
 			}
+			
 		}
+		log.info("내 페이지 넘버는 3?" + pageInbox);
 		
 		int empNo = empInfo.getEmpinfo_no();
 		
@@ -141,13 +218,120 @@ public class NoteController {
 		map.put("empNo", empNo);
 		
 		List<NoteAll> list = noteService.getNoteListByRno(map);
-		
+		log.info("내 list 가온나 " + list.toString());
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
 		String contentType = "수신";
 		model.addAttribute("contentType", contentType);
 		
+		
+		return "/noteContent";
+	}
+	//수신 쪽지함 검색하기
+	@GetMapping("/noteInboxSearch")
+	public String noteInboxSearch(String pageInboxSearch, HttpSession session, @RequestParam(name= "searchKeyword", required=false) String searchKeyword, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+		log.info("내 페이지 넘버는 1?" + pageInboxSearch);
+		log.info("서치 키워드는?" + searchKeyword);
+		if(pageInboxSearch == null) {
+			//세션에 저장되어 있는지 확인
+			pageInboxSearch = (String) session.getAttribute("pageInboxSearch");
+			//저장되어있지 않다면 "1"로 초기화
+			log.info("내 페이지 넘버는 2?" + pageInboxSearch);
+			
+			if(pageInboxSearch == null || pageInboxSearch == "0") {
+				pageInboxSearch = "1";
+			}
+			
+		}
+		log.info("내 페이지 넘버는 3?" + pageInboxSearch);
+		
+		int empNo = empInfo.getEmpinfo_no();
+		log.info("내 엠프넘버는?" + empNo);
+		
+		Map<String, Object> mapCount = new HashMap<>();
+		mapCount.put("empNo", empNo);
+		mapCount.put("searchKeyword", searchKeyword);
+		log.info("어디서 막히는거임?");
+		//문자열을 정수로 변환
+		int intPageNo = Integer.parseInt(pageInboxSearch);
+		//세션에 pageNo를 저장
+		session.setAttribute("pageInboxSearch", String.valueOf(pageInboxSearch));
+		int totalRows = noteService.countBySearchNoteNo(mapCount);
+		log.info("내 totalRows 넘버는 ?" + totalRows);
+		
+		Pager pager = new Pager(10, 5, totalRows, intPageNo);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("startRowNo", pager.getStartRowNo());
+		map.put("endRowNo", pager.getEndRowNo());
+		map.put("empNo", empNo);
+		map.put("searchKeyword", searchKeyword);
+		
+		List<NoteAll> list = noteService.getNoteSearchListByRno(map);
+		log.info("내 list 가온나 " + list.toString());
+		
+		model.addAttribute("pager", pager);
+		model.addAttribute("list", list);
+		String contentType = "수신";
+		model.addAttribute("contentType", contentType);
+		model.addAttribute("searchKeyword", searchKeyword);
+		
+		
+		return "/noteContent";
+	}
+	//발신 쪽지함 검색하기
+	@GetMapping("/noteSentSearch")
+	public String noteSentSearch(String pageSentSearch, HttpSession session, @RequestParam(name= "searchKeyword", required=false) String searchKeyword, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+		
+		
+		if(pageSentSearch == null) {
+			   //세션에 저장되어 있는지 확인
+			pageSentSearch = (String) session.getAttribute("pageSentSearch");
+			   //저장되어있지 않다면 "1"로 초기화
+			   if(pageSentSearch == null) {
+				   pageSentSearch = "1";
+			   }
+		}
+		
+		int empNo = empInfo.getEmpinfo_no();
+		
+		
+		Map<String, Object> mapCount = new HashMap<>();
+		mapCount.put("empNo", empNo);
+		mapCount.put("searchKeyword", searchKeyword);
+		
+		//문자열을 정수로 변환
+		int intPageNo = Integer.parseInt(pageSentSearch);
+		//세션에 pageNo를 저장
+		session.setAttribute("pageSentSearch", String.valueOf(pageSentSearch));
+		log.info("여기까지 ok2");
+		int totalRows = noteService.countBySearchNoteSenderNo(mapCount);
+		log.info(totalRows+"나전체숫자");
+		
+		Pager pager = new Pager(10, 5, totalRows, intPageNo);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("startRowNo", pager.getStartRowNo());
+		map.put("endRowNo", pager.getEndRowNo());
+		map.put("empNo", empNo);
+		map.put("searchKeyword", searchKeyword);
+		
+		List<NoteAll> list = noteService.getNoteSentSearchListByRno(map);
+			
+		model.addAttribute("pager", pager);
+		model.addAttribute("list", list);
+		String contentType = "발신";
+		model.addAttribute("contentType", contentType);
+		model.addAttribute("searchKeyword", searchKeyword);
 		
 		return "/noteContent";
 	}
@@ -193,6 +377,61 @@ public class NoteController {
 		List<NoteAll> list = noteService.getNoteSendListByRno(map);
 		log.info(list+"여기까지 ok3");
 			
+		model.addAttribute("pager", pager);
+		model.addAttribute("list", list);
+		String contentType = "발신";
+		model.addAttribute("contentType", contentType);
+		
+		
+		log.info("여기까지 ok4");
+		
+		return "/noteContent";
+	}
+	
+	//임시저장함 세부-> 메세지 전송
+	@GetMapping("/sentDraft")
+	public String sentDraft(String pageSent,@RequestParam("noteNo") String noteNo, HttpSession session, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+		
+		int note_no = Integer.parseInt(noteNo);
+		noteService.sendDraftNote(note_no);
+		
+		
+		
+		if(pageSent == null) {
+			//세션에 저장되어 있는지 확인
+			pageSent = (String) session.getAttribute("pageSent");
+			//저장되어있지 않다면 "1"로 초기화
+			if(pageSent == null) {
+				pageSent = "1";
+			}
+		}
+		
+		int empNo = empInfo.getEmpinfo_no();
+		
+		
+		//문자열을 정수로 변환
+		int intPageNo = Integer.parseInt(pageSent);
+		//세션에 pageNo를 저장
+		session.setAttribute("pageSent", String.valueOf(pageSent));
+		log.info("여기까지 ok2");
+		int totalRows = noteService.countByNoteSenderNo(empNo);
+		log.info(totalRows+"나전체숫자");
+		
+		Pager pager = new Pager(10, 5, totalRows, intPageNo);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("startRowNo", pager.getStartRowNo());
+		map.put("endRowNo", pager.getEndRowNo());
+		map.put("empNo", empNo);
+		log.info(map+"여기까지 맵임ok3");
+		
+		List<NoteAll> list = noteService.getNoteSendListByRno(map);
+		log.info(list+"여기까지 ok3");
+		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
 		String contentType = "발신";
@@ -256,6 +495,63 @@ public class NoteController {
 		return "/noteContent";
 	}
 	
+	//임시저장 검색 쪽지함 불러오기
+	@GetMapping("/noteDraftSearch")
+	public String noteDraftSearch(String pageDraftSearch, @RequestParam(name= "searchKeyword", required=false) String searchKeyword, HttpSession session, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+		
+		
+		if(pageDraftSearch == null) {
+			//세션에 저장되어 있는지 확인
+			pageDraftSearch = (String) session.getAttribute("pageDraftSearch");
+			//저장되어있지 않다면 "1"로 초기화
+			if(pageDraftSearch == null) {
+				pageDraftSearch = "1";
+			}
+		}
+		
+		int empNo = empInfo.getEmpinfo_no();
+		
+		
+
+		Map<String, Object> mapCount = new HashMap<>();
+		mapCount.put("empNo", empNo);
+		mapCount.put("searchKeyword", searchKeyword);
+		
+		//문자열을 정수로 변환
+		int intPageNo = Integer.parseInt(pageDraftSearch);
+		//세션에 pageNo를 저장
+		session.setAttribute("pageDraftSearch", String.valueOf(pageDraftSearch));
+		log.info("여기까지 ok2");
+		int totalRows = noteService.countBySearchNoteDraftNo(mapCount);
+		log.info(totalRows+"나전체숫자");
+		
+		Pager pager = new Pager(10, 5, totalRows, intPageNo);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("startRowNo", pager.getStartRowNo());
+		map.put("endRowNo", pager.getEndRowNo());
+		map.put("empNo", empNo);
+		map.put("searchKeyword", searchKeyword);
+		log.info(map+"여기까지 맵임ok3");
+		
+		List<NoteAll> list = noteService.getNoteDraftSearchListByRno(map);
+		log.info(list+"여기까지 ok3");
+		
+		model.addAttribute("pager", pager);
+		model.addAttribute("list", list);
+		String contentType = "임시저장";
+		model.addAttribute("contentType", contentType);
+		model.addAttribute("searchKeyword", searchKeyword);
+		
+		log.info("여기까지 ok4");
+		
+		return "/noteContent";
+	}
+	
 	//중요쪽지함 불러오기
 	@GetMapping("/noteStarred")
 	public String noteStarred(String pageStarred,@RequestParam("noteStarred") String noteStarred, HttpSession session, Model model, Authentication authentication) {
@@ -299,6 +595,115 @@ public class NoteController {
 		model.addAttribute("list", list);
 		String contentType = "중요";
 		model.addAttribute("contentType", contentType);
+		
+		log.info("여기까지 ok4");
+		
+		return "/noteContent";
+	}
+	
+	//중요쪽지함 검색 불러오기
+	@GetMapping("/noteStarredSearch")
+	public String noteStarredSearch(String pageStarredSearch, @RequestParam(name= "searchKeyword", required=false) String searchKeyword, HttpSession session, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+		
+		if(pageStarredSearch == null) {
+			//세션에 저장되어 있는지 확인
+			pageStarredSearch = (String) session.getAttribute("pageStarredSearch");
+			//저장되어있지 않다면 "1"로 초기화
+			if(pageStarredSearch == null) {
+				pageStarredSearch = "1";
+			}
+		}
+		
+		int empNo = empInfo.getEmpinfo_no();
+		Map<String, Object> mapCount = new HashMap<>();
+		mapCount.put("empNo", empNo);
+		mapCount.put("searchKeyword", searchKeyword);
+		
+		
+		
+		//문자열을 정수로 변환
+		int intPageNo = Integer.parseInt(pageStarredSearch);
+		//세션에 pageNo를 저장
+		session.setAttribute("pageStarred", String.valueOf(pageStarredSearch));
+		log.info("여기까지 ok2");
+		int totalRows = noteService.countBySearchNoteStarredNo(mapCount);
+		log.info(totalRows+"나전체숫자");
+		
+		Pager pager = new Pager(10, 5, totalRows, intPageNo);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("startRowNo", pager.getStartRowNo());
+		map.put("endRowNo", pager.getEndRowNo());
+		map.put("empNo", empNo);
+		map.put("searchKeyword", searchKeyword);
+		log.info(map+"여기까지 맵임ok3");
+		
+		List<NoteAll> list = noteService.getNoteStarredSearchListByRno(map);
+		log.info(list+"여기까지 ok3");
+		
+		model.addAttribute("pager", pager);
+		model.addAttribute("list", list);
+		String contentType = "중요";
+		model.addAttribute("contentType", contentType);
+		model.addAttribute("searchKeyword", searchKeyword);
+		
+		log.info("여기까지 ok4");
+		
+		return "/noteContent";
+	}
+	
+	//휴지통 쪽지 검색
+	@GetMapping("/noteTashSearch")
+	public String noteTashSearch(String pageTrashSearch, @RequestParam(name= "searchKeyword", required=false) String searchKeyword, HttpSession session, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+		
+		if(pageTrashSearch == null) {
+			//세션에 저장되어 있는지 확인
+			pageTrashSearch = (String) session.getAttribute("pageTrashSearch");
+			//저장되어있지 않다면 "1"로 초기화
+			if(pageTrashSearch == null) {
+				pageTrashSearch = "1";
+			}
+		}
+		
+		int empNo = empInfo.getEmpinfo_no();
+		Map<String, Object> mapCount = new HashMap<>();
+		mapCount.put("empNo", empNo);
+		mapCount.put("searchKeyword", searchKeyword);
+		
+		
+		//문자열을 정수로 변환
+		int intPageNo = Integer.parseInt(pageTrashSearch);
+		//세션에 pageNo를 저장
+		session.setAttribute("pageTrashSearch", String.valueOf(pageTrashSearch));
+		log.info("여기까지 ok2");
+		int totalRows = noteService.countBySearchNoteTrashNo(mapCount);
+		log.info(totalRows+"나전체숫자");
+		
+		Pager pager = new Pager(10, 5, totalRows, intPageNo);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("startRowNo", pager.getStartRowNo());
+		map.put("endRowNo", pager.getEndRowNo());
+		map.put("empNo", empNo);
+		map.put("searchKeyword", searchKeyword);
+		log.info(map+"여기까지 맵임ok3");
+		
+		List<NoteAll> list = noteService.getNoteTrashSearchListByRno(map);
+		log.info(list+"여기까지 ok3");
+		
+		model.addAttribute("pager", pager);
+		model.addAttribute("list", list);
+		String contentType = "휴지통";
+		model.addAttribute("contentType", contentType);
+		model.addAttribute("searchKeyword", searchKeyword);
 		
 		log.info("여기까지 ok4");
 		
@@ -371,14 +776,123 @@ public class NoteController {
 		model.addAttribute("note", note);
 		EmployeeInfo sender = employeeService.getEmpInfo(note.getNote_sender());
 		String name = sender.getEmpinfo_name();
+		String email = sender.getEmpinfo_email();
 				
+		model.addAttribute("name", name);
+		model.addAttribute("email", email);
+		
+		List<MediaDto> mediaList = noteService.getMediaList(note.getNote_no());
+		
+		model.addAttribute("mediaList", mediaList);
+		
+		List<NoteResponse> noteResponseList = noteService.getNoteReceiver(note.getNote_no(), loginResponse.getEmp_no());
+		model.addAttribute("list", noteResponseList);
+		
+		
+		return "/noteDetail";
+	}
+	
+	//임시저장 편집 파일 불러오기
+	@PostMapping("/editFileGet")
+	@ResponseBody
+	public String editFileGet(String fileValues, HttpSession session, Model model, Authentication authentication) {
+		log.info(fileValues+"파일밸류알려달라");
+		List<MediaDto> mediaList = noteService.selectMediaFiles(fileValues);
+		
+		
+		
+		return "/noteDetail";
+	}
+	
+	//쪽지 상세 발신 불러오기
+	@GetMapping("/noteDetailSent")
+	public String noteDetailSent(String noteNo, HttpSession session, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+		
+		log.info(noteNo+"먼값이 들어오나 보자");
+		int note_no = Integer.parseInt(noteNo);
+		Note note = noteService.getNoteSent(note_no);
+		
+		model.addAttribute("note", note);
+		EmployeeInfo sender = employeeService.getEmpInfo(note.getNote_sender());
+		String name = sender.getEmpinfo_name();
+		
 		model.addAttribute("name", name);
 		
 		List<MediaDto> mediaList = noteService.getMediaList(note.getNote_no());
 		
 		model.addAttribute("mediaList", mediaList);
+		
+		String contentType = "발신";
+		model.addAttribute("contentType", contentType);
+		
+		List<NoteResponse> noteResponseList = noteService.getNoteReceiverSent(note.getNote_no(), loginResponse.getEmp_no());
+		model.addAttribute("list", noteResponseList);
+		
+		
 		return "/noteDetail";
 	}
+	
+	//쪽지 상세 임시저장 불러오기
+	@GetMapping("/noteDetailDraft")
+	public String noteDetailDraft(String noteNo, HttpSession session, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+		
+		log.info(noteNo+"먼값이 들어오나 보자");
+		int note_no = Integer.parseInt(noteNo);
+		Note note = noteService.getNoteSent(note_no);
+		
+		model.addAttribute("note", note);
+		EmployeeInfo sender = employeeService.getEmpInfo(note.getNote_sender());
+		String name = sender.getEmpinfo_name();
+		
+		model.addAttribute("name", name);
+		
+		List<MediaDto> mediaList = noteService.getMediaList(note.getNote_no());
+		
+		model.addAttribute("mediaList", mediaList);
+		
+		String contentType = "임시저장";
+		model.addAttribute("contentType", contentType);
+		
+		List<NoteResponse> noteResponseList = noteService.getNoteReceiverSent(note.getNote_no(), loginResponse.getEmp_no());
+		model.addAttribute("list", noteResponseList);
+		
+		
+		return "/noteDetail";
+	}
+	
+	//발송취소 목록 불러오기
+	@GetMapping("/noteSentCancelList")
+	public String noteSentCancelList(String noteNo, HttpSession session, Model model, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+		
+		log.info(noteNo+"먼값이 들어오나 보자");
+		int note_no = Integer.parseInt(noteNo);
+		List<NoteResponse> list = noteService.getNoteSentList(note_no);
+		model.addAttribute("list", list);
+		boolean hasNoReferenceTypeCC = list.stream()
+			    .noneMatch(noteResponse -> "참조".equals(noteResponse.getNoteRead_type()));
+		
+		model.addAttribute("noCC", hasNoReferenceTypeCC);
+		boolean hasNoReferenceTypeBCC = list.stream()
+			    .noneMatch(noteResponse -> "비밀참조".equals(noteResponse.getNoteRead_type()));
+		model.addAttribute("noBCC", hasNoReferenceTypeBCC);
+		
+		
+		
+		return "/noteContentModal";
+	}
+	
 	
 	//쪽지 파일 다운로드
 	@GetMapping("/noteFileDownload")
@@ -446,6 +960,16 @@ public class NoteController {
 		return "redirect:/note";
 	}
 	
+	//발송 취소
+	@PostMapping("/noteSentCancel")
+	@ResponseBody
+	public Map<String, String> noteSentCancel(String noteReadNo) {
+		 Map<String, String> response = new HashMap<>();
+		String noCancel = noteService.noteSentCancel(noteReadNo);
+		response.put("noCancel", noCancel);
+	    return response;
+	}
+	
 	
 	//중요쪽지 업데이트
 	@PostMapping("/noteStarredUpdate")
@@ -469,6 +993,16 @@ public class NoteController {
 		return "redirect:/note";
 	}
 	
+	//발신 쪽지 휴지통보내기
+	@PostMapping("/deleteSentNote")
+	@ResponseBody
+	public String deleteSentNote(String checkedIdsString, String contentType) {
+		
+		noteService.checkTrashSent(checkedIdsString);
+		
+		return "redirect:/note";
+	}
+	
 	//쪽지 휴지통 비우기
 	@PostMapping("/deleteTrashNote")
 	@ResponseBody
@@ -485,6 +1019,25 @@ public class NoteController {
 	public String recoveryNote(String checkedIdsString) {
 		
 		noteService.recoverTrashNote(checkedIdsString);
+		
+		return "redirect:/note";
+	}
+	
+	//임시저장
+	@PostMapping("/draftNote")
+	@ResponseBody
+	public String draftNote(NoteRequest request, Authentication authentication) throws Exception {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		request.setNote_sender(loginResponse.getEmp_no());
+		log.info(request.getNote_receiver()+"수신자");
+		log.info(request.getNote_receiver_cc()+"씨씨");
+		log.info(request.getNote_receiver_bcc()+"비씨씨");
+		log.info(request.getNote_title()+"주제");
+		log.info(request.getNote_content()+"내용");
+		log.info(request.getFiles()+"파일들");
+		
+		noteService.addDraft(request);
 		
 		return "redirect:/note";
 	}
