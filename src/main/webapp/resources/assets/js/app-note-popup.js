@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
       emailReplyToolbars = [].slice.call(document.querySelectorAll('.email-reply-toolbar')),
       bookmarkEmail = [].slice.call(document.querySelectorAll('.email-list-item-bookmark')),
       selectAllEmails = document.getElementById('email-select-all'),
+      send = document.getElementById('send'),
       emailSearch = document.querySelector('.email-search-input'),
       toggleCC = document.querySelector('.email-compose-toggle-cc'),
       toggleBCC = document.querySelector('.email-compose-toggle-bcc'),
@@ -82,13 +83,29 @@ document.addEventListener('DOMContentLoaded', function () {
     // 답장
 	    if (editorElement && toolbarElement) {
 	    	
-		      new Quill(editorElement, {
+		      var quill = new Quill(editorElement, {
 		        modules: {
 		          toolbar: toolbarElement
 		        },
 		        placeholder: '메세지를 입력하세요. ',
 		        theme: 'snow'
 		      });
+		      let lastEditorContents = null;
+		      quill.on('text-change', function() {
+        		  const editorContents = quill.getContents();
+        		  
+        		  const htmlContent = quill.root.innerHTML;
+        		  const inputElement = document.getElementById('reply');
+        		  if(JSON.stringify(editorContents) !== JSON.stringify(lastEditorContents)) {
+        			  lastEditorContents = editorContents;
+        			  inputElement.value = htmlContent;
+        			  
+        		  }
+        		  
+        		  console.log(htmlContent+"뭐라 나오는지 좀 보자");
+        		  console.log(inputElement.value+"그래서 넘어가는 값이 뭐냐");
+        	});
+		      
 	    }
     
     });
@@ -231,12 +248,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
       }
 
-    // Empty compose email message inputs when modal is hidden
+   /* // Empty compose email message inputs when modal is hidden
     emailCompose.addEventListener('hidden.bs.modal', event => {
       document.querySelector('.email-editor .ql-editor').innerHTML = '';
       $('#emailContacts').val('');
       initSelect2();
-    });
+    });*/
 
     // Delete multiple email
     if (emailListDelete) {
@@ -255,6 +272,14 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     }
 
+    
+
+    document.querySelector('#replySend').addEventListener('submit', function(e) {
+
+       
+    });
+    
+    
     // Mark as read
     if (emailListRead) {
       emailListRead.addEventListener('click', e => {
@@ -359,7 +384,21 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     initSelect2();
     
+    let fileupload = $('#reply-attach-file');
+    if (fileupload) {
+        fileupload.on('change', function () {
+            console.log("파일 클릭함오냐안오냐");
+            const fileName = fileupload[0].files[0].name;
 
+            const fileCount = fileupload[0].files.length;
+            if (fileCount > 1) {
+                document.getElementById('reply-filename').value = fileName + " 외 " + (fileCount - 1) + "개";
+            } else {
+                document.getElementById('reply-filename').value = fileName;
+            }
+        });
+    }
+    
 
     // Scroll to bottom on reply click
     // ? Using jquery vars due to jQuery animation dependency

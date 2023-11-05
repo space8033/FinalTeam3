@@ -19,6 +19,13 @@ public interface NoteDao {
 	public List<NoteAll> selectTrashNoteByEmpNo(Map<String, Object> map);
 	public List<NoteAll> selectDraftNoteByEmpNo(Map<String, Object> map);
 	
+	//쪽지함 검색
+	public List<NoteAll> searchNoteByEmpNo(Map<String, Object> map);
+	public List<NoteAll> searchSentNoteByEmpNo(Map<String, Object> map);
+	public List<NoteAll> searchStarredNoteByEmpNo(Map<String, Object> map);
+	public List<NoteAll> searchTrashNoteByEmpNo(Map<String, Object> map);
+	public List<NoteAll> searchDraftNoteByEmpNo(Map<String, Object> map);
+	
 	//예약 전송
 	public List<Note> selectNoteByNoteRestime(String currentDate);
 	public void updateNoteRestime(Note noteNo);
@@ -29,7 +36,8 @@ public interface NoteDao {
 	//노트번호로 노트불러오기
 	public Note selectNoteByNoteNo(int noteNo);
 	
-	//인원수 불러오기
+	//임시저장 메세지 전송
+	public void updateDraftNote(Note note);
 	
 	//페이징을 위한 카운트
 	public int countByEmpno(int Nno);
@@ -37,6 +45,15 @@ public interface NoteDao {
 	public int countByStarredEmpno(int Nno);
 	public int countByTrashEmpno(int Nno);
 	public int countByDraftEmpno(int Nno);
+	
+	//검색 페이징을 위한 카운트
+	public int countBySearchEmpno(Map<String, Object> map);
+	public int countBySearchSentEmpno(Map<String, Object> map);
+	public int countBySearchStarredEmpno(Map<String, Object> map);
+	public int countBySearchTrashEmpno(Map<String, Object> map);
+	public int countBySearchDraftEmpno(Map<String, Object> map);
+	
+	
 	
 	//페이징을 위한 카운트
 	public int countByUnreadInbox(int Nno);

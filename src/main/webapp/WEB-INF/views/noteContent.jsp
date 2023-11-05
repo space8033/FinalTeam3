@@ -106,14 +106,33 @@
                               <div class="mb-0 mb-lg-2 w-100">
                                 <div class="input-group input-group-merge shadow-none">
                                   <span class="input-group-text border-0 ps-0 py-0" id="email-search">
-                                    <i class="bx bx-search fs-4 text-muted"></i>
+		                              <c:choose>
+		                              	<c:when test ="${contentType eq '휴지통'}">
+		                              		 <i class="bx bx-search cursor-pointer fs-4 text-muted" onclick="javascript:searchTrashMail();"></i>
+			                          	</c:when>
+		                              	<c:when test ="${contentType eq '발신'}">
+		                              		 <i class="bx bx-search cursor-pointer fs-4 text-muted" onclick="javascript:searchSentMail();"></i>
+			                          	</c:when>
+		                              	<c:when test ="${contentType eq '임시저장'}">
+		                              		 <i class="bx bx-search cursor-pointer fs-4 text-muted" onclick="javascript:searchDraftMail();"></i>
+			                          	</c:when>
+		                              	<c:when test ="${contentType eq '중요'}">
+		                              		 <i class="bx bx-search cursor-pointer fs-4 text-muted" onclick="javascript:searchStarredMail();"></i>
+			                          	</c:when>
+		                              	<c:otherwise>
+		                              		 <i class="bx bx-search cursor-pointer fs-4 text-muted" onclick="javascript:searchInboxMail();"></i>
+		                              	</c:otherwise>
+		                              </c:choose>
                                   </span>
+                                  
                                   <input
+                                  	id="searchNote"
                                     type="text"
                                     class="form-control email-search-input border-0 py-0"
                                     placeholder="Search mail"
                                     aria-label="Search..."
                                     aria-describedby="email-search" />
+                                    
                                 </div>
                               </div>
                             </div>
@@ -228,51 +247,104 @@
                                 </div> -->
                               </div>
                             </div>
-                            <div
-                              class="email-pagination d-sm-flex d-none align-items-center flex-wrap justify-content-between justify-sm-content-end">
-                              <span class="d-sm-block d-none mx-3 text-muted">
-                              
-                              		<c:if test="${pager.totalRows <= 10}">
-                              			${pager.totalRows} of ${pager.totalRows}
-                              		</c:if>
-                              		<c:if test="${pager.pageNo == 1 && pager.totalRows > 10}">
-                              			1-10 of ${pager.totalRows}
-                              		</c:if>
-                             
-                              		<c:if test="${pager.pageNo > 1 && pager.pageNo < pager.totalPageNo}">
-                              			${pager.pageNo-1}1-${pager.pageNo}0 of ${pager.totalRows}
-                              		</c:if>
-                              		<c:if test="${pager.pageNo > 1 && pager.pageNo == pager.totalPageNo}">
-                              			${pager.pageNo-1}1-${pager.totalRows} of ${pager.totalRows}
-                              		</c:if>
-                              </span>
-                              <span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="javascript:showEmailList('${contentType}', 1)">처음</a></span>
-                                   <c:if test="${pager.pageNo>1}">
-	                                   <a href="javascript:showEmailList('${contentType}', ${pager.pageNo-1})">
-			                              <i
-			                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
-			                                       
-			                              </i>
-	                              		</a>
-                                   </c:if>
-                                   <c:if test="${pager.pageNo <= 1}">
-			                              <i
-			                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
-			                              </i>
-                                   </c:if>
-                              
-                              
-                              <c:if test="${pager.pageNo >= pager.totalPageNo}">
-                              	 <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i>
-                              </c:if>
-                              
-                              <c:if test="${pager.pageNo < pager.totalPageNo}">
-                              	 <a href="javascript:showEmailList('${contentType}', ${pager.pageNo+1})"> <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i></a>
-                              </c:if>
-                              	
-                              	
-                              	<span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="javascript:showEmailList('${contentType}', ${pager.totalPageNo})">맨끝</a></span>
-                            </div>
+                            
+                            <c:if test ="${!empty searchKeyword}">
+	                            <div
+	                              class="email-pagination d-sm-flex d-none align-items-center flex-wrap justify-content-between justify-sm-content-end">
+	                              <span class="d-sm-block d-none mx-3 text-muted">
+	                              
+	                              		<c:if test="${pager.totalRows <= 10}">
+	                              			${pager.totalRows} of ${pager.totalRows}
+	                              		</c:if>
+	                              		<c:if test="${pager.pageNo == 1 && pager.totalRows > 10}">
+	                              			1-10 of ${pager.totalRows}
+	                              		</c:if>
+	                             
+	                              		<c:if test="${pager.pageNo > 1 && pager.pageNo < pager.totalPageNo}">
+	                              			${pager.pageNo-1}1-${pager.pageNo}0 of ${pager.totalRows}
+	                              		</c:if>
+	                              		<c:if test="${pager.pageNo > 1 && pager.pageNo == pager.totalPageNo}">
+	                              			${pager.pageNo-1}1-${pager.totalRows} of ${pager.totalRows}
+	                              		</c:if>
+	                              </span>
+	                              <span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="javascript:showSearchEmailList('${searchKeyword}','${contentType}', 1)">처음</a></span>
+	                                   <c:if test="${pager.pageNo>1}">
+		                                   <a href="javascript:showSearchEmailList('${searchKeyword}','${contentType}', ${pager.pageNo-1})">
+				                              <i
+				                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
+				                                       
+				                              </i>
+		                              		</a>
+	                                   </c:if>
+	                                   <c:if test="${pager.pageNo <= 1}">
+				                              <i
+				                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
+				                              </i>
+	                                   </c:if>
+	                              
+	                              
+	                              <c:if test="${pager.pageNo >= pager.totalPageNo}">
+	                              	 <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i>
+	                              </c:if>
+	                              
+	                              <c:if test="${pager.pageNo < pager.totalPageNo}">
+	                              	 <a href="javascript:showSearchEmailList('${searchKeyword}','${contentType}', ${pager.pageNo+1})"> <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i></a>
+	                              </c:if>
+	                              	
+	                              	
+	                              	<span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="javascript:showSearchEmailList('${searchKeyword}','${contentType}', ${pager.totalPageNo})">맨끝</a></span>
+	                            </div>
+                            </c:if>
+                            
+                             <c:if test ="${empty searchKeyword}">
+	                            <div
+	                              class="email-pagination d-sm-flex d-none align-items-center flex-wrap justify-content-between justify-sm-content-end">
+	                              <span class="d-sm-block d-none mx-3 text-muted">
+	                              
+	                              		<c:if test="${pager.totalRows <= 10}">
+	                              			${pager.totalRows} of ${pager.totalRows}
+	                              		</c:if>
+	                              		<c:if test="${pager.pageNo == 1 && pager.totalRows > 10}">
+	                              			1-10 of ${pager.totalRows}
+	                              		</c:if>
+	                             
+	                              		<c:if test="${pager.pageNo > 1 && pager.pageNo < pager.totalPageNo}">
+	                              			${pager.pageNo-1}1-${pager.pageNo}0 of ${pager.totalRows}
+	                              		</c:if>
+	                              		<c:if test="${pager.pageNo > 1 && pager.pageNo == pager.totalPageNo}">
+	                              			${pager.pageNo-1}1-${pager.totalRows} of ${pager.totalRows}
+	                              		</c:if>
+	                              </span>
+	                              <span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="javascript:showEmailList('${contentType}', 1)">처음</a></span>
+	                                   <c:if test="${pager.pageNo>1}">
+		                                   <a href="javascript:showEmailList('${contentType}', ${pager.pageNo-1})">
+				                              <i
+				                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
+				                                       
+				                              </i>
+		                              		</a>
+	                                   </c:if>
+	                                   <c:if test="${pager.pageNo <= 1}">
+				                              <i
+				                                class="email-prev bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4">
+				                              </i>
+	                                   </c:if>
+	                              
+	                              
+	                              <c:if test="${pager.pageNo >= pager.totalPageNo}">
+	                              	 <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i>
+	                              </c:if>
+	                              
+	                              <c:if test="${pager.pageNo < pager.totalPageNo}">
+	                              	 <a href="javascript:showEmailList('${contentType}', ${pager.pageNo+1})"> <i class="email-next bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i></a>
+	                              </c:if>
+	                              	
+	                              	
+	                              	<span class="d-sm-block d-none mx-3 text-muted"><a class="text-muted" href="javascript:showEmailList('${contentType}', ${pager.totalPageNo})">맨끝</a></span>
+	                            </div>
+                            
+                            </c:if>
+                            
                           </div>
                         </div>
                         <hr class="container-m-nx m-0" />
@@ -498,7 +570,7 @@
 					                          	</c:when>
 				                              	<c:when test ="${contentType eq '임시저장'}">
 				                              	
-				                              		<li id="li-${note.noteRead_no}" class="list-inline-item email-unread"><i id="i-${note.note_no}" class="bx bx-envelope fs-4"></i></li>
+				                              		<li id="li-${note.noteRead_no}" class="list-inline-item email-unread"><i id="i-${note.note_no}" class="bx bx-envelope fs-4" title="전송" onclick="javascript:sendDraft(${note.note_no})"></i></li>
 					                          	</c:when>
 				                              	<c:otherwise>
 				                              	 	   <c:if test ="${note.noteRead_read != null}">
