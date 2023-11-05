@@ -19,7 +19,9 @@
 		  FROM alarm a
 		  JOIN empinfo ei ON a.empinfo_no = ei.empinfo_no
 		  JOIN emp e ON ei.emp_no = e.emp_no
-		 WHERE e.emp_id = #{emp_id} AND a.alarm_isread = 0
+		 WHERE e.emp_id = #{emp_id} 
+		   AND alarm_isread = 0
+		   AND alarm_deletedAt IS NULL
 	</select>
 	
 	<select id="selectAlarmList" parameterType="int" resultType="AlarmRequest">
