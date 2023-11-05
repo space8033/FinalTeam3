@@ -441,7 +441,8 @@ function deleteProgram(task_no) {
 $(document).ready(function() {
   var emp_no = $("#empNoBox").val();
   var usersList = [];
-
+  var now = $("#nowEmpNo").val();
+  console.log(now);
   function sendAjaxRequest(emp_no) {
     $.ajax({
       type: "GET",

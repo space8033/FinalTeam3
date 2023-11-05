@@ -6,6 +6,7 @@
     <form class="card-body" onsubmit="return false">
        <div><input type="hidden" value="${programModify.task_no}" id="taskNoBox"/></div>
        <div><input type="hidden" value="${programModify.emp_no}" id="empNoBox"/></div>
+       <div><input type="hidden" value="${now_emp_no}" id="nowEmpNo"/></div>
        <div class="row mb-3">
          <label class="col-sm-3 col-form-label" for="multicol-email">프로그램명</label>
          <div class="col-sm-9">
@@ -245,13 +246,26 @@
       </div>
     </div>
     <div class="pt-4">
-      <div class="row justify-content-end">
-        <div class="col-sm-12 col-md-8 ps-4">
-          <button id="programModify" type="submit" class="btn btn-primary me-sm-2 me-1 mb-2" >수정</button>
-          <button id="programDelete" type="button" class="btn btn-danger me-sm-2 me-1 mb-2" onclick="javascript:deleteProgram(${programModify.task_no})">삭제</button>
-          <button type="reset" class="btn btn-label-secondary mb-2 me-1">취소</button>
-        </div>
-      </div>
+      <c:if test="${now_emp_no == 0}">
+	      <div class="row justify-content-end">
+	        <div class="col-sm-12 col-md-8 ps-4">
+	          <button id="programModify" type="submit" class="btn btn-primary me-sm-2 me-1 mb-2" >수정</button>
+	          <button id="programDelete" type="button" class="btn btn-danger me-sm-2 me-1 mb-2" onclick="javascript:deleteProgram(${programModify.task_no})">삭제</button>
+	          <button type="reset" class="btn btn-label-secondary mb-2 me-1">취소</button>
+	        </div>
+	      </div>
+      </c:if>
+      <c:if test="${programModify.emp_no != 0}">
+	      <c:if test="${programModify.emp_no == now_emp_no}">
+		      <div class="row justify-content-end">
+		        <div class="col-sm-12 col-md-8 ps-4">
+		          <button id="programModify" type="submit" class="btn btn-primary me-sm-2 me-1 mb-2" >수정</button>
+		          <button id="programDelete" type="button" class="btn btn-danger me-sm-2 me-1 mb-2" onclick="javascript:deleteProgram(${programModify.task_no})">삭제</button>
+		          <button type="reset" class="btn btn-label-secondary mb-2 me-1">취소</button>
+		        </div>
+		      </div>
+	      </c:if>
+      </c:if>
     </div>
   </form>
 </div>
