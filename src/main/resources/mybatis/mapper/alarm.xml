@@ -29,6 +29,7 @@
 		  from alarm
 		 where empinfo_no = #{empinfo_no}
 		   and alarm_deletedAt IS NULL 
+	  order by alarm_createdAt desc
 	</select>
 	
 	<update id="deleteAlarmByAlarmNo" parameterType="int">
