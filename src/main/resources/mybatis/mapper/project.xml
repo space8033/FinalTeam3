@@ -33,4 +33,10 @@
 		
 	</select>
 	
+	<select id="selectProjectDetail" parameterType="int" resultType="ProjectModifyResponse">
+		select project_no, project_name, project_outline, project_startdate, project_enddate, project_client, project_manager
+		from project
+		where project_no = #{project_no}
+	</select>
+	
 </mapper>
