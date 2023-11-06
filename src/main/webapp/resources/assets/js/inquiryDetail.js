@@ -158,7 +158,7 @@ $(function () {
 	    $('#replyAdd').click(function() {
 	    	console.log("댓글 등록 클릭 성공");
 	    	var reply_content = $('#replyContent').val();
-	        //var empInfoName = $('#replyName').val(); // empInfo_name
+	        var empInfoName = $('#replyName').val(); // empInfo_name
 	        console.log("replyContent : "+ reply_content);
 	        //console.log("empinfoname : "+ empInfoName);
 
@@ -167,6 +167,7 @@ $(function () {
 	        } else {
 	            var replyData = {
 	            		reply_content: reply_content,
+	            		empinfo_name: $('#replyName').val(),
 	            		notice_no: $('#noticeNo').val()
 	            		//empInfoName: empInfoName
 	            };
@@ -190,18 +191,19 @@ $(function () {
 	    });
 
 	    
-	    function replyDelete(replyId) {
+	    function replyDelete(replyNo) {
+	        // replyNo를 사용하여 AJAX 요청을 보냅니다.
 	        $.ajax({
 	            type: 'POST',
 	            url: '/exodia/replyDelete',
-	            data: { replyId: replyId },
+	            data: { reply_no: replyNo },
 	            success: function (data) {
-	            	console.log("댓글데이터 :" + data);
-	                // 댓글 제거
-	                $('#reply' + replyId).remove();
+	                // 댓글이 삭제되면 이후 작업 수행
+	                console.log("댓글이 삭제되었습니다.");
+	                // 다른 동작 수행 가능
 	            },
 	            error: function (xhr, status, error) {
-	                console.error('오류 발생:');
+	                console.error('댓글 삭제 중 오류 발생:');
 	                console.error('상태 코드: ' + xhr.status);
 	                console.error('에러 메시지: ' + error);
 	            }

@@ -174,9 +174,13 @@ public class InquiryController {
 			LoginResponse loginResponse = empDetails.getLoginResponse();
 			int emp_no = loginResponse.getEmp_no();
 			
+			int empinfo_no = inquiryService.replyEmpinfoNo(emp_no);
+			
 			Reply reply = new Reply();
 			reply.setNotice_no(notice_no);
 			reply.setReply_content(replyContent);
+			reply.setEmpinfo_no(empinfo_no);
+			
 			inquiryService.replyWrite(reply);		
 			
 			log.info("댓글 입력 시 db로 넘어가는 값들 :" + reply);	

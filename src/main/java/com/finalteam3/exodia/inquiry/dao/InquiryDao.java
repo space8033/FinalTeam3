@@ -20,4 +20,5 @@ public interface InquiryDao {
 	public void insertReply(Reply reply);
 	public List<Reply> selectReplyByNoticeNo(int notice_no);
 	public void deleteByReplyNo(int reply_no);
+	public int selectEmpInfoNo(int emp_no);
 }
