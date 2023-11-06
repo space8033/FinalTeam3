@@ -160,7 +160,11 @@
 	</select>
 	
 	<update id="updateRole" parameterType="Map">
-		update role set role_category = #{role_category} where project_no = 0 and empinfo_no = #{empinfo_no}
+		update role set role_category = #{role_category} where project_no = #{project_no} and empinfo_no = #{empinfo_no}
+	</update>
+	
+	<update id="updateTeamDuty" parameterType="Map">
+		update team set team_duty = #{team_duty} where project_no = #{project_no} and empinfo_no = 0 and team_name = #{team_name}
 	</update>
 	
 	<select id="updateEmpInfo" parameterType="ModifyRequest">

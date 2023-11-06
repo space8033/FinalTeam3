@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.json.JSONArray;
 
+import com.finalteam3.exodia.employee.dto.response.EmpNote;
+
 import lombok.Data;
 
 @Data
@@ -15,7 +17,8 @@ public class ProjectModifyResponse {
 	private String project_enddate;
 	private String project_client;
 	private String project_date;
-	//private int project_manager;
+	private List<EmpNote> emp_notes;
+	private int project_manager;
 	private String manager_name;
 	private JSONArray team_names;
 	private List<String> teams;

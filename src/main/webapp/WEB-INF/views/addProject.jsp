@@ -249,14 +249,14 @@
               <!-- Sticky Actions -->
               <div class="row">
                 <div class="col-12">
-               	<form id="projectRegister" name="ProjectAddRequest" action="addProject" method="POST">
+               	<form id="projectRegister" name="ProjectAddRequest" onsubmit="return false">
                   <div class="card">
                     <div
                       class="card-header sticky-element bg-label-secondary d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row">
                       <h5 class="card-title mb-sm-0 me-2">프로젝트 등록</h5>
                       <div class="action-btns">
                         
-                        <button class="btn btn-primary">저장</button>
+                        <button class="btn btn-primary" id="registerButton">저장</button>
                       </div>
                     </div>
                     <div class="card-body">

@@ -33,14 +33,20 @@ public class ProjectServiceImpl implements ProjectService{
 		String[] project_periods = request.getProject_period().split(" to ");
 		request.setProject_startDate(project_periods[0]);
 		request.setProject_endDate(project_periods[1]);
-		
+		request.setProject_manager(request.getEmp_notes().get(0).getEmpinfo_no());
 		//프로젝트 시작시 요구분석 상태로 초기화
 		request.setProject_status("요구분석");
+		
 		
 		//프로젝트 등록
 		projectDao.insertProject(request);
 		//여기부터 하면됨 (프로젝트 넘버 구해서 팀 등록하기)팀명들은 다 받아옴 아래 주석내용 다시확인!
 		int projectNo = projectDao.selectRecentNo();
+		Map<String, Object> map1 = new HashMap<>();
+		map1.put("project_no", projectNo);
+		map1.put("role_category", "ROLE_PM");
+		map1.put("empinfo_no", request.getProject_manager());
+		employeeDao.updateRole(map1);
 		
 		//팀명 등록
 		JSONArray teamNames = request.getTeam_name();
@@ -91,9 +97,11 @@ public class ProjectServiceImpl implements ProjectService{
 			
 		String project_startdate = response.getProject_date().split(" to ")[0];
 		String project_enddate = response.getProject_date().split(" to ")[1];
+		int empinfo_no = response.getEmp_notes().get(0).getEmpinfo_no();
 		
 		response.setProject_startdate(project_startdate);
 		response.setProject_enddate(project_enddate);
+		response.setProject_manager(empinfo_no);
 		
 		projectDao.updateProject(response);
 	}

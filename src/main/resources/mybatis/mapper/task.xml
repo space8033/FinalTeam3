@@ -15,6 +15,7 @@
 		select p.task_no, t.team_name, p.task_name, i.empinfo_no, i.empinfo_name, p.task_startdate, p.task_enddate, p.task_status
 		from empinfo i, task p, team t
 		where p.project_no = 0
+		and t.project_no = 0
 		and p.emp_no = i.emp_no
 		and i.empinfo_no = t.empinfo_no
 		and p.task_type = 'Business'
@@ -29,6 +30,21 @@
 		and i.emp_no = e.emp_no
 		and t.task_type = 'Business'
 		and t.task_no = #{task_no}
+	</select>
+	
+	<select id="countAllTask" resultType="int" parameterType="int">
+		select count(*)
+		from task
+		where project_no = #{project_no}
+		and task_type='Business'
+	</select>
+	
+	<select id="countCompleteTask" resultType="int" parameterType="int">
+		select count(*)
+		from task
+		where project_no = #{project_no}
+		and task_type='Business'
+		and task_status='완료'
 	</select>
 	
 	<update id="updateProgram" parameterType="ProgramModifyRequest">

@@ -62,9 +62,7 @@ public class InquiryController {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
-		List<Notice> data = inquiryService.getInquiryList();
-		log.info("문의사항 리스트 내놔 : "+ data.toString());
-		
+		List<Notice> data = inquiryService.getInquiryList();	
 		
 		//data를 json데이터로 바꾸기
         ObjectMapper objectMapper = new ObjectMapper();
@@ -102,7 +100,6 @@ public class InquiryController {
 			inquiryService.write(notice);
 			
 			int noticeNo = notice.getNotice_no();
-			log.info("" + noticeNo);
 			
 			for(MultipartFile mf : mfs) {
 						if(!mf.isEmpty()) {
@@ -116,7 +113,6 @@ public class InquiryController {
 					mediaService.insertNoticeFile(mediaDto);
 						}
 			}
-			log.info("공지사항 입력 시 db로 넘어가는 값들 :" + notice);	
 			return "redirect:/inquiryList";
 		}
 		
@@ -155,13 +151,11 @@ public class InquiryController {
 			Notice notice = inquiryService.getInquiryDetail(notice_no);				
 			List<MediaDto> mediaList = inquiryService.getMediaList(notice.getNotice_no());
 			List<Reply> replyList = inquiryService.getReplyByNoticeNo(notice_no);
-			log.info("replyList :"+ replyList);
 
 		    model.addAttribute("replyList", replyList);
 		    model.addAttribute("loginResponse", loginResponse);
 		    model.addAttribute("notice", notice);
 		    model.addAttribute("mediaList", mediaList);
-		    log.info("notice_no가 왜 0이야 : " + model);
 		    	
 			return "inquiryDetail";
 		}
@@ -194,7 +188,7 @@ public class InquiryController {
 			LoginResponse loginResponse = empDetails.getLoginResponse();
 			
 			Notice notice = inquiryService.getInquiryDetail(notice_no);
-			log.info("inquiry :" +  notice);
+
 			model.addAttribute("notice", notice);
 			
 			return "inquiryUpdate";
@@ -224,16 +218,14 @@ public class InquiryController {
 		
 		//댓글 삭제
 		@PostMapping("/replyDelete")
-		public String replyDelete(Authentication authentication, @RequestParam int reply_no, int notice_no) {
+		public String replyDelete(Authentication authentication, @RequestParam int reply_no) {
 
 			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 			LoginResponse loginResponse = empDetails.getLoginResponse();
-			log.info("댓글노티스넘버 : " + notice_no);
 			
 			inquiryService.deleteReplyByReplyNo(reply_no);
 			
-			
-			return "redirect:/inquiryDetail?notice_no=" + notice_no;
+			return "redirect:/inquiryList";
 		}
 
 }

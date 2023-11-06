@@ -15,4 +15,6 @@ public interface TaskDao {
 	public ProgramModifyRequest selectDetailByTaskNo(int task_no);
 	public void updateProgram(ProgramModifyRequest request);
 	public void deleteProgram(int task_no);
+	public int countAllTask(int project_no);
+	public int countCompleteTask(int project_no);
 }

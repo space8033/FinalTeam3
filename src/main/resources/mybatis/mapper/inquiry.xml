@@ -24,6 +24,7 @@
 		    empinfo e ON r.empinfo_no = e.empinfo_no
 		WHERE
 		    r.notice_no = #{notice_no}
+		    AND r.reply_deletedat IS NULL
 		ORDER BY r.reply_createdat ASC
 	</select>
 	

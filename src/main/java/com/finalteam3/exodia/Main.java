@@ -1,5 +1,7 @@
 package com.finalteam3.exodia;
 
+import javax.annotation.Resource;
+
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -7,9 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.security.dto.EmpDetails;
+import com.finalteam3.exodia.task.service.TaskService;
 
 @Controller
 public class Main {
+	@Resource
+	private TaskService taskService;
 	
 	@RequestMapping("/")
 	public String login(Model model) {
@@ -196,6 +201,9 @@ public class Main {
 		
 		String emp_name = loginResponse.getEmpInfo_name();
 		model.addAttribute("empInfo_name", emp_name);
+		
+		double rate = taskService.getProgressRate(0);
+		model.addAttribute("progressRate", rate);
 		
 		return "main";
 	}

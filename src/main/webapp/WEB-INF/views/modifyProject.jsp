@@ -249,14 +249,16 @@
               <!-- Sticky Actions -->
               <div class="row">
                 <div class="col-12">
-               	<form id="projectModify" name="ProjectModifyResponse" action="modifyProject" method="POST">
+               	<form id="projectModify" name="ProjectModifyResponse" onsubmit="return false">
                   <div class="card">
+                  	<input type="hidden" value="${projectDetail.project_no}" id="projectNoBox">
+                  	<input type="hidden" value="${projectDetail.project_manager}" id="managerNoBox">
                     <div
                       class="card-header sticky-element bg-label-secondary d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row">
                       <h5 class="card-title mb-sm-0 me-2">프로젝트 수정</h5>
                       <div class="action-btns">
                         
-                        <button class="btn btn-primary">저장</button>
+                        <button class="btn btn-primary" id="modifyButton">저장</button>
                       </div>
                     </div>
                     <div class="card-body">
@@ -391,7 +393,7 @@
     <!-- Page JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/form-layouts.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/forms-selects.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/tagForProject.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/tagForProject2.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/forms-typeahead.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
     
