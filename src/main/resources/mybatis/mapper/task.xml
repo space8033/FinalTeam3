@@ -32,6 +32,16 @@
 		and t.task_no = #{task_no}
 	</select>
 	
+	<select id="selectTeamTaskDetail" resultType="TeamTaskResponse" parameterType="Map">
+		select t.team_duty, i.empinfo_no, e.emp_no, i.empinfo_name
+		from team t, empinfo i, emp e
+		where t.project_no = #{project_no}
+		and t.empinfo_no = i.empinfo_no
+		and i.emp_no = e.emp_no
+		and t.team_name = #{team_name}
+		and e.emp_no != 0
+	</select>
+	
 	<select id="countAllTask" resultType="int" parameterType="int">
 		select count(*)
 		from task
@@ -45,6 +55,23 @@
 		where project_no = #{project_no}
 		and task_type='Business'
 		and task_status='완료'
+	</select>
+	
+	<select id="countTaskByEmpNo" resultType="int" parameterType="Map">
+		select count(*)
+		from task
+		where project_no = #{project_no}
+		and task_type='Business'
+		and emp_no = #{emp_no}
+	</select>
+
+	<select id="countCompleteByEmpNo" resultType="int" parameterType="Map">
+		select count(*)
+		from task
+		where project_no = #{project_no}
+		and task_type='Business'
+		and task_status='완료'
+		and emp_no = #{emp_no}
 	</select>
 	
 	<update id="updateProgram" parameterType="ProgramModifyRequest">
