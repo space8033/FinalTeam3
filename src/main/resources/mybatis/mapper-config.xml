@@ -30,6 +30,8 @@
 		<typeAlias alias="Reply" type="com.finalteam3.exodia.inquiry.dto.Reply" />
 		<typeAlias alias="ProgramListResponse" type="com.finalteam3.exodia.task.dto.response.ProgramListResponse" />
 		<typeAlias alias="ProgramModifyRequest" type="com.finalteam3.exodia.task.dto.request.ProgramModifyRequest" />
-
+		<typeAlias alias="ChatRoom" type="com.finalteam3.exodia.chat.dto.request.ChatRoom" />
+		<typeAlias alias="ChatMessage" type="com.finalteam3.exodia.chat.dto.request.ChatMessage" />
+		<typeAlias alias="ChatParticipant" type="com.finalteam3.exodia.chat.dto.request.ChatParticipant" />
 	</typeAliases>
 </configuration>

@@ -54,7 +54,11 @@
 	    	var alarmToast = document.querySelector("#alarmToast");
 	    	alarmToast.classList.add('show');
 	    	var alarmMsg = document.querySelector("#alarmMsg");
-	    	alarmMsg.innerText = "제목 : " + title + "</br>" + sender + "님으로부터 1개의 쪽지가 도착하였습니다!"
+	    	alarmMsg.innerText = "제목 : " + title + sender + "님으로부터 1개의 쪽지가 도착하였습니다!"
+	    	setTimeout(function() {
+	    		alarmToast.classList.remove("show");
+		    }, 100000);
+	    	
 	    }
 	};
 
@@ -369,7 +373,15 @@ function showAlarm() {
         });
 	  	
 }
+
+
+//채팅
+function chat() {
+	var url = "/exodia/chat";
+    var popup = window.open(url, "MyPopup", "width=1100, height=700");
 	
+	
+}
 	
 	
 	

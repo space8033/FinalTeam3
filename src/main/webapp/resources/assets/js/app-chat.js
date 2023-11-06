@@ -4,6 +4,97 @@
 
 'use strict';
 
+
+
+
+
+function chatRoom(emp_no) {
+	 console.log("들어는오나용 ㅎㅎ");
+	
+	  
+   var data = {
+		 emp_no: emp_no
+	};
+	
+	$.ajax({
+		url: "/exodia/chatRoom",
+		type: "GET",
+		data: data
+		
+	}).done(function(result) {
+ 
+   	  var html = jQuery('<div>').html(result);
+         var contents = html.find("div#chatRoomContent").html();
+     	  $("#chatRoom").html(contents);
+     	console.log("값은받아오나용 ㅠ");
+        new PerfectScrollbar('.app-chat-contacts .sidebar-body', {
+		        wheelPropagation: false,
+		        suppressScrollX: true
+		      });
+		    
+
+		    // Chat history scrollbar
+		      new PerfectScrollbar('.chat-history-body', {
+		        wheelPropagation: false,
+		        suppressScrollX: true
+		      });
+		    
+
+		    // Sidebar left scrollbar
+		      new PerfectScrollbar('.app-chat-sidebar-left .sidebar-body', {
+		        wheelPropagation: false,
+		        suppressScrollX: true
+		      });
+		    
+
+		    // Sidebar right scrollbar
+		      new PerfectScrollbar('.app-chat-sidebar-right .sidebar-body', {
+		        wheelPropagation: false,
+		        suppressScrollX: true
+		     });
+		    
+		     $("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
+		     $("#"+emp_no).addClass("active");
+		    
+		    
+		    
+		    
+		    
+		   
+     	$('.form-send-message').on('submit', function (e) {
+     		  e.preventDefault();
+     		  var messageInput = $('.message-input');
+     		  if (messageInput.val()) {
+     		    // Create a div and add a class
+     		    sendMessage();
+     		    var renderMsg = $('<div class="chat-message-text mt-2"></div>');
+     		    renderMsg.html('<p class="mb-0 text-break">' + messageInput.val() + '</p>');
+     		    $('li:last-child .chat-message-wrapper').append(renderMsg);
+     		    messageInput.val('');
+     		    scrollToBottom();
+     		    
+     		
+     		  }
+     		  
+     	});
+     	
+	
+	});
+	
+}
+
+function sendMessage() {
+	var messageInput = $('.message-input').val();
+    sock.send(messageInput);
+}
+
+function scrollToBottom() {
+	  var chatHistoryBody = $('.chat-history-body');
+	  chatHistoryBody.scrollTop(chatHistoryBody[0].scrollHeight);
+	  scrollToBottom();
+}
+
+
 document.addEventListener('DOMContentLoaded', function () {
   (function () {
     const chatContactsBody = document.querySelector('.app-chat-contacts .sidebar-body'),
@@ -18,6 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
       formSendMessage = document.querySelector('.form-send-message'),
       messageInput = document.querySelector('.message-input'),
       msgArea = document.getElementById("msgArea"),
+      myName = document.getElementById("name"),
       searchInput = document.querySelector('.chat-search-input'),
       speechToText = $('.speech-to-text'), // ! jQuery dependency for speech to text
       userStatusObj = {
@@ -29,39 +121,87 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize PerfectScrollbar
     // ------------------------------
+    
+    
+    if(myName){
+	    var emp_no = "46";
+	    var data = {
+	   		 emp_no: emp_no
+	   	};
+	   	
+	   	$.ajax({
+	   		url: "/exodia/chatRoom",
+	   		type: "GET",
+	   		data: data
+	   		
+	   	}).done(function(result) {
+	    
+	      	  var html = jQuery('<div>').html(result);
+	            var contents = html.find("div#chatRoomContent").html();
+	        	  $("#chatRoom").html(contents);
+	        	console.log("값은받아오나용 ㅠ");
+	        	 new PerfectScrollbar('.app-chat-contacts .sidebar-body', {
+     		        wheelPropagation: false,
+     		        suppressScrollX: true
+     		      });
+     		    
 
-    
-    // 소켓 생성 및 연결
-	  const sock = new SockJS("http://localhost:8080/exodia/chat");
-	  sock.onmessage = onMessage;
-	  sock.onclose = onClose;
-	  sock.onopen = onOpen;
-/*    let websocket;
-    
-    //입장 버튼을 눌렀을 때 호출되는 함수
-    function connect() {
-        // 웹소켓 주소
-        var wsUri = "ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/chat";
-        // 소켓 객체 생성
-        websocket = new WebSocket(wsUri);
-        //웹 소켓에 이벤트가 발생했을 때 호출될 함수 등록
-        websocket.onopen = onOpen;
-        websocket.onmessage = onMessage;
+     		    // Chat history scrollbar
+     		      new PerfectScrollbar('.chat-history-body', {
+     		        wheelPropagation: false,
+     		        suppressScrollX: true
+     		      });
+     		    
+
+     		    // Sidebar left scrollbar
+     		      new PerfectScrollbar('.app-chat-sidebar-left .sidebar-body', {
+     		        wheelPropagation: false,
+     		        suppressScrollX: true
+     		      });
+     		    
+
+     		    // Sidebar right scrollbar
+     		      new PerfectScrollbar('.app-chat-sidebar-right .sidebar-body', {
+     		        wheelPropagation: false,
+     		        suppressScrollX: true
+     		     });
+     		    
+     		     $("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
+     		     $("#"+emp_no).addClass("active");
+     		    
+     		    
+     		    
+     		    
+     		  
+	        	$('.form-send-message').on('submit', function (e) {
+	        		  e.preventDefault();
+	        		  var messageInput = $('.message-input');
+	        		  if (messageInput.val()) {
+	        		    // Create a div and add a class
+	        		    //sendMessage();
+	        		    var renderMsg = $('<div class="chat-message-text mt-2"></div>');
+	        		    renderMsg.html('<p class="mb-0 text-break">' + messageInput.val() + '</p>');
+	        		    $('li:last-child .chat-message-wrapper').append(renderMsg);
+	        		    messageInput.val('');
+	        		    
+	        		    
+	         		    scrollToBottom();
+	         		    
+
+	         		   function scrollToBottom() {
+	         		   	  var chatHistoryBody = $('.chat-history-body');
+	         		   	  chatHistoryBody.scrollTop(chatHistoryBody[0].scrollHeight);
+	         		   	  scrollToBottom();
+	         		   }
+	        		  
+	        		  }
+	        	});
+	        	
+	        	scrollToBottom();
+	        	
+	   	});
     }
-    
-    //웹 소켓에 연결되었을 때 호출될 함수
-    function onOpen() {
-    }
-    
-   // * 1 메시지 전송
-   function sendMessage(message){
-   }
-   
-    // * 2 메세지 수신
-    function onMessage(evt) {
-   }
-	  
-	  */
+	 
 	  
     // Chat contacts scrollbar
     if (chatContactsBody) {
@@ -132,12 +272,22 @@ document.addEventListener('DOMContentLoaded', function () {
     chatContactListItems.forEach(chatContactListItem => {
       // Bind click event to each chat contact list item
       chatContactListItem.addEventListener('click', e => {
-        // Remove active class from chat contact list item
-        chatContactListItems.forEach(chatContactListItem => {
-          chatContactListItem.classList.remove('active');
-        });
-        // Add active class to current chat contact list item
-        e.currentTarget.classList.add('active');
+    	  
+    	 
+	          // Remove active class from chat contact list item
+	          chatContactListItems.forEach(chatContactListItem => {
+	        	  chatContactListItem.classList.remove('active');
+	          });
+	          // Add active class to current chat contact list item
+	          e.currentTarget.classList.add('active');
+        
+       /* var html = jQuery('<div>').html();
+    	var contents = html.find("div#chatRoom").html();
+    	$("#chatRoomContent").html(contents);*/
+        
+        
+        
+		
       });
     });
 
@@ -189,9 +339,9 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
     
-    function sendMessage() {
+   /* function sendMessage() {
   	    sock.send(messageInput.value);
-  	}
+  	}*/
 
 	function onMessage(msg) {
 	    const data = msg.data;
@@ -226,7 +376,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	    appendMessage(msgArea, "", str, "alert-info");
 	  }
 
-    // Send Message
+    /*// Send Message
     formSendMessage.addEventListener('submit', e => {
       e.preventDefault();
       if (messageInput.value) {
@@ -239,7 +389,7 @@ document.addEventListener('DOMContentLoaded', function () {
         messageInput.value = '';
         scrollToBottom();
       }
-    });
+    });*/
     
     
   	  
