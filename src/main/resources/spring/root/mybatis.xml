@@ -50,5 +50,8 @@
 	<mybatis-spring:scan
 		base-package="com.finalteam3.exodia.inquiry.dao"
 		annotation="org.apache.ibatis.annotations.Mapper" />
+	<mybatis-spring:scan
+		base-package="com.finalteam3.exodia.chat.dao"
+		annotation="org.apache.ibatis.annotations.Mapper" />
 
 </beans>

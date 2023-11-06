@@ -267,7 +267,7 @@
                  </a>
                </li>
                <li>
-                 <a class="dropdown-item" href="${pageContext.request.contextPath}/chat">
+                 <a class="dropdown-item" href="javascript:chat();">
                    <span class="d-flex align-items-center align-middle">
                      <i class="bx bx-chat me-3"></i>
                      <span class="flex-grow-1 align-middle">채팅</span>
