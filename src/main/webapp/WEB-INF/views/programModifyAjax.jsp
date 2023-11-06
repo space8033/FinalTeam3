@@ -272,5 +272,6 @@
 
     <!-- Page JS -->
 <script src="${pageContext.request.contextPath}/resources/assets/js/forms-pickers.js"></script>
+<script src="${pageContext.request.contextPath}/resources/assets/js/modifyProgramAjax.js"></script>
     
 <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.js"></script>

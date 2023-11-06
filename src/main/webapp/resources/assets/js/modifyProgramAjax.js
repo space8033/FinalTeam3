@@ -1,22 +1,30 @@
 /**
  * Tagify
  */
+
 $(document).ready(function() {
   var emp_no = $("#empNoBox").val();
   var usersList = [];
   var now = $("#nowEmpNo").val();
   console.log(now);
-  function sendAjaxRequest() {
+  function sendAjaxRequest(emp_no) {
     $.ajax({
       type: "GET",
-      url: "/exodia/employee/getAllEmpInfo",
-
+      url: "/exodia/employee/getAllUser",
+      data: {
+    	  emp_no: emp_no
+      },
       success: function(data) {
  		 usersList = data;
- 		 console.log(usersList);
  		 TagifyUserList.settings.whitelist = usersList;
          TagifyUserList.loading(false);
+         var originalUser = usersList.filter(function(user) {
+        	 return user.emp_no == emp_no;
+         });
          
+         originalUser.forEach(function(user) {
+        	TagifyUserList.addTags([user.empinfo_name]); 
+         });
       },
       error: function(xhr, status, error) {
         // 에러 처리를 수행합니다.
@@ -24,7 +32,7 @@ $(document).ready(function() {
     });
   }
   
-  sendAjaxRequest();
+  sendAjaxRequest(emp_no);
   
   
   // Basic
@@ -155,7 +163,7 @@ $(document).ready(function() {
 	    >
 	    <div class="d-flex">
 	      <div class="fw-medium" style="width:150px">${tagData.empinfo_name} </div>
-	      <span>${tagData.empinfo_email}</span>
+	      <span>${tagData.team_name}</span>
 	    </div>
 	    </div>
 	  `;
@@ -215,6 +223,49 @@ $(document).ready(function() {
   function onInvalidTag(e) {
     console.log('invalid', e.detail);
   }
+  
+  $("#programModify").on("click", function(e) {
+	  e.preventDefault();
+	  
+	  var task_no = $("#taskNoBox").val();
+	  var task_name = $("#multicol-email").val();
+	  var emp_notes = TagifyUserList.value;
+	  var task_url = $("#multicol-password").val();
+	  var task_importance = $("#task-priority").val();
+	  var task_category = $("#multicol-country").val();
+	  var task_detail = $("#detail-category").val();
+	  var task_date = $("#flatpickr-range").val();
+	  var task_realstart = $("#flatpickr-date").val();
+	  var task_realend = $("#flatpickr-disabled-range").val();
+	  var task_status = $("#task-progress").val();
+	  console.log(emp_no);
+	  var data = {
+			  task_no : task_no,
+			  task_name : task_name,
+			  emp_notes : emp_notes,
+			  task_url : task_url,
+			  task_importance : task_importance,
+			  task_category : task_category,
+			  task_detail : task_detail,
+			  task_date : task_date,
+			  task_realstart : task_realstart,
+			  task_realend : task_realend,
+			  task_status : task_status
+	  }
+	  
+	  $.ajax({
+		  url: "/exodia/task/modifyProgram",
+		  method: "post",
+		  contentType: 'application/json',
+		  data: JSON.stringify(data),
+		  success: function(data) {
+			  location.reload();
+		  },
+		  error: function(error) {
+			  console.log("아왜안떠왜왜왜");
+		  }
+	  });
+  });
   
 });
 
