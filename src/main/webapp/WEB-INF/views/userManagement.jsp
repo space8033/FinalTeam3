@@ -276,17 +276,19 @@
 					                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
 					                            </li>
 			                          		</c:if>
-				                            <c:if test="${memberStatus.last}">
-				                               <li class="avatar avatar-xs col-md-3 col-sm-6">
-						                          <span
-						                            class="avatar-initial rounded-circle pull-up bg-secondary"
-						                            data-bs-toggle="tooltip"
-						                            data-bs-placement="bottom"
-						                            title="${memberStatus.count-3} more"
-						                            >+${memberStatus.count-3}</span
-						                          >
-				                        		</li>
-				                            </c:if>
+			                          		<c:if test="${memberStatus.count > 3}">
+					                            <c:if test="${memberStatus.last}">
+					                               <li class="avatar avatar-xs col-md-3 col-sm-6">
+							                          <span
+							                            class="avatar-initial rounded-circle pull-up bg-secondary"
+							                            data-bs-toggle="tooltip"
+							                            data-bs-placement="bottom"
+							                            title="${memberStatus.count-3} more"
+							                            >+${memberStatus.count-3}</span
+							                          >
+					                        		</li>
+					                            </c:if>
+			                          		</c:if>
 			                          	</c:forEach>
 			                          </ul>
 			                        </td>
