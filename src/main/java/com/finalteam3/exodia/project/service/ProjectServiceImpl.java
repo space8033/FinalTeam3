@@ -33,7 +33,7 @@ public class ProjectServiceImpl implements ProjectService{
 		String[] project_periods = request.getProject_period().split(" to ");
 		request.setProject_startDate(project_periods[0]);
 		request.setProject_endDate(project_periods[1]);
-		
+		request.setProject_manager(request.getEmp_notes().get(0).getEmpinfo_no());
 		//프로젝트 시작시 요구분석 상태로 초기화
 		request.setProject_status("요구분석");
 		

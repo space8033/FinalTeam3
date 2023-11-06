@@ -7,8 +7,8 @@
 			select seq_project.nextval from dual
 		</selectKey>
 		
-		insert into project(project_no, project_name, project_outline, project_client, project_startdate, project_enddate, project_status, project_createdat)
-		values(#{project_no}, #{project_name}, #{project_outline}, #{project_client}, #{project_startDate}, #{project_endDate}, #{project_status}, to_char(sysdate,'yyyy.mm.dd hh24:mi:ss'))
+		insert into project(project_no, project_name, project_outline, project_client, project_startdate, project_enddate, project_status, project_createdat, project_manager)
+		values(#{project_no}, #{project_name}, #{project_outline}, #{project_client}, #{project_startDate}, #{project_endDate}, #{project_status}, to_char(sysdate,'yyyy.mm.dd hh24:mi:ss'), #{project_manager})
 	</insert>
 	
 	<insert id="insertTeam" parameterType="Map">

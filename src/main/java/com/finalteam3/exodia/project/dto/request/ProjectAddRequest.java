@@ -16,6 +16,7 @@ public class ProjectAddRequest {
 	private String project_client;
 	private JSONArray team_name;
 	private List<EmpNote> emp_notes;
+	private int project_manager;
 	private String project_period;
 	private String project_startDate;
 	private String project_endDate;
