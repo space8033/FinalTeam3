@@ -352,16 +352,13 @@
 												<div class="flex-grow-1 ms-1">
 												  <h6 class="m-0" id="replyWriter" name="replyWriter">${reply.empinfo_name}</h6>
 												  <small class="text-muted" id="replyWriterEmail" name="replyWriterEmail">${reply.empinfo_email}</small>
+												  <small class="mb-0 me-3 text-muted" id="replyCreatedat" name="replyCreatedat">  /  ${reply.reply_createdat}</small>											    
 												</div>
 											  </div>
 												<div class="d-flex align-items-center">
-													<small class="mb-0 me-3 text-muted" id="replyCreatedat" name="replyCreatedat">${reply.reply_createdat}</small>											    
-													
+													<i class="bx bx-edit-alt email-list-delete cursor-pointer me-3 fs-4"></i>
 													<!-- 버튼 -->
-													<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#basicModal">
-													  삭제
-													</button>
-													
+													<i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4"></i>													
 													<!-- 모달 창 -->
 													<div class="modal fade" id="basicModal" tabindex="-1" aria-labelledby="basicModalLabel" aria-hidden="true">
 													  <div class="modal-dialog">

@@ -191,7 +191,13 @@ $(function () {
 	        }
 	    });
 	    
-	    
+	    $('.bx-trash.email-list-delete').click(function () {
+	    	  console.log("아이콘 클릭");
+	    	  
+	    	  // 댓글 삭제 모달 열기
+	    	  $('#basicModal').modal('show');
+	    	});
+	        
 	  //삭제 버튼 클릭 이벤트 처리
 	    $('#replyDeleteButton').click(function () {
 	    	console.log("댓글삭제버튼클릭");
@@ -214,8 +220,7 @@ $(function () {
 	  	            console.error('에러 메시지: ' + error);
 	  	        }
 	  	    });
-	  	}); 
-	    
+	  	});    
 	    /*function closeDropdownMenu() {
 	    	  // 드롭다운 메뉴의 ID나 클래스 선택자를 사용하여 드롭다운을 닫습니다.
 	    	  $('.dropdown-menu').dropdown('hide');
