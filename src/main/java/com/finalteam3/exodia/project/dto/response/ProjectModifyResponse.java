@@ -2,6 +2,8 @@ package com.finalteam3.exodia.project.dto.response;
 
 import java.util.List;
 
+import org.json.JSONArray;
+
 import lombok.Data;
 
 @Data
@@ -13,7 +15,8 @@ public class ProjectModifyResponse {
 	private String project_enddate;
 	private String project_client;
 	private String project_date;
-	private int project_manager;
+	//private int project_manager;
 	private String manager_name;
-	private List<String> team_names;
+	private JSONArray team_names;
+	private List<String> teams;
 }

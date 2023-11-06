@@ -285,6 +285,13 @@
                                 placeholder="프로젝트 개요"></textarea>
                             </div>
                             
+                            <div class="col-12">
+					           <label class="form-label" for="TagifyUserList2">담당자</label>
+					           <div class="col-md-12 mb-2">
+					               <input type="text" id="TagifyUserList2" class="form-control" name="emp_note"/>
+					           </div>
+					       </div>
+                            
                             <div class="col-md-12 mb-2">
                           		<label for="TagifyBasic" class="form-label">구성 팀</label>
                          		<input id="TagifyBasic" class="form-control" name="team_name" value="개발1팀" />
@@ -297,8 +304,7 @@
                                   id="pnumber" 
                                   class="form-control"
                                   name="project_client"
-                                  
-                                  placeholder="프로젝트 인원 수" />
+                                  placeholder="고객사" />
                             </div>
                             
 		                    
@@ -380,7 +386,7 @@
     <!-- Page JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/form-layouts.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/forms-selects.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-tagify.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/tagForProject.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/forms-typeahead.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
     

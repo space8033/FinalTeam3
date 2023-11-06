@@ -13,4 +13,5 @@ public interface ProjectDao {
 	public void insertTeam(Map<String, Object> map);
 	public int selectRecentNo();
 	public ProjectModifyResponse selectProjectDetail(int project_no);
+	public void updateProject(ProjectModifyResponse response);
 }

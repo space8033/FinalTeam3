@@ -39,4 +39,10 @@
 		where project_no = #{project_no}
 	</select>
 	
+	<update id="updateProject" parameterType="ProjectModifyResponse">
+		update project
+		set project_name = #{project_name}, project_outline = #{project_outline}, project_startdate = #{project_startdate},
+			project_enddate = #{project_enddate}, project_client = #{project_client}, project_manager = #{project_manager}
+		where project_no = #{project_no}
+	</update>
 </mapper>

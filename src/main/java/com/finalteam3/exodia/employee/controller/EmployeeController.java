@@ -274,6 +274,29 @@ public class EmployeeController {
 		
 		return list;
 	}
+
+	@GetMapping("/getAllEmpInfo")
+	@ResponseBody
+	public List<EmpNote> getAllEmpInfo() {
+		List<EmpNote> getAll = employeeService.getAllEmpAndEmpInfo();
+		
+		List<EmpNote> list = new ArrayList<>();
+		for(EmpNote e : getAll) {
+			if(e.getEmp_no() != 0) {
+				list.add(e);
+			}
+		}
+		
+		int value = 1;
+		for(EmpNote e : list) {
+			e.setValue(value);
+			value++;
+		}
+		
+		log.info(list.toString());
+		
+		return list;
+	}
 	
 	@GetMapping(value = "/getTeamDuty", produces = "application/json; charset=UTF-8")
 	@ResponseBody

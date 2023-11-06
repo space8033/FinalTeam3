@@ -11,4 +11,5 @@ public interface ProjectService {
 	
 	public ProjectAddResult addProject(ProjectAddRequest request);
 	public ProjectModifyResponse getProjectDetail(int project_no);
+	public void modifyProject(ProjectModifyResponse response);
 }

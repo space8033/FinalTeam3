@@ -62,4 +62,12 @@ public class ProjectController {
 		
 		return "/modifyProject";
 	}
+	
+	@PostMapping("/modifyProject")
+	public String modifyProject(ProjectModifyResponse response) {
+		log.info(response.toString());
+		//projectService.modifyProject(response);
+		
+		return "redirect:/main";
+	}
 }
