@@ -7,10 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
-import com.finalteam3.exodia.project.dao.ProjectDao;
 import com.finalteam3.exodia.project.dto.request.ProjectAddRequest;
 import com.finalteam3.exodia.project.dto.response.ProjectModifyResponse;
 import com.finalteam3.exodia.project.service.ProjectService;
@@ -38,10 +38,10 @@ public class ProjectController {
 		return "/addProject";
 	}
 	
-	@PostMapping("/addProject")
-	public String addProject(ProjectAddRequest request) {
+	@PostMapping(value = "/addProject", produces = "application/json; charset=UTF-8")
+	public String addProject(@RequestBody ProjectAddRequest request) {
 		log.info(request.toString());	
-		projectService.addProject(request);
+		//projectService.addProject(request);
 		
 		return "redirect:/employee/userManagement";
 	}
@@ -63,8 +63,8 @@ public class ProjectController {
 		return "/modifyProject";
 	}
 	
-	@PostMapping("/modifyProject")
-	public String modifyProject(ProjectModifyResponse response) {
+	@PostMapping(value = "/modifyProject", produces = "application/json; charset=UTF-8")
+	public String modifyProject(@RequestBody ProjectModifyResponse response) {
 		log.info(response.toString());
 		//projectService.modifyProject(response);
 		
