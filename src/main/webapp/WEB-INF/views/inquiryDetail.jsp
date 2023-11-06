@@ -355,26 +355,32 @@
 												</div>
 											  </div>
 												<div class="d-flex align-items-center">
-												  <small class="mb-0 me-3 text-muted" id="replyCreatedat" name="replyCreatedat">${reply.reply_createdat}</small>											    
-												<div class="dropdown me-3">
-											      <button
-											        class="btn p-0"
-											        type="button"
-											        id="dropdownEmailTwo"
-											        data-bs-toggle="dropdown"
-											        aria-haspopup="true"
-											        aria-expanded="false">
-											        <i class="bx bx-dots-vertical-rounded bx-sm"></i>
-											      </button>
-											      <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownEmailTwo">
-					                                  <a class="dropdown-item" href="javascript:void(0)">
-					                                    <span class="align-middle">쪽지하기</span>
-					                                  </a>   
-					                                  <a class="dropdown-item" href="#" onclick="replyDelete(${reply.reply_no})">
-														    <span class="align-middle">삭제</span>
-														</a>                         
-				                                </div>
-											    </div>
+													<small class="mb-0 me-3 text-muted" id="replyCreatedat" name="replyCreatedat">${reply.reply_createdat}</small>											    
+													
+													<!-- 버튼 -->
+													<button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#basicModal">
+													  삭제
+													</button>
+													
+													<!-- 모달 창 -->
+													<div class="modal fade" id="basicModal" tabindex="-1" aria-labelledby="basicModalLabel" aria-hidden="true">
+													  <div class="modal-dialog">
+													    <div class="modal-content">
+													      <div class="modal-header">
+													        <h5 class="modal-title" id="basicModalLabel">내용:</h5>
+													        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+													      </div>
+													      <div class="modal-body">
+													        	댓글을 삭제하시겠습니까?
+													      </div>
+													      <div class="modal-footer">
+													      	<textarea id="replyNo" style="display: none">${reply.reply_no}</textarea>
+													        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+													        <button type="button" class="btn btn-primary" id="replyDeleteButton">삭제</button>
+													      </div>
+													    </div>
+													  </div>
+													</div>
 											    </div>
 											</div>
 					                          <div class="card-body pt-3">
