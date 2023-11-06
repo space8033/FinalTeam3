@@ -54,4 +54,5 @@ public interface EmployeeService {
 	public void deleteTeam(String team_name);
 	public EmployeeInfo getEmpInfoByEmpInfoNo(int empInfoNo);
 	public List<EmpNote> getAllEmp();
+	public List<EmpNote> getAllEmpAndEmpInfo();
 }

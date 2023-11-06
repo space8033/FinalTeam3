@@ -73,6 +73,12 @@
 		and emp_id = #{emp_id}
 	</select>
 	
+	<select id="selectAllEmployee" resultType="EmpNote">
+		select i.empinfo_no, i.empinfo_name, i.empinfo_email, i.empinfo_position, e.emp_no, e.emp_id
+		  from empinfo i, emp e
+		 where e.emp_no = i.emp_no
+	</select>
+	
 	<select id="selectTeamname" resultType="String" parameterType="int">
 		select team_name
 		from team

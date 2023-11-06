@@ -63,6 +63,12 @@
 		where notice_no = #{notice_no}
 	</update>
 	
+	<select id="selectEmpInfoNo" parameterType="int" resultType="int">
+		select empinfo_no
+		from empinfo
+		where emp_no = #{emp_no}
+	</select>
+	
 	<insert id="insertReply" parameterType="Reply">
 		<selectKey keyProperty="reply_no" resultType="int" order="BEFORE">
 	         select seq_replyno.nextval from dual

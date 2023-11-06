@@ -249,11 +249,11 @@
               <!-- Sticky Actions -->
               <div class="row">
                 <div class="col-12">
-               	<form id="projectRegister" name="ProjectAddRequest" action="addProject" method="POST">
+               	<form id="projectModify" name="ProjectModifyResponse" action="modifyProject" method="POST">
                   <div class="card">
                     <div
                       class="card-header sticky-element bg-label-secondary d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row">
-                      <h5 class="card-title mb-sm-0 me-2">프로젝트 등록</h5>
+                      <h5 class="card-title mb-sm-0 me-2">프로젝트 수정</h5>
                       <div class="action-btns">
                         
                         <button class="btn btn-primary">저장</button>
@@ -271,7 +271,7 @@
                                   id="fullname" 
                                   class="form-control"
                                   name="project_name"
-                                  placeholder="프로젝트명" />
+                                  value="${projectDetail.project_name}" />
                             </div>
 
                           
@@ -282,7 +282,7 @@
                                 class="form-control"
                                 id="address"
                                 rows="2"
-                                placeholder="프로젝트 개요"></textarea>
+                                >${projectDetail.project_outline}</textarea>
                             </div>
                             
                             <div class="col-12">
@@ -293,8 +293,13 @@
 					       </div>
                             
                             <div class="col-md-12 mb-2">
-                          		<label for="TagifyBasic" class="form-label">구성 팀</label>
-                         		<input id="TagifyBasic" class="form-control" name="team_name" value="개발1팀" />
+                            	<label for="team_names" class="form-label">현재 팀</label>
+                         		<input id="team_names" class="form-control" value="${projectDetail.teams}" readonly="readonly"/>
+                       		</div>
+                       		
+                            <div class="col-md-12 mb-2">
+                          		<label for="TagifyBasic" class="form-label">추가 팀</label>
+                         		<input id="TagifyBasic" class="form-control" name="team_names" />
                        		</div>
                        		
 		                    <div class="col-md-12">
@@ -304,7 +309,7 @@
                                   id="pnumber" 
                                   class="form-control"
                                   name="project_client"
-                                  placeholder="고객사" />
+                                  value="${projectDetail.project_client}" />
                             </div>
                             
 		                    
@@ -313,9 +318,9 @@
 	                          <label for="flatpickr-range" class="form-label">프로젝트 기간</label>
 	                          <input
 	                            type="text"
-	                            name="project_period"
+	                            name="project_date"
 	                            class="form-control"
-	                            placeholder="YYYY-MM-DD to YYYY-MM-DD"
+	                            value="${projectDetail.project_date}"
 	                            id="flatpickr-range" />
 	                        </div>
                           </div>

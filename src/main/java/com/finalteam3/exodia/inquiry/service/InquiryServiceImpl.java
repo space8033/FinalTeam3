@@ -80,5 +80,10 @@ public class InquiryServiceImpl implements InquiryService{
 		
 	}
 
+	@Override
+	public int replyEmpinfoNo(int emp_no) {
+		return inquiryDao.selectEmpInfoNo(emp_no);		
+	}
+
 	
 }

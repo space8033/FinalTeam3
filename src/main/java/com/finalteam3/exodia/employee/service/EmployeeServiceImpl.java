@@ -317,4 +317,11 @@ public class EmployeeServiceImpl implements EmployeeService{
 		
 		return list;
 	}
+
+	@Override
+	public List<EmpNote> getAllEmpAndEmpInfo() {
+		List<EmpNote> list = employeeDao.selectAllEmployee();
+
+		return list;
+	}
 }
