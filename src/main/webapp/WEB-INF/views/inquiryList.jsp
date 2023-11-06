@@ -1,4 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c"   uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <!DOCTYPE html>
 
 <html
@@ -158,7 +161,7 @@
               </a>
             </li>
             <li class="menu-item active">
-              <a href="${pageContext.request.contextPath}/qnaList" class="menu-link">
+              <a href="${pageContext.request.contextPath}/inquiryList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-conversation"></i>
                 <div class="text-truncate">문의하기</div>
               </a>
@@ -227,7 +230,7 @@
         <div class="layout-page">
           <!-- Navbar -->
 
-          <%@ include file="/WEB-INF/views/header.jsp" %>
+           <%@ include file="/WEB-INF/views/header.jsp" %>
           <!-- / Navbar -->
 
           <!-- Content wrapper -->
@@ -241,33 +244,27 @@
                 <div class="card-header">
                   <h5 class="card-title"></h5>
                   <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
-                    <div class="col-md-4 product_category" style = "margin-left: 20px"><h3><strong>문의 게시판🍇</strong></h3></div>
+                    <div class="col-md-4 product_category" style = "margin-left: 20px"><h3><strong>문의사항🍇</strong></h3></div>
                   </div>
                 </div>
                 <div class="card-datatable table-responsive">
-                  <table class="datatables-products table border-top">
+                  <table id="noticeTable" class="datatables-products table border-top">
                     <thead>
                       <tr>
                         <th></th>
                         <th>번호</th>
                         <th>제목</th>
                         <th>글쓴이</th>
+                        <!-- <th>팀</th> -->
                         <th>날짜</th>
-                        <!-- <th>actions</th> -->
-                        <!-- <th>stock</th> -->                     
-                        <!-- <th>sku</th> -->
-                        <!-- <th>qty</th> -->
                       </tr>
                     </thead>
+
                   </table>
                 </div>
               </div>
             </div>
             <!-- / Content -->
-
-            <!-- Footer -->
-            
-            <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
           </div>
@@ -306,7 +303,7 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/qnaList.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/inquiryList.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
   </body>
 </html>

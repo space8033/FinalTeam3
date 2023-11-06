@@ -174,7 +174,6 @@ public class NoticeController {
 		model.addAttribute("notice", notice);
 		
 		List<MediaDto> mediaList = noticeService.getMediaList(notice.getNotice_no());
-		log.info("미디어? : "+mediaList);
 	    model.addAttribute("mediaList", mediaList);
 		
 		return "noticeDetail";

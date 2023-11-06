@@ -63,14 +63,88 @@
 	
 	
 	
-function pageMove(alarm_type, alarm_typeNo) {
+function pageMove(alarm_no, alarm_type, alarm_typeNo) {
 	var alarmType = alarm_type;
 	var noteReadNo = alarm_typeNo;
+	var alarmNo = alarm_no;
 	const clickedItem = event.currentTarget;
 	console.log(clickedItem);
 	const excludedItem = document.querySelector(".dropdown-notifications-archive");
 	if(alarmType === '쪽지' && clickedItem !==excludedItem) {
-		window.location.href="/exodia/note"
+		var url = "/exodia/noteDetailView?noteReadNo=" + alarm_typeNo;
+		var popup = window.open(url, "MyPopup", "width=800, height=500");
+		var postData = {
+				alarm_no: alarmNo
+		};
+		
+		$.ajax({
+		    	url: "/exodia/alarmRead",
+		        type: "POST",
+		        data: postData 
+		        
+		        }).done(function(result) {
+		        	console.log("알람읽음처리완료");
+		        	var data = {
+		        	        readUpdateId: noteReadNo
+		                };
+		                
+		                // AJAX 요청으로 데이터 전송
+		                $.ajax({
+		                	url: "/exodia/readUpdate",
+		                    type: "POST",
+		                    data: data,
+		                    success: function(response) {
+		                    	
+		                    	let inbox = "수신";
+		                		var postData = {
+		                			inbox: inbox
+		                        };
+		                        
+		                        // AJAX 요청으로 데이터 전송
+		                        $.ajax({
+		                        	url: "/exodia/noteInbox",
+		                            type: "GET",
+		                            data: postData
+		                           
+		                        }).done(function(result) {
+		                        	console.log("결과확인");
+		                        	var html = jQuery('<div>').html(result);
+		                        	var contents = html.find("div#noteContent").html();
+		                        	$("#refreshNoteContent").html(contents);
+		                        	$("#app-email-view").removeClass("show");
+		                        	
+		                        	var emailListInstance = new PerfectScrollbar('.email-list', {
+		                        	        wheelPropagation: false,
+		                        	        suppressScrollX: true
+		                        	});
+		                        	
+		                        }).fail(function (jqXHR, textStatus, errorThrown) {
+		                        	console.log("에러");
+		                        	console.log(jqXHR);
+		                        	console.log(textStatus);
+		                        	console.log(errorThrown);
+		                        	
+		                        });
+		                    	
+		                    },
+		                    error: function() {
+		                        // 오류 처리
+		                        alert("데이터 전송 중 오류가 발생했습니다.");
+		                    }
+		                });
+		        	
+		        	
+		        }).fail(function (jqXHR, textStatus, errorThrown) {
+		        	console.log("에러");
+		        	console.log(jqXHR);
+		        	console.log(textStatus);
+		        	console.log(errorThrown);
+		        	
+		        });
+	  	 
+  		
+	
+		
 	}
 }
 

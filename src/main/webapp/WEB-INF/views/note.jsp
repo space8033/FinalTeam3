@@ -873,12 +873,12 @@
                               <input type="hidden" name="note_receiver" id="note_receiver" value="">
                             </div>
                             <div class="email-compose-toggle-wrapper mb-2 mx-1" style="width: 140px;">
-                              <a class="email-compose-toggle-cc text-body mx-1" href="javascript:void(0);">참조  </a>
-                              |<a class="email-compose-toggle-bcc text-body mx-1" href="javascript:void(0);"> 비밀참조</a>
+                              <a class="email-compose-toggle-cc text-body mx-1" href="javascript:void(0);" id="emailcc">참조  </a>
+                              |<a class="email-compose-toggle-bcc text-body mx-1" href="javascript:void(0);" id="emailbcc"> 비밀참조</a>
                             </div>
                           </div>
                          
-                           <div class="email-compose-cc d-none" onclick="javascript:sendCCList();">
+                           <div class="email-compose-cc d-none">
                             <hr class="mx-n4 my-2" />
                             <div class="d-flex justify-content-between align-items-center">
                                <label for="selectpickerSelectDeselect" class="form-label me-1" style="width: 40px;">참조 :</label>

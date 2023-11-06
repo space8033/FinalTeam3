@@ -86,191 +86,14 @@
             <!-- Content -->
                     <!-- Email View -->
                     <div class="col app-email-view flex-grow-0 bg-body show" id="noteDetail">
-                      <div class="app-email-view-header p-3 py-md-3 py-2 rounded-0">
-                        <!-- Email View : Title  bar-->
-                        <div class="d-flex justify-content-between align-items-center">
-                          <div class="d-flex align-items-center overflow-hidden">
-                            <i
-                              class="bx bx-chevron-left bx-sm cursor-pointer me-2"
-                              data-bs-toggle="sidebar"
-                              data-target="#app-email-view"
-                              onclick="javascript:showNoteList();"></i>
-                            <h6 class="text-truncate mb-0 me-2">뒤로가기 </h6>
-                          </div>
-                          <!-- Email View : Action  bar-->
-                          <div class="d-flex">
-                           <!--  <i class="bx bx-printer d-sm-block d-none fs-4"></i>
-                            <div class="dropdown ms-3">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="dropdownMoreOptions"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="bx bx-dots-vertical-rounded fs-4"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMoreOptions">
-                                <a class="dropdown-item" href="javascript:void(0)">
-                                  <i class="bx bx-envelope-open bx-xs me-1"></i>
-                                  <span class="align-middle">Mark as unread</span>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0)">
-                                  <i class="bx bx-envelope-open bx-xs me-1"></i>
-                                  <span class="align-middle">Mark as unread</span>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0)">
-                                  <i class="bx bx-star bx-xs me-1"></i>
-                                  <span class="align-middle">Add star</span>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0)">
-                                  <i class="bx bx-calendar bx-xs me-1"></i>
-                                  <span class="align-middle">Create Event</span>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0)">
-                                  <i class="bx bx-volume-mute bx-xs me-1"></i>
-                                  <span class="align-middle">Mute</span>
-                                </a>
-                                <a class="dropdown-item d-sm-none d-block" href="javascript:void(0)">
-                                  <i class="bx bx-printer bx-xs me-1"></i>
-                                  <span class="align-middle">Print</span>
-                                </a>
-                              </div>
-                            </div> -->
-                          </div>
-                        </div>
-                        <hr class="app-email-view-hr mx-n3 mb-2" />
-                        <!-- <div class="d-flex justify-content-between align-items-center">
-                          <div class="d-flex align-items-center">
-                            <i
-                              class="bx bx-trash-alt cursor-pointer me-3 fs-4"
-                              data-bs-toggle="sidebar"
-                              data-target="#app-email-view"></i>
-                            <i class="bx bx-envelope fs-4 cursor-pointer me-3"></i>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="dropdownMenuFolderTwo"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="bx bx-folder fs-4 me-3"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuFolderTwo">
-                                <a class="dropdown-item" href="javascript:void(0)">
-                                  <i class="bx bx-error-circle me-1"></i>
-                                  <span class="align-middle">Spam</span>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0)">
-                                  <i class="bx bx-edit me-1"></i>
-                                  <span class="align-middle">Draft</span>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0)">
-                                  <i class="bx bx-trash-alt me-1"></i>
-                                  <span class="align-middle">Trash</span>
-                                </a>
-                              </div>
-                            </div>
-                            <div class="dropdown">
-                              <button
-                                class="btn p-0"
-                                type="button"
-                                id="dropdownLabelTwo"
-                                data-bs-toggle="dropdown"
-                                aria-haspopup="true"
-                                aria-expanded="false">
-                                <i class="bx bx-label fs-4 me-3"></i>
-                              </button>
-                              <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLabelTwo">
-                                <a class="dropdown-item" href="javascript:void(0)">
-                                  <i class="badge badge-dot bg-success me-1"></i>
-                                  <span class="align-middle">Workshop</span>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0)">
-                                  <i class="badge badge-dot bg-primary me-1"></i>
-                                  <span class="align-middle">Company</span>
-                                </a>
-                                <a class="dropdown-item" href="javascript:void(0)">
-                                  <i class="badge badge-dot bg-warning me-1"></i>
-                                  <span class="align-middle">Important</span>
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="d-flex align-items-center flex-wrap justify-content-end">
-                            <span class="d-sm-block d-none mx-3 text-muted">1-10 of 653</span>
-                            <i class="bx bx-chevron-left scaleX-n1-rtl cursor-pointer text-muted me-4 fs-4"></i>
-                            <i class="bx bx-chevron-right scaleX-n1-rtl cursor-pointer fs-4"></i>
-                          </div>
-                        </div> -->
-                      </div>
-                    <!--   <hr class="m-0" /> -->
                      
-                      
+                    <!--   <hr class="m-0" /> -->
                       
                       <!-- Email View : Content-->
                       <div class="app-email-view-content py-4">
                         <!-- <p class="email-earlier-msgs text-center text-muted cursor-pointer mb-5">이전 메세지 1개</p> -->
                         <!-- Email View : Previous mails-->
-                        <div class="card email-card-prev mx-sm-4 mx-3 border">
-                          <div class="card-header d-flex justify-content-between align-items-center flex-wrap">
-                            <div class="d-flex align-items-center mb-sm-0 mb-3">
-                              <img
-                                src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png"
-                                alt="user-avatar"
-                                class="flex-shrink-0 rounded-circle me-2"
-                                height="38"
-                                width="38" />
-                              <div class="flex-grow-1 ms-1">
-                                <h6 class="m-0">Ross Geller</h6>
-                                <small class="text-muted">rossGeller@email.com</small>
-                              </div>
-                            </div>
-                            <div class="d-flex align-items-center">
-                              <small class="mb-0 me-3 text-muted">June 20th 2020, 08:30 AM</small>
-                              <i class="bx bx-paperclip cursor-pointer me-2 bx-sm"></i>
-                              <i class="email-list-item-bookmark bx bx-star cursor-pointer me-2 bx-sm"></i>
-                              <div class="dropdown me-3">
-                                <button
-                                  class="btn p-0"
-                                  type="button"
-                                  id="dropdownEmailOne"
-                                  data-bs-toggle="dropdown"
-                                  aria-haspopup="true"
-                                  aria-expanded="false">
-                                  <i class="bx bx-dots-vertical-rounded bx-sm"></i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownEmailOne">
-                                  <a class="dropdown-item scroll-to-reply" href="javascript:void(0)">
-                                    <i class="bx bx-share me-1"></i>
-                                    <span class="align-middle">답장</span>
-                                  </a>
-                                  <!-- <a class="dropdown-item" href="javascript:void(0)">
-                                    <i class="bx bx-share scaleX-n1 scaleX-n1-rtl me-1"></i>
-                                    <span class="align-middle">전달</span>
-                                  </a> -->
-                                  <a class="dropdown-item" href="javascript:void(0)">
-                                    <i class="bx bx-info-circle me-1"></i>
-                                    <span class="align-middle">팝업 창 띄우기</span>
-                                  </a>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="card-body">
-                            <p class="fw-medium">Greetings!</p>
-                            <p>
-                              ${note.note_content}
-                            </p>
-                            <hr />
-                            <p class="mb-2">Attachments</p>
-                            <div class="cursor-pointer">
-                              <i class="bx bx-file"></i>
-                              <span class="align-middle ms-1">report.xlsx</span>
-                            </div>
-                          </div>
-                        </div>
+                       
                         <!-- Email View : Last mail-->
                         <div class="card email-card-last mx-sm-4 mx-3 mt-4 border">
                           <div
@@ -330,12 +153,8 @@
 	                     			<small class="mb-0 me-3 text-muted">${note.note_createdAt}</small>
 	                     		
 	                     		</c:when>
-                            
-                             
                               
                             </c:choose> 	 
-                             	 
-                             	 
                               
                               <c:if test="${not empty mediaList}">
                               	<i class="bx bx-paperclip cursor-pointer me-2 bx-sm"></i>
@@ -360,84 +179,7 @@
 			                              </c:if>
 		                     			</c:otherwise>
 		                     		</c:choose>
-                              
-                              
-                              <div class="dropdown me-3">
-                                <button
-                                  class="btn p-0"
-                                  type="button"
-                                  id="dropdownEmailTwo"
-                                  data-bs-toggle="dropdown"
-                                  aria-haspopup="true"
-                                  aria-expanded="false">
-                                  <i class="bx bx-dots-vertical-rounded bx-sm"></i>
-                                </button>
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownEmailTwo">
-	                                 <c:choose>		                                  
-										<c:when test ="${contentType eq '발신'}">
-										
-										 	
-			                     		</c:when>
-			                     		<c:when test ="${contentType eq '임시저장'}">
-		                     			 <a class="dropdown-item scroll-to-forward" href="javascript:sendDraft(${note.note_no})">
-		                                     <i class="bx bx-share me-1 scaleX-n1 scaleX-n1-rtl"></i>
-		                                    <span class="align-middle">전송</span>
-		                                 </a>
-		                                 
-		                     			 <a class="dropdown-item scroll-to-edit" href="javascript:editDraft()">
-		                                     <i class="bx bx-edit me-1 scaleX-n1 scaleX-n1-rtl"></i>
-		                                    <span class="align-middle">편집</span>
-		                                 </a>
-		                     		
-		                     		
-		                     			</c:when>
-		                     			<c:otherwise>
-		                     			 <a class="dropdown-item scroll-to-reply" href="javascript:void(0)">
-		                                    <i class="bx bx-share me-1"></i>
-		                                    <span class="align-middle">답장</span>
-		                                 </a>
-		                     			</c:otherwise>
-		                     		</c:choose>
-                                
-                                 
-                                  <!-- <a class="dropdown-item" href="javascript:void(0)">
-                                    <i class="bx bx-share me-1 scaleX-n1 scaleX-n1-rtl"></i>
-                                    <span class="align-middle">전달</span>
-                                  </a> -->
-                                  
-                                 <c:choose>		                                  
-										<c:when test ="${contentType eq '발신'}">
-										
-										 	 <a class="dropdown-item" href="javascript:noteDetailViewSent(${note.note_no})">
-			                                    <i class="bx bx-info-circle me-1"></i>
-			                                    <span class="align-middle">팝업 창 띄우기</span>
-			                                  </a>
-			                     		</c:when>
-			                     		<c:when test ="${contentType eq '임시저장'}">
-		                     				  <a class="dropdown-item" href="javascript:noteDetailViewSent(${note.note_no})">
-			                                    <i class="bx bx-info-circle me-1"></i>
-			                                    <span class="align-middle">팝업 창 띄우기</span>
-			                                  </a>
-		                     			</c:when>
-		                     			<c:otherwise>
-		                     			 	<a class="dropdown-item" href="javascript:noteDetailView(${noteRead.noteRead_no})">
-			                                    <i class="bx bx-info-circle me-1"></i>
-			                                    <span class="align-middle">팝업 창 띄우기</span>
-			                                  </a>
-		                     			</c:otherwise>
-		                     		</c:choose>  
-                                  
-                                 
-                                
-                                
-                                
-                                </div>
-                              </div>
-                              
-                             
                             </div>
-                             
-	                  
                             
                           </div>
                           <div class="card-body pt-3">
@@ -500,34 +242,6 @@
                         </div>
                         
                         
-                        <input type="hidden" value="${note.note_title}" id="noteTitle"/>
-                        <input type="hidden" value="${note.note_content}" id="noteContent"/>
-                        
-                        <c:forEach var="list" items="${list}">
-                        	<c:if test="${list.noteRead_type == '수신'}">
-                        		<input type="hidden" class="receiver" value="${list.emp_no_receiver}"/>
-                        	</c:if>
-               			 </c:forEach>	
-                        <c:forEach var="list" items="${list}">
-                        	<c:if test="${list.noteRead_type == '참조'}">
-                        		<input type="hidden" class="noteCC" value="${list.emp_no_receiver}"/>
-                        	</c:if>
-               			 </c:forEach>	
-                        <c:forEach var="list" items="${list}">
-                        	<c:if test="${list.noteRead_type == '비밀참조'}">
-                        		<input type="hidden" class="noteBCC" value="${list.emp_no_receiver}"/>
-                        	</c:if>
-               			 </c:forEach>	
-               			 
-               			 <c:forEach var="media" items="${mediaList}">
-		        	           <input type="hidden" class="noteFiles" value="${media.media_no}"/> 
-		            	        	          	
-		                 </c:forEach>
-               			 
-               			 
-               		
-                        
-                        
                         
                         <c:choose>		                                  
 								<c:when test ="${contentType eq '발신'}">
@@ -565,7 +279,7 @@
 			                            <input type="hidden" name="note_no" value="${note.note_no}"/>
 			                            <input type="hidden" name="note_title" value="${note.note_title}"/>
 			                            <input type="hidden" name="note_receiver" value="${note.note_sender}"/>
-			                            <div class="d-flex justify-content-end align-items-center">
+			                            <div class="mt-2 d-flex justify-content-end align-items-center">
 			                              <div class="cursor-pointer me-3">
 				                              <input value="" readonly type="text" id="reply-filename" placeholder="" class="text-muted ms-1 upload-name" style="border:none; width:400px; outline: none; text-align:right;">
 			                                  <label for="reply-attach-file"><i class="bx bx-paperclip"></i><span class="align-middle cursor-pointer"> 첨부 파일</span></label>
@@ -630,7 +344,7 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/app-note.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/app-note-popup.js"></script>
     
      <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->

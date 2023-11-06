@@ -28,17 +28,17 @@
       	)
       	values(
       		#{notice_no}, #{notice_title}, #{notice_content}, 'NOTICE',
-      		#{empinfo_no_writer}, sysdate, 0
+      		#{empinfo_no_writer}, to_char(sysdate,'yyyy.mm.dd hh24:mi:ss'), 0
       	)		
 	</insert>
 	
 	<update id="updateDetailByNoticeNo" parameterType="Notice">  
-		update notice set notice_title = #{notice_title}, notice_content = #{notice_content}, notice_modifiedat = sysdate
+		update notice set notice_title = #{notice_title}, notice_content = #{notice_content}, notice_modifiedat = to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
 		where notice_no = #{notice_no}
 	</update>
 	
 	<update id="deleteByNoticeNo" parameterType="int">  
-		update notice set notice_deletedat = sysdate
+		update notice set notice_deletedat = to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
 		where notice_no = #{notice_no}
 	</update>
 

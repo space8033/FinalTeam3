@@ -31,7 +31,7 @@
        <div class="row mb-3">
            <label class="col-sm-3 col-form-label" for="TagifyUserList2">담당자</label>
            <div class="col-sm-9">
-               <input type="text" id="TagifyUserList2" class="form-control" name="emp_note" placeholder="담당자"/>
+               <input type="text" id="TagifyUserList2" class="form-control" name="emp_note"/>
            </div>
        </div>
        

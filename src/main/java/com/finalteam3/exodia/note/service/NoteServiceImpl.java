@@ -423,7 +423,7 @@ public class NoteServiceImpl implements NoteService{
 		
 		NoteRead noteRead = new NoteRead();
 		noteRead.setEmp_no_receiver(receiver);
-		noteRead.setNoteRead_type("답장");
+		noteRead.setNoteRead_type("수신");
 		noteRead.setNote_no(noteNo);
 		noteDao.insertNoteRead(noteRead);
 		
@@ -592,6 +592,29 @@ public class NoteServiceImpl implements NoteService{
 				noteResponse.setNoteRead_type(noteRead.getNoteRead_type());
 				noteResponseList.add(noteResponse);
 			}
+			
+		}
+		
+		
+		return noteResponseList;
+	}
+	
+	//수신자 목록 불러오기 - 발신/임시저장
+	@Override
+	public List<NoteResponse> getNoteReceiverSent(int noteNo, int empNo) {
+		List<NoteRead> noteReadList = noteDao.selectNoteReadByNoteNo(noteNo);
+		List<NoteResponse> noteResponseList = new ArrayList<>();
+		
+		for(NoteRead noteRead : noteReadList) {
+			NoteResponse noteResponse = new NoteResponse();
+				
+				int emp_No = noteRead.getEmp_no_receiver();
+				EmployeeInfo empInfo = employeeDao.selectInfoByEmpNo(emp_No);
+				noteResponse.setEmp_name(empInfo.getEmpinfo_name());
+				noteResponse.setEmp_email(empInfo.getEmpinfo_email());
+				noteResponse.setEmp_no_receiver(noteRead.getEmp_no_receiver());
+				noteResponse.setNoteRead_type(noteRead.getNoteRead_type());
+				noteResponseList.add(noteResponse);
 			
 		}
 		
@@ -783,5 +806,172 @@ public class NoteServiceImpl implements NoteService{
 		
 		return noCancel;
 		
+	}
+	
+	//임시저장 메세지 전송
+	@Override
+	public void sendDraftNote(int noteNo) {
+		Note note = new Note();
+		note.setNote_no(noteNo);
+		note.setNote_draft("");
+		noteDao.updateDraftNote(note);
+		
+	}
+
+	@Override
+	public List<MediaDto> selectMediaFiles(String fileValues) {
+		String[] numberStrings = fileValues.split(", ");
+		int[] numberArray = new int[numberStrings.length];
+		for(int i = 0; i < numberStrings.length; i++) {
+			numberArray[i] = Integer.parseInt(numberStrings[i].trim());
+		}
+		
+		List<MediaDto> mediaList = new ArrayList<>();
+		for(int mediaNo : numberArray) {
+			
+			
+			MediaDto media = new MediaDto();
+			media = mediaDao.selectMediaByMno(mediaNo);
+			
+			mediaList.add(media);
+		}
+		
+		
+		
+		return mediaList; 
+		
+	}
+
+	@Override
+	public List<NoteAll> getNoteSearchListByRno(Map<String, Object> map) {
+		List<NoteAll> noteAllList = noteDao.searchNoteByEmpNo(map);
+		for(NoteAll noteAll : noteAllList) {
+			int senderNo = noteAll.getNote_sender();
+			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			noteAll.setNote_sender_name(sender.getEmpinfo_name());
+			int noteNo = noteAll.getNote_no();
+			MediaDto media = new MediaDto();
+			media.setFrom_no(noteNo);
+			media.setMedia_from("NOTE");
+			List<MediaDto> mediaList = mediaDao.selectMedia(media);
+			if(mediaList.isEmpty()) {
+				noteAll.setMedia_isEmpty(true);
+			}else {
+				noteAll.setMedia_isEmpty(false);
+			}
+			
+			
+		}
+		return noteAllList;
+	}
+
+	@Override
+	public List<NoteAll> getNoteSentSearchListByRno(Map<String, Object> map) {
+		List<NoteAll> noteAllList = noteDao.searchSentNoteByEmpNo(map);
+		for(NoteAll noteAll : noteAllList) {
+			int senderNo = noteAll.getNote_sender();
+			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			noteAll.setNote_sender_name(sender.getEmpinfo_name());
+			int noteNo = noteAll.getNote_no();
+			MediaDto media = new MediaDto();
+			media.setFrom_no(noteNo);
+			media.setMedia_from("NOTE");
+			List<MediaDto> mediaList = mediaDao.selectMedia(media);
+			if(mediaList.isEmpty()) {
+				noteAll.setMedia_isEmpty(true);
+			}else {
+				noteAll.setMedia_isEmpty(false);
+			}
+		}
+		return noteAllList;
+	}
+
+	@Override
+	public List<NoteAll> getNoteStarredSearchListByRno(Map<String, Object> map) {
+		List<NoteAll> noteAllList = noteDao.searchStarredNoteByEmpNo(map);
+		for(NoteAll noteAll : noteAllList) {
+			int senderNo = noteAll.getNote_sender();
+			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			noteAll.setNote_sender_name(sender.getEmpinfo_name());
+			int noteNo = noteAll.getNote_no();
+			MediaDto media = new MediaDto();
+			media.setFrom_no(noteNo);
+			media.setMedia_from("NOTE");
+			List<MediaDto> mediaList = mediaDao.selectMedia(media);
+			if(mediaList.isEmpty()) {
+				noteAll.setMedia_isEmpty(true);
+			}else {
+				noteAll.setMedia_isEmpty(false);
+			}
+		}
+		return noteAllList;
+	}
+
+	@Override
+	public List<NoteAll> getNoteTrashSearchListByRno(Map<String, Object> map) {
+		List<NoteAll> noteAllList = noteDao.searchTrashNoteByEmpNo(map);
+		for(NoteAll noteAll : noteAllList) {
+			int senderNo = noteAll.getNote_sender();
+			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			noteAll.setNote_sender_name(sender.getEmpinfo_name());
+			int noteNo = noteAll.getNote_no();
+			MediaDto media = new MediaDto();
+			media.setFrom_no(noteNo);
+			media.setMedia_from("NOTE");
+			List<MediaDto> mediaList = mediaDao.selectMedia(media);
+			if(mediaList.isEmpty()) {
+				noteAll.setMedia_isEmpty(true);
+			}else {
+				noteAll.setMedia_isEmpty(false);
+			}
+		}
+		return noteAllList;
+	}
+
+	@Override
+	public List<NoteAll> getNoteDraftSearchListByRno(Map<String, Object> map) {
+		List<NoteAll> noteAllList = noteDao.searchDraftNoteByEmpNo(map);
+		for(NoteAll noteAll : noteAllList) {
+			int senderNo = noteAll.getNote_sender();
+			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			noteAll.setNote_sender_name(sender.getEmpinfo_name());
+			int noteNo = noteAll.getNote_no();
+			MediaDto media = new MediaDto();
+			media.setFrom_no(noteNo);
+			media.setMedia_from("NOTE");
+			List<MediaDto> mediaList = mediaDao.selectMedia(media);
+			if(mediaList.isEmpty()) {
+				noteAll.setMedia_isEmpty(true);
+			}else {
+				noteAll.setMedia_isEmpty(false);
+			}
+		}
+		return noteAllList;
+	}
+
+	@Override
+	public int countBySearchNoteNo(Map<String, Object> map) {
+		log.info(map.toString()+"맵정보좀줘바");
+		return noteDao.countBySearchEmpno(map);
+	}
+
+	@Override
+	public int countBySearchNoteSenderNo(Map<String, Object> map) {
+		return noteDao.countBySearchSentEmpno(map);
+	}
+
+	@Override
+	public int countBySearchNoteStarredNo(Map<String, Object> map) {
+		return noteDao.countBySearchStarredEmpno(map);
+	}
+
+	@Override
+	public int countBySearchNoteTrashNo(Map<String, Object> map) {
+		return noteDao.countBySearchTrashEmpno(map);
+	}
+
+	@Override
+	public int countBySearchNoteDraftNo(Map<String, Object> map) {
+		return noteDao.countBySearchDraftEmpno(map);
 	}
 }

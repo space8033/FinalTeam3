@@ -25,6 +25,9 @@
 		<typeAlias alias="Media" type="com.finalteam3.exodia.media.dto.MediaDto" />
 		<typeAlias alias="AlarmRequest" type="com.finalteam3.exodia.alarm.dto.request.AlarmRequest" />
 		<typeAlias alias="ProgramRegisterRequest" type="com.finalteam3.exodia.task.dto.request.ProgramRegisterRequest" />
+		<typeAlias alias="Notice" type="com.finalteam3.exodia.notice.dto.Notice" />
+		<typeAlias alias="Inquiry" type="com.finalteam3.exodia.inquiry.dto.Inquiry" />
+		<typeAlias alias="Reply" type="com.finalteam3.exodia.inquiry.dto.Reply" />
 		<typeAlias alias="ProgramListResponse" type="com.finalteam3.exodia.task.dto.response.ProgramListResponse" />
 		<typeAlias alias="ProgramModifyRequest" type="com.finalteam3.exodia.task.dto.request.ProgramModifyRequest" />
 

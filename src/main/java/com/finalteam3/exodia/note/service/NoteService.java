@@ -22,8 +22,19 @@ public interface NoteService {
 	public List<String> getTeamList();
 	public List<MediaDto> getMediaList(int noteNo);
 	
+	//검색하기
+	public List<NoteAll> getNoteSearchListByRno(Map<String, Object> map);
+	public List<NoteAll> getNoteSentSearchListByRno(Map<String, Object> map);
+	public List<NoteAll> getNoteStarredSearchListByRno(Map<String, Object> map);
+	public List<NoteAll> getNoteTrashSearchListByRno(Map<String, Object> map);
+	public List<NoteAll> getNoteDraftSearchListByRno(Map<String, Object> map);
+	/*public List<EmpNote> getEmpList();
+	public List<String> getTeamList();
+	public List<MediaDto> getMediaList(int noteNo);*/
+	
 	//쪽지 번호로 수신/참조/비밀참조 얻어오기
 	public List<NoteResponse> getNoteReceiver(int noteNo, int empNo);
+	public List<NoteResponse> getNoteReceiverSent(int noteNo, int empNo);
 	public List<NoteResponse> getNoteSentList(int noteNo);
 	public Note getNote(int noteReadNo);
 	public Note getNoteSent(int noteNo);
@@ -33,8 +44,19 @@ public interface NoteService {
 	public int countByNoteTrashNo(int empNo);
 	public int countByNoteDraftNo(int empNo);
 	
+	//검색 쪽지 개수
+	public int countBySearchNoteNo(Map<String, Object> map);
+	public int countBySearchNoteSenderNo(Map<String, Object> map);
+	public int countBySearchNoteStarredNo(Map<String, Object> map);
+	public int countBySearchNoteTrashNo(Map<String, Object> map);
+	public int countBySearchNoteDraftNo(Map<String, Object> map);
+	
 	//안읽은 쪽지
 	public int countByUnreadNoteNo(int empNo);
+	
+	//임시저장 메세지 전송
+	public void sendDraftNote(int noteNo);
+	public List<MediaDto> selectMediaFiles(String fileValues);
 	
 	
 	public void addNote(NoteRequest note) throws Exception;
