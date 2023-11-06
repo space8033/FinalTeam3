@@ -350,7 +350,7 @@
 												  height="38"
 												  width="38" />
 												<div class="flex-grow-1 ms-1">
-												  <h6 class="m-0" id="replyWriter" name="replyWriter">${loginResponse.empInfo_name}</h6>
+												  <h6 class="m-0" id="replyWriter" name="replyWriter">${reply.empinfo_name}</h6>
 												  <small class="text-muted" id="replyWriterEmail" name="replyWriterEmail">${reply.empinfo_email}</small>
 												</div>
 											  </div>
