@@ -43,11 +43,11 @@ public class AlarmController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
-		List<AlarmRequest> AlarmList = alarmService.getAlarmList(empInfo.getEmpinfo_no());
+		List<AlarmRequest> alarmList = alarmService.getAlarmList(empInfo.getEmpinfo_no());
 		List<AlarmResponse> list = new ArrayList<>();
 		
 		
-		for(AlarmRequest alarm : AlarmList) {
+		for(AlarmRequest alarm : alarmList) {
 			AlarmResponse alarmResponse = new AlarmResponse();
 			alarmResponse.setAlarm_createdAt(alarm.getAlarm_createdAt());
 			alarmResponse.setAlarm_isRead(alarm.isAlarm_isRead());
@@ -79,6 +79,22 @@ public class AlarmController {
 	public String alarmRemove(String alarm_no) {
 		int alarmNo = Integer.parseInt(alarm_no);
 		alarmService.deleteAlarm(alarmNo);
+		
+		return "redirect:/alarm";
+		
+	}
+	@PostMapping("/alarmRemoveAll")
+	@ResponseBody
+	public String alarmRemoveAll(String alarm, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		List<AlarmRequest> alarmList = alarmService.getAlarmList(empInfo.getEmpinfo_no());
+
+		for(AlarmRequest alarmRequest : alarmList) {
+			int alarmNo = alarmRequest.getAlarm_no();
+			alarmService.deleteAlarm(alarmNo);
+		}
 		
 		return "redirect:/alarm";
 		

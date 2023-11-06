@@ -1,5 +1,28 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
+<style>
+
+ .alarmBell {
+ 
+ }
+ 
+ .alarmBell.vibration {
+ 	animation: vibration .3s infinite;
+ }
+ 
+ @keyframes vibration {
+ 	from {
+ 		transform: rotate(10deg);
+ 	}
+ 	to {
+ 		transform: rotate(-10deg);
+ 	}
+ }
+
+
+
+</style>
+
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 
 
@@ -184,7 +207,7 @@
                data-bs-toggle="dropdown"
                data-bs-auto-close="outside"
                aria-expanded="false">
-               <i class="bx bx-bell bx-sm"></i> <input id="alarmId" type="hidden" value="${emp_id}">
+               <i class="alarmBell bx bx-bell bx-sm" id="bellAlarm"></i> <input id="alarmId" type="hidden" value="${emp_id}">
                <span id="alarmIcon" class="d-none badge bg-danger rounded-pill badge-notifications"></span>
              </a>
        				 

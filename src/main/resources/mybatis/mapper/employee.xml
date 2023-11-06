@@ -164,6 +164,12 @@
 		where emp_no = #{emp_no}
 	</select>
 	
+	<select id="selectEmpByEmpNo" resultType="JoinRequest" parameterType="int">
+		select emp_no, emp_id
+		from emp
+		where emp_no = #{emp_no}
+	</select>
+	
 	<!-- empinfo_no 로 empinfo 얻어오기 -->
 	<select id="selectEmpInfoByEmpInfoNo" resultType="EmployeeInfo" parameterType="int">
 		select empinfo_no, empinfo_name, empinfo_position, empinfo_phone, empinfo_email, empinfo_createdat
