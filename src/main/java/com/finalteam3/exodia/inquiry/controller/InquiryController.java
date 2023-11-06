@@ -224,16 +224,17 @@ public class InquiryController {
 		
 		//댓글 삭제
 		@PostMapping("/replyDelete")
-		public String replyDelete(Authentication authentication, @RequestParam int reply_no, int notice_no) {
+		public String replyDelete(Authentication authentication, @RequestParam int reply_no) {
 
 			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 			LoginResponse loginResponse = empDetails.getLoginResponse();
-			log.info("댓글노티스넘버 : " + notice_no);
 			
 			inquiryService.deleteReplyByReplyNo(reply_no);
 			
+			log.info("댓글 번호 : " + reply_no);
 			
-			return "redirect:/inquiryDetail?notice_no=" + notice_no;
+			
+			return "redirect:/inquiryList";
 		}
 
 }

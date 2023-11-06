@@ -152,6 +152,7 @@ $(function () {
       }
     });
   }
+  
 });
 
 	//add reply
@@ -189,26 +190,49 @@ $(function () {
             });
 	        }
 	    });
-
 	    
-	    function replyDelete(replyNo) {
-	        // replyNo를 사용하여 AJAX 요청을 보냅니다.
-	        $.ajax({
-	            type: 'POST',
-	            url: '/exodia/replyDelete',
-	            data: { reply_no: replyNo },
-	            success: function (data) {
-	                // 댓글이 삭제되면 이후 작업 수행
-	                console.log("댓글이 삭제되었습니다.");
-	                // 다른 동작 수행 가능
-	            },
-	            error: function (xhr, status, error) {
-	                console.error('댓글 삭제 중 오류 발생:');
-	                console.error('상태 코드: ' + xhr.status);
-	                console.error('에러 메시지: ' + error);
-	            }
-	        });
-	    }	    
+	    
+	  //삭제 버튼 클릭 이벤트 처리
+	    $('#replyDeleteButton').click(function () {
+	    	console.log("댓글삭제버튼클릭");
+	  	    var replyData = {
+	  	    		reply_no: $('#replyNo').val()
+	  	    };
+	  	    console.log("받아온 reply_no :" + replyData);
+	  	    // 댓글을 삭제하는 AJAX 요청
+	  	    $.ajax({
+	  	        type: 'POST',
+	  	        url: '/exodia/replyDelete',
+	  	        data: replyData,
+	  	        success: function (data) {
+	  	        	console.log('이제 좀 다른거하고싶다');
+	  	                location.reload();
+	  	        },
+	  	        error: function (xhr, status, error) {
+	  	            console.error('댓글 삭제 중 오류 발생:');
+	  	            console.error('상태 코드: ' + xhr.status);
+	  	            console.error('에러 메시지: ' + error);
+	  	        }
+	  	    });
+	  	}); 
+	    
+	    /*function closeDropdownMenu() {
+	    	  // 드롭다운 메뉴의 ID나 클래스 선택자를 사용하여 드롭다운을 닫습니다.
+	    	  $('.dropdown-menu').dropdown('hide');
+	    	}
+	    
+	    function showDeleteModal(replyNo) {
+	        // 선택한 댓글의 ID를 저장하고 모달을 표시
+	    	console.log("댓글 삭제 버튼이 클릭은 돼??");
+	    	console.log("replyNo :" +replyNo);
+	    	$('#confirmDeleteModal').modal('hide');
+	        $('#confirmDeleteModal').modal('show');
+	        console.log("열려라 좀");
+	        $('#confirmDeleteModal').data('replyId', replyNo).modal('show');
+	    }*/
+
+	 
+        
 /*function replyDelete(replyId) {
 	// 모달 창 표시
 	$('#confirmDeleteModal').modal('show');
