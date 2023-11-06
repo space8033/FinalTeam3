@@ -363,9 +363,8 @@
 		                            data-style="btn-default">
 		                            <option data-icon="bx">-------권한을 선택해주세요-------</option>
 		                            <!-- <option data-icon="bx">ROLE_PM</option> -->
-		                            <option data-icon="bx">ROLE_PM</option>
-		                            <option data-icon="bx">ROLE_PL</option>
-		                            <option data-icon="bx">ROLE_EMP</option>
+		                            <option data-icon="bx" value="ROLE_PL">팀장</option>
+		                            <option data-icon="bx" value="ROLE_EMP">팀원</option>
 		                          </select>
 		                        </div>
 		                        

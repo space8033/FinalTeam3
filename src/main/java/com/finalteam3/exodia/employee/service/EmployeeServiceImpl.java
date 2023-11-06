@@ -260,6 +260,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 				Map<String, Object> map = new HashMap<>();
 				map.put("empinfo_no", i);
 				map.put("role_category", request.getSelected_role_category());
+				map.put("project_no", 0);
 				
 				//리스트에 있는 인원 권한 업데이트
 				employeeDao.updateRole(map);
@@ -283,7 +284,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 				map.put("team_isleader", true);
 				map.put("project_no", 0);
 				employeeDao.insertNewTeamEmp(map);
-				
+				employeeDao.updateRole(map);
 				employeeDao.updateTeamDuty(map);
 			}
 		}else if(request.getSelected_role_category().equals("ROLE_PM")){

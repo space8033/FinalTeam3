@@ -12,4 +12,5 @@ public interface TaskService {
 	public ProgramModifyRequest getProgramDetail(int task_no);
 	public void updateProgram(ProgramModifyRequest request);
 	public void deleteProgram(int task_no);
+	public double getProgressRate(int project_no);
 }

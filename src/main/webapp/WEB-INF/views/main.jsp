@@ -628,6 +628,7 @@
 	                          </div>
 	                        </div>
 	                      </div>
+	                      <input type="hidden" id="rateBox" value="${progressRate}"/>
 	                      <div id="growthChart"></div>
 	                      <div class="text-center fw-medium pt-3 mb-2">화이팅!</div>
 	
@@ -711,7 +712,6 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/mainRank.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/mainGraph.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
     

@@ -151,7 +151,7 @@
 	</select>
 	
 	<update id="updateRole" parameterType="Map">
-		update role set role_category = #{role_category} where project_no = 0 and empinfo_no = #{empinfo_no}
+		update role set role_category = #{role_category} where project_no = #{project_no} and empinfo_no = #{empinfo_no}
 	</update>
 	
 	<update id="updateTeamDuty" parameterType="Map">

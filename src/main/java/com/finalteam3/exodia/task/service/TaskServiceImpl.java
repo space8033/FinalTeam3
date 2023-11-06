@@ -146,4 +146,15 @@ public class TaskServiceImpl implements TaskService{
 	public void deleteProgram(int task_no) {
 		taskDao.deleteProgram(task_no);
 	}
+
+	@Override
+	public double getProgressRate(int project_no) {
+		int all = taskDao.countAllTask(project_no);
+		int complete = taskDao.countCompleteTask(project_no);
+		
+		double rate = (double) complete * 100 / all;
+		rate = Math.round(rate * 10.0) / 10.0;
+		
+		return rate;
+	}
 }

@@ -375,9 +375,12 @@
 
   // Growth Chart - Radial Bar Chart
   // --------------------------------------------------------------------
+  var progressRate = $("#rateBox").val();
+  console.log(progressRate);
+  
   const growthChartEl = document.querySelector('#growthChart'),
     growthChartOptions = {
-      series: [87],
+      series: [progressRate],
       labels: ['진행률'],
       chart: {
         height: 240,
