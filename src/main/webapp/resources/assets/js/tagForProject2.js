@@ -2,10 +2,9 @@
  * Tagify
  */
 $(document).ready(function() {
-  var emp_no = $("#empNoBox").val();
   var usersList = [];
-  var now = $("#nowEmpNo").val();
-  console.log(now);
+  var manager_no = $("#managerNoBox").val();
+  
   function sendAjaxRequest() {
     $.ajax({
       type: "GET",
@@ -16,6 +15,14 @@ $(document).ready(function() {
  		 console.log(usersList);
  		 TagifyUserList.settings.whitelist = usersList;
          TagifyUserList.loading(false);
+         
+         var originalUser = usersList.filter(function(user) {
+        	 return user.empinfo_no == manager_no;
+         });
+         
+         originalUser.forEach(function(user) {
+        	TagifyUserList.addTags([user.empinfo_name]); 
+         });
          
       },
       error: function(xhr, status, error) {
@@ -224,7 +231,7 @@ $(document).ready(function() {
 	  var emp_notes = TagifyUserList.value;
 	  var team_name = $("#TagifyBasic").val();
 	  var project_client = $("#pnumber").val();
-	  var project_period = $("flatpickr-range").val();
+	  var project_date = $("flatpickr-range").val();
 	  
 	  var data = {
 			  project_name : project_name,
@@ -232,7 +239,7 @@ $(document).ready(function() {
 			  emp_notes : emp_notes,
 			  team_name : team_name,
 			  project_client : project_client,
-			  project_period : project_period
+			  project_date : project_date
 	  }
 	  console.log(data);
 	  $.ajax({
@@ -248,27 +255,28 @@ $(document).ready(function() {
 		  }
 	  });
   });
-  $("#registerButton").on("click", function(e) {
+  $("#modifyButton").on("click", function(e) {
 	  e.preventDefault();
-	  
+	  var project_no = $("#projectNoBox").val();
 	  var project_name = $("#fullname").val();
 	  var project_outline = $("#address").val();
 	  var emp_notes = TagifyUserList.value;
-	  var team_name = $("#TagifyBasic").val();
+	  var team_names = $("#TagifyBasic").val();
 	  var project_client = $("#pnumber").val();
-	  var project_period = $("flatpickr-range").val();
+	  var project_date = $("flatpickr-range").val();
 	  
 	  var data = {
+			  project_no : project_no,
 			  project_name : project_name,
 			  project_outline : project_outline,
 			  emp_notes : emp_notes,
-			  team_name : team_name,
+			  team_names : team_names,
 			  project_client : project_client,
-			  project_period : project_period
+			  project_date : project_date
 	  }
-	  console.log(data);
+	  
 	  $.ajax({
-		  url: "/exodia/project/addProject",
+		  url: "/exodia/project/modifyProject",
 		  method: "post",
 		  contentType: 'application/json',
 		  data: JSON.stringify(data),

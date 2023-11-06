@@ -91,9 +91,11 @@ public class ProjectServiceImpl implements ProjectService{
 			
 		String project_startdate = response.getProject_date().split(" to ")[0];
 		String project_enddate = response.getProject_date().split(" to ")[1];
+		int empinfo_no = response.getEmp_notes().get(0).getEmpinfo_no();
 		
 		response.setProject_startdate(project_startdate);
 		response.setProject_enddate(project_enddate);
+		response.setProject_manager(empinfo_no);
 		
 		projectDao.updateProject(response);
 	}

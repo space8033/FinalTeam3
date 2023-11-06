@@ -281,7 +281,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 				map.put("team_name", request.getSelected_team_name());
 				map.put("team_duty", request.getTyped_team_duty());
 				map.put("team_isleader", true);
+				map.put("project_no", 0);
 				employeeDao.insertNewTeamEmp(map);
+				
+				employeeDao.updateTeamDuty(map);
 			}
 		}else if(request.getSelected_role_category().equals("ROLE_PM")){
 			Integer nowPM = employeeDao.selectRolePM(0);

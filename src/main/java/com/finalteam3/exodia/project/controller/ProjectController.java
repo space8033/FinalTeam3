@@ -40,8 +40,7 @@ public class ProjectController {
 	
 	@PostMapping(value = "/addProject", produces = "application/json; charset=UTF-8")
 	public String addProject(@RequestBody ProjectAddRequest request) {
-		log.info(request.toString());	
-		//projectService.addProject(request);
+		projectService.addProject(request);
 		
 		return "redirect:/employee/userManagement";
 	}
@@ -65,8 +64,7 @@ public class ProjectController {
 	
 	@PostMapping(value = "/modifyProject", produces = "application/json; charset=UTF-8")
 	public String modifyProject(@RequestBody ProjectModifyResponse response) {
-		log.info(response.toString());
-		//projectService.modifyProject(response);
+		projectService.modifyProject(response);
 		
 		return "redirect:/main";
 	}
