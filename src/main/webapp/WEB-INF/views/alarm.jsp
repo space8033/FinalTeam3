@@ -219,7 +219,7 @@
                  </ul>
                </li>
                <li class="dropdown-menu-footer border-top p-3">
-                 <button class="btn btn-primary text-uppercase w-100">알림 모두보기</button>
+                 <button class="btn btn-primary text-uppercase w-100" onclick="javascript:alarmRemoveAll();">알림 모두 삭제</button>
                </li>
              </ul>
            

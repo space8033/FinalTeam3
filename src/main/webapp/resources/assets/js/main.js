@@ -19,8 +19,9 @@
 		const message = JSON.parse(e.data);
 		const msg = message.msg;
 		const count = message.count;
-		
-		
+		const cmd = message.cmd;
+		const title = message.title;
+		const sender = message.sender;
 		
 		
 		
@@ -28,6 +29,12 @@
 	    v_alarmIcon.classList.remove('d-none');
 	    v_alarmIcon.innerText = count;
 	    var alarmContent = document.querySelector("#alarm");
+	    var bellAlarm = document.querySelector("#bellAlarm");
+	    bellAlarm.classList.add("vibration");
+	    setTimeout(function() {
+	    	bellAlarm.classList.remove("vibration");
+	    }, 500);
+	    
 	    
 	    if (alarmContent.classList.contains("show")) {
 	        // "show" 클래스가 있을 때 실행할 작업
@@ -42,6 +49,13 @@
 	    	var alarmMsg = document.querySelector("#alarmMsg");
 	    	alarmMsg.innerText = msg;
 	    }
+	    
+	    if(cmd === "쪽지") {
+	    	var alarmToast = document.querySelector("#alarmToast");
+	    	alarmToast.classList.add('show');
+	    	var alarmMsg = document.querySelector("#alarmMsg");
+	    	alarmMsg.innerText = "제목 : " + title + "</br>" + sender + "님으로부터 1개의 쪽지가 도착하였습니다!"
+	    }
 	};
 
 	function wsSend() {
@@ -49,18 +63,19 @@
 	}
 	
 	function sendMsg() {
-		var msg = document.querySelector("#email-subject").value;
-		sock.send(msg);
-		console.log(msg+"가긴가니");
+		var title = document.querySelector("#email-subject").value;
+		var sender = document.getElementById('alarmId').value;
+		var receiver = document.getElementById('emailContacts').value;
+		var receiverCC = document.getElementById('selectpickerSelectDeselect').value;
+		var receiverBCC = document.getElementById('selecBcc').value;
+		
+		
+		
+		let socketMsg = "note,"+title+","+sender+","+receiver+","+receiverCC+","+receiverBCC;
+		console.log(socketMsg+"가긴가니");
+		sock.send(socketMsg);
 		
 	}
-
-
-	
-
-	
-	
-	
 	
 	
 function pageMove(alarm_no, alarm_type, alarm_typeNo) {
@@ -169,6 +184,85 @@ function alarmRemove(alarm_no) {
 	        	console.log(errorThrown);
 	        	
 	        });
+}
+function alarmRemoveAll() {
+	var alarm = "알람삭제";
+	var postData = {
+			alarm: alarm
+	};
+	
+	$.ajax({
+		url: "/exodia/alarmRemoveAll",
+		type: "POST",
+		data: postData 
+		
+	}).done(function(result) {
+		var v_alarmIcon = document.querySelector("#alarmIcon");
+		v_alarmIcon.classList.add('d-none');
+		console.log("결과확인");
+		var empId = "sion";
+		var postData = {
+	        empId: empId
+	    };
+	    
+	    $.ajax({
+	    	url: "/exodia/alarmDetail",
+	        type: "GET",
+	        data: postData 
+	        
+	        }).done(function(result) {
+	        	console.log("결과확인");
+	        	var html = jQuery('<ul>').html(result);
+	        	var contents = html.find("ul#alarmContent").html();
+	        	$("#alarm").html(contents);
+	        	window.Helpers.initNavbarDropdownScrollbar();
+	        	const notificationMarkAsReadAll = document.querySelector('.dropdown-notifications-all');
+	        	  const notificationMarkAsReadList = document.querySelectorAll('.dropdown-notifications-read');
+
+	        	  // Notification: Mark as all as read
+	        	  if (notificationMarkAsReadAll) {
+	        	    notificationMarkAsReadAll.addEventListener('click', event => {
+	        	      notificationMarkAsReadList.forEach(item => {
+	        	        item.closest('.dropdown-notifications-item').classList.add('marked-as-read');
+	        	      });
+	        	    });
+	        	  }
+	        	  // Notification: Mark as read/unread onclick of dot
+	        	  if (notificationMarkAsReadList) {
+	        	    notificationMarkAsReadList.forEach(item => {
+	        	      item.addEventListener('click', event => {
+	        	        item.closest('.dropdown-notifications-item').classList.toggle('marked-as-read');
+	        	      });
+	        	    });
+	        	  }
+
+	        	  // Notification: Mark as read/unread onclick of dot
+	        	  const notificationArchiveMessageList = document.querySelectorAll('.dropdown-notifications-archive');
+	        	  notificationArchiveMessageList.forEach(item => {
+	        	    item.addEventListener('click', event => {
+	        	      item.closest('.dropdown-notifications-item').remove();
+	        	    });
+	        	  });
+	        	
+	        	
+	        }).fail(function (jqXHR, textStatus, errorThrown) {
+	        	console.log("에러");
+	        	console.log(jqXHR);
+	        	console.log(textStatus);
+	        	console.log(errorThrown);
+	        	
+	        });
+		
+		
+		
+		
+	}).fail(function (jqXHR, textStatus, errorThrown) {
+		console.log("에러");
+		console.log(jqXHR);
+		console.log(textStatus);
+		console.log(errorThrown);
+		
+	});
 }
 
 function alarmRead(alarm_no) {

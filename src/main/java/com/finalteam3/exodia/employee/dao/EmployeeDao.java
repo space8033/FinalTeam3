@@ -46,4 +46,6 @@ public interface EmployeeDao {
 	public Integer selectRolePM(int project_no);
 	public void deleteAllTeam(String team_name);
 	public List<EmpNote> selectEmployeeForNote();
+	
+	public JoinRequest selectEmpByEmpNo(int emp_no);
 }
