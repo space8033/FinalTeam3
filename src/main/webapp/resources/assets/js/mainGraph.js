@@ -5,6 +5,8 @@
 'use strict';
 
 (function () {
+
+	
   let cardColor, headingColor, legendColor, labelColor, shadeColor, borderColor;
 
   if (isDarkStyle) {
