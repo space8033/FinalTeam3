@@ -47,9 +47,9 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/styles/index.min.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" type="text/html" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css" />
     
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css" />
+    <link rel="stylesheet" type ="text/html" href="${pageContext.request.contextPath}/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css" />
 
     <!-- Page CSS -->
 
@@ -258,8 +258,7 @@
                   <table class="datatables-users table border-top">
                     <thead>
                       <tr>
-                        <th></th>
-                        <th></th>
+                      	<th></th>
                         <th>이름</th>
                         <th>권한</th>
                         <th>팀</th>

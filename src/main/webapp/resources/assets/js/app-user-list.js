@@ -20,32 +20,39 @@ $(function () {
 
   // Variable declaration for table
   var dt_user_table = $('.datatables-users'),
+    select2 = $('.select2'),
+    userView = 'app-user-view-account.html',
     statusObj = {
       1: { title: 'Pending', class: 'bg-label-warning' },
       2: { title: 'Active', class: 'bg-label-success' },
       3: { title: 'Inactive', class: 'bg-label-secondary' }
     };
 
-  
+  if (select2.length) {
+    var $this = select2;
+    $this.wrap('<div class="position-relative"></div>').select2({
+      placeholder: 'Select Country',
+      dropdownParent: $this.parent()
+    });
+  }
 
   // Users datatable
   if (dt_user_table.length) {
     var dt_user = dt_user_table.DataTable({
-      ajax:{
-          url: '/exodia/task/getPrograms',
-          type : "GET",
+      ajax: {
+          url: '/exodia/employee/projectEmp',
+          type : "POST",
           dataSrc: ''
       },
       columns: [
         // columns according to JSON
         { data: '' },
-        { data: 'id' },
-        { data: 'full_name' },
-        { data: 'role' },
-        { data: 'current_plan' },
-        { data: 'billing' },
-        { data: 'status' },
-        { data: 'action' }
+        { data: 'emp_no' },
+        { data: 'empinfo_name' },
+        { data: 'role_category' },
+        { data: 'team_name' },
+        { data: 'empinfo_position' },
+        { data: 'emp_status' }
       ],
       columnDefs: [
         {
@@ -60,105 +67,99 @@ $(function () {
           }
         },
         {
-          // For Checkboxes
-          targets: 1,
-          orderable: false,
-          searchable: false,
-          responsivePriority: 3,
-          checkboxes: true,
-          render: function () {
-            return '<input type="checkbox" class="dt-checkboxes form-check-input">';
-          },
-          checkboxes: {
-            selectAllRender: '<input type="checkbox" class="form-check-input">'
-          }
-        },
-        {
           // User full name and email
-          targets: 2,
+          targets: 1,
           responsivePriority: 4,
           render: function (data, type, full, meta) {
-            var $name = full['full_name'],
-              $email = full['email'],
-              $image = full['avatar'];
+            var $name = full['empinfo_name'],
+            	$image = full['avatar'],
+            	$email = full['empinfo_email'];
             if ($image) {
-              // For Avatar image
-              var $output =
-                '<img src="' + assetsPath + 'img/avatars/' + $image + '" alt="Avatar" class="rounded-circle">';
-            } else {
-              // For Avatar badge
-              var stateNum = Math.floor(Math.random() * 6);
-              var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
-              var $state = states[stateNum],
-                $name = full['full_name'],
-                $initials = $name.match(/\b\w/g) || [];
-              $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-              $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';
-            }
+	          // For Avatar image
+	          var $output =
+	            '<img src="' + assetsPath + 'img/avatars/' + $image + '" alt="Avatar" class="rounded-circle">';
+	        } else {
+	            // For Avatar badge
+	          var stateNum = Math.floor(Math.random() * 6);
+	          var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
+	          var $state = states[stateNum],
+	          $name = full['empinfo_name'],
+	          $initials = $name.slice(-2);
+	          $output = '<span class="avatar-initial rounded-circle bg-label-' + $state + '">' + $initials + '</span>';
+	        }
             // Creates full output for row
             var $row_output =
+                '<div class="d-flex justify-content-start align-items-center user-name">' +
+                '<div class="avatar-wrapper">' +
+                '<div class="avatar avatar-sm me-3">' +
+                $output +
+                '</div>' +
+                '</div>' +
+                '<div class="d-flex flex-column">' +
+                '<a href="' +
+                userView +
+                '" class="text-body text-truncate"><span class="fw-medium">' +
+                $name +
+                '</span></a>' +
+                '<small class="text-muted">' +
+                $email +
+                '</small>' +
+                '</div>' +
+                '</div>';
+              return $row_output;
+            /*var $row_output =
               '<div class="d-flex justify-content-start align-items-center user-name">' +
-              '<div class="avatar-wrapper">' +
-              '<div class="avatar avatar-sm me-3">' +
-              $output +
-              '</div>' +
-              '</div>' +
               '<div class="d-flex flex-column">' +
-              '<a href="' +
-              userView +
-              '" class="text-body text-truncate"><span class="fw-medium">' +
+              '<span class="fw-medium">' +
               $name +
-              '</span></a>' +
+              '</span>' +
               '<small class="text-muted">' +
               $email +
               '</small>' +
               '</div>' +
               '</div>';
-            return $row_output;
+            return $row_output;*/
           }
         },
         {
           // User Role
-          targets: 3,
+          targets: 2,
           render: function (data, type, full, meta) {
-            var $role = full['role'];
-            var roleBadgeObj = {
-              Subscriber:
-                '<span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2"><i class="bx bx-user bx-xs"></i></span>',
-              Author:
-                '<span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30 me-2"><i class="bx bx-cog bx-xs"></i></span>',
-              Maintainer:
-                '<span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2"><i class="bx bx-pie-chart-alt bx-xs"></i></span>',
-              Editor:
-                '<span class="badge badge-center rounded-pill bg-label-info w-px-30 h-px-30 me-2"><i class="bx bx-edit bx-xs"></i></span>',
-              Admin:
-                '<span class="badge badge-center rounded-pill bg-label-secondary w-px-30 h-px-30 me-2"><i class="bx bx-mobile-alt bx-xs"></i></span>'
-            };
-            return "<span class='text-truncate d-flex align-items-center'>" + roleBadgeObj[$role] + $role + '</span>';
+            var $role = full['role_category'];
+            
+            return "<span class='text-truncate d-flex align-items-center'>" + $role + '</span>';
           }
         },
         {
           // Plans
-          targets: 4,
+          targets: 3,
           render: function (data, type, full, meta) {
-            var $plan = full['current_plan'];
+            var $plan = full['team_name'];
 
             return '<span class="fw-medium">' + $plan + '</span>';
           }
         },
         {
           // User Status
-          targets: 6,
+          targets: 4,
           render: function (data, type, full, meta) {
-            var $status = full['status'];
+            var $position = full['empinfo_position'];
 
-            return '<span class="badge ' + statusObj[$status].class + '">' + statusObj[$status].title + '</span>';
+            return '<span class="fw-medium">' + $position + '</span>';
           }
         },
         {
+        	// User Status
+        	targets: 5,
+        	render: function (data, type, full, meta) {
+        		var $status = full['emp_status'];
+        		
+        		return '<span class="fw-medium">' + $status + '</span>';
+        	}
+        },
+        {
           // Actions
-          targets: 7,
-          title: '메신저',
+          targets: 6,
           searchable: false,
           orderable: false,
           render: function (data, type, full, meta) {
@@ -167,13 +168,6 @@ $(function () {
               '<button class="btn btn-sm btn-icon"><i class="bx bx-paper-plane"></i></button>' +
               '<button class="btn btn-sm btn-icon"><i class="bx bx-chat"></i></button>' +
               '<button class="btn btn-sm btn-icon delete-record"><i class="bx bx-trash"></i></button>' +
-              '<button class="btn btn-sm btn-icon dropdown-toggle hide-arrow" data-bs-toggle="dropdown"><i class="bx bx-dots-vertical-rounded me-2"></i></button>' +
-              '<div class="dropdown-menu dropdown-menu-end m-0">' +
-              '<a href="' +
-              userView +
-              '" class="dropdown-item">View</a>' +
-              '<a href="javascript:;" class="dropdown-item">Suspend</a>' +
-              '</div>' +
               '</div>'
             );
           }

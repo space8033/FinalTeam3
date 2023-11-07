@@ -35,6 +35,7 @@ import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.EmpSimpleResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
+import com.finalteam3.exodia.employee.dto.response.ProjectEmpResponse;
 import com.finalteam3.exodia.employee.dto.response.TransferDto;
 import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.employee.service.EmployeeService.JoinResult;
@@ -320,5 +321,14 @@ public class EmployeeController {
 		employeeService.deleteTeam(team_name);
 		
 		return "/userManagement";
+	}
+	
+	@PostMapping("/projectEmp")
+	@ResponseBody
+	public List<ProjectEmpResponse> getProjectEmp() {
+		int project_no = 0;
+		List<ProjectEmpResponse> list = employeeService.getAllEmp(project_no);
+		
+		return list;
 	}
 }
