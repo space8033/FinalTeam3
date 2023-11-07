@@ -13,7 +13,7 @@ public interface ChatDao {
 	public int insertChatRoom(ChatRoom chatRoom);
 	public int insertChatMessage(ChatMessage chatMsg);
 	
-	public int selectChatRoomNo(ChatParticipant chatPart);
+	public Integer selectChatRoomNo(ChatParticipant chatPart);
 	
 	public List<ChatMessage> selectChatHistory(int chatRoomNo);
 

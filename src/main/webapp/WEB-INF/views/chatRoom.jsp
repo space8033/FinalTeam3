@@ -114,14 +114,17 @@
                           </div>
                         </div>
                       </div>
+                        <c:forEach var="chat" items="${chatMsg}">
+						   <input type="hidden" id="chatNo" value="${chat.chatRoom_no}"/>
+						</c:forEach>
                       
-                      <input type="hidden" id="alarmId" value="${empInfo.emp_id}"/>
+                      <input type="hidden" id="alarmId" value="${empInfo.empinfo_no}"/>
                       <div class="chat-history-body">
                         <ul class="list-unstyled chat-history mb-0">
                          
                         <c:set var="empInfoNo" value="${empInfo.empinfo_no}" />
-
 						<c:forEach var="chat" items="${chatMsg}">
+						   <c:if test="${chat.message_content != null}">
 						    <c:if test="${empInfoNo != chat.empInfo_no}">
 	                          <li class="chat-message">
 	                            <div class="d-flex overflow-hidden">
@@ -132,7 +135,9 @@
 	                              </div>
 	                              <div class="chat-message-wrapper flex-grow-1">
 	                                <div class="chat-message-text">
-	                                  <p class="mb-0">${chat.message_content}</p>
+	                                  
+	                                  	<p class="mb-0">${chat.message_content}</p>
+	                                  
 	                                </div>
 	                                <div class="text-muted mt-1">
 	                                  <small>${chat.message_createdAt}</small>
@@ -168,6 +173,7 @@
 	                            </div>
 	                          </li>
 	                        </c:if>
+	                       </c:if>
                           </c:forEach>
                           
                          
@@ -176,7 +182,7 @@
                       </div>
                       <!-- Chat message form -->
                       <div class="chat-history-footer">
-                        <form class="form-send-message d-flex justify-content-between align-items-center">
+                        <div class="form-send-message d-flex justify-content-between align-items-center">
                           <input id="msg"
                             class="form-control message-input border-0 me-3 shadow-none"
                             placeholder="Type your message here..." 
@@ -187,12 +193,12 @@
                               <i class="bx bx-paperclip bx-sm cursor-pointer mx-3"></i>
                               <input type="file" id="attach-doc" hidden />
                             </label>
-                            <button id="button-send" class="btn btn-primary d-flex send-msg-btn">
+                            <button id="button-send" class="btn btn-primary d-flex send-msg-btn" onclick="javascript:buttonSend();">
                               <i class="bx bx-paper-plane me-md-1 me-0"></i>
                               <span class="align-middle d-md-inline-block d-none">send</span>
                             </button>
                           </div>
-                        </form>
+                        </div>
                       </div>
                     </div>
                    </div>

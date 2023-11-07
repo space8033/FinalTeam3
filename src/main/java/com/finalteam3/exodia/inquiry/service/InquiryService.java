@@ -17,4 +17,5 @@ public interface InquiryService {
 	public List<Reply> getReplyByNoticeNo(int notice_no);//댓글 가져오기
 	public void deleteReplyByReplyNo(int reply_no);//댓글 삭제
 	public int replyEmpinfoNo(int emp_no); //emp_no를 통해 댓글db에 저장될 empinfo_no를 가져옴
+	public int getEmpInfoNoByEmpNo(int emp_no); //emp_no를 가지고 empinfo_no구하기
 }

@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.inquiry.dto.Inquiry;
 import com.finalteam3.exodia.inquiry.dto.Reply;
@@ -40,6 +41,9 @@ public class InquiryController {
 
 	@Resource
 	private MediaService mediaService;
+	
+	@Resource
+	private EmployeeDao employeeDao;
 	
 	//문의사항 리스트 조회
 	@GetMapping("/inquiryList")
@@ -148,15 +152,24 @@ public class InquiryController {
 		public String inquiryDetail(Authentication authentication,@RequestParam("notice_no") int notice_no, Model model){
 			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 			LoginResponse loginResponse = empDetails.getLoginResponse();
+			
+			model.addAttribute("loginResponse", loginResponse);
+			model.addAttribute("now_emp_no", loginResponse.getEmp_no());
+			
+			int empinfoNo = inquiryService.getEmpInfoNoByEmpNo(loginResponse.getEmp_no());
+			model.addAttribute("now_empinfo_no", empinfoNo);
+
 			Notice notice = inquiryService.getInquiryDetail(notice_no);				
 			List<MediaDto> mediaList = inquiryService.getMediaList(notice.getNotice_no());
 			List<Reply> replyList = inquiryService.getReplyByNoticeNo(notice_no);
 
-		    model.addAttribute("replyList", replyList);
-		    model.addAttribute("loginResponse", loginResponse);
 		    model.addAttribute("notice", notice);
 		    model.addAttribute("mediaList", mediaList);
-		    	
+		    model.addAttribute("replyList", replyList);
+		    log.info("replyList : " + replyList.toString());
+		    
+		    int empNo = employeeDao.selectNoByEmpName(loginResponse.getEmpInfo_name());
+		    	    		    	
 			return "inquiryDetail";
 		}
 				

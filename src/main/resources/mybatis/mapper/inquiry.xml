@@ -17,6 +17,7 @@
 		    r.reply_createdat,
 		    r.reply_no,
 		    e.empinfo_name,
+		    e.empinfo_no,
 		    e.empinfo_email
 		FROM
 		    reply r
@@ -86,6 +87,12 @@
 		update reply set reply_deletedat = to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
 		where reply_no = #{reply_no}
 	</update>
+	
+	<select id="selectEmpInfoNoByEmpNo" parameterType="int" resultType="int">
+		select empinfo_no
+		from empinfo
+		where emp_no = #{emp_no}
+	</select>
 
 	
 </mapper>

@@ -9,5 +9,4 @@ import com.finalteam3.exodia.employee.dto.response.EmpNote;
 public interface ChatService {
 	public EmpNote getEmpInfo(int emp_no);
 	public List<ChatMessage> getChatList(ChatParticipant chatPart);
-
 }
