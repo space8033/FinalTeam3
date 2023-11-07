@@ -9,7 +9,9 @@
 
 let chatsock;
 function connect() {
-	chatsock = new SockJS("http://localhost:8080/exodia/chat");
+	
+	var wsUri = "ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/chat";
+	chatsock = new WebSocket(wsUri);
 	chatsock.onopen = onOpen;
 	chatsock.onmessage = onMessage;
 	console.log(chatsock.send);
