@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html
@@ -456,141 +457,135 @@
 	                  <div class="card text-center" style="padding-: 1.625rem !important;">
 	                    <div class="card-header py-3">
 	                      <ul class="nav nav-pills" role="tablist">
-	                        <li class="nav-item">
-	                          <button
-	                            type="button"
-	                            class="nav-link active"
-	                            role="tab"
-	                            data-bs-toggle="tab"
-	                            data-bs-target="#navs-pills-browser"
-	                            aria-controls="navs-pills-browser"
-	                            aria-selected="true">
-	                            	개발 1팀
-	                          </button>
-	                        </li>
-	                        <li class="nav-item">
-	                          <button
-	                            type="button"
-	                            class="nav-link"
-	                            role="tab"
-	                            data-bs-toggle="tab"
-	                            data-bs-target="#navs-pills-os"
-	                            aria-controls="navs-pills-os"
-	                            aria-selected="false">
-	                            	개발 2팀
-	                          </button>
-	                        </li>
-	                        <li class="nav-item">
-	                          <button
-	                            type="button"
-	                            class="nav-link"
-	                            role="tab"
-	                            data-bs-toggle="tab"
-	                            data-bs-target="#navs-pills-country"
-	                            aria-controls="navs-pills-country"
-	                            aria-selected="false">
-	                            	개발 3팀
-	                          </button>
-	                        </li>
+	                      	<c:forEach items="${team_names}" var="teamName" varStatus="teamStatus">
+	                      		<c:if test="${teamStatus.count == 1}">
+			                        <li class="nav-item">
+			                          <button
+			                            type="button"
+			                            class="nav-link active"
+			                            role="tab"
+			                            data-bs-toggle="tab"
+			                            data-bs-target="#target1"
+			                            aria-selected="true">
+			                            	${teamName}
+			                          </button>
+			                        </li>
+	                      		</c:if>
+	                      		<c:if test="${teamStatus.count != 1}">
+			                        <li class="nav-item">
+			                          <button
+			                            type="button"
+			                            class="nav-link"
+			                            role="tab"
+			                            data-bs-toggle="tab"
+			                            data-bs-target="#target${teamStatus.count}"
+			                            aria-selected="false">
+			                            	${teamName}
+			                          </button>
+			                        </li>
+	                      		</c:if>
+	                      	</c:forEach>
 	                      </ul>
 	                    </div>
 	                    <div class="tab-content pt-0">
-	                      <div class="tab-pane fade show active" id="navs-pills-browser" role="tabpanel">
-	                        <div class="table-responsive text-start">
-	                          <table class="table table-borderless text-nowrap">
-	                            <thead>
-	                              <tr>
-	                                <th>No</th>
-	                                <th>담당 업무</th>
-	                                <th>이름</th>
-	                                <th class="w-50">진척률</th>
-	                              </tr>
-	                            </thead>
-	                            <tbody>
-	                              <tr>
-	                                <td>1</td>
-	                                <td>
-	                                  <div class="d-flex align-items-center">
-	                                    <img
-	                                      src="../../assets/img/icons/brands/chrome.png"
-	                                      alt="Chrome"
-	                                      height="24"
-	                                      class="me-2" />
-	                                    <span>Chrome</span>
-	                                  </div>
-	                                </td>
-	                                <td>8.92k</td>
-	                                <td>
-	                                  <div class="d-flex justify-content-between align-items-center gap-3">
-	                                    <div class="progress w-100" style="height: 10px">
-	                                      <div
-	                                        class="progress-bar bg-success"
-	                                        role="progressbar"
-	                                        style="width: 84.75%"
-	                                        aria-valuenow="84.75"
-	                                        aria-valuemin="0"
-	                                        aria-valuemax="100"></div>
-	                                    </div>
-	                                    <small class="fw-medium">84.75%</small>
-	                                  </div>
-	                                </td>
-	                              </tr>
-	                            </tbody>
-	                          </table>
-	                        </div>
-	                      </div>
-	                      <div class="tab-pane fade" id="navs-pills-os" role="tabpanel">
-	                        <div class="table-responsive text-start">
-	                          <table class="table table-borderless">
-	                            <thead>
-	                              <tr>
-	                                <th>No</th>
-	                                <th>담당 업무</th>
-	                                <th>이름</th>
-	                                <th class="w-50">진척률</th>
-	                              </tr>
-	                            </thead>
-	                            <tbody>
-	                              <tr>
-	                                <td>1</td>
-	                                <td>
-	                                  <div class="d-flex align-items-center">
-	                                    <img
-	                                      src="../../assets/img/icons/brands/windows.png"
-	                                      alt="Windows"
-	                                      height="24"
-	                                      class="me-2" />
-	                                    <span>Windows</span>
-	                                  </div>
-	                                </td>
-	                                <td>875.24k</td>
-	                                <td>
-	                                  <div class="d-flex justify-content-between align-items-center gap-3">
-	                                    <div class="progress w-100" style="height: 10px">
-	                                      <div
-	                                        class="progress-bar bg-success"
-	                                        role="progressbar"
-	                                        style="width: 71.5%"
-	                                        aria-valuenow="71.50"
-	                                        aria-valuemin="0"
-	                                        aria-valuemax="100"></div>
-	                                    </div>
-	                                    <small class="fw-medium">71.50%</small>
-	                                  </div>
-	                                </td>
-	                              </tr>
-	                            </thead>
-	                            <tbody>
-	                                                                     
-	                            </tbody>
-	                          </table>
-	                        </div>
-	                      </div>
-	                    </div>
+	                    
+	                    <c:forEach items="${taskList}" var="tl" varStatus="tlStatus">
+	                      <c:if test="${tlStatus.count == 1}">
+		                      <div class="tab-pane fade show active" id="target${tlStatus.count}" role="tabpanel">
+		                        <div class="table-responsive text-start">
+		                          <table class="table table-borderless text-nowrap">
+		                            <thead>
+		                              <tr>
+		                                <th>No</th>
+		                                <th>담당 업무</th>
+		                                <th>이름</th>
+		                                <th class="w-50">진척률</th>
+		                              </tr>
+		                            </thead>
+		                            <tbody>
+		                              <c:forEach items="${tl.response}" var="response" varStatus="resStatus">
+			                              <tr>
+			                                <td>${response.index}</td>
+			                                <td>
+			                                  <div class="d-flex align-items-center">
+			                                    <span>${response.team_duty}</span>
+			                                  </div>
+			                                </td>
+			                                <td>${response.empinfo_name}</td>
+			                                <td>
+			                                  <div class="d-flex justify-content-between align-items-center gap-3">
+			                                    <div class="progress w-100" style="height: 10px">
+			                                      <div
+			                                        class="progress-bar bg-success"
+			                                        role="progressbar"
+			                                        style="width: ${response.progress_rate}%"
+			                                        aria-valuenow="${response.progress_rate}"
+			                                        aria-valuemin="0"
+			                                        aria-valuemax="100"></div>
+			                                    </div>
+			                                    <small class="fw-medium">${response.progress_rate}%</small>
+			                                  </div>
+			                                </td>
+			                              </tr>
+		                              
+		                              </c:forEach>
+		                            </tbody>
+		                          </table>
+		                        </div>
+		                      </div>
+	                      </c:if>
+	                      <c:if test="${tlStatus.count != 1}">
+		                      <div class="tab-pane fade" id="target${tlStatus.count}" role="tabpanel">
+		                        <div class="table-responsive text-start">
+		                          <table class="table table-borderless text-nowrap">
+		                            <thead>
+		                              <tr>
+		                                <th>No</th>
+		                                <th>담당 업무</th>
+		                                <th>이름</th>
+		                                <th class="w-50">진척률</th>
+		                              </tr>
+		                            </thead>
+		                            <tbody>
+		                              <c:forEach items="${tl.response}" var="response" varStatus="resStatus">
+		                              
+			                              <tr>
+			                                <td>${response.index}</td>
+			                                <td>
+			                                  <div class="d-flex align-items-center">
+			                                    <span>${response.team_duty}</span>
+			                                  </div>
+			                                </td>
+			                                <td>${response.empinfo_name}</td>
+			                                <td>
+			                                  <div class="d-flex justify-content-between align-items-center gap-3">
+			                                    <div class="progress w-100" style="height: 10px">
+			                                      <div
+			                                        class="progress-bar bg-success"
+			                                        role="progressbar"
+			                                        style="width: ${response.progress_rate}%"
+			                                        aria-valuenow="${response.progress_rate}"
+			                                        aria-valuemin="0"
+			                                        aria-valuemax="100"></div>
+			                                    </div>
+			                                    <small class="fw-medium">${response.progress_rate}%</small>
+			                                  </div>
+			                                </td>
+			                              </tr>
+		                              
+		                              </c:forEach>
+		                            </tbody>
+		                          </table>
+		                        </div>
+		                      </div>
+	                      </c:if>
+	                    </c:forEach>
+	                    
 	                  </div>
 	                </div>
 					 
 				</div>
+			</div>
               	<div style="width:35%;">
               		<!-- 캘린더 -->
 					 <div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%;">
@@ -628,7 +623,7 @@
 	                          </div>
 	                        </div>
 	                      </div>
-	                      <input type="hidden" id="rateBox" value="${progressRate}"/>
+	                      <input type="hidden" value="${progressRate}" id="rateBox"/>
 	                      <div id="growthChart"></div>
 	                      <div class="text-center fw-medium pt-3 mb-2">화이팅!</div>
 	
@@ -712,6 +707,7 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
+    <script src="${pageContext.request.contextPath}/resources/assets/js/mainRank.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/mainGraph.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
     

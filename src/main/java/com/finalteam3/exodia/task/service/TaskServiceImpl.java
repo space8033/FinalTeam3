@@ -3,9 +3,12 @@ package com.finalteam3.exodia.task.service;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -15,6 +18,7 @@ import com.finalteam3.exodia.task.dao.TaskDao;
 import com.finalteam3.exodia.task.dto.request.ProgramModifyRequest;
 import com.finalteam3.exodia.task.dto.request.ProgramRegisterRequest;
 import com.finalteam3.exodia.task.dto.response.ProgramListResponse;
+import com.finalteam3.exodia.task.dto.response.TeamTaskResponse;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -156,5 +160,35 @@ public class TaskServiceImpl implements TaskService{
 		rate = Math.round(rate * 10.0) / 10.0;
 		
 		return rate;
+	}
+
+	@Override
+	public List<TeamTaskResponse> getTeamTaskDetail(Map<String, Object> map) {
+		List<TeamTaskResponse> list = taskDao.selectTeamTaskDetail(map);
+		List<TeamTaskResponse> response = new ArrayList<>();
+		
+		int index = 1;
+		for(TeamTaskResponse ttr : list) {
+			Map<String, Object> empMap = new HashMap<>();
+			empMap.put("project_no", 0);
+			empMap.put("emp_no", ttr.getEmp_no());
+			
+			int all = taskDao.countTaskByEmpNo(empMap);
+			int complete = taskDao.countCompleteByEmpNo(empMap);
+			
+			double rate = (double) complete * 100 / all;
+			rate = Math.round(rate * 100.0) / 100.0;
+			
+			
+			ttr.setTotal_task(all);
+			ttr.setComplete_task(complete);
+			ttr.setProgress_rate(rate);
+			ttr.setIndex(index);
+			index++;
+			
+			response.add(ttr);
+		}
+		
+		return response;
 	}
 }
