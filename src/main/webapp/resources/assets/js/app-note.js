@@ -2573,9 +2573,6 @@ document.addEventListener('DOMContentLoaded', function () {
     	  console.log(inputElement.value+"그래서 넘어가는 값이 뭐냐");
       });
     }
-    
-    
-
 
     emailReplyContainers.forEach((container, index) => {
     	

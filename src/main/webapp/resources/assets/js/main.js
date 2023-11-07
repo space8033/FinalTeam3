@@ -5,12 +5,12 @@
 'use strict';
 
 
+	
 	const sock = new SockJS("http://localhost:8080/exodia/header");
 	   
 	sock.onopen = function() {
-		var emp_id = document.getElementById('alarmId').value;
-		sock.send(emp_id);
-	    wsSend();
+		
+	
 	};
 
 	sock.onmessage = function(e) {

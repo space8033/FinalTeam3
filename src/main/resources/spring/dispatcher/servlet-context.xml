@@ -19,4 +19,15 @@
 
 	<bean id="webSocketHandler" class="com.finalteam3.exodia.handler.WebSocketHandler"
 		/>
+		
+	<websocket:handlers>
+		<websocket:mapping handler="chatHandler" path="/chat"/>
+		<websocket:handshake-interceptors>
+			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
+		</websocket:handshake-interceptors>
+		<websocket:sockjs></websocket:sockjs>
+	</websocket:handlers>
+
+	<bean id="chatHandler" class="com.finalteam3.exodia.handler.ChatHandler"
+		/>
 </beans>

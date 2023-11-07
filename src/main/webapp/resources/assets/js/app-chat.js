@@ -7,9 +7,37 @@
 
 
 
+let chatsock;
+function connect() {
+	chatsock = new SockJS("http://localhost:8080/exodia/chat");
+	chatsock.onopen = onOpen;
+	chatsock.onmessage = onMessage;
+	console.log(chatsock.send);
+
+}
+
+function onOpen() {
+	var empInfo_no = $("#alarmId").val();
+		var chatNo = $("#chatNo").val();
+		console.log(empInfo_no+"넘버갖고오걸아");
+		console.log(chatNo+"챗넘버갖고오걸아");
+	
+	const  data = {
+		"chatRoom_no" : chatNo,
+		"empInfo_no" : empInfo_no,
+		"message_content" : "ENTER-CHAT"
+			
+	};
+	let jsonData = JSON.stringify(data);
+	console.log(jsonData+"어케돼있누");
+	chatsock.send(jsonData);
+	console.log(chatsock);
+	
+}
+
 
 function chatRoom(emp_no) {
-	 console.log("들어는오나용 ㅎㅎ");
+	console.log("들어는오나용 ㅎㅎ");
 	
 	  
    var data = {
@@ -23,10 +51,12 @@ function chatRoom(emp_no) {
 		
 	}).done(function(result) {
  
-   	  var html = jQuery('<div>').html(result);
-         var contents = html.find("div#chatRoomContent").html();
-     	  $("#chatRoom").html(contents);
-     	console.log("값은받아오나용 ㅠ");
+		
+   	    var html = jQuery('<div>').html(result);
+        var contents = html.find("div#chatRoomContent").html();
+     	$("#chatRoom").html(contents);
+     	
+     	connect();
         new PerfectScrollbar('.app-chat-contacts .sidebar-body', {
 		        wheelPropagation: false,
 		        suppressScrollX: true
@@ -55,43 +85,120 @@ function chatRoom(emp_no) {
 		    
 		     $("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
 		     $("#"+emp_no).addClass("active");
-		    
-		    
-		    
-		    
+		     
 		    
 		   
-     	$('.form-send-message').on('submit', function (e) {
-     		  e.preventDefault();
-     		  var messageInput = $('.message-input');
-     		  if (messageInput.val()) {
-     		    // Create a div and add a class
-     		    sendMessage();
-     		    var renderMsg = $('<div class="chat-message-text mt-2"></div>');
-     		    renderMsg.html('<p class="mb-0 text-break">' + messageInput.val() + '</p>');
-     		    $('li:last-child .chat-message-wrapper').append(renderMsg);
-     		    messageInput.val('');
-     		    scrollToBottom();
-     		    
-     		
-     		  }
-     		  
-     	});
+     	
      	
 	
 	});
 	
 }
 
+function buttonSend() {
+	  var messageInput = $('.message-input');
+	  if (messageInput.val()) {
+	    // Create a div and add a class
+	    var renderMsg = $('<div class="chat-message-text mt-2"></div>');
+	    renderMsg.html('<p class="mb-0 text-break">' + messageInput.val() + '</p>');
+	    $('li:last-child .chat-message-wrapper').append(renderMsg);
+	    console.log(renderMsg+"왜안나오지..ㅠㅠ");
+	    var currentDate = new Date();
+	    var options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+	    var formattedDate = new Intl.DateTimeFormat('en-US', options).format(currentDate);
+	    console.log(formattedDate+"오늘날짜");
+	    var renderMsg2 = $('<div class="text-end text-muted mt-1"></div>');
+	    renderMsg2.html('<i class="bx bx-check-double"></i><small>' + formattedDate
+	    		+ '</small>');
+	    
+	    $('li:last-child .chat-message-wrapper').append(renderMsg2);
+	    
+	    var renderMsg3 = $('<div class="avatar avatar-sm"></div>');
+	    renderMsg3.html('<img src="/exodia/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />');
+	    $('li:last-child .user-avatar flex-shrink-0 ms-3').append(renderMsg3);
+	    
+	    sendMessage();
+	    messageInput.val('');
+	    scrollToBottom();
+	   /* 
+	    new PerfectScrollbar('.chat-history-body', {
+		        wheelPropagation: false,
+		        suppressScrollX: true
+		   });*/
+	    	
+	  }
+	
+}
+
 function sendMessage() {
 	var messageInput = $('.message-input').val();
-    sock.send(messageInput);
+	var empInfo_no = $("#alarmId").val();
+	var chatNo = $("#chatNo").val();
+	
+	const data = {
+		"chatRoom_no" : chatNo,
+		"empInfo_no" : empInfo_no,
+		"message_content" : messageInput
+			
+	};
+	
+	let jsonData = JSON.stringify(data);
+	
+	
+	chatsock.send(jsonData);
+}
+
+function onMessage(evt) {
+	console.log(evt+"들어오긴하닝 ㅎㅎ");
+	
+	let receive = evt.data.split(",");
+	
+	const data = {
+			"empInfo_no" : receive[0],
+			"message_content" : receive[1]
+			
+	};
+	var empInfo_no = $("#alarmId").val();
+	if(data.empInfo_no != empInfo_no) {
+		checkLR(data);
+	}
+}
+
+
+function checkLR(data) {
+	
+	console.log("어디가 문젠지 알ㄹ줘야 고치지?"+ data);
+	
+	var renderMsg = $('<div class="chat-message-text mt-2"></div>');
+    renderMsg.html('<p class="mb-0 text-break">' + data.message_content + '</p>');
+    $('li:last-child .chat-message-wrapper').append(renderMsg);
+    var currentDate = new Date();
+    var options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+    var formattedDate = new Intl.DateTimeFormat('en-US', options).format(currentDate);
+    console.log(formattedDate+"오늘날짜");
+    var renderMsg2 = $('<div class="text-end text-muted mt-1"></div>');
+    renderMsg2.html('<i class="bx bx-check-double"></i><small>' + data.empInfo_no
+    		+ '</small>');
+    
+    $('li:last-child .chat-message-wrapper').append(renderMsg2);
+    
+    var renderMsg3 = $('<div class="avatar avatar-sm"></div>');
+    renderMsg3.html('<img src="/exodia/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />');
+    $('li:last-child .user-avatar flex-shrink-0 ms-3').append(renderMsg3);
+    
+    scrollToBottom();
+    
+    new PerfectScrollbar('.chat-history-body', {
+	        wheelPropagation: false,
+	        suppressScrollX: true
+	});
+
+	
 }
 
 function scrollToBottom() {
 	  var chatHistoryBody = $('.chat-history-body');
 	  chatHistoryBody.scrollTop(chatHistoryBody[0].scrollHeight);
-	  scrollToBottom();
 }
 
 

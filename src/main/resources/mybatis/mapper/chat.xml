@@ -6,10 +6,10 @@
         select SEQ_CHATROOM.nextval from dual
     </selectKey>
     insert into CHATROOM(
-        CHATROOM_NO, CHATROOM_CREATEDAT, CHATROOM_LASTMSGID
+        CHATROOM_NO, CHATROOM_CREATEDAT
     )
     values(
-        #{chatRoom_no}, to_char(sysdate, 'yyyy.MM.dd HH24:mi:ss'), #{chatRoom_lastMsgId}
+        #{chatRoom_no}, to_char(sysdate, 'yyyy.MM.dd HH24:mi:ss')
     )
 	</insert>
 	
@@ -18,10 +18,10 @@
         select SEQ_CHATMESSAGE.nextval from dual
     </selectKey>
 	 insert into CHATMESSAGE (
-	    CHATMESSAGE_NO, CHATMESSAGE_CREATEDAT, MESSAGE_READ, CHATROOM_NO, MESSAGE_CONTENT, EMPINFO_NO
+	    CHATMESSAGE_NO, MESSAGE_CREATEDAT, CHATROOM_NO, MESSAGE_CONTENT, EMPINFO_NO
 	)
 	values (
-	    #{chatMessage_no}, to_char(sysdate, 'yyyy.MM.dd HH24:mi:ss'), #{message_read}, #{chatroom_no}, #{message_content}, #{empinfo_no}
+	    #{chatMessage_no}, to_char(sysdate, 'yyyy.MM.dd HH24:mi:ss'), #{chatRoom_no}, #{message_content}, #{empInfo_no}
 	)
 	</insert>
 		
@@ -39,8 +39,11 @@
 		SELECT CHATMESSAGE_NO, MESSAGE_CREATEDAT, MESSAGE_READ, CHATROOM_NO, MESSAGE_CONTENT, EMPINFO_NO
 		  FROM chatMessage
 		 WHERE chatRoom_no = #{chatRoom_no}
+		   
  		  
 	</select>
+	
+  
 	
 	<!-- <update id="deleteAlarmByAlarmNo" parameterType="int">
 		update alarm 
