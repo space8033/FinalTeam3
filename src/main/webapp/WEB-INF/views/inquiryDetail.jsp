@@ -265,6 +265,10 @@
                         <h5 class="card-tile mb-0">Product information</h5>
                       </div> -->
                       <div class="card-body">
+							<div><input type="hidden" value="${reply.reply_no}" id="myReply"/></div>
+							<div><input type="hidden" value="${reply.empinfo_no}" id="myEmpInfoNo"/></div>
+							<div><input type="hidden" value="${now_emp_no}" id="nowEmpNo"/></div>
+							<div><input type="hidden" value="${now_empinfo_no}" id="nowEmpInfoNo"/></div>
                         	<div class="card-body">
 								<div>
 									<div>
@@ -356,9 +360,19 @@
 												</div>
 											  </div>
 												<div class="d-flex align-items-center">
-													<i class="bx bx-edit-alt email-list-delete cursor-pointer me-3 fs-4"></i>
-													<!-- 버튼 -->
-													<i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4"></i>													
+												
+
+													<c:if test="${now_emp_no == 0}">
+														<i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4"></i>
+													</c:if>
+													<c:if test="${reply.empinfo_no != 0}">
+														<c:if test="${reply.empinfo_no == now_empinfo_no}">
+															<i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4"></i>
+														</c:if>
+													</c:if>
+													
+												<!-- 버튼 -->
+													<!-- <i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4"></i> -->													
 													<!-- 모달 창 -->
 													<div class="modal fade" id="basicModal" tabindex="-1" aria-labelledby="basicModalLabel" aria-hidden="true">
 													  <div class="modal-dialog">
