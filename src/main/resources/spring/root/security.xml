@@ -22,7 +22,7 @@
 			
 		<security:logout 
 			logout-url="/logout"
-			success-handler-ref="logoutSuccessHandler"/>
+			logout-success-url="/employee/login"/>
 			
 		<!-- 사이트간 요청 위조 방지 비활성화 -->
 		<!-- logout도 post 방식으로 요청(_csrf의 토큰을 전달해야함) -->

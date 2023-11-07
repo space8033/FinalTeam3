@@ -280,7 +280,7 @@
                  <div class="dropdown-divider"></div>
                </li>
                <li>
-                 <a class="dropdown-item" href="${pageContext.request.contextPath}/logout" target="_blank">
+                 <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
                    <i class="bx bx-power-off me-2"></i>
                    <span class="align-middle">로그아웃</span>
                  </a>
