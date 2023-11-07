@@ -630,7 +630,7 @@
 	                      <div class="d-flex px-xxl-4 px-lg-2 p-4 gap-xxl-3 gap-lg-1 gap-3 justify-content-between">
 	                        <div class="d-flex">
 	                          <div class="me-2">
-	                            <span class="badge bg-label-primary p-2"><i class="bx bx-dollar text-primary"></i></span>
+	                            <span class="badge bg-label-primary p-2"><i class='bx bx-calendar-star' ></i></span>
 	                          </div>
 	                          <div class="d-flex flex-column">
 	                            <small>프로젝트 시작</small>
@@ -639,7 +639,7 @@
 	                        </div>
 	                        <div class="d-flex">
 	                          <div class="me-2">
-	                            <span class="badge bg-label-info p-2"><i class="bx bx-wallet text-info"></i></span>
+	                            <span class="badge bg-label-info p-2"><i class='bx bx-calendar-x'></i></span>
 	                          </div>
 	                          <div class="d-flex flex-column">
 	                            <small>프로젝트 종료</small>
