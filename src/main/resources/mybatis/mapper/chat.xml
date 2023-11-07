@@ -42,16 +42,22 @@
 		   
  		  
 	</select>
+    <select id="selectEmpInfoNo" parameterType="ChatMessage" resultType="int">
+		SELECT empInfo_no
+		FROM ChatMessage
+		WHERE chatRoom_no = #{chatRoom_no}
+		AND empInfo_no != #{empInfo_no}
+		AND MESSAGE_CONTENT IS NULL
+ 		  
+	</select>
 	
-  
-	
-	<!-- <update id="deleteAlarmByAlarmNo" parameterType="int">
-		update alarm 
-		   set alarm_deletedAt=to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
-  		 where alarm_no = #{alarm_no}
+	 <update id="updateChatRoom" parameterType="ChatRoom">
+		update CHATROOM 
+		   set chatRoom_lastMsgid = #{chatRoom_lastMsgId}
+  		 where chatRoom_no = #{chatRoom_no}
 	</update>
 	
-	<update id="updateAlarmReadByAlarmNo" parameterType="AlarmRequest">
+	<!-- <update id="updateAlarmReadByAlarmNo" parameterType="AlarmRequest">
 		update alarm
 		   set alarm_isRead = #{alarm_isRead}
   		 where alarm_no = #{alarm_no}

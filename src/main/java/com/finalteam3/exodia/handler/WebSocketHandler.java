@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Resource;
 
@@ -15,6 +14,8 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finalteam3.exodia.alarm.dao.AlarmDao;
 import com.finalteam3.exodia.chat.dao.ChatDao;
@@ -49,7 +50,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	//1:1로 할 경우
 	private Map<String, WebSocketSession> userSessionMap = new HashMap<String, WebSocketSession>();
 	
-	
+    
     private static int i;
 	
 	@Override
@@ -62,58 +63,139 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		i++;
 		log.info(session.getId()+"연결 성공 => 총 접속 인원:" + i +"명");
 		
-		//채팅
-		//log.info("#ChattingHandler, afterConnectionEstablished");
-		
-		//log.info(session.getId()+"님이 입장하셨습니다.");
 	}
 	
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
+		
+			Thread.sleep(600);
 			//알람
-			
 			String msg = message.getPayload();
 			log.info(msg+"메세지 받아오니?");
 			
-			//채팅
-			ChatMessage chatMessage = objectMapper.readValue(msg, ChatMessage.class);
+			//채팅 알람
+			ChatMessage chatMessage = null;
+			
+			try {
+				chatMessage = objectMapper.readValue(msg, ChatMessage.class);
+			} catch(JsonParseException | JsonMappingException e) {
 				
-				for(WebSocketSession single : sessions) {
-					String memId = single.getPrincipal().getName();
-		     
-		
-					//log.info(message+"나 메세지" + memId+"나 아이디"+single+"싱글이야?"+session.getId()+"세션에서 얻은 아이디"+single.getId()+"싱글에서얻은아이디");
+				
+			}
+			
+			
+			if(chatMessage != null) {
+				
+				int empInfoNo = chatDao.selectEmpInfoNo(chatMessage);
+				
+				EmployeeInfo sender = empDao.selectEmpInfoByEmpInfoNo(chatMessage.getEmpInfo_no());
+				EmployeeInfo empInfo = empDao.selectEmpInfoByEmpInfoNo(empInfoNo);
+				int empNo = empInfo.getEmp_no();
+				JoinRequest emp = empDao.selectEmpByEmpNo(empNo);
+				String empId = emp.getEmp_id();
+				WebSocketSession receiverSession = userSessionMap.get(empId);
+				int uckCount = alarmDao.selectAlarmUchkCount(empId);
+				
+				
+				// 메시지 목록을 배열에 담습니다.
+				Message messageContent= new Message();
+				messageContent.setCount(uckCount);
+				messageContent.setMsg(empInfo.getEmpinfo_name()+"님 "+sender.getEmpinfo_name()
+						+ "님으로부터 1:1채팅이 왔습니다."+chatMessage.getMessage_content());
+				String jsonMessages = objectMapper.writeValueAsString(messageContent);
+				
+				TextMessage textMessage = new TextMessage(jsonMessages);
+				log.info(textMessage+"머라고보내니?");
+				receiverSession.sendMessage(textMessage);
+				
+				
+			} else {
+				String[] strs = msg.split(",");
+				if(strs != null && strs.length > 3) {
+					String cmd = strs[0];
+					String title = strs[1];
+					String sender = strs[2];
+					List<String> receivers = new ArrayList<>();
+					List<String> receiverIds = new ArrayList<>();
+					log.info(cmd+"cmd 받아오니?");
+					log.info(title+"title 받아오니?");
+					log.info(sender+"sender 받아오니?");
 					
-					int uckCount = alarmDao.selectAlarmUchkCount(memId);
 					
-					if(single.getId().equals(session.getId()) && uckCount != 0) {
+					LoginResponse empName = empDao.selectEmpByEmpId(sender);
+					String senderName = empName.getEmpInfo_name();
+					
+			        for (int i = 3; i < strs.length; i++) {
+			            receivers.add(strs[i]);
+			        }
+			        log.info(receivers+"receiver 받아오니?");
+			        
+			        for(String receiver : receivers) {
+			        	int receiverNo = Integer.parseInt(receiver);
+			        	EmployeeInfo empInfo = empDao.selectInfoByEmpNo(receiverNo);
+			        	JoinRequest emp = empDao.selectEmpByEmpNo(receiverNo);
+			        	String receiverId = emp.getEmp_id();
+			        	//String receiverName = empInfo.getEmpinfo_name();
+			        	
+			        	receiverIds.add(receiverId);
+			        }
+					
+					WebSocketSession senderSession = userSessionMap.get(sender);
+					
+					for(String receiverId : receiverIds) {
+						WebSocketSession receiverSession = userSessionMap.get(receiverId);
 						
-						ObjectMapper objectMapper = new ObjectMapper(); // Jackson 라이브러리 사용
-		
-						// 메시지 목록을 배열에 담습니다.
-						Message messageContent= new Message();
-						messageContent.setCount(uckCount);
-						messageContent.setMsg("");
-						String jsonMessages = objectMapper.writeValueAsString(messageContent);
-						TextMessage textMessage = new TextMessage(jsonMessages);
-						session.sendMessage(textMessage);
+						log.info(receiverSession+"receiver session은 들어오니?");
+						if("note".equals(cmd) && receiverSession!=null) {
+							log.info(receiverSession+"여기는들어오니?");
 						
+							ObjectMapper objectMapper = new ObjectMapper(); // Jackson 라이브러리 사용
+	
+							// 메시지 목록을 배열에 담습니다.
+							Message messageContent= new Message();
+							messageContent.setCmd("쪽지");
+							messageContent.setTitle(title);
+							messageContent.setSender(senderName);
+							
+							String jsonMessages = objectMapper.writeValueAsString(messageContent);
+							TextMessage textMessage = new TextMessage(jsonMessages);
+							log.info(textMessage+"머라고보내니?");
+							receiverSession.sendMessage(textMessage);
+						}
 					}
-				//messageContent.setMsg(memId+"님 새 알림이 있습니다.");
+				} else {
+					
+					for(WebSocketSession single : sessions) {
+						String memId = single.getPrincipal().getName();
+						int uckCount = alarmDao.selectAlarmUchkCount(memId);
+						if(single.getId().equals(session.getId()) && uckCount != 0) {
+							
+							ObjectMapper objectMapper = new ObjectMapper(); // Jackson 라이브러리 사용
+							// 메시지 목록을 배열에 담습니다.
+							Message messageContent= new Message();
+							messageContent.setCount(uckCount);
+							messageContent.setMsg(memId+"님 "+uckCount+"개의 알람이 있습니다.");
+							String jsonMessages = objectMapper.writeValueAsString(messageContent);
+							TextMessage textMessage = new TextMessage(jsonMessages);
+							session.sendMessage(textMessage);
+							
+						}
+					//messageContent.setMsg(memId+"님 새 알림이 있습니다.");
+					}
 				}
-		
+			}
+		//채팅
+		//log.info(session.getId() + ": " + message);
 	}
 	
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
-		
 		//채팅
 		i--;
 		log.info("소켓 연결 끊김 현재 접속자수:" + i);
 		  // sessionList에 session이 있다면
           // 해당 session의 방 번호를 가져와서, 방을 찾고, 그 방의 ArrayList<session>에서 해당 session을 지운다.
-	
 
 	}
 }
