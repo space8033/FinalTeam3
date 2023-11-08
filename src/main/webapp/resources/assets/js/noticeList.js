@@ -6,7 +6,9 @@
 
 // Datatable (jquery)
 $(function () {
+	
   let borderColor, bodyBg, headingColor;
+  var empNo = $("#now_emp_no").val();
 
   if (isDarkStyle) {
     borderColor = config.colors_dark.borderColor;
@@ -22,27 +24,14 @@ $(function () {
   var sharedNoticeNo = null;
   
   var dt_product_table = $('.datatables-products'),
-    productAdd = "noticeAdd",
-    statusObj = {
-      1: { title: 'Scheduled', class: 'bg-label-warning' },
-      2: { title: 'Publish', class: 'bg-label-success' },
-      3: { title: 'Inactive', class: 'bg-label-danger' }
-    },
-    categoryObj = {
-      0: { title: 'Household' },
-      1: { title: 'Office' },
-      2: { title: 'Electronics' },
-      3: { title: 'Shoes' },
-      4: { title: 'Accessories' },
-      5: { title: 'Game' }
-    }
+    productAdd = "noticeAdd"
   
   //DataTable
   if (dt_product_table.length) {
     var dt_products = dt_product_table.DataTable({
     	ajax: {
             url: 'noticeListJson',
-            type : "GET",
+            type : "POST",
             dataSrc: ''
         }, // JSON file to add data
       columns: [
@@ -114,7 +103,7 @@ $(function () {
       ],
       order: [1, 'desc'], //set any columns order asc/desc
       dom:
-        '<"card-header d-flex border-top rounded-0 flex-wrap py-md-0"' +
+        '<"card-header d-flex border-top rounded-0 flex-wrap py-md-0 pr-3"' +
         '<"me-5 ms-n2 pe-5"f>' +
         '<"d-flex justify-content-start justify-content-md-end align-items-baseline"<"dt-action-buttons d-flex align-items-start align-items-md-center justify-content-sm-center mb-3 mb-sm-0"lB>>' +
         '>t' +
@@ -127,7 +116,7 @@ $(function () {
         sLengthMenu: '_MENU_',
         search: '',
         searchPlaceholder: '검색',
-        info: 'Displaying _START_ to _END_ of _TOTAL_ entries'
+        info: '현재 _START_ - _END_ / _TOTAL_ 건'
       },
       // Buttons with Dropdown
       buttons: [
@@ -135,8 +124,27 @@ $(function () {
           text: '<i class="bx bx-plus me-0 me-sm-1"></i><span class="d-none d-sm-inline-block">공지사항 등록</span>',
           className: 'add-new btn btn-primary',
           action: function () {
-            window.location.href = productAdd;
-          }
+              // 여기서 특정 조건을 확인
+
+              // 여기서 로그인한 사용자의 emp_no를 가져옵니다.
+              $.ajax({
+                type: 'GET',
+                url: 'noticeList',
+                success: function (data) {    
+                	console.log("empNo :" + empNo);
+                  // emp_no에 따라 조건 확인
+                  if (empNo == 0) {
+                    window.location.href = productAdd;
+                  } else {
+                    // 조건을 만족하지 않을 때 사용자에게 알림
+                    alert("글쓰기 권한이 없습니다.");
+                  }
+                },
+                error: function (xhr, status, error) {
+                  console.error('에러 메시지: ' + error);
+                }
+              });
+            }
         }
       ],
       // For responsive popup

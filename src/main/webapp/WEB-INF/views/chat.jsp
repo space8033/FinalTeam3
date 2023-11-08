@@ -97,8 +97,7 @@
                           id="chat-sidebar-left-user-about"
                           class="form-control chat-sidebar-left-user-about mt-2"
                           rows="4"
-                          maxlength="120">
-							맛있는게 먹고 싶다.</textarea
+                          maxlength="120">맛있는게 먹고 싶다.</textarea
                         >
                       </div>
                       <div class="my-4">
@@ -272,7 +271,7 @@
                           <h5 class="text-primary mb-0">목록</h5>
                         </li>
                         <li class="chat-contact-list-item contact-list-item-0 d-none">
-                          <h6 class="text-muted mb-0">No Contacts Found</h6>
+                          <h6 class="text-muted mb-0">해당 프로젝트 인원이 없습니다.</h6>
                         </li>
                         
                         

@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class EmployeeInfo {
+	private int emp_no;
 	private int empinfo_no;
 	private String empinfo_name;
 	private String emp_id;

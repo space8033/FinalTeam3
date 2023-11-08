@@ -1,8 +1,6 @@
 package com.finalteam3.exodia.handler;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -17,12 +15,11 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finalteam3.exodia.alarm.dao.AlarmDao;
+import com.finalteam3.exodia.alarm.dto.request.AlarmRequest;
 import com.finalteam3.exodia.chat.dao.ChatDao;
 import com.finalteam3.exodia.chat.dto.request.ChatMessage;
+import com.finalteam3.exodia.chat.dto.request.ChatRoom;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
-import com.finalteam3.exodia.employee.dto.request.JoinRequest;
-import com.finalteam3.exodia.employee.dto.response.LoginResponse;
-import com.finalteam3.exodia.note.dto.EmployeeInfo;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -38,6 +35,9 @@ public class ChatHandler extends TextWebSocketHandler{
 	
 	@Resource
 	private EmployeeDao empDao;
+	
+	@Resource
+	private AlarmDao alarmDao;
 	
 	
 	//채팅방 목록 <방 번호, ArrayList<session>
@@ -122,19 +122,28 @@ public class ChatHandler extends TextWebSocketHandler{
 				}
 				
 				chatDao.insertChatMessage(chatMessage);
+				int receiverNo = chatDao.selectEmpInfoNo(chatMessage);
+				AlarmRequest alarm = new AlarmRequest();
+				alarm.setAlarm_isRead(false);
+				alarm.setAlarm_type("채팅");
+				alarm.setEmpinfo_no(receiverNo);
+				alarm.setAlarm_typeNo(chatMessage.getChatRoom_no());
+				
+				alarmDao.insertAlarm(alarm);
+				
+				int chatMsgNo = chatMessage.getChatMessage_no();
+				
+				ChatRoom chatRoom = new ChatRoom();
+				chatRoom.setChatRoom_lastMsgId(chatMsgNo);
+				chatRoom.setChatRoom_no(chatMessage.getChatRoom_no());
+				chatDao.updateChatRoom(chatRoom);
+				
 				log.info("채팅방 내용");
-				
-				
 			}
-			
 			//채팅방아니고 알람일 때
-			
 			log.info("응 아ㅣ무것도 아니야 ㅅㄱㄴ");
-		
 		//채팅
-		
 		//log.info(session.getId() + ": " + message);
-	
 	}
 	
 	@Override
