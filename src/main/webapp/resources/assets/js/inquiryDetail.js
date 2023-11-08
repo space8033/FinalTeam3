@@ -2,6 +2,13 @@
  * App eCommerce Add Product Script
  */
 'use strict';
+//이름 프로필 랜덤 색 바꾸기
+$(document).ready(function(){
+	console.log("실행");
+    var colors = ["bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary"];
+    var randomClass = colors[Math.floor(Math.random() * colors.length)];
+    $('#nameProfile').addClass(randomClass);
+});
 
 //Javascript to handle the e-commerce product add page
 

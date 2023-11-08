@@ -2,6 +2,7 @@ package com.finalteam3.exodia.inquiry.service;
 
 import java.util.List;
 
+import com.finalteam3.exodia.inquiry.dto.Inquiry;
 import com.finalteam3.exodia.inquiry.dto.Reply;
 import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.notice.dto.Notice;

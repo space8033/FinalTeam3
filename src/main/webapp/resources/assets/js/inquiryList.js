@@ -127,7 +127,7 @@ $(function () {
         sLengthMenu: '_MENU_',
         search: '',
         searchPlaceholder: '검색',
-        info: 'Displaying _START_ to _END_ of _TOTAL_ entries'
+        info: '현재 _START_ - _END_ / _TOTAL_ 건'
       },
       // Buttons with Dropdown
       buttons: [

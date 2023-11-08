@@ -40,27 +40,37 @@ public class NoticeController {
 	
 	//공지사항 리스트 조회
 	@GetMapping("/noticeList")
-	public String noticeList(Model model){				
+	public String noticeList(Authentication authentication, Model model){
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		int emp_no = empDetails.getLoginResponse().getEmp_no();
+		
+		model.addAttribute("emp_no", emp_no);
+		
         return "noticeList";
 	}
 	
 	//공지사항 리스트 json화
 	@ResponseBody
-	@GetMapping("/noticeListJson")
-	public String noticeListJson(Authentication authentication, Model model) throws JsonProcessingException {
+	@PostMapping("/noticeListJson")
+	public List<Notice> noticeListJson(Authentication authentication) throws JsonProcessingException {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
+		//int emp_no = empDetails.getLoginResponse().getEmp_no();
 		
 		List<Notice> data = noticeService.getNoticeList();
-		log.info("delete하고 list받기 : "+ data.toString());
+		
+		log.info("데이터 data 어떻게 나오 : " + data);
 		
 		
 		//data를 json데이터로 바꾸기
-        ObjectMapper objectMapper = new ObjectMapper();
+       /* ObjectMapper objectMapper = new ObjectMapper();
         String jsonData = objectMapper.writeValueAsString(data);
         
+        log.info("jsonData로 바꿈 : " + jsonData);*/
         
-		return jsonData;
+        
+		return data;
 	}
 	
 	//공지사항 추가1

@@ -18,5 +18,8 @@ public class Inquiry {
 	private int empinfo_no_writer;
 	private String empinfo_name;
 	private MultipartFile[] inquiry_files;
+	private byte[] media_data;
+	private String two_name;
+	
 
 }

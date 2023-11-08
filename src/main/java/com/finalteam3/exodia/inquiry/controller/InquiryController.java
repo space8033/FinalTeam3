@@ -166,7 +166,7 @@ public class InquiryController {
 		    model.addAttribute("notice", notice);
 		    model.addAttribute("mediaList", mediaList);
 		    model.addAttribute("replyList", replyList);
-		    log.info("replyList : " + replyList.toString());
+		    log.info("notice : " + notice);
 		    
 		    int empNo = employeeDao.selectNoByEmpName(loginResponse.getEmpInfo_name());
 		    	    		    	
@@ -201,8 +201,8 @@ public class InquiryController {
 			LoginResponse loginResponse = empDetails.getLoginResponse();
 			
 			Notice notice = inquiryService.getInquiryDetail(notice_no);
-
 			model.addAttribute("notice", notice);
+			log.info("문의사하 ㅇ업데이트 문의사항 번호? :" + notice);
 			
 			return "inquiryUpdate";
 		}
@@ -214,6 +214,7 @@ public class InquiryController {
 			LoginResponse loginResponse = empDetails.getLoginResponse();
 			
 			inquiryService.updateByInquiry(notice);
+
 			return "inquiryList";
 		}
 		
