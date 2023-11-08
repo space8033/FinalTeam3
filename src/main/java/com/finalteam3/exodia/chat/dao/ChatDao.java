@@ -14,11 +14,17 @@ public interface ChatDao {
 	public int insertChatMessage(ChatMessage chatMsg);
 	
 	public Integer selectChatRoomNo(ChatParticipant chatPart);
+
+	public int countUnreadChat(ChatMessage chatMsg);
 	
 	public List<ChatMessage> selectChatHistory(int chatRoomNo);
 	
 	public void updateChatRoom(ChatRoom chatRoom);
 	
+	public ChatRoom selectChatRoomByRoomNo(int chatRoomNo);
+	
 	public int selectEmpInfoNo(ChatMessage chatMsg);
+	
+	public ChatMessage selectLastMsg(int chatMsgId);
 
 }

@@ -50,6 +50,33 @@
 		AND MESSAGE_CONTENT IS NULL
  		  
 	</select>
+
+	<!-- chatRoomNo로 ChatRoom얻어오기 -->
+    <select id="selectChatRoomByRoomNo" parameterType="int" resultType="ChatRoom">
+		SELECT CHATROOM_NO, CHATROOM_CREATEDAT, CHATROOM_LASTMSGID
+		FROM CHATROOM
+		WHERE chatRoom_no = #{chatRoom_no}
+ 		  
+	</select
+	>
+	<!-- lastMsgId로 chatMessage얻어오기 -->
+    <select id="selectLastMsg" parameterType="int" resultType="ChatMessage">
+		SELECT CHATMESSAGE_NO, MESSAGE_CREATEDAT, MESSAGE_CONTENT
+		FROM CHATMESSAGE
+		WHERE CHATMESSAGE_NO = #{chatRoom_lastMsgId}
+ 		  
+	</select>
+
+	<!-- 안읽은 채팅 개수 구하기 -->
+    <select id="countUnreadChat" parameterType="ChatMessage" resultType="int">
+		SELECT COUNT(*) 
+		FROM ChatMessage
+		WHERE chatRoom_no = #{chatRoom_no}
+		  AND empInfo_no = #{empInfo_no}
+		  AND MESSAGE_CONTENT IS NOT NULL
+		  AND MESSAGE_READ IS NULL
+		 		  
+	</select>
 	
 	 <update id="updateChatRoom" parameterType="ChatRoom">
 		update CHATROOM 

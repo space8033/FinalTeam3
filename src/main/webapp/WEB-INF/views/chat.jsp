@@ -222,48 +222,25 @@
                         <li class="chat-contact-list-item chat-list-item-0 d-none">
                           <h6 class="text-muted mb-0">대화목록을 찾을 수 없습니다.</h6>
                         </li>
-                        <li class="chat-contact-list-item">
-                          <a class="d-flex align-items-center">
-                            <div class="flex-shrink-0 avatar avatar-online">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/13.png" alt="Avatar" class="rounded-circle" />
-                            </div>
-                            <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">오우주</h6>
-                              <p class="chat-contact-status text-truncate mb-0 text-muted">
-                                	나는 팀장이다. 내 말을 들어라
-                              </p>
-                            </div>
-                            <small class="text-muted mb-auto">5분전</small>
-                          </a>
-                        </li>
-                        <li class="chat-contact-list-item">
-                          <a class="d-flex align-items-center">
-                            <div class="flex-shrink-0 avatar avatar-offline">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
-                            </div>
-                            <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">박재홍</h6>
-                              <p class="chat-contact-status text-truncate mb-0 text-muted">
-                                	나는 아기고양이. 앙냥냥 👍
-                              </p>
-                            </div>
-                            <small class="text-muted mb-auto">30분전</small>
-                          </a>
-                        </li>
-                        <li class="chat-contact-list-item">
-                          <a class="d-flex align-items-center">
-                            <div class="flex-shrink-0 avatar avatar-busy">
-                              <span class="avatar-initial rounded-circle bg-label-success">JJ</span>
-                            </div>
-                            <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">김종진</h6>
-                              <p class="chat-contact-status text-truncate mb-0 text-muted">
-                              		 나는 김종지다.
-                              </p>
-                            </div>
-                            <small class="text-muted mb-auto">1일 전</small>
-                          </a>
-                        </li>
+                        
+						<c:forEach var="emp" items="${empList}" varStatus="a">
+						  <c:if test="${emp.lastMsgContent != null}">
+	                        <li class="chat-contact-list-item"  id="${emp.emp_no}" >
+	                          <a class="d-flex align-items-center" onclick="javascript:chatRoom(${emp.emp_no})">
+		                            <div class="flex-shrink-0 avatar avatar-busy">
+	                              <span class="avatar-initial rounded-circle bg-label-success">${emp.two_name}</span>
+	                            </div>
+	                            <div class="chat-contact-info flex-grow-1 ms-3">
+	                              <h6 class="chat-contact-name text-truncate m-0">${emp.empinfo_name}</h6>
+	                              <p class="chat-contact-status text-truncate mb-0 text-muted">
+	                              		 ${emp.lastMsgContent}
+	                              </p>
+	                            </div>
+	                            <small class="text-muted mb-auto">${emp.message_createdAt}</small>
+	                          </a>
+	                        </li>
+	                      </c:if>
+                        </c:forEach>
                       </ul>
                       <!-- Contacts -->
                       <ul class="list-unstyled chat-contact-list mb-0" id="contact-list">
@@ -276,8 +253,9 @@
                         
                         
                         <c:forEach var="emp" items="${empList}" varStatus="a">
+                         <c:if test="${emp.lastMsgContent == null}">
 	                        <li class="chat-contact-list-item"  id="${emp.emp_no}" >
-	                          <a class="d-flex align-items-center" onclick="javascript:chatRoom(${emp.emp_no}, 1)">
+	                          <a class="d-flex align-items-center" onclick="javascript:chatRoom(${emp.emp_no})">
 	                            <div class="flex-shrink-0 avatar avatar-offline">
 	                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/4.png" alt="Avatar" class="rounded-circle" />
 	                            </div>
@@ -287,21 +265,12 @@
 	                            </div>
 	                          </a>
 	                        </li>
+	                      </c:if>
                         </c:forEach>
                        
                        
                        
-                        <li class="chat-contact-list-item">
-                          <a class="d-flex align-items-center">
-                            <div class="flex-shrink-0 avatar avatar-busy">
-                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/11.png" alt="Avatar" class="rounded-circle" />
-                            </div>
-                            <div class="chat-contact-info flex-grow-1 ms-3">
-                              <h6 class="chat-contact-name text-truncate m-0">김진성</h6>
-                              <p class="chat-contact-status text-truncate mb-0 text-muted">Backend Developer</p>
-                            </div>
-                          </a>
-                        </li>
+                       
                       </ul>
                     </div>
                   </div>

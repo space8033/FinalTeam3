@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.finalteam3.exodia.chat.dto.request.ChatMessage;
 import com.finalteam3.exodia.chat.dto.request.ChatParticipant;
+import com.finalteam3.exodia.chat.dto.response.EmpChat;
 import com.finalteam3.exodia.chat.service.ChatService;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
@@ -46,10 +47,10 @@ public class ChatController {
 		String emp_name = loginResponse.getEmpInfo_name();
 		model.addAttribute("empInfo_name", emp_name);
 		
-		List<String> teamList = noteService.getTeamList();
-		List<EmpNote> empList = noteService.getEmpList();
-		model.addAttribute("teamList", teamList);
-		model.addAttribute("empList", empList);
+		List<EmpChat> empChatList = chatService.getChatEmpList(empInfo.getEmpinfo_no());
+		
+		
+		model.addAttribute("empList", empChatList);
 		
 		return "/chat";
 	}

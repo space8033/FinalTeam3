@@ -86,6 +86,7 @@ function chatRoom(emp_no) {
 		     $("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
 		     $("#"+emp_no).addClass("active");
 		     
+		     scrollToBottom();
 		     
 		     const searchInput = document.querySelector('.chat-search-input');
 		     searchInput.addEventListener('keyup', e => {
@@ -296,85 +297,7 @@ document.addEventListener('DOMContentLoaded', function () {
     
     
 
-    
-    if(myName){
-	    var emp_no = "46";
-	    var data = {
-	   		 emp_no: emp_no
-	   	};
-	   	
-	   	$.ajax({
-	   		url: "/exodia/chatRoom",
-	   		type: "GET",
-	   		data: data
-	   		
-	   	}).done(function(result) {
-	    
-	      	  var html = jQuery('<div>').html(result);
-	            var contents = html.find("div#chatRoomContent").html();
-	        	  $("#chatRoom").html(contents);
-	        	console.log("값은받아오나용 ㅠ");
-	        	 new PerfectScrollbar('.app-chat-contacts .sidebar-body', {
-     		        wheelPropagation: false,
-     		        suppressScrollX: true
-     		      });
-     		    
 
-     		    // Chat history scrollbar
-     		      new PerfectScrollbar('.chat-history-body', {
-     		        wheelPropagation: false,
-     		        suppressScrollX: true
-     		      });
-     		    
-
-     		    // Sidebar left scrollbar
-     		      new PerfectScrollbar('.app-chat-sidebar-left .sidebar-body', {
-     		        wheelPropagation: false,
-     		        suppressScrollX: true
-     		      });
-     		    
-
-     		    // Sidebar right scrollbar
-     		      new PerfectScrollbar('.app-chat-sidebar-right .sidebar-body', {
-     		        wheelPropagation: false,
-     		        suppressScrollX: true
-     		     });
-     		    
-     		     $("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
-     		     $("#"+emp_no).addClass("active");
-     		    
-     		    
-     		    
-     		    
-     		  
-	        	$('.form-send-message').on('submit', function (e) {
-	        		  e.preventDefault();
-	        		  var messageInput = $('.message-input');
-	        		  if (messageInput.val()) {
-	        		    // Create a div and add a class
-	        		    //sendMessage();
-	        		    var renderMsg = $('<div class="chat-message-text mt-2"></div>');
-	        		    renderMsg.html('<p class="mb-0 text-break">' + messageInput.val() + '</p>');
-	        		    $('li:last-child .chat-message-wrapper').append(renderMsg);
-	        		    messageInput.val('');
-	        		    
-	        		    
-	         		    scrollToBottom();
-	         		    
-
-	         		   function scrollToBottom() {
-	         		   	  var chatHistoryBody = $('.chat-history-body');
-	         		   	  chatHistoryBody.scrollTop(chatHistoryBody[0].scrollHeight);
-	         		   	  scrollToBottom();
-	         		   }
-	        		  
-	        		  }
-	        	});
-	        	
-	        	scrollToBottom();
-	        	
-	   	});
-    }
 	 
 	  
     // Chat contacts scrollbar
