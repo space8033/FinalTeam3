@@ -275,7 +275,7 @@
 												class="text-small text-muted text-uppercase align-middle">분류</small>
 										</div>
 
-										<div class="form-check mb-2">
+										<div class="form-check mb-2" style="display:none;">
 											<input class="form-check-input select-all" type="checkbox"
 												id="selectAll" data-value="all" checked /> <label
 												class="form-check-label" for="selectAll">전체</label>
@@ -377,8 +377,7 @@
 															data-bs-dismiss="offcanvas">취소</button>
 													</div>
 													<div>
-														<button
-															class="btn btn-label-danger btn-delete-event d-none">삭제</button>
+														<button class="btn btn-label-danger btn-delete-event d-none">삭제</button>
 													</div>
 												</div>
 											</form>

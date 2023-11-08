@@ -122,6 +122,7 @@ public class ChatHandler extends TextWebSocketHandler{
 				}
 				
 				chatDao.insertChatMessage(chatMessage);
+
 				int receiverNo = chatDao.selectEmpInfoNo(chatMessage);
 				AlarmRequest alarm = new AlarmRequest();
 				alarm.setAlarm_isRead(false);
