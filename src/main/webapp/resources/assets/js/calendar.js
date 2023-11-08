@@ -33,6 +33,9 @@ $(document).ready(function() {
         });
     });
     
+  //delete task
+    
+    
 });
 
 let direction = 'ltr';
@@ -518,7 +521,31 @@ document.addEventListener('DOMContentLoaded', function () {
 	            // Call removeEvent function
 	            btnDeleteEvent.addEventListener('click', e => {
 	              removeEvent(parseInt(eventToUpdate.id));
-	              // eventToUpdate.remove();
+
+	            	    var taskNo = eventToUpdate.extendedProps.task_no;
+	            	    var xhr = new XMLHttpRequest();
+	            	    
+	            	    xhr.open('POST', '/exodia/deleteCalendar', true);
+	            	    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+	            	    
+	            	    xhr.onreadystatechange = function() {
+	            	        if (xhr.readyState === 4) {
+	            	            if (xhr.status === 200) {
+	            	                console.log("나는 빈대다");
+	            	                //location.reload();
+	            	            } else {
+	            	                console.error("에러 발생: " + xhr.status);
+	            	            }
+	            	        }
+	            	    };
+	            	    
+	            	    var data = 'task_no=' + encodeURIComponent(taskNo);
+	            	    xhr.send(data);
+
+	              
+	              
+	              
+	              
 	              bsAddEventSidebar.hide();
 	            });
 

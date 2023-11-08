@@ -8,6 +8,7 @@ import javax.annotation.Resource;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -59,5 +60,16 @@ public class CalendarController {
 		
 		return events;
 	}
-
+	
+	//일정 삭제
+	@PostMapping("/deleteCalendar")
+	public String deleteTask(Authentication authentication, int task_no) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		log.info("아 왜안되는데 :" + task_no);
+		calendarService.delete(task_no);
+		
+		return "calendar";
+	}
 }

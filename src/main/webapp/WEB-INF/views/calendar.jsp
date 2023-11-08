@@ -326,7 +326,7 @@
 												data-bs-dismiss="offcanvas" aria-label="Close"></button>
 										</div>
 										<div class="offcanvas-body">
-											<form class="event-form pt-0" id="eventForm"
+											<form class="event-form pt-0" id="eventForm" action="/deleteCalendar" method="post"
 												name="CalendarRequest" onsubmit="return false">
 												<div class="mb-3">
 													<label class="form-label" for="eventTitle">제목</label> <input
@@ -377,7 +377,8 @@
 															data-bs-dismiss="offcanvas">취소</button>
 													</div>
 													<div>
-														<button class="btn btn-label-danger btn-delete-event d-none">삭제</button>
+														<textarea id="taskNo" style="display: none">${CalendarResponse.task_no}</textarea>
+														<button type="button" id="taskDeleteButton" class="btn btn-label-danger btn-delete-event d-none">삭제</button>
 													</div>
 												</div>
 											</form>
