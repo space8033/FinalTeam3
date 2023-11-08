@@ -94,7 +94,7 @@ public class ProjectServiceImpl implements ProjectService{
 			
 			projectDao.insertTeam(map);
 		}
-			
+		
 		String project_startdate = response.getProject_date().split(" to ")[0];
 		String project_enddate = response.getProject_date().split(" to ")[1];
 		int empinfo_no = response.getEmp_notes().get(0).getEmpinfo_no();

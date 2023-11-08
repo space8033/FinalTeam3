@@ -7,7 +7,8 @@
 // Datatable (jquery)
 $(function () {
   let borderColor, bodyBg, headingColor;
-
+  let empNow = $("#empNow").val();
+  console.log(empNow);
   if (isDarkStyle) {
     borderColor = config.colors_dark.borderColor;
     bodyBg = config.colors_dark.bodyBg;
@@ -23,9 +24,9 @@ $(function () {
     select2 = $('.select2'),
     userView = 'app-user-view-account.html',
     statusObj = {
-      1: { title: 'Pending', class: 'bg-label-warning' },
-      2: { title: 'on-line', class: 'bg-label-success' },
-      3: { title: 'off-line', class: 'bg-label-secondary' }
+      1: { title: 'away', class: 'bg-label-warning' },
+      2: { title: 'online', class: 'bg-label-success' },
+      3: { title: 'offline', class: 'bg-label-secondary' }
     };
 
   if (select2.length) {
@@ -128,7 +129,7 @@ $(function () {
             var $role = full['role_category'];
             var roleBadgeObj = {
                     PM:
-                      '<span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2"><i class="bx bx-user bx-xs"></i></span>',
+                      '<span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2"><i class="bx bx-crown bx-xs" ></i></span>',
                     팀원:
                       '<span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30 me-2"><i class="bx bx-group bx-sm"></i></span>',
                     팀장:
@@ -172,13 +173,23 @@ $(function () {
           searchable: false,
           orderable: false,
           render: function (data, type, full, meta) {
-            return (
-              '<div class="d-inline-block text-nowrap">' +
-              '<button class="btn btn-sm btn-icon"><i class="bx bx-paper-plane"></i></button>' +
-              '<button class="btn btn-sm btn-icon"><i class="bx bx-chat"></i></button>' +
-              '<button class="btn btn-sm btn-icon delete-record"><i class="bx bx-trash"></i></button>' +
-              '</div>'
-            );
+        	var $no = full['emp_no']
+        	if(empNow == 0) {
+        		return (
+        				'<div class="d-inline-block text-nowrap">' +
+        				'<button class="btn btn-sm btn-icon"><i class="bx bx-paper-plane"></i></button>' +
+        				'<button class="btn btn-sm btn-icon"><i class="bx bx-chat"></i></button>' +
+        				'<button class="btn btn-sm btn-icon delete-record" onclick="javascript:deleteEmployee(' + $no + ')"><i class="bx bx-trash"></i></button>' +
+        				'</div>'
+        		);
+        	}else {
+        		return (
+        				'<div class="d-inline-block text-nowrap">' +
+        				'<button class="btn btn-sm btn-icon"><i class="bx bx-paper-plane"></i></button>' +
+        				'<button class="btn btn-sm btn-icon"><i class="bx bx-chat"></i></button>' +
+        				'</div>'
+        		);
+        	}
           }
         }
       ],
@@ -246,6 +257,8 @@ $(function () {
               .appendTo('.user_role')
               .on('change', function () {
                 var val = $.fn.dataTable.util.escapeRegex($(this).val());
+                console.log(val);
+                console.log(val ? '^' + val + '$' : '');
                 column.search(val ? '^' + val + '$' : '', true, false).draw();
               });
 
@@ -254,7 +267,7 @@ $(function () {
               .unique()
               .sort()
               .each(function (d, j) {
-                select.append('<option value="' + d + '">' + d + '</option>');
+                select.append('<option value="'+ d +'">' + d + '</option>');
               });
           });
         // Adding plan filter once table initialized
@@ -276,7 +289,7 @@ $(function () {
               .unique()
               .sort()
               .each(function (d, j) {
-                select.append('<option value="' + d + '">' + d + '</option>');
+                select.append('<option value="'+ d +'">' + d + '</option>');
               });
           });
         // Adding status filter once table initialized
@@ -299,7 +312,7 @@ $(function () {
               .sort()
               .each(function (d, j) {
                 select.append(
-                  '<option value="' +
+                  '<option value="'+
                     statusObj[d].title +
                     '" class="text-capitalize">' +
                     statusObj[d].title +
@@ -313,9 +326,9 @@ $(function () {
   }
 
   // Delete Record
-  $('.datatables-users tbody').on('click', '.delete-record', function () {
+/*  $('.datatables-users tbody').on('click', '.delete-record', function () {
     dt_user.row($(this).parents('tr')).remove().draw();
-  });
+  });*/
 
   // Filter form control to default size
   // ? setTimeout used for multilingual table initialization
@@ -377,3 +390,19 @@ $(function () {
     }
   });
 })();
+
+function deleteEmployee(emp_no) {
+	if(confirm('정말로 삭제하시겠습니까?')) {
+		$.ajax({
+			type: 'post',
+			url: '/exodia/employee/deleteEmp', 
+			data: {emp_no : emp_no}, 
+			success: function(data) {
+				alert('삭제가 완료되었습니다');
+				location.reload();
+			}
+		});		
+	}else {
+		alert('삭제가 취소되었습니다.');
+	}
+}

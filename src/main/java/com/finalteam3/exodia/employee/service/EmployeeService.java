@@ -58,4 +58,5 @@ public interface EmployeeService {
 	public List<EmpNote> getAllEmpAndEmpInfo();
 	public List<ProjectEmpResponse> getAllEmp(int project_no);
 	public void updateLogoutStatus(String emp_id);
+	public void deleteEmp(int emp_no);
 }

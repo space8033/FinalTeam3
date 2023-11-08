@@ -25,13 +25,11 @@ public class CalendarServiceImpl implements CalendarService{
 
 	@Override
 	public void write(CalendarRequest calendarRequest) {
-		calendarDao.insert(calendarRequest);
-		
+		calendarDao.insert(calendarRequest);	
 	}
 
 	@Override
-    public List<CalendarResponse2> getPersonalTask(int emp_no) {
-		
+    public List<CalendarResponse2> getPersonalTask(int emp_no) {		
 	    List<CalendarResponse> originalResponseList = calendarDao.selectCalendarTask(emp_no);
 	    log.info("캘린더dto 1 : " + originalResponseList);
 	    
@@ -68,5 +66,10 @@ public class CalendarServiceImpl implements CalendarService{
 
 	    return responseList;
     }
+
+	@Override
+	public void delete(int task_no) {
+		calendarDao.deleteCalendar(task_no);	
+	}
 
 }

@@ -61,6 +61,7 @@ public class Main {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		String emp_id = loginResponse.getEmp_id();
 		model.addAttribute("emp_id", emp_id);
+		model.addAttribute("emp_no", loginResponse.getEmp_no());
 		
 		String emp_name = loginResponse.getEmpInfo_name();
 		model.addAttribute("empInfo_name", emp_name);

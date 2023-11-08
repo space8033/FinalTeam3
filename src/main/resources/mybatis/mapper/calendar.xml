@@ -17,5 +17,10 @@
 		where project_no = 0
 		and emp_no = #{emp_no}
     </select>
+    
+    <delete id="deleteCalendar" parameterType="int">
+    	delete from task
+    	where task_no=#{task_no}   	
+    </delete>
 	
 </mapper>
