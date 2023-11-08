@@ -353,8 +353,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 				per.setEmp_status("3");
 			}else if(per.getEmp_status().equals("on-line")) {
 				per.setEmp_status("2");
-			}else {
+			}else if(per.getEmp_status().equals("off-line")){
 				per.setEmp_status("3");
+			}else {
+				per.setEmp_status("1");
 			}
 		}
 		
@@ -367,5 +369,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 		map.put("emp_id", emp_id);
 		map.put("emp_status", "off-line");
 		employeeDao.updateStatus(map);
+	}
+
+	@Override
+	public void deleteEmp(int emp_no) {
+		employeeDao.deleteEmp(emp_no);
 	}
 }

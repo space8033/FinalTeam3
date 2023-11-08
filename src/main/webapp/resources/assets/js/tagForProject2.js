@@ -4,7 +4,6 @@
 $(document).ready(function() {
   var usersList = [];
   var manager_no = $("#managerNoBox").val();
-  
   function sendAjaxRequest() {
     $.ajax({
       type: "GET",
@@ -263,7 +262,7 @@ $(document).ready(function() {
 	  var emp_notes = TagifyUserList.value;
 	  var team_names = $("#TagifyBasic").val();
 	  var project_client = $("#pnumber").val();
-	  var project_date = $("flatpickr-range").val();
+	  var project_date = $("#flatpickr-range").val();
 	  
 	  var data = {
 			  project_no : project_no,

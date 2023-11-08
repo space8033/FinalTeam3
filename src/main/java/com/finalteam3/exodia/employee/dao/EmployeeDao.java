@@ -53,4 +53,5 @@ public interface EmployeeDao {
 	public List<EmpNote> selectAllEmployee();
 	public List<ProjectEmpResponse> selectProjectEmp(int project_no);
 	public ProjectEmpResponse selectProjectPm(int project_no);
+	public void deleteEmp(int emp_no);
 }

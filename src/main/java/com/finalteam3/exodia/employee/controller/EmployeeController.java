@@ -317,6 +317,7 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/deleteTeam")
+	@ResponseBody
 	public String deleteTeam(String team_name) {
 		employeeService.deleteTeam(team_name);
 		
@@ -330,5 +331,11 @@ public class EmployeeController {
 		List<ProjectEmpResponse> list = employeeService.getAllEmp(project_no);
 		
 		return list;
+	}
+	
+	@PostMapping("/deleteEmp")
+	@ResponseBody
+	public void deleteEmp(int emp_no) {
+		employeeService.deleteEmp(emp_no);
 	}
 }

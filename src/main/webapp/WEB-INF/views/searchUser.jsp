@@ -241,7 +241,7 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-
+			<input type="hidden" value="${emp_no}" id="empNow"/>
             <div class="container-xxl flex-grow-1 container-p-y">
               <div class="row g-4 mb-4">
               <!-- Users List Table -->

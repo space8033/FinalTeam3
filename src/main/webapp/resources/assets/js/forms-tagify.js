@@ -303,18 +303,22 @@ $(document).ready(function() {
 });
 
 function deleteTeam(team_name) {
-	console.log("dgaag");
-	$.ajax({
-		url: "/exodia/employee/deleteTeam",
-		method: "post",
-		data:{
-			"team_name": team_name
-		},
-		success: function(data) {
-			location.reload();
-		},
-		error: function(error) {
-			console.log("아왜");
-		}
-	});
+	if(confirm('정말로 삭제하시겠습니까?')) {
+		$.ajax({
+			url: "/exodia/employee/deleteTeam",
+			method: "post",
+			data:{
+				"team_name": team_name
+			},
+			success: function(data) {
+				alert('삭제가 완료되었습니다');
+				location.reload();
+			},
+			error: function(error) {
+				console.log("아왜");
+			}
+		});		
+	}else {
+		alert('삭제가 취소되었습니다.');
+	}
 }

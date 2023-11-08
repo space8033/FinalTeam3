@@ -77,6 +77,7 @@
 		select i.empinfo_no, i.empinfo_name, i.empinfo_email, i.empinfo_position, e.emp_no, e.emp_id
 		  from empinfo i, emp e
 		 where e.emp_no = i.emp_no
+		   and e.emp_deletedat is null
 	</select>
 	
 	<select id="selectTeamname" resultType="String" parameterType="int">
@@ -88,19 +89,22 @@
 	</select>
 	
 	<select id="selectNoTeamEmp" resultType="EmpSimpleResponse">
-		select empinfo_name, empinfo_email
-		from empinfo
-		left join team
-		on empinfo.empinfo_no = team.empinfo_no
-		where team.empinfo_no is null
+		SELECT empinfo_name, empinfo_email
+		FROM empinfo i
+		LEFT JOIN team t ON i.empinfo_no = t.empinfo_no
+		WHERE t.empinfo_no IS NULL
+		AND i.emp_no IN (SELECT emp_no FROM emp WHERE emp_deletedat IS NULL)
 	</select>
 		
 	<select id="selectTeamEmp" resultType="EmpSimpleResponse" parameterType="String">
-		select i.empinfo_name, i.empinfo_email
-		from empinfo i, team t
-		where t.empinfo_no = i.empinfo_no
-		and t.team_name = #{team_name}
-		and t.team_isleader = 0
+		SELECT i.empinfo_name, i.empinfo_email
+		FROM empinfo i, team t, emp e
+		WHERE t.empinfo_no = i.empinfo_no
+		and t.project_no = 0
+		AND t.team_name = #{team_name}
+		AND t.team_isleader = 0
+		AND e.emp_no = i.emp_no
+		AND e.emp_deletedat IS NULL
 	</select>
 	
 	<select id="selectTeamLeader" resultType="EmpSimpleResponse" parameterType="String">
@@ -113,10 +117,12 @@
 
 	<select id="selectTeamBasic" parameterType="String" resultType="TeamBasicResponse">
 		select t.team_duty, i.emp_no, i.empinfo_name, t.team_isleader
-		from team t, empinfo i
+		from team t, empinfo i, emp e
 		where project_no = 0
 		and i.empinfo_no = t.empinfo_no
 		and t.team_name = #{team_name}
+		and e.emp_deletedat is null
+		and e.emp_no = i.emp_no
 	</select>
 	
 	<select id="selectTeamDuty" parameterType="String" resultType="String">
@@ -133,6 +139,7 @@
 		 where project_no = 0
 		   and i.empinfo_no = t.empinfo_no
 		   and e.emp_no = i.emp_no
+		   and e.emp_deletedat is null
 	</select>
 	
 	<select id="selectEmployeeByEmpNo" resultType="EmpNote" parameterType="int">
@@ -153,6 +160,7 @@
 		and r.project_no = #{project_no}
 		and t.project_no = #{project_no}
 		and i.emp_no != 0
+		and e.emp_deletedat is null
 	</select>
 
 	<select id="selectProjectPm" resultType="ProjectEmpResponse" parameterType="int">
@@ -185,6 +193,10 @@
 	
 	<update id="updateTeamDuty" parameterType="Map">
 		update team set team_duty = #{team_duty} where project_no = #{project_no} and empinfo_no = 0 and team_name = #{team_name}
+	</update>
+	
+	<update id="deleteEmp" parameterType="int">
+		update emp set emp_deletedat = to_char(sysdate,'yyyy.mm.dd hh24:mi:ss') where emp_no = #{emp_no}
 	</update>
 	
 	<select id="updateEmpInfo" parameterType="ModifyRequest">
