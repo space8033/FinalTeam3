@@ -192,13 +192,12 @@ public class NoticeController {
 	//공지사항 삭제
 	@PostMapping("/noticeDelete")
 	public String noticeDelete(Authentication authentication, int notice_no) {
-		log.info("노티스넘버 : " + notice_no);
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
+		log.info("노티스넘버 : " + notice_no);
 		noticeService.deleteByNoticeNo(notice_no);
 		
 		return "noticeList";
 	}
-
 }

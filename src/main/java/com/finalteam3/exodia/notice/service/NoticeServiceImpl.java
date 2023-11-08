@@ -22,7 +22,6 @@ public class NoticeServiceImpl implements NoticeService{
 	private NoticeDao noticeDao;
 	@Resource
 	private MediaDao mediaDao;
-	
 
 	@Override
 	public List<Notice> getNoticeList() {
