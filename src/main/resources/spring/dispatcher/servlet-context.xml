@@ -20,7 +20,7 @@
 	<bean id="webSocketHandler" class="com.finalteam3.exodia.handler.WebSocketHandler"
 		/>
 		
-	<websocket:handlers allowed-origins="*">
+	<websocket:handlers allowed-origin-patterns="*">
 		<websocket:mapping handler="chatHandler" path="/chat"/>
 		<websocket:handshake-interceptors>
 			<bean class="org.springframework.web.socket.server.support.HttpSessionHandshakeInterceptor"/>
