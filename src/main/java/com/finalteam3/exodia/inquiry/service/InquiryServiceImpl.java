@@ -89,6 +89,5 @@ public class InquiryServiceImpl implements InquiryService{
 	public int getEmpInfoNoByEmpNo(int emp_no) {
 		return inquiryDao.selectEmpInfoNoByEmpNo(emp_no);
 	}
-
 	
 }

@@ -242,6 +242,7 @@
               <!-- Product List Table -->
               <div class="card2">
                 <div class="card-header">
+                	<div><input type="hidden" value="${emp_no}" id="now_emp_no"/></div>
                   <h5 class="card-title"></h5>
                   <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
                     <div class="col-md-4 product_category" style = "margin-left: 20px"><h3><strong>공지사항🚨</strong></h3></div>
@@ -304,5 +305,14 @@
     <!-- Page JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/noticeList.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
+    <script>
+        $(document).ready(function() {
+            // card-header 요소 선택
+            var cardHeader = $('.card-header');
+
+            // 스타일 추가
+            cardHeader.css('padding-right', '15px');
+        });
+    </script>
   </body>
 </html>

@@ -250,13 +250,13 @@
                     <!-- Account -->
                     <div class="card-body">
                       <div class="d-flex align-items-start align-items-sm-center gap-4">
-                        <c:if test="${empModifyResponse.media_data == null}">
+                        <c:if test="${inquiry.media_data == null}">
                         	<span class="avatar-initial rounded-circle" id="nameProfile" 
                         	style="width :100px; height: 100px; font-size: 40px; display: flex; align-items: center; justify-content: center;"> 
-                        	${empModifyResponse.two_name} 
+                        	${inquiry.two_name} 
                         	</span>
                         </c:if>
-                        <c:if test="${empModifyResponse.media_data != null}">
+                        <c:if test="${inquiry.media_data != null}">
 	                        <img
 	                          src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
 	                          alt="user-avatar"

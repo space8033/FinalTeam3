@@ -14,7 +14,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>User List - Pages | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>eCommerce Add Product - Apps | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
 
     <meta name="description" content="" />
 
@@ -41,15 +41,13 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/typography.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/katex.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/editor.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/styles/index.min.css" />
-    <link rel="stylesheet" type="text/html" href="${pageContext.request.contextPath}/assets/vendor/libs/flatpickr/flatpickr.css" />
-    
-    <link rel="stylesheet" type ="text/html" href="${pageContext.request.contextPath}/assets/vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/dropzone/dropzone.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.css" />
 
     <!-- Page CSS -->
 
@@ -67,7 +65,7 @@
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
         <!-- Menu -->
-		 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+ 		 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
             <a href="${pageContext.request.contextPath}/main" class="app-brand-link">
               <span class="app-brand-logo demo">
@@ -122,7 +120,7 @@
               <span class="app-brand-text demo menu-text fw-bold ms-2">pms</span>
             </a>
 
-             <a href="${pageContext.request.contextPath}/main" class="layout-menu-toggle menu-link text-large ms-auto">
+            <a href="${pageContext.request.contextPath}/main" class="layout-menu-toggle menu-link text-large ms-auto">
               <i class="bx bx-chevron-left bx-sm align-middle"></i>
             </a>
           </div>
@@ -135,14 +133,14 @@
             <li class="menu-header small text-uppercase">
               <span class="menu-header-text">MENU</span>
             </li>
-            <li class="menu-item active">
+            <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate" >프로젝트</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                 <a href="${pageContext.request.contextPath}/projectList" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/projectList" class="menu-link">
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
                 </li>
@@ -151,21 +149,21 @@
                     <div class="text-truncate" >프로젝트 조직도</div>
                   </a>
                 </li>
-                <li class="menu-item active">
+                <li class="menu-item">
                   <a href="${pageContext.request.contextPath}/searchUser" class="menu-link">
                     <div class="text-truncate">프로젝트 인력 검색</div>
                   </a>
                 </li>
               </ul>
             </li>
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="${pageContext.request.contextPath}/noticeList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-bell"></i>
                 <div class="text-truncate">공지사항</div>
               </a>
             </li>
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/inquiryList" class="menu-link">
+              <a href="${pageContext.request.contextPath}/qnaList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-conversation"></i>
                 <div class="text-truncate">문의하기</div>
               </a>
@@ -207,19 +205,18 @@
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
+            <%-- <li class="menu-item">
+              <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div class="text-truncate">사용자 등록</div>
+              </a>
+            </li> --%>
             <li class="menu-item">
               <a href="${pageContext.request.contextPath}/employee/jjoin" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
               </a>
             </li>
-<%--             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user"></i>
-                <div class="text-truncate">사용자 등록</div>
-              </a>
-            </li> --%>
-            
             
             <li class="menu-item">
               <a href="${pageContext.request.contextPath}/employee/userManagement" class="menu-link">
@@ -243,39 +240,156 @@
             <!-- Content -->
 
             <div class="container-xxl flex-grow-1 container-p-y">
-              <div class="row g-4 mb-4">
-              <!-- Users List Table -->
-              <div class="card">
-                <div class="card-header border-bottom">
-                  <h5 class="card-title">프로젝트 인원 검색</h5>
-                  <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
-                    <div class="col-md-4 user_role"></div>
-                    <div class="col-md-4 user_plan"></div>
-                    <div class="col-md-4 user_status"></div>
+              <!-- <h4 class="py-3 mb-4"><span class="text-muted fw-light">eCommerce /</span><span> Add Product</span></h4> -->
+
+              <div class="app-ecommerce">
+                <!-- Add Product -->
+                <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
+                  <div class="d-flex flex-column justify-content-center">
+                    <h4 class="mb-1 mt-3"><strong>문의사항 수정하기</strong></h4>
+                    <!-- <p class="text-muted">Orders placed across your store</p> -->
+                  </div>
+                  <div class="d-flex align-content-center flex-wrap gap-3">
+                    <!-- <button class="btn btn-label-secondary">Discard</button>
+                    <button class="btn btn-label-primary">Save draft</button> -->
+                    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+					  취소
+					</button>
+					
+					<!-- Modal -->
+					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  <div class="modal-dialog">
+					    <div class="modal-content">
+					      <div class="modal-header">
+					        <h5 class="modal-title" id="exampleModalLabel">나가시겠습니까?</h5>
+					        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+					      </div>
+					      <div class="modal-body">
+							내용이 저장되지 않았습니다.
+							나가시겠습니까?
+					      </div>
+					      <div class="modal-footer">
+					      	<textarea id="noticeNo" style="display: none">${notice.notice_no}</textarea>
+					        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+					        <button type="button" class="btn btn-primary" onclick="location.href='inquiryList'">나가기</button>
+					      </div>
+					    </div>
+					  </div>
+					</div>
+                    <button type="submit" id="inquirySubmit" class="btn btn-primary">수정</button>
+                    
                   </div>
                 </div>
-                <div class="card-datatable table-responsive">
-                  <table class="datatables-users table border-top">
-                    <thead>
-                      <tr>
-                      	<th></th>
-                        <th>이름</th>
-                        <th>권한</th>
-                        <th>팀</th>
-                        <th>직책</th>
-                        <th>상태</th>
-                        <th>메신저</th>
-                      </tr>
-                    </thead>
-                  </table>
-                </div>
 
+                <div class="row">
+                  <!-- First column-->
+                  <div class="col-12 col-lg-12">
+                    <!-- Product Information -->
+                    <div class="card mb-4">
+                      <div class="card-body">
+                        <div class="row">
+						  <div class="col-8 mb-3">
+						    <label class="form-label" for="ecommerce-product-name">제목</label>
+						    <input
+						      type="text"
+						      class="form-control"
+						      id="ecommerce-product-name"
+						      value="${notice.notice_title }"
+						      placeholder="제목을 입력해 주세요"
+						      name="noticeTitle"
+						      aria-label="Notice title" />
+						  </div>
+						  <!-- <div class="col-4 mb-3">
+						    <label class="form-label" for="form-repeater-1-1">팀</label>
+						    <select id="form-repeater-1-1" class="select2 form-select" data-placeholder="소속 팀">
+						      <option value="">소속 팀</option>
+						      <option value="size">개발1팀</option>
+						      <option value="color">개발2팀</option>
+						      <option value="weight">유지보수1팀</option>
+						      <option value="smell">유지보수2팀</option>
+						    </select>
+						  </div> -->
+						</div>
+                        <!-- Description -->
+                        <div>
+                          <label class="form-label">내용</label>
+                          <div class="form-control p-0 pt-1">
+                            <div class="comment-toolbar border-0 border-bottom">
+                              <div class="d-flex justify-content-start">
+                                <span class="ql-formats me-0">
+                                  <button class="ql-bold"></button>
+                                  <button class="ql-italic"></button>
+                                  <button class="ql-underline"></button>
+                                  <button class="ql-list" value="ordered"></button>
+                                  <button class="ql-list" value="bullet"></button>
+                                  <button class="ql-link"></button>
+                                  <button class="ql-image"></button>
+                                </span>
+                              </div>
+                            </div>
+                            <div class="comment-editor border-0 pb-4" id="ecommerce-category-description">${notice.notice_content}</div>
+                            <textarea id="noticeContent" style="display: none"></textarea>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- /Product Information -->
+                    <!-- Media -->
+                    <div class="card mb-4">
+                      <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0 card-title">미디어</h5>
+                      </div>
+                      <div class="card-body">
+                        <form action="/upload" class="dropzone needsclick" id="dropzone-basic">
+                          <div class="dz-message needsclick my-5">
+                            <p class="fs-4 note needsclick my-2">Drag and drop your image here</p>
+                            <small class="text-muted d-block fs-6 my-2">or</small>
+                            <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse"
+                              >이미지 업로드</span>
+                          </div>
+                          <div class="fallback">
+                            <input name="file" type="file" />
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
             <!-- / Content -->
 
             <!-- Footer -->
-            
+            <footer class="content-footer footer bg-footer-theme">
+              <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                <div class="mb-2 mb-md-0">
+                  Â©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  , made with â¤ï¸ by
+                  <a href="https://themeselection.com" target="_blank" class="footer-link fw-medium">ThemeSelection</a>
+                </div>
+                <div class="d-none d-lg-inline-block">
+                  <a href="https://themeselection.com/license/" class="footer-link me-4" target="_blank">License</a>
+                  <a href="https://themeselection.com/" target="_blank" class="footer-link me-4">More Themes</a>
+
+                  <a
+                    href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template/documentation/"
+                    target="_blank"
+                    class="footer-link me-4"
+                    >Documentation</a
+                  >
+
+                  <a
+                    href="https://themeselection.com/support/"
+                    target="_blank"
+                    class="footer-link d-none d-sm-inline-block"
+                    >Support</a
+                  >
+                </div>
+              </div>
+            </footer>
             <!-- / Footer -->
 
             <div class="content-backdrop fade"></div>
@@ -290,8 +404,7 @@
 
       <!-- Drag Target Area To SlideIn Menu On Small Screens -->
       <div class="drag-target"></div>
-     </div>
-    </div> 
+    </div>
     <!-- / Layout wrapper -->
 
     <!-- Core JS -->
@@ -309,21 +422,19 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/moment/moment.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/katex.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/quill.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/cleavejs/cleave-phone.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/dropzone/dropzone.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery-repeater/jquery-repeater.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.js"></script>
 
     <!-- Main JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/app-user-list.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/inquiryUpdate.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
   </body>
 </html>

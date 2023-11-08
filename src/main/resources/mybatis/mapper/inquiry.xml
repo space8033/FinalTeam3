@@ -44,7 +44,7 @@
 	</insert>
 	
 	<update id="updateDetailByInquiryNo" parameterType="Notice">  
-		update notice set notice_title = #{notice_title}, notice_content = #{notice_content}, notice_modifiedat = sysdate
+		update notice set notice_title = #{notice_title}, notice_content = #{notice_content}, notice_modifiedat = to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
 		where notice_no = #{notice_no}
 	</update>
 	
@@ -54,7 +54,7 @@
 	</update>
 	
  	<select id="selectDetailByNoticeNo" parameterType="int" resultType="Notice">
-		SELECT notice.notice_no, empinfo.empinfo_name, notice.notice_title, notice.notice_content, notice.notice_createdat
+		SELECT notice.notice_no, empinfo.empinfo_name, notice.notice_title, notice.notice_content, notice.empinfo_no_writer, notice.notice_createdat
 		FROM notice
 		INNER JOIN empinfo ON notice.empinfo_no_writer = empinfo.empinfo_no
 		where notice_no = #{notice_no}
@@ -93,6 +93,5 @@
 		from empinfo
 		where emp_no = #{emp_no}
 	</select>
-
 	
 </mapper>
