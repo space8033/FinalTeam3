@@ -196,7 +196,7 @@
 	
 	<!-- empinfo_no 로 empinfo 얻어오기 -->
 	<select id="selectEmpInfoByEmpInfoNo" resultType="EmployeeInfo" parameterType="int">
-		select empinfo_no, empinfo_name, empinfo_position, empinfo_phone, empinfo_email, empinfo_createdat
+		select empinfo_no, empinfo_name, empinfo_position, empinfo_phone, empinfo_email, empinfo_createdat, emp_no
 		from empinfo
 		where empinfo_no = #{empinfo_no}
 	</select>

@@ -9,9 +9,7 @@
 
 let chatsock;
 function connect() {
-	
-	var wsUri = "ws://${pageContext.request.serverName}:${pageContext.request.serverPort}${pageContext.request.contextPath}/chat";
-	chatsock = new WebSocket(wsUri);
+	chatsock = new SockJS("http://localhost:8080/exodia/chat");
 	chatsock.onopen = onOpen;
 	chatsock.onmessage = onMessage;
 	console.log(chatsock.send);
@@ -88,10 +86,51 @@ function chatRoom(emp_no) {
 		     $("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
 		     $("#"+emp_no).addClass("active");
 		     
-		    
-		   
-     	
-     	
+		     
+		     const searchInput = document.querySelector('.chat-search-input');
+		     searchInput.addEventListener('keyup', e => {
+		         let searchValue = e.currentTarget.value.toLowerCase(),
+		           searchChatListItemsCount = 0,
+		           searchContactListItemsCount = 0,
+		           chatListItem0 = document.querySelector('.chat-list-item-0'),
+		           contactListItem0 = document.querySelector('.contact-list-item-0'),
+		           searchChatListItems = [].slice.call(
+		             document.querySelectorAll('#chat-list li:not(.chat-contact-list-item-title)')
+		           ),
+		           searchContactListItems = [].slice.call(
+		             document.querySelectorAll('#contact-list li:not(.chat-contact-list-item-title)')
+		           );
+
+		         // Search in chats
+		         searchChatContacts(searchChatListItems, searchChatListItemsCount, searchValue, chatListItem0);
+		         // Search in contacts
+		         searchChatContacts(searchContactListItems, searchContactListItemsCount, searchValue, contactListItem0);
+		       });
+		     
+		     function searchChatContacts(searchListItems, searchListItemsCount, searchValue, listItem0) {
+		         searchListItems.forEach(searchListItem => {
+		           let searchListItemText = searchListItem.textContent.toLowerCase();
+		           if (searchValue) {
+		             if (-1 < searchListItemText.indexOf(searchValue)) {
+		               searchListItem.classList.add('d-flex');
+		               searchListItem.classList.remove('d-none');
+		               searchListItemsCount++;
+		             } else {
+		               searchListItem.classList.add('d-none');
+		             }
+		           } else {
+		             searchListItem.classList.add('d-flex');
+		             searchListItem.classList.remove('d-none');
+		             searchListItemsCount++;
+		           }
+		         });
+		         // Display no search fount if searchListItemsCount == 0
+		         if (searchListItemsCount == 0) {
+		           listItem0.classList.remove('d-none');
+		         } else {
+		           listItem0.classList.add('d-none');
+		         }
+		       }
 	
 	});
 	
@@ -100,24 +139,33 @@ function chatRoom(emp_no) {
 function buttonSend() {
 	  var messageInput = $('.message-input');
 	  if (messageInput.val()) {
-	    // Create a div and add a class
-	    var renderMsg = $('<div class="chat-message-text mt-2"></div>');
-	    renderMsg.html('<p class="mb-0 text-break">' + messageInput.val() + '</p>');
-	    $('li:last-child .chat-message-wrapper').append(renderMsg);
-	    console.log(renderMsg+"왜안나오지..ㅠㅠ");
+		    // Create a div and add a class
+	    var renderMsg = $('<li class="chat-message chat-message-right"></li>');
 	    var currentDate = new Date();
 	    var options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
 	    var formattedDate = new Intl.DateTimeFormat('en-US', options).format(currentDate);
 	    console.log(formattedDate+"오늘날짜");
-	    var renderMsg2 = $('<div class="text-end text-muted mt-1"></div>');
-	    renderMsg2.html('<i class="bx bx-check-double"></i><small>' + formattedDate
-	    		+ '</small>');
 	    
-	    $('li:last-child .chat-message-wrapper').append(renderMsg2);
 	    
-	    var renderMsg3 = $('<div class="avatar avatar-sm"></div>');
-	    renderMsg3.html('<img src="/exodia/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />');
-	    $('li:last-child .user-avatar flex-shrink-0 ms-3').append(renderMsg3);
+	      renderMsg.html('<div class="d-flex overflow-hidden">' +
+	      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
+	      '<div class="chat-message-text">' +
+	      '<p class="mb-0 text-break">' + messageInput.val() + '</p>' +
+	      '</div>' +
+	      '<div class="text-end text-muted mt-1">' +
+	      '<i class="bx bx-check-double"></i>' +
+	      ' <small>' + formattedDate + '</small>' +
+	      '</div>' +
+	      '</div>' +
+	      '<div class="user-avatar flex-shrink-0 ms-3">' +
+	      '<div class="avatar avatar-sm">' +
+	      '<img src="/exodia/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />' +
+	      '</div>' +
+	      '</div>' +
+	      '</div>');
+
+	    // Append the message to the chat container
+		    $('.chat-history').append(renderMsg);
 	    
 	    sendMessage();
 	    messageInput.val('');
@@ -146,8 +194,8 @@ function sendMessage() {
 	
 	let jsonData = JSON.stringify(data);
 	
-	
 	chatsock.send(jsonData);
+	sock.send(jsonData);
 }
 
 function onMessage(evt) {
@@ -170,23 +218,32 @@ function onMessage(evt) {
 function checkLR(data) {
 	
 	console.log("어디가 문젠지 알ㄹ줘야 고치지?"+ data);
-	
-	var renderMsg = $('<div class="chat-message-text mt-2"></div>');
-    renderMsg.html('<p class="mb-0 text-break">' + data.message_content + '</p>');
-    $('li:last-child .chat-message-wrapper').append(renderMsg);
     var currentDate = new Date();
     var options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
     var formattedDate = new Intl.DateTimeFormat('en-US', options).format(currentDate);
     console.log(formattedDate+"오늘날짜");
-    var renderMsg2 = $('<div class="text-end text-muted mt-1"></div>');
-    renderMsg2.html('<i class="bx bx-check-double"></i><small>' + data.empInfo_no
-    		+ '</small>');
     
-    $('li:last-child .chat-message-wrapper').append(renderMsg2);
-    
-    var renderMsg3 = $('<div class="avatar avatar-sm"></div>');
-    renderMsg3.html('<img src="/exodia/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />');
-    $('li:last-child .user-avatar flex-shrink-0 ms-3').append(renderMsg3);
+    var renderMsg = $('<li class="chat-message"></li>');
+    renderMsg.html('<div class="d-flex overflow-hidden">' +
+    		 '<div class="user-avatar flex-shrink-0 me-3">' +
+    	      '<div class="avatar avatar-sm">' +
+    	      '<img src="/exodia/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />' +
+    	      '</div>' +
+    	      '</div>' +
+      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
+      '<div class="chat-message-text">' +
+      '<p class="mb-0 text-break">' + data.message_content + '</p>' +
+      '</div>' +
+      '<div class="text-end text-muted mt-1">' +
+      '<i class="bx bx-check-double"></i>' +
+      ' <small>' + formattedDate + '</small>' +
+      '</div>' +
+      '</div>' +
+     
+      '</div>');
+
+	    // Append the message to the chat container
+	    $('.chat-history').append(renderMsg);
     
     scrollToBottom();
     

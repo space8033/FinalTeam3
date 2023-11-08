@@ -72,12 +72,10 @@
 		var receiver = document.getElementById('emailContacts').value;
 		var receiverCC = document.getElementById('selectpickerSelectDeselect').value;
 		var receiverBCC = document.getElementById('selecBcc').value;
-		
-		
-		
 		let socketMsg = "note,"+title+","+sender+","+receiver+","+receiverCC+","+receiverBCC;
 		console.log(socketMsg+"가긴가니");
 		sock.send(socketMsg);
+		console.log("소켓메시지");
 		
 	}
 	

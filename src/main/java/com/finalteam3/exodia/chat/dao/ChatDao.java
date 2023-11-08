@@ -16,5 +16,9 @@ public interface ChatDao {
 	public Integer selectChatRoomNo(ChatParticipant chatPart);
 	
 	public List<ChatMessage> selectChatHistory(int chatRoomNo);
+	
+	public void updateChatRoom(ChatRoom chatRoom);
+	
+	public int selectEmpInfoNo(ChatMessage chatMsg);
 
 }
