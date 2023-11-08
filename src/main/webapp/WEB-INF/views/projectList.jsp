@@ -270,7 +270,7 @@
                           <th></th>
                           <th></th>
                           <th>프로젝트명</th>
-                          <th class="text-nowrap text-sm-end">투입인력 &nbsp;</th>
+                          <th class="text-nowrap text-sm-end">투입인력 </th>
                           <th class="text-nowrap text-sm-end">기간</th>
                           <th class="text-lg-center">삭제</th>
                         </tr>
@@ -279,24 +279,22 @@
                   </div>
                 </div>
                 <!-- Offcanvas to add new customer -->
-                <div
+                <!-- <div class="offcanvas-header py-4">
+                  <h5 id="offcanvasEcommerceCategoryListLabel" class="offcanvas-title">프로젝트 편집</h5>
+                  <button
+                    type="button"
+                    class="btn-close bg-label-secondary text-reset"></button>
+                </div> -->
+                <!-- <div
                   class="offcanvas offcanvas-end"
                   tabindex="-1"
                   id="offcanvasEcommerceCategoryList"
                   aria-labelledby="offcanvasEcommerceCategoryListLabel">
-                  <!-- Offcanvas Header -->
-                  <div class="offcanvas-header py-4">
-                    <h5 id="offcanvasEcommerceCategoryListLabel" class="offcanvas-title">프로젝트 편집</h5>
-                    <button
-                      type="button"
-                      class="btn-close bg-label-secondary text-reset"
-                      data-bs-dismiss="offcanvas"
-                      aria-label="Close"></button>
-                  </div>
-                  <!-- Offcanvas Body -->
+                  Offcanvas Header
+                  Offcanvas Body
                   <div class="offcanvas-body border-top">
                     <form class="pt-0" id="eCommerceCategoryListForm" onsubmit="return true">
-                      <!-- Title -->
+                      Title
                       <div class="mb-3">
                         <label class="form-label" for="ecommerce-category-title">프로젝트명</label>
                         <input
@@ -307,7 +305,7 @@
                           name="categoryTitle"
                           aria-label="category title" />
                       </div>
-                      <!-- Slug -->
+                      Slug
                       <div class="mb-3">
                         <label class="form-label" for="ecommerce-category-slug">투입 인력</label>
                         <input
@@ -319,7 +317,7 @@
                           name="slug" />
                       </div>
                      
-                      <!-- Description -->
+                      Description
                       <div class="mb-3">
                         <label class="form-label">프로젝트 개요</label>
                         <div class="form-control p-0 pt-1">
@@ -339,12 +337,12 @@
                           </div>
                         </div>
                       </div>
-                      <!-- Status -->
+                      Status
                       <div class="col-md-12 mb-2">
                    		<label for="TagifyBasic" class="form-label">구성 팀</label>
                   		<input id="TagifyBasic" class="form-control" name="TagifyBasic" value="개발1팀, 개발2팀, 개발3팀" />
                       </div>
-                      <!-- Range Picker-->
+                      Range Picker
                        <div class="col-md-12 mb-3">
                          <label for="flatpickr-range" class="form-label">프로젝트 기간</label>
                          <input
@@ -353,14 +351,14 @@
                            placeholder="YYYY-MM-DD to YYYY-MM-DD"
                            id="flatpickr-range" />
                        </div>
-                      <!-- Submit and reset -->
+                      Submit and reset
                       <div class="mb-3">
                         <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">수정</button>
                         <button type="reset" class="btn bg-label-danger" data-bs-dismiss="offcanvas">취소</button>
                       </div>
                     </form>
                   </div>
-                </div>
+                </div> -->
               </div>
             </div>
             <!-- / Content -->
@@ -432,11 +430,7 @@
 
     <!-- Page JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/form-layouts.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-selects.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-tagify.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-typeahead.js"></script>
-    
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-pickers.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/projectList.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
   </body>
 </html>
