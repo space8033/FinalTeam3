@@ -268,11 +268,10 @@
                       <thead>
                         <tr>
                           <th></th>
-                          <th></th>
                           <th>프로젝트명</th>
-                          <th class="text-nowrap text-sm-end">투입인력 </th>
-                          <th class="text-nowrap text-sm-end">기간</th>
-                          <th class="text-lg-center">삭제</th>
+                          <th>투입인력 </th>
+                          <th>기간</th>
+                          <th>삭제</th>
                         </tr>
                       </thead>
                     </table>

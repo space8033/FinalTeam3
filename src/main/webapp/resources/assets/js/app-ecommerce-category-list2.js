@@ -159,7 +159,7 @@ $(function () {
             return "<div class='fw-medium text-sm-end'>" + $total_earnings + '</div';
           }
         },
-        {
+        /*{
           // Actions
           targets: -1,
           title: '삭제',
@@ -173,7 +173,7 @@ $(function () {
               '</div>'
             );
           }
-        }
+        }*/
       ],
       order: [2, 'desc'], //set any columns order asc/desc
       dom:
