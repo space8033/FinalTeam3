@@ -40,7 +40,7 @@ public interface EmployeeService {
 		WRONG_EMAIL
 	}
 	
-	public LoginResult login(LoginRequest loginRequest);
+	//public LoginResult login(LoginRequest loginRequest);
 	public LoginResponse getLoginResponse(LoginRequest loginRequest);
 	public EmployeeInfo getEmpInfo(int empNo);
 	public JoinResult join(JoinRequest joinRequest);
@@ -57,4 +57,5 @@ public interface EmployeeService {
 	public List<EmpNote> getAllEmp();
 	public List<EmpNote> getAllEmpAndEmpInfo();
 	public List<ProjectEmpResponse> getAllEmp(int project_no);
+	public void updateLogoutStatus(String emp_id);
 }

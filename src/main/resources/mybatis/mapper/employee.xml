@@ -155,8 +155,8 @@
 		and i.emp_no != 0
 	</select>
 	
-	<update id="updateStatus" parameterType="String">
-		update emp set emp_status = 'connected' where emp_id = #{emp_id}
+	<update id="updateStatus" parameterType="Map">
+		update emp set emp_status = #{emp_status} where emp_id = #{emp_id}
 	</update>
 	
 	<update id="updatePassword" parameterType="Map">

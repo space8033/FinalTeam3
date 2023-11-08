@@ -20,7 +20,7 @@ import com.finalteam3.exodia.note.dto.EmployeeInfo;
 public interface EmployeeDao {
 	public int selectNoByEmpId(String emp_id);
 	public LoginResponse selectInfoByEmpId(LoginRequest loginRequest);
-	public void updateStatus(String emp_id);
+	public void updateStatus(Map<String, Object> map);
 	public void insertEmp(JoinRequest joinRequest);
 	public void insertEmpInfo(JoinRequest joinRequest);
 	public EmployeeInfo selectInfoByEmpNo(int emp_no);

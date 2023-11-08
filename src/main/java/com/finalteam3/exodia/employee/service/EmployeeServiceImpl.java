@@ -43,7 +43,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 	private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 	
 	//로그인
-	@Override
+	/*@Override
 	@Transactional
 	public LoginResult login(LoginRequest loginRequest) {
 		LoginResponse loginResponse = employeeDao.selectInfoByEmpId(loginRequest);
@@ -71,10 +71,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}
 		
 		//로그인 중인 사용자 로그인 상태 변경
-		employeeDao.updateStatus(loginRequest.getEmp_id());
+		Map<String, Object> status = new HashMap<>();
+		status.put("emp_id", loginRequest.getEmp_id());
+		status.put("emp_status", "on-line");
+		employeeDao.updateStatus(status);
 		
 		return LoginResult.LOGIN_SUCCESS;
-	}
+	}*/
 	
 	//로그인중인 유저 표시할 때 필요한 정보 얻기
 	@Override
@@ -345,5 +348,13 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}
 		
 		return list;
+	}
+
+	@Override
+	public void updateLogoutStatus(String emp_id) {
+		Map<String, Object> map = new HashMap<>();
+		map.put("emp_id", emp_id);
+		map.put("emp_status", "off-line");
+		employeeDao.updateStatus(map);
 	}
 }
