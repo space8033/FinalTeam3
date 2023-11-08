@@ -5,15 +5,37 @@
 'use strict';
 
 
-
+$(document).ready(function () {
+	var empNo = $("#now_emp_no").val();
+	var checkExist = setInterval(function() {
+		if($(".add-new").length) {
+			if(empNo == 0) {
+				$(".add-new").show();
+				console.log("empnoempnoempnopo2 :" + empNo);
+			} else {
+				$(".add-new").hide();		
+				console.log("empnoempnoempnopo3 :" + empNo);
+			}
+			clearInterval(checkExist);
+		}
+	}, 10);
+	/*console.log($(".add-new").text());
+	console.log("empnoempnoempnopo1 :" + empNo);
+	if(empNo == 0) {
+		$(".add-new").show();
+		console.log("empnoempnoempnopo2 :" + empNo);
+	} else {
+		$(".add-new").hide();		
+		console.log("empnoempnoempnopo3 :" + empNo);
+	}*/
+	
+});
 // Datatable (jquery)
 $(function () {
+	
   var dtUserTable = $('.datatables-users'),
-    statusObj = {
-      1: { title: 'Pending', class: 'bg-label-warning' },
-      2: { title: 'Active', class: 'bg-label-success' },
-      3: { title: 'Inactive', class: 'bg-label-secondary' }
-    };
+  	programManagement = "programManagement";
+  		
 
   // Users List datatable
   if (dtUserTable.length) {
@@ -131,7 +153,29 @@ $(function () {
             attr: {
               'data-bs-toggle': 'offcanvas',
               'data-bs-target': '#offcanvasEcommerceCategoryList'
-            }
+            }/*,
+            action: function () {
+                // 여기서 특정 조건을 확인
+
+                // 여기서 로그인한 사용자의 emp_no를 가져옵니다.
+                $.ajax({
+                  type: 'GET',
+                  url: '/exodia/task/getPrograms',
+                  success: function (data) {    
+                  	console.log("empNo :" + empNo);
+                    // emp_no에 따라 조건 확인
+                    if (empNo == 0) {
+                      window.location.href = programManagement;
+                    } else {
+                      // 조건을 만족하지 않을 때 사용자에게 알림
+                      alert("등록 권한이 없습니다.");
+                    }
+                  },
+                  error: function (xhr, status, error) {
+                    console.error('에러 메시지: ' + error);
+                  }
+                });
+              }*/
           }
       ],
       responsive: {

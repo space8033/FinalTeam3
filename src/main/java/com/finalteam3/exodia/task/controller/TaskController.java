@@ -32,7 +32,14 @@ public class TaskController {
 	private TaskService taskService;
 	
 	@GetMapping("/programManagement")
-	public String programManagement() {
+	public String programManagement(Authentication authentication, Model model) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		int emp_no = empDetails.getLoginResponse().getEmp_no();
+		log.info("empno : " + emp_no);
+		
+		model.addAttribute("emp_no", emp_no);
+		
 		
 		return "/programManagement";
 	}
