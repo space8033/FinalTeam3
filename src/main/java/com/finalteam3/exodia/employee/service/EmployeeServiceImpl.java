@@ -345,6 +345,14 @@ public class EmployeeServiceImpl implements EmployeeService{
 			}else {
 				per.setRole_category("PM");
 			}
+			
+			if(per.getEmp_status() == null) {
+				per.setEmp_status("3");
+			}else if(per.getEmp_status().equals("on-line")) {
+				per.setEmp_status("2");
+			}else {
+				per.setEmp_status("3");
+			}
 		}
 		
 		return list;

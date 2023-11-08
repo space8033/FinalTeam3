@@ -24,8 +24,8 @@ $(function () {
     userView = 'app-user-view-account.html',
     statusObj = {
       1: { title: 'Pending', class: 'bg-label-warning' },
-      2: { title: 'Active', class: 'bg-label-success' },
-      3: { title: 'Inactive', class: 'bg-label-secondary' }
+      2: { title: 'on-line', class: 'bg-label-success' },
+      3: { title: 'off-line', class: 'bg-label-secondary' }
     };
 
   if (select2.length) {
@@ -126,8 +126,17 @@ $(function () {
           targets: 2,
           render: function (data, type, full, meta) {
             var $role = full['role_category'];
-            
-            return "<span class='text-truncate d-flex align-items-center'>" + $role + '</span>';
+            var roleBadgeObj = {
+                    PM:
+                      '<span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2"><i class="bx bx-user bx-xs"></i></span>',
+                    팀원:
+                      '<span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30 me-2"><i class="bx bx-group bx-sm"></i></span>',
+                    팀장:
+                      '<span class="badge badge-center rounded-pill bg-label-primary w-px-30 h-px-30 me-2"><i class="bx bx-user bx-sm"></i></span>',
+                    Admin:
+                      '<span class="badge badge-center rounded-pill bg-label-secondary w-px-30 h-px-30 me-2"><i class="bx bx-mobile-alt bx-xs"></i></span>'
+                  };
+                  return "<span class='text-truncate d-flex align-items-center'>" + roleBadgeObj[$role] + $role + '</span>';
           }
         },
         {
@@ -154,7 +163,7 @@ $(function () {
         	render: function (data, type, full, meta) {
         		var $status = full['emp_status'];
         		
-        		return '<span class="fw-medium">' + $status + '</span>';
+        		return '<span class="badge ' + statusObj[$status].class + '">' + statusObj[$status].title + '</span>';
         	}
         },
         {
