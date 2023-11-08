@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 
 <html
@@ -182,97 +184,7 @@
                   <div
                     class="col app-chat-contacts app-sidebar flex-grow-0 overflow-hidden border-end"
                     id="app-chat-contacts">
-                    <div class="sidebar-header pt-3 px-3 mx-1">
-                      <div class="d-flex align-items-center me-3 me-lg-0">
-                        <div
-                          class="flex-shrink-0 avatar avatar-online me-2"
-                          data-bs-toggle="sidebar"
-                          data-overlay="app-overlay-ex"
-                          data-target="#app-chat-sidebar-left">
-                          <img
-                            class="user-avatar rounded-circle cursor-pointer"
-                            src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
-                            alt="Avatar" />
-                        </div>
-                        <div class="flex-grow-1 input-group input-group-merge rounded-pill ms-1">
-                          <span class="input-group-text" id="basic-addon-search31"
-                            ><i class="bx bx-search fs-4"></i
-                          ></span>
-                          <input
-                            type="text"
-                            class="form-control chat-search-input"
-                            placeholder="검색"
-                            aria-label="Search..."
-                            aria-describedby="basic-addon-search31" />
-                        </div>
-                      </div>
-                      <i
-                        class="bx bx-x cursor-pointer position-absolute top-0 end-0 mt-2 me-1 fs-4 d-lg-none d-block"
-                        data-overlay
-                        data-bs-toggle="sidebar"
-                        data-target="#app-chat-contacts"></i>
-                    </div>
-                    <hr class="container-m-nx mt-3 mb-0" />
-                    <div class="sidebar-body">
-                      <!-- Chats -->
-                      <ul class="list-unstyled chat-contact-list pt-1" id="chat-list">
-                        <li class="chat-contact-list-item chat-contact-list-item-title">
-                          <h5 class="text-primary mb-0">채팅</h5>
-                        </li>
-                        <li class="chat-contact-list-item chat-list-item-0 d-none">
-                          <h6 class="text-muted mb-0">대화목록을 찾을 수 없습니다.</h6>
-                        </li>
-                        
-						<c:forEach var="emp" items="${empList}" varStatus="a">
-						  <c:if test="${emp.lastMsgContent != null}">
-	                        <li class="chat-contact-list-item"  id="${emp.emp_no}" >
-	                          <a class="d-flex align-items-center" onclick="javascript:chatRoom(${emp.emp_no})">
-		                            <div class="flex-shrink-0 avatar avatar-busy">
-	                              <span class="avatar-initial rounded-circle bg-label-success">${emp.two_name}</span>
-	                            </div>
-	                            <div class="chat-contact-info flex-grow-1 ms-3">
-	                              <h6 class="chat-contact-name text-truncate m-0">${emp.empinfo_name}</h6>
-	                              <p class="chat-contact-status text-truncate mb-0 text-muted">
-	                              		 ${emp.lastMsgContent}
-	                              </p>
-	                            </div>
-	                            <small class="text-muted mb-auto">${emp.message_createdAt}</small>
-	                          </a>
-	                        </li>
-	                      </c:if>
-                        </c:forEach>
-                      </ul>
-                      <!-- Contacts -->
-                      <ul class="list-unstyled chat-contact-list mb-0" id="contact-list">
-                        <li class="chat-contact-list-item chat-contact-list-item-title">
-                          <h5 class="text-primary mb-0">목록</h5>
-                        </li>
-                        <li class="chat-contact-list-item contact-list-item-0 d-none">
-                          <h6 class="text-muted mb-0">해당 프로젝트 인원이 없습니다.</h6>
-                        </li>
-                        
-                        
-                        <c:forEach var="emp" items="${empList}" varStatus="a">
-                         <c:if test="${emp.lastMsgContent == null}">
-	                        <li class="chat-contact-list-item"  id="${emp.emp_no}" >
-	                          <a class="d-flex align-items-center" onclick="javascript:chatRoom(${emp.emp_no})">
-	                            <div class="flex-shrink-0 avatar avatar-offline">
-	                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/4.png" alt="Avatar" class="rounded-circle" />
-	                            </div>
-	                            <div class="chat-contact-info flex-grow-1 ms-3">
-	                              <h6 class="chat-contact-name text-truncate m-0">${emp.empinfo_name}</h6>
-	                              <p class="chat-contact-status text-truncate mb-0 text-muted">${emp.team_name} ${emp.empinfo_position}</p>
-	                            </div>
-	                          </a>
-	                        </li>
-	                      </c:if>
-                        </c:forEach>
-                       
-                       
-                       
-                       
-                      </ul>
-                    </div>
+                   
                   </div>
                   <!-- /Chat contacts -->
 

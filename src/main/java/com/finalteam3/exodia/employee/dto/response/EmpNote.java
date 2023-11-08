@@ -13,6 +13,7 @@ public class EmpNote {
 	private String team_name;
 	private String empinfo_email;
 	private String empinfo_position;
+	private String emp_status;
 	private byte[] profile;
 	
 }

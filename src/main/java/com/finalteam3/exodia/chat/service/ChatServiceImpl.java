@@ -95,6 +95,7 @@ public class ChatServiceImpl implements ChatService {
 				empchat.setTwo_name(emp.getTwo_name());
 				empchat.setTeam_name(emp.getTeam_name());
 				empchat.setEmpinfo_name(emp.getEmpinfo_name());
+				empchat.setEmp_status(emp.getEmp_status());
 				
 				//챗방검색
 				Integer chatRoomNo = chatDao.selectChatRoomNo(chatParticipant);
@@ -131,5 +132,9 @@ public class ChatServiceImpl implements ChatService {
 		return empChatList;
 	}
 
+	@Override
+	public void updateMessageRead(ChatMessage chatmsg) {
+		chatDao.updateUnCheckMsg(chatmsg);
+	}
 	
 }
