@@ -52,4 +52,5 @@ public interface EmployeeDao {
 	public JoinRequest selectEmpByEmpNo(int emp_no);
 	public List<EmpNote> selectAllEmployee();
 	public List<ProjectEmpResponse> selectProjectEmp(int project_no);
+	public ProjectEmpResponse selectProjectPm(int project_no);
 }

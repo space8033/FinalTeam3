@@ -336,6 +336,9 @@ public class EmployeeServiceImpl implements EmployeeService{
 	@Override
 	public List<ProjectEmpResponse> getAllEmp(int project_no) {
 		List<ProjectEmpResponse> list = employeeDao.selectProjectEmp(project_no);
+		ProjectEmpResponse pm = employeeDao.selectProjectPm(project_no);
+		pm.setTeam_name("프로젝트 매니저");
+		list.add(pm);
 		
 		for(ProjectEmpResponse per : list) {
 			if(per.getRole_category().equals("ROLE_EMP")) {

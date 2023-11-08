@@ -128,7 +128,7 @@ $(function () {
             var $role = full['role_category'];
             var roleBadgeObj = {
                     PM:
-                      '<span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2"><i class="bx bx-user bx-xs"></i></span>',
+                      '<span class="badge badge-center rounded-pill bg-label-warning w-px-30 h-px-30 me-2"><i class="bx bx-crown bx-xs" ></i></span>',
                     팀원:
                       '<span class="badge badge-center rounded-pill bg-label-success w-px-30 h-px-30 me-2"><i class="bx bx-group bx-sm"></i></span>',
                     팀장:

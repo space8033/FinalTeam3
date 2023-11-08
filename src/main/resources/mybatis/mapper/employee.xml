@@ -154,6 +154,15 @@
 		and t.project_no = #{project_no}
 		and i.emp_no != 0
 	</select>
+
+	<select id="selectProjectPm" resultType="ProjectEmpResponse" parameterType="int">
+		select i.empinfo_no, e.emp_no, i.empinfo_name, r.role_category, i.empinfo_position, e.emp_status, i.empinfo_email
+		from empinfo i, emp e, role r
+		where i.emp_no = e.emp_no
+		and i.empinfo_no = r.empinfo_no
+		and r.project_no = #{project_no}
+		and r.role_category = 'ROLE_PM'
+	</select>
 	
 	<update id="updateStatus" parameterType="Map">
 		update emp set emp_status = #{emp_status} where emp_id = #{emp_id}
