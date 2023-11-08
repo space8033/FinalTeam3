@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.finalteam3.exodia.alarm.dao.AlarmDao;
 import com.finalteam3.exodia.alarm.dto.request.AlarmRequest;
+import com.finalteam3.exodia.chat.dto.response.EmpChat;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.media.dao.MediaDao;
@@ -534,6 +535,9 @@ public class NoteServiceImpl implements NoteService{
 	@Override
 	public List<EmpNote> getEmpList() {
 		List<EmpNote> empList = employeeDao.selectEmployeeForNote();
+		
+		
+		
 		
 		
 		return empList;

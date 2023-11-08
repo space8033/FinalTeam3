@@ -11,4 +11,5 @@ public interface ChatService {
 	public EmpNote getEmpInfo(int emp_no);
 	public List<ChatMessage> getChatList(ChatParticipant chatPart);
 	public List<EmpChat> getChatEmpList(int empInfo_no);
+	public void updateMessageRead(ChatMessage chatmsg);
 }

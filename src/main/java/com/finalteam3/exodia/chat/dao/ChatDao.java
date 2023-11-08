@@ -26,5 +26,7 @@ public interface ChatDao {
 	public int selectEmpInfoNo(ChatMessage chatMsg);
 	
 	public ChatMessage selectLastMsg(int chatMsgId);
+	
+	public void updateUnCheckMsg(ChatMessage chatMsg);
 
 }

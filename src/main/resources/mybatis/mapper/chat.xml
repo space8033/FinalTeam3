@@ -84,6 +84,14 @@
   		 where chatRoom_no = #{chatRoom_no}
 	</update>
 	
+	 <update id="updateUnCheckMsg" parameterType="ChatMessage">
+		update ChatMessage 
+		   set message_read = to_char(sysdate, 'yyyy.MM.dd HH24:mi:ss')
+  		 where chatRoom_no = #{chatRoom_no}
+  		   and empInfo_no = #{empInfo_no}
+  		   and message_content is not null
+	</update>
+	
 	<!-- <update id="updateAlarmReadByAlarmNo" parameterType="AlarmRequest">
 		update alarm
 		   set alarm_isRead = #{alarm_isRead}

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>	
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <!DOCTYPE html>
 
@@ -140,7 +142,32 @@
 	                                  
 	                                </div>
 	                                <div class="text-muted mt-1">
-	                                  <small>${chat.message_createdAt}</small>
+	                                
+	                                 <c:set var="today" value="<%=new java.util.Date()%>" />
+									<!-- 현재날짜 -->
+									<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy.MM.dd" /></c:set>
+	                            
+	                             		<c:if test="${chat.message_createdAt.substring(0, 10) eq date}">
+										  	<c:if test="${chat.message_createdAt.substring(11, 13) ge '0' && chat.message_createdAt.substring(11, 13) le '11'}">
+										      <small>오전 ${chat.message_createdAt.substring(11, 16)}</small>
+										    </c:if>
+										  	<c:if test="${chat.message_createdAt.substring(11, 13) ge '12' && chat.message_createdAt.substring(11, 13) le '23'}">
+											    <c:set var="hour" value="${chat.message_createdAt.substring(11, 13)}" />
+											    <c:choose>
+											        <c:when test="${hour eq '12'}">
+											            <c:set var="hour" value="오후 12" />
+											        </c:when>
+											        <c:otherwise>
+											            <c:set var="hour" value="오후 ${hour - 12}" />
+											        </c:otherwise>
+											    </c:choose>
+											    <small>${hour}${chat.message_createdAt.substring(13, 16)}</small>
+											</c:if>
+										  </c:if>
+										 
+										  <c:if test="${chat.message_createdAt.substring(0, 10) ne date}">
+										    <small>${chat.message_createdAt.substring(2, 10)}</small>
+										  </c:if>
 	                                </div>
 	                              </div>
 	                            </div>
@@ -153,6 +180,7 @@
 	                                <div class="chat-message-text">
 	                                  <p class="mb-0">
 	                                   		${chat.message_content}
+	                                   		${chat.message_read}
 	                                  </p>
 	                                </div>
 	                                <div class="text-end text-muted mt-1">
@@ -162,7 +190,27 @@
 	                                <c:if test="${chat.message_read != null}">
 	                                  <i class="bx bx-check-double text-success"></i>
 	                                </c:if>
-	                                  <small>${chat.message_createdAt}</small>
+	                                  <c:if test="${chat.message_createdAt.substring(0, 10) eq date}">
+										  	<c:if test="${chat.message_createdAt.substring(11, 13) ge '0' && chat.message_createdAt.substring(11, 13) le '11'}">
+										      <small>오전 ${chat.message_createdAt.substring(11, 16)}</small>
+										    </c:if>
+										  	<c:if test="${chat.message_createdAt.substring(11, 13) ge '12' && chat.message_createdAt.substring(11, 13) le '23'}">
+											    <c:set var="hour" value="${chat.message_createdAt.substring(11, 13)}" />
+											    <c:choose>
+											        <c:when test="${hour eq '12'}">
+											            <c:set var="hour" value="오후 12" />
+											        </c:when>
+											        <c:otherwise>
+											            <c:set var="hour" value="오후 ${hour - 12}" />
+											        </c:otherwise>
+											    </c:choose>
+											    <small>${hour}${chat.message_createdAt.substring(13, 16)}</small>
+											</c:if>
+										  </c:if>
+										 
+										  <c:if test="${chat.message_createdAt.substring(0, 10) ne date}">
+										    <small>${chat.message_createdAt.substring(2, 10)}</small>
+										  </c:if>
 	                                </div>
 	                              </div>
 	                              <div class="user-avatar flex-shrink-0 ms-3">

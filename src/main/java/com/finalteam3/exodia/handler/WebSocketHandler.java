@@ -7,6 +7,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.socket.CloseStatus;
@@ -57,12 +59,13 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		//알람
 		sessions.add(session);
-		String userId = session.getPrincipal().getName();
-		
-		userSessionMap.put(userId, session);
-		i++;
-		log.info(session.getId()+"연결 성공 => 총 접속 인원:" + i +"명");
-		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	    if (authentication != null && authentication.getPrincipal() instanceof org.springframework.security.core.userdetails.User) {
+	        String userId = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername();
+	        userSessionMap.put(userId, session);
+	        i++;
+	        log.info(session.getId() + " 연결 성공 => 총 접속 인원:" + i + "명");
+	    }
 	}
 	
 	@Override

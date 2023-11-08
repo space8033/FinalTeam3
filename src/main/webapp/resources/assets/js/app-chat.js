@@ -9,6 +9,12 @@
 
 let chatsock;
 function connect() {
+	
+	if(chatsock) {
+		chatsock.close();
+		
+	}
+	
 	chatsock = new SockJS("http://192.168.0.27:8080/exodia/chat");
 	chatsock.onopen = onOpen;
 	chatsock.onmessage = onMessage;
@@ -38,8 +44,6 @@ function onOpen() {
 
 function chatRoom(emp_no) {
 	console.log("들어는오나용 ㅎㅎ");
-	
-	  
    var data = {
 		 emp_no: emp_no
 	};
@@ -56,90 +60,106 @@ function chatRoom(emp_no) {
         var contents = html.find("div#chatRoomContent").html();
      	$("#chatRoom").html(contents);
      	
-     	connect();
-        new PerfectScrollbar('.app-chat-contacts .sidebar-body', {
-		        wheelPropagation: false,
-		        suppressScrollX: true
-		      });
-		    
-
-		    // Chat history scrollbar
-		      new PerfectScrollbar('.chat-history-body', {
-		        wheelPropagation: false,
-		        suppressScrollX: true
-		      });
-		    
-
-		    // Sidebar left scrollbar
-		      new PerfectScrollbar('.app-chat-sidebar-left .sidebar-body', {
-		        wheelPropagation: false,
-		        suppressScrollX: true
-		      });
-		    
-
-		    // Sidebar right scrollbar
-		      new PerfectScrollbar('.app-chat-sidebar-right .sidebar-body', {
-		        wheelPropagation: false,
-		        suppressScrollX: true
-		     });
-		    
-		     $("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
-		     $("#"+emp_no).addClass("active");
-		     
-		     scrollToBottom();
-		     
-		     const searchInput = document.querySelector('.chat-search-input');
-		     searchInput.addEventListener('keyup', e => {
-		         let searchValue = e.currentTarget.value.toLowerCase(),
-		           searchChatListItemsCount = 0,
-		           searchContactListItemsCount = 0,
-		           chatListItem0 = document.querySelector('.chat-list-item-0'),
-		           contactListItem0 = document.querySelector('.contact-list-item-0'),
-		           searchChatListItems = [].slice.call(
-		             document.querySelectorAll('#chat-list li:not(.chat-contact-list-item-title)')
-		           ),
-		           searchContactListItems = [].slice.call(
-		             document.querySelectorAll('#contact-list li:not(.chat-contact-list-item-title)')
-		           );
-
-		         // Search in chats
-		         searchChatContacts(searchChatListItems, searchChatListItemsCount, searchValue, chatListItem0);
-		         // Search in contacts
-		         searchChatContacts(searchContactListItems, searchContactListItemsCount, searchValue, contactListItem0);
-		       });
-		     
-		     function handleKeyPress(event) {
-		    	    if (event.key === "Enter") {
-		    	    	buttonSend();
-		    	    }
-		    	}
-		     
-		     function searchChatContacts(searchListItems, searchListItemsCount, searchValue, listItem0) {
-		         searchListItems.forEach(searchListItem => {
-		           let searchListItemText = searchListItem.textContent.toLowerCase();
-		           if (searchValue) {
-		             if (-1 < searchListItemText.indexOf(searchValue)) {
-		               searchListItem.classList.add('d-flex');
-		               searchListItem.classList.remove('d-none');
-		               searchListItemsCount++;
-		             } else {
-		               searchListItem.classList.add('d-none');
-		             }
-		           } else {
-		             searchListItem.classList.add('d-flex');
-		             searchListItem.classList.remove('d-none');
-		             searchListItemsCount++;
-		           }
-		         });
-		         // Display no search fount if searchListItemsCount == 0
-		         if (searchListItemsCount == 0) {
-		           listItem0.classList.remove('d-none');
-		         } else {
-		           listItem0.classList.add('d-none');
-		         }
-		       }
-		     
-		
+     	var chatNo = $("#chatNo").val();
+     	console.log(chatNo+"챗방번호");
+     	
+     	var postdata = {
+     			 emp_no: emp_no,
+     			 chatNo: chatNo 
+     		};
+     		
+     		$.ajax({
+     			url: "/exodia/updateUckMsg",
+     			type: "POST",
+     			data: postdata
+     			
+     		}).done(function(result) {
+     	
+     		$("#uck-" + emp_no).text(' ');
+     		$("#uck-" + emp_no).removeClass("bg-danger");
+	     	connect();
+	        new PerfectScrollbar('.app-chat-contacts .sidebar-body', {
+			        wheelPropagation: false,
+			        suppressScrollX: true
+			      });
+			    
+	
+			    // Chat history scrollbar
+			      new PerfectScrollbar('.chat-history-body', {
+			        wheelPropagation: false,
+			        suppressScrollX: true
+			      });
+			    
+	
+			    // Sidebar left scrollbar
+			      new PerfectScrollbar('.app-chat-sidebar-left .sidebar-body', {
+			        wheelPropagation: false,
+			        suppressScrollX: true
+			      });
+			    
+	
+			    // Sidebar right scrollbar
+			      new PerfectScrollbar('.app-chat-sidebar-right .sidebar-body', {
+			        wheelPropagation: false,
+			        suppressScrollX: true
+			     });
+			    
+			     $("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
+			     $("#"+emp_no).addClass("active");
+			     
+			     scrollToBottom();
+			     
+			     const searchInput = document.querySelector('.chat-search-input');
+			     searchInput.addEventListener('keyup', e => {
+			         let searchValue = e.currentTarget.value.toLowerCase(),
+			           searchChatListItemsCount = 0,
+			           searchContactListItemsCount = 0,
+			           chatListItem0 = document.querySelector('.chat-list-item-0'),
+			           contactListItem0 = document.querySelector('.contact-list-item-0'),
+			           searchChatListItems = [].slice.call(
+			             document.querySelectorAll('#chat-list li:not(.chat-contact-list-item-title)')
+			           ),
+			           searchContactListItems = [].slice.call(
+			             document.querySelectorAll('#contact-list li:not(.chat-contact-list-item-title)')
+			           );
+	
+			         // Search in chats
+			         searchChatContacts(searchChatListItems, searchChatListItemsCount, searchValue, chatListItem0);
+			         // Search in contacts
+			         searchChatContacts(searchContactListItems, searchContactListItemsCount, searchValue, contactListItem0);
+			       });
+			     
+			     function handleKeyPress(event) {
+			    	    if (event.key === "Enter") {
+			    	    	buttonSend();
+			    	    }
+			    	}
+			     
+			     function searchChatContacts(searchListItems, searchListItemsCount, searchValue, listItem0) {
+			         searchListItems.forEach(searchListItem => {
+			           let searchListItemText = searchListItem.textContent.toLowerCase();
+			           if (searchValue) {
+			             if (-1 < searchListItemText.indexOf(searchValue)) {
+			               searchListItem.classList.add('d-flex');
+			               searchListItem.classList.remove('d-none');
+			               searchListItemsCount++;
+			             } else {
+			               searchListItem.classList.add('d-none');
+			             }
+			           } else {
+			             searchListItem.classList.add('d-flex');
+			             searchListItem.classList.remove('d-none');
+			             searchListItemsCount++;
+			           }
+			         });
+			         // Display no search fount if searchListItemsCount == 0
+			         if (searchListItemsCount == 0) {
+			           listItem0.classList.remove('d-none');
+			         } else {
+			           listItem0.classList.add('d-none');
+			         }
+			       }
+     		});
 	
 	});
 	
@@ -153,9 +173,16 @@ function buttonSend() {
 		    // Create a div and add a class
 	    var renderMsg = $('<li class="chat-message chat-message-right"></li>');
 	    var currentDate = new Date();
-	    var options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-	    var formattedDate = new Intl.DateTimeFormat('en-US', options).format(currentDate);
-	    console.log(formattedDate+"오늘날짜");
+	    var hour = currentDate.getHours();
+	    var minute = currentDate.getMinutes();
+	    var period = (hour < 12) ? '오전' : '오후';
+
+	    if (hour > 12) {
+	        hour -= 12;
+	    }
+
+	    var formattedDate = period + ' ' + hour + ':' + (minute < 10 ? '0' : '') + minute;
+	    console.log(formattedDate + " 오늘날짜");
 	    
 	    
 	      renderMsg.html('<div class="d-flex overflow-hidden">' +
@@ -225,10 +252,18 @@ function onMessage(evt) {
 function checkLR(data) {
 	
 	console.log("어디가 문젠지 알ㄹ줘야 고치지?"+ data);
+	var renderMsg = $('<li class="chat-message chat-message-right"></li>');
     var currentDate = new Date();
-    var options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-    var formattedDate = new Intl.DateTimeFormat('en-US', options).format(currentDate);
-    console.log(formattedDate+"오늘날짜");
+    var hour = currentDate.getHours();
+    var minute = currentDate.getMinutes();
+    var period = (hour < 12) ? '오전' : '오후';
+
+    if (hour > 12) {
+        hour -= 12;
+    }
+
+    var formattedDate = period + ' ' + hour + ':' + (minute < 10 ? '0' : '') + minute;
+    console.log(formattedDate + " 오늘날짜");
     
     var renderMsg = $('<li class="chat-message"></li>');
     renderMsg.html('<div class="d-flex overflow-hidden">' +
@@ -282,6 +317,7 @@ document.addEventListener('DOMContentLoaded', function () {
       formSendMessage = document.querySelector('.form-send-message'),
       messageInput = document.querySelector('.message-input'),
       msgArea = document.getElementById("msgArea"),
+      chatList = document.getElementById("app-chat-contacts"),
       myName = document.getElementById("name"),
       searchInput = document.querySelector('.chat-search-input'),
       speechToText = $('.speech-to-text'), // ! jQuery dependency for speech to text
@@ -294,12 +330,114 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Initialize PerfectScrollbar
     // ------------------------------
-    
-    
 
-
-	 
-	  
+    if(chatList) {
+    	var emp_no = "24";
+	    var data = {
+	   		 emp_no: emp_no
+	   	};
+	   	
+	   	$.ajax({
+	   		url: "/exodia/chatList",
+	   		type: "GET",
+	   		data: data
+	   		
+	   	}).done(function(result) {
+	    
+	   		
+	      	    var html = jQuery('<div>').html(result);
+	           var contents = html.find("div#chatList").html();
+	        	$("#app-chat-contacts").html(contents);
+	        	
+	           new PerfectScrollbar('.app-chat-contacts .sidebar-body', {
+	   		        wheelPropagation: false,
+	   		        suppressScrollX: true
+	   		      });
+	   		    
+	           const searchInput = document.querySelector('.chat-search-input');
+	   		     searchInput.addEventListener('keyup', e => {
+	   		         let searchValue = e.currentTarget.value.toLowerCase(),
+	   		           searchChatListItemsCount = 0,
+	   		           searchContactListItemsCount = 0,
+	   		           chatListItem0 = document.querySelector('.chat-list-item-0'),
+	   		           contactListItem0 = document.querySelector('.contact-list-item-0'),
+	   		           searchChatListItems = [].slice.call(
+	   		             document.querySelectorAll('#chat-list li:not(.chat-contact-list-item-title)')
+	   		           ),
+	   		           searchContactListItems = [].slice.call(
+	   		             document.querySelectorAll('#contact-list li:not(.chat-contact-list-item-title)')
+	   		           );
+	
+	   		         // Search in chats
+	   		         searchChatContacts(searchChatListItems, searchChatListItemsCount, searchValue, chatListItem0);
+	   		         // Search in contacts
+	   		         searchChatContacts(searchContactListItems, searchContactListItemsCount, searchValue, contactListItem0);
+	   		       });
+	   		     
+	   		     function handleKeyPress(event) {
+	   		    	    if (event.key === "Enter") {
+	   		    	    	buttonSend();
+	   		    	    }
+	   		    	}
+	   		     
+	   		     function searchChatContacts(searchListItems, searchListItemsCount, searchValue, listItem0) {
+	   		         searchListItems.forEach(searchListItem => {
+	   		           let searchListItemText = searchListItem.textContent.toLowerCase();
+	   		           if (searchValue) {
+	   		             if (-1 < searchListItemText.indexOf(searchValue)) {
+	   		               searchListItem.classList.add('d-flex');
+	   		               searchListItem.classList.remove('d-none');
+	   		               searchListItemsCount++;
+	   		             } else {
+	   		               searchListItem.classList.add('d-none');
+	   		             }
+	   		           } else {
+	   		             searchListItem.classList.add('d-flex');
+	   		             searchListItem.classList.remove('d-none');
+	   		             searchListItemsCount++;
+	   		           }
+	   		         });
+	   		         // Display no search fount if searchListItemsCount == 0
+	   		         if (searchListItemsCount == 0) {
+	   		           listItem0.classList.remove('d-none');
+	   		         } else {
+	   		           listItem0.classList.add('d-none');
+	   		         }
+	   		       }
+	           
+	           
+	
+	   		    /*// Chat history scrollbar
+	   		      new PerfectScrollbar('.chat-history-body', {
+	   		        wheelPropagation: false,
+	   		        suppressScrollX: true
+	   		      });*/
+	   		    
+	/*
+	   		    // Sidebar left scrollbar
+	   		      new PerfectScrollbar('.app-chat-sidebar-left .sidebar-body', {
+	   		        wheelPropagation: false,
+	   		        suppressScrollX: true
+	   		      });
+	   		    
+	
+	   		    // Sidebar right scrollbar
+	   		      new PerfectScrollbar('.app-chat-sidebar-right .sidebar-body', {
+	   		        wheelPropagation: false,
+	   		        suppressScrollX: true
+	   		     });*/
+	   		    
+	   		     $("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
+	   		     $("#"+emp_no).addClass("active");
+	   		     
+	   		     scrollToBottom();
+	   		     
+	   		    
+	   		     
+	   		
+	   	
+	   	});
+    } 
     // Chat contacts scrollbar
     if (chatContactsBody) {
       new PerfectScrollbar(chatContactsBody, {
@@ -333,10 +471,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // Scroll to bottom function
-    function scrollToBottom() {
+  /*  function scrollToBottom() {
       chatHistoryBody.scrollTo(0, chatHistoryBody.scrollHeight);
     }
-    scrollToBottom();
+    scrollToBottom();*/
 
     // User About Maxlength Init
     if (chatSidebarLeftUserAbout.length) {

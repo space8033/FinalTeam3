@@ -1,5 +1,6 @@
 package com.finalteam3.exodia.chat.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,7 +10,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.finalteam3.exodia.chat.dto.request.ChatMessage;
 import com.finalteam3.exodia.chat.dto.request.ChatParticipant;
@@ -35,7 +38,23 @@ public class ChatController {
 	private ChatService chatService;
 	
 	@GetMapping("/chat")
-	public String chat(HttpSession session, Model model, Authentication authentication) {
+	public String chat(HttpSession session, Model model, Authentication authentication, @RequestParam(name= "emp_no", required=false) String emp_no) {
+		
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		String emp_id = loginResponse.getEmp_id();
+		model.addAttribute("emp_id", emp_id);
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		model.addAttribute("empInfo", empInfo);
+		
+		String emp_name = loginResponse.getEmpInfo_name();
+		model.addAttribute("empInfo_name", emp_name);
+		
+		return "/chat";
+	}
+	
+	@GetMapping("/chatList")
+	public String chatList(HttpSession session, Model model, Authentication authentication, @RequestParam(name= "emp_no", required=false) String emp_no) {
 		
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
@@ -50,9 +69,11 @@ public class ChatController {
 		List<EmpChat> empChatList = chatService.getChatEmpList(empInfo.getEmpinfo_no());
 		
 		
+		
+		
 		model.addAttribute("empList", empChatList);
 		
-		return "/chat";
+		return "/chatList";
 	}
 	
 	
@@ -85,4 +106,39 @@ public class ChatController {
 		
 		return "/chatRoom";
 	}
+	
+	//채팅 읽음 업데이트
+	@PostMapping("/updateUckMsg")
+	@ResponseBody
+	public String updateUckMsg(String emp_no, String chatNo) {
+		
+		int chat_no = Integer.parseInt(chatNo);
+		int empNo = Integer.parseInt(emp_no);
+		EmployeeInfo empInfo = employeeService.getEmpInfo(empNo);
+		
+		
+		ChatMessage chatMsg = new ChatMessage();
+		chatMsg.setChatRoom_no(chat_no);
+		chatMsg.setEmpInfo_no(empInfo.getEmpinfo_no());
+		chatService.updateMessageRead(chatMsg);
+		log.info("업데이트 성공이요");
+		return "redirect:/chatRoom";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

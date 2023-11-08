@@ -74,7 +74,7 @@
 	</select>
 	
 	<select id="selectAllEmployee" resultType="EmpNote">
-		select i.empinfo_no, i.empinfo_name, i.empinfo_email, i.empinfo_position, e.emp_no, e.emp_id
+		select i.empinfo_no, i.empinfo_name, i.empinfo_email, i.empinfo_position, e.emp_no, e.emp_id, e.emp_status
 		  from empinfo i, emp e
 		 where e.emp_no = i.emp_no
 		   and e.emp_deletedat is null
@@ -134,7 +134,7 @@
 	</select>
 	
 	<select id="selectEmployeeForNote" resultType="EmpNote">
-		select i.empinfo_no, i.empinfo_name, i.empinfo_email, i.empinfo_position, t.team_name, e.emp_no, e.emp_id
+		select i.empinfo_no, i.empinfo_name, i.empinfo_email, i.empinfo_position, t.team_name, e.emp_no, e.emp_id, e.emp_status
 		  from empinfo i, team t, emp e
 		 where project_no = 0
 		   and i.empinfo_no = t.empinfo_no
