@@ -175,10 +175,14 @@
 	                        </c:if>
 	                       </c:if>
                           </c:forEach>
-                          
-                         
-                         
                         </ul>
+                          <script>
+                          function handleKeyPress(event) {
+                        	    if (event.key === "Enter") {
+                        	    	buttonSend();
+                        	    }
+                        	}
+                          </script>
                       </div>
                       <!-- Chat message form -->
                       <div class="chat-history-footer">
@@ -186,7 +190,8 @@
                           <input id="msg"
                             class="form-control message-input border-0 me-3 shadow-none"
                             placeholder="Type your message here..." 
-                            aria-label="Recipient's username" aria-describedby="button-addon2"/>
+                            aria-label="Recipient's username" aria-describedby="button-addon2"
+                            onkeyup="javascript:handleKeyPress(event)"/>
                           <div class="message-actions d-flex align-items-center">
                             <i class="speech-to-text bx bx-microphone bx-sm cursor-pointer"></i>
                             <label for="attach-doc" class="form-label mb-0">

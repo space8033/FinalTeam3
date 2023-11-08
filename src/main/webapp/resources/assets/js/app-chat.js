@@ -107,6 +107,12 @@ function chatRoom(emp_no) {
 		         searchChatContacts(searchContactListItems, searchContactListItemsCount, searchValue, contactListItem0);
 		       });
 		     
+		     function handleKeyPress(event) {
+		    	    if (event.key === "Enter") {
+		    	    	buttonSend();
+		    	    }
+		    	}
+		     
 		     function searchChatContacts(searchListItems, searchListItemsCount, searchValue, listItem0) {
 		         searchListItems.forEach(searchListItem => {
 		           let searchListItemText = searchListItem.textContent.toLowerCase();
@@ -131,14 +137,18 @@ function chatRoom(emp_no) {
 		           listItem0.classList.add('d-none');
 		         }
 		       }
+		     
+		
 	
 	});
 	
 }
 
+
+
 function buttonSend() {
-	  var messageInput = $('.message-input');
-	  if (messageInput.val()) {
+	  var inputValue = $('.message-input').val();
+	  if (inputValue.trim() !== "") {
 		    // Create a div and add a class
 	    var renderMsg = $('<li class="chat-message chat-message-right"></li>');
 	    var currentDate = new Date();
@@ -150,7 +160,7 @@ function buttonSend() {
 	      renderMsg.html('<div class="d-flex overflow-hidden">' +
 	      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
 	      '<div class="chat-message-text">' +
-	      '<p class="mb-0 text-break">' + messageInput.val() + '</p>' +
+	      '<p class="mb-0 text-break">' + inputValue + '</p>' +
 	      '</div>' +
 	      '<div class="text-end text-muted mt-1">' +
 	      '<i class="bx bx-check-double"></i>' +
@@ -168,13 +178,9 @@ function buttonSend() {
 		    $('.chat-history').append(renderMsg);
 	    
 	    sendMessage();
+	    var messageInput = $('.message-input');
 	    messageInput.val('');
 	    scrollToBottom();
-	   /* 
-	    new PerfectScrollbar('.chat-history-body', {
-		        wheelPropagation: false,
-		        suppressScrollX: true
-		   });*/
 	    	
 	  }
 	
@@ -288,6 +294,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize PerfectScrollbar
     // ------------------------------
     
+    
+
     
     if(myName){
 	    var emp_no = "46";
