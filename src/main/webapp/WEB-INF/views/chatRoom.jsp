@@ -180,7 +180,6 @@
 	                                <div class="chat-message-text">
 	                                  <p class="mb-0">
 	                                   		${chat.message_content}
-	                                   		${chat.message_read}
 	                                  </p>
 	                                </div>
 	                                <div class="text-end text-muted mt-1">

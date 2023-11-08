@@ -277,7 +277,6 @@ function checkLR(data) {
       '<p class="mb-0 text-break">' + data.message_content + '</p>' +
       '</div>' +
       '<div class="text-end text-muted mt-1">' +
-      '<i class="bx bx-check-double"></i>' +
       ' <small>' + formattedDate + '</small>' +
       '</div>' +
       '</div>' +
