@@ -39,6 +39,7 @@
 		SELECT CHATMESSAGE_NO, MESSAGE_CREATEDAT, MESSAGE_READ, CHATROOM_NO, MESSAGE_CONTENT, EMPINFO_NO
 		  FROM chatMessage
 		 WHERE chatRoom_no = #{chatRoom_no}
+	  ORDER BY MESSAGE_CREATEDAT desc
 		   
  		  
 	</select>

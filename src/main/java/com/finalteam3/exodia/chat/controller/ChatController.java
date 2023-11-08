@@ -100,6 +100,13 @@ public class ChatController {
 		log.info(chatParticipant.toString()+"구성원에 이상한게 들어가는건지");
 		
 		List<ChatMessage> chatMsg = chatService.getChatList(chatParticipant);
+		
+		for(ChatMessage chatMsg1 : chatMsg) {
+			chatMsg1.getMessage_content();
+			log.info(chatMsg1.getMessage_content()+"컨텐트 다있냐");
+			
+			
+		}
 		model.addAttribute("chatMsg", chatMsg);
 		
 		
