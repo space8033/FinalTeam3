@@ -8,7 +8,9 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.socket.CloseStatus;
@@ -26,6 +28,7 @@ import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
+import com.finalteam3.exodia.security.dto.EmpDetails;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -57,22 +60,19 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
-		//알람
-		sessions.add(session);
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-	    if (authentication != null && authentication.getPrincipal() instanceof org.springframework.security.core.userdetails.User) {
-	        String userId = ((org.springframework.security.core.userdetails.User) authentication.getPrincipal()).getUsername();
-	        userSessionMap.put(userId, session);
-	        i++;
-	        log.info(session.getId() + " 연결 성공 => 총 접속 인원:" + i + "명");
-	    }
-	}
 	
+		
+		String user_id = session.getPrincipal().getName();
+		log.info(user_id+"아읻이뭐니?");
+		sessions.add(session);
+		userSessionMap.put(user_id, session);
+	}
+
 	@Override
 	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
 		
 		
-			Thread.sleep(600);
+			// Thread.sleep(600);
 			//알람
 			String msg = message.getPayload();
 			log.info(msg+"메세지 받아오니?");
@@ -84,9 +84,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 				chatMessage = objectMapper.readValue(msg, ChatMessage.class);
 			} catch(JsonParseException | JsonMappingException e) {
 				
-				
 			}
-			
 			
 			if(chatMessage != null) {
 				
@@ -124,7 +122,6 @@ public class WebSocketHandler extends TextWebSocketHandler{
 					log.info(cmd+"cmd 받아오니?");
 					log.info(title+"title 받아오니?");
 					log.info(sender+"sender 받아오니?");
-					
 					
 					LoginResponse empName = empDao.selectEmpByEmpId(sender);
 					String senderName = empName.getEmpInfo_name();
@@ -199,6 +196,9 @@ public class WebSocketHandler extends TextWebSocketHandler{
 		log.info("소켓 연결 끊김 현재 접속자수:" + i);
 		  // sessionList에 session이 있다면
           // 해당 session의 방 번호를 가져와서, 방을 찾고, 그 방의 ArrayList<session>에서 해당 session을 지운다.
+		sessions.remove(session);
+		String user_id = session.getPrincipal().getName();
+		userSessionMap.remove(user_id, session);
 
 	}
 }

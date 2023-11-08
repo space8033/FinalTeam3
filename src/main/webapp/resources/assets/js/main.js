@@ -6,9 +6,12 @@
 
 
 	
-	const sock = new SockJS("http://192.168.0.27:8080/exodia/header");
+	const sock = new SockJS("http://localhost:8080/exodia/header");
 	   
 	sock.onopen = function() {
+		
+		var emp_id = $("#alarmId").val();
+		sock.send(emp_id);
 		
 	
 	};
@@ -33,7 +36,7 @@
 	    bellAlarm.classList.add("vibration");
 	    setTimeout(function() {
 	    	bellAlarm.classList.remove("vibration");
-	    }, 500);
+	    }, 2000);
 	    
 	    
 	    if (alarmContent.classList.contains("show")) {

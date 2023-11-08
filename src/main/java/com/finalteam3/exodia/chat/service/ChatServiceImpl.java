@@ -136,5 +136,13 @@ public class ChatServiceImpl implements ChatService {
 	public void updateMessageRead(ChatMessage chatmsg) {
 		chatDao.updateUnCheckMsg(chatmsg);
 	}
+
+	@Override
+	public int getEmpInfo(ChatMessage chatmsg) {
+		log.info(chatmsg+"먼디?");
+		int empInfoNo = chatDao.selectEmpInfoNo(chatmsg);
+		log.info(empInfoNo+"머가두개임");
+		return empInfoNo;
+	}
 	
 }
