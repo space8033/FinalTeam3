@@ -195,7 +195,7 @@ function sendMessage() {
 	let jsonData = JSON.stringify(data);
 	
 	chatsock.send(jsonData);
-	sock.send(jsonData);
+	//sock.send(jsonData);
 }
 
 function onMessage(evt) {
