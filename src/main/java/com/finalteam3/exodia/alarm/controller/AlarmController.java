@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.finalteam3.exodia.alarm.dto.request.AlarmRequest;
 import com.finalteam3.exodia.alarm.dto.response.AlarmResponse;
 import com.finalteam3.exodia.alarm.service.AlarmService;
+import com.finalteam3.exodia.chat.dto.request.ChatMessage;
+import com.finalteam3.exodia.chat.service.ChatService;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
@@ -35,6 +37,8 @@ public class AlarmController {
 	private EmployeeService employeeService;
 	@Resource
 	private NoteService noteService;
+	@Resource
+	private ChatService chatService;
 	
 	
 	@GetMapping("/alarmDetail")
@@ -64,6 +68,19 @@ public class AlarmController {
 				String empInfoName = empInfo2.getEmpinfo_name();
 				alarmResponse.setEmp_name(empInfoName);
 				list.add(alarmResponse);
+			} else if ("채팅".equals(alarm.getAlarm_type())) {
+				ChatMessage chatMsg = new ChatMessage();
+				chatMsg.setChatRoom_no(alarm.getAlarm_typeNo());
+				chatMsg.setEmpInfo_no(empInfo.getEmpinfo_no());
+				int empInfoNo = chatService.getEmpInfo(chatMsg);
+				EmployeeInfo empInfo3 = employeeService.getEmpInfoByEmpInfoNo(empInfoNo);
+				String empInfo3Name = empInfo3.getEmpinfo_name();
+				alarmResponse.setEmp_name(empInfo3Name);
+				
+				
+				list.add(alarmResponse);
+				
+				
 			}
 		}
 		

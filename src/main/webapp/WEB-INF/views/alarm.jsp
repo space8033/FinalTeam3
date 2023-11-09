@@ -83,8 +83,15 @@
 	                       <div class="flex-grow-1" onclick="javascript:pageMove('${alarm.alarm_no}', '${alarm.alarm_type}', '${alarm.alarm_typeNo}');">
 	                         <c:if test="${alarm.alarm_type == '쪽지'}">
 	                         	<h6 class="mb-1">새 메세지 ✉️</h6>
+	                         	 <p class="mb-0">${alarm.emp_name}님으로부터 ${alarm.alarm_type}가 도착하였습니다!</p>
 	                         </c:if>
-	                         <p class="mb-0">${alarm.emp_name}님으로부터 ${alarm.alarm_type}가 도착하였습니다!</p>
+	                         <c:if test="${alarm.alarm_type == '채팅'}">
+	                         	<h6 class="mb-1">채팅 메세지 💬</h6>
+	                         	 <p class="mb-0">${alarm.emp_name}님으로부터 1:1 채팅이 도착하였습니다!</p>
+	                         </c:if>
+	                         
+	                         
+	                        
 	                         <small class="text-muted">${alarm.alarm_createdAt}</small>
 	                       </div>
 	                       <div class="flex-shrink-0 dropdown-notifications-actions">

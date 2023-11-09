@@ -10,6 +10,9 @@
 	   
 	sock.onopen = function() {
 		
+		var emp_id = $("#alarmId").val();
+		sock.send(emp_id);
+		
 	
 	};
 
@@ -33,7 +36,7 @@
 	    bellAlarm.classList.add("vibration");
 	    setTimeout(function() {
 	    	bellAlarm.classList.remove("vibration");
-	    }, 500);
+	    }, 2000);
 	    
 	    
 	    if (alarmContent.classList.contains("show")) {
