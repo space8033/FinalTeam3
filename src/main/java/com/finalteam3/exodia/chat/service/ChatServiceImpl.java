@@ -129,6 +129,8 @@ public class ChatServiceImpl implements ChatService {
 			}
 		}
 		
+		empChatList.sort((empChat1, empChat2) -> Integer.compare(empChat2.getLastMsgNo(), empChat1.getLastMsgNo()));
+		
 		return empChatList;
 	}
 

@@ -82,6 +82,9 @@ public class ChatHandler extends TextWebSocketHandler{
 				//roomList에 추가
 				roomList.put(chatMessage.getChatRoom_no(), sessionTwo);
 				log.info(roomList.get(chatMessage.getChatRoom_no()).toString()+"처음 채팅방에 넣은 애");
+				int numberOfSessions = sessionList.size();
+				System.out.println("현재 세션 개수: " + numberOfSessions);
+				
 				
 				//확인
 				log.info("채팅방 생성");
@@ -98,6 +101,9 @@ public class ChatHandler extends TextWebSocketHandler{
 			
 				//sessionList추가
 				sessionList.put(session, chatMessage.getChatRoom_no());
+				
+				int numberOfSessions = sessionList.size();
+				System.out.println("읽어야돼 현재 세션 개수: " + numberOfSessions);
 			
 				log.info(roomList.get(chatMessage.getChatRoom_no()).toString()+"상대방 접속 까지 완료");
 				
@@ -110,27 +116,39 @@ public class ChatHandler extends TextWebSocketHandler{
 				
 				TextMessage textMessage = new TextMessage(chatMessage.getEmpInfo_no()+","+chatMessage.getMessage_content());
 				
+				int numberOfSessions = sessionList.size();
+				System.out.println("현재 세션 개수: " + numberOfSessions);
 				
-				int sessionCount = 0;
+				
+				
+
 				
 				log.info(roomList.get(chatMessage.getChatRoom_no()).toString()+"채팅방 얼마나 있나봅시다..ㅜ");
-				for(WebSocketSession sess : roomList.get(chatMessage.getChatRoom_no())) {
+				
+				if(numberOfSessions == 1) {
+					int receiverNo = chatDao.selectEmpInfoNo(chatMessage);
+					AlarmRequest alarm = new AlarmRequest();
+					alarm.setAlarm_isRead(false);
+					alarm.setAlarm_type("채팅");
+					alarm.setEmpinfo_no(receiverNo);
+					alarm.setAlarm_typeNo(chatMessage.getChatRoom_no());
 					
-					log.info("이걸 보내라고!");
-					sess.sendMessage(textMessage);
-					sessionCount++;
+					for(WebSocketSession sess : roomList.get(chatMessage.getChatRoom_no())) {
+						log.info("읽으면 안돼!");
+						sess.sendMessage(textMessage);
+					}
+					
+					alarmDao.insertAlarm(alarm);
+				} else {
+					//알람 세션에 두명있을때랑 한명있을떄 나누기
+					for(WebSocketSession sess : roomList.get(chatMessage.getChatRoom_no())) {
+						log.info("읽어야 돼!");
+						sess.sendMessage(textMessage);
+					}
+					
 				}
 				
 				chatDao.insertChatMessage(chatMessage);
-
-				int receiverNo = chatDao.selectEmpInfoNo(chatMessage);
-				AlarmRequest alarm = new AlarmRequest();
-				alarm.setAlarm_isRead(false);
-				alarm.setAlarm_type("채팅");
-				alarm.setEmpinfo_no(receiverNo);
-				alarm.setAlarm_typeNo(chatMessage.getChatRoom_no());
-				
-				alarmDao.insertAlarm(alarm);
 				
 				int chatMsgNo = chatMessage.getChatMessage_no();
 				
@@ -142,7 +160,7 @@ public class ChatHandler extends TextWebSocketHandler{
 				log.info("채팅방 내용");
 			}
 			//채팅방아니고 알람일 때
-			log.info("응 아ㅣ무것도 아니야 ㅅㄱㄴ");
+			
 		//채팅
 		//log.info(session.getId() + ": " + message);
 	}

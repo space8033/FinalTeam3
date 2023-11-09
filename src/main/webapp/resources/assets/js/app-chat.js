@@ -105,8 +105,10 @@ function chatRoom(emp_no) {
 			     });
 			    
 			     $("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
-			     $("#"+emp_no).addClass("active");
 			     
+			     var empinfono = $("#empInfoNo").val();
+			     $("#"+empinfono).addClass("active");
+			     console.log(empinfono+"모지?ㅠ");
 			     scrollToBottom();
 			     
 			     const searchInput = document.querySelector('.chat-search-input');
@@ -202,17 +204,21 @@ function buttonSend() {
 	      '</div>' +
 	      '</div>');
 
-	    // Append the message to the chat container
-		    $('.chat-history').append(renderMsg);
-	    
-	    sendMessage();
+	      var appendedMsg = $('.chat-history').append(renderMsg);
+	      sendMessage();
+
+	        // Find the appended checkDoubleElement and add the class
+	        
 	    var messageInput = $('.message-input');
 	    messageInput.val('');
+	    
 	    scrollToBottom();
 	    	
 	  }
 	
 }
+
+
 
 function sendMessage() {
 	var messageInput = $('.message-input').val();
@@ -229,10 +235,89 @@ function sendMessage() {
 	let jsonData = JSON.stringify(data);
 	
 	chatsock.send(jsonData);
-	sock.send(jsonData);
+	//sock.send(jsonData);
 }
 
 function onMessage(evt) {
+	var emp_no = $("#empInfoNo").val();
+	
+    var postdata = {
+   		 emp_no: emp_no
+   	};
+   	
+   	$.ajax({
+   		url: "/exodia/chatList",
+   		type: "GET",
+   		data: postdata
+   		
+   	}).done(function(result) {
+    
+   		
+      	    var html = jQuery('<div>').html(result);
+           var contents = html.find("div#chatList").html();
+        	$("#app-chat-contacts").html(contents);
+        	
+           new PerfectScrollbar('.app-chat-contacts .sidebar-body', {
+   		        wheelPropagation: false,
+   		        suppressScrollX: true
+   		      });
+   		    
+           const searchInput = document.querySelector('.chat-search-input');
+   		     searchInput.addEventListener('keyup', e => {
+   		         let searchValue = e.currentTarget.value.toLowerCase(),
+   		           searchChatListItemsCount = 0,
+   		           searchContactListItemsCount = 0,
+   		           chatListItem0 = document.querySelector('.chat-list-item-0'),
+   		           contactListItem0 = document.querySelector('.contact-list-item-0'),
+   		           searchChatListItems = [].slice.call(
+   		             document.querySelectorAll('#chat-list li:not(.chat-contact-list-item-title)')
+   		           ),
+   		           searchContactListItems = [].slice.call(
+   		             document.querySelectorAll('#contact-list li:not(.chat-contact-list-item-title)')
+   		           );
+
+   		         // Search in chats
+   		         searchChatContacts(searchChatListItems, searchChatListItemsCount, searchValue, chatListItem0);
+   		         // Search in contacts
+   		         searchChatContacts(searchContactListItems, searchContactListItemsCount, searchValue, contactListItem0);
+   		       });
+   		     
+   		     function handleKeyPress(event) {
+   		    	    if (event.key === "Enter") {
+   		    	    	buttonSend();
+   		    	    }
+   		    	}
+   		     
+   		     function searchChatContacts(searchListItems, searchListItemsCount, searchValue, listItem0) {
+   		         searchListItems.forEach(searchListItem => {
+   		           let searchListItemText = searchListItem.textContent.toLowerCase();
+   		           if (searchValue) {
+   		             if (-1 < searchListItemText.indexOf(searchValue)) {
+   		               searchListItem.classList.add('d-flex');
+   		               searchListItem.classList.remove('d-none');
+   		               searchListItemsCount++;
+   		             } else {
+   		               searchListItem.classList.add('d-none');
+   		             }
+   		           } else {
+   		             searchListItem.classList.add('d-flex');
+   		             searchListItem.classList.remove('d-none');
+   		             searchListItemsCount++;
+   		           }
+   		         });
+   		         // Display no search fount if searchListItemsCount == 0
+   		         if (searchListItemsCount == 0) {
+   		           listItem0.classList.remove('d-none');
+   		         } else {
+   		           listItem0.classList.add('d-none');
+   		         }
+   		       }
+   	});
+   	var empInfono = $("#empInfoNo").val();
+	
+   	//
+	
+	
 	console.log(evt+"들어오긴하닝 ㅎㅎ");
 	
 	let receive = evt.data.split(",");
@@ -243,9 +328,21 @@ function onMessage(evt) {
 			
 	};
 	var empInfo_no = $("#alarmId").val();
+	
+	/* 실시간 읽음 확인용
+	var checkDoubleElement = $('.bx.bx-check-double');
+    checkDoubleElement.addClass('text-success');
+	*/
+	
 	if(data.empInfo_no != empInfo_no) {
 		checkLR(data);
 	}
+	
+	//$("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
+    
+	//$("#"+empInfono).addClass("active");
+	//console.log(empInfono+"이게 못남아있는건지..");
+	
 }
 
 
@@ -285,7 +382,7 @@ function checkLR(data) {
 
 	    // Append the message to the chat container
 	    $('.chat-history').append(renderMsg);
-    
+	    
     scrollToBottom();
     
     new PerfectScrollbar('.chat-history-body', {
@@ -404,37 +501,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	   		         }
 	   		       }
 	           
-	           
-	
-	   		    /*// Chat history scrollbar
-	   		      new PerfectScrollbar('.chat-history-body', {
-	   		        wheelPropagation: false,
-	   		        suppressScrollX: true
-	   		      });*/
-	   		    
-	/*
-	   		    // Sidebar left scrollbar
-	   		      new PerfectScrollbar('.app-chat-sidebar-left .sidebar-body', {
-	   		        wheelPropagation: false,
-	   		        suppressScrollX: true
-	   		      });
-	   		    
-	
-	   		    // Sidebar right scrollbar
-	   		      new PerfectScrollbar('.app-chat-sidebar-right .sidebar-body', {
-	   		        wheelPropagation: false,
-	   		        suppressScrollX: true
-	   		     });*/
-	   		    
-	   		     $("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
-	   		     $("#"+emp_no).addClass("active");
-	   		     
-	   		     scrollToBottom();
-	   		     
-	   		    
-	   		     
-	   		
-	   	
+	   		      
+	   		      
 	   	});
     } 
     // Chat contacts scrollbar
