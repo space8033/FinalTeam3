@@ -256,7 +256,7 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-
+			<input type="hidden" value="${empinfo_no}" id="empinfoNo"/>
             <div class="container-xxl flex-grow-1 container-p-y">
               <h4 class="py-3 mx-1 mb-2"> 프로젝트 목록</h4>
 
@@ -271,7 +271,6 @@
                           <th>프로젝트명</th>
                           <th>투입인력 </th>
                           <th>기간</th>
-                          <!-- <th>고객사</th> -->
                           <th>삭제</th>
                         </tr>
                       </thead>

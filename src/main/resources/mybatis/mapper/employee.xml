@@ -35,6 +35,12 @@
 		and r.empinfo_no = i.empinfo_no
 	</select>
 	
+	<select id="selectEmpInfoNoByEmpNo" parameterType="int" resultType="int">
+		select empinfo_no
+		from empinfo
+		where emp_no = #{emp_no}
+	</select> 
+	
 	<select id="selectModifyByEmpId" parameterType="String" resultType="EmpModifyResponse">
 		select i.empinfo_name, e.emp_id, i.empinfo_email, i.empinfo_phone, i.empinfo_position
 		from emp e, empinfo i
@@ -105,6 +111,13 @@
 		AND t.team_isleader = 0
 		AND e.emp_no = i.emp_no
 		AND e.emp_deletedat IS NULL
+	</select>
+	
+	<select id="countProjectEmp" parameterType="int" resultType="int">
+		select count(*)
+		from team
+		where project_no = #{project_no}
+		and empinfo_no != 0
 	</select>
 	
 	<select id="selectTeamLeader" resultType="EmpSimpleResponse" parameterType="String">

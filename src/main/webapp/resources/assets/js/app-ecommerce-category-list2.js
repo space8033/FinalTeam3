@@ -8,15 +8,7 @@
 
 const commentEditor = document.querySelector('.comment-editor');
 
-if (commentEditor) {
-  new Quill(commentEditor, {
-    modules: {
-      toolbar: '.comment-toolbar'
-    },
-    placeholder: '프로젝트 개요.',
-    theme: 'snow'
-  });
-}
+
 
 // Datatable (jquery)
 
@@ -33,6 +25,7 @@ $(function () {
     headingColor = config.colors.headingColor;
   }
 
+  var empinfo_no = $("#empinfoNo").val();
   // Variable declaration for category list table
   var dt_category_list_table = $('.datatables-category-list');
 
@@ -50,21 +43,25 @@ $(function () {
   }
 
   // Customers List Datatable
-
+  console.log(empinfo_no);
+  
   if (dt_category_list_table.length) {
     var dt_category = dt_category_list_table.DataTable({
       ajax: {
-    	  url: '',
+    	  url: '/exodia/project/projectList',
+    	  data: {
+    		  empinfo_no : empinfo_no
+    	  },
+    	  type: 'post',
     	  dataSrc: ''// JSON file to add data
       },
       columns: [
         // columns according to JSON
         { data: '' },
-        { data: 'id' },
-        { data: 'categories' },
-        { data: 'total_products' },
-        { data: 'total_earnings' },
-        { data: '' }
+        { data: 'project_name' },
+        { data: 'project_memberCount' },
+        { data: 'project_period' },
+        { data: 'project_client' }
       ],
       columnDefs: [
         {
@@ -97,45 +94,13 @@ $(function () {
           targets: 2,
           responsivePriority: 2,
           render: function (data, type, full, meta) {
-            var $name = full['categories'],
-              $category_detail = full['category_detail'],
-              $image = full['cat_image'],
-              $id = full['id'];
-            if ($image) {
-              // For Product image
-              var $output =
-                '<img src="' +
-                assetsPath +
-                'img/ecommerce-images/' +
-                $image +
-                '" alt="Product-' +
-                $id +
-                '" class="rounded-2">';
-            } else {
-              // For Product badge
-              var stateNum = Math.floor(Math.random() * 6);
-              var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
-              var $state = states[stateNum],
-                $name = full['category_detail'],
-                $initials = $name.match(/\b\w/g) || [];
-              $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-              $output = '<span class="avatar-initial rounded-2 bg-label-' + $state + '">' + $initials + '</span>';
-            }
-            // Creates full output for Categories and Category Detail
+            var $name = full['project_name'];
             var $row_output =
               '<div class="d-flex align-items-center">' +
-              '<div class="avatar-wrapper me-2 rounded-2 bg-label-secondary">' +
-              '<div class="avatar">' +
-              $output +
-              '</div>' +
-              '</div>' +
               '<div class="d-flex flex-column justify-content-center">' +
               '<span class="text-body text-wrap fw-medium">' +
               $name +
               '</span>' +
-              '<span class="text-muted text-truncate mb-0 d-none d-sm-block"><small>' +
-              $category_detail +
-              '</small></span>' +
               '</div>' +
               '</div>';
             return $row_output;
@@ -146,7 +111,7 @@ $(function () {
           targets: 3,
           responsivePriority: 3,
           render: function (data, type, full, meta) {
-            var $total_products = full['total_products'];
+            var $total_products = full['project_memberCount'];
             return '<div class="text-sm-end">' + $total_products + '</div>';
           }
         },
@@ -155,7 +120,7 @@ $(function () {
           targets: 4,
           orderable: false,
           render: function (data, type, full, meta) {
-            var $total_earnings = full['total_earnings'];
+            var $total_earnings = full['project_period'];
             return "<div class='fw-medium text-sm-end'>" + $total_earnings + '</div';
           }
         },
