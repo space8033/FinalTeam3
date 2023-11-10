@@ -268,10 +268,10 @@
                         <div
                           class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">
                           <div class="user-profile-info">
-                            <h4>김시온</h4>
+                            <h4>${timeLine.empinfo_name}</h4>
                             <ul
                               class="list-inline mb-0 d-flex align-items-center flex-wrap justify-content-sm-start justify-content-center gap-2">
-                              <li class="list-inline-item fw-medium"><i class="bx bx-id-card mb-1"></i> 개발자</li>
+                              <li class="list-inline-item fw-medium"><i class="bx bx-id-card mb-1"></i> ${timeLine.role_category}</li>
                               <li class="list-inline-item fw-medium"><i class="bx bx-buildings mb-1"></i> 오티아이</li>
 
                             </ul>
@@ -296,50 +296,44 @@
                       <small class="text-muted text-uppercase">About</small>
                       <ul class="list-unstyled mb-4 mt-3">
                         <li class="d-flex align-items-center mb-3">
-                          <i class="bx bx-user"></i><span class="fw-medium mx-2">이름 :</span> <span>김시온</span>
+                          <i class="bx bx-user"></i><span class="fw-medium mx-2">이름 :</span> <span>${timeLine.empinfo_name}</span>
                         </li>
                         <li class="d-flex align-items-center mb-3">
                           <i class="bx bx-detail"></i><span class="fw-medium mx-2">아이디 :</span>
-                          <span>20231234</span>
+                          <span>${timeLine.emp_id}</span>
                         </li>
                         <li class="d-flex align-items-center mb-3">
-                          <i class="bx bx-check"></i><span class="fw-medium mx-2">상태 :</span> <span>활동중</span>
+                          <i class="bx bx-check"></i><span class="fw-medium mx-2">상태 :</span> <span>${timeLine.emp_status}</span>
                         </li>
                         <li class="d-flex align-items-center mb-3">
-                          <i class="bx bx-star"></i><span class="fw-medium mx-2">권한 :</span> <span>개발자</span>
+                          <i class="bx bx-star"></i><span class="fw-medium mx-2">권한 :</span> <span>${timeLine.role_category}</span>
                         </li>
                         <li class="d-flex align-items-center mb-3">
-                          <i class="bx bx-sitemap"></i><span class="fw-medium mx-2">직위 :</span> <span>부장</span>
+                          <i class="bx bx-sitemap"></i><span class="fw-medium mx-2">직위 :</span> <span>${timeLine.empinfo_position}</span>
                         </li>
                          <li class="d-flex align-items-center mb-3">
-                          <i class="bx bx-task"></i><span class="fw-medium mx-2">업무 :</span> <span>로그인</span>
+                          <i class="bx bx-task"></i><span class="fw-medium mx-2">업무 :</span> <span>${timeLine.team_duty}</span>
                         </li>
                         
                       </ul>
                       <small class="text-muted text-uppercase">Contacts</small>
                       <ul class="list-unstyled mb-4 mt-3">
-                        <li class="d-flex align-items-center mb-3">
+                        <li class="d-flex align-items-center mb-2">
                           <i class="bx bx-phone"></i><span class="fw-medium mx-2">전화번호 :</span>
-                          <span>010-4504-1219</span>
+                          <span>${timeLine.empinfo_phone}</span>
                         </li>
                         
-                        <li class="d-flex align-items-center mb-3">
+                        <li class="d-flex align-items-center mb-2">
                           <i class="bx bx-envelope"></i><span class="fw-medium mx-2">이메일 :</span>
-                          <span>noismik@example.com</span>
+                          <span>${timeLine.empinfo_email}</span>
                         </li>
                       </ul>
                       <small class="text-muted text-uppercase">Teams</small>
-                      <ul class="list-unstyled mt-3 mb-0">
-                        <li class="d-flex align-items-center mb-3">
+                      <ul class="list-unstyled mt-2">
+                        <li class="d-flex align-items-center">
                           <i class="bx bxl-github text-primary me-2"></i>
                           <div class="d-flex flex-wrap">
-                            <span class="fw-medium me-2">개발 1팀</span><span>(12명)</span>
-                          </div>
-                        </li>
-                        <li class="d-flex align-items-center">
-                          <i class="bx bxl-react text-info me-2"></i>
-                          <div class="d-flex flex-wrap">
-                            <span class="fw-medium me-2">개발 2팀</span><span>(9명)</span>
+                            <span class="fw-medium me-2">${timeLine.team_name}</span><span>(${timeLine.team_memberCount}명)</span>
                           </div>
                         </li>
                       </ul>
@@ -352,7 +346,7 @@
                   <div class="row">
 					<div class="col-xl-12 mb-4 mb-xl-0">
 	                  <div class="card">
-	                    <h5 class="card-header">타임라인</h5>
+	                    <h5 class="card-header">최근 소식</h5>
 	                    <div class="card-body">
 	                      <ul class="timeline">
 	                        <li class="timeline-item timeline-item-transparent">
@@ -363,15 +357,16 @@
 	                          <div class="timeline-event">
 	                            <div class="timeline-header border-bottom mb-3">
 	                              <h6 class="mb-0">공지사항</h6>
-	                              <span class="text-muted">3rd October</span>
+	                              <span class="text-muted">${timeLine.notice_createdat}</span>
 	                            </div>
 	                            <div class="d-flex justify-content-between flex-wrap mb-2">
 	                              <div>
-	                                <span>Charles de Gaulle Airport, Paris</span>
-	                                <span>Heathrow Airport, London</span>
+	                              	<a href="/exodia/noticeDetail?notice_no=${timeLine.notice_no}">
+		                                <span>${timeLine.notice_title}</span>
+	                              	</a>
 	                              </div>
 	                              <div>
-	                                <span class="text-muted">6:30 AM</span>
+	                                <span class="text-muted">${timeLine.notice_time}</span>
 	                              </div>
 	                            </div>
 	                          </div>
@@ -379,63 +374,66 @@
 	                        
 	                        <li class="timeline-item timeline-item-transparent">
 	                          <span class="timeline-point-wrapper">
-	                          	<span class="timeline-point timeline-point-primary"> <!-- success, danger, info, warning 있음-->
+	                          	<span class="timeline-point timeline-point-primary">
 	                          	</span>
 	                          </span>
 	                          <div class="timeline-event">
 	                            <div class="timeline-header border-bottom mb-3">
 	                              <h6 class="mb-0">문의하기</h6>
-	                              <span class="text-muted">3rd October</span>
+		                              <span class="text-muted">${timeLine.inquiry_createdat}</span>
 	                            </div>
 	                            <div class="d-flex justify-content-between flex-wrap mb-2">
 	                              <div>
-	                                <span>Charles de Gaulle Airport, Paris</span>
-	                                <span>Heathrow Airport, London</span>
+	                              	<a href="/exodia/inquiryDetail?notice_no=${timeLine.inquiry_no}">
+		                                <span>${timeLine.inquiry_title}</span>
+	                              	</a>
 	                              </div>
 	                              <div>
-	                                <span class="text-muted">6:30 AM</span>
+	                                <span class="text-muted">${timeLine.inquiry_time}</span>
 	                              </div>
 	                            </div>
 	                          </div>
 	                        </li>
 	                        <li class="timeline-item timeline-item-transparent">
 	                          <span class="timeline-point-wrapper">
-	                          	<span class="timeline-point timeline-point-warning"> <!-- success, danger, info, warning 있음-->
+	                          	<span class="timeline-point timeline-point-warning"> 
 	                          	</span>
 	                          </span>
 	                          <div class="timeline-event">
 	                            <div class="timeline-header border-bottom mb-3">
 	                              <h6 class="mb-0">일정관리</h6>
-	                              <span class="text-muted">3rd October</span>
+	                              <span class="text-muted">시작일자</span>
 	                            </div>
 	                            <div class="d-flex justify-content-between flex-wrap mb-2">
 	                              <div>
-	                                <span>Charles de Gaulle Airport, Paris</span>
-	                                <span>Heathrow Airport, London</span>
+	                              	<a href="/exodia/calendar">
+		                                <span>${timeLine.myTask_name}</span>
+	                              	</a>
 	                              </div>
 	                              <div>
-	                                <span class="text-muted">6:30 AM</span>
+	                                <span class="text-muted">${timeLine.myTask_start}</span>
 	                              </div>
 	                            </div>
 	                          </div>
 	                        </li>
 	                        <li class="timeline-item timeline-item-transparent">
 	                          <span class="timeline-point-wrapper">
-	                          	<span class="timeline-point timeline-point-success"> <!-- success, danger, info, warning 있음-->
+	                          	<span class="timeline-point timeline-point-success"> 
 	                          	</span>
 	                          </span>
 	                          <div class="timeline-event">
 	                            <div class="timeline-header border-bottom mb-3">
 	                              <h6 class="mb-0">프로그램</h6>
-	                              <span class="text-muted">3rd October</span>
+	                              <span class="text-muted">시작일자</span>
 	                            </div>
 	                            <div class="d-flex justify-content-between flex-wrap mb-2">
 	                              <div>
-	                                <span>Charles de Gaulle Airport, Paris</span>
-	                                <span>Heathrow Airport, London</span>
+	                              	<a href="/exodia/task/programManagement">
+		                                <span>${timeLine.task_name}</span>
+	                              	</a>
 	                              </div>
 	                              <div>
-	                                <span class="text-muted">6:30 AM</span>
+	                                <span class="text-muted">${timeLine.task_start}</span>
 	                              </div>
 	                            </div>
 	                          </div>
@@ -496,7 +494,6 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/app-user-view-account.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
   </body>
 </html>

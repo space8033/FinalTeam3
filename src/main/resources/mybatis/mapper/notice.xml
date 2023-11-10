@@ -40,6 +40,31 @@
 		update notice set notice_deletedat = to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
 		where notice_no = #{notice_no}
 	</update>
-
 	
+	<select id="selectRecentNotice" resultType="RecentNotice">
+		<![CDATA[
+		    SELECT notice_no, notice_title, notice_createdat
+		    FROM (
+		        SELECT notice_no, notice_title, notice_createdat
+		        FROM notice
+		        where notice_type = 'NOTICE'
+		        ORDER BY notice_no DESC
+		    )
+		    WHERE ROWNUM = 1
+		]]>
+	</select>
+
+	<select id="selectRecentInquiry" resultType="RecentNotice">
+		<![CDATA[
+		    SELECT notice_no, notice_title, notice_createdat
+		    FROM (
+		        SELECT notice_no, notice_title, notice_createdat
+		        FROM notice
+		        where notice_type = 'INQUIRY'
+		        ORDER BY notice_no DESC
+		    )
+		    WHERE ROWNUM = 1
+		]]>
+	</select>
+
 </mapper>

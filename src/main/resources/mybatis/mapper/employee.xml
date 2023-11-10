@@ -274,4 +274,15 @@
       	insert into team(team_no, project_no, empinfo_no, team_name, team_duty, team_isleader)
       	values(#{team_no}, 0, #{empinfo_no}, #{team_name}, #{team_duty}, #{team_isleader})
 	</insert>
+	
+	<select id="selectTimeLineResponse" parameterType="Map" resultType="TimeLineResponse">
+		select i.empinfo_no, e.emp_no, i.empinfo_name, e.emp_id, e.emp_status, r.role_category, i.empinfo_position, t.team_duty, i.empinfo_phone, i.empinfo_email, t.team_name
+		from empinfo i, emp e, team t, role r
+		where t.project_no = #{project_no}
+		and r.project_no = #{project_no}
+		and r.empinfo_no = i.empinfo_no
+		and t.empinfo_no = i.empinfo_no
+		and i.emp_no = e.emp_no
+        and i.emp_no = #{emp_no}
+	</select>
 </mapper>

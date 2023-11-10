@@ -67,7 +67,7 @@
         <div class="d-none d-lg-flex col-lg-7 col-xl-6 align-items-center" style="background-color:white">
           <div class="w-100 d-flex justify-content-end">
             <img
-              src="${pageContext.request.contextPath}/resources/assets/img/illustrations/loginBackground.jpg"
+              src="${pageContext.request.contextPath}/resources/assets/img/illustrations/loginAnimation.gif"
               class="img-fluid"
               alt="Login image"
               width="80%"
@@ -78,16 +78,22 @@
 
 	       <div class="d-flex col-12 col-lg-5 col-xl-6 align-items-center authentication-bg justify-content-center">
 	<!--           <div class="w-px-400 mx-auto"> -->
-        	<div class="mmmmmmmmmmmmmmmmmmm">
+        	<div class="mmmmmmmmmmmmmmmmmmm" style="
+        			display: flex;
+        			align-items: center;
+        			background-color: whitesmoke;
+        			height: 100%;
+        			padding: 100px;">
 	         <div class="w-px-400">
 	           <!-- Logo -->
-	           <div class="app-brand mb-3">
+	           <div class="app-brand mb-3 d-flex justify-content-center">
 	             <a href="#" class="app-brand-link gap-2">
 	                 <img
 		              src="${pageContext.request.contextPath}/resources/assets/img/illustrations/otilogo.png"
 		              class="img-fluid"
 		              alt="Login image"
-		              width="80%"
+		              width="60%"
+		              style="margin-left: 80px; margin-bottom: 20px;"
 	              />
 	             </a>
 	           </div>

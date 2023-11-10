@@ -14,6 +14,7 @@ import com.finalteam3.exodia.employee.dto.response.EmpSimpleResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.dto.response.ProjectEmpResponse;
 import com.finalteam3.exodia.employee.dto.response.TeamBasicResponse;
+import com.finalteam3.exodia.employee.dto.response.TimeLineResponse;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 
 @Mapper
@@ -57,5 +58,6 @@ public interface EmployeeDao {
 	public List<EmpNote> selectAllEmployee();
 	public List<ProjectEmpResponse> selectProjectEmp(int project_no);
 	public ProjectEmpResponse selectProjectPm(int project_no);
+	public TimeLineResponse selectTimeLineResponse(Map<String, Object> map);
 	public void deleteEmp(int emp_no);
 }

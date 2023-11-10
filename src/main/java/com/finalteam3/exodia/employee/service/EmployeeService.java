@@ -13,6 +13,7 @@ import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.dto.response.ProjectEmpResponse;
+import com.finalteam3.exodia.employee.dto.response.TimeLineResponse;
 import com.finalteam3.exodia.employee.dto.response.TransferDto;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 
@@ -42,6 +43,7 @@ public interface EmployeeService {
 	
 	//public LoginResult login(LoginRequest loginRequest);
 	public LoginResponse getLoginResponse(LoginRequest loginRequest);
+	public TimeLineResponse getTimeLineByEmpNo(Map<String, Object> map);
 	public EmployeeInfo getEmpInfo(int empNo);
 	public JoinResult join(JoinRequest joinRequest);
 	public PasswordResult changePassword(PasswordRequest passwordRequest);

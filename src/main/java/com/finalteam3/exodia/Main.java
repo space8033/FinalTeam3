@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.finalteam3.exodia.calendar.service.CalendarService;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
+import com.finalteam3.exodia.employee.dto.response.TimeLineResponse;
+import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.notice.dto.Notice;
 import com.finalteam3.exodia.notice.service.NoticeService;
 import com.finalteam3.exodia.security.dto.EmpDetails;
@@ -30,6 +32,8 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Controller
 public class Main {
+	@Resource
+	private EmployeeService employeeService;
 	@Resource
 	private TaskService taskService;
 	@Resource
@@ -91,6 +95,14 @@ public class Main {
 		
 		String emp_name = loginResponse.getEmpInfo_name();
 		model.addAttribute("empInfo_name", emp_name);
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("emp_no", loginResponse.getEmp_no());
+		map.put("project_no", 0);
+		
+		TimeLineResponse timeLine = employeeService.getTimeLineByEmpNo(map);
+		model.addAttribute("timeLine", timeLine);
+		log.info("timeLine" + timeLine.toString());
 		
 		return "userProfile";
 	}
