@@ -22,6 +22,7 @@ import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finalteam3.exodia.alarm.dao.AlarmDao;
+import com.finalteam3.exodia.alarm.dto.request.AlarmRequest;
 import com.finalteam3.exodia.chat.dao.ChatDao;
 import com.finalteam3.exodia.chat.dto.request.ChatMessage;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
@@ -92,7 +93,35 @@ public class WebSocketHandler extends TextWebSocketHandler{
 					
 					TextMessage textMessage = new TextMessage(jsonMessages);
 					
-					session.sendMessage(textMessage);
+					//session.sendMessage(textMessage);
+					
+					LoginResponse emp = empDao.selectEmpByEmpId(memId);
+					List<AlarmRequest> alarmList = alarmDao.selectUckAlarmList(emp.getEmpInfo_no());
+					for(AlarmRequest alarm : alarmList) {
+						if(alarm.getAlarm_type().equals("채팅") && alarm.getAlarm_toast() == null) {
+							
+							int chatMsgNo = alarm.getAlarm_typeNo();
+							ChatMessage chatMsg = chatDao.selectLastMsg(chatMsgNo);
+							int senderNo = chatMsg.getEmpInfo_no();
+							String chatContent = chatMsg.getMessage_content();
+							EmployeeInfo empInfo = empDao.selectEmpInfoByEmpInfoNo(senderNo);
+							String senderName = empInfo.getEmpinfo_name();
+							
+							Message messageContent2= new Message();
+							messageContent2.setCmd("채팅");
+							messageContent2.setTitle(chatContent);
+							messageContent2.setSender(senderName);
+							
+							String jsonMessages2 = objectMapper.writeValueAsString(messageContent2);
+							TextMessage textMessage2 = new TextMessage(jsonMessages2);
+							log.info(textMessage2+"머라고보내니?");
+							alarmDao.alarmToastUpdate(alarm.getAlarm_no());
+							session.sendMessage(textMessage2);
+						
+						}
+					
+					}
+					
 					
 				}
 			}

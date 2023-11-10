@@ -26,7 +26,7 @@
 	</insert>
 	
 	<select id="selectEmpByEmpId" parameterType="String" resultType="LoginResponse">
-		select e.emp_id, e.emp_password, i.empinfo_name, e.emp_no, e.emp_isinit, e.emp_deletedAt, r.role_category
+		select e.emp_id, e.emp_password, i.empinfo_name, e.emp_no, e.emp_isinit, e.emp_deletedAt, r.role_category, i.empinfo_no
 		from emp e, empinfo i, role r
 		where project_no = 0
 		and e.emp_no = i.emp_no

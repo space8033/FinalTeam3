@@ -10,9 +10,9 @@
     <Logger name="com.finalteam3.exodia" level="info" additivity="false">
       <AppenderRef ref="Out"/>
     </Logger>
-    <!-- <Logger name="jdbc.sqlonly" level="info" additivity="false">
+     <Logger name="jdbc.sqlonly" level="info" additivity="false">
       <AppenderRef ref="Out"/>
-    </Logger> -->
+    </Logger>
     <Root level="error">
       <AppenderRef ref="Out"/>
     </Root>
