@@ -13,6 +13,9 @@ public interface CalendarService {
 	//캘린더에 업무 불러오기
 	public List<CalendarResponse2> getPersonalTask(int emp_no);
 	
+	//일정 수정
+	//public void updateByTaskNo(CalendarResponse2 calendarResponse2);
+	
 	//일정 삭제
 	public void delete(int task_no);
 	

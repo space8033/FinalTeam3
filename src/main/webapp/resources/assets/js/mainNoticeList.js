@@ -28,9 +28,10 @@ $(function () {
   
   //DataTable
   if (dt_product_table.length) {
+	  console.log("죽어");
     var dt_products = dt_product_table.DataTable({
     	ajax: {
-            url: 'noticeListJson',
+            url: 'noticeListJson2',
             type : "POST",
             dataSrc: ''
         }, // JSON file to add data

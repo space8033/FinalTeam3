@@ -10,22 +10,35 @@ import javax.annotation.Resource;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.finalteam3.exodia.calendar.service.CalendarService;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
+import com.finalteam3.exodia.notice.dto.Notice;
+import com.finalteam3.exodia.notice.service.NoticeService;
 import com.finalteam3.exodia.security.dto.EmpDetails;
 import com.finalteam3.exodia.task.dto.TaskByTeamEmp;
 import com.finalteam3.exodia.task.dto.response.TeamTaskResponse;
 import com.finalteam3.exodia.task.service.TaskService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 public class Main {
 	@Resource
 	private TaskService taskService;
 	@Resource
 	private EmployeeDao employeeDao;
+	@Resource
+	private CalendarService calendarService;
+	@Resource
+	private NoticeService noticeService;
 	
 	@RequestMapping("/")
 	public String login(Model model) {
@@ -81,28 +94,6 @@ public class Main {
 		return "calendar";
 	}
 	
-	/*@RequestMapping("/noticeList")
-	public String noticeList(Model model, Authentication authentication) {
-		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		LoginResponse loginResponse = empDetails.getLoginResponse();
-		
-		String emp_name = loginResponse.getEmpInfo_name();
-		model.addAttribute("empInfo_name", emp_name);
-		return "noticeList";
-	}*/
-	
-	/*@RequestMapping("/noticeAdd")
-	public String noticeAdd(Model model, Authentication authentication) {
-		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		LoginResponse loginResponse = empDetails.getLoginResponse();
-		String emp_id = loginResponse.getEmp_id();
-		model.addAttribute("emp_id", emp_id);
-		
-		String emp_name = loginResponse.getEmpInfo_name();
-		model.addAttribute("empInfo_name", emp_name);
-		return "noticeAdd";
-	}*/
-	
 	@RequestMapping("/userManagement")
 	public String userManagement(Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
@@ -152,58 +143,6 @@ public class Main {
 		return "projectList";
 	}
 	
-	/*@RequestMapping("/qnaList")
-	public String qnaList(Model model, Authentication authentication) {
-		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		LoginResponse loginResponse = empDetails.getLoginResponse();
-		String emp_id = loginResponse.getEmp_id();
-		model.addAttribute("emp_id", emp_id);
-		
-		String emp_name = loginResponse.getEmpInfo_name();
-		model.addAttribute("empInfo_name", emp_name);
-		
-		return "qnaList";
-	}
-	
-	@RequestMapping("/qnaDetail")
-	public String qnaDetail(Model model, Authentication authentication) {
-		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		LoginResponse loginResponse = empDetails.getLoginResponse();
-		String emp_id = loginResponse.getEmp_id();
-		model.addAttribute("emp_id", emp_id);
-		
-		String emp_name = loginResponse.getEmpInfo_name();
-		model.addAttribute("empInfo_name", emp_name);
-		
-		return "qnaDetail";
-	}
-	
-	@RequestMapping("/qnaAdd")
-	public String qnaAdd(Model model, Authentication authentication) {
-		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		LoginResponse loginResponse = empDetails.getLoginResponse();
-		String emp_id = loginResponse.getEmp_id();
-		model.addAttribute("emp_id", emp_id);
-		
-		String emp_name = loginResponse.getEmpInfo_name();
-		model.addAttribute("empInfo_name", emp_name);
-		
-		return "qnaAdd";
-	}
-	
-	@RequestMapping("/noticeDetail")
-	public String noticeDetail(Model model, Authentication authentication) {
-		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		LoginResponse loginResponse = empDetails.getLoginResponse();
-		String emp_id = loginResponse.getEmp_id();
-		model.addAttribute("emp_id", emp_id);
-		
-		String emp_name = loginResponse.getEmpInfo_name();
-		model.addAttribute("empInfo_name", emp_name);
-		
-		return "noticeDetail";
-	}*/
-	
 	@RequestMapping("/main")
 	public String main(Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
@@ -241,6 +180,21 @@ public class Main {
 		
 		return "main";
 	}
+	
+	@ResponseBody
+    @PostMapping("/noticeListJson2")
+    public List<Notice> noticeListJson2() {
+        // 이 메서드에서 데이터를 반환하면서 리디렉션을 처리
+       
+		 
+		
+        List<Notice> data = noticeService.getNoticeList();
+        
+        log.info("데이터 data 어떻게 나와? : " + data);
+        
+        return data;
+    }
+
 	
 	@RequestMapping("/mainCalendar")
 	public String mainCalendar(Model model, Authentication authentication) {

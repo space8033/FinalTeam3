@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finalteam3.exodia.calendar.dto.request.CalendarRequest;
 import com.finalteam3.exodia.calendar.dto.response.CalendarColor;
+import com.finalteam3.exodia.calendar.dto.response.CalendarResponse;
 import com.finalteam3.exodia.calendar.dto.response.CalendarResponse2;
 import com.finalteam3.exodia.calendar.service.CalendarService;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
@@ -34,6 +35,7 @@ public class CalendarController {
 		return "/calendar";
 	}
 	
+	//캘린더 일정 추가
 	@PostMapping("/calendar")
 	public String addTask(CalendarRequest request, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
@@ -72,4 +74,16 @@ public class CalendarController {
 		
 		return "calendar";
 	}
+	
+	//일정 수정
+	@PostMapping("/updateCalendar")
+	public String updateCalendar(Authentication authentication, int task_no, CalendarResponse2 calendarResponse2) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		
+		
+		return "calendar";
+	}
+	
 }
