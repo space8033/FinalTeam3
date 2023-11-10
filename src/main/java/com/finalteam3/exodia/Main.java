@@ -10,15 +10,14 @@ import javax.annotation.Resource;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.finalteam3.exodia.calendar.service.CalendarService;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
-import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.notice.dto.Notice;
 import com.finalteam3.exodia.notice.service.NoticeService;
 import com.finalteam3.exodia.security.dto.EmpDetails;
@@ -68,18 +67,7 @@ public class Main {
 		return "chat2";
 	}
 	
-	@RequestMapping("/searchUser")
-	public String searchUser(Model model, Authentication authentication) {
-		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		LoginResponse loginResponse = empDetails.getLoginResponse();
-		String emp_id = loginResponse.getEmp_id();
-		model.addAttribute("emp_id", emp_id);
-		model.addAttribute("emp_no", loginResponse.getEmp_no());
-		
-		String emp_name = loginResponse.getEmpInfo_name();
-		model.addAttribute("empInfo_name", emp_name);
-		return "searchUser";
-	}
+
 	
 
 	@RequestMapping("/calendar")
@@ -94,19 +82,7 @@ public class Main {
 		return "calendar";
 	}
 	
-	@RequestMapping("/userManagement")
-	public String userManagement(Model model, Authentication authentication) {
-		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		LoginResponse loginResponse = empDetails.getLoginResponse();
-		String emp_id = loginResponse.getEmp_id();
-		model.addAttribute("emp_id", emp_id);
-		
-		String emp_name = loginResponse.getEmpInfo_name();
-		model.addAttribute("empInfo_name", emp_name);
-		
-		return "userManagement";
-	}
-	@RequestMapping("/userProfile")
+	@GetMapping("/userProfile")
 	public String userProfile(Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
@@ -119,7 +95,7 @@ public class Main {
 		return "userProfile";
 	}
 
-	@RequestMapping("/userModify2")
+/*	@RequestMapping("/userModify2")
 	public String userModify2(Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
@@ -128,20 +104,8 @@ public class Main {
 		model.addAttribute("empInfo_name", emp_name);
 		
 		return "userModify2";
-	}
+	}*/
 	
-	@RequestMapping("/projectList")
-	public String projectList(Model model, Authentication authentication) {
-		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		LoginResponse loginResponse = empDetails.getLoginResponse();
-		String emp_id = loginResponse.getEmp_id();
-		model.addAttribute("emp_id", emp_id);
-		
-		String emp_name = loginResponse.getEmpInfo_name();
-		model.addAttribute("empInfo_name", emp_name);
-		
-		return "projectList";
-	}
 	
 	@RequestMapping("/main")
 	public String main(Model model, Authentication authentication) {
@@ -207,18 +171,5 @@ public class Main {
 		model.addAttribute("empInfo_name", emp_name);
 		
 		return "mainCalendar";
-	}
-	
-	@RequestMapping("/programManagement")
-	public String programManagement(Model model, Authentication authentication) {
-		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		LoginResponse loginResponse = empDetails.getLoginResponse();
-		String emp_id = loginResponse.getEmp_id();
-		model.addAttribute("emp_id", emp_id);
-		
-		String emp_name = loginResponse.getEmpInfo_name();
-		model.addAttribute("empInfo_name", emp_name);
-		
-		return "programManagement";
 	}
 }

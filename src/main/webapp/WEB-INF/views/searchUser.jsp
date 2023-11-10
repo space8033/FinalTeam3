@@ -142,7 +142,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                 <a href="${pageContext.request.contextPath}/projectList" class="menu-link">
+                 <a href="${pageContext.request.contextPath}/project/projectList" class="menu-link">
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
                 </li>
@@ -152,7 +152,7 @@
                   </a>
                 </li>
                 <li class="menu-item active">
-                  <a href="${pageContext.request.contextPath}/searchUser" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/project/searchUser" class="menu-link">
                     <div class="text-truncate">프로젝트 인력 검색</div>
                   </a>
                 </li>
@@ -191,7 +191,7 @@
               </ul>
             </li>
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/programManagement" class="menu-link">
+              <a href="${pageContext.request.contextPath}/task/programManagement" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-server"></i>
                 <div class="text-truncate">프로그램</div>
               </a>
@@ -207,6 +207,14 @@
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
+            
+            <li class="menu-item">
+              <a href="${pageContext.request.contextPath}/project/modifyProject" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-edit"></i>
+                <div class="text-truncate">프로젝트 수정</div>
+              </a>
+            </li>
+            
             <li class="menu-item">
               <a href="${pageContext.request.contextPath}/employee/jjoin" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
@@ -248,11 +256,11 @@
               <div class="card">
                 <div class="card-header border-bottom">
                   <h5 class="card-title">프로젝트 인원 검색</h5>
-                  <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
+                  <!-- <div class="d-flex justify-content-between align-items-center row py-3 gap-3 gap-md-0">
                     <div class="col-md-4 user_role"></div>
                     <div class="col-md-4 user_plan"></div>
                     <div class="col-md-4 user_status"></div>
-                  </div>
+                  </div> -->
                 </div>
                 <div class="card-datatable table-responsive">
                   <table class="datatables-users table border-top">

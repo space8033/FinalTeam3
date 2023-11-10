@@ -176,7 +176,7 @@
 					</a>
 						<ul class="menu-sub">
 							<li class="menu-item"><a
-								href="${pageContext.request.contextPath}/projectList"
+								href="${pageContext.request.contextPath}/project/projectList"
 								class="menu-link">
 									<div class="text-truncate">프로젝트 목록</div>
 							</a></li>
@@ -185,7 +185,7 @@
 									<div class="text-truncate">프로젝트 조직도</div>
 							</a></li>
 							<li class="menu-item"><a
-								href="${pageContext.request.contextPath}/searchUser"
+								href="${pageContext.request.contextPath}/project/searchUser"
 								class="menu-link">
 									<div class="text-truncate">프로젝트 인력 검색</div>
 							</a></li>
@@ -221,7 +221,7 @@
 							</a></li>
 						</ul></li>
 					<li class="menu-item active"><a
-						href="${pageContext.request.contextPath}/programManagement"
+						href="${pageContext.request.contextPath}/task/programManagement"
 						class="menu-link"> <i class="menu-icon tf-icons bx bx-server"></i>
 							<div class="text-truncate">프로그램</div>
 					</a></li>
@@ -235,6 +235,12 @@
 						class="menu-link"> <i class="menu-icon tf-icons bx bx-file"></i>
 							<div class="text-truncate">프로젝트 등록</div>
 					</a></li>
+					<li class="menu-item">
+		              <a href="${pageContext.request.contextPath}/project/modifyProject" class="menu-link">
+		                <i class="menu-icon tf-icons bx bxs-edit"></i>
+		                <div class="text-truncate">프로젝트 수정</div>
+		              </a>
+		            </li>
 					<li class="menu-item"><a
 						href="${pageContext.request.contextPath}/employee/jjoin"
 						class="menu-link"> <i class="menu-icon tf-icons bx bx-user"></i>

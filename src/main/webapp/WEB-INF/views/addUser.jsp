@@ -136,7 +136,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                 <a href="${pageContext.request.contextPath}/projectList" class="menu-link">
+                 <a href="${pageContext.request.contextPath}/project/projectList" class="menu-link">
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
                 </li>
@@ -146,7 +146,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="${pageContext.request.contextPath}/searchUser" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/project/searchUser" class="menu-link">
                     <div class="text-truncate">프로젝트 인력 검색</div>
                   </a>
                 </li>
@@ -185,7 +185,7 @@
               </ul>
             </li>
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/programManagement" class="menu-link">
+              <a href="${pageContext.request.contextPath}/task/programManagement" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-server"></i>
                 <div class="text-truncate">프로그램</div>
               </a>
@@ -201,8 +201,16 @@
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
+            
+            <li class="menu-item">
+              <a href="${pageContext.request.contextPath}/project/modifyProject" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-edit"></i>
+                <div class="text-truncate">프로젝트 수정</div>
+              </a>
+            </li>
+            
             <li class="menu-item active">
-              <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
+              <a href="${pageContext.request.contextPath}/employee/addUser" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
               </a>
