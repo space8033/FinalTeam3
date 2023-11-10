@@ -13,5 +13,7 @@ public class AlarmResponse {
 	private int alarm_typeNo;
 	private int empinfo_no;
 	private String emp_name;
+	private String alarm_toast;
+
 
 }

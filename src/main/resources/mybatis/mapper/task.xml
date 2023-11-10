@@ -85,4 +85,34 @@
 	<delete id="deleteProgram" parameterType="int">
 		delete from task where task_no = #{task_no}
 	</delete>
+	
+	<select id="selectRecentTask" resultType="RecentTask" parameterType="Map">
+		<![CDATA[
+		    SELECT task_no, task_name, task_startdate
+		    FROM (
+		        SELECT task_no, task_name, task_startdate
+		        FROM task
+		        where task_type = 'Business'
+		        and project_no = #{project_no}
+		        and emp_no = #{emp_no}
+		        ORDER BY task_no DESC
+		    )
+		    WHERE ROWNUM = 1
+		]]>
+	</select>
+
+	<select id="selectRecentPersonalTask" resultType="RecentTask" parameterType="Map">
+		<![CDATA[
+		    SELECT task_no, task_name, task_startdate
+		    FROM (
+		        SELECT task_no, task_name, task_startdate
+		        FROM task
+		        where task_type != 'Business'
+		        and project_no = #{project_no}
+		        and emp_no = #{emp_no}
+		        ORDER BY task_no DESC
+		    )
+		    WHERE ROWNUM = 1
+		]]>
+	</select>
 </mapper>

@@ -152,10 +152,15 @@ public class ChatServiceImpl implements ChatService {
 
 	@Override
 	public int getEmpInfoNo(ChatMessage chatmsg) {
-		//log.info(chatmsg+"먼디?");
+		log.info(chatmsg+"먼디?");
 		int empInfoNo = chatDao.selectEmpInfoNo(chatmsg);
-		//log.info(empInfoNo+"머가두개임");
+		log.info(empInfoNo+"머가두개임");
 		return empInfoNo;
+	}
+
+	@Override
+	public ChatMessage getChatMessage(int chatmsgNo) {
+		return chatDao.selectLastMsg(chatmsgNo);
 	}
 	
 }
