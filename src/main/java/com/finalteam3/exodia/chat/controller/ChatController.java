@@ -81,18 +81,18 @@ public class ChatController {
 	public String chatRoom(HttpSession session, @RequestParam(name= "emp_no", required=false) String emp_no, Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
-		
+		log.info(emp_no+"누가 널이지?");
 		//내정보
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
 	
 		
+		
+		
 		//채팅방정보
 		int empNo = Integer.parseInt(emp_no);
 		EmpNote buddy = chatService.getEmpInfo(empNo);
 		model.addAttribute("buddy", buddy);
-		
-		
 		
 		ChatParticipant chatParticipant = new ChatParticipant();
 		chatParticipant.setEmpInfo_no1(buddy.getEmpinfo_no());
