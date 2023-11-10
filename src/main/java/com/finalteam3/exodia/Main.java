@@ -149,9 +149,6 @@ public class Main {
     @PostMapping("/noticeListJson2")
     public List<Notice> noticeListJson2() {
         // 이 메서드에서 데이터를 반환하면서 리디렉션을 처리
-       
-		
-		
         List<Notice> data = noticeService.getMainNoticeList();
         
         log.info("데이터 data 어떻게 나와? : " + data);
