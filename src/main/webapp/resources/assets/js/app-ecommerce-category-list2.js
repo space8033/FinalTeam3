@@ -43,7 +43,6 @@ $(function () {
   }
 
   // Customers List Datatable
-  console.log(empinfo_no);
   
   if (dt_category_list_table.length) {
     var dt_category = dt_category_list_table.DataTable({
@@ -76,31 +75,17 @@ $(function () {
           }
         },
         {
-          // For Checkboxes
-          targets: 1,
-          orderable: false,
-          searchable: false,
-          responsivePriority: 4,
-          checkboxes: true,
-          render: function () {
-            return '<input type="checkbox" class="dt-checkboxes form-check-input">';
-          },
-          checkboxes: {
-            selectAllRender: '<input type="checkbox" class="form-check-input">'
-          }
-        },
-        {
           // Categories and Category Detail
-          targets: 2,
+          targets: 1,
           responsivePriority: 2,
           render: function (data, type, full, meta) {
             var $name = full['project_name'];
             var $row_output =
               '<div class="d-flex align-items-center">' +
               '<div class="d-flex flex-column justify-content-center">' +
-              '<span class="text-body text-wrap fw-medium">' +
+              '<a class="text-body text-wrap fw-medium" href="#">' +
               $name +
-              '</span>' +
+              '</a>' +
               '</div>' +
               '</div>';
             return $row_output;
@@ -108,37 +93,31 @@ $(function () {
         },
         {
           // Total products
-          targets: 3,
+          targets: 2,
           responsivePriority: 3,
           render: function (data, type, full, meta) {
             var $total_products = full['project_memberCount'];
-            return '<div class="text-sm-end">' + $total_products + '</div>';
+            return '<div class="text-sm-start">' + $total_products + '</div>';
           }
         },
         {
           // Total Earnings
-          targets: 4,
+          targets: 3,
           orderable: false,
           render: function (data, type, full, meta) {
             var $total_earnings = full['project_period'];
-            return "<div class='fw-medium text-sm-end'>" + $total_earnings + '</div';
+            return "<div class='fw-medium text-sm-start'>" + $total_earnings + '</div';
           }
         },
-        /*{
-          // Actions
-          targets: -1,
-          title: '삭제',
-          searchable: false,
-          orderable: false,
-          render: function (data, type, full, meta) {
-            return (
-              '<div class="d-flex align-items-sm-center justify-content-sm-center">' +
-              '<button class="btn btn-sm btn-icon delete-record mx-2"><i class="bx bx-trash"></i></button>' +
-             
-              '</div>'
-            );
-          }
-        }*/
+        {
+        	// Total Earnings
+        	targets: 4,
+        	orderable: false,
+        	render: function (data, type, full, meta) {
+        		var $client = full['project_client'];
+        		return "<div class='fw-medium text-sm-start'>" + $client + '</div';
+        	}
+        }
       ],
       order: [2, 'desc'], //set any columns order asc/desc
       dom:
@@ -156,17 +135,7 @@ $(function () {
         search: '',
         searchPlaceholder: '프로젝트 검색'
       },
-      // Button for offcanvas
-      buttons: [
-        {
-          text: '<i class="bx me-0 me-sm-1"></i>프로젝트 편집',
-          className: 'add-new btn btn-primary ms-2',
-          attr: {
-            'data-bs-toggle': 'offcanvas',
-            'data-bs-target': '#offcanvasEcommerceCategoryList'
-          }
-        }
-      ],
+     
       // For responsive popup
       responsive: {
         details: {

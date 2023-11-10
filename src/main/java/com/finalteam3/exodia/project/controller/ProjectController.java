@@ -69,7 +69,6 @@ public class ProjectController {
 	@PostMapping("/projectList")
 	@ResponseBody
 	public List<ProjectListResponse> getProjectList(@RequestParam int empinfo_no) {
-		log.info("ㅇ라ㅣㄴ어미라ㅓㅁㅇ니ㅏㄹ" + empinfo_no);
 		List<ProjectListResponse> list = projectService.getAllProjectList(empinfo_no);
 		log.info("dfasdgasga" + list.toString());
 		return list;
