@@ -149,7 +149,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="${pageContext.request.contextPath}/projectList" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/project/projectList" class="menu-link">
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
                 </li>
@@ -159,7 +159,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="${pageContext.request.contextPath}/searchUser" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/project/searchUser" class="menu-link">
                     <div class="text-truncate">프로젝트 인력 검색</div>
                   </a>
                 </li>
@@ -198,7 +198,7 @@
               </ul>
             </li>
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/programManagement" class="menu-link">
+              <a href="${pageContext.request.contextPath}/task/programManagement" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-server"></i>
                 <div class="text-truncate">프로그램</div>
               </a>
@@ -214,6 +214,14 @@
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
+            
+            <li class="menu-item">
+              <a href="${pageContext.request.contextPath}/project/modifyProject" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-edit"></i>
+                <div class="text-truncate">프로젝트 수정</div>
+              </a>
+            </li>
+            
             <li class="menu-item">
               <a href="${pageContext.request.contextPath}/employee/jjoin" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
@@ -251,24 +259,25 @@
               <div class="row">
 				<div style="width:65%;">							
 					<!-- 공지사항 -->
-					<div class="card">
-						<div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%; padding-top:1.625rem;">
-						    <div class="card-datatable table-responsive">
-			                  <table id="noticeTable" class="datatables-products table border-top">
-			                    <thead>
-			                      <tr>
-			                        <th></th>
-			                        <th>번호</th>
-			                        <th>제목</th>
-			                        <th>작성자</th>
-			                        <th>날짜</th>
-			                      </tr>
-			                    </thead>
-			
-			                  </table>
-			                </div>
-						 </div>
-					</div>
+					<div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%; padding-top:1.625rem;">
+						
+							<div class="card">
+								    <div class="card-datatable table-responsive">
+					                  <table id="noticeTable" class="datatables-products table border-top" style="width:100%;">
+					                    <thead>
+					                      <tr>
+					                        <th>No</th>
+					                        <th>제목</th>
+					                        <th>작성자</th>
+					                        <th>날짜</th>
+					                      </tr>
+					                    </thead>
+					
+					                  </table>
+					                </div>
+								 </div>
+							
+						</div>
 					 
 					 <div class="col-md-6 col-lg-4 mb-4 mb-mb-0" style="width:100%; padding-top:1.625rem;">
 	                  <div class="card text-center" style="padding-: 1.625rem !important;">
@@ -403,6 +412,7 @@
 					 
 				</div>
 			</div>
+			
               	<div style="width:35%;">
               		<!-- 캘린더 -->
 					 <div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%;">

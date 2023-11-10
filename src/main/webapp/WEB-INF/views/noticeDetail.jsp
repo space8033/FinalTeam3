@@ -141,7 +141,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="${pageContext.request.contextPath}/projectList" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/project/projectList" class="menu-link">
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
                 </li>
@@ -151,7 +151,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="${pageContext.request.contextPath}/searchUser" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/project/searchUser" class="menu-link">
                     <div class="text-truncate">프로젝트 인력 검색</div>
                   </a>
                 </li>
@@ -206,6 +206,14 @@
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
+            
+            <li class="menu-item">
+              <a href="${pageContext.request.contextPath}/project/modifyProject" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-edit"></i>
+                <div class="text-truncate">프로젝트 수정</div>
+              </a>
+            </li>
+            
             <li class="menu-item">
               <a href="${pageContext.request.contextPath}/employee/jjoin" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
@@ -289,7 +297,7 @@
 												<span style="font-size: 12px;">${notice.notice_createdat}</span> <br/>
 											</p>
 										</div>	
-										<div class="card email-card-last mx-sm-4 mx-3 mt-4 border">																	
+										<div class="card email-card-last mx-sm-4 mx-3 mt-4 border" style="margin-bottom:1.5rem;">																	
 											<div class="card-body pt-3">
 					                            <%-- <p class="fw-medium py-2"><strong>${notice.notice_title}</strong></p> --%>
 					                            <p>
