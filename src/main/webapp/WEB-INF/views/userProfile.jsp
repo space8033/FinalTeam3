@@ -138,7 +138,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                 <a href="${pageContext.request.contextPath}/projectList" class="menu-link">
+                 <a href="${pageContext.request.contextPath}/project/projectList" class="menu-link">
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
                 </li>
@@ -148,7 +148,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="${pageContext.request.contextPath}/searchUser" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/project/searchUser" class="menu-link">
                     <div class="text-truncate">프로젝트 인력 검색</div>
                   </a>
                 </li>
@@ -187,7 +187,7 @@
               </ul>
             </li>
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/programManagement" class="menu-link">
+              <a href="${pageContext.request.contextPath}/task/programManagement" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-server"></i>
                 <div class="text-truncate">프로그램</div>
               </a>
@@ -203,6 +203,14 @@
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
+            
+            <li class="menu-item">
+              <a href="${pageContext.request.contextPath}/project/modifyProject" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-edit"></i>
+                <div class="text-truncate">프로젝트 수정</div>
+              </a>
+            </li>
+            
             <li class="menu-item">
               <a href="${pageContext.request.contextPath}/employee/jjoin" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
@@ -337,34 +345,108 @@
                       </ul>
                     </div>
                   </div>
-                  <!--/ About User -->
-                  <!-- Profile Overview -->
-                   <!-- Teams -->
-                    
-                    <!--/ Teams -->
-                  <!--/ Profile Overview -->
+
                 </div>
                 <div class="col-xl-8 col-lg-7 col-md-7">
                   
                   <div class="row">
-                    
-                   
-                    <div class="card mb-4">
-	                    <h5 class="card-header mt-2">프로젝트 리스트</h5>
-	                    <div class="table-responsive mb-3">
-	                      <table class="table datatable-project">
-	                        <thead class="table-light">
-	                          <tr>
-	                            <th></th>
-	                            <th>프로젝트명</th>
-	                            <th class="text-nowrap">총 업무</th>
-	                            <th>진행율</th>
-	                            <th></th>
-	                          </tr>
-	                        </thead>
-	                      </table>
+					<div class="col-xl-12 mb-4 mb-xl-0">
+	                  <div class="card">
+	                    <h5 class="card-header">타임라인</h5>
+	                    <div class="card-body">
+	                      <ul class="timeline">
+	                        <li class="timeline-item timeline-item-transparent">
+	                          <span class="timeline-point-wrapper">
+	                          	<span class="timeline-point timeline-point-danger"> <!-- success, danger, info, warning 있음-->
+	                          	</span>
+	                          </span>
+	                          <div class="timeline-event">
+	                            <div class="timeline-header border-bottom mb-3">
+	                              <h6 class="mb-0">공지사항</h6>
+	                              <span class="text-muted">3rd October</span>
+	                            </div>
+	                            <div class="d-flex justify-content-between flex-wrap mb-2">
+	                              <div>
+	                                <span>Charles de Gaulle Airport, Paris</span>
+	                                <span>Heathrow Airport, London</span>
+	                              </div>
+	                              <div>
+	                                <span class="text-muted">6:30 AM</span>
+	                              </div>
+	                            </div>
+	                          </div>
+	                        </li>
+	                        
+	                        <li class="timeline-item timeline-item-transparent">
+	                          <span class="timeline-point-wrapper">
+	                          	<span class="timeline-point timeline-point-primary"> <!-- success, danger, info, warning 있음-->
+	                          	</span>
+	                          </span>
+	                          <div class="timeline-event">
+	                            <div class="timeline-header border-bottom mb-3">
+	                              <h6 class="mb-0">문의하기</h6>
+	                              <span class="text-muted">3rd October</span>
+	                            </div>
+	                            <div class="d-flex justify-content-between flex-wrap mb-2">
+	                              <div>
+	                                <span>Charles de Gaulle Airport, Paris</span>
+	                                <span>Heathrow Airport, London</span>
+	                              </div>
+	                              <div>
+	                                <span class="text-muted">6:30 AM</span>
+	                              </div>
+	                            </div>
+	                          </div>
+	                        </li>
+	                        <li class="timeline-item timeline-item-transparent">
+	                          <span class="timeline-point-wrapper">
+	                          	<span class="timeline-point timeline-point-warning"> <!-- success, danger, info, warning 있음-->
+	                          	</span>
+	                          </span>
+	                          <div class="timeline-event">
+	                            <div class="timeline-header border-bottom mb-3">
+	                              <h6 class="mb-0">일정관리</h6>
+	                              <span class="text-muted">3rd October</span>
+	                            </div>
+	                            <div class="d-flex justify-content-between flex-wrap mb-2">
+	                              <div>
+	                                <span>Charles de Gaulle Airport, Paris</span>
+	                                <span>Heathrow Airport, London</span>
+	                              </div>
+	                              <div>
+	                                <span class="text-muted">6:30 AM</span>
+	                              </div>
+	                            </div>
+	                          </div>
+	                        </li>
+	                        <li class="timeline-item timeline-item-transparent">
+	                          <span class="timeline-point-wrapper">
+	                          	<span class="timeline-point timeline-point-success"> <!-- success, danger, info, warning 있음-->
+	                          	</span>
+	                          </span>
+	                          <div class="timeline-event">
+	                            <div class="timeline-header border-bottom mb-3">
+	                              <h6 class="mb-0">프로그램</h6>
+	                              <span class="text-muted">3rd October</span>
+	                            </div>
+	                            <div class="d-flex justify-content-between flex-wrap mb-2">
+	                              <div>
+	                                <span>Charles de Gaulle Airport, Paris</span>
+	                                <span>Heathrow Airport, London</span>
+	                              </div>
+	                              <div>
+	                                <span class="text-muted">6:30 AM</span>
+	                              </div>
+	                            </div>
+	                          </div>
+	                        </li>
+	                        <li class="timeline-end-indicator">
+	                          <i class="bx bx-check-circle"></i>
+	                        </li>
+	                      </ul>
 	                    </div>
-                    </div>
+	                  </div>
+                	</div>                   
                   </div>
                   <!-- Projects table -->
                   
@@ -376,9 +458,7 @@
             </div>
             <!-- / Content -->
 
-            <!-- Footer -->
-            
-            <!-- / Footer -->
+
 
             <div class="content-backdrop fade"></div>
           </div>

@@ -8,15 +8,7 @@
 
 const commentEditor = document.querySelector('.comment-editor');
 
-if (commentEditor) {
-  new Quill(commentEditor, {
-    modules: {
-      toolbar: '.comment-toolbar'
-    },
-    placeholder: '프로젝트 개요.',
-    theme: 'snow'
-  });
-}
+
 
 // Datatable (jquery)
 
@@ -33,6 +25,7 @@ $(function () {
     headingColor = config.colors.headingColor;
   }
 
+  var empinfo_no = $("#empinfoNo").val();
   // Variable declaration for category list table
   var dt_category_list_table = $('.datatables-category-list');
 
@@ -50,21 +43,24 @@ $(function () {
   }
 
   // Customers List Datatable
-
+  
   if (dt_category_list_table.length) {
     var dt_category = dt_category_list_table.DataTable({
       ajax: {
-    	  url: '',
+    	  url: '/exodia/project/projectList',
+    	  data: {
+    		  empinfo_no : empinfo_no
+    	  },
+    	  type: 'post',
     	  dataSrc: ''// JSON file to add data
       },
       columns: [
         // columns according to JSON
         { data: '' },
-        { data: 'id' },
-        { data: 'categories' },
-        { data: 'total_products' },
-        { data: 'total_earnings' },
-        { data: '' }
+        { data: 'project_name' },
+        { data: 'project_memberCount' },
+        { data: 'project_period' },
+        { data: 'project_client' }
       ],
       columnDefs: [
         {
@@ -79,63 +75,17 @@ $(function () {
           }
         },
         {
-          // For Checkboxes
-          targets: 1,
-          orderable: false,
-          searchable: false,
-          responsivePriority: 4,
-          checkboxes: true,
-          render: function () {
-            return '<input type="checkbox" class="dt-checkboxes form-check-input">';
-          },
-          checkboxes: {
-            selectAllRender: '<input type="checkbox" class="form-check-input">'
-          }
-        },
-        {
           // Categories and Category Detail
-          targets: 2,
+          targets: 1,
           responsivePriority: 2,
           render: function (data, type, full, meta) {
-            var $name = full['categories'],
-              $category_detail = full['category_detail'],
-              $image = full['cat_image'],
-              $id = full['id'];
-            if ($image) {
-              // For Product image
-              var $output =
-                '<img src="' +
-                assetsPath +
-                'img/ecommerce-images/' +
-                $image +
-                '" alt="Product-' +
-                $id +
-                '" class="rounded-2">';
-            } else {
-              // For Product badge
-              var stateNum = Math.floor(Math.random() * 6);
-              var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
-              var $state = states[stateNum],
-                $name = full['category_detail'],
-                $initials = $name.match(/\b\w/g) || [];
-              $initials = (($initials.shift() || '') + ($initials.pop() || '')).toUpperCase();
-              $output = '<span class="avatar-initial rounded-2 bg-label-' + $state + '">' + $initials + '</span>';
-            }
-            // Creates full output for Categories and Category Detail
+            var $name = full['project_name'];
             var $row_output =
               '<div class="d-flex align-items-center">' +
-              '<div class="avatar-wrapper me-2 rounded-2 bg-label-secondary">' +
-              '<div class="avatar">' +
-              $output +
-              '</div>' +
-              '</div>' +
               '<div class="d-flex flex-column justify-content-center">' +
-              '<span class="text-body text-wrap fw-medium">' +
+              '<a class="text-body text-wrap fw-medium" href="#">' +
               $name +
-              '</span>' +
-              '<span class="text-muted text-truncate mb-0 d-none d-sm-block"><small>' +
-              $category_detail +
-              '</small></span>' +
+              '</a>' +
               '</div>' +
               '</div>';
             return $row_output;
@@ -143,36 +93,30 @@ $(function () {
         },
         {
           // Total products
-          targets: 3,
+          targets: 2,
           responsivePriority: 3,
           render: function (data, type, full, meta) {
-            var $total_products = full['total_products'];
-            return '<div class="text-sm-end">' + $total_products + '</div>';
+            var $total_products = full['project_memberCount'];
+            return '<div class="text-sm-start">' + $total_products + '</div>';
           }
         },
         {
           // Total Earnings
-          targets: 4,
+          targets: 3,
           orderable: false,
           render: function (data, type, full, meta) {
-            var $total_earnings = full['total_earnings'];
-            return "<div class='fw-medium text-sm-end'>" + $total_earnings + '</div';
+            var $total_earnings = full['project_period'];
+            return "<div class='fw-medium text-sm-start'>" + $total_earnings + '</div';
           }
         },
         {
-          // Actions
-          targets: -1,
-          title: '삭제',
-          searchable: false,
-          orderable: false,
-          render: function (data, type, full, meta) {
-            return (
-              '<div class="d-flex align-items-sm-center justify-content-sm-center">' +
-              '<button class="btn btn-sm btn-icon delete-record mx-2"><i class="bx bx-trash"></i></button>' +
-             
-              '</div>'
-            );
-          }
+        	// Total Earnings
+        	targets: 4,
+        	orderable: false,
+        	render: function (data, type, full, meta) {
+        		var $client = full['project_client'];
+        		return "<div class='fw-medium text-sm-start'>" + $client + '</div';
+        	}
         }
       ],
       order: [2, 'desc'], //set any columns order asc/desc
@@ -191,17 +135,7 @@ $(function () {
         search: '',
         searchPlaceholder: '프로젝트 검색'
       },
-      // Button for offcanvas
-      buttons: [
-        {
-          text: '<i class="bx me-0 me-sm-1"></i>프로젝트 편집',
-          className: 'add-new btn btn-primary ms-2',
-          attr: {
-            'data-bs-toggle': 'offcanvas',
-            'data-bs-target': '#offcanvasEcommerceCategoryList'
-          }
-        }
-      ],
+     
       // For responsive popup
       responsive: {
         details: {

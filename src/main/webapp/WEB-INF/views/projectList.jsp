@@ -154,7 +154,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item active">
-                  <a href="${pageContext.request.contextPath}/projectList" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/project/projectList" class="menu-link">
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
                 </li>
@@ -164,7 +164,7 @@
                   </a>
                 </li>
                 <li class="menu-item">
-                  <a href="${pageContext.request.contextPath}/searchUser" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/project/searchUser" class="menu-link">
                     <div class="text-truncate">프로젝트 인력 검색</div>
                   </a>
                 </li>
@@ -203,7 +203,7 @@
               </ul>
             </li>
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/programManagement" class="menu-link">
+              <a href="${pageContext.request.contextPath}/task/programManagement" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-server"></i>
                 <div class="text-truncate">프로그램</div>
               </a>
@@ -219,6 +219,14 @@
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
+            
+            <li class="menu-item">
+              <a href="${pageContext.request.contextPath}/project/modifyProject" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-edit"></i>
+                <div class="text-truncate">프로젝트 수정</div>
+              </a>
+            </li>
+            
             <li class="menu-item">
               <a href="${pageContext.request.contextPath}/employee/jjoin" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
@@ -256,7 +264,7 @@
           <!-- Content wrapper -->
           <div class="content-wrapper">
             <!-- Content -->
-
+			<input type="hidden" value="${empinfo_no}" id="empinfoNo"/>
             <div class="container-xxl flex-grow-1 container-p-y">
               <h4 class="py-3 mx-1 mb-2"> 프로젝트 목록</h4>
 
@@ -268,99 +276,16 @@
                       <thead>
                         <tr>
                           <th></th>
-                          <th></th>
                           <th>프로젝트명</th>
-                          <th class="text-nowrap text-sm-end">투입인력 &nbsp;</th>
-                          <th class="text-nowrap text-sm-end">기간</th>
-                          <th class="text-lg-center">삭제</th>
+                          <th>투입인력 </th>
+                          <th>기간</th>
+                          <th>고객사</th>
                         </tr>
                       </thead>
                     </table>
                   </div>
                 </div>
-                <!-- Offcanvas to add new customer -->
-                <div
-                  class="offcanvas offcanvas-end"
-                  tabindex="-1"
-                  id="offcanvasEcommerceCategoryList"
-                  aria-labelledby="offcanvasEcommerceCategoryListLabel">
-                  <!-- Offcanvas Header -->
-                  <div class="offcanvas-header py-4">
-                    <h5 id="offcanvasEcommerceCategoryListLabel" class="offcanvas-title">프로젝트 편집</h5>
-                    <button
-                      type="button"
-                      class="btn-close bg-label-secondary text-reset"
-                      data-bs-dismiss="offcanvas"
-                      aria-label="Close"></button>
-                  </div>
-                  <!-- Offcanvas Body -->
-                  <div class="offcanvas-body border-top">
-                    <form class="pt-0" id="eCommerceCategoryListForm" onsubmit="return true">
-                      <!-- Title -->
-                      <div class="mb-3">
-                        <label class="form-label" for="ecommerce-category-title">프로젝트명</label>
-                        <input
-                          type="text"
-                          class="form-control"
-                          id="ecommerce-category-title"
-                          placeholder="프로젝트명"
-                          name="categoryTitle"
-                          aria-label="category title" />
-                      </div>
-                      <!-- Slug -->
-                      <div class="mb-3">
-                        <label class="form-label" for="ecommerce-category-slug">투입 인력</label>
-                        <input
-                          type="number"
-                          id="ecommerce-category-slug"
-                          class="form-control"
-                          placeholder="21"
-                          aria-label="slug"
-                          name="slug" />
-                      </div>
-                     
-                      <!-- Description -->
-                      <div class="mb-3">
-                        <label class="form-label">프로젝트 개요</label>
-                        <div class="form-control p-0 pt-1">
-                          <div class="comment-editor border-0" id="ecommerce-category-description"></div>
-                          <div class="comment-toolbar border-0 rounded">
-                            <div class="d-flex justify-content-end">
-                              <span class="ql-formats me-0">
-                                <button class="ql-bold"></button>
-                                <button class="ql-italic"></button>
-                                <button class="ql-underline"></button>
-                                <button class="ql-list" value="ordered"></button>
-                                <button class="ql-list" value="bullet"></button>
-                                <button class="ql-link"></button>
-                                <button class="ql-image"></button>
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <!-- Status -->
-                      <div class="col-md-12 mb-2">
-                   		<label for="TagifyBasic" class="form-label">구성 팀</label>
-                  		<input id="TagifyBasic" class="form-control" name="TagifyBasic" value="개발1팀, 개발2팀, 개발3팀" />
-                      </div>
-                      <!-- Range Picker-->
-                       <div class="col-md-12 mb-3">
-                         <label for="flatpickr-range" class="form-label">프로젝트 기간</label>
-                         <input
-                           type="text"
-                           class="form-control"
-                           placeholder="YYYY-MM-DD to YYYY-MM-DD"
-                           id="flatpickr-range" />
-                       </div>
-                      <!-- Submit and reset -->
-                      <div class="mb-3">
-                        <button type="submit" class="btn btn-primary me-sm-3 me-1 data-submit">수정</button>
-                        <button type="reset" class="btn bg-label-danger" data-bs-dismiss="offcanvas">취소</button>
-                      </div>
-                    </form>
-                  </div>
-                </div>
+               
               </div>
             </div>
             <!-- / Content -->
@@ -432,11 +357,7 @@
 
     <!-- Page JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/form-layouts.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-selects.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-tagify.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-typeahead.js"></script>
-    
-    <script src="${pageContext.request.contextPath}/resources/assets/js/forms-pickers.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/projectList.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
   </body>
 </html>

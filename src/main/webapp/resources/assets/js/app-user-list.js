@@ -8,7 +8,6 @@
 $(function () {
   let borderColor, bodyBg, headingColor;
   let empNow = $("#empNow").val();
-  console.log(empNow);
   if (isDarkStyle) {
     borderColor = config.colors_dark.borderColor;
     bodyBg = config.colors_dark.bodyBg;
@@ -97,11 +96,9 @@ $(function () {
                 '</div>' +
                 '</div>' +
                 '<div class="d-flex flex-column">' +
-                '<a href="' +
-                userView +
-                '" class="text-body text-truncate"><span class="fw-medium">' +
+                '<span class="fw-medium">' +
                 $name +
-                '</span></a>' +
+                '</span>' +
                 '<small class="text-muted">' +
                 $email +
                 '</small>' +
@@ -244,8 +241,8 @@ $(function () {
             return data ? $('<table class="table"/><tbody />').append(data) : false;
           }
         }
-      },
-      initComplete: function () {
+      }
+      /*initComplete: function () {
         // Adding role filter once table initialized
         this.api()
           .columns(3)
@@ -320,7 +317,7 @@ $(function () {
                 );
               });
           });
-      }
+      }*/
     });
     // To remove default btn-secondary in export buttons
   }

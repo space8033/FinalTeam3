@@ -14,6 +14,7 @@ import com.finalteam3.exodia.chat.dto.request.ChatRoom;
 import com.finalteam3.exodia.chat.dto.response.EmpChat;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
+import com.finalteam3.exodia.employee.dto.response.ProjectEmpResponse;
 import com.finalteam3.exodia.note.dao.NoteDao;
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,7 +32,15 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public EmpNote getEmpInfo(int emp_no) {
 		
-		return employeeDao.selectEmployeeByEmpNo(emp_no);
+		
+		ProjectEmpResponse pmInfo = employeeDao.selectProjectPm(0);
+		if(pmInfo.getEmp_no() == emp_no) {
+			List<EmpNote> pmList = employeeDao.selectPM();
+			EmpNote pm = pmList.get(0);
+			return pm;
+		} else {
+			return employeeDao.selectEmployeeByEmpNo(emp_no);
+		}
 		
 	}
 
@@ -39,7 +48,7 @@ public class ChatServiceImpl implements ChatService {
 	public List<ChatMessage> getChatList(ChatParticipant chatPart) {
 		
 		Integer chatRoomNo = chatDao.selectChatRoomNo(chatPart);
-		log.info(chatRoomNo+"챗넘버못받아오는건지");
+		//log.info(chatRoomNo+"챗넘버못받아오는건지");
 		
 		if(chatRoomNo == null) {
 			ChatRoom chatRoom = new ChatRoom();
@@ -47,7 +56,7 @@ public class ChatServiceImpl implements ChatService {
 			chatDao.insertChatRoom(chatRoom);
 			
 			int chatRoom_no = chatRoom.getChatRoom_no();
-			log.info(chatRoom_no+"방번호잘가져오나");
+			//log.info(chatRoom_no+"방번호잘가져오나");
 			
 			
 			ChatMessage chatMsg = new ChatMessage();
@@ -76,6 +85,8 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public List<EmpChat> getChatEmpList(int empInfo_no) {
 		List<EmpNote> empList = employeeDao.selectEmployeeForNote();
+		List<EmpNote> empListPM = employeeDao.selectPM();
+		empList.addAll(empListPM);
 		List<EmpChat> empChatList = new ArrayList<>();
 		
 		for(EmpNote emp : empList) {
@@ -101,11 +112,11 @@ public class ChatServiceImpl implements ChatService {
 				Integer chatRoomNo = chatDao.selectChatRoomNo(chatParticipant);
 				
 				if(chatRoomNo != null) {
-					log.info(chatRoomNo+"챗룸넘버 integer");
+					//log.info(chatRoomNo+"챗룸넘버 integer");
 					
 					int chatroom_no = chatRoomNo;
 					ChatRoom room = chatDao.selectChatRoomByRoomNo(chatroom_no);
-					log.info(chatRoomNo+"챗룸넘버 int");
+					//log.info(chatRoomNo+"챗룸넘버 int");
 					empchat.setChatRoom_no(chatroom_no);
 					Integer lastMsgId = room.getChatRoom_lastMsgId();
 					if(lastMsgId != null && lastMsgId != 0) {
@@ -114,9 +125,9 @@ public class ChatServiceImpl implements ChatService {
 						chatMsg.setEmpInfo_no(emp.getEmpinfo_no());
 						int unreadCount = chatDao.countUnreadChat(chatMsg);
 						empchat.setUnreadCount(unreadCount);
-						log.info(lastMsgId+"lastMsgId int");
+						//log.info(lastMsgId+"lastMsgId int");
 						int lastMsgNo = lastMsgId;
-						log.info(lastMsgNo+"lastMsgNo int");
+						//log.info(lastMsgNo+"lastMsgNo int");
 						ChatMessage chatMessage = chatDao.selectLastMsg(lastMsgNo);
 						empchat.setLastMsgContent(chatMessage.getMessage_content());
 						empchat.setLastMsgNo(chatMessage.getChatMessage_no());
@@ -140,10 +151,10 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
-	public int getEmpInfo(ChatMessage chatmsg) {
-		log.info(chatmsg+"먼디?");
+	public int getEmpInfoNo(ChatMessage chatmsg) {
+		//log.info(chatmsg+"먼디?");
 		int empInfoNo = chatDao.selectEmpInfoNo(chatmsg);
-		log.info(empInfoNo+"머가두개임");
+		//log.info(empInfoNo+"머가두개임");
 		return empInfoNo;
 	}
 	

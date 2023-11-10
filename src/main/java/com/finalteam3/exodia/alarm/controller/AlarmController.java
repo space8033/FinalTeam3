@@ -72,7 +72,7 @@ public class AlarmController {
 				ChatMessage chatMsg = new ChatMessage();
 				chatMsg.setChatRoom_no(alarm.getAlarm_typeNo());
 				chatMsg.setEmpInfo_no(empInfo.getEmpinfo_no());
-				int empInfoNo = chatService.getEmpInfo(chatMsg);
+				int empInfoNo = chatService.getEmpInfoNo(chatMsg);
 				EmployeeInfo empInfo3 = employeeService.getEmpInfoByEmpInfoNo(empInfoNo);
 				String empInfo3Name = empInfo3.getEmpinfo_name();
 				alarmResponse.setEmp_name(empInfo3Name);

@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.project.dao.ProjectDao;
 import com.finalteam3.exodia.project.dto.request.ProjectAddRequest;
+import com.finalteam3.exodia.project.dto.response.ProjectListResponse;
 import com.finalteam3.exodia.project.dto.response.ProjectModifyResponse;
 
 import lombok.extern.slf4j.Slf4j;
@@ -104,5 +105,19 @@ public class ProjectServiceImpl implements ProjectService{
 		response.setProject_manager(empinfo_no);
 		
 		projectDao.updateProject(response);
+	}
+
+	@Override
+	public List<ProjectListResponse> getAllProjectList(int empinfo_no) {
+		List<ProjectListResponse> list = projectDao.selectProjectList(empinfo_no);
+		for(ProjectListResponse plr : list) {
+			int totalEmp = employeeDao.countProjectEmp(plr.getProject_no());
+			plr.setProject_memberCount(totalEmp);
+			
+			String project_period = plr.getProject_startdate() + " ~ " + plr.getProject_enddate();
+			plr.setProject_period(project_period);
+		}
+		
+		return list;
 	}
 }

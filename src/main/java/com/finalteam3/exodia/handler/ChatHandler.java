@@ -104,7 +104,12 @@ public class ChatHandler extends TextWebSocketHandler{
 				
 				int numberOfSessions = sessionList.size();
 				System.out.println("읽어야돼 현재 세션 개수: " + numberOfSessions);
+				chatDao.updateAllUnCheckMsg(chatMessage.getChatRoom_no());
 			
+				TextMessage textMessage = new TextMessage("읽음");
+				for(WebSocketSession sess : roomList.get(chatMessage.getChatRoom_no())) {
+					sess.sendMessage(textMessage);
+				}
 				log.info(roomList.get(chatMessage.getChatRoom_no()).toString()+"상대방 접속 까지 완료");
 				
 				
@@ -114,14 +119,11 @@ public class ChatHandler extends TextWebSocketHandler{
 			else if(roomList.get(chatMessage.getChatRoom_no()) != null && !chatMessage.getMessage_content().equals("ENTER-CHAT")) {
 				
 				
-				TextMessage textMessage = new TextMessage(chatMessage.getEmpInfo_no()+","+chatMessage.getMessage_content());
 				
-				int numberOfSessions = sessionList.size();
+				
+				int numberOfSessions = roomList.get(chatMessage.getChatRoom_no()).size();
 				System.out.println("현재 세션 개수: " + numberOfSessions);
 				
-				
-				
-
 				
 				log.info(roomList.get(chatMessage.getChatRoom_no()).toString()+"채팅방 얼마나 있나봅시다..ㅜ");
 				
@@ -135,6 +137,7 @@ public class ChatHandler extends TextWebSocketHandler{
 					
 					for(WebSocketSession sess : roomList.get(chatMessage.getChatRoom_no())) {
 						log.info("읽으면 안돼!");
+						TextMessage textMessage = new TextMessage("안읽음"+","+chatMessage.getEmpInfo_no()+","+chatMessage.getMessage_content());
 						sess.sendMessage(textMessage);
 					}
 					
@@ -143,6 +146,10 @@ public class ChatHandler extends TextWebSocketHandler{
 					//알람 세션에 두명있을때랑 한명있을떄 나누기
 					for(WebSocketSession sess : roomList.get(chatMessage.getChatRoom_no())) {
 						log.info("읽어야 돼!");
+						
+						chatDao.updateAllUnCheckMsg(chatMessage.getChatRoom_no());
+						
+						TextMessage textMessage = new TextMessage("읽음"+","+chatMessage.getEmpInfo_no()+","+chatMessage.getMessage_content());
 						sess.sendMessage(textMessage);
 					}
 					
@@ -173,10 +180,47 @@ public class ChatHandler extends TextWebSocketHandler{
 		log.info("소켓 연결 끊김 현재 접속자수:" + i);
 		  // sessionList에 session이 있다면
           // 해당 session의 방 번호를 가져와서, 방을 찾고, 그 방의 ArrayList<session>에서 해당 session을 지운다.
-		if(sessionList.get(session) != null) {
+		/*if(sessionList.get(session) != null) {
 			roomList.get(sessionList.get(session)).remove(session);
 			sessionList.remove(session);
+			log.info(roomList.toString()+"채팅방 얼마나 있나봅시다..ㅜ");
+			log.info(sessionList.toString()+"채팅방 얼마나 있나봅시다..ㅜ");
 		}
+		*/
+		
+		
+		if (sessionList.containsKey(session)) {
+	        int roomNumber = sessionList.get(session);
+
+	        // 해당 방 번호에 대한 세션 목록을 가져옴
+	        ArrayList<WebSocketSession> roomSessions = roomList.get(roomNumber);
+
+	        // 해당 세션을 방에서 제거
+	        roomList.get(sessionList.get(session)).remove(session);
+	        if (roomSessions != null) {
+	            roomSessions.remove(session);
+
+	            // 세션이 모두 나갔다면 방도 삭제
+	            if (roomSessions.isEmpty()) {
+	                roomList.remove(roomNumber);
+	                log.info("방 번호 " + roomNumber + "가 모두 나가서 방이 삭제되었습니다.");
+	            }
+	        }
+	        sessionList.remove(session);
+
+	        log.info(roomList.toString() + "채팅방 얼마나 있나봅시다..ㅜ");
+	        log.info(sessionList.toString() + "채팅방 얼마나 있나봅시다..ㅜ");
+	    }
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
 
 	}
 }

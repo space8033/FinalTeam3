@@ -535,6 +535,8 @@ public class NoteServiceImpl implements NoteService{
 	@Override
 	public List<EmpNote> getEmpList() {
 		List<EmpNote> empList = employeeDao.selectEmployeeForNote();
+		List<EmpNote> empListPM = employeeDao.selectPM();
+		empList.addAll(empListPM);
 		
 		
 		
