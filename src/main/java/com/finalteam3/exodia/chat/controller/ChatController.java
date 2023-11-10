@@ -97,16 +97,10 @@ public class ChatController {
 		ChatParticipant chatParticipant = new ChatParticipant();
 		chatParticipant.setEmpInfo_no1(buddy.getEmpinfo_no());
 		chatParticipant.setEmpInfo_no2(empInfo.getEmpinfo_no());
-		log.info(chatParticipant.toString()+"구성원에 이상한게 들어가는건지");
 		
 		List<ChatMessage> chatMsg = chatService.getChatList(chatParticipant);
 		
-		for(ChatMessage chatMsg1 : chatMsg) {
-			chatMsg1.getMessage_content();
-			log.info(chatMsg1.getMessage_content()+"컨텐트 다있냐");
-			
-			
-		}
+		
 		model.addAttribute("chatMsg", chatMsg);
 		
 		
