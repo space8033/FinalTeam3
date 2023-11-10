@@ -375,4 +375,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 	public void deleteEmp(int emp_no) {
 		employeeDao.deleteEmp(emp_no);
 	}
+
+	@Override
+	public List<String> getTeamNames(int project_no) {
+		List<String> list = employeeDao.selectTeamname(project_no);
+		return list;
+	}
 }

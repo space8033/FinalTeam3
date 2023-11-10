@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html
@@ -321,16 +322,42 @@
                               <input type="text" class="form-control" id="ecommerce-product-name" placeholder="제목을 입력해 주세요" name="noticeTitle" aria-label="Notice title" />
                             </div>
                             <div class="col-4 mb-3">
-                              <label class="form-label" for="form-repeater-1-1">팀</label>
-                              <select id="form-repeater-1-1" class="select2 form-select" data-placeholder="소속 팀">
-                                <option value="">소속 팀</option>
-                                <option value="size">개발1팀</option>
-                                <option value="color">개발2팀</option>
-                                <option value="weight">유지보수1팀</option>
-                                <option value="smell">유지보수2팀</option>
+                              <label class="form-label" for="selectpickerLiveSearch">팀</label>
+                              <select id="selectpickerLiveSearch" class="selectpicker form-select" data-style="btn-default"
+		                            data-live-search="true">
+		                            <option data-tokens="ketchup mustard"  value="">팀을 선택해주세요</option>
+                                <c:forEach var="teamName" items="${tNames}">
+		                            <option data-tokens="ketchup mustard">${teamName}</option>
+	                            </c:forEach>
                               </select>
                             </div>
                           </div>
+                          <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+                          <script>
+						    $(document).ready(function () {
+						    	// selectpickerLiveSearch 변경 감지
+						        $('#selectpickerLiveSearch').change(function () {
+						            // 선택한 팀 이름 가져오기
+						            var selectedTeam = $(this).val();
+
+						            // 기존 입력된 값 가져오기
+						            var currentInputValue = $('#ecommerce-product-name').val();
+
+						            // 기존에 있던 팀 이름 제거 (앞 뒤 공백도 제거)
+						            var currentTeam = currentInputValue.split(' ')[0].trim();
+						            var newValue = currentInputValue.replace(currentTeam, '');
+
+						            // 맨 앞과 맨 뒤에 [ ] 추가
+						            var formattedTeam = selectedTeam ? '[' + selectedTeam + ']' : '';
+
+						            // 새로운 값 설정 (팀 이름이 맨 앞에 추가됨)
+						            newValue = formattedTeam + ' ' + newValue.trim();
+
+						            // 팀 이름을 input 칸에 설정
+						            $('#ecommerce-product-name').val(newValue);
+						        });
+						    });
+						  </script>
                           <!-- Description -->
                           <div>
                             <label class="form-label">내용</label>
@@ -411,7 +438,6 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
-
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/jquery/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/popper/popper.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/bootstrap.js"></script>
