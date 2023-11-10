@@ -259,24 +259,25 @@
               <div class="row">
 				<div style="width:65%;">							
 					<!-- 공지사항 -->
-					<div class="card">
-						<div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%; padding-top:1.625rem;">
-						    <div class="card-datatable table-responsive">
-			                  <table id="noticeTable" class="datatables-products table border-top">
-			                    <thead>
-			                      <tr>
-			                        <th></th>
-			                        <th>번호</th>
-			                        <th>제목</th>
-			                        <th>작성자</th>
-			                        <th>날짜</th>
-			                      </tr>
-			                    </thead>
-			
-			                  </table>
-			                </div>
-						 </div>
-					</div>
+					<div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%; padding-top:1.625rem;">
+						
+							<div class="card">
+								    <div class="card-datatable table-responsive">
+					                  <table id="noticeTable" class="datatables-products table border-top" style="width:100%;">
+					                    <thead>
+					                      <tr>
+					                        <th>No</th>
+					                        <th>제목</th>
+					                        <th>작성자</th>
+					                        <th>날짜</th>
+					                      </tr>
+					                    </thead>
+					
+					                  </table>
+					                </div>
+								 </div>
+							
+						</div>
 					 
 					 <div class="col-md-6 col-lg-4 mb-4 mb-mb-0" style="width:100%; padding-top:1.625rem;">
 	                  <div class="card text-center" style="padding-: 1.625rem !important;">
@@ -411,6 +412,7 @@
 					 
 				</div>
 			</div>
+			
               	<div style="width:35%;">
               		<!-- 캘린더 -->
 					 <div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%;">
