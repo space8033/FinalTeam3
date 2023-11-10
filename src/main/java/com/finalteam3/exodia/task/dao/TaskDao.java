@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.finalteam3.exodia.task.dto.request.ProgramModifyRequest;
 import com.finalteam3.exodia.task.dto.request.ProgramRegisterRequest;
 import com.finalteam3.exodia.task.dto.response.ProgramListResponse;
+import com.finalteam3.exodia.task.dto.response.RecentTask;
 import com.finalteam3.exodia.task.dto.response.TeamTaskResponse;
 
 @Mapper
@@ -22,4 +23,6 @@ public interface TaskDao {
 	public int countTaskByEmpNo(Map<String, Object> map);
 	public int countCompleteByEmpNo(Map<String, Object> map);
 	public List<TeamTaskResponse> selectTeamTaskDetail(Map<String, Object> map);
+	public RecentTask selectRecentTask(Map<String, Object> map);
+	public RecentTask selectRecentPersonalTask(Map<String, Object> map);
 }

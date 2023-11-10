@@ -15,6 +15,7 @@
 		<typeAlias alias="ProjectEmpResponse" type="com.finalteam3.exodia.employee.dto.response.ProjectEmpResponse" />
 		<typeAlias alias="EmpNote" type="com.finalteam3.exodia.employee.dto.response.EmpNote" />
 		<typeAlias alias="TeamBasicResponse" type="com.finalteam3.exodia.employee.dto.response.TeamBasicResponse" />
+		<typeAlias alias="TimeLineResponse" type="com.finalteam3.exodia.employee.dto.response.TimeLineResponse" />
 		<typeAlias alias="Note" type="com.finalteam3.exodia.note.dto.request.Note" />
 		<typeAlias alias="NoteRead" type="com.finalteam3.exodia.note.dto.request.NoteRead" />
 		<typeAlias alias="NoteAll" type="com.finalteam3.exodia.note.dto.NoteAll" />
@@ -22,6 +23,7 @@
 		<typeAlias alias="ProjectListResponse" type="com.finalteam3.exodia.project.dto.response.ProjectListResponse" />
 		<typeAlias alias="ProjectModifyResponse" type="com.finalteam3.exodia.project.dto.response.ProjectModifyResponse" />
 		<typeAlias alias="Notice" type="com.finalteam3.exodia.notice.dto.Notice" />
+		<typeAlias alias="RecentNotice" type="com.finalteam3.exodia.notice.dto.RecentNotice" />
 		<typeAlias alias="Calendar" type="com.finalteam3.exodia.calendar.dto.request.CalendarRequest" />
 		<typeAlias alias="CalendarResponse" type="com.finalteam3.exodia.calendar.dto.response.CalendarResponse" />
 		<typeAlias alias="Media" type="com.finalteam3.exodia.media.dto.MediaDto" />
@@ -33,6 +35,7 @@
 		<typeAlias alias="ProgramListResponse" type="com.finalteam3.exodia.task.dto.response.ProgramListResponse" />
 		<typeAlias alias="ProgramModifyRequest" type="com.finalteam3.exodia.task.dto.request.ProgramModifyRequest" />
 		<typeAlias alias="TeamTaskResponse" type="com.finalteam3.exodia.task.dto.response.TeamTaskResponse" />
+		<typeAlias alias="RecentTask" type="com.finalteam3.exodia.task.dto.response.RecentTask" />
 		<typeAlias alias="ChatRoom" type="com.finalteam3.exodia.chat.dto.request.ChatRoom" />
 		<typeAlias alias="ChatMessage" type="com.finalteam3.exodia.chat.dto.request.ChatMessage" />
 		<typeAlias alias="ChatParticipant" type="com.finalteam3.exodia.chat.dto.request.ChatParticipant" />

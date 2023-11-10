@@ -1,7 +1,12 @@
 package com.finalteam3.exodia.notice.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -64,7 +69,22 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public List<Notice> getMainNoticeList() {
 		List<Notice> list = noticeDao.selectNoticeAll();
-		return list;
+		
+		// notice_no를 기준으로 내림차순 정렬
+        List<Notice> sortedList = list.stream()
+                .sorted(Comparator.comparingInt(Notice::getNotice_no).reversed())
+                // 상위 5개 추출
+                .limit(3)
+                // 다시 정렬
+                .sorted(Comparator.comparingInt(Notice::getNotice_no))
+                .collect(Collectors.toList());
+
+        // 최대 5개의 요소만 추출
+        List<Notice> top5List = sortedList.subList(0, Math.min(5, sortedList.size()));
+
+        // 새로운 리스트에 복사
+        List<Notice> list2 = new ArrayList<>(top5List);
+	    return list2;
 	}
 	
 }

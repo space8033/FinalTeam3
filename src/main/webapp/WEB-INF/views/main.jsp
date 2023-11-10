@@ -255,30 +255,55 @@
           <div class="content-wrapper">
             <!-- Content -->
 
-            <div class="container-xxl flex-grow-1 container-p-y" >
+            <div class="container-xxl flex-grow-1" >
               <div class="row">
 				<div style="width:65%;">							
 					<!-- 공지사항 -->
 					<div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%; padding-top:1.625rem;">
-						
-							<div class="card">
-								    <div class="card-datatable table-responsive">
-					                  <table id="noticeTable" class="datatables-products table border-top" style="width:100%;">
-					                    <thead>
-					                      <tr>
-					                        <th>No</th>
-					                        <th>제목</th>
-					                        <th>작성자</th>
-					                        <th>날짜</th>
-					                      </tr>
-					                    </thead>
-					
-					                  </table>
-					                </div>
-								 </div>
-							
-						</div>
+						<div class="card">
+						    <div class="card-datatable table-responsive">
+			                  <table id="noticeTable" class="datatables-products table border-top" style="width:100%;">
+			                    <thead>
+			                      <th>최신 공지사항</th>
+			                      <th></th>
+			                      <th></th>
+			                      <th></th>
+			                      <tr>
+			                        <th>No</th>
+			                        <th>제목</th>
+			                        <th>작성자</th>
+			                        <th>날짜</th>
+			                      </tr>
+			                    </thead>
+			
+			                  </table>
+			                </div>
+						 </div>		
+					  </div>
+					  
+					  <!-- 캘린더 -->
+					 <div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%;">
+			            <div class="flex-grow-1 container-p-y">
+			              <div class="card app-calendar-wrapper">
+			                <div class="row g-0">
+			                  <div id='calendar' style="padding:30px;"></div>
+			                </div>
+			              </div>
+			            </div>
+	          		</div>
 					 
+					 
+					 
+					 
+					 
+					 
+					 
+					 
+			</div>
+			
+              	<div style="width:35%;">
+              		
+              		<!-- 개인별 진척도 -->
 					 <div class="col-md-6 col-lg-4 mb-4 mb-mb-0" style="width:100%; padding-top:1.625rem;">
 	                  <div class="card text-center" style="padding-: 1.625rem !important;">
 	                    <div class="card-header py-3">
@@ -406,27 +431,10 @@
 		                      </div>
 	                      </c:if>
 	                    </c:forEach>
-	                    
 	                  </div>
 	                </div>
-					 
 				</div>
-			</div>
-			
-              	<div style="width:35%;">
-              		<!-- 캘린더 -->
-					 <div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%;">
-			            <div class="flex-grow-1 container-p-y">
-			              <div class="card app-calendar-wrapper">
-			                <div class="row g-0">
-			                  <div id='calendar'></div>
-			                </div>
-			              </div>
-			            </div>
-	          		</div>
-              		
-	                
-	                
+				          
 	                <!-- 진척률 -->
 	                <div class="col-md-4" style="width:100%;">
 	                	<div class="card">
