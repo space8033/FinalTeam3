@@ -12,6 +12,7 @@ import lombok.Data;
 @Mapper
 public interface NoticeDao {
 	public List<Notice> selectNoticeAll();
+	public List<Notice> selectMainNotice();
 	public Notice selectDetailByNoticeNo(int notice_no);
 	public int insertNotice(Notice notice);
 	public void updateDetailByNoticeNo(Notice notice);
