@@ -55,20 +55,21 @@ $(function () {
           }
         },
         
-        {
+        /*{
         	//notice no
         	targets: 1,
         	render: function (data, type, full, meta) {
         		sharedNoticeNo = full['notice_no'];
         		  return "<span class='text-truncate d-flex align-items-center'>" + sharedNoticeNo + '</span>';
         	}
-        },
+        },*/
         {
         	  //notice title
-        	  targets: 2,
+        	  targets: 1,
         	  responsivePriority: 1,
         	  render: function (data, type, full, meta) {
         		  var $title = full['notice_title'];
+        		  sharedNoticeNo = full['notice_no'];
 
         		    // Create a text output for Product name
         		    var $row_output =
@@ -85,7 +86,7 @@ $(function () {
         {
           // writer
 
-          targets: 3,
+          targets: 2,
           responsivePriority: 5,
           render: function (data, type, full, meta) {
         	  var $writerName = full['empinfo_name']; //writer 필드에서 글쓴이 이름을 가져옴
@@ -94,14 +95,14 @@ $(function () {
         },
         {
         	//date
-        	targets: 4,
+        	targets: 3,
         	render: function (data, type, full, meta) {
         		var $date = full['notice_createdat']; //date 필드에서 날짜 정보를 가져옴
         	    return '<span class="text-truncate d-flex align-items-center">' + $date + '</span>';
         	}
         }
       ],
-      order: [1, 'desc'], //set any columns order asc/desc
+      order: [0, 'desc'], //set any columns order asc/desc
       dom:
         '<"card-header d-flex border-top rounded-0 flex-wrap py-md-0 pr-3"' +
         '<"me-5 ms-n2 pe-5"f>' +
@@ -147,39 +148,6 @@ $(function () {
             }
         }
       ],
-      // For responsive popup
-      responsive: {
-        details: {
-          display: $.fn.dataTable.Responsive.display.modal({
-            header: function (row) {
-              var data = row.data();
-              return 'Details of ' + data['product_name'];
-            }
-          }),
-          type: 'column',
-          renderer: function (api, rowIdx, columns) {
-            var data = $.map(columns, function (col, i) {
-              return col.title !== '' // ? Do not show row in modal popup if title is blank (for check box)
-                ? '<tr data-dt-row="' +
-                    col.rowIndex +
-                    '" data-dt-column="' +
-                    col.columnIndex +
-                    '">' +
-                    '<td>' +
-                    col.title +
-                    ':' +
-                    '</td> ' +
-                    '<td>' +
-                    col.data +
-                    '</td>' +
-                    '</tr>'
-                : '';
-            }).join('');
-
-            return data ? $('<table class="table"/><tbody />').append(data) : false;
-          }
-        }
-      },
       initComplete: function () {
         // Adding status filter once table initialized
         this.api()

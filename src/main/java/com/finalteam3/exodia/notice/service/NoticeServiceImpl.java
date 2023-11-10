@@ -60,5 +60,11 @@ public class NoticeServiceImpl implements NoticeService{
 		
 		return mediaList;
 	}
+
+	@Override
+	public List<Notice> getMainNoticeList() {
+		List<Notice> list = noticeDao.selectNoticeAll();
+		return list;
+	}
 	
 }

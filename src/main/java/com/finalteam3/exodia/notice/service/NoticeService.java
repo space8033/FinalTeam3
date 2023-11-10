@@ -7,6 +7,7 @@ import com.finalteam3.exodia.notice.dto.Notice;
 
 public interface NoticeService {
 	public List<Notice> getNoticeList(); //공지사항 목록
+	public List<Notice> getMainNoticeList(); //공지사항 목록
 	public Notice getNoticeDetail(int notice_no); //공지사항 세부내용
 	public int write(Notice notice); //공지사항 작성
 	public void updateByNotice(Notice notice); //공지사항 내용 업데이트

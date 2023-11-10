@@ -15,7 +15,7 @@ function connect() {
 		
 	}
 	
-	chatsock = new SockJS("http://192.168.27.221:8080/exodia/chat");
+	chatsock = new SockJS("http://192.168.0.27:8080/exodia/chat");
 	chatsock.onopen = onOpen;
 	chatsock.onmessage = onMessage;
 	console.log(chatsock.send);

@@ -252,7 +252,6 @@
                   <table id="noticeTable" class="datatables-products table border-top">
                     <thead>
                       <tr>
-                        <th></th>
                         <th>번호</th>
                         <th>제목</th>
                         <th>작성자</th>
@@ -265,9 +264,6 @@
               </div>
             </div>
             <!-- / Content -->
-
-            <div class="content-backdrop fade"></div>
-          </div>
           <!-- Content wrapper -->
         </div>
         <!-- / Layout page -->
