@@ -37,6 +37,8 @@ public interface EmployeeDao {
 	public EmpSimpleResponse selectTeamLeader(String team_name);
 	public void insertRole(int empinfo_no);
 	public String selectTeamDuty(String team_name);
+	public int countProjectEmp(int project_no);
+	public int selectEmpInfoNoByEmpNo(int emp_no);
 	//empinfo_no로 empinfo얻어오기
 	public EmployeeInfo selectEmpInfoByEmpInfoNo(int empinfo_no);
 	//pm가져오기

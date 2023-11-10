@@ -377,7 +377,7 @@
 															data-bs-dismiss="offcanvas">취소</button>
 													</div>
 													<div>
-														<textarea id="taskNo" style="display: none">${CalendarResponse.task_no}</textarea>
+														<textarea id="taskNo" style="display: none">${CalendarResponse2.task_no}</textarea>
 														<button type="button" id="taskDeleteButton" class="btn btn-label-danger btn-delete-event d-none">삭제</button>
 													</div>
 												</div>
