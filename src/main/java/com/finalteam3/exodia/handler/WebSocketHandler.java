@@ -77,6 +77,28 @@ public class WebSocketHandler extends TextWebSocketHandler{
 			String msg = message.getPayload();
 			log.info(msg+"메세지 받아오니?");
 			
+			
+			for(WebSocketSession single : sessions) {
+				String memId = single.getPrincipal().getName();
+				int uckCount = alarmDao.selectAlarmUchkCount(memId);
+				if(single.getId().equals(session.getId()) && uckCount != 0) {
+					
+					ObjectMapper objectMapper = new ObjectMapper(); // Jackson 라이브러리 사용
+					// 메시지 목록을 배열에 담습니다.
+					Message messageContent= new Message();
+					messageContent.setCount(uckCount);
+					messageContent.setMsg(memId+"님 "+uckCount+"개의 알람이 있습니다.");
+					String jsonMessages = objectMapper.writeValueAsString(messageContent);
+					
+					TextMessage textMessage = new TextMessage(jsonMessages);
+					
+					session.sendMessage(textMessage);
+					
+				}
+			}
+			//messageContent.setMsg(memId+"님 새 알림이 있습니다.");
+					
+			/*
 			//채팅 알람
 			ChatMessage chatMessage = null;
 			
@@ -166,25 +188,9 @@ public class WebSocketHandler extends TextWebSocketHandler{
 					}
 				} else {
 					
-					for(WebSocketSession single : sessions) {
-						String memId = single.getPrincipal().getName();
-						int uckCount = alarmDao.selectAlarmUchkCount(memId);
-						if(single.getId().equals(session.getId()) && uckCount != 0) {
-							
-							ObjectMapper objectMapper = new ObjectMapper(); // Jackson 라이브러리 사용
-							// 메시지 목록을 배열에 담습니다.
-							Message messageContent= new Message();
-							messageContent.setCount(uckCount);
-							messageContent.setMsg(memId+"님 "+uckCount+"개의 알람이 있습니다.");
-							String jsonMessages = objectMapper.writeValueAsString(messageContent);
-							TextMessage textMessage = new TextMessage(jsonMessages);
-							session.sendMessage(textMessage);
-							
-						}
-					//messageContent.setMsg(memId+"님 새 알림이 있습니다.");
-					}
+					//원래방식
 				}
-			}
+			}*/
 		//채팅
 		//log.info(session.getId() + ": " + message);
 	}

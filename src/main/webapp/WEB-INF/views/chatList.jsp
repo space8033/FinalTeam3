@@ -110,7 +110,7 @@
                         
 						<c:forEach var="emp" items="${empList}" varStatus="a">
 						  <c:if test="${emp.lastMsgContent != null}">
-	                        <li class="chat-contact-list-item"  id="${emp.emp_no}" >
+	                        <li class="chat-contact-list-item"  id="${emp.empinfo_no}" >
 	                          <a class="d-flex align-items-center" onclick="javascript:chatRoom(${emp.emp_no})">
 	                          	<c:choose>
 	                          	  <c:when test="${emp.emp_status == 'on-line'}">
@@ -185,7 +185,7 @@
                         
                         <c:forEach var="emp" items="${empList}" varStatus="a">
                          <c:if test="${emp.lastMsgContent == null}">
-	                        <li class="chat-contact-list-item"  id="${emp.emp_no}" >
+	                        <li class="chat-contact-list-item"  id="${emp.empinfo_no}" >
 	                          <a class="d-flex align-items-center" onclick="javascript:chatRoom(${emp.emp_no})">
 	                            <c:choose>
 	                          	  <c:when test="${emp.emp_status == 'on-line'}">

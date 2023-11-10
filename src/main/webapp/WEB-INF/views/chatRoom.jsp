@@ -92,7 +92,7 @@
                             </div>
                           </div>
                           <div class="d-flex align-items-center">
-                            <i class="bx bx-phone-call cursor-pointer d-sm-block d-none me-3 fs-4"></i>
+                            <!-- <i class="bx bx-phone-call cursor-pointer d-sm-block d-none me-3 fs-4"></i>
                             <i class="bx bx-video cursor-pointer d-sm-block d-none me-3 fs-4"></i>
                             <i class="bx bx-search cursor-pointer d-sm-block d-none me-3 fs-4"></i>
                             <div class="dropdown">
@@ -112,12 +112,15 @@
                                 <a class="dropdown-item" href="javascript:void(0);">Clear Chat</a>
                                 <a class="dropdown-item" href="javascript:void(0);">Report</a>
                               </div>
-                            </div>
+                            </div> -->
                           </div>
                         </div>
                       </div>
                         <c:forEach var="chat" items="${chatMsg}">
 						   <input type="hidden" id="chatNo" value="${chat.chatRoom_no}"/>
+						    <c:if test="${empInfoNo != chat.empInfo_no}">
+						      <input type="hidden" id="empInfoNo" value="${chat.empInfo_no}"/>
+						    </c:if>
 						</c:forEach>
                       
                       <input type="hidden" id="alarmId" value="${empInfo.empinfo_no}"/>
@@ -236,15 +239,15 @@
                         <div class="form-send-message d-flex justify-content-between align-items-center">
                           <input id="msg"
                             class="form-control message-input border-0 me-3 shadow-none"
-                            placeholder="Type your message here..." 
+                            placeholder="메세지를 입력해주세요" 
                             aria-label="Recipient's username" aria-describedby="button-addon2"
                             onkeyup="javascript:handleKeyPress(event)"/>
                           <div class="message-actions d-flex align-items-center">
-                            <i class="speech-to-text bx bx-microphone bx-sm cursor-pointer"></i>
+                           <!--  <i class="speech-to-text bx bx-microphone bx-sm cursor-pointer"></i>
                             <label for="attach-doc" class="form-label mb-0">
                               <i class="bx bx-paperclip bx-sm cursor-pointer mx-3"></i>
                               <input type="file" id="attach-doc" hidden />
-                            </label>
+                            </label> -->
                             <button id="button-send" class="btn btn-primary d-flex send-msg-btn" onclick="javascript:buttonSend();">
                               <i class="bx bx-paper-plane me-md-1 me-0"></i>
                               <span class="align-middle d-md-inline-block d-none">send</span>
