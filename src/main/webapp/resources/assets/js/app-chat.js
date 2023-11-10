@@ -234,6 +234,9 @@ function sendMessage() {
 	
 	let jsonData = JSON.stringify(data);
 	
+	
+	
+	
 	chatsock.send(jsonData);
 	//sock.send(jsonData);
 }
@@ -261,7 +264,10 @@ function onMessage(evt) {
    		        wheelPropagation: false,
    		        suppressScrollX: true
    		      });
-   		    
+           $("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
+		     
+		     var empinfono = $("#empInfoNo").val();
+		     $("#"+empinfono).addClass("active");
            const searchInput = document.querySelector('.chat-search-input');
    		     searchInput.addEventListener('keyup', e => {
    		         let searchValue = e.currentTarget.value.toLowerCase(),
@@ -313,35 +319,37 @@ function onMessage(evt) {
    		         }
    		       }
    	});
-   	var empInfono = $("#empInfoNo").val();
-	
-   	//
-	
+   
+	$("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
+    
+    var empinfono = $("#empInfoNo").val();
+    console.log(empinfono+"왜애드클래스갑자기못해너?");
+    $("#"+empinfono).addClass("active");
 	
 	console.log(evt+"들어오긴하닝 ㅎㅎ");
 	
 	let receive = evt.data.split(",");
 	
 	const data = {
-			"empInfo_no" : receive[0],
-			"message_content" : receive[1]
+			"emp_read" : receive[0],
+			"empInfo_no" : receive[1],
+			"message_content" : receive[2]
 			
 	};
 	var empInfo_no = $("#alarmId").val();
 	
-	/* 실시간 읽음 확인용
-	var checkDoubleElement = $('.bx.bx-check-double');
-    checkDoubleElement.addClass('text-success');
-	*/
+	// 실시간 읽음 확인용
+	
+	if(data.emp_read === "읽음") {
+		var checkDoubleElement = $('.bx.bx-check-double');
+	    checkDoubleElement.addClass('text-success');
+	}
 	
 	if(data.empInfo_no != empInfo_no) {
 		checkLR(data);
 	}
 	
-	//$("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
-    
-	//$("#"+empInfono).addClass("active");
-	//console.log(empInfono+"이게 못남아있는건지..");
+
 	
 }
 

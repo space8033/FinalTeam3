@@ -164,6 +164,16 @@
 		   and e.emp_no = #{emp_no}
 	</select>
 	
+	<select id="selectPM" resultType="EmpNote">
+     SELECT i.empinfo_no, i.empinfo_name, i.empinfo_email, i.empinfo_position, e.emp_no, e.emp_id, e.emp_status
+      FROM empinfo i, role r, emp e
+     WHERE project_no = 0
+       AND i.empinfo_no = r.empinfo_no
+       AND e.emp_no = i.emp_no
+       AND r.role_category = 'ROLE_PM'
+       AND e.emp_deletedat IS NULL
+    </select>
+	
 	<select id="selectProjectEmp" resultType="ProjectEmpResponse" parameterType="int">
 		select i.empinfo_no, e.emp_no, i.empinfo_name, r.role_category, t.team_name, i.empinfo_position, e.emp_status, i.empinfo_email
 		from empinfo i, emp e, team t, role r
