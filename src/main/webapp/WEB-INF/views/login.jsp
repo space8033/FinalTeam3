@@ -76,63 +76,65 @@
         </div>
         <!-- /Left Text -->
 
-        <!-- Login -->
-        <div class="d-flex col-12 col-lg-5 col-xl-6 align-items-center authentication-bg justify-content-center">
-<!--           <div class="w-px-400 mx-auto"> -->
-          <div class="w-px-400">
-            <!-- Logo -->
-            <div class="app-brand mb-3">
-              <a href="#" class="app-brand-link gap-2">
-                  <img
+	       <div class="d-flex col-12 col-lg-5 col-xl-6 align-items-center authentication-bg justify-content-center">
+	<!--           <div class="w-px-400 mx-auto"> -->
+        	<div class="mmmmmmmmmmmmmmmmmmm">
+	         <div class="w-px-400">
+	           <!-- Logo -->
+	           <div class="app-brand mb-3">
+	             <a href="#" class="app-brand-link gap-2">
+	                 <img
 		              src="${pageContext.request.contextPath}/resources/assets/img/illustrations/otilogo.png"
 		              class="img-fluid"
 		              alt="Login image"
 		              width="80%"
 	              />
-              </a>
-            </div>
-            <!-- /Logo -->
-            
-            <form id="formAuthentication" class="mb-3" name="loginRequest" action="/exodia/login" method="POST">
-                <div class="mb-3">
-                  <label for="email" class="form-label">아이디</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="email"
-                    name="emp_id"
-                    placeholder="아이디"
-                    autofocus />
-                </div>
-                <div class="mb-3 form-password-toggle">
-                  <div class="d-flex justify-content-between">
-                    <label class="form-label" for="password">비밀번호</label>
-                  </div>
-                  <div class="input-group input-group-merge">
-                    <input
-                      type="password"
-                      id="password"
-                      class="form-control"
-                      name="emp_password"
-                      placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                      aria-describedby="password" />
-                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="remember-me" />
-                    <label class="form-check-label" for="remember-me"> 아이디 저장 </label>
-                  </div>
-                </div>
-                <div class="mb-3">
-                  <button class="login btn btn-primary d-grid w-100" type="submit" id="btnLogin">로그인</button>
-                </div>
-                <small>비밀번호 분실시 010-1212-3434</small>
-              </form>
+	             </a>
+	           </div>
+	           <!-- /Logo -->
+	           
+	           <form id="formAuthentication" class="mb-3" name="loginRequest" action="/exodia/login" method="POST">
+	               <div class="mb-3">
+	                 <label for="email" class="form-label">아이디</label>
+	                 <input
+	                   type="text"
+	                   class="form-control"
+	                   id="email"
+	                   name="emp_id"
+	                   placeholder="아이디"
+	                   autofocus />
+	               </div>
+	               <div class="mb-3 form-password-toggle">
+	                 <div class="d-flex justify-content-between">
+	                   <label class="form-label" for="password">비밀번호</label>
+	                 </div>
+	                 <div class="input-group input-group-merge">
+	                   <input
+	                     type="password"
+	                     id="password"
+	                     class="form-control"
+	                     name="emp_password"
+	                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
+	                     aria-describedby="password" />
+	                   <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+	                 </div>
+	               </div>
+	               <div class="mb-3">
+	                 <div class="form-check">
+	                   <input class="form-check-input" type="checkbox" id="remember-me" />
+	                   <label class="form-check-label" for="remember-me"> 아이디 저장 </label>
+	                 </div>
+	               </div>
+	               <div class="mb-3">
+	                 <button class="login btn btn-primary d-grid w-100" type="submit" id="btnLogin">로그인</button>
+	               </div>
+	               <small>비밀번호 분실시 010-1212-3434</small>
+	             </form>
+	
+	         </div>
 
-          </div>
-        </div>
+	       </div>
+        <!-- Login -->
         <!-- /Login -->
       </div>
     </div>

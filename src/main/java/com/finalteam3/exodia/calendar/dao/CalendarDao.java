@@ -13,5 +13,7 @@ public interface CalendarDao {
 
 	public void insert(CalendarRequest calendarRequest);
 	public List<CalendarResponse> selectCalendarTask(int emp_no);
+	public void updateContentByTaskNo(CalendarResponse calendarResponse);
 	public void deleteCalendar(int task_no);
+	
 }

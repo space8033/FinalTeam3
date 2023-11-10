@@ -255,7 +255,7 @@
                         <th></th>
                         <th>번호</th>
                         <th>제목</th>
-                        <th>글쓴이</th>
+                        <th>작성자</th>
                         <th>날짜</th>
                       </tr>
                     </thead>

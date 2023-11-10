@@ -18,6 +18,13 @@
 		and emp_no = #{emp_no}
     </select>
     
+    <update id="updateContentByTaskNo" parameterType="CalendarResponse">  
+		update task set task_name = #{task_name}, task_content = #{task_content},
+			 task_startdate = to_char(sysdate,'yyyy.mm.dd hh24:mi:ss'), task_enddate = to_char(sysdate,'yyyy.mm.dd hh24:mi:ss'),
+			 task_type = #{task_type}
+		where notice_no = #{notice_no}
+	</update>
+    
     <delete id="deleteCalendar" parameterType="int">
     	delete from task
     	where task_no=#{task_no}   	

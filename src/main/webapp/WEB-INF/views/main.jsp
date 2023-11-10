@@ -251,207 +251,24 @@
               <div class="row">
 				<div style="width:65%;">							
 					<!-- 공지사항 -->
-					<div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%; padding-top:1.625rem;">
-					    <div class="card">
-					      <div class="table-responsive text-nowrap" style="margin:17.5px;">
-					        <table class="table text-nowrap">
-					          <thead>
-					            <tr>
-					           <th>공지사항</th>
-					           <th></th>
-					              <th></th>
-					              <th></th>
-					              <th></th>
-					         </tr>
-					            <tr>
-					              <th>번호</th>
-					              <th>제목</th>
-					              <th>작성자</th>
-					              <th>날짜</th>
-					              <th></th>
-					            </tr>
-					          </thead>
-					          <tbody class="table-border-bottom-0">
-					            <tr>
-					              <td>
-					                
-					              </td>
-					              <td>
-					                <span class="badge bg-label-primary rounded-pill badge-center p-3 me-2"
-					                  ><i class="bx bx-mobile-alt bx-xs"></i
-					                ></span>
-					                Smart Phone
-					              </td>
-					              <td>
-					                <div class="text-muted lh-1"><span class="text-primary fw-medium">$120</span>/499</div>
-					                <small class="text-muted">Partially Paid</small>
-					              </td>
-					              <td><span class="badge bg-label-primary">Confirmed</span></td>
-					              <td>
-					                <div class="dropdown">
-					                  <button
-					                    type="button"
-					                    class="btn p-0 dropdown-toggle hide-arrow"
-					                    data-bs-toggle="dropdown">
-					                    <i class="bx bx-dots-vertical-rounded"></i>
-					                  </button>
-					                  <div class="dropdown-menu">
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-edit-alt me-1"></i> View Details</a
-					                    >
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-trash me-1"></i> Delete</a
-					                    >
-					                  </div>
-					                </div>
-					              </td>
-					            </tr>
-					            
-					            <tr>
-					              <td>
-					                
-					              </td>
-					              <td>
-					                <span class="badge bg-label-primary rounded-pill badge-center p-3 me-2"
-					                  ><i class="bx bx-mobile-alt bx-xs"></i
-					                ></span>
-					                Smart Phone
-					              </td>
-					              <td>
-					                <div class="text-muted lh-1"><span class="text-primary fw-medium">$120</span>/499</div>
-					                <small class="text-muted">Partially Paid</small>
-					              </td>
-					              <td><span class="badge bg-label-primary">Confirmed</span></td>
-					              <td>
-					                <div class="dropdown">
-					                  <button
-					                    type="button"
-					                    class="btn p-0 dropdown-toggle hide-arrow"
-					                    data-bs-toggle="dropdown">
-					                    <i class="bx bx-dots-vertical-rounded"></i>
-					                  </button>
-					                  <div class="dropdown-menu">
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-edit-alt me-1"></i> View Details</a
-					                    >
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-trash me-1"></i> Delete</a
-					                    >
-					                  </div>
-					                </div>
-					              </td>
-					            </tr>
-					            
-					            <tr>
-					              <td>
-					                
-					              </td>
-					              <td>
-					                <span class="badge bg-label-primary rounded-pill badge-center p-3 me-2"
-					                  ><i class="bx bx-mobile-alt bx-xs"></i
-					                ></span>
-					                Smart Phone
-					              </td>
-					              <td>
-					                <div class="text-muted lh-1"><span class="text-primary fw-medium">$120</span>/499</div>
-					                <small class="text-muted">Partially Paid</small>
-					              </td>
-					              <td><span class="badge bg-label-primary">Confirmed</span></td>
-					              <td>
-					                <div class="dropdown">
-					                  <button
-					                    type="button"
-					                    class="btn p-0 dropdown-toggle hide-arrow"
-					                    data-bs-toggle="dropdown">
-					                    <i class="bx bx-dots-vertical-rounded"></i>
-					                  </button>
-					                  <div class="dropdown-menu">
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-edit-alt me-1"></i> View Details</a
-					                    >
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-trash me-1"></i> Delete</a
-					                    >
-					                  </div>
-					                </div>
-					              </td>
-					            </tr>
-					            
-					            <tr>
-					              <td>
-					                
-					              </td>
-					              <td>
-					                <span class="badge bg-label-primary rounded-pill badge-center p-3 me-2"
-					                  ><i class="bx bx-mobile-alt bx-xs"></i
-					                ></span>
-					                Smart Phone
-					              </td>
-					              <td>
-					                <div class="text-muted lh-1"><span class="text-primary fw-medium">$120</span>/499</div>
-					                <small class="text-muted">Partially Paid</small>
-					              </td>
-					              <td><span class="badge bg-label-primary">Confirmed</span></td>
-					              <td>
-					                <div class="dropdown">
-					                  <button
-					                    type="button"
-					                    class="btn p-0 dropdown-toggle hide-arrow"
-					                    data-bs-toggle="dropdown">
-					                    <i class="bx bx-dots-vertical-rounded"></i>
-					                  </button>
-					                  <div class="dropdown-menu">
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-edit-alt me-1"></i> View Details</a
-					                    >
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-trash me-1"></i> Delete</a
-					                    >
-					                  </div>
-					                </div>
-					              </td>
-					            </tr>
-					            
-					            <tr>
-					              <td>
-					                
-					              </td>
-					              <td>
-					                <span class="badge bg-label-primary rounded-pill badge-center p-3 me-2"
-					                  ><i class="bx bx-mobile-alt bx-xs"></i
-					                ></span>
-					                Smart Phone
-					              </td>
-					              <td>
-					                <div class="text-muted lh-1"><span class="text-primary fw-medium">$120</span>/499</div>
-					                <small class="text-muted">Partially Paid</small>
-					              </td>
-					              <td><span class="badge bg-label-primary">Confirmed</span></td>
-					              <td>
-					                <div class="dropdown">
-					                  <button
-					                    type="button"
-					                    class="btn p-0 dropdown-toggle hide-arrow"
-					                    data-bs-toggle="dropdown">
-					                    <i class="bx bx-dots-vertical-rounded"></i>
-					                  </button>
-					                  <div class="dropdown-menu">
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-edit-alt me-1"></i> View Details</a
-					                    >
-					                    <a class="dropdown-item" href="javascript:void(0);"
-					                      ><i class="bx bx-trash me-1"></i> Delete</a
-					                    >
-					                  </div>
-					                </div>
-					              </td>
-					            </tr>
-					              
-					          </tbody>
-					        </table>
-					      </div>
-					    </div>
-					 </div>
+					<div class="card">
+						<div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%; padding-top:1.625rem;">
+						    <div class="card-datatable table-responsive">
+			                  <table id="noticeTable" class="datatables-products table border-top">
+			                    <thead>
+			                      <tr>
+			                        <th></th>
+			                        <th>번호</th>
+			                        <th>제목</th>
+			                        <th>작성자</th>
+			                        <th>날짜</th>
+			                      </tr>
+			                    </thead>
+			
+			                  </table>
+			                </div>
+						 </div>
+					</div>
 					 
 					 <div class="col-md-6 col-lg-4 mb-4 mb-mb-0" style="width:100%; padding-top:1.625rem;">
 	                  <div class="card text-center" style="padding-: 1.625rem !important;">
@@ -695,6 +512,7 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/apex-charts/apexcharts.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
@@ -709,14 +527,14 @@
     <!-- Page JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/mainRank.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/mainGraph.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/mainNoticeList.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
     
-    
     <script>
-        // 사이드바를 숨기기
+        // 사이드바 숨기기
         //document.getElementById('app-calendar-sidebar').style.display = 'none';
 
-        // 또는 사이드바를 다시 나타내려면 다음과 같이 사용
+        // 사이드바 보이기
         // document.getElementById('app-calendar-sidebar').style.display = 'block';
     </script>
     
