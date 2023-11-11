@@ -284,6 +284,7 @@
 								<div class="card">
 									<div class="card-datatable table-responsive">
 										<div><input type="hidden" value="${emp_no}" id="now_emp_no"/></div>
+										<div><input type="hidden" value="${empinfo_no}" id="now_empinfo_no"/></div>
 										<table class="datatables-users table border-top"
 											style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
 											<thead>

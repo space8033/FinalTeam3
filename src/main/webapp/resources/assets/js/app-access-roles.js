@@ -7,6 +7,7 @@
 
 $(document).ready(function () {
 	var empNo = $("#now_emp_no").val();
+	
 	var checkExist = setInterval(function() {
 		if($(".add-new").length) {
 			if(empNo == 0) {
@@ -32,7 +33,7 @@ $(document).ready(function () {
 });
 // Datatable (jquery)
 $(function () {
-	
+  var empinfo_no = $("#now_empinfo_no").val();
   var dtUserTable = $('.datatables-users'),
   	programManagement = "programManagement";
   		
@@ -42,6 +43,9 @@ $(function () {
     dtUserTable.DataTable({
       ajax: {
           url: '/exodia/task/getPrograms',
+          data: {
+        	  empinfo_no: empinfo_no
+          },
           type : "GET",
           dataSrc: ''
       }, // JSON file to add data
@@ -125,13 +129,13 @@ $(function () {
           }
         }
       ],
-      order: [[1, 'asc']],
+ /*     order: [[1, 'asc']],*/
       dom:
     	  '<"card-header d-flex flex-wrap py-0"' +
           '<"me-5 ms-n2 pe-5"f>' +
-          '<"d-flex justify-content-start justify-content-md-end align-items-baseline"<"dt-action-buttons d-flex align-items-start align-items-md-center justify-content-sm-center mb-3 mb-sm-0 gap-3"lB>>' +
+          '<"d-flex justify-content-start justify-content-md-end align-items-baseline py-5"<"dt-action-buttons d-flex align-items-start align-items-md-center justify-content-sm-center mb-3 mb-sm-0 gap-3"lB>>' +
           '>t' +
-          '<"row mx-2"' +
+          '<"row mx-2 py-2"' +
           '<"col-sm-12 col-md-6"i>' +
           '<"col-sm-12 col-md-6"p>' +
           '>',

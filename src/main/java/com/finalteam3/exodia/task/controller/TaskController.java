@@ -1,5 +1,6 @@
 package com.finalteam3.exodia.task.controller;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -35,19 +36,21 @@ public class TaskController {
 	public String programManagement(Authentication authentication, Model model) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
+		int empinfo_no = loginResponse.getEmpInfo_no();
 		int emp_no = empDetails.getLoginResponse().getEmp_no();
 		log.info("empno : " + emp_no);
 		
 		model.addAttribute("emp_no", emp_no);
-		
+		model.addAttribute("empinfo_no", empinfo_no);
 		
 		return "/programManagement";
 	}
 	
 	@GetMapping("/getPrograms")
 	@ResponseBody
-	public String getPrograms() throws JsonProcessingException{
+	public String getPrograms(int empinfo_no) throws JsonProcessingException{
 		List<ProgramListResponse> list = taskService.getAllBusinessProgram();
+		Collections.sort(list, ProgramListResponse.empinfoNoComparator(empinfo_no));
 		
 		ObjectMapper objectMapper = new ObjectMapper();
 		String jsonData = objectMapper.writeValueAsString(list);
