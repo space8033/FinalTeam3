@@ -203,14 +203,14 @@
               <span class="menu-header-text">ADMIN MENU</span>
             </li>
             
-            <li class="menu-item active">
+            <li class="menu-item">
               <a href="${pageContext.request.contextPath}/project/addProject" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate">프로젝트 등록</div>
               </a>
             </li>
             
-            <li class="menu-item">
+            <li class="menu-item active">
               <a href="${pageContext.request.contextPath}/project/modifyProject" class="menu-link">
                 <i class="menu-icon tf-icons bx bxs-edit"></i>
                 <div class="text-truncate">프로젝트 수정</div>
