@@ -437,7 +437,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		timeLineResponse.setTask_start(tStart);
 		timeLineResponse.setMyTask_no(personalTask.getTask_no());
 		timeLineResponse.setMyTask_start(pStart);
-		
+		timeLineResponse.setTwo_name(timeLineResponse.getEmpinfo_name().substring(timeLineResponse.getEmpinfo_name().length() - 2 ));
 		timeLineResponse.setTeam_memberCount(employeeDao.selectTeamEmp(timeLineResponse.getTeam_name()).size() + 1);
 		
 		return timeLineResponse;

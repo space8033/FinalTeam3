@@ -406,13 +406,12 @@
 											</div>
 										</div>
 										<div class="row mb-3">
-											<label class="col-sm-3 col-form-label" for="detail-category">세부
-												유형</label>
+											<label class="col-sm-3 col-form-label" for="detail-category">세부 유형</label>
 											<div class="col-sm-9">
 												<select id="detail-category" class="select2 form-select"
 													data-allow-clear="true">
 													<c:if test="${programModifiy.task_detail == null}">
-														<option value="선택">선택</option>
+														<option value=""></option>
 														<option value="화면(메인)">화면(메인)</option>
 														<option value="화면(탭)">화면(탭)</option>
 														<option value="화면(팝업)">화면(팝업)</option>
@@ -420,7 +419,7 @@
 														<option value="배치">배치</option>
 													</c:if>
 													<c:if test="${programModifiy.task_detail == '화면(메인)'}">
-														<option value="선택">선택</option>
+														<option value="">선택</option>
 														<option value="화면(메인)" selected="selected">화면(메인)</option>
 														<option value="화면(탭)">화면(탭)</option>
 														<option value="화면(팝업)">화면(팝업)</option>
@@ -428,7 +427,7 @@
 														<option value="배치">배치</option>
 													</c:if>
 													<c:if test="${programModifiy.task_detail == '화면(탭)'}">
-														<option value="선택">선택</option>
+														<option value="">선택</option>
 														<option value="화면(메인)">화면(메인)</option>
 														<option value="화면(탭)" selected="selected">화면(탭)</option>
 														<option value="화면(팝업)">화면(팝업)</option>
@@ -436,7 +435,7 @@
 														<option value="배치">배치</option>
 													</c:if>
 													<c:if test="${programModifiy.task_detail == '화면(팝업)'}">
-														<option value="선택">선택</option>
+														<option value="">선택</option>
 														<option value="화면(메인)">화면(메인)</option>
 														<option value="화면(탭)">화면(탭)</option>
 														<option value="화면(팝업)" selected="selected">화면(팝업)</option>
@@ -444,7 +443,7 @@
 														<option value="배치">배치</option>
 													</c:if>
 													<c:if test="${programModifiy.task_detail=='보고서'}">
-														<option value="선택">선택</option>
+														<option value="">선택</option>
 														<option value="화면(메인)">화면(메인)</option>
 														<option value="화면(탭)">화면(탭)</option>
 														<option value="화면(팝업)">화면(팝업)</option>
@@ -452,7 +451,7 @@
 														<option value="배치">배치</option>
 													</c:if>
 													<c:if test="${programModifiy.task_detail == '배치'}">
-														<option value="선택">선택</option>
+														<option value="">선택</option>
 														<option value="화면(메인)">화면(메인)</option>
 														<option value="화면(탭)">화면(탭)</option>
 														<option value="화면(팝업)">화면(팝업)</option>
@@ -626,11 +625,9 @@
 											</div>
 										</div>
 										<div class="row mb-4">
-											<label class="col-sm-4 col-form-label" for="detail-category2">세부
-												유형</label>
+											<label class="col-sm-4 col-form-label" for="detail-category2">세부유형</label>
 											<div class="col-sm-8">
-												<select id="detail-category2" name="task_detail"
-													class="select2 form-select" data-allow-clear="true">
+												<select id="detail-category2" name="task_detail" class="select2 form-select" data-allow-clear="true">
 													<option value="">Select</option>
 													<option value="화면(메인)">화면(메인)</option>
 													<option value="화면(탭)">화면(탭)</option>
