@@ -257,7 +257,7 @@
 
             <div class="container-xxl flex-grow-1" >
               <div class="row">
-				<div style="width:65%;">							
+				<div style="width:60%;">							
 					<!-- 공지사항 -->
 					<div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%; padding-top:1.625rem;">
 						<div class="card">
@@ -301,7 +301,7 @@
 					 
 			</div>
 			
-              	<div style="width:35%;">
+              	<div style="width:40%;">
               		
               		<!-- 개인별 진척도 -->
 					 <div class="col-md-6 col-lg-4 mb-4 mb-mb-0" style="width:100%; padding-top:1.625rem;">
