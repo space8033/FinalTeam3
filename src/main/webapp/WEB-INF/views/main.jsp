@@ -264,8 +264,7 @@
 						    <div class="card-datatable table-responsive">
 			                  <table id="noticeTable" class="datatables-products table border-top" style="width:100%;">
 			                    <thead>
-			                      <th>최신 공지사항</th>
-			                      <th></th>
+			                      <th colspan="2">최신 공지사항</th>
 			                      <th></th>
 			                      <th></th>
 			                      <tr>
