@@ -277,28 +277,33 @@
 							<div><input type="hidden" value="${reply.empinfo_no}" id="myEmpInfoNo"/></div>
 							<div><input type="hidden" value="${now_emp_no}" id="nowEmpNo"/></div>
 							<div><input type="hidden" value="${now_empinfo_no}" id="nowEmpInfoNo"/></div>
-                        	<div class="card-body">
+                        	<div class="card-body" style="padding-top:0px;">
 								<div>
 									<div>
 										<div>
 											<p>
-												<span style="font-size: 12px;">글 번호:</span> 
-												<span style="font-size: 12px;">${notice.notice_no}</span>
+												<span style="font-size: 12px; display: none;">글 번호:</span> 
+												<span style="font-size: 12px; display: none;">${notice.notice_no}</span>
 											</p>
 											
 											<p>
-												<span style="font-size: 18px;"><strong>제목:</strong></span> 
-												<span style="font-size: 18px;"><strong>${notice.notice_title}</strong></span>
+												<span style="font-size: 28px;"><strong>${notice.notice_title}</strong></span>
 											</p>
 											
 											<p>
-												<span style="font-size: 12px;">글쓴이:</span> 
-												<span style="font-size: 12px;">${notice.empinfo_name}</span>
-											<p>
-											
-											<p>
-												<span style="font-size: 12px;">날짜:</span> 
-												<span style="font-size: 12px;">${notice.notice_createdat}</span> <br/>
+												<div class="d-flex align-items-center mb-sm-0 mb-3">
+											    <img
+											      src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
+												  alt="user-avatar"
+												  class="flex-shrink-0 rounded-circle me-2"
+												  height="38"
+												  width="38" />
+												<div class="flex-grow-1 ms-1">
+												  <h6 class="m-0" id="replyWriter" name="replyWriter">${notice.empinfo_name}</h6>
+												  <small class="text-muted" id="replyWriterEmail" name="replyWriterEmail">${notice.empinfo_email}</small>
+												  <small class="mb-0 me-3 text-muted" id="replyCreatedat" name="replyCreatedat">  /  ${notice.notice_createdat}</small>											    
+												</div>
+											  </div>
 											</p>
 										</div>	
 										<div class="card email-card-last mx-sm-4 mx-3 mt-4 border" style="margin-bottom:1.5rem;">																	

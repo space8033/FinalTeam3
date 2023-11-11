@@ -162,7 +162,7 @@
               </a>
             </li>
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/qnaList" class="menu-link">
+              <a href="${pageContext.request.contextPath}/inquiryList" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-conversation"></i>
                 <div class="text-truncate">문의하기</div>
               </a>
