@@ -20,6 +20,6 @@ public class Inquiry {
 	private MultipartFile[] inquiry_files;
 	private byte[] media_data;
 	private String two_name;
+	private int empinfo_no;
 	
-
 }

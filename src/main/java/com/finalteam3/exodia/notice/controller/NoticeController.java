@@ -179,12 +179,17 @@ public class NoticeController {
 	public String noticeDetail(Authentication authentication, int notice_no, Model model){
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		model.addAttribute("now_emp_no", loginResponse.getEmp_no());
 
 		Notice notice = noticeService.getNoticeDetail(notice_no);		
 		model.addAttribute("notice", notice);
 		
 		List<MediaDto> mediaList = noticeService.getMediaList(notice.getNotice_no());
 	    model.addAttribute("mediaList", mediaList);
+	    
+	    log.info("공지사항 수정할떄 필요한 empinfonowriter넘버 : " + notice.getEmpinfo_no_writer());
+	    log.info("공지사항 수정할떄 필요한 empinfo넘버 : " + notice.getEmpinfo_no());
 		
 		return "noticeDetail";
 	}

@@ -257,15 +257,14 @@
 
             <div class="container-xxl flex-grow-1" >
               <div class="row">
-				<div style="width:65%;">							
+				<div style="width:60%;">							
 					<!-- 공지사항 -->
 					<div class="col-md-6 col-lg-8 mb-4 mb-md-0" style="width:100%; padding-top:1.625rem;">
 						<div class="card">
 						    <div class="card-datatable table-responsive">
 			                  <table id="noticeTable" class="datatables-products table border-top" style="width:100%;">
 			                    <thead>
-			                      <th>최신 공지사항</th>
-			                      <th></th>
+			                      <th colspan="2">최신 공지사항</th>
 			                      <th></th>
 			                      <th></th>
 			                      <tr>
@@ -301,7 +300,7 @@
 					 
 			</div>
 			
-              	<div style="width:35%;">
+              	<div style="width:40%;">
               		
               		<!-- 개인별 진척도 -->
 					 <div class="col-md-6 col-lg-4 mb-4 mb-mb-0" style="width:100%; padding-top:1.625rem;">
@@ -355,30 +354,31 @@
 		                            </thead>
 		                            <tbody>
 		                              <c:forEach items="${tl.response}" var="response" varStatus="resStatus">
-			                              <tr>
-			                                <td>${response.index}</td>
-			                                <td>
-			                                  <div class="d-flex align-items-center">
-			                                    <span>${response.team_duty}</span>
-			                                  </div>
-			                                </td>
-			                                <td>${response.empinfo_name}</td>
-			                                <td>
-			                                  <div class="d-flex justify-content-between align-items-center gap-3">
-			                                    <div class="progress w-100" style="height: 10px">
-			                                      <div
-			                                        class="progress-bar bg-success"
-			                                        role="progressbar"
-			                                        style="width: ${response.progress_rate}%"
-			                                        aria-valuenow="${response.progress_rate}"
-			                                        aria-valuemin="0"
-			                                        aria-valuemax="100"></div>
-			                                    </div>
-			                                    <small class="fw-medium">${response.progress_rate}%</small>
-			                                  </div>
-			                                </td>
-			                              </tr>
-		                              
+		                              	  <c:if test="${resStatus.count < 7}">
+				                              <tr>
+				                                <td>${response.index}</td>
+				                                <td>
+				                                  <div class="d-flex align-items-center">
+				                                    <span>${response.team_duty}</span>
+				                                  </div>
+				                                </td>
+				                                <td>${response.empinfo_name}</td>
+				                                <td>
+				                                  <div class="d-flex justify-content-between align-items-center gap-3">
+				                                    <div class="progress w-100" style="height: 10px">
+				                                      <div
+				                                        class="progress-bar bg-success"
+				                                        role="progressbar"
+				                                        style="width: ${response.progress_rate}%"
+				                                        aria-valuenow="${response.progress_rate}"
+				                                        aria-valuemin="0"
+				                                        aria-valuemax="100"></div>
+				                                    </div>
+				                                    <small class="fw-medium">${response.progress_rate}%</small>
+				                                  </div>
+				                                </td>
+				                              </tr>
+		                              	  </c:if>
 		                              </c:forEach>
 		                            </tbody>
 		                          </table>
@@ -399,31 +399,31 @@
 		                            </thead>
 		                            <tbody>
 		                              <c:forEach items="${tl.response}" var="response" varStatus="resStatus">
-		                              
-			                              <tr>
-			                                <td>${response.index}</td>
-			                                <td>
-			                                  <div class="d-flex align-items-center">
-			                                    <span>${response.team_duty}</span>
-			                                  </div>
-			                                </td>
-			                                <td>${response.empinfo_name}</td>
-			                                <td>
-			                                  <div class="d-flex justify-content-between align-items-center gap-3">
-			                                    <div class="progress w-100" style="height: 10px">
-			                                      <div
-			                                        class="progress-bar bg-success"
-			                                        role="progressbar"
-			                                        style="width: ${response.progress_rate}%"
-			                                        aria-valuenow="${response.progress_rate}"
-			                                        aria-valuemin="0"
-			                                        aria-valuemax="100"></div>
-			                                    </div>
-			                                    <small class="fw-medium">${response.progress_rate}%</small>
-			                                  </div>
-			                                </td>
-			                              </tr>
-		                              
+		                              	  <c:if test="${resStatus.count < 7}">
+				                              <tr>
+				                                <td>${response.index}</td>
+				                                <td>
+				                                  <div class="d-flex align-items-center">
+				                                    <span>${response.team_duty}</span>
+				                                  </div>
+				                                </td>
+				                                <td>${response.empinfo_name}</td>
+				                                <td>
+				                                  <div class="d-flex justify-content-between align-items-center gap-3">
+				                                    <div class="progress w-100" style="height: 10px">
+				                                      <div
+				                                        class="progress-bar bg-success"
+				                                        role="progressbar"
+				                                        style="width: ${response.progress_rate}%"
+				                                        aria-valuenow="${response.progress_rate}"
+				                                        aria-valuemin="0"
+				                                        aria-valuemax="100"></div>
+				                                    </div>
+				                                    <small class="fw-medium">${response.progress_rate}%</small>
+				                                  </div>
+				                                </td>
+				                              </tr>
+		                              	  </c:if>
 		                              </c:forEach>
 		                            </tbody>
 		                          </table>

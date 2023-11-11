@@ -16,7 +16,8 @@ public class Notice {
 	private String notice_deletedat;
 	private String notice_team;
 	private int empinfo_no_writer;
+	private String empinfo_email;
 	private String empinfo_name;
 	private MultipartFile[] notice_files;
-
+	private int empinfo_no;
 }

@@ -7,6 +7,7 @@ public class TimeLineResponse {
 	private int emp_no;
 	private int empinfo_no;
 	private String empinfo_name;
+	private String two_name;
 	private String emp_id;
 	private String emp_status;
 	private String role_category;

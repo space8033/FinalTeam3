@@ -11,7 +11,7 @@
 	</select>
 	
 	<select id="selectDetailByNoticeNo" parameterType="int" resultType="Notice">
-		SELECT notice.notice_no, empinfo.empinfo_name, notice.notice_title, notice.notice_content, notice.notice_createdat
+		SELECT notice.notice_no, empinfo.empinfo_no, empinfo.empinfo_name, empinfo.empinfo_email, notice.notice_title, notice.notice_content, notice.notice_createdat
 		FROM notice
 		INNER JOIN empinfo ON notice.empinfo_no_writer = empinfo.empinfo_no
 		where notice_no = #{notice_no}
@@ -27,17 +27,17 @@
       	)
       	values(
       		#{notice_no}, #{notice_title}, #{notice_content}, 'NOTICE',
-      		#{empinfo_no_writer}, to_char(sysdate,'yyyy.mm.dd hh24:mi:ss'), 0
+      		#{empinfo_no_writer}, to_char(sysdate,'yyyy.mm.dd hh24:mi'), 0
       	)		
 	</insert>
 	
 	<update id="updateDetailByNoticeNo" parameterType="Notice">  
-		update notice set notice_title = #{notice_title}, notice_content = #{notice_content}, notice_modifiedat = to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
+		update notice set notice_title = #{notice_title}, notice_content = #{notice_content}, notice_modifiedat = to_char(sysdate,'yyyy.mm.dd hh24:mi')
 		where notice_no = #{notice_no}
 	</update>
 	
 	<update id="deleteByNoticeNo" parameterType="int">  
-		update notice set notice_deletedat = to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
+		update notice set notice_deletedat = to_char(sysdate,'yyyy.mm.dd hh24:mi')
 		where notice_no = #{notice_no}
 	</update>
 	

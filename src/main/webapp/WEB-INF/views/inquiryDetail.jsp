@@ -277,28 +277,33 @@
 							<div><input type="hidden" value="${reply.empinfo_no}" id="myEmpInfoNo"/></div>
 							<div><input type="hidden" value="${now_emp_no}" id="nowEmpNo"/></div>
 							<div><input type="hidden" value="${now_empinfo_no}" id="nowEmpInfoNo"/></div>
-                        	<div class="card-body">
+                        	<div class="card-body" style="padding-top:0px;">
 								<div>
 									<div>
 										<div>
 											<p>
-												<span style="font-size: 12px;">글 번호:</span> 
-												<span style="font-size: 12px;">${notice.notice_no}</span>
+												<span style="font-size: 12px; display: none;">글 번호:</span> 
+												<span style="font-size: 12px; display: none;">${notice.notice_no}</span>
 											</p>
 											
 											<p>
-												<span style="font-size: 18px;"><strong>제목:</strong></span> 
-												<span style="font-size: 18px;"><strong>${notice.notice_title}</strong></span>
+												<span style="font-size: 28px;"><strong>${notice.notice_title}</strong></span>
 											</p>
 											
 											<p>
-												<span style="font-size: 12px;">글쓴이:</span> 
-												<span style="font-size: 12px;">${notice.empinfo_name}</span>
-											<p>
-											
-											<p>
-												<span style="font-size: 12px;">날짜:</span> 
-												<span style="font-size: 12px;">${notice.notice_createdat}</span> <br/>
+												<div class="d-flex align-items-center mb-sm-0 mb-3">
+											    <img
+											      src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
+												  alt="user-avatar"
+												  class="flex-shrink-0 rounded-circle me-2"
+												  height="38"
+												  width="38" />
+												<div class="flex-grow-1 ms-1">
+												  <h6 class="m-0" id="replyWriter" name="replyWriter">${notice.empinfo_name}</h6>
+												  <small class="text-muted" id="replyWriterEmail" name="replyWriterEmail">${notice.empinfo_email}</small>
+												  <small class="mb-0 me-3 text-muted" id="replyCreatedat" name="replyCreatedat">  /  ${notice.notice_createdat}</small>											    
+												</div>
+											  </div>
 											</p>
 										</div>	
 										<div class="card email-card-last mx-sm-4 mx-3 mt-4 border" style="margin-bottom:1.5rem;">																	
@@ -321,30 +326,57 @@
 							                              </c:forEach>
 							                         </c:if>
 					                            </span>
-					                          </div>
+				                          	</div>
 				                          </div>										
 										<a class="btn btn-primary btn-sm mt-2" href="inquiryList">목록</a>
-										<a class="btn btn-primary btn-sm mt-2" href="inquiryUpdate?notice_no=${notice.notice_no}">수정</a>
-										<a class="btn btn-primary btn-sm mt-2"data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">삭제</a>									
-										<!-- Modal -->
-										<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-										  <div class="modal-dialog">
-										    <div class="modal-content">
-										      <div class="modal-header">
-										        <h5 class="modal-title" id="exampleModalLabel">삭제하시겠습니까?</h5>
-										        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										      </div>
-										      <div class="modal-body">
-												게시물이 삭제됩니다.
-										      </div>
-										      <div class="modal-footer">
-										      	<textarea id="noticeNo" style="display: none">${notice.notice_no}</textarea>
-										        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-										        <button type="button" class="btn btn-primary" id="deleteButton">삭제</button> 
-										      </div>
-										    </div>
-										  </div>
-										</div>	
+										<c:if test="${now_emp_no == 0}">
+											<a class="btn btn-primary btn-sm mt-2" href="noticeUpdate?notice_no=${notice.notice_no}">수정</a>
+										    <a class="btn btn-primary btn-sm mt-2"data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">삭제</a>									
+											<!-- Modal -->
+											<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											  <div class="modal-dialog">
+											    <div class="modal-content">
+											      <div class="modal-header">
+											        <h5 class="modal-title" id="exampleModalLabel">삭제하시겠습니까?</h5>
+											        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											      </div>
+											      <div class="modal-body">
+													게시물이 삭제됩니다.
+											      </div>
+											      <div class="modal-footer">
+											      	<textarea id="noticeNo" style="display: none">${notice.notice_no}</textarea>
+											        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+											        <button type="button" class="btn btn-primary" id="deleteButton">삭제</button> 
+											      </div>
+											    </div>
+											  </div>
+											</div>
+										</c:if>
+										<c:if test="${now_emp_no != 0}">
+											<c:if test="${notice.empinfo_no == now_emp_no}">
+												<a class="btn btn-primary btn-sm mt-2" href="noticeUpdate?notice_no=${notice.notice_no}">수정</a>
+											    <a class="btn btn-primary btn-sm mt-2"data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">삭제</a>									
+												<!-- Modal -->
+												<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												  <div class="modal-dialog">
+												    <div class="modal-content">
+												      <div class="modal-header">
+												        <h5 class="modal-title" id="exampleModalLabel">삭제하시겠습니까?</h5>
+												        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+												      </div>
+												      <div class="modal-body">
+														게시물이 삭제됩니다.
+												      </div>
+												      <div class="modal-footer">
+												      	<textarea id="noticeNo" style="display: none">${notice.notice_no}</textarea>
+												        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+												        <button type="button" class="btn btn-primary" id="deleteButton">삭제</button> 
+												      </div>
+												    </div>
+												  </div>
+												</div>
+											</c:if>
+										</c:if>
 																	
 										<!-- 댓글 -->
 										  <hr />
@@ -411,33 +443,33 @@
 			                             </c:forEach>
  
 									     	<form action="#" id="replyDetail" enctype="multipart/form-data">
-							                        <div class="card email-card-last mx-sm-4 mx-3 mt-4 border">
-														<div class="card-body pt-3" style="padding-bottom:0px;">											
-									                        <div style="padding-top:10px;"><strong id="replyName">${loginResponse.empInfo_name}</strong></div>
-									                        <div style="padding-top:10px;">
-									                        	<input type="hidden" name="noticeNo" value="${inquiry.notice_no}"/>
-										                        <textarea id="replyContent" name="replyContent" rows="4" style="width:100%; border: none; height: 40px; outline: none;" placeholder="댓글을 작성해주세요"></textarea>
-									                        </div>
-															<div style="text-align: right;">
-															        <button type="button" form="replyAdd" onclick="" id="replyAdd" class="btn btn-primary btn-sm mt-2" style="margin-bottom:10px;">댓글 작성</button>
-															        <!-- 모달 -->
-												                    <div class="modal" id="modal-no-content">
-												                      <div class="modal-dialog">
-												                        <div class="modal-content">
-												                          <div class="modal-header">
-												                            <h5 class="modal-title">댓글을 입력하세요</h5>
-												                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-												                          </div>
-												                          <div class="modal-body text-start">내용을 작성해주세요.</div>
-												                          <div class="modal-footer">
-												                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
-												                          </div>
-												                        </div>
-												                      </div>
-												                    </div>
-															</div>
+						                        <div class="card email-card-last mx-sm-4 mx-3 mt-4 border">
+													<div class="card-body pt-3" style="padding-bottom:0px;">											
+								                        <div style="padding-top:10px;"><strong id="replyName">${loginResponse.empInfo_name}</strong></div>
+								                        <div style="padding-top:10px;">
+								                        	<input type="hidden" id="noticeNo" value="${notice.notice_no}"/>
+									                        <textarea id="replyContent" name="replyContent" rows="4" style="width:100%; border: none; height: 40px; outline: none;" placeholder="댓글을 작성해주세요"></textarea>
+								                        </div>
+														<div style="text-align: right;">
+													        <button type="button" form="replyAdd" onclick="" id="replyAdd" class="btn btn-primary btn-sm mt-2" style="margin-bottom:10px;">댓글 작성</button>
+													        <!-- 모달 -->
+										                    <div class="modal" id="modal-no-content">
+										                      <div class="modal-dialog">
+										                        <div class="modal-content">
+										                          <div class="modal-header">
+										                            <h5 class="modal-title">댓글을 입력하세요</h5>
+										                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+										                          </div>
+										                          <div class="modal-body text-start">내용을 작성해주세요.</div>
+										                          <div class="modal-footer">
+										                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+										                          </div>
+										                        </div>
+										                      </div>
+										                    </div>
 														</div>
-							                        </div>																				     	
+													</div>
+						                        </div>																				     	
 									     	</form>
 									</div>
 								</div>

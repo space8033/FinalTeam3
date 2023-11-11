@@ -62,4 +62,5 @@ public interface EmployeeService {
 	public void updateLogoutStatus(String emp_id);
 	public void deleteEmp(int emp_no);
 	public List<String> getTeamNames(int project_no);
+	List<String> getTeamNames1(int project_no);
 }

@@ -166,16 +166,18 @@ $(function () {
 	    $('#replyAdd').click(function() {
 	    	console.log("댓글 등록 클릭 성공");
 	    	var reply_content = $('#replyContent').val();
-	        var empInfoName = $('#replyName').val(); // empInfo_name
+	        var empInfoName = $('#replyName').html(); // empInfo_name
+	        var notice_no = $('#noticeNo').val();
 	        console.log("replyContent : "+ reply_content);
-	        //console.log("empinfoname : "+ empInfoName);
+	        console.log("empinfoname : "+ empInfoName);
+	        console.log("noticeNo : " + notice_no);
 
 	        if (!reply_content) {
 	            $('#modal-no-content').modal('show');
 	        } else {
 	            var replyData = {
 	            		reply_content: reply_content,
-	            		empinfo_name: $('#replyName').val(),
+	            		empinfo_name: $('#replyName').html(),
 	            		notice_no: $('#noticeNo').val()
 	            		//empInfoName: empInfoName
 	            };
@@ -186,7 +188,7 @@ $(function () {
 	            url: '/exodia/replyAdd', 
 	            data: replyData, 
 	            success: function(data) {
-	            	console.log("ajax부분 -> 댓글 입력값 db로 잘 들어감");
+	            	console.log("ajax부분 -> 댓글 입력값 db로 잘 들어감?");
 	            	location.reload();
 	            	
 	            },
