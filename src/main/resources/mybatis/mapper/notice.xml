@@ -11,7 +11,7 @@
 	</select>
 	
 	<select id="selectDetailByNoticeNo" parameterType="int" resultType="Notice">
-		SELECT notice.notice_no, empinfo.empinfo_name, empinfo.empinfo_email, notice.notice_title, notice.notice_content, notice.notice_createdat
+		SELECT notice.notice_no, empinfo.empinfo_no, empinfo.empinfo_name, empinfo.empinfo_email, notice.notice_title, notice.notice_content, notice.notice_createdat
 		FROM notice
 		INNER JOIN empinfo ON notice.empinfo_no_writer = empinfo.empinfo_no
 		where notice_no = #{notice_no}
