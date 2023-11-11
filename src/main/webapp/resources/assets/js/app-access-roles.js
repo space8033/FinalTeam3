@@ -121,7 +121,6 @@ $(function () {
           // Actions
           targets: 5,
           title: '상태',
-          orderable: false,
           render: function (data, type, full, meta) {
         	var $status = full['task_progress']
             
