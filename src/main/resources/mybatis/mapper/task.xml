@@ -40,6 +40,7 @@
 		and i.emp_no = e.emp_no
 		and t.team_name = #{team_name}
 		and e.emp_no != 0
+		and e.emp_deletedat is null
 	</select>
 	
 	<select id="countAllTask" resultType="int" parameterType="int">
