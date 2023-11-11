@@ -147,28 +147,3 @@ $(function () {
     });
   }
 });
-
-/*$(document).ready(function() {
-	//add task
-		console.log("insert시작");
-	    $('#noticeSubmit').click(function() {
-	    	console.log("공지사항 등록 클릭 성공");
-	        var noticeData = {
-	            notice_title: $('input[name=noticeTitle]').val(),
-	            notice_content: $('#noticeContent').val()
-	            //task_type: $('#eventLabel').val(),
-	            //task_startdate: $('input[name=eventStartDate]').val(),
-	            //task_enddate: $('input[name=eventEndDate]').val()
-	        };
-	        console.log(noticeData);
-
-	        $.ajax({
-	            type: 'post',
-	            url: '/exodia/noticeAdd', 
-	            data: noticeData, 
-	            success: function(data) {
-	            	console.log("ajax부분 -> 공지사항 입력값 db로 잘 들어감");
-	            }
-	        });
-	    });
-});*/

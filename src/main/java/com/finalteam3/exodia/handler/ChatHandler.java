@@ -123,6 +123,14 @@ public class ChatHandler extends TextWebSocketHandler{
 				
 				int numberOfSessions = roomList.get(chatMessage.getChatRoom_no()).size();
 				System.out.println("현재 세션 개수: " + numberOfSessions);
+				chatDao.insertChatMessage(chatMessage);
+				
+				int chatMsgNo = chatMessage.getChatMessage_no();
+				
+				ChatRoom chatRoom = new ChatRoom();
+				chatRoom.setChatRoom_lastMsgId(chatMsgNo);
+				chatRoom.setChatRoom_no(chatMessage.getChatRoom_no());
+				chatDao.updateChatRoom(chatRoom);
 				
 				
 				log.info(roomList.get(chatMessage.getChatRoom_no()).toString()+"채팅방 얼마나 있나봅시다..ㅜ");
@@ -133,7 +141,7 @@ public class ChatHandler extends TextWebSocketHandler{
 					alarm.setAlarm_isRead(false);
 					alarm.setAlarm_type("채팅");
 					alarm.setEmpinfo_no(receiverNo);
-					alarm.setAlarm_typeNo(chatMessage.getChatRoom_no());
+					alarm.setAlarm_typeNo(chatMessage.getChatMessage_no());
 					
 					for(WebSocketSession sess : roomList.get(chatMessage.getChatRoom_no())) {
 						log.info("읽으면 안돼!");
@@ -155,14 +163,6 @@ public class ChatHandler extends TextWebSocketHandler{
 					
 				}
 				
-				chatDao.insertChatMessage(chatMessage);
-				
-				int chatMsgNo = chatMessage.getChatMessage_no();
-				
-				ChatRoom chatRoom = new ChatRoom();
-				chatRoom.setChatRoom_lastMsgId(chatMsgNo);
-				chatRoom.setChatRoom_no(chatMessage.getChatRoom_no());
-				chatDao.updateChatRoom(chatRoom);
 				
 				log.info("채팅방 내용");
 			}

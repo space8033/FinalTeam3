@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class LoginResponse {
+	private int empInfo_no;
 	private int emp_no;
 	private String emp_id;
 	private String emp_password;

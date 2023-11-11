@@ -32,6 +32,15 @@
 	  order by alarm_createdAt desc
 	</select>
 	
+	<select id="selectUckAlarmList" parameterType="int" resultType="AlarmRequest">
+		select ALARM_NO, ALARM_CREATEDAT, ALARM_ISREAD, ALARM_TYPE, ALARM_TYPENO, ALARM_TOAST
+		  from alarm
+		 where empinfo_no = #{empinfo_no}
+		   and alarm_deletedAt IS NULL
+		   and alarm_isread = 0
+	  order by alarm_no desc
+	</select>
+	
 	<update id="deleteAlarmByAlarmNo" parameterType="int">
 		update alarm 
 		   set alarm_deletedAt=to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
@@ -41,6 +50,12 @@
 	<update id="updateAlarmReadByAlarmNo" parameterType="AlarmRequest">
 		update alarm
 		   set alarm_isRead = #{alarm_isRead}
+  		 where alarm_no = #{alarm_no}
+	</update>
+	
+	<update id="alarmToastUpdate" parameterType="int">
+		update alarm
+		   set alarm_toast = to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
   		 where alarm_no = #{alarm_no}
 	</update>
 	

@@ -10,11 +10,17 @@
 	   
 	sock.onopen = function() {
 		
-		var emp_id = $("#alarmId").val();
-		sock.send(emp_id);
+		wsSend();
 		
 	
 	};
+	
+	var wsSend=()=>{
+	      setInterval(function() {
+	    	  var emp_id = $("#alarmId").val();
+	         sock.send(emp_id);
+	      }, 10000);
+    }
 
 	sock.onmessage = function(e) {
 		console.log("핸들러에서 전송한 메세지",e.data);
@@ -29,29 +35,32 @@
 		
 		
 	    var v_alarmIcon = document.querySelector("#alarmIcon");
-	    v_alarmIcon.classList.remove('d-none');
-	    v_alarmIcon.innerText = count;
-	    var alarmContent = document.querySelector("#alarm");
-	    var bellAlarm = document.querySelector("#bellAlarm");
-	    bellAlarm.classList.add("vibration");
-	    setTimeout(function() {
-	    	bellAlarm.classList.remove("vibration");
-	    }, 2000);
+	    if(v_alarmIcon) {
+		    v_alarmIcon.classList.remove('d-none');
+		    v_alarmIcon.innerText = count;
+		    var alarmContent = document.querySelector("#alarm");
+		    var bellAlarm = document.querySelector("#bellAlarm");
+		    bellAlarm.classList.add("vibration");
+		    setTimeout(function() {
+		    	bellAlarm.classList.remove("vibration");
+		    }, 2000);
+		    
+
+		    if (alarmContent.classList.contains("show")) {
+		        // "show" 클래스가 있을 때 실행할 작업
+		        console.log("alarmContent의 클래스에 'show'가 있습니다.");
+		        showAlarm();
+		        // 다른 작업 수행
+		    } 
+	    }
 	    
 	    
-	    if (alarmContent.classList.contains("show")) {
-	        // "show" 클래스가 있을 때 실행할 작업
-	        console.log("alarmContent의 클래스에 'show'가 있습니다.");
-	        showAlarm();
-	        // 다른 작업 수행
-	    } 
-	    
-	    if(msg !== "") {
+	    /*if(msg !== "") {
 	    	var alarmToast = document.querySelector("#alarmToast");
 	    	alarmToast.classList.add('show');
 	    	var alarmMsg = document.querySelector("#alarmMsg");
 	    	alarmMsg.innerText = msg;
-	    }
+	    }*/
 	    
 	    if(cmd === "쪽지") {
 	    	var alarmToast = document.querySelector("#alarmToast");
@@ -60,7 +69,105 @@
 	    	alarmMsg.innerText = "제목 : " + title + sender + "님으로부터 1개의 쪽지가 도착하였습니다!"
 	    	setTimeout(function() {
 	    		alarmToast.classList.remove("show");
-		    }, 100000);
+		    }, 10000);
+	    	
+	    } else if(cmd === "채팅") {
+	    	
+	    	console.log("일단 채팅 여기들어오는지");
+	    	var alarmToast = document.querySelector("#alarmToast");
+	    	if(alarmToast) {
+		    	alarmToast.classList.add('show');
+		    	var alarmMsg = document.querySelector("#alarmMsg");
+		    	alarmMsg.innerHTML = sender + "님으로부터 1:1 메세지가 도착하였습니다!" + "<br>" + "내용 : " + title;
+		    	setTimeout(function() {
+		    		alarmToast.classList.remove("show");
+			    }, 100000);
+	    	}
+	
+	    	var chatList = $("#app-chat-contacts");
+	    	if(chatList) {
+	    		console.log("일단 채팅리스트가있는지");
+	    		var emp_no = $("#empInfoNo").val();
+	    		if(emp_no == null) {
+	    			emp_no = "챗방없음";
+	    		}
+	    		
+	    	    var postdata = {
+	    	   		 emp_no: emp_no
+	    	   	};
+	    	   	
+	    	   	$.ajax({
+	    	   		url: "/exodia/chatList",
+	    	   		type: "GET",
+	    	   		data: postdata
+	    	   		
+	    	   	}).done(function(result) {
+	    	    
+	    	   		
+	    	      	    var html = jQuery('<div>').html(result);
+	    	           var contents = html.find("div#chatList").html();
+	    	        	$("#app-chat-contacts").html(contents);
+	    	        	
+	    	           new PerfectScrollbar('.app-chat-contacts .sidebar-body', {
+	    	   		        wheelPropagation: false,
+	    	   		        suppressScrollX: true
+	    	   		      });
+	    			    
+	    	           const searchInput = document.querySelector('.chat-search-input');
+	    	   		     searchInput.addEventListener('keyup', e => {
+	    	   		         let searchValue = e.currentTarget.value.toLowerCase(),
+	    	   		           searchChatListItemsCount = 0,
+	    	   		           searchContactListItemsCount = 0,
+	    	   		           chatListItem0 = document.querySelector('.chat-list-item-0'),
+	    	   		           contactListItem0 = document.querySelector('.contact-list-item-0'),
+	    	   		           searchChatListItems = [].slice.call(
+	    	   		             document.querySelectorAll('#chat-list li:not(.chat-contact-list-item-title)')
+	    	   		           ),
+	    	   		           searchContactListItems = [].slice.call(
+	    	   		             document.querySelectorAll('#contact-list li:not(.chat-contact-list-item-title)')
+	    	   		           );
+
+	    	   		         // Search in chats
+	    	   		         searchChatContacts(searchChatListItems, searchChatListItemsCount, searchValue, chatListItem0);
+	    	   		         // Search in contacts
+	    	   		         searchChatContacts(searchContactListItems, searchContactListItemsCount, searchValue, contactListItem0);
+	    	   		       });
+	    	   		     
+	    	   		     function handleKeyPress(event) {
+	    	   		    	    if (event.key === "Enter") {
+	    	   		    	    	buttonSend();
+	    	   		    	    }
+	    	   		    	}
+	    	   		     
+	    	   		     function searchChatContacts(searchListItems, searchListItemsCount, searchValue, listItem0) {
+	    	   		         searchListItems.forEach(searchListItem => {
+	    	   		           let searchListItemText = searchListItem.textContent.toLowerCase();
+	    	   		           if (searchValue) {
+	    	   		             if (-1 < searchListItemText.indexOf(searchValue)) {
+	    	   		               searchListItem.classList.add('d-flex');
+	    	   		               searchListItem.classList.remove('d-none');
+	    	   		               searchListItemsCount++;
+	    	   		             } else {
+	    	   		               searchListItem.classList.add('d-none');
+	    	   		             }
+	    	   		           } else {
+	    	   		             searchListItem.classList.add('d-flex');
+	    	   		             searchListItem.classList.remove('d-none');
+	    	   		             searchListItemsCount++;
+	    	   		           }
+	    	   		         });
+	    	   		         // Display no search fount if searchListItemsCount == 0
+	    	   		         if (searchListItemsCount == 0) {
+	    	   		           listItem0.classList.remove('d-none');
+	    	   		         } else {
+	    	   		           listItem0.classList.add('d-none');
+	    	   		         }
+	    	   		       }
+	    	   	});
+	    		
+	    	} 
+	    	
+	    		
 	    	
 	    }
 	};
@@ -164,6 +271,11 @@ function pageMove(alarm_no, alarm_type, alarm_typeNo) {
 	  	 
   		
 	
+		
+	} else if(alarmType === '채팅' && clickedItem !==excludedItem) {
+		
+		var url = "/exodia/chat";
+	    var popup = window.open(url, "MyPopup", "width=1100, height=700");
 		
 	}
 }

@@ -16,4 +16,6 @@ public interface AlarmDao {
 	public List<AlarmRequest> selectAlarmList(int empinfoNo);
 	public void deleteAlarmByAlarmNo(int alarm_no);
 	public void updateAlarmReadByAlarmNo(AlarmRequest alarm);
+	public List<AlarmRequest> selectUckAlarmList(int empinfoNo);
+	public void alarmToastUpdate(int alarm_no);
 }

@@ -1,4 +1,4 @@
-package com.finalteam3.exodia.employee.service;
+ package com.finalteam3.exodia.employee.service;
 
 import java.util.List;
 import java.util.Map;
@@ -61,4 +61,5 @@ public interface EmployeeService {
 	public List<ProjectEmpResponse> getAllEmp(int project_no);
 	public void updateLogoutStatus(String emp_id);
 	public void deleteEmp(int emp_no);
+	public List<String> getTeamNames(int project_no);
 }

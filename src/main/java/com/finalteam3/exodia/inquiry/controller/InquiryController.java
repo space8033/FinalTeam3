@@ -21,6 +21,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
+import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.inquiry.dto.Inquiry;
 import com.finalteam3.exodia.inquiry.dto.Reply;
 import com.finalteam3.exodia.inquiry.service.InquiryService;
@@ -44,6 +45,9 @@ public class InquiryController {
 	
 	@Resource
 	private EmployeeDao employeeDao;
+	
+	@Resource
+	private EmployeeService employeeService;
 	
 	//문의사항 리스트 조회
 	@GetMapping("/inquiryList")
@@ -84,8 +88,14 @@ public class InquiryController {
 			String emp_id = loginResponse.getEmp_id();
 			model.addAttribute("emp_id", emp_id);
 			
+			List<String> tNames = employeeDao.selectTeamname(0);
+			model.addAttribute("tNames", tNames);
+			
 			String emp_name = loginResponse.getEmpInfo_name();
 			model.addAttribute("empInfo_name", emp_name);
+			
+			log.info("팀이름이 뭔데" + model);
+			
 			return "inquiryAdd";
 		}
 		
