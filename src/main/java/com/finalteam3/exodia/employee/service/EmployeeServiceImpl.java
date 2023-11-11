@@ -386,11 +386,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-<<<<<<< HEAD
 	public List<String> getTeamNames(int project_no) {
 		List<String> list = employeeDao.selectTeamname(project_no);
 		return list;
-=======
+	}
 	public TimeLineResponse getTimeLineByEmpNo(Map<String, Object> map) {
 		TimeLineResponse timeLineResponse = employeeDao.selectTimeLineResponse(map);
 		
@@ -446,6 +445,6 @@ public class EmployeeServiceImpl implements EmployeeService{
 		timeLineResponse.setTeam_memberCount(employeeDao.selectTeamEmp(timeLineResponse.getTeam_name()).size() + 1);
 		
 		return timeLineResponse;
->>>>>>> branch 'master' of https://github.com/space8033/FinalTeam3.git
+
 	}
 }

@@ -9,5 +9,6 @@ public interface AlarmService {
 	public List<AlarmRequest> getAlarmList(int empInfoNo);
 	public void deleteAlarm(int alarmNo);
 	public void updateAlarmRead(int alarmNo);
+	public int uckAlarmCount(int empInfoNo);
 
 }

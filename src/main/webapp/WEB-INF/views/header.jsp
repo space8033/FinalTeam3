@@ -25,6 +25,48 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
 
+<script>
+window.addEventListener('message', function (event) {
+    if (event.data.type === 'websocket_message') {
+        const message = event.data.data;
+        // 여기서 메시지를 처리
+        handleWebSocketMessage(message);
+    }
+});
+
+function handleWebSocketMessage(message) {
+    // 웹소켓 메시지 처리 로직
+    console.log('Handling WebSocket Message:', message);
+    const msg = message.msg;
+    const count = message.count;
+    const cmd = message.cmd;
+    const title = message.title;
+    const sender = message.sender;
+    if(cmd === "쪽지") {
+    	var alarmToast = document.querySelector("#alarmToast");
+    	alarmToast.classList.add('show');
+    	var alarmMsg = document.querySelector("#alarmMsg");
+    	alarmMsg.innerText = "제목 : " + title + "<br>" + sender + "님으로부터 1개의 쪽지가 도착하였습니다!"
+    	setTimeout(function() {
+    		alarmToast.classList.remove("show");
+	    }, 3000);
+    	
+    } else if(cmd === "채팅") {
+    	var alarmToast = document.querySelector("#alarmToast");
+		if(alarmToast) {
+	    	alarmToast.classList.add('show');
+	    	var alarmMsg = document.querySelector("#alarmMsg");
+	    	alarmMsg.innerHTML = sender + "님으로부터 1:1 채팅이 도착하였습니다!" + "<br>" + "내용 : " + title;
+	    	setTimeout(function() {
+	    		alarmToast.classList.remove("show");
+		    }, 3000);
+		}
+    	
+       /* updateChatList(message);*/
+    	
+    }
+}
+</script>
 
 
 
@@ -262,7 +304,7 @@
                    <span class="d-flex align-items-center align-middle">
                	  <i class="bx bx-envelope me-3"></i>
                 	  <span class="flex-grow-1 align-middle">쪽지함</span>
-                 	  <span class="badge badge-center rounded-pill bg-label-warning">1</span>
+                 	  <span class="badge badge-center rounded-pill bg-label-warning" id="moveNote">1</span>
                  	</span>
                  </a>
                </li>
@@ -271,7 +313,7 @@
                    <span class="d-flex align-items-center align-middle">
                      <i class="bx bx-chat me-3"></i>
                      <span class="flex-grow-1 align-middle">채팅</span>
-                     <span class="badge badge-center rounded-pill bg-label-primary">1</span>
+                     <span class="badge badge-center rounded-pill bg-label-primary" id="moveChat">1</span>
                    </span>
                  </a>
                </li>

@@ -1042,5 +1042,44 @@ public class NoteController {
 		return "redirect:/note";
 	}
 	
+	//실시간 수신메세지함 갯수변경
+	@GetMapping("/getUckNoteNo")
+	@ResponseBody
+	public Map<String, Integer> getUckNoteNo(Authentication authentication) {
+	    EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		 
+		 int uckNo = noteService.countByUnreadNoteNo(loginResponse.getEmp_no());
+		 Map<String, Integer> response = new HashMap<>();
+	     response.put("uckNo", uckNo);
+		
+		return response;
+	}
+	
+	//실시간 메세지함 개수변경
+	@GetMapping("/updateNoteNo")
+	@ResponseBody
+	public Map<String, Integer> updateNoteNo(Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		
+		int empNo = loginResponse.getEmp_no();
+		int uckNo = noteService.countByUnreadNoteNo(empNo);
+		int trashNo = noteService.countByNoteTrashNo(empNo);
+		int draftNo = noteService.countByNoteDraftNo(empNo);
+		int starredNo = noteService.countByNoteStarredNo(empNo);
+		
+		Map<String, Integer> response = new HashMap<>();
+		response.put("uckNo", uckNo);
+		response.put("trashNo", trashNo);
+		response.put("draftNo", draftNo);
+		response.put("starredNo", starredNo);
+		log.info(uckNo+"수신"+trashNo+"휴지"+draftNo+"임시"+starredNo+"중요");
+		
+		return response;
+	}
+	
 	
 }

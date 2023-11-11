@@ -16,26 +16,32 @@
 	};
 	
 	var wsSend=()=>{
+		
+		  showAlarmCount();
 	      setInterval(function() {
 	    	  var emp_id = $("#alarmId").val();
 	         sock.send(emp_id);
-	      }, 10000);
+	      }, 30000);
     }
 
-	sock.onmessage = function(e) {
-		console.log("핸들러에서 전송한 메세지",e.data);
-		
-		const message = JSON.parse(e.data);
-		const msg = message.msg;
-		const count = message.count;
-		const cmd = message.cmd;
-		const title = message.title;
-		const sender = message.sender;
-		
-		
-		
+	function handleWebSocketMessage(message) {
+	    console.log('Handling WebSocket Message:', message);
+	    const msg = message.msg;
+	    const count = message.count;
+	    const cmd = message.cmd;
+	    const title = message.title;
+	    const sender = message.sender;
+
+	    // 팝업 페이지 갱신
+	    $.get("/exodia/chatList?emp_no=1", function(result){
+			updateChatList(result);
+		});
+
+	    // 메인 페이지 토스트 알람 띄우기
+	    showToast(msg, count, cmd, title, sender);
+	    
 	    var v_alarmIcon = document.querySelector("#alarmIcon");
-	    if(v_alarmIcon) {
+	    if(v_alarmIcon && cmd != null) {
 		    v_alarmIcon.classList.remove('d-none');
 		    v_alarmIcon.innerText = count;
 		    var alarmContent = document.querySelector("#alarm");
@@ -43,7 +49,7 @@
 		    bellAlarm.classList.add("vibration");
 		    setTimeout(function() {
 		    	bellAlarm.classList.remove("vibration");
-		    }, 2000);
+		    }, 3000);
 		    
 
 		    if (alarmContent.classList.contains("show")) {
@@ -52,142 +58,269 @@
 		        showAlarm();
 		        // 다른 작업 수행
 		    } 
-	    }
-	    
-	    
-	    /*if(msg !== "") {
-	    	var alarmToast = document.querySelector("#alarmToast");
-	    	alarmToast.classList.add('show');
-	    	var alarmMsg = document.querySelector("#alarmMsg");
-	    	alarmMsg.innerText = msg;
-	    }*/
-	    
+	    } else if(v_alarmIcon && cmd == null) {
+	    	v_alarmIcon.classList.remove('d-none');
+		    v_alarmIcon.innerText = count;
+	    }   
+	}
+
+	function showToast(msg, count, cmd, title, sender) {
+		
 	    if(cmd === "쪽지") {
 	    	var alarmToast = document.querySelector("#alarmToast");
 	    	alarmToast.classList.add('show');
 	    	var alarmMsg = document.querySelector("#alarmMsg");
-	    	alarmMsg.innerText = "제목 : " + title + sender + "님으로부터 1개의 쪽지가 도착하였습니다!"
+	    	alarmMsg.innerHTML = sender + "님으로부터 쪽지가 도착하였습니다!" + "<br>" + "제목 : " + title
 	    	setTimeout(function() {
 	    		alarmToast.classList.remove("show");
-		    }, 10000);
+		    }, 4000);
+	    	
+	    	let inbox = "수신";
+    		var postData = {
+    			inbox: inbox
+            };
+            
+            // AJAX 요청으로 데이터 전송
+            $.ajax({
+            	url: "/exodia/noteInbox",
+                type: "GET",
+                data: postData
+               
+            }).done(function(result) {
+            	console.log("결과확인");
+            	var html = jQuery('<div>').html(result);
+            	var contents = html.find("div#noteContent").html();
+            	$("#refreshNoteContent").html(contents);
+            	$("#app-email-view").removeClass("show");
+            	
+            	var emailListInstance = new PerfectScrollbar('.email-list', {
+            	        wheelPropagation: false,
+            	        suppressScrollX: true
+            	});
+            	
+            }).fail(function (jqXHR, textStatus, errorThrown) {
+            	console.log("에러");
+            	console.log(jqXHR);
+            	console.log(textStatus);
+            	console.log(errorThrown);
+            	
+            });
+            
+            $.ajax({
+        	    url: '/exodia/getUckNoteNo',
+        	    type: 'GET',
+        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+        	    success: function(response) {
+        	        // 서버에서 받아온 숫자 값
+        	        var uckNo = response.uckNo;
+
+        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+        	        console.log('Received number:', uckNo);
+        	        var unreadNote = document.querySelector("#unreadNote");
+        	        var moveNote = document.querySelector("#moveNote");
+        	        if (uckNo === 0) {
+        	        	unreadNote.classList.add('d-none');
+        	        	moveNote.classList.add('d-none');
+        	        } else {
+        	        	unreadNote.classList.remove('d-none');
+        	        	unreadNote.innerText = uckNo;
+        	        	moveNote.classList.remove('d-none');
+        	        	moveNote.innerText = uckNo;
+        	            
+        	        }
+        	        
+        	       
+        	        
+        	    },
+        	    error: function(error) {
+        	        console.error('Error fetching data:', error);
+        	    }
+        	});
+            
+            
 	    	
 	    } else if(cmd === "채팅") {
-	    	
-	    	console.log("일단 채팅 여기들어오는지");
 	    	var alarmToast = document.querySelector("#alarmToast");
-	    	if(alarmToast) {
+			if(alarmToast) {
 		    	alarmToast.classList.add('show');
 		    	var alarmMsg = document.querySelector("#alarmMsg");
-		    	alarmMsg.innerHTML = sender + "님으로부터 1:1 메세지가 도착하였습니다!" + "<br>" + "내용 : " + title;
+		    	alarmMsg.innerHTML = sender + "님으로부터 1:1 채팅이 도착하였습니다!" + "<br>" + "내용 : " + title;
 		    	setTimeout(function() {
 		    		alarmToast.classList.remove("show");
-			    }, 100000);
-	    	}
-	
-	    	var chatList = $("#app-chat-contacts");
-	    	if(chatList) {
-	    		console.log("일단 채팅리스트가있는지");
-	    		var emp_no = $("#empInfoNo").val();
-	    		if(emp_no == null) {
-	    			emp_no = "챗방없음";
-	    		}
-	    		
-	    	    var postdata = {
-	    	   		 emp_no: emp_no
-	    	   	};
-	    	   	
-	    	   	$.ajax({
-	    	   		url: "/exodia/chatList",
-	    	   		type: "GET",
-	    	   		data: postdata
-	    	   		
-	    	   	}).done(function(result) {
-	    	    
-	    	   		
-	    	      	    var html = jQuery('<div>').html(result);
-	    	           var contents = html.find("div#chatList").html();
-	    	        	$("#app-chat-contacts").html(contents);
-	    	        	
-	    	           new PerfectScrollbar('.app-chat-contacts .sidebar-body', {
-	    	   		        wheelPropagation: false,
-	    	   		        suppressScrollX: true
-	    	   		      });
-	    			    
-	    	           const searchInput = document.querySelector('.chat-search-input');
-	    	   		     searchInput.addEventListener('keyup', e => {
-	    	   		         let searchValue = e.currentTarget.value.toLowerCase(),
-	    	   		           searchChatListItemsCount = 0,
-	    	   		           searchContactListItemsCount = 0,
-	    	   		           chatListItem0 = document.querySelector('.chat-list-item-0'),
-	    	   		           contactListItem0 = document.querySelector('.contact-list-item-0'),
-	    	   		           searchChatListItems = [].slice.call(
-	    	   		             document.querySelectorAll('#chat-list li:not(.chat-contact-list-item-title)')
-	    	   		           ),
-	    	   		           searchContactListItems = [].slice.call(
-	    	   		             document.querySelectorAll('#contact-list li:not(.chat-contact-list-item-title)')
-	    	   		           );
-
-	    	   		         // Search in chats
-	    	   		         searchChatContacts(searchChatListItems, searchChatListItemsCount, searchValue, chatListItem0);
-	    	   		         // Search in contacts
-	    	   		         searchChatContacts(searchContactListItems, searchContactListItemsCount, searchValue, contactListItem0);
-	    	   		       });
-	    	   		     
-	    	   		     function handleKeyPress(event) {
-	    	   		    	    if (event.key === "Enter") {
-	    	   		    	    	buttonSend();
-	    	   		    	    }
-	    	   		    	}
-	    	   		     
-	    	   		     function searchChatContacts(searchListItems, searchListItemsCount, searchValue, listItem0) {
-	    	   		         searchListItems.forEach(searchListItem => {
-	    	   		           let searchListItemText = searchListItem.textContent.toLowerCase();
-	    	   		           if (searchValue) {
-	    	   		             if (-1 < searchListItemText.indexOf(searchValue)) {
-	    	   		               searchListItem.classList.add('d-flex');
-	    	   		               searchListItem.classList.remove('d-none');
-	    	   		               searchListItemsCount++;
-	    	   		             } else {
-	    	   		               searchListItem.classList.add('d-none');
-	    	   		             }
-	    	   		           } else {
-	    	   		             searchListItem.classList.add('d-flex');
-	    	   		             searchListItem.classList.remove('d-none');
-	    	   		             searchListItemsCount++;
-	    	   		           }
-	    	   		         });
-	    	   		         // Display no search fount if searchListItemsCount == 0
-	    	   		         if (searchListItemsCount == 0) {
-	    	   		           listItem0.classList.remove('d-none');
-	    	   		         } else {
-	    	   		           listItem0.classList.add('d-none');
-	    	   		         }
-	    	   		       }
-	    	   	});
-	    		
-	    	} 
+			    }, 4000);
+			}
 	    	
-	    		
+	       /* updateChatList(message);*/
 	    	
 	    }
+	}
+
+	sock.onmessage = function (e) {
+	    console.log("WebSocket Message Received:", e.data);
+
+	    const message = JSON.parse(e.data);
+
+	    // 공통 로직 수행
+	    handleWebSocketMessage(message);
+	    window.postMessage({ type: 'websocket_message', data: message }, '*');
 	};
 
-	function wsSend() {
-	   
-	}
+function updateChatList(result){
 	
-	function sendMsg() {
-		var title = document.querySelector("#email-subject").value;
-		var sender = document.getElementById('alarmId').value;
-		var receiver = document.getElementById('emailContacts').value;
-		var receiverCC = document.getElementById('selectpickerSelectDeselect').value;
-		var receiverBCC = document.getElementById('selecBcc').value;
-		let socketMsg = "note,"+title+","+sender+","+receiver+","+receiverCC+","+receiverBCC;
-		console.log(socketMsg+"가긴가니");
-		sock.send(socketMsg);
-		console.log("소켓메시지");
+
+	    console.log("메인타고드러온놈");
+	   var chatList = $("#app-chat-contacts");
+	   
+	   if(chatList) {
+	   
+      	   var html = jQuery('<div>').html(result);
+           var contents = html.find("div#chatList").html();
+        	$("#app-chat-contacts").html(contents);
+        	$("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
+            
+            var empinfono = $("#chatEmpInfoNo").val();
+            console.log(empinfono+"왜애드클래스갑자기못해너?");
+            $("#"+empinfono).addClass("active");
+           new PerfectScrollbar('.app-chat-contacts .sidebar-body', {
+   		        wheelPropagation: false,
+   		        suppressScrollX: true
+   		      });
+		    
+           const searchInput = document.querySelector('.chat-search-input');
+   		     searchInput.addEventListener('keyup', e => {
+   		         let searchValue = e.currentTarget.value.toLowerCase(),
+   		           searchChatListItemsCount = 0,
+   		           searchContactListItemsCount = 0,
+   		           chatListItem0 = document.querySelector('.chat-list-item-0'),
+   		           contactListItem0 = document.querySelector('.contact-list-item-0'),
+   		           searchChatListItems = [].slice.call(
+   		             document.querySelectorAll('#chat-list li:not(.chat-contact-list-item-title)')
+   		           ),
+   		           searchContactListItems = [].slice.call(
+   		             document.querySelectorAll('#contact-list li:not(.chat-contact-list-item-title)')
+   		           );
+
+   		         // Search in chats
+   		         searchChatContacts(searchChatListItems, searchChatListItemsCount, searchValue, chatListItem0);
+   		         // Search in contacts
+   		         searchChatContacts(searchContactListItems, searchContactListItemsCount, searchValue, contactListItem0);
+   		       });
+   		     
+   		     function handleKeyPress(event) {
+   		    	    if (event.key === "Enter") {
+   		    	    	buttonSend();
+   		    	    }
+   		    	}
+   		     
+   		     function searchChatContacts(searchListItems, searchListItemsCount, searchValue, listItem0) {
+   		         searchListItems.forEach(searchListItem => {
+   		           let searchListItemText = searchListItem.textContent.toLowerCase();
+   		           if (searchValue) {
+   		             if (-1 < searchListItemText.indexOf(searchValue)) {
+   		               searchListItem.classList.add('d-flex');
+   		               searchListItem.classList.remove('d-none');
+   		               searchListItemsCount++;
+   		             } else {
+   		               searchListItem.classList.add('d-none');
+   		             }
+   		           } else {
+   		             searchListItem.classList.add('d-flex');
+   		             searchListItem.classList.remove('d-none');
+   		             searchListItemsCount++;
+   		           }
+   		         });
+   		         // Display no search fount if searchListItemsCount == 0
+   		         if (searchListItemsCount == 0) {
+   		           listItem0.classList.remove('d-none');
+   		         } else {
+   		           listItem0.classList.add('d-none');
+   		         }
+   		       }
+		   /*	});*/
 		
-	}
+	} 
+	
+}
+function showAlarmCount() {
+	$.ajax({
+	    url: '/exodia/getUckAlarmNo',
+	    type: 'GET',
+	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+	    success: function(response) {
+	        // 서버에서 받아온 숫자 값
+	        var uckNo = response.uckNo;
+
+	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+	        console.log('Received number:', uckNo);
+	        var v_alarmIcon = document.querySelector("#alarmIcon");
+	        if (uckNo === 0) {
+	        	v_alarmIcon.classList.add('d-none');
+	            console.log('uckNo is 0');
+	        } else {
+	        	v_alarmIcon.classList.remove('d-none');
+    		    v_alarmIcon.innerText = uckNo;
+	            console.log('uckNo is not 0');
+	            var alarmToast = document.querySelector("#alarmToast");
+		        var alarmId = document.querySelector("#alarmId").value;
+		    	alarmToast.classList.add('show');
+		    	var alarmMsg = document.querySelector("#alarmMsg");
+		    	alarmMsg.innerHTML = alarmId + "님 " + uckNo +"개의 미확인 알람이 있습니다."
+		    	setTimeout(function() {
+		    		alarmToast.classList.remove("show");
+			    }, 4000);
+	        }
+	        
+	        $.ajax({
+        	    url: '/exodia/getUckNoteNo',
+        	    type: 'GET',
+        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+        	    success: function(response) {
+        	        // 서버에서 받아온 숫자 값
+        	        var uckNo = response.uckNo;
+
+        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+        	        console.log('Received number:', uckNo);
+        	        var moveNote = document.querySelector("#moveNote");
+        	        if (uckNo === 0) {
+        	        	moveNote.classList.add('d-none');
+        	        } else {
+        	        	moveNote.classList.remove('d-none');
+        	        	moveNote.innerText = uckNo;
+        	            
+        	        }
+        	        
+        	       
+        	        
+        	    },
+        	    error: function(error) {
+        	        console.error('Error fetching data:', error);
+        	    }
+        	});
+	        
+	    },
+	    error: function(error) {
+	        console.error('Error fetching data:', error);
+	    }
+	});
+	
+	
+}
+function wsSend() {
+   
+}
+	
+function sendMsg() {
+	/*var title = document.querySelector("#email-subject").value;
+	var sender = document.getElementById('alarmId').value;
+	var receiver = document.getElementById('emailContacts').value;
+	var receiverCC = document.getElementById('selectpickerSelectDeselect').value;
+	var receiverBCC = document.getElementById('selecBcc').value;
+	let socketMsg = "note,"+title+","+sender+","+receiver+","+receiverCC+","+receiverBCC;
+	console.log(socketMsg+"가긴가니");
+	sock.send(socketMsg);
+	console.log("소켓메시지");*/
+	
+}
 	
 	
 function pageMove(alarm_no, alarm_type, alarm_typeNo) {
@@ -196,10 +329,10 @@ function pageMove(alarm_no, alarm_type, alarm_typeNo) {
 	var alarmNo = alarm_no;
 	const clickedItem = event.currentTarget;
 	console.log(clickedItem);
+	$("#a-"+alarm_no).addClass("marked-as-read");
 	const excludedItem = document.querySelector(".dropdown-notifications-archive");
 	if(alarmType === '쪽지' && clickedItem !==excludedItem) {
-		var url = "/exodia/noteDetailView?noteReadNo=" + alarm_typeNo;
-		var popup = window.open(url, "MyPopup", "width=800, height=500");
+		
 		var postData = {
 				alarm_no: alarmNo
 		};
@@ -211,6 +344,34 @@ function pageMove(alarm_no, alarm_type, alarm_typeNo) {
 		        
 		        }).done(function(result) {
 		        	console.log("알람읽음처리완료");
+		        	
+		        	$.ajax({
+		        	    url: '/exodia/getUckAlarmNo',
+		        	    type: 'GET',
+		        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+		        	    success: function(response) {
+		        	        // 서버에서 받아온 숫자 값
+		        	        var uckNo = response.uckNo;
+
+		        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+		        	        console.log('Received number:', uckNo);
+		        	        var v_alarmIcon = document.querySelector("#alarmIcon");
+		        	        if (uckNo === 0) {
+		        	        	v_alarmIcon.classList.add('d-none');
+		        	            console.log('uckNo is 0');
+		        	        } else {
+		        	        	v_alarmIcon.classList.remove('d-none');
+			        		    v_alarmIcon.innerText = uckNo;
+		        	            console.log('uckNo is not 0');
+		        	        }
+		        	        
+		        	    },
+		        	    error: function(error) {
+		        	        console.error('Error fetching data:', error);
+		        	    }
+		        	});
+		        	var url = "/exodia/noteDetailView?noteReadNo=" + alarm_typeNo;
+		    		var popup = window.open(url, "MyPopup", "width=800, height=500");
 		        	var data = {
 		        	        readUpdateId: noteReadNo
 		                };
@@ -222,36 +383,7 @@ function pageMove(alarm_no, alarm_type, alarm_typeNo) {
 		                    data: data,
 		                    success: function(response) {
 		                    	
-		                    	let inbox = "수신";
-		                		var postData = {
-		                			inbox: inbox
-		                        };
-		                        
-		                        // AJAX 요청으로 데이터 전송
-		                        $.ajax({
-		                        	url: "/exodia/noteInbox",
-		                            type: "GET",
-		                            data: postData
-		                           
-		                        }).done(function(result) {
-		                        	console.log("결과확인");
-		                        	var html = jQuery('<div>').html(result);
-		                        	var contents = html.find("div#noteContent").html();
-		                        	$("#refreshNoteContent").html(contents);
-		                        	$("#app-email-view").removeClass("show");
-		                        	
-		                        	var emailListInstance = new PerfectScrollbar('.email-list', {
-		                        	        wheelPropagation: false,
-		                        	        suppressScrollX: true
-		                        	});
-		                        	
-		                        }).fail(function (jqXHR, textStatus, errorThrown) {
-		                        	console.log("에러");
-		                        	console.log(jqXHR);
-		                        	console.log(textStatus);
-		                        	console.log(errorThrown);
-		                        	
-		                        });
+		                    	
 		                    	
 		                    },
 		                    error: function() {
@@ -273,7 +405,45 @@ function pageMove(alarm_no, alarm_type, alarm_typeNo) {
 	
 		
 	} else if(alarmType === '채팅' && clickedItem !==excludedItem) {
+		var postData = {
+				alarm_no: alarmNo
+		};
 		
+		$.ajax({
+		    	url: "/exodia/alarmRead",
+		        type: "POST",
+		        data: postData 
+		        
+		        }).done(function(result) {
+		        	console.log("알람읽음처리완료");
+		        	
+		        	$.ajax({
+		        	    url: '/exodia/getUckAlarmNo',
+		        	    type: 'GET',
+		        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+		        	    success: function(response) {
+		        	        // 서버에서 받아온 숫자 값
+		        	        var uckNo = response.uckNo;
+
+		        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+		        	        console.log('Received number:', uckNo);
+		        	        var v_alarmIcon = document.querySelector("#alarmIcon");
+		        	        if (uckNo === 0) {
+		        	        	v_alarmIcon.classList.add('d-none');
+		        	            console.log('uckNo is 0');
+		        	        } else {
+		        	        	v_alarmIcon.classList.remove('d-none');
+			        		    v_alarmIcon.innerText = uckNo;
+		        	            console.log('uckNo is not 0');
+		        	        }
+		        	        
+		        	    },
+		        	    error: function(error) {
+		        	        console.error('Error fetching data:', error);
+		        	    }
+		        	});
+		        	
+		        });
 		var url = "/exodia/chat";
 	    var popup = window.open(url, "MyPopup", "width=1100, height=700");
 		
@@ -294,6 +464,35 @@ function alarmRemove(alarm_no) {
 	        }).done(function(result) {
 	        	console.log("결과확인");
 	        	
+	        	$.ajax({
+	        	    url: '/exodia/getUckAlarmNo',
+	        	    type: 'GET',
+	        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+	        	    success: function(response) {
+	        	        // 서버에서 받아온 숫자 값
+	        	        var uckNo = response.uckNo;
+
+	        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+	        	        console.log('Received number:', uckNo);
+	        	        var v_alarmIcon = document.querySelector("#alarmIcon");
+	        	        if (uckNo === 0) {
+	        	        	v_alarmIcon.classList.add('d-none');
+	        	            console.log('uckNo is 0');
+	        	        } else {
+	        	        	v_alarmIcon.classList.remove('d-none');
+		        		    v_alarmIcon.innerText = uckNo;
+	        	            console.log('uckNo is not 0');
+	        	        }
+	        	        
+	        	    },
+	        	    error: function(error) {
+	        	        console.error('Error fetching data:', error);
+	        	    }
+	        	});
+	        	
+	        	
+	        	
+	        	
 	        }).fail(function (jqXHR, textStatus, errorThrown) {
 	        	console.log("에러");
 	        	console.log(jqXHR);
@@ -302,6 +501,7 @@ function alarmRemove(alarm_no) {
 	        	
 	        });
 }
+
 function alarmRemoveAll() {
 	var alarm = "알람삭제";
 	var postData = {
@@ -382,7 +582,7 @@ function alarmRemoveAll() {
 	});
 }
 
-function alarmRead(alarm_no) {
+/*function alarmRead(alarm_no) {
 	console.log(alarm_no+"오긴함/");
 	var postData = {
 			alarm_no: alarm_no
@@ -403,7 +603,7 @@ function alarmRead(alarm_no) {
 		console.log(errorThrown);
 		
 	});
-}
+}*/
 
 function alarmAllRead() {
 	
@@ -419,6 +619,10 @@ function alarmAllRead() {
 		
 	}).done(function(result) {
 		console.log("결과확인");
+		 var v_alarmIcon = document.querySelector("#alarmIcon");
+	     v_alarmIcon.classList.add('d-none');
+			   
+		
 		
 	}).fail(function (jqXHR, textStatus, errorThrown) {
 		console.log("에러");

@@ -61,6 +61,95 @@
   </head>
 
   <body>
+  
+  <script>
+window.addEventListener('message', function (event) {
+    if (event.data.type === 'websocket_message') {
+        const message = event.data.data;
+        // 여기서 메시지를 처리
+        handleWebSocketMessage(message);
+    }
+});
+
+function handleWebSocketMessage(message) {
+	  $.get("/exodia/chatList?emp_no=1", function(result){
+			updateChatList(result);
+	  });
+}
+
+function updateChatList(result){	    
+	   var chatList = $("#app-chat-contacts");
+	   console.log("제이에스피타고드러온놈");
+	   if(chatList) {
+	   	
+      	   var html = jQuery('<div>').html(result);
+           var contents = html.find("div#chatList").html();
+        	$("#app-chat-contacts").html(contents);
+        	
+           new PerfectScrollbar(chatList, {
+   		        wheelPropagation: false,
+   		        suppressScrollX: true
+   		      });
+		    
+           const searchInput = document.querySelector('.chat-search-input');
+           searchInput.addEventListener('keyup', function(e) {
+        	    let searchValue = e.currentTarget.value.toLowerCase(),
+        	        searchChatListItemsCount = 0,
+        	        searchContactListItemsCount = 0,
+        	        chatListItem0 = document.querySelector('.chat-list-item-0'),
+        	        contactListItem0 = document.querySelector('.contact-list-item-0'),
+        	        searchChatListItems = [].slice.call(
+        	            document.querySelectorAll('#chat-list li:not(.chat-contact-list-item-title)')
+        	        ),
+        	        searchContactListItems = [].slice.call(
+        	            document.querySelectorAll('#contact-list li:not(.chat-contact-list-item-title)')
+        	        );
+
+        	    // Search in chats
+        	    searchChatContacts(searchChatListItems, searchChatListItemsCount, searchValue, chatListItem0);
+        	    // Search in contacts
+        	    searchChatContacts(searchContactListItems, searchContactListItemsCount, searchValue, contactListItem0);
+        	});
+   		     
+   		     function handleKeyPress(event) {
+   		    	    if (event.key === "Enter") {
+   		    	    	buttonSend();
+   		    	    }
+   		    	}
+   		     
+   		     function searchChatContacts(searchListItems, searchListItemsCount, searchValue, listItem0) {
+   		    	searchListItems.forEach(function(searchListItem) {
+   		    	    let searchListItemText = searchListItem.textContent.toLowerCase();
+   		    	    if (searchValue) {
+   		    	        if (-1 < searchListItemText.indexOf(searchValue)) {
+   		    	            searchListItem.classList.add('d-flex');
+   		    	            searchListItem.classList.remove('d-none');
+   		    	            searchListItemsCount++;
+   		    	        } else {
+   		    	            searchListItem.classList.add('d-none');
+   		    	        }
+   		    	    } else {
+   		    	        searchListItem.classList.add('d-flex');
+   		    	        searchListItem.classList.remove('d-none');
+   		    	        searchListItemsCount++;
+   		    	    }
+   		    	});
+
+   		    	// Display no search found if searchListItemsCount == 0
+   		    	if (searchListItemsCount == 0) {
+   		    	    listItem0.classList.remove('d-none');
+   		    	} else {
+   		    	    listItem0.classList.add('d-none');
+   		    	}
+   		     }
+		
+	   }
+	
+	
+}
+</script>
+  
+  
     <!-- Layout wrapper -->
         <!-- Menu -->
 

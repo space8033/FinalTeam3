@@ -1,7 +1,9 @@
 package com.finalteam3.exodia.alarm.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -143,4 +145,21 @@ public class AlarmController {
 		return "redirect:/alarm";
 		
 	}
+	
+	 @GetMapping("/getUckAlarmNo")
+	 @ResponseBody
+     public Map<String, Integer> getUckAlarmNo(Authentication authentication) {
+	    EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		 
+		 int uckNo = alarmService.uckAlarmCount(empInfo.getEmpinfo_no());
+
+        // 숫자 값을 Map에 담아 JSON으로 반환
+        Map<String, Integer> response = new HashMap<>();
+        response.put("uckNo", uckNo);
+
+        return response;
+     }
+
 }
