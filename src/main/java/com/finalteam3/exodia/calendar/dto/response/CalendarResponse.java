@@ -1,7 +1,5 @@
 package com.finalteam3.exodia.calendar.dto.response;
 
-import java.text.SimpleDateFormat;
-
 import lombok.Data;
 
 @Data
@@ -12,4 +10,5 @@ public class CalendarResponse {
 	private String end; //task_enddate
 	private int emp_no;
 	private String task_type;
+	private String task_content;
 }

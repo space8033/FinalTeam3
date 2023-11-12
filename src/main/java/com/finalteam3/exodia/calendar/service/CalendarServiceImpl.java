@@ -50,7 +50,7 @@ public class CalendarServiceImpl implements CalendarService{
 	        response2.setExtendedProps(cc);
 	        //response2.setEmp_no(response.getEmp_no());
 	        response2.setUrl("");
-
+	        response2.setDescription(response.getTask_content());
 	        try {
 	            Date start = dateFormat.parse(response.getStart());
 	            Date end = dateFormat.parse(response.getEnd());

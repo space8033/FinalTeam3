@@ -8,59 +8,6 @@
  * ! We are getting events from a separate file named app-calendar-events.js. You can add or remove events from there.
  *
  **/
-$(document).ready(function() {
-
-//add task
-    /*$('.btn-add-event').click(function() {
-        var eventData = {
-            task_name: $('input[name=eventTitle]').val(),
-            task_content: $('#eventDescription').val(),
-            task_type: $('#eventLabel').val(),
-            task_startdate: $('input[name=eventStartDate]').val(),
-            task_enddate: $('input[name=eventEndDate]').val()
-        };
-
-        $.ajax({
-    
-            type: 'post',
-            url: '/exodia/calendar', 
-            data: eventData, 
-            success: function(data) {
-                console.log("나는 병신이다");
-                location.reload();
-            }
-        });
-    });*/
-    
-    /*$('.btn-update-event').click(function() {
-    	var task_no = eventToUpdate.extendedProps.task_no;
-    	console.log(task_no);
-    	
-    	var eventData = {
-    			task_no: task_no,
-    			task_name: $('input[name=eventTitle]').val(),
-    			task_content: $('#eventDescription').val(),
-    			task_type: $('#eventLabel').val(),
-    			task_startdate: $('input[name=eventStartDate]').val(),
-    			task_enddate: $('input[name=eventEndDate]').val()
-    	};
-    	
-    	$.ajax({
-    		
-    		type: 'post',
-    		url: '/exodia/modifyCalendar', 
-    		data: eventData, 
-    		success: function(data) {
-    			console.log("나는 병신이다");
-    			location.reload();
-    		}
-    	});
-    });*/
-    
-  //delete task
-    
-    
-});
 
 let direction = 'ltr';
 
@@ -488,6 +435,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	                var propName = extendedPropsToUpdate[index];
 	                existingEvent.setExtendedProp(propName, updatedEventData.extendedProps[propName]);
 	              }
+	              
+	             
 	            };
 
 	            // Remove Event In Calendar (UI Only)
@@ -502,43 +451,42 @@ document.addEventListener('DOMContentLoaded', function () {
 	              if (btnSubmit.classList.contains('btn-add-event')) {
 	                if (isFormValid) {
 	                	var eventData = {
-	                	        task_name: document.querySelector('input[name=eventTitle]').value,
-	                	        task_content: document.querySelector('#eventDescription').value,
-	                	        task_type: document.querySelector('#eventLabel').value,
-	                	        task_startdate: document.querySelector('input[name=eventStartDate]').value,
-	                	        task_enddate: document.querySelector('input[name=eventEndDate]').value
-	                	    };
+                	        task_name: document.querySelector('input[name=eventTitle]').value,
+                	        task_content: document.querySelector('#eventDescription').value,
+                	        task_type: document.querySelector('#eventLabel').value,
+                	        task_startdate: document.querySelector('input[name=eventStartDate]').value,
+                	        task_enddate: document.querySelector('input[name=eventEndDate]').value
+                	    };
 
-	                	    var xhr = new XMLHttpRequest();
-	                	    
-	                	    xhr.open('POST', '/exodia/calendar', true);
-	                	    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                	    var xhr = new XMLHttpRequest();
+                	    
+                	    xhr.open('POST', '/exodia/calendar', true);
+                	    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
-	                	    xhr.onreadystatechange = function() {
-	                	        if (xhr.readyState === 4) {
-	                	            if (xhr.status === 200) {
-	                	                console.log("나는 병신이다");
-	                	                location.reload();
-	                	            } else {
-	                	                console.error("에러 발생: " + xhr.status);
-	                	            }
-	                	        }
-	                	    };
-	                	    
-	                	    var data = 'task_name=' + encodeURIComponent(eventData.task_name) +
-	                	               '&task_content=' + encodeURIComponent(eventData.task_content) +
-	                	               '&task_type=' + encodeURIComponent(eventData.task_type) +
-	                	               '&task_startdate=' + encodeURIComponent(eventData.task_startdate) +
-	                	               '&task_enddate=' + encodeURIComponent(eventData.task_enddate);
-	                	    
-	                	    xhr.send(data);
+                	    xhr.onreadystatechange = function() {
+                	        if (xhr.readyState === 4) {
+                	            if (xhr.status === 200) {
+                	                console.log("나는 병신이다");
+                	                location.reload();
+                	            } else {
+                	                console.error("에러 발생: " + xhr.status);
+                	            }
+                	        }
+                	    };
+                	    
+                	    var data = 'task_name=' + encodeURIComponent(eventData.task_name) +
+                	               '&task_content=' + encodeURIComponent(eventData.task_content) +
+                	               '&task_type=' + encodeURIComponent(eventData.task_type) +
+                	               '&task_startdate=' + encodeURIComponent(eventData.task_startdate) +
+                	               '&task_enddate=' + encodeURIComponent(eventData.task_enddate);
+                	    
+                	    xhr.send(data);
 	                }
 	              } else {
 	                // Update event
 	                // ------------------------------------------------
 	                if (isFormValid) {
 	                	var task_no = eventToUpdate.extendedProps.task_no;
-	                    console.log(task_no);
 
 	                    var eventData = {
 	                        task_no: task_no,
@@ -574,7 +522,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	                    
 	                    xhr.send(data);
 	                	
-	                  
 	                }
 	              }
 	            });
