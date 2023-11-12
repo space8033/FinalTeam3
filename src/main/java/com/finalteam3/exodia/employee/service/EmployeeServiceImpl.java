@@ -433,6 +433,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		String iTime = inquiry.getNotice_createdat().substring(11);
 		String tStart = task.getTask_startdate().substring(0, 10);
 		String pStart = personalTask.getTask_startdate().substring(0, 10);
+		String twoName = timeLineResponse.getEmpinfo_name().substring(timeLineResponse.getEmpinfo_name().length() - 2);
 		
 		timeLineResponse.setNotice_no(notice.getNotice_no());
 		timeLineResponse.setNotice_createdat(nDate);
@@ -444,6 +445,7 @@ public class EmployeeServiceImpl implements EmployeeService{
 		timeLineResponse.setTask_start(tStart);
 		timeLineResponse.setMyTask_no(personalTask.getTask_no());
 		timeLineResponse.setMyTask_start(pStart);
+		timeLineResponse.setTwo_name(twoName);
 		
 		timeLineResponse.setTeam_memberCount(employeeDao.selectTeamEmp(timeLineResponse.getTeam_name()).size() + 1);
 		
@@ -451,66 +453,5 @@ public class EmployeeServiceImpl implements EmployeeService{
 
 	}
 
-   @Override
-   public List<String> getTeamNames1(int project_no) {
-      List<String> list = employeeDao.selectTeamname(project_no);
-      return list;
-   }
-      
-   public TimeLineResponse getTimeLineByEmpNo1(Map<String, Object> map) {
-      TimeLineResponse timeLineResponse = employeeDao.selectTimeLineResponse(map);
-      
-      if(timeLineResponse.getRole_category().equals("ROLE_PM")) {
-         timeLineResponse.setRole_category("프로젝트 매니저");
-      }else if(timeLineResponse.getRole_category().equals("ROLE_PL")) {
-         timeLineResponse.setRole_category("팀장");
-      }else if(timeLineResponse.getRole_category().equals("ROLE_ADMIN")){
-         timeLineResponse.setRole_category("관리자");
-      }else {
-         timeLineResponse.setRole_category("팀원");
-      }
-      
-      if(timeLineResponse.getEmp_status().equals("on-line")) {
-         timeLineResponse.setEmp_status("온라인");
-      }else if(timeLineResponse.getEmp_status().equals("off-line")) {
-         timeLineResponse.setEmp_status("오프라인");
-      }
-      
-      int empinfo_no = timeLineResponse.getEmpinfo_no();
-      map.put("empinfo_no", empinfo_no);
-      
-      RecentNotice notice = noticeDao.selectRecentNotice();
-      RecentNotice inquiry = noticeDao.selectRecentInquiry();
-      
-      RecentTask task = taskDao.selectRecentTask(map);
-      RecentTask personalTask = taskDao.selectRecentPersonalTask(map);
-      
-      timeLineResponse.setNotice_title(notice.getNotice_title());
-      timeLineResponse.setInquiry_title(inquiry.getNotice_title());
-      
-      timeLineResponse.setTask_name(task.getTask_name());
-      timeLineResponse.setMyTask_name(personalTask.getTask_name());
-      
-      String nDate = notice.getNotice_createdat().substring(0, 10);
-      String nTime = notice.getNotice_createdat().substring(11);
-      String iDate = inquiry.getNotice_createdat().substring(0, 10);
-      String iTime = inquiry.getNotice_createdat().substring(11);
-      String tStart = task.getTask_startdate().substring(0, 10);
-      String pStart = personalTask.getTask_startdate().substring(0, 10);
-      
-      timeLineResponse.setNotice_no(notice.getNotice_no());
-      timeLineResponse.setNotice_createdat(nDate);
-      timeLineResponse.setNotice_time(nTime);
-      timeLineResponse.setInquiry_no(inquiry.getNotice_no());
-      timeLineResponse.setInquiry_createdat(iDate);
-      timeLineResponse.setInquiry_time(iTime);
-      timeLineResponse.setTask_no(task.getTask_no());
-      timeLineResponse.setTask_start(tStart);
-      timeLineResponse.setMyTask_no(personalTask.getTask_no());
-      timeLineResponse.setMyTask_start(pStart);
-      timeLineResponse.setTwo_name(timeLineResponse.getEmpinfo_name().substring(timeLineResponse.getEmpinfo_name().length() - 2 ));
-      timeLineResponse.setTeam_memberCount(employeeDao.selectTeamEmp(timeLineResponse.getTeam_name()).size() + 1);
-      
-      return timeLineResponse;
-   }
+   
 }

@@ -76,7 +76,6 @@ public class ProjectController {
 	@ResponseBody
 	public List<ProjectListResponse> getProjectList(@RequestParam int empinfo_no) {
 		List<ProjectListResponse> list = projectService.getAllProjectList(empinfo_no);
-		log.info("dfasdgasga" + list.toString());
 		return list;
 	}
 
