@@ -71,7 +71,7 @@ public class NoteServiceImpl implements NoteService{
 		return noteDao.countByEmpno(empNo);
 	}
 
-	/*@Override
+	@Override
 	@Scheduled(cron = "0 * * * * ?")
 	public void restimeSend() {
 		
@@ -96,6 +96,7 @@ public class NoteServiceImpl implements NoteService{
 				int empInfo_no = employeeDao.selectEmpInfoNoByEmpNo(empNo);
 				alarm.setAlarm_isRead(false);
 				alarm.setAlarm_type("쪽지");
+				alarm.setAlarm_content("");
 				alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
 				alarm.setEmpinfo_no(empInfo_no);
 				alarmDao.insertAlarm(alarm);
@@ -103,7 +104,7 @@ public class NoteServiceImpl implements NoteService{
 				log.info(noteRead.toString()+"에약전송 노트리드가문젠지");
 			}
 		}
-	}*/
+	}
 	
 	
 	@Override
@@ -174,6 +175,7 @@ public class NoteServiceImpl implements NoteService{
 						alarm.setAlarm_type("쪽지");
 						alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
 						alarm.setEmpinfo_no(empInfo_no);
+						alarm.setAlarm_content("");
 						alarmDao.insertAlarm(alarm);
 					}
 					
@@ -204,6 +206,7 @@ public class NoteServiceImpl implements NoteService{
 						alarm.setAlarm_type("쪽지");
 						alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
 						alarm.setEmpinfo_no(empInfo_no);
+						alarm.setAlarm_content("");
 						alarmDao.insertAlarm(alarm);
 					}
 				}
@@ -233,6 +236,7 @@ public class NoteServiceImpl implements NoteService{
 						alarm.setAlarm_type("쪽지");
 						alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
 						alarm.setEmpinfo_no(empInfo_no);
+						alarm.setAlarm_content("");
 						alarmDao.insertAlarm(alarm);
 					}
 				}
@@ -455,6 +459,7 @@ public class NoteServiceImpl implements NoteService{
 		alarm.setAlarm_type("쪽지");
 		alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
 		alarm.setEmpinfo_no(empInfo_no);
+		alarm.setAlarm_content("");
 		alarmDao.insertAlarm(alarm);
 		
 		

@@ -10,5 +10,6 @@ public interface AlarmService {
 	public void deleteAlarm(int alarmNo);
 	public void updateAlarmRead(int alarmNo);
 	public int uckAlarmCount(int empInfoNo);
+	public void programStartAlarm();
 
 }

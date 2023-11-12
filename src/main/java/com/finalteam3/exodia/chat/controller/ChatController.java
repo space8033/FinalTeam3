@@ -65,6 +65,8 @@ public class ChatController {
 		
 		String emp_name = loginResponse.getEmpInfo_name();
 		model.addAttribute("empInfo_name", emp_name);
+		String empInfo_twoname = emp_name.substring(emp_name.length() - 2);
+		model.addAttribute("empInfo_twoname", empInfo_twoname);
 		
 		List<EmpChat> empChatList = chatService.getChatEmpList(empInfo.getEmpinfo_no());
 		
@@ -85,6 +87,9 @@ public class ChatController {
 		//내정보
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
+		String emp_name = empInfo.getEmpinfo_name();
+		String empInfo_twoname = emp_name.substring(emp_name.length() - 2);
+		model.addAttribute("empInfo_twoname", empInfo_twoname);
 	
 		
 		

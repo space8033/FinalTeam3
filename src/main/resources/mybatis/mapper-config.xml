@@ -35,6 +35,7 @@
 		<typeAlias alias="ProgramListResponse" type="com.finalteam3.exodia.task.dto.response.ProgramListResponse" />
 		<typeAlias alias="ProgramModifyRequest" type="com.finalteam3.exodia.task.dto.request.ProgramModifyRequest" />
 		<typeAlias alias="TeamTaskResponse" type="com.finalteam3.exodia.task.dto.response.TeamTaskResponse" />
+		<typeAlias alias="ProgramTaskResponse" type="com.finalteam3.exodia.task.dto.response.ProgramTaskResponse" />
 		<typeAlias alias="RecentTask" type="com.finalteam3.exodia.task.dto.response.RecentTask" />
 		<typeAlias alias="ChatRoom" type="com.finalteam3.exodia.chat.dto.request.ChatRoom" />
 		<typeAlias alias="ChatMessage" type="com.finalteam3.exodia.chat.dto.request.ChatMessage" />

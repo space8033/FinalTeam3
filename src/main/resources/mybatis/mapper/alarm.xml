@@ -6,10 +6,11 @@
         select SEQ_ALARM.nextval from dual
     </selectKey>
     insert into ALARM(
-        ALARM_NO, ALARM_CREATEDAT, ALARM_ISREAD, ALARM_TYPE, ALARM_TYPENO, EMPINFO_NO
+        ALARM_NO, ALARM_CREATEDAT, ALARM_ISREAD, ALARM_TYPE, ALARM_TYPENO, EMPINFO_NO, ALARM_CONTENT
     )
     values(
-        #{alarm_no}, to_char(sysdate, 'yyyy.MM.dd HH24:mi:ss'), #{alarm_isRead}, #{alarm_type}, #{alarm_typeNo}, #{empinfo_no}
+        #{alarm_no}, to_char(sysdate, 'yyyy.MM.dd HH24:mi:ss'), #{alarm_isRead}, #{alarm_type}, #{alarm_typeNo}, #{empinfo_no}, #{alarm_content}
+
     )
 	</insert>
 	
@@ -33,7 +34,7 @@
 	</select>
 	
 	<select id="selectAlarmList" parameterType="int" resultType="AlarmRequest">
-		select ALARM_NO, ALARM_CREATEDAT, ALARM_ISREAD, ALARM_TYPE, ALARM_TYPENO
+		select ALARM_NO, ALARM_CREATEDAT, ALARM_ISREAD, ALARM_TYPE, ALARM_TYPENO, ALARM_CONTENT
 		  from alarm
 		 where empinfo_no = #{empinfo_no}
 		   and alarm_deletedAt IS NULL 
@@ -41,7 +42,7 @@
 	</select>
 	
 	<select id="selectUckAlarmList" parameterType="int" resultType="AlarmRequest">
-		select ALARM_NO, ALARM_CREATEDAT, ALARM_ISREAD, ALARM_TYPE, ALARM_TYPENO, ALARM_TOAST
+		select ALARM_NO, ALARM_CREATEDAT, ALARM_ISREAD, ALARM_TYPE, ALARM_TYPENO, ALARM_TOAST, ALARM_CONTENT
 		  from alarm
 		 where empinfo_no = #{empinfo_no}
 		   and alarm_deletedAt IS NULL
