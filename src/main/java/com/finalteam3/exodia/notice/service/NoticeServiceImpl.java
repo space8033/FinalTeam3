@@ -1,9 +1,6 @@
 package com.finalteam3.exodia.notice.service;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,8 +8,8 @@ import java.util.stream.Collectors;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.finalteam3.exodia.alarm.dao.AlarmDao;
 import com.finalteam3.exodia.media.dao.MediaDao;
 import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.notice.dao.NoticeDao;
@@ -27,6 +24,8 @@ public class NoticeServiceImpl implements NoticeService{
 	private NoticeDao noticeDao;
 	@Resource
 	private MediaDao mediaDao;
+	@Resource
+	private AlarmDao alarmDao;
 
 	@Override
 	public List<Notice> getNoticeList() {
@@ -42,6 +41,7 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public int write(Notice notice){
+		
 		return noticeDao.insertNotice(notice);
 	}
 

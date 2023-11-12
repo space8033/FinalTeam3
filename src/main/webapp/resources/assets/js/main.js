@@ -20,6 +20,7 @@
 		  showAlarmCount();
 	      setInterval(function() {
 	    	  var emp_id = $("#alarmId").val();
+	    	  console.log(emp_id+"야 잘보내긴해?");
 	         sock.send(emp_id);
 	      }, 30000);
     }
@@ -158,6 +159,36 @@
 		    	alarmToast.classList.add('show');
 		    	var alarmMsg = document.querySelector("#alarmMsg");
 		    	alarmMsg.innerHTML = sender + "님 오늘은 " + title +" 업무 시작일입니다." + "<br>" + "파이팅 하세요!🙌";
+		    	setTimeout(function() {
+		    		alarmToast.classList.remove("show");
+			    }, 4000);
+			}
+	    } else if(cmd === "공지") {
+	    	var alarmToast = document.querySelector("#alarmToast");
+			if(alarmToast) {
+		    	alarmToast.classList.add('show');
+		    	var alarmMsg = document.querySelector("#alarmMsg");
+		    	alarmMsg.innerHTML = sender + "님  새 공지사항이 등록되었습니다.🔊" + "<br>" + "[제목 : " + title + "]";
+		    	setTimeout(function() {
+		    		alarmToast.classList.remove("show");
+			    }, 4000);
+			}
+	    } else if(cmd === "문의") {
+	    	var alarmToast = document.querySelector("#alarmToast");
+			if(alarmToast) {
+		    	alarmToast.classList.add('show');
+		    	var alarmMsg = document.querySelector("#alarmMsg");
+		    	alarmMsg.innerHTML = sender + "님이  새 문의사항을 등록하였습니다.🔈" + "<br>" + "[제목 : " + title + "]";
+		    	setTimeout(function() {
+		    		alarmToast.classList.remove("show");
+			    }, 4000);
+			}
+	    } else if(cmd === "댓글") {
+	    	var alarmToast = document.querySelector("#alarmToast");
+			if(alarmToast) {
+		    	alarmToast.classList.add('show');
+		    	var alarmMsg = document.querySelector("#alarmMsg");
+		    	alarmMsg.innerHTML = sender + "님이 " + "[" + title + "]" + "<br>" + "글에 새 댓글을 달았습니다.✅";
 		    	setTimeout(function() {
 		    		alarmToast.classList.remove("show");
 			    }, 4000);
@@ -457,7 +488,200 @@ function pageMove(alarm_no, alarm_type, alarm_typeNo) {
 		var url = "/exodia/chat";
 	    var popup = window.open(url, "MyPopup", "width=1100, height=700");
 		
-	}
+	} else if (alarmType === '공지' && clickedItem !==excludedItem) {
+		var postData = {
+				alarm_no: alarmNo
+		};
+		
+		$.ajax({
+		    	url: "/exodia/alarmRead",
+		        type: "POST",
+		        data: postData 
+		        
+		        }).done(function(result) {
+		        	console.log("알람읽음처리완료");
+		        	
+		        	$.ajax({
+		        	    url: '/exodia/getUckAlarmNo',
+		        	    type: 'GET',
+		        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+		        	    success: function(response) {
+		        	        // 서버에서 받아온 숫자 값
+		        	        var uckNo = response.uckNo;
+
+		        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+		        	        console.log('Received number:', uckNo);
+		        	        var v_alarmIcon = document.querySelector("#alarmIcon");
+		        	        if (uckNo === 0) {
+		        	        	v_alarmIcon.classList.add('d-none');
+		        	            console.log('uckNo is 0');
+		        	        } else {
+		        	        	v_alarmIcon.classList.remove('d-none');
+			        		    v_alarmIcon.innerText = uckNo;
+		        	            console.log('uckNo is not 0');
+		        	        }
+		        	        
+		        	    },
+		        	    error: function(error) {
+		        	        console.error('Error fetching data:', error);
+		        	    }
+		        	});
+		        	
+		        });
+	
+		
+     	    	window.location.href = '/exodia/noticeDetail?notice_no=' + alarm_typeNo;
+		
+		
+	} else if (alarmType === '문의' && clickedItem !==excludedItem) {
+		var postData = {
+				alarm_no: alarmNo
+		};
+		
+		$.ajax({
+		    	url: "/exodia/alarmRead",
+		        type: "POST",
+		        data: postData 
+		        
+		        }).done(function(result) {
+		        	console.log("알람읽음처리완료");
+		        	
+		        	$.ajax({
+		        	    url: '/exodia/getUckAlarmNo',
+		        	    type: 'GET',
+		        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+		        	    success: function(response) {
+		        	        // 서버에서 받아온 숫자 값
+		        	        var uckNo = response.uckNo;
+
+		        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+		        	        console.log('Received number:', uckNo);
+		        	        var v_alarmIcon = document.querySelector("#alarmIcon");
+		        	        if (uckNo === 0) {
+		        	        	v_alarmIcon.classList.add('d-none');
+		        	            console.log('uckNo is 0');
+		        	        } else {
+		        	        	v_alarmIcon.classList.remove('d-none');
+			        		    v_alarmIcon.innerText = uckNo;
+		        	            console.log('uckNo is not 0');
+		        	        }
+		        	        
+		        	    },
+		        	    error: function(error) {
+		        	        console.error('Error fetching data:', error);
+		        	    }
+		        	});
+		        	
+		        });
+	
+		
+     	    	window.location.href = '/exodia/inquiryDetail?notice_no=' + alarm_typeNo;
+		
+	} else if (alarmType === '댓글' && clickedItem !==excludedItem) {
+		var postData = {
+				alarm_no: alarmNo
+		};
+		
+		$.ajax({
+		    	url: "/exodia/alarmRead",
+		        type: "POST",
+		        data: postData 
+		        
+		        }).done(function(result) {
+		        	console.log("알람읽음처리완료");
+		        	
+		        	$.ajax({
+		        	    url: '/exodia/getUckAlarmNo',
+		        	    type: 'GET',
+		        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+		        	    success: function(response) {
+		        	        // 서버에서 받아온 숫자 값
+		        	        var uckNo = response.uckNo;
+
+		        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+		        	        console.log('Received number:', uckNo);
+		        	        var v_alarmIcon = document.querySelector("#alarmIcon");
+		        	        if (uckNo === 0) {
+		        	        	v_alarmIcon.classList.add('d-none');
+		        	            console.log('uckNo is 0');
+		        	        } else {
+		        	        	v_alarmIcon.classList.remove('d-none');
+			        		    v_alarmIcon.innerText = uckNo;
+		        	            console.log('uckNo is not 0');
+		        	        }
+		        	        
+		        	    },
+		        	    error: function(error) {
+		        	        console.error('Error fetching data:', error);
+		        	    }
+		        	});
+		        	
+		        });
+		
+		var data = {
+			reply_no : alarm_typeNo
+		};
+		$.ajax({
+    	    url: '/exodia/getInquiryNo',
+    	    type: 'GET',
+    	    data: data, // 반환되는 데이터 형식을 JSON으로 지정
+    	    success: function(response) {
+    	        // 서버에서 받아온 숫자 값
+    	        
+
+    	        window.location.href = '/exodia/inquiryDetail?notice_no=' + response;
+    	    },
+    	    error: function(error) {
+    	        console.error('Error fetching data:', error);
+    	    }
+    	});
+		
+     	     	
+	 } else if (alarmType === '프로그램' && clickedItem !==excludedItem) {
+			var postData = {
+					alarm_no: alarmNo
+			};
+			
+			$.ajax({
+			    	url: "/exodia/alarmRead",
+			        type: "POST",
+			        data: postData 
+			        
+			        }).done(function(result) {
+			        	console.log("알람읽음처리완료");
+			        	
+			        	$.ajax({
+			        	    url: '/exodia/getUckAlarmNo',
+			        	    type: 'GET',
+			        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+			        	    success: function(response) {
+			        	        // 서버에서 받아온 숫자 값
+			        	        var uckNo = response.uckNo;
+
+			        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+			        	        console.log('Received number:', uckNo);
+			        	        var v_alarmIcon = document.querySelector("#alarmIcon");
+			        	        if (uckNo === 0) {
+			        	        	v_alarmIcon.classList.add('d-none');
+			        	            console.log('uckNo is 0');
+			        	        } else {
+			        	        	v_alarmIcon.classList.remove('d-none');
+				        		    v_alarmIcon.innerText = uckNo;
+			        	            console.log('uckNo is not 0');
+			        	        }
+			        	        
+			        	    },
+			        	    error: function(error) {
+			        	        console.error('Error fetching data:', error);
+			        	    }
+			        	});
+			        	
+			        });
+			
+			window.location.href = '/exodia/task/programManagement';
+			
+	     	    	
+		 }
 }
 
 function alarmRemove(alarm_no) {

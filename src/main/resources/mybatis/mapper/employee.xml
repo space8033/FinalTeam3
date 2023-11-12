@@ -129,7 +129,7 @@
 	</select>
 
 	<select id="selectTeamBasic" parameterType="String" resultType="TeamBasicResponse">
-		select t.team_duty, i.emp_no, i.empinfo_name, t.team_isleader
+		select t.team_duty, i.emp_no, i.empinfo_name, t.team_isleader, i.empinfo_no
 		from team t, empinfo i, emp e
 		where project_no = 0
 		and i.empinfo_no = t.empinfo_no

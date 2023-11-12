@@ -23,4 +23,5 @@ public interface InquiryDao {
 	public void deleteByReplyNo(int reply_no);
 	public int selectEmpInfoNo(int emp_no);
 	public int selectEmpInfoNoByEmpNo(int emp_no);
+	public Reply selectReplyByReplyNo(int replyNo);
 }

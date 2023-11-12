@@ -19,16 +19,15 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.finalteam3.exodia.alarm.service.AlarmService;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
-import com.finalteam3.exodia.inquiry.dto.Inquiry;
 import com.finalteam3.exodia.inquiry.dto.Reply;
 import com.finalteam3.exodia.inquiry.service.InquiryService;
 import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.media.service.MediaService;
 import com.finalteam3.exodia.notice.dto.Notice;
-import com.finalteam3.exodia.notice.service.NoticeService;
 import com.finalteam3.exodia.security.dto.EmpDetails;
 
 import lombok.extern.slf4j.Slf4j;
@@ -48,6 +47,8 @@ public class InquiryController {
 	
 	@Resource
 	private EmployeeService employeeService;
+	@Resource
+	private AlarmService alarmService;
 	
 	//문의사항 리스트 조회
 	@GetMapping("/inquiryList")
@@ -115,6 +116,7 @@ public class InquiryController {
 			
 			int noticeNo = notice.getNotice_no();
 			
+			alarmService.insertInquiryeAlarm(notice);
 			for(MultipartFile mf : mfs) {
 						if(!mf.isEmpty()) {
 					MediaDto mediaDto = new MediaDto();
@@ -165,7 +167,8 @@ public class InquiryController {
 			
 			model.addAttribute("loginResponse", loginResponse);
 			model.addAttribute("now_emp_no", loginResponse.getEmp_no());
-			
+			String emp_id = loginResponse.getEmp_id();
+			model.addAttribute("emp_id", emp_id);
 			int empinfoNo = inquiryService.getEmpInfoNoByEmpNo(loginResponse.getEmp_no());
 			model.addAttribute("now_empinfo_no", empinfoNo);
 
@@ -201,7 +204,8 @@ public class InquiryController {
 			
 			inquiryService.replyWrite(reply);		
 			log.info("댓글작성버튼이 눌려?");
-			log.info("댓글 입력 시 db로 넘어가는 값들 :" + reply);	
+			log.info("댓글 입력 시 db로 넘어가는 값들 :" + reply);
+			alarmService.insertReplyAlarm(reply);
 			return "inquiryDetail";
 		}
 				
@@ -237,6 +241,7 @@ public class InquiryController {
 			LoginResponse loginResponse = empDetails.getLoginResponse();
 			
 			inquiryService.deleteByNoticeNo(notice_no);
+			alarmService.deleteInquiryAlarm(notice_no);
 			
 			return "inquiryList";
 		}
@@ -249,6 +254,7 @@ public class InquiryController {
 			LoginResponse loginResponse = empDetails.getLoginResponse();
 			
 			inquiryService.deleteReplyByReplyNo(reply_no);
+			alarmService.deleteReplyAlarm(reply_no);
 			
 			return "redirect:/inquiryList";
 		}

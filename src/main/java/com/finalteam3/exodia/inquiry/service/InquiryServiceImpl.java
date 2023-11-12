@@ -89,5 +89,11 @@ public class InquiryServiceImpl implements InquiryService{
 	public int getEmpInfoNoByEmpNo(int emp_no) {
 		return inquiryDao.selectEmpInfoNoByEmpNo(emp_no);
 	}
+
+	@Override
+	public Reply getReplyByReplyNo(int replyNo) {
+		// TODO Auto-generated method stub
+		return inquiryDao.selectReplyByReplyNo(replyNo);
+	}
 	
 }
