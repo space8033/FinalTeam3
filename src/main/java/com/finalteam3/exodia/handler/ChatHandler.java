@@ -141,6 +141,7 @@ public class ChatHandler extends TextWebSocketHandler{
 					alarm.setAlarm_isRead(false);
 					alarm.setAlarm_type("채팅");
 					alarm.setEmpinfo_no(receiverNo);
+					alarm.setAlarm_content("");
 					alarm.setAlarm_typeNo(chatMessage.getChatMessage_no());
 					
 					for(WebSocketSession sess : roomList.get(chatMessage.getChatRoom_no())) {

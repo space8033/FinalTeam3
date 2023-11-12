@@ -1,7 +1,9 @@
 package com.finalteam3.exodia.chat.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Resource;
 
@@ -37,9 +39,18 @@ public class ChatServiceImpl implements ChatService {
 		if(pmInfo.getEmp_no() == emp_no) {
 			List<EmpNote> pmList = employeeDao.selectPM();
 			EmpNote pm = pmList.get(0);
+			
+			String emp_name = pm.getEmpinfo_name();
+			String empInfo_twoname = emp_name.substring(emp_name.length() - 2);
+			pm.setTwo_name(empInfo_twoname);
 			return pm;
 		} else {
-			return employeeDao.selectEmployeeByEmpNo(emp_no);
+			EmpNote buddy = employeeDao.selectEmployeeByEmpNo(emp_no);
+			String emp_name = buddy.getEmpinfo_name();
+			String empInfo_twoname = emp_name.substring(emp_name.length() - 2);
+			buddy.setTwo_name(empInfo_twoname);
+			
+			return buddy;
 		}
 		
 	}
@@ -89,9 +100,15 @@ public class ChatServiceImpl implements ChatService {
 		empList.addAll(empListPM);
 		List<EmpChat> empChatList = new ArrayList<>();
 		
+		
+		
 		for(EmpNote emp : empList) {
 			ChatParticipant chatParticipant = new ChatParticipant();
 			if(emp.getEmpinfo_no() != empInfo_no && emp.getEmpinfo_no() != 0) {
+				List<String> myList = Arrays.asList("bg-label-success", "bg-label-secondary", "bg-label-danger", "bg-label-info", "bg-label-warning", "bg-label-primary");
+
+		        int randomIndex = (emp.getEmpinfo_no()%6);
+		        log.info(randomIndex+"숫자어디서불만인거냐");
 				
 				EmpChat empchat = new EmpChat();
 				chatParticipant.setEmpInfo_no1(emp.getEmpinfo_no());
@@ -103,10 +120,11 @@ public class ChatServiceImpl implements ChatService {
 				empchat.setEmpinfo_position(emp.getEmpinfo_position());
 				empchat.setEmpinfo_no(emp.getEmpinfo_no());
 				empchat.setProfile(emp.getProfile());
-				empchat.setTwo_name(emp.getTwo_name());
+				empchat.setTwo_name(emp.getEmpinfo_name().substring(emp.getEmpinfo_name().length() - 2));
 				empchat.setTeam_name(emp.getTeam_name());
 				empchat.setEmpinfo_name(emp.getEmpinfo_name());
 				empchat.setEmp_status(emp.getEmp_status());
+				empchat.setEmp_color(myList.get(randomIndex));
 				
 				//챗방검색
 				Integer chatRoomNo = chatDao.selectChatRoomNo(chatParticipant);

@@ -13,5 +13,6 @@ public class AlarmRequest {
 	private int alarm_typeNo;
 	private int empinfo_no;
 	private String alarm_toast;
+	private String alarm_content;
 
 }
