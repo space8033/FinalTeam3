@@ -152,6 +152,16 @@
 	    	
 	       /* updateChatList(message);*/
 	    	
+	    } else if(cmd === "프로그램") {
+	    	var alarmToast = document.querySelector("#alarmToast");
+			if(alarmToast) {
+		    	alarmToast.classList.add('show');
+		    	var alarmMsg = document.querySelector("#alarmMsg");
+		    	alarmMsg.innerHTML = sender + "님 오늘은 " + title +" 업무 시작일입니다." + "<br>" + "파이팅 하세요!🙌";
+		    	setTimeout(function() {
+		    		alarmToast.classList.remove("show");
+			    }, 4000);
+			}
 	    }
 	}
 

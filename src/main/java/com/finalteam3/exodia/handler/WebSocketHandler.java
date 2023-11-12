@@ -166,6 +166,25 @@ public class WebSocketHandler extends TextWebSocketHandler{
 							session.sendMessage(textMessage2);
 							
 							
+						} else if(alarm.getAlarm_type().equals("프로그램") && alarm.getAlarm_toast() == null) {
+							
+							if(uckCount != alarmCount.get(memId)){
+								alarmCount.put(memId, uckCount);
+							}
+							String programContent = alarm.getAlarm_content();
+							String senderName = emp.getEmpInfo_name();
+							Message messageContent2= new Message();
+							messageContent2.setCmd("프로그램");
+							messageContent2.setTitle(programContent);
+							messageContent2.setCount(uckCount);
+							messageContent2.setSender(senderName);
+							
+							String jsonMessages2 = objectMapper.writeValueAsString(messageContent2);
+							TextMessage textMessage2 = new TextMessage(jsonMessages2);
+							log.info(textMessage2+"머라고보내니?");
+							alarmDao.alarmToastUpdate(alarm.getAlarm_no());
+							session.sendMessage(textMessage2);
+							
 						} else if(uckCount != alarmCount.get(memId)){
 							// 메시지 목록을 배열에 담습니다.
 							

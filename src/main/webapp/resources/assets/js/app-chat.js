@@ -198,8 +198,8 @@ function buttonSend() {
 	      '</div>' +
 	      '</div>' +
 	      '<div class="user-avatar flex-shrink-0 ms-3">' +
-	      '<div class="avatar avatar-sm">' +
-	      '<img src="/exodia/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />' +
+	      '<div class="avatar">' +
+	      '<span class="avatar-initial rounded-circle bg-label-primary" style="font-size: 13px;">시온</span>' +
 	      '</div>' +
 	      '</div>' +
 	      '</div>');
@@ -373,8 +373,8 @@ function checkLR(data) {
     var renderMsg = $('<li class="chat-message"></li>');
     renderMsg.html('<div class="d-flex overflow-hidden">' +
     		 '<div class="user-avatar flex-shrink-0 me-3">' +
-    	      '<div class="avatar avatar-sm">' +
-    	      '<img src="/exodia/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />' +
+    	      '<div class="avatar">' +
+    	      '<span class="avatar-initial rounded-circle bg-label-primary" style="font-size: 13px;">재롱</span>' +
     	      '</div>' +
     	      '</div>' +
       '<div class="chat-message-wrapper flex-grow-1 w-50">' +

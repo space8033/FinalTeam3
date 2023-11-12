@@ -330,7 +330,7 @@
 				                          </div>										
 										<a class="btn btn-primary btn-sm mt-2" href="inquiryList">목록</a>
 										<c:if test="${now_emp_no == 0}">
-											<a class="btn btn-primary btn-sm mt-2" href="noticeUpdate?notice_no=${notice.notice_no}">수정</a>
+											<a class="btn btn-primary btn-sm mt-2" href="inquiryUpdate?notice_no=${notice.notice_no}">수정</a>
 										    <a class="btn btn-primary btn-sm mt-2"data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">삭제</a>									
 											<!-- Modal -->
 											<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -354,7 +354,7 @@
 										</c:if>
 										<c:if test="${now_emp_no != 0}">
 											<c:if test="${notice.empinfo_no == now_emp_no}">
-												<a class="btn btn-primary btn-sm mt-2" href="noticeUpdate?notice_no=${notice.notice_no}">수정</a>
+												<a class="btn btn-primary btn-sm mt-2" href="inquiryUpdate?notice_no=${notice.notice_no}">수정</a>
 											    <a class="btn btn-primary btn-sm mt-2"data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">삭제</a>									
 												<!-- Modal -->
 												<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -407,14 +407,14 @@
 													</c:if>
 													<c:if test="${reply.empinfo_no != 0}">
 														<c:if test="${reply.empinfo_no == now_empinfo_no}">
-															<i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4"></i>
+															<i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4" onclick="openDeleteModal(${reply.reply_no})"></i>
 														</c:if>
 													</c:if>
 													
 												<!-- 버튼 -->
 													<!-- <i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4"></i> -->													
 													<!-- 모달 창 -->
-													<div class="modal fade" id="basicModal" tabindex="-1" aria-labelledby="basicModalLabel" aria-hidden="true">
+													<div class="modal fade" id="basicModal${reply.reply_no}" tabindex="-1" aria-labelledby="basicModalLabel" aria-hidden="true">
 													  <div class="modal-dialog">
 													    <div class="modal-content">
 													      <div class="modal-header">
@@ -425,9 +425,9 @@
 													        	댓글을 삭제하시겠습니까?
 													      </div>
 													      <div class="modal-footer">
-													      	<textarea id="replyNo" style="display: none">${reply.reply_no}</textarea>
+													      	<textarea id="replyNo${reply.reply_no}" style="display: none">${reply.reply_no}</textarea>
 													        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-													        <button type="button" class="btn btn-primary" id="replyDeleteButton">삭제</button>
+													        <button type="button" class="btn btn-primary" id="replyDeleteButton" onclick="deleteComment(${reply.reply_no})">삭제</button>
 													      </div>
 													    </div>
 													  </div>

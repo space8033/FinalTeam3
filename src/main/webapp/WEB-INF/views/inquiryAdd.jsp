@@ -272,12 +272,12 @@
                           <div class="modal-body"> 내용이 저장되지 않았습니다. 나가시겠습니까? </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-                            <button type="button" class="btn btn-primary" onclick="location.href='noticeList'">나가기</button>
+                            <button type="button" class="btn btn-primary" onclick="location.href='inquiryList'">나가기</button>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <button type="submit" form="noticeAdd" id="noticeSubmit" class="btn btn-primary">등록</button>
+                    <button type="button" form="noticeAdd" id="inquirySubmit" class="btn btn-primary">등록</button>
                     <!-- 모달 -->
                     <div class="modal" id="modal-no-content">
                       <div class="modal-dialog">
@@ -295,11 +295,12 @@
                     </div>
                     <script>
                       // 등록 버튼 클릭 이벤트
-                      document.getElementById('noticeSubmit').addEventListener('click', function() {
+                      document.getElementById('inquirySubmit').addEventListener('click', function() {
                         var title = document.getElementById('ecommerce-product-name').value;
                         var content = document.getElementById('noticeContent').value;
+                        var teamname = document.getElementById('selectpickerLiveSearch').value;
                         // 제목이나 내용이 없음
-                        if (!title || !content) {
+                        if (!title || !content || !teamname) {
                           $('#modal-no-content').modal('show');
                         } else {
                           //폼 제출
@@ -333,31 +334,44 @@
                             </div>
                           </div>
                           <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-                          <script>
-						    $(document).ready(function () {
-						    	// selectpickerLiveSearch 변경 감지
-						        $('#selectpickerLiveSearch').change(function () {
-						            // 선택한 팀 이름 가져오기
-						            var selectedTeam = $(this).val();
-
-						            // 기존 입력된 값 가져오기
-						            var currentInputValue = $('#ecommerce-product-name').val();
-
-						            // 기존에 있던 팀 이름 제거 (앞 뒤 공백도 제거)
-						            var currentTeam = currentInputValue.split(' ')[0].trim();
-						            var newValue = currentInputValue.replace(currentTeam, '');
-
-						            // 맨 앞과 맨 뒤에 [ ] 추가
-						            var formattedTeam = selectedTeam ? '[' + selectedTeam + ']' : '';
-
-						            // 새로운 값 설정 (팀 이름이 맨 앞에 추가됨)
-						            newValue = formattedTeam + ' ' + newValue.trim();
-
-						            // 팀 이름을 input 칸에 설정
-						            $('#ecommerce-product-name').val(newValue);
-						        });
-						    });
-						  </script>
+							<script>
+							  $(document).ready(function () {
+							    // 기존 입력값 저장 변수
+							    var originalInputValue = '';
+							
+							    // selectpickerLiveSearch 변경 감지
+							    $('#selectpickerLiveSearch').change(function () {
+							      // 선택한 팀 이름 가져오기
+							      var selectedTeam = $(this).val();
+							
+							      // 기존 입력된 값 가져오기
+							      var currentInputValue = $('#ecommerce-product-name').val();
+							
+							      // 기존 값이 존재하면 저장
+							      if (!originalInputValue) {
+							        originalInputValue = currentInputValue;
+							      }
+							
+							      // 팀 이름이 이미 존재하는지 확인
+							      if (currentInputValue.includes('[')) {
+							        // 이미 팀 이름이 존재하면 기존 팀 이름을 지우고 새로운 팀 이름으로 수정
+							        var newValue = currentInputValue.replace(/\[.*?\]\s*/, '[' + selectedTeam + '] ');
+							      } else {
+							        // 팀 이름이 존재하지 않으면 맨 앞에 [팀이름] 추가
+							        var newValue = '[' + selectedTeam + '] ' + currentInputValue.trim();
+							      }
+							
+							      // 팀 이름을 input 칸에 설정
+							      $('#ecommerce-product-name').val(newValue);
+							    });
+							
+							    // 팀을 선택하지 않은 경우 원래의 입력값 복원
+							    $('#selectpickerLiveSearch').on('selectpicker:unselect', function () {
+							      $('#ecommerce-product-name').val(originalInputValue);
+							      originalInputValue = ''; // 초기화
+							    });
+							  });
+							</script>
                           <!-- Description -->
                           <div>
                             <label class="form-label">내용</label>

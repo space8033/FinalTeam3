@@ -76,9 +76,17 @@
 		                </c:if>
 	                     <div class="d-flex">
 	                       <div class="flex-shrink-0 me-3" onclick="javascript:pageMove('${alarm.alarm_no}', '${alarm.alarm_type}', '${alarm.alarm_typeNo}');">
+	                         
 	                         <div class="avatar">
-	                           <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle" />
-	                         </div>
+	                            <c:if test="${alarm.alarm_type != '프로그램'}">
+	                           		<img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle" />
+	                            </c:if>
+	                            <c:if test="${alarm.alarm_type == '프로그램'}">
+	                           		 <span class="avatar-initial rounded-circle bg-label-primary"><i class="bx bx-pie-chart-alt"></i></span>
+	                            </c:if>
+	                         
+	                        </div>
+	                         
 	                       </div>
 	                       <div class="flex-grow-1" onclick="javascript:pageMove('${alarm.alarm_no}', '${alarm.alarm_type}', '${alarm.alarm_typeNo}');">
 	                         <c:if test="${alarm.alarm_type == '쪽지'}">
@@ -88,6 +96,10 @@
 	                         <c:if test="${alarm.alarm_type == '채팅'}">
 	                         	<h6 class="mb-1">채팅 메세지 💬</h6>
 	                         	 <p class="mb-0">${alarm.emp_name}님으로부터 1:1 채팅이 도착하였습니다!</p>
+	                         </c:if>
+	                         <c:if test="${alarm.alarm_type == '프로그램'}">
+	                         	<h6 class="mb-1">업무 시작일 📅</h6>
+	                         	 <p class="mb-0">오늘은  '${alarm.alarm_content}' 업무 시작일입니다. 파이팅하세요!</p>
 	                         </c:if>
 	                         
 	                         

@@ -76,10 +76,7 @@
                           data-bs-toggle="sidebar"
                           data-overlay="app-overlay-ex"
                           data-target="#app-chat-sidebar-left">
-                          <img
-                            class="user-avatar rounded-circle cursor-pointer"
-                            src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
-                            alt="Avatar" />
+                          <span class="avatar-initial rounded-circle bg-label-primary" style="font-size: 15px;">${empInfo_twoname}</span>
                         </div>
                         <div class="flex-grow-1 input-group input-group-merge rounded-pill ms-1">
                           <span class="input-group-text" id="basic-addon-search31"
@@ -126,7 +123,7 @@
 		                          </c:otherwise>
 	                            </c:choose>
 	                           
-	                              <span class="avatar-initial rounded-circle bg-label-success">${emp.two_name}</span>
+	                              <span class="avatar-initial rounded-circle ${emp.emp_color}" style="font-size: 13px;">${emp.two_name}</span>
 	                            </div>
 	                            <div class="chat-contact-info flex-grow-1 ms-3">
 	                              <h6 class="chat-contact-name text-truncate m-0">${emp.empinfo_name}</h6>
@@ -200,7 +197,7 @@
 		                            <div class="flex-shrink-0 avatar avatar-offline">
 		                          </c:otherwise>
 	                            </c:choose>
-	                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/4.png" alt="Avatar" class="rounded-circle" />
+	                               <span class="avatar-initial rounded-circle ${emp.emp_color}" style="font-size: 13px;">${emp.two_name}</span>
 	                            </div>
 	                            <div class="chat-contact-info flex-grow-1 ms-3">
 	                              <h6 class="chat-contact-name text-truncate m-0">${emp.empinfo_name}</h6>

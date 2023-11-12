@@ -62,6 +62,7 @@ public class AlarmController {
 			alarmResponse.setAlarm_type(alarm.getAlarm_type());
 			alarmResponse.setAlarm_typeNo(alarm.getAlarm_typeNo());
 			alarmResponse.setEmpinfo_no(alarm.getEmpinfo_no());
+			
 			if ("쪽지".equals(alarm.getAlarm_type())) {
 				int typeNo = alarm.getAlarm_typeNo();
 				Note note = noteService.getNote(typeNo);
@@ -77,11 +78,11 @@ public class AlarmController {
 				EmployeeInfo empInfo3 = employeeService.getEmpInfoByEmpInfoNo(empInfoNo);
 				String empInfo3Name = empInfo3.getEmpinfo_name();
 				alarmResponse.setEmp_name(empInfo3Name);
-				
-				
 				list.add(alarmResponse);
 				
-				
+			} else if ("프로그램".equals(alarm.getAlarm_type())) {
+				alarmResponse.setAlarm_content(alarm.getAlarm_content());
+				list.add(alarmResponse);
 			}
 		}
 		

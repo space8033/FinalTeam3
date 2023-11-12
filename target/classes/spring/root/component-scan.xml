@@ -15,7 +15,7 @@
 		</context:component-scan>
 		
 		<!-- scheduled 어노테이션을 사용하기 위해 xmlns:task주입 -->
-		<task:annotation-driven />    
+		<task:annotation-driven />
 
    		<context:component-scan base-package="com.finalteam3.exodia">
 

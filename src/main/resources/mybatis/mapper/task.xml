@@ -116,4 +116,13 @@
 		    WHERE ROWNUM = 1
 		]]>
 	</select>
+	
+	
+	<!-- 프로그램 시작일 가져오기 : 김시온 / 알람-->
+	<select id="selectTaskStartDate" resultType="ProgramTaskResponse" parameterType="ProgramTaskResponse">
+		select task_no, task_name, task_startdate, emp_no
+  		  from task
+  	 	 where task_type = 'Business'
+  	 	   and task_startdate = #{task_startdate}
+	</select>
 </mapper>

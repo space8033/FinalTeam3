@@ -19,5 +19,6 @@ public class EmpChat {
 	private String empinfo_email;
 	private String empinfo_position;
 	private String emp_status;
+	private String emp_color;
 	private byte[] profile;
 }

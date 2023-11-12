@@ -307,16 +307,7 @@
 						      name="noticeTitle"
 						      aria-label="Notice title" />
 						  </div>
-						  <!-- <div class="col-4 mb-3">
-						    <label class="form-label" for="form-repeater-1-1">팀</label>
-						    <select id="form-repeater-1-1" class="select2 form-select" data-placeholder="소속 팀">
-						      <option value="">소속 팀</option>
-						      <option value="size">개발1팀</option>
-						      <option value="color">개발2팀</option>
-						      <option value="weight">유지보수1팀</option>
-						      <option value="smell">유지보수2팀</option>
-						    </select>
-						  </div> -->
+						  
 						</div>
                         <!-- Description -->
                         <div>
@@ -343,24 +334,7 @@
                     </div>
                     <!-- /Product Information -->
                     <!-- Media -->
-                    <div class="card mb-4">
-                      <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0 card-title">미디어</h5>
-                      </div>
-                      <div class="card-body">
-                        <form action="/upload" class="dropzone needsclick" id="dropzone-basic">
-                          <div class="dz-message needsclick my-5">
-                            <p class="fs-4 note needsclick my-2">Drag and drop your image here</p>
-                            <small class="text-muted d-block fs-6 my-2">or</small>
-                            <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse"
-                              >이미지 업로드</span>
-                          </div>
-                          <div class="fallback">
-                            <input name="file" type="file" />
-                          </div>
-                        </form>
-                      </div>
-                    </div>
+                    
                   </div>
                 </div>
               </div>

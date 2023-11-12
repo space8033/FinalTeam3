@@ -78,13 +78,7 @@
                               data-overlay
                               data-target="#app-chat-contacts"></i>
                             <div class="flex-shrink-0 avatar">
-                              <img
-                                src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png"
-                                alt="Avatar"
-                                class="rounded-circle"
-                                data-bs-toggle="sidebar"
-                                data-overlay
-                                data-target="#app-chat-sidebar-right" />
+                               <span class="avatar-initial rounded-circle bg-label-primary" style="font-size: 15px;">${buddy.two_name}</span>
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
                               <h6 class="m-0">${buddy.empinfo_name}</h6>
@@ -134,8 +128,8 @@
 	                          <li class="chat-message">
 	                            <div class="d-flex overflow-hidden">
 	                              <div class="user-avatar flex-shrink-0 me-3">
-	                                <div class="avatar avatar-sm">
-	                                  <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt="Avatar" class="rounded-circle" />
+	                                <div class="avatar">
+	                                   <span class="avatar-initial rounded-circle bg-label-success" style="font-size: 13px;">${buddy.two_name}</span>
 	                                </div>
 	                              </div>
 	                              <div class="chat-message-wrapper flex-grow-1">
@@ -216,8 +210,8 @@
 	                                </div>
 	                              </div>
 	                              <div class="user-avatar flex-shrink-0 ms-3">
-	                                <div class="avatar avatar-sm">
-	                                  <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
+	                                <div class="avatar">
+	                                   <span class="avatar-initial rounded-circle bg-label-primary" style="font-size: 13px;">${empInfo_twoname}</span>
 	                                </div>
 	                              </div>
 	                            </div>
