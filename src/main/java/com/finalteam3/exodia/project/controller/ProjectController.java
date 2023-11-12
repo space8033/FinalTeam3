@@ -3,6 +3,7 @@ package com.finalteam3.exodia.project.controller;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -57,11 +58,16 @@ public class ProjectController {
 	}
 	
 	@GetMapping("/projectList")
-	public String getAllProject(Authentication authentication, Model model) {
+	public String getAllProject(Authentication authentication, Model model, HttpSession session) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		int empinfo_no = employeeDao.selectEmpInfoNoByEmpNo(loginResponse.getEmp_no());
 		model.addAttribute("empinfo_no", empinfo_no);
+		
+		if(session.getAttribute("projectNo") != null) {
+			int project_no = (int) session.getAttribute("projectNo");
+			model.addAttribute("project_no", project_no);
+		}
 		
 		return "/projectList";
 	}
@@ -70,7 +76,6 @@ public class ProjectController {
 	@ResponseBody
 	public List<ProjectListResponse> getProjectList(@RequestParam int empinfo_no) {
 		List<ProjectListResponse> list = projectService.getAllProjectList(empinfo_no);
-		log.info("dfasdgasga" + list.toString());
 		return list;
 	}
 

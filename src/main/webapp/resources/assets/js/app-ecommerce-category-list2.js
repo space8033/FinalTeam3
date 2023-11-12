@@ -83,7 +83,7 @@ $(function () {
             var $row_output =
               '<div class="d-flex align-items-center">' +
               '<div class="d-flex flex-column justify-content-center">' +
-              '<a class="text-body text-wrap fw-medium" href="#">' +
+              '<a class="text-body text-wrap fw-medium" href="/exodia/main">' +
               $name +
               '</a>' +
               '</div>' +

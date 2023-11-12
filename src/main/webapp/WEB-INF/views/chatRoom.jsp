@@ -118,8 +118,8 @@
                       </div>
                         <c:forEach var="chat" items="${chatMsg}">
 						   <input type="hidden" id="chatNo" value="${chat.chatRoom_no}"/>
-						    <c:if test="${empInfoNo != chat.empInfo_no}">
-						      <input type="hidden" id="empInfoNo" value="${chat.empInfo_no}"/>
+						    <c:if test="${empInfo.empinfo_no != chat.empInfo_no}">
+						      <input type="hidden" id="chatEmpInfoNo" value="${chat.empInfo_no}"/>
 						    </c:if>
 						</c:forEach>
                       

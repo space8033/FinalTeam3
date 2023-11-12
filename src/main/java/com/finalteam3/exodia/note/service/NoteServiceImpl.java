@@ -78,14 +78,31 @@ public class NoteServiceImpl implements NoteService{
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 		String currentDate = sdf.format(new Date());
 		List<Note> noteRestimes = noteDao.selectNoteByNoteRestime(currentDate);
-		
+		log.info(noteRestimes.toString()+"noteRestimes머있나보자");
+		log.info(noteRestimes.size()+"noteRestimes몇개있나보자");
 		for (Note noteRestime : noteRestimes) {
 			Note note = new Note();
 			note.setNote_createdAt(noteRestime.getNote_restime());
 			note.setNote_restime("예약 전송 완료");
 			note.setNote_no(noteRestime.getNote_no());
+			log.info(note.toString()+"노트 잘넣고");
 			noteDao.updateNoteRestime(note);
-			log.info("예약전송완료");
+			log.info("완료된것도알려줘야지");
+			
+			List<NoteRead> noteList = noteDao.selectNoteReadByNoteNo(noteRestime.getNote_no());
+			AlarmRequest alarm = new AlarmRequest();
+			for(NoteRead noteRead : noteList) {
+				int empNo = noteRead.getEmp_no_receiver();
+				int empInfo_no = employeeDao.selectEmpInfoNoByEmpNo(empNo);
+				alarm.setAlarm_isRead(false);
+				alarm.setAlarm_type("쪽지");
+				alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
+				alarm.setEmpinfo_no(empInfo_no);
+				alarmDao.insertAlarm(alarm);
+				log.info(alarm.toString()+"에약전송 알람이문젠지");
+				log.info(noteRead.toString()+"에약전송 노트리드가문젠지");
+			}
+			
 			
 		}
 	}*/
@@ -154,11 +171,13 @@ public class NoteServiceImpl implements NoteService{
 					
 					EmployeeInfo employeeInfo = employeeDao.selectInfoByEmpNo(receiverNoCC);
 					int empInfo_no = employeeInfo.getEmpinfo_no();
-					alarm.setAlarm_isRead(false);
-					alarm.setAlarm_type("쪽지");
-					alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
-					alarm.setEmpinfo_no(empInfo_no);
-					alarmDao.insertAlarm(alarm);
+					if(request.getNote_reserve_time() == null) {
+						alarm.setAlarm_isRead(false);
+						alarm.setAlarm_type("쪽지");
+						alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
+						alarm.setEmpinfo_no(empInfo_no);
+						alarmDao.insertAlarm(alarm);
+					}
 					
 				}
 			}
@@ -182,11 +201,13 @@ public class NoteServiceImpl implements NoteService{
 					
 					EmployeeInfo employeeInfo = employeeDao.selectInfoByEmpNo(receiverNo);
 					int empInfo_no = employeeInfo.getEmpinfo_no();
-					alarm.setAlarm_isRead(false);
-					alarm.setAlarm_type("쪽지");
-					alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
-					alarm.setEmpinfo_no(empInfo_no);
-					alarmDao.insertAlarm(alarm);
+					if(request.getNote_reserve_time() == null) {
+						alarm.setAlarm_isRead(false);
+						alarm.setAlarm_type("쪽지");
+						alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
+						alarm.setEmpinfo_no(empInfo_no);
+						alarmDao.insertAlarm(alarm);
+					}
 				}
 			}
 		}
@@ -209,11 +230,13 @@ public class NoteServiceImpl implements NoteService{
 					
 					EmployeeInfo employeeInfo = employeeDao.selectInfoByEmpNo(receiverBccNo);
 					int empInfo_no = employeeInfo.getEmpinfo_no();
-					alarm.setAlarm_isRead(false);
-					alarm.setAlarm_type("쪽지");
-					alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
-					alarm.setEmpinfo_no(empInfo_no);
-					alarmDao.insertAlarm(alarm);
+					if(request.getNote_reserve_time() == null) {
+						alarm.setAlarm_isRead(false);
+						alarm.setAlarm_type("쪽지");
+						alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
+						alarm.setEmpinfo_no(empInfo_no);
+						alarmDao.insertAlarm(alarm);
+					}
 				}
 			}
 		}
@@ -779,6 +802,10 @@ public class NoteServiceImpl implements NoteService{
 				noCancel = "발송취소할 목록이 없습니다.";
 			} else {
 				noteDao.sentCancelNote(noteReadNo);
+				AlarmRequest alarm = new AlarmRequest();
+				alarm.setAlarm_type("쪽지");
+				alarm.setAlarm_typeNo(noteReadNo);
+				alarmDao.deleteAlarmByAlarm(alarm);
 				noCancel = "발송취소 완료";
 				
 				//예약 전송 취소
@@ -801,6 +828,8 @@ public class NoteServiceImpl implements NoteService{
 						newNote.setNote_restime(currentDate+" 예악 발송 취소됨");
 						newNote.setNote_createdAt("");
 						noteDao.updateNoteRestime(newNote);
+						
+						
 						
 					}
 				}

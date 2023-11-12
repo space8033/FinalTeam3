@@ -44,5 +44,12 @@ public class AlarmServiceImpl implements AlarmService {
 		alarm.setAlarm_isRead(true);
 		alarmDao.updateAlarmReadByAlarmNo(alarm);
 	}
+
+
+
+	@Override
+	public int uckAlarmCount(int empInfoNo) {
+		return alarmDao.countUckAlarm(empInfoNo);
+	}
 	
 }
