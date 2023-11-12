@@ -18,11 +18,11 @@
 	var wsSend=()=>{
 		
 		  showAlarmCount();
-	      setInterval(function() {
+	      /*setInterval(function() {
 	    	  var emp_id = $("#alarmId").val();
 	    	  console.log(emp_id+"야 잘보내긴해?");
 	         sock.send(emp_id);
-	      }, 30000);
+	      }, 30000);*/
     }
 
 	function handleWebSocketMessage(message) {

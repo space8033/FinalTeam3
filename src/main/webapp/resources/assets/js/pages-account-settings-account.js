@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     }
 
     // Update/reset user image of account page
-    let accountUserImage = document.getElementById('uploadedAvatar');
+    /*let accountUserImage = document.getElementById('uploadedAvatar');
     const fileInput = document.querySelector('.account-file-input'),
       resetFileInput = document.querySelector('.account-image-reset');
 
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
         fileInput.value = '';
         accountUserImage.src = resetImage;
       };
-    }
+    }*/
   })();
 });
 
@@ -239,4 +239,46 @@ $(document).ready(function() {
     $("#formAccountSettings").submit(function(event) {
         event.preventDefault();
     });
+    
+    //프사변경
+    var accountUserImage = $('#uploadedAvatar');
+    var fileInput = $('.account-file-input');
+    var resetFileInput = $('.account-image-reset');
+    
+    fileInput.change(function() {
+    	if (fileInput[0].files[0]) {
+    		var formData = new FormData();
+    		formData.append('file', fileInput[0].files[0]);
+    		$.ajax({
+    			url: '/exodia/employee/profileImgModify', // 귀하의 Java 컨트롤러의 URL로 대체해야 합니다.
+    			type: 'POST',
+    			data: formData,
+    			processData: false,
+    			contentType: false,
+    			success: function(data) {
+    				location.reload();
+    			},
+    			error: function(jqXHR, textStatus, errorThrown) {
+    				console.error('AJAX Error: ', textStatus, errorThrown);
+    			}
+    		});
+    	}
+    });
+    
+    resetFileInput.click(function() {
+    	$.ajax({
+			url: '/exodia/employee/deleteImg', // 귀하의 Java 컨트롤러의 URL로 대체해야 합니다.
+			type: 'POST',
+			processData: false,
+			contentType: false,
+			success: function(data) {
+				location.reload();
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.error('AJAX Error: ', textStatus, errorThrown);
+			}
+		});
+    });
+    
 });
+

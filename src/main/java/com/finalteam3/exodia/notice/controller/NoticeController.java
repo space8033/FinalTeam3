@@ -86,6 +86,7 @@ public class NoticeController {
 		
 		String emp_name = loginResponse.getEmpInfo_name();
 		model.addAttribute("empInfo_name", emp_name);
+		
 		return "noticeAdd";
 	}
 	

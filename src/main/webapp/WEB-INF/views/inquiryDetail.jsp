@@ -330,7 +330,7 @@
 				                          </div>										
 										<a class="btn btn-primary btn-sm mt-2" href="inquiryList">목록</a>
 										<c:if test="${now_emp_no == 0}">
-											<a class="btn btn-primary btn-sm mt-2" href="noticeUpdate?notice_no=${notice.notice_no}">수정</a>
+											<a class="btn btn-primary btn-sm mt-2" href="inquiryUpdate?notice_no=${notice.notice_no}">수정</a>
 										    <a class="btn btn-primary btn-sm mt-2"data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">삭제</a>									
 											<!-- Modal -->
 											<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -354,7 +354,7 @@
 										</c:if>
 										<c:if test="${now_emp_no != 0}">
 											<c:if test="${notice.empinfo_no == now_emp_no}">
-												<a class="btn btn-primary btn-sm mt-2" href="noticeUpdate?notice_no=${notice.notice_no}">수정</a>
+												<a class="btn btn-primary btn-sm mt-2" href="inquiryUpdate?notice_no=${notice.notice_no}">수정</a>
 											    <a class="btn btn-primary btn-sm mt-2"data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">삭제</a>									
 												<!-- Modal -->
 												<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

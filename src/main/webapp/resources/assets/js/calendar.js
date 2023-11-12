@@ -8,35 +8,6 @@
  * ! We are getting events from a separate file named app-calendar-events.js. You can add or remove events from there.
  *
  **/
-$(document).ready(function() {
-
-//add task
-    $('#calendarsubmit').click(function() {
-        var eventData = {
-            task_name: $('input[name=eventTitle]').val(),
-            task_content: $('#eventDescription').val(),
-            task_type: $('#eventLabel').val(),
-            task_startdate: $('input[name=eventStartDate]').val(),
-            task_enddate: $('input[name=eventEndDate]').val()
-        };
-        console.log(eventData);
-
-        $.ajax({
-    
-            type: 'post',
-            url: '/exodia/calendar', 
-            data: eventData, 
-            success: function(data) {
-                console.log("나는 병신이다");
-                location.reload();
-            }
-        });
-    });
-    
-  //delete task
-    
-    
-});
 
 let direction = 'ltr';
 
@@ -45,6 +16,15 @@ if (isRtl) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+	var eventForm = document.getElementById('eventForm');
+
+    eventForm.addEventListener('submit', function(event) {
+        // 폼의 submit 동작 막기
+        event.preventDefault();
+
+        // 추가적인 로직 수행 가능
+        // 예: 유효성 검사, AJAX 요청 등
+    });
 	let events;
 	//let events;
 	var xhr = new XMLHttpRequest();
@@ -67,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	              },
 	              offcanvasTitle = document.querySelector('.offcanvas-title'),
 	              btnToggleSidebar = document.querySelector('.btn-toggle-sidebar'),
-	              btnSubmit = document.querySelector('button[type="submit"]'),
+	              btnSubmit = document.querySelector('#calendarsubmit'),
 	              btnDeleteEvent = document.querySelector('.btn-delete-event'),
 	              btnCancel = document.querySelector('.btn-cancel'),
 	              eventTitle = document.querySelector('#eventTitle'),
@@ -192,9 +172,9 @@ document.addEventListener('DOMContentLoaded', function () {
 	              if (offcanvasTitle) {
 	                offcanvasTitle.innerHTML = '수정하기';
 	              }
-	              btnSubmit.innerHTML = '수정';
-	              btnSubmit.classList.add('btn-update-event');
+	              btnSubmit.textContent = '수정';
 	              btnSubmit.classList.remove('btn-add-event');
+	              btnSubmit.classList.add('btn-update-event');
 	              btnDeleteEvent.classList.remove('d-none');
 
 	              eventTitle.value = eventToUpdate.title;
@@ -301,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	                if (offcanvasTitle) {
 	                  offcanvasTitle.innerHTML = '일정 추가';
 	                }
-	                btnSubmit.innerHTML = '추가';
+	                btnSubmit.textContent = '추가';
 	                btnSubmit.classList.remove('btn-update-event');
 	                btnSubmit.classList.add('btn-add-event');
 	                btnDeleteEvent.classList.add('d-none');
@@ -455,6 +435,8 @@ document.addEventListener('DOMContentLoaded', function () {
 	                var propName = extendedPropsToUpdate[index];
 	                existingEvent.setExtendedProp(propName, updatedEventData.extendedProps[propName]);
 	              }
+	              
+	             
 	            };
 
 	            // Remove Event In Calendar (UI Only)
@@ -468,52 +450,78 @@ document.addEventListener('DOMContentLoaded', function () {
 	            btnSubmit.addEventListener('click', e => {
 	              if (btnSubmit.classList.contains('btn-add-event')) {
 	                if (isFormValid) {
-	                  let newEvent = {
-	                    id: calendar.getEvents().length + 1,
-	                    title: eventTitle.value,
-	                    start: eventStartDate.value,
-	                    end: eventEndDate.value,
-	                    startStr: eventStartDate.value,
-	                    endStr: eventEndDate.value,
-	                    display: 'block',
-	                    extendedProps: {
-	                      //location: eventLocation.value,
-	                      guests: eventGuests.val(),
-	                      calendar: eventLabel.val(),
-	                      description: eventDescription.value
-	                    }
-	                  };
-	                  /*if (eventUrl.value) {
-	                    newEvent.url = eventUrl.value;
-	                  }*/
-	                  if (allDaySwitch.checked) {
-	                    newEvent.allDay = true;
-	                  }
-	                  addEvent(newEvent);
-	                  bsAddEventSidebar.hide();
+	                	var eventData = {
+                	        task_name: document.querySelector('input[name=eventTitle]').value,
+                	        task_content: document.querySelector('#eventDescription').value,
+                	        task_type: document.querySelector('#eventLabel').value,
+                	        task_startdate: document.querySelector('input[name=eventStartDate]').value,
+                	        task_enddate: document.querySelector('input[name=eventEndDate]').value
+                	    };
+
+                	    var xhr = new XMLHttpRequest();
+                	    
+                	    xhr.open('POST', '/exodia/calendar', true);
+                	    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+                	    xhr.onreadystatechange = function() {
+                	        if (xhr.readyState === 4) {
+                	            if (xhr.status === 200) {
+                	                console.log("나는 병신이다");
+                	                location.reload();
+                	            } else {
+                	                console.error("에러 발생: " + xhr.status);
+                	            }
+                	        }
+                	    };
+                	    
+                	    var data = 'task_name=' + encodeURIComponent(eventData.task_name) +
+                	               '&task_content=' + encodeURIComponent(eventData.task_content) +
+                	               '&task_type=' + encodeURIComponent(eventData.task_type) +
+                	               '&task_startdate=' + encodeURIComponent(eventData.task_startdate) +
+                	               '&task_enddate=' + encodeURIComponent(eventData.task_enddate);
+                	    
+                	    xhr.send(data);
 	                }
 	              } else {
 	                // Update event
 	                // ------------------------------------------------
 	                if (isFormValid) {
-	                  let eventData = {
-	                    id: eventToUpdate.id,
-	                    title: eventTitle.value,
-	                    start: eventStartDate.value,
-	                    end: eventEndDate.value,
-	                    //url: eventUrl.value,
-	                    extendedProps: {
-	                      //location: eventLocation.value,
-	                      guests: eventGuests.val(),
-	                      calendar: eventLabel.val(),
-	                      description: eventDescription.value
-	                    },
-	                    display: 'block',
-	                    allDay: allDaySwitch.checked ? true : false
-	                  };
+	                	var task_no = eventToUpdate.extendedProps.task_no;
 
-	                  updateEvent(eventData);
-	                  bsAddEventSidebar.hide();
+	                    var eventData = {
+	                        task_no: task_no,
+	                        task_name: document.querySelector('input[name=eventTitle]').value,
+	                        task_content: document.querySelector('#eventDescription').value,
+	                        task_type: document.querySelector('#eventLabel').value,
+	                        task_startdate: document.querySelector('input[name=eventStartDate]').value,
+	                        task_enddate: document.querySelector('input[name=eventEndDate]').value
+	                    };
+
+	                    var xhr = new XMLHttpRequest();
+	                    
+	                    xhr.open('POST', '/exodia/modifyCalendar', true);
+	                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+	                    xhr.onreadystatechange = function() {
+	                        if (xhr.readyState === 4) {
+	                            if (xhr.status === 200) {
+	                                console.log("나는 병신이다");
+	                                location.reload();
+	                            } else {
+	                                console.error("에러 발생: " + xhr.status);
+	                            }
+	                        }
+	                    };
+	                    
+	                    var data = 'task_no=' + encodeURIComponent(eventData.task_no) +
+	                               '&task_name=' + encodeURIComponent(eventData.task_name) +
+	                               '&task_content=' + encodeURIComponent(eventData.task_content) +
+	                               '&task_type=' + encodeURIComponent(eventData.task_type) +
+	                               '&task_startdate=' + encodeURIComponent(eventData.task_startdate) +
+	                               '&task_enddate=' + encodeURIComponent(eventData.task_enddate);
+	                    
+	                    xhr.send(data);
+	                	
 	                }
 	              }
 	            });
@@ -542,10 +550,6 @@ document.addEventListener('DOMContentLoaded', function () {
 	            	    var data = 'task_no=' + encodeURIComponent(taskNo);
 	            	    xhr.send(data);
 
-	              
-	              
-	              
-	              
 	              bsAddEventSidebar.hide();
 	            });
 

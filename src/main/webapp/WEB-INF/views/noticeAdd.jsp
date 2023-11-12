@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html
@@ -283,7 +284,36 @@
 					    </div>
 					  </div>
 					</div>
-                    <button type="submit" form="noticeAdd" id="noticeSubmit" class="btn btn-primary">등록</button>
+                    <button type="button" form="noticeAdd" id="noticeSubmit" class="btn btn-primary">등록</button>
+                    <!-- 모달 -->
+                    <div class="modal" id="modal-no-content">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">내용을 입력하세요</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body"> 제목이나 내용을 입력해주세요. </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <script>
+                      // 등록 버튼 클릭 이벤트
+                      document.getElementById('noticeSubmit').addEventListener('click', function() {
+                        var title = document.getElementById('ecommerce-product-name').value;
+                        var content = document.getElementById('noticeContent').value;
+                        // 제목이나 내용이 없음222
+                        if (!title || !content) {
+                          $('#modal-no-content').modal('show');
+                        } else {
+                          //폼 제출
+                          document.getElementById('noticeAdd').submit();
+                        }
+                      });
+                    </script>
                   </div>
                 </div>
 					<form action="noticeAdd" id="noticeAdd" method="post" enctype="multipart/form-data">

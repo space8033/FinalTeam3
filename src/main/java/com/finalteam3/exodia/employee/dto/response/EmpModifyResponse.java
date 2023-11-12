@@ -11,4 +11,5 @@ public class EmpModifyResponse {
 	private String empinfo_phone;
 	private String empinfo_position;
 	private byte[] media_data;
+	private String base64;
 }

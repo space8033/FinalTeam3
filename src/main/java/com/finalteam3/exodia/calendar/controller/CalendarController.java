@@ -42,9 +42,20 @@ public class CalendarController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		int emp_no = loginResponse.getEmp_no();
 		request.setEmp_no(emp_no);
-		log.info("저장성공 : " + request.toString());
 		calendarService.write(request);
-		log.info("저장성공 : " + request);
+		
+		return "redirect:/calendar";
+	}
+
+	@PostMapping("/modifyCalendar")
+	public String modifyTask(CalendarRequest request, Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		int emp_no = loginResponse.getEmp_no();
+		request.setEmp_no(emp_no);
+		
+		calendarService.updateByTaskNo(request);
+		log.info("수정성공 : " + request);
 		
 		return "redirect:/calendar";
 	}

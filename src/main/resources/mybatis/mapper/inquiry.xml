@@ -58,12 +58,12 @@
       	)
       	values(
       		#{notice_no}, #{notice_title}, #{notice_content}, 'INQUIRY',
-      		#{empinfo_no_writer}, to_char(sysdate,'yyyy.mm.dd hh24:mi:ss'), 0
+      		#{empinfo_no_writer}, to_char(sysdate,'yyyy.mm.dd hh24:mi'), 0
       	)		
 	</insert>
 	
 	<update id="updateDetailByInquiryNo" parameterType="Notice">  
-		update notice set notice_title = #{notice_title}, notice_content = #{notice_content}, notice_modifiedat = to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
+		update notice set notice_title = #{notice_title}, notice_content = #{notice_content}, notice_modifiedat = to_char(sysdate,'yyyy.mm.dd hh24:mi')
 		where notice_no = #{notice_no}
 	</update>
 	
