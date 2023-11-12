@@ -196,6 +196,7 @@ public class EmployeeServiceImpl implements EmployeeService{
          EmpManagementResponse emr = new EmpManagementResponse();
          List<TeamBasicResponse> tbrs = employeeDao.selectTeamBasic(tName);
          List<Integer> teamMembers = new ArrayList<>();
+         List<String> teamMemberNames = new ArrayList<>();
          
          for(TeamBasicResponse tbr : tbrs) {
             if(tbr.getEmp_no() == 0) {
@@ -205,11 +206,13 @@ public class EmployeeServiceImpl implements EmployeeService{
                emr.setTeam_leader(tbr.getEmpinfo_name());               
             }else {
                teamMembers.add(tbr.getEmp_no());
+               teamMemberNames.add(tbr.getEmpinfo_name());
             }
          }
          
          //사람당 이미지파일 구하기(아직 구현 전)
          emr.setTeam_members(teamMembers);
+         emr.setTeam_memberNames(teamMemberNames);
          list.add(emr);
       }
       

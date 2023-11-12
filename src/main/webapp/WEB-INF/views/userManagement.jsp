@@ -273,7 +273,7 @@
 			                        <td>${teams.team_leader}</td>
 			                        <td>
 			                          <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
-			                          	<c:forEach var="members" items="${teams.team_members}" varStatus="memberStatus">
+			                          	<c:forEach var="members" items="${teams.team_memberNames}" varStatus="memberStatus">
 			                          		<c:if test="${memberStatus.count < 4}">
 				                             	<li
 					                              data-bs-toggle="tooltip"

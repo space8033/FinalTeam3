@@ -12,6 +12,7 @@ public class EmpManagementResponse {
 	private String team_name;
 	private String team_leader;
 	private List<Integer> team_members;
+	private List<String> team_memberNames;
 	//private List<MediaDto> team_member;
 	private String team_duty;
 }
