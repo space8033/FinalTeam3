@@ -103,7 +103,7 @@ public class ChatServiceImpl implements ChatService {
 				empchat.setEmpinfo_position(emp.getEmpinfo_position());
 				empchat.setEmpinfo_no(emp.getEmpinfo_no());
 				empchat.setProfile(emp.getProfile());
-				empchat.setTwo_name(emp.getTwo_name());
+				empchat.setTwo_name(emp.getEmpinfo_name().substring(emp.getEmpinfo_name().length() - 2));
 				empchat.setTeam_name(emp.getTeam_name());
 				empchat.setEmpinfo_name(emp.getEmpinfo_name());
 				empchat.setEmp_status(emp.getEmp_status());

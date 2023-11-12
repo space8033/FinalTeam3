@@ -102,8 +102,6 @@ public class NoteServiceImpl implements NoteService{
 				log.info(alarm.toString()+"에약전송 알람이문젠지");
 				log.info(noteRead.toString()+"에약전송 노트리드가문젠지");
 			}
-			
-			
 		}
 	}
 	
@@ -1009,4 +1007,6 @@ public class NoteServiceImpl implements NoteService{
 	public int countBySearchNoteDraftNo(Map<String, Object> map) {
 		return noteDao.countBySearchDraftEmpno(map);
 	}
+
+	
 }

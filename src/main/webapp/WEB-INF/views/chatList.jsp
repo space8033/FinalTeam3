@@ -126,7 +126,7 @@
 		                          </c:otherwise>
 	                            </c:choose>
 	                           
-	                              <span class="avatar-initial rounded-circle bg-label-success">${emp.two_name}</span>
+	                              <span class="avatar-initial rounded-circle bg-label-success" style="font-size: 13px;">${emp.two_name}</span>
 	                            </div>
 	                            <div class="chat-contact-info flex-grow-1 ms-3">
 	                              <h6 class="chat-contact-name text-truncate m-0">${emp.empinfo_name}</h6>
@@ -191,13 +191,13 @@
 	                          <a class="d-flex align-items-center" onclick="javascript:chatRoom(${emp.emp_no})">
 	                            <c:choose>
 	                          	  <c:when test="${emp.emp_status == 'on-line'}">
-	                          	    <div class="flex-shrink-0 avatar avatar-online">
+	                          	    <div class="flex-shrink-0 avatar avatar-sm avatar-online">
 	                          	  </c:when>
 	                          	  <c:when test="${emp.emp_status == 'away'}">
-	                          	    <div class="flex-shrink-0 avatar avatar-busy"> 
+	                          	    <div class="flex-shrink-0 avatar avatar-sm avatar-busy"> 
 	                          	  </c:when>
 	                          	  <c:otherwise>
-		                            <div class="flex-shrink-0 avatar avatar-offline">
+		                            <div class="flex-shrink-0 avatar avatar-sm avatar-offline">
 		                          </c:otherwise>
 	                            </c:choose>
 	                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/4.png" alt="Avatar" class="rounded-circle" />
