@@ -67,7 +67,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	
 		
 		String user_id = session.getPrincipal().getName();
-		log.info(user_id+"아읻이뭐니?");
+		//log.info(user_id+"아읻이뭐니?");
 		sessions.add(session);
 		userSessionMap.put(user_id, session);
 	}
@@ -79,7 +79,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 			// Thread.sleep(600);
 			//알람
 			String msg = message.getPayload();
-			log.info(msg+"메세지 받아오니?");
+			//log.info(msg+"메세지 받아오니?");
 			
 			
 			for(WebSocketSession single : sessions) {
@@ -87,11 +87,11 @@ public class WebSocketHandler extends TextWebSocketHandler{
 				int uckCount = alarmDao.selectAlarmUchkCount(memId);
 				if(alarmCount.get(memId) == null) {
 					alarmCount.put(memId, uckCount);
-					log.info(alarmCount.toString()+"잘드러갔닝?");
+					//log.info(alarmCount.toString()+"잘드러갔닝?");
 				}
 				
-				log.info(alarmCount.get(memId).toString()+"내아이디 안읽은 숫자는?");
-				log.info(uckCount+"알람 안읽은 숫자는?");
+				//log.info(alarmCount.get(memId).toString()+"내아이디 안읽은 숫자는?");
+				//log.info(uckCount+"알람 안읽은 숫자는?");
 				
 				if(single.getId().equals(session.getId()) && uckCount != 0) {
 					
@@ -128,7 +128,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 							
 							String jsonMessages2 = objectMapper.writeValueAsString(messageContent2);
 							TextMessage textMessage2 = new TextMessage(jsonMessages2);
-							log.info(textMessage2+"머라고보내니?");
+							//log.info(textMessage2+"머라고보내니?");
 							alarmDao.alarmToastUpdate(alarm.getAlarm_no());
 							session.sendMessage(textMessage2);
 						
@@ -161,7 +161,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 							
 							String jsonMessages2 = objectMapper.writeValueAsString(messageContent2);
 							TextMessage textMessage2 = new TextMessage(jsonMessages2);
-							log.info(textMessage2+"머라고보내니?");
+							//log.info(textMessage2+"머라고보내니?");
 							alarmDao.alarmToastUpdate(alarm.getAlarm_no());
 							session.sendMessage(textMessage2);
 							
@@ -169,8 +169,8 @@ public class WebSocketHandler extends TextWebSocketHandler{
 						} else if(uckCount != alarmCount.get(memId)){
 							// 메시지 목록을 배열에 담습니다.
 							
-							log.info(alarmCount.get(memId).toString()+"내아이디 안읽은 숫자는?");
-							log.info(uckCount+"알람 안읽은 숫자는?");
+							//log.info(alarmCount.get(memId).toString()+"내아이디 안읽은 숫자는?");
+							//log.info(uckCount+"알람 안읽은 숫자는?");
 							Message messageContent2= new Message();
 							
 							messageContent2.setCount(uckCount);
@@ -290,7 +290,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		//채팅
 		i--;
-		log.info("소켓 연결 끊김 현재 접속자수:" + i);
+		//log.info("소켓 연결 끊김 현재 접속자수:" + i);
 		  // sessionList에 session이 있다면
           // 해당 session의 방 번호를 가져와서, 방을 찾고, 그 방의 ArrayList<session>에서 해당 session을 지운다.
 		sessions.remove(session);

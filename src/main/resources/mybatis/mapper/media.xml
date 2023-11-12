@@ -10,7 +10,15 @@
 		INSERT INTO media(media_no, media_name, media_data, media_type, media_from, from_no)
         VALUES (#{media_no}, #{media_name}, #{media_data}, #{media_type}, #{media_from}, #{from_no})
     </insert>
+
 	<select id="selectMedia" parameterType="Media" resultType="Media">
+		select media_no, media_name, media_data, media_type, media_from, from_no
+  		  from media
+  	 	 where media_from = #{media_from}
+  	 	   and from_no = #{from_no}
+	</select>
+
+	<select id="selectMediaFromNo" parameterType="Map" resultType="Media">
 		select media_no, media_name, media_data, media_type, media_from, from_no
   		  from media
   	 	 where media_from = #{media_from}
@@ -23,4 +31,9 @@
   	 	 where media_no = #{media_no}
 	</select>
 	
+	<delete id="deleteMediaByFromNo" parameterType="Map">
+		delete from media
+		where media_from = #{media_from}
+		and from_no = #{from_no}
+	</delete>
 </mapper>

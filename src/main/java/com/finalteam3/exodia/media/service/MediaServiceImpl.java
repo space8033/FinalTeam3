@@ -1,5 +1,7 @@
 package com.finalteam3.exodia.media.service;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -30,6 +32,22 @@ public class MediaServiceImpl implements MediaService {
 	public void insertNoticeFile(MediaDto mediaDto) {
 		mediaDao.insertMedia(mediaDto);
 		
+	}
+
+
+
+	@Override
+	public MediaDto getMediaByFromNo(Map<String, Object> map) {
+		MediaDto media = mediaDao.selectMediaFromNo(map);
+		
+		return media;
+	}
+
+
+
+	@Override
+	public void deleteMediaByFromNo(Map<String, Object> map) {
+		mediaDao.deleteMediaByFromNo(map);
 	}
 
 }

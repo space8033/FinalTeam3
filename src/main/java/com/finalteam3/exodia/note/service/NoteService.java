@@ -72,8 +72,8 @@ public interface NoteService {
 	public void recoverTrashNote(String checkedIdsString);
 	public NoteRead getNoteRead(int noteReadNo);
 	
-	//예약 전송
-	public void restimeSend();
+	/*//예약 전송
+	public void restimeSend();*/
 	
 	public void addDraft(NoteRequest note) throws Exception;
 	

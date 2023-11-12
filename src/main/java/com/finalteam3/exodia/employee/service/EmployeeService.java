@@ -47,7 +47,7 @@ public interface EmployeeService {
 	public EmployeeInfo getEmpInfo(int empNo);
 	public JoinResult join(JoinRequest joinRequest);
 	public PasswordResult changePassword(PasswordRequest passwordRequest);
-	public EmpModifyResponse getModifyInfo(String emp_id);
+	public EmpModifyResponse getModifyInfo(Map<String, Object> map);
 	public ModifyResult changeEmpInfo(ModifyRequest modifyRequest);
 	public boolean confirmPassword(String emp_id, String emp_password);
 	public List<EmpManagementResponse> getManagementResponse(int project_no);

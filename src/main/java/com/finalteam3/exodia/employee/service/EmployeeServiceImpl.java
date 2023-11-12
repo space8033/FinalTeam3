@@ -1,11 +1,10 @@
 package com.finalteam3.exodia.employee.service;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,6 +30,8 @@ import com.finalteam3.exodia.employee.dto.response.ProjectEmpResponse;
 import com.finalteam3.exodia.employee.dto.response.TeamBasicResponse;
 import com.finalteam3.exodia.employee.dto.response.TimeLineResponse;
 import com.finalteam3.exodia.employee.dto.response.TransferDto;
+import com.finalteam3.exodia.media.dao.MediaDao;
+import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 import com.finalteam3.exodia.notice.dao.NoticeDao;
 import com.finalteam3.exodia.notice.dto.RecentNotice;
@@ -48,6 +49,8 @@ public class EmployeeServiceImpl implements EmployeeService{
    private NoticeDao noticeDao;
    @Resource
    private TaskDao taskDao;
+   @Resource
+   private MediaDao mediaDao;
    //암호화용
    private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
    
@@ -150,8 +153,15 @@ public class EmployeeServiceImpl implements EmployeeService{
    }
 
    @Override
-   public EmpModifyResponse getModifyInfo(String emp_id) {
+   public EmpModifyResponse getModifyInfo(Map<String, Object> map) {
+	  String emp_id = (String) map.get("emp_id"); 
       EmpModifyResponse response = employeeDao.selectModifyByEmpId(emp_id);
+      
+      MediaDto mediaDto = mediaDao.selectMediaFromNo(map);
+      if(mediaDto != null) {
+    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+    	  response.setBase64(base64Img);
+      }
       
       return response;
    }

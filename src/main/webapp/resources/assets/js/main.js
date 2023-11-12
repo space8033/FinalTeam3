@@ -18,10 +18,10 @@
 	var wsSend=()=>{
 		
 		  showAlarmCount();
-	      setInterval(function() {
+	      /*setInterval(function() {
 	    	  var emp_id = $("#alarmId").val();
 	         sock.send(emp_id);
-	      }, 30000);
+	      }, 30000);*/
     }
 
 	function handleWebSocketMessage(message) {
