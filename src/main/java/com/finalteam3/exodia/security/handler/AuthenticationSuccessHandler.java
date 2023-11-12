@@ -32,7 +32,7 @@ public class AuthenticationSuccessHandler extends SavedRequestAwareAuthenticatio
 		if (loginResponse.isEmp_isinit()) {
             getRedirectStrategy().sendRedirect(request, response, "/employee/initialPassword");
         } else {
-            getRedirectStrategy().sendRedirect(request, response, "/main");
+            getRedirectStrategy().sendRedirect(request, response, "/project/projectList");
         }
 		
 		Map<String, Object> status = new HashMap<>();

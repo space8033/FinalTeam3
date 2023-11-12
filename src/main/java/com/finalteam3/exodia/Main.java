@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -120,7 +121,8 @@ public class Main {
 	
 	
 	@RequestMapping("/main")
-	public String main(Model model, Authentication authentication) {
+	public String main(Model model, Authentication authentication, HttpSession session) {
+		session.setAttribute("projectNo", 0);
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		String emp_id = loginResponse.getEmp_id();

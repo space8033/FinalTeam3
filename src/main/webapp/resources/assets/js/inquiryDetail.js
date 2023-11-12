@@ -200,18 +200,16 @@ $(function () {
 	        }
 	    });
 	    
-	    $('.bx-trash.email-list-delete').click(function () {
+	    function openDeleteModal(replyNumber) {
 	    	  console.log("아이콘 클릭");
-	    	  
 	    	  // 댓글 삭제 모달 열기
-	    	  $('#basicModal').modal('show');
-	    	});
-	        
-	  //삭제 버튼 클릭 이벤트 처리
-	    $('#replyDeleteButton').click(function () {
+	    	  
+	    	  $('#basicModal'+replyNumber).modal('show');
+	    }
+	    function deleteComment(replyNumber) {
 	    	console.log("댓글삭제버튼클릭");
 	  	    var replyData = {
-	  	    		reply_no: $('#replyNo').val()
+	  	    		reply_no: replyNumber
 	  	    };
 	  	    console.log("받아온 reply_no :" + replyData);
 	  	    // 댓글을 삭제하는 AJAX 요청
@@ -221,7 +219,7 @@ $(function () {
 	  	        data: replyData,
 	  	        success: function (data) {
 	  	        	console.log('이제 좀 다른거하고싶다');
-	  	                location.reload();
+	  	               location.reload();
 	  	        },
 	  	        error: function (xhr, status, error) {
 	  	            console.error('댓글 삭제 중 오류 발생:');
@@ -229,7 +227,7 @@ $(function () {
 	  	            console.error('에러 메시지: ' + error);
 	  	        }
 	  	    });
-	  	});    
+	  	};    
 	    /*function closeDropdownMenu() {
 	    	  // 드롭다운 메뉴의 ID나 클래스 선택자를 사용하여 드롭다운을 닫습니다.
 	    	  $('.dropdown-menu').dropdown('hide');
@@ -245,7 +243,37 @@ $(function () {
 	        $('#confirmDeleteModal').data('replyId', replyNo).modal('show');
 	    }*/
 
-	 
+	  	/*	    $('.bx-trash.email-list-delete').click(function () {
+    	console.log("아이콘 클릭");
+    	// 댓글 삭제 모달 열기
+    	
+    	$('#basicModal').modal('show');
+    });
+*/	        
+  //삭제 버튼 클릭 이벤트 처리
+    /*$('#replyDeleteButton').click(function () {
+    	console.log("댓글삭제버튼클릭");
+    	var yame = $("#yame").val();
+  	    var replyData = {
+  	    		reply_no: replyNo
+  	    };
+  	    console.log("받아온 reply_no :" + replyData);
+  	    // 댓글을 삭제하는 AJAX 요청
+  	    $.ajax({
+  	        type: 'POST',
+  	        url: '/exodia/replyDelete',
+  	        data: replyData,
+  	        success: function (data) {
+  	        	console.log('이제 좀 다른거하고싶다');
+  	               location.reload();
+  	        },
+  	        error: function (xhr, status, error) {
+  	            console.error('댓글 삭제 중 오류 발생:');
+  	            console.error('상태 코드: ' + xhr.status);
+  	            console.error('에러 메시지: ' + error);
+  	        }
+  	    });
+  	});    */	 
         
 /*function replyDelete(replyId) {
 	// 모달 창 표시
