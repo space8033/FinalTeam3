@@ -22,20 +22,7 @@ $(function () {
   var sharedNoticeNo = null;
   
   var dt_product_table = $('.datatables-products'),
-    productAdd = "inquiryAdd",
-    statusObj = {
-      1: { title: 'Scheduled', class: 'bg-label-warning' },
-      2: { title: 'Publish', class: 'bg-label-success' },
-      3: { title: 'Inactive', class: 'bg-label-danger' }
-    },
-    categoryObj = {
-      0: { title: 'Household' },
-      1: { title: 'Office' },
-      2: { title: 'Electronics' },
-      3: { title: 'Shoes' },
-      4: { title: 'Accessories' },
-      5: { title: 'Game' }
-    }
+    productAdd = "inquiryAdd";
   
   //DataTable
   if (dt_product_table.length) {
@@ -80,6 +67,7 @@ $(function () {
         	  responsivePriority: 1,
         	  render: function (data, type, full, meta) {
         		  var $title = full['notice_title'];
+        		  sharedNoticeNo = full['notice_no'];
 
         		    // Create a text output for Product name
         		    var $row_output =
@@ -112,7 +100,7 @@ $(function () {
         	}
         }
       ],
-      order: [1, 'desc'], //set any columns order asc/desc
+      order: [1, 'asc'], //set any columns order asc/desc
       dom:
         '<"card-header d-flex border-top rounded-0 flex-wrap py-md-0"' +
         '<"me-5 ms-n2 pe-5"f>' +

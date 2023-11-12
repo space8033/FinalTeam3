@@ -94,8 +94,6 @@ public class InquiryController {
 			String emp_name = loginResponse.getEmpInfo_name();
 			model.addAttribute("empInfo_name", emp_name);
 			
-			log.info("팀이름이 뭔데" + model);
-			
 			return "inquiryAdd";
 		}
 		
@@ -211,8 +209,13 @@ public class InquiryController {
 			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 			LoginResponse loginResponse = empDetails.getLoginResponse();
 			
+			List<String> tNames = employeeDao.selectTeamname(0);
+			model.addAttribute("tNames", tNames);
+			
 			Notice notice = inquiryService.getInquiryDetail(notice_no);
 			model.addAttribute("notice", notice);
+			
+			log.info("팀이름이 잘 들어가나요?" + model);
 			log.info("문의사하 ㅇ업데이트 문의사항 번호? :" + notice);
 			
 			return "inquiryUpdate";

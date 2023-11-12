@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html
@@ -285,6 +286,34 @@
 					  </div>
 					</div>
                     <button type="submit" id="inquirySubmit" class="btn btn-primary">수정</button>
+                    <div class="modal" id="modal-no-content">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">내용을 입력하세요</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body"> 제목이나 내용을 입력해주세요. </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <script>
+                      // 등록 버튼 클릭 이벤트
+                      document.getElementById('inquiryeSubmit').addEventListener('click', function() {
+                        var title = document.getElementById('ecommerce-product-name').value;
+                        var content = document.getElementById('noticeContent').value;
+                        // 제목이나 내용이 없음
+                        if (!title || !content) {
+                          $('#modal-no-content').modal('show');
+                        } else {
+                          //폼 제출
+                          document.getElementById('inquiryAdd').submit();
+                        }
+                      });
+                    </script>
                     
                   </div>
                 </div>
@@ -307,17 +336,57 @@
 						      name="noticeTitle"
 						      aria-label="Notice title" />
 						  </div>
-						  <!-- <div class="col-4 mb-3">
-						    <label class="form-label" for="form-repeater-1-1">팀</label>
-						    <select id="form-repeater-1-1" class="select2 form-select" data-placeholder="소속 팀">
-						      <option value="">소속 팀</option>
-						      <option value="size">개발1팀</option>
-						      <option value="color">개발2팀</option>
-						      <option value="weight">유지보수1팀</option>
-						      <option value="smell">유지보수2팀</option>
-						    </select>
-						  </div> -->
+						  
+						  <div class="col-4 mb-3">
+                              <label class="form-label" for="selectpickerLiveSearch">팀</label>
+                              <select id="selectpickerLiveSearch" class="selectpicker form-select" data-style="btn-default"
+		                            data-live-search="true">
+		                            <option data-tokens="ketchup mustard"  value="">팀을 선택해주세요</option>
+                                <c:forEach var="teamName" items="${tNames}">
+		                            <option data-tokens="ketchup mustard">${teamName}</option>
+	                            </c:forEach>
+                              </select>
+                            </div>
 						</div>
+						<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+							<script>
+							  $(document).ready(function () {
+							    // 기존 입력값 저장 변수
+							    var originalInputValue = '';
+							
+							    // selectpickerLiveSearch 변경 감지
+							    $('#selectpickerLiveSearch').change(function () {
+							      // 선택한 팀 이름 가져오기
+							      var selectedTeam = $(this).val();
+							
+							      // 기존 입력된 값 가져오기
+							      var currentInputValue = $('#ecommerce-product-name').val();
+							
+							      // 기존 값이 존재하면 저장
+							      if (!originalInputValue) {
+							        originalInputValue = currentInputValue;
+							      }
+							
+							      // 팀 이름이 이미 존재하는지 확인
+							      if (currentInputValue.includes('[')) {
+							        // 이미 팀 이름이 존재하면 기존 팀 이름을 지우고 새로운 팀 이름으로 수정
+							        var newValue = currentInputValue.replace(/\[.*?\]\s*/, '[' + selectedTeam + '] ');
+							      } else {
+							        // 팀 이름이 존재하지 않으면 맨 앞에 [팀이름] 추가
+							        var newValue = '[' + selectedTeam + '] ' + currentInputValue.trim();
+							      }
+							
+							      // 팀 이름을 input 칸에 설정
+							      $('#ecommerce-product-name').val(newValue);
+							    });
+							
+							    // 팀을 선택하지 않은 경우 원래의 입력값 복원
+							    $('#selectpickerLiveSearch').on('selectpicker:unselect', function () {
+							      $('#ecommerce-product-name').val(originalInputValue);
+							      originalInputValue = ''; // 초기화
+							    });
+							  });
+							</script>
                         <!-- Description -->
                         <div>
                           <label class="form-label">내용</label>
@@ -337,30 +406,16 @@
                             </div>
                             <div class="comment-editor border-0 pb-4" id="ecommerce-category-description">${notice.notice_content}</div>
                             <textarea id="noticeContent" style="display: none"></textarea>
+                            <div class="input-group">
+                              <input type="file" name="files" class="form-control" id="attach-file" multiple />
+                            </div>
                           </div>
                         </div>
                       </div>
                     </div>
                     <!-- /Product Information -->
                     <!-- Media -->
-                    <div class="card mb-4">
-                      <div class="card-header d-flex justify-content-between align-items-center">
-                        <h5 class="mb-0 card-title">미디어</h5>
-                      </div>
-                      <div class="card-body">
-                        <form action="/upload" class="dropzone needsclick" id="dropzone-basic">
-                          <div class="dz-message needsclick my-5">
-                            <p class="fs-4 note needsclick my-2">Drag and drop your image here</p>
-                            <small class="text-muted d-block fs-6 my-2">or</small>
-                            <span class="note needsclick btn bg-label-primary d-inline" id="btnBrowse"
-                              >이미지 업로드</span>
-                          </div>
-                          <div class="fallback">
-                            <input name="file" type="file" />
-                          </div>
-                        </form>
-                      </div>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
