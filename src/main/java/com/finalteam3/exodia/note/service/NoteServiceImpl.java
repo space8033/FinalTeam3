@@ -71,7 +71,7 @@ public class NoteServiceImpl implements NoteService{
 		return noteDao.countByEmpno(empNo);
 	}
 
-	@Override
+	/*@Override
 	@Scheduled(cron = "0 * * * * ?")
 	public void restimeSend() {
 		
@@ -88,7 +88,7 @@ public class NoteServiceImpl implements NoteService{
 			log.info("예약전송완료");
 			
 		}
-	}
+	}*/
 	
 	
 	@Override
