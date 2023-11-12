@@ -79,6 +79,26 @@
 		 		  
 	</select>
 	
+	<!-- 내 empinfono로 안읽은 채팅 개수 구하기 -->
+    <select id="countUnreadChat2" parameterType="ChatMessage" resultType="int">
+		SELECT COUNT(*) 
+		FROM ChatMessage
+		WHERE chatRoom_no = #{chatRoom_no}
+		  AND empInfo_no != #{empInfo_no}
+		  AND MESSAGE_CONTENT IS NOT NULL
+		  AND MESSAGE_READ IS NULL
+		 		  
+	</select>
+	
+	<!-- 안읽은 채팅 개수 구하기 -->
+    <select id="selectChatRoomList" parameterType="int" resultType="ChatMessage">
+		SELECT chatRoom_no
+		FROM ChatMessage
+		WHERE empInfo_no = #{empInfo_no}
+		  AND MESSAGE_CONTENT IS NULL
+		 		  
+	</select>
+	
 	 <update id="updateChatRoom" parameterType="ChatRoom">
 		update CHATROOM 
 		   set chatRoom_lastMsgid = #{chatRoom_lastMsgId}

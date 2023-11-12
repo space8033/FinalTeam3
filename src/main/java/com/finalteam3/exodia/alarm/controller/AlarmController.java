@@ -175,10 +175,12 @@ public class AlarmController {
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		 
 		 int uckNo = alarmService.uckAlarmCount(empInfo.getEmpinfo_no());
+		 int uckChatNo = chatService.getUckChatMsgAll(empInfo.getEmpinfo_no());
 
         // 숫자 값을 Map에 담아 JSON으로 반환
         Map<String, Integer> response = new HashMap<>();
         response.put("uckNo", uckNo);
+        response.put("uckChatNo", uckChatNo);
 
         return response;
      }

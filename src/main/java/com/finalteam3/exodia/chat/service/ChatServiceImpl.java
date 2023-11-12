@@ -180,5 +180,21 @@ public class ChatServiceImpl implements ChatService {
 	public ChatMessage getChatMessage(int chatmsgNo) {
 		return chatDao.selectLastMsg(chatmsgNo);
 	}
+
+	@Override
+	public int getUckChatMsgAll(int empInfo_no) {
+		List<ChatMessage> chatRoom = chatDao.selectChatRoomList(empInfo_no);
+		int uckChatMsg = 0;
+		for(ChatMessage chat : chatRoom) {
+			int chatRoomNo = chat.getChatRoom_no();
+			ChatMessage chatRequest = new ChatMessage();
+			chatRequest.setChatRoom_no(chatRoomNo);
+			chatRequest.setEmpInfo_no(empInfo_no);
+			int uckMsg = chatDao.countUnreadChat2(chatRequest);
+			uckChatMsg += uckMsg;
+			
+		}
+		return uckChatMsg;
+	}
 	
 }

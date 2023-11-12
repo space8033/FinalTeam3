@@ -14,4 +14,5 @@ public interface ChatService {
 	public void updateMessageRead(ChatMessage chatmsg);
 	public int getEmpInfoNo(ChatMessage chatmsg);
 	public ChatMessage getChatMessage(int chatmsgNo);
+	public int getUckChatMsgAll(int empInfo_no);
 }

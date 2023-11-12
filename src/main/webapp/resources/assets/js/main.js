@@ -18,11 +18,11 @@
 	var wsSend=()=>{
 		
 		  showAlarmCount();
-	      /*setInterval(function() {
+	      setInterval(function() {
 	    	  var emp_id = $("#alarmId").val();
 	    	  console.log(emp_id+"야 잘보내긴해?");
 	         sock.send(emp_id);
-	      }, 30000);*/
+	      }, 30000);
     }
 
 	function handleWebSocketMessage(message) {
@@ -290,10 +290,12 @@ function showAlarmCount() {
 	    success: function(response) {
 	        // 서버에서 받아온 숫자 값
 	        var uckNo = response.uckNo;
+	        var uckChatNo = response.uckChatNo;
 
 	        // 여기에서 숫자 값을 사용하도록 로직을 추가
 	        console.log('Received number:', uckNo);
 	        var v_alarmIcon = document.querySelector("#alarmIcon");
+	        var moveChat = document.querySelector("#moveChat");
 	        if (uckNo === 0) {
 	        	v_alarmIcon.classList.add('d-none');
 	            console.log('uckNo is 0');
@@ -309,6 +311,12 @@ function showAlarmCount() {
 		    	setTimeout(function() {
 		    		alarmToast.classList.remove("show");
 			    }, 4000);
+	        }
+	        if (uckChatNo === 0) {
+	        	moveChat.classList.add('d-none');
+	        } else {
+	        	moveChat.classList.remove('d-none');
+	        	moveChat.innerText = uckChatNo;
 	        }
 	        
 	        $.ajax({
@@ -464,20 +472,35 @@ function pageMove(alarm_no, alarm_type, alarm_typeNo) {
 		        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
 		        	    success: function(response) {
 		        	        // 서버에서 받아온 숫자 값
-		        	        var uckNo = response.uckNo;
+		        	    	var uckNo = response.uckNo;
+		        	        var uckChatNo = response.uckChatNo;
 
 		        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
 		        	        console.log('Received number:', uckNo);
 		        	        var v_alarmIcon = document.querySelector("#alarmIcon");
+		        	        var moveChat = document.querySelector("#moveChat");
 		        	        if (uckNo === 0) {
 		        	        	v_alarmIcon.classList.add('d-none');
 		        	            console.log('uckNo is 0');
 		        	        } else {
 		        	        	v_alarmIcon.classList.remove('d-none');
-			        		    v_alarmIcon.innerText = uckNo;
+		            		    v_alarmIcon.innerText = uckNo;
 		        	            console.log('uckNo is not 0');
+		        	            var alarmToast = document.querySelector("#alarmToast");
+		        		        var alarmId = document.querySelector("#alarmId").value;
+		        		    	alarmToast.classList.add('show');
+		        		    	var alarmMsg = document.querySelector("#alarmMsg");
+		        		    	alarmMsg.innerHTML = alarmId + "님 " + uckNo +"개의 미확인 알람이 있습니다."
+		        		    	setTimeout(function() {
+		        		    		alarmToast.classList.remove("show");
+		        			    }, 4000);
 		        	        }
-		        	        
+		        	        if (uckChatNo === 0) {
+		        	        	moveChat.classList.add('d-none');
+		        	        } else {
+		        	        	moveChat.classList.remove('d-none');
+		        	        	moveChat.innerText = uckChatNo;
+		        	        }
 		        	    },
 		        	    error: function(error) {
 		        	        console.error('Error fetching data:', error);

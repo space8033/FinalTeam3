@@ -17,6 +17,8 @@ public interface ChatDao {
 
 	public int countUnreadChat(ChatMessage chatMsg);
 	
+	public int countUnreadChat2(ChatMessage chatMsg);
+	
 	public List<ChatMessage> selectChatHistory(int chatRoomNo);
 	
 	public void updateChatRoom(ChatRoom chatRoom);
@@ -30,5 +32,7 @@ public interface ChatDao {
 	public void updateUnCheckMsg(ChatMessage chatMsg);
 	
 	public void updateAllUnCheckMsg(int chatRoomNo);
+	
+	public List<ChatMessage> selectChatRoomList(int empInfoNo);
 
 }
