@@ -1,6 +1,7 @@
 package com.finalteam3.exodia.calendar.service;
 
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -61,7 +62,6 @@ public class CalendarServiceImpl implements CalendarService{
 	        }
 
 	        responseList.add(response2);
-	        log.info("날짜로 변환한 response2 : " + response2);
 	    }
 
 	    return responseList;
@@ -72,10 +72,10 @@ public class CalendarServiceImpl implements CalendarService{
 		calendarDao.deleteCalendar(task_no);	
 	}
 
-	/*@Override
-	public void updateByTaskNo(CalendarResponse2 calendarResponse2) {
-		calendarDao.updateContentByTaskNo(calendarResponse2);
+	@Override
+	public void updateByTaskNo(CalendarRequest CalendarRequest) {
+		calendarDao.updateContentByTaskNo(CalendarRequest);
 		
-	}*/
+	}
 
 }
