@@ -802,6 +802,58 @@ function bookMark(noteReadNo) {
 		            type: "POST",
 		            data: postData,
 		            success: function(response) {
+		            	$.ajax({
+			        	    url: '/exodia/updateNoteNo',
+			        	    type: 'GET',
+			        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+			        	    success: function(response) {
+			        	        // 서버에서 받아온 숫자 값
+			        	        var uckNo = response.uckNo;
+			        	        var trashNo = response.trashNo;
+			        	        var draftNo = response.draftNo;
+			        	        var starredNo = response.starredNo;
+			        	        
+
+			        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+			        	        console.log('Received number:', uckNo);
+			        	        var unreadNote = document.querySelector("#unreadNote");
+			        	        if (uckNo === 0) {
+			        	        	unreadNote.classList.add('d-none');
+			        	        } else if(uckNo !== 0){
+			        	        	unreadNote.classList.remove('d-none');
+			        	        	unreadNote.innerText = uckNo;
+			        	        }
+			        	        var draftNote = document.querySelector("#draftNote");
+			        	        if (draftNo === 0) {
+			        	        	draftNote.classList.add('d-none');
+			        	        } else if(draftNo !== 0){
+			        	        	draftNote.classList.remove('d-none');
+			        	        	draftNote.innerText = draftNo;
+			        	        }
+			        	        var starredNote = document.querySelector("#starredNote");
+			        	        if (starredNo === 0) {
+			        	        	starredNote.classList.add('d-none');
+			        	        	console.log('uckNo is 0');
+			        	        } else if(starredNo !== 0){
+			        	        	starredNote.classList.remove('d-none');
+			        	        	starredNote.innerText = starredNo;
+			        	        }
+			        	        var trashNote = document.querySelector("#trashNote");
+			        	        if (trashNo === 0) {
+			        	        	trashNote.classList.add('d-none');
+			        	        	console.log('uckNo is 0');
+			        	        } else if(trashNo !== 0){
+			        	        	trashNote.classList.remove('d-none');
+			        	        	trashNote.innerText = trashNo;
+			        	        	console.log('uckNo is not 0');
+			        	        }
+			        	        
+			        	        
+			        	    },
+			        	    error: function(error) {
+			        	        console.error('Error fetching data:', error);
+			        	    }
+			        	});
 		            	
 		            },
 		            error: function() {
@@ -826,6 +878,58 @@ function bookMark(noteReadNo) {
 	            type: "POST",
 	            data: postData,
 	            success: function(response) {
+	            	$.ajax({
+		        	    url: '/exodia/updateNoteNo',
+		        	    type: 'GET',
+		        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+		        	    success: function(response) {
+		        	        // 서버에서 받아온 숫자 값
+		        	        var uckNo = response.uckNo;
+		        	        var trashNo = response.trashNo;
+		        	        var draftNo = response.draftNo;
+		        	        var starredNo = response.starredNo;
+		        	        
+
+		        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+		        	        console.log('Received number:', uckNo);
+		        	        var unreadNote = document.querySelector("#unreadNote");
+		        	        if (uckNo === 0) {
+		        	        	unreadNote.classList.add('d-none');
+		        	        } else if(uckNo !== 0){
+		        	        	unreadNote.classList.remove('d-none');
+		        	        	unreadNote.innerText = uckNo;
+		        	        }
+		        	        var draftNote = document.querySelector("#draftNote");
+		        	        if (draftNo === 0) {
+		        	        	draftNote.classList.add('d-none');
+		        	        } else if(draftNo !== 0){
+		        	        	draftNote.classList.remove('d-none');
+		        	        	draftNote.innerText = draftNo;
+		        	        }
+		        	        var starredNote = document.querySelector("#starredNote");
+		        	        if (starredNo === 0) {
+		        	        	starredNote.classList.add('d-none');
+		        	        	console.log('uckNo is 0');
+		        	        } else if(starredNo !== 0){
+		        	        	starredNote.classList.remove('d-none');
+		        	        	starredNote.innerText = starredNo;
+		        	        }
+		        	        var trashNote = document.querySelector("#trashNote");
+		        	        if (trashNo === 0) {
+		        	        	trashNote.classList.add('d-none');
+		        	        	console.log('uckNo is 0');
+		        	        } else if(trashNo !== 0){
+		        	        	trashNote.classList.remove('d-none');
+		        	        	trashNote.innerText = trashNo;
+		        	        	console.log('uckNo is not 0');
+		        	        }
+		        	        
+		        	        
+		        	    },
+		        	    error: function(error) {
+		        	        console.error('Error fetching data:', error);
+		        	    }
+		        	});
 	            	
 	            },
 	            error: function() {
@@ -900,9 +1004,57 @@ function trashCheck(type) {
      		    	        wheelPropagation: false,
      		    	        suppressScrollX: true
      		    	});
-     		    	
+     		    	$.ajax({
+    	        	    url: '/exodia/updateNoteNo',
+    	        	    type: 'GET',
+    	        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+    	        	    success: function(response) {
+    	        	        // 서버에서 받아온 숫자 값
+    	        	        var uckNo = response.uckNo;
+    	        	        var trashNo = response.trashNo;
+    	        	        var draftNo = response.draftNo;
+    	        	        var starredNo = response.starredNo;
+    	        	        
 
-     		    	
+    	        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+    	        	        console.log('Received number:', uckNo);
+    	        	        var unreadNote = document.querySelector("#unreadNote");
+		        	        if (uckNo === 0) {
+		        	        	unreadNote.classList.add('d-none');
+		        	        } else if(uckNo !== 0){
+		        	        	unreadNote.classList.remove('d-none');
+		        	        	unreadNote.innerText = uckNo;
+		        	        }
+		        	        var draftNote = document.querySelector("#draftNote");
+		        	        if (draftNo === 0) {
+		        	        	draftNote.classList.add('d-none');
+		        	        } else if(draftNo !== 0){
+		        	        	draftNote.classList.remove('d-none');
+		        	        	draftNote.innerText = draftNo;
+		        	        }
+		        	        var starredNote = document.querySelector("#starredNote");
+		        	        if (starredNo === 0) {
+		        	        	starredNote.classList.add('d-none');
+		        	        	console.log('uckNo is 0');
+		        	        } else if(starredNo !== 0){
+		        	        	starredNote.classList.remove('d-none');
+		        	        	starredNote.innerText = starredNo;
+		        	        }
+		        	        var trashNote = document.querySelector("#trashNote");
+		        	        if (trashNo === 0) {
+		        	        	trashNote.classList.add('d-none');
+		        	        	console.log('uckNo is 0');
+		        	        } else if(trashNo !== 0){
+		        	        	trashNote.classList.remove('d-none');
+		        	        	trashNote.innerText = trashNo;
+		        	        	console.log('uckNo is not 0');
+		        	        }
+    	        	        
+    	        	    },
+    	        	    error: function(error) {
+    	        	        console.error('Error fetching data:', error);
+    	        	    }
+    	        	});
      		    	
      		    }).fail(function (jqXHR, textStatus, errorThrown) {
      		    	console.log("에러");
@@ -974,6 +1126,58 @@ function deleteStarredNote(type) {
     				wheelPropagation: false,
     				suppressScrollX: true
     			});
+    			$.ajax({
+	        	    url: '/exodia/updateNoteNo',
+	        	    type: 'GET',
+	        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+	        	    success: function(response) {
+	        	        // 서버에서 받아온 숫자 값
+	        	        var uckNo = response.uckNo;
+	        	        var trashNo = response.trashNo;
+	        	        var draftNo = response.draftNo;
+	        	        var starredNo = response.starredNo;
+	        	        
+
+	        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+	        	        console.log('Received number:', uckNo);
+	        	        var unreadNote = document.querySelector("#unreadNote");
+	        	        if (uckNo === 0) {
+	        	        	unreadNote.classList.add('d-none');
+	        	        } else if(uckNo !== 0){
+	        	        	unreadNote.classList.remove('d-none');
+	        	        	unreadNote.innerText = uckNo;
+	        	        }
+	        	        var draftNote = document.querySelector("#draftNote");
+	        	        if (draftNo === 0) {
+	        	        	draftNote.classList.add('d-none');
+	        	        } else if(draftNo !== 0){
+	        	        	draftNote.classList.remove('d-none');
+	        	        	draftNote.innerText = draftNo;
+	        	        }
+	        	        var starredNote = document.querySelector("#starredNote");
+	        	        if (starredNo === 0) {
+	        	        	starredNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(starredNo !== 0){
+	        	        	starredNote.classList.remove('d-none');
+	        	        	starredNote.innerText = starredNo;
+	        	        }
+	        	        var trashNote = document.querySelector("#trashNote");
+	        	        if (trashNo === 0) {
+	        	        	trashNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(trashNo !== 0){
+	        	        	trashNote.classList.remove('d-none');
+	        	        	trashNote.innerText = trashNo;
+	        	        	console.log('uckNo is not 0');
+	        	        }
+	        	        
+	        	        
+	        	    },
+	        	    error: function(error) {
+	        	        console.error('Error fetching data:', error);
+	        	    }
+	        	});
     			
     		}).fail(function (jqXHR, textStatus, errorThrown) {
     			console.log("에러");
@@ -1045,6 +1249,58 @@ function trashDelete(type) {
     				wheelPropagation: false,
     				suppressScrollX: true
     			});
+    			$.ajax({
+	        	    url: '/exodia/updateNoteNo',
+	        	    type: 'GET',
+	        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+	        	    success: function(response) {
+	        	        // 서버에서 받아온 숫자 값
+	        	        var uckNo = response.uckNo;
+	        	        var trashNo = response.trashNo;
+	        	        var draftNo = response.draftNo;
+	        	        var starredNo = response.starredNo;
+	        	        
+
+	        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+	        	        console.log('Received number:', uckNo);
+	        	        var unreadNote = document.querySelector("#unreadNote");
+	        	        if (uckNo === 0) {
+	        	        	unreadNote.classList.add('d-none');
+	        	        } else if(uckNo !== 0){
+	        	        	unreadNote.classList.remove('d-none');
+	        	        	unreadNote.innerText = uckNo;
+	        	        }
+	        	        var draftNote = document.querySelector("#draftNote");
+	        	        if (draftNo === 0) {
+	        	        	draftNote.classList.add('d-none');
+	        	        } else if(draftNo !== 0){
+	        	        	draftNote.classList.remove('d-none');
+	        	        	draftNote.innerText = draftNo;
+	        	        }
+	        	        var starredNote = document.querySelector("#starredNote");
+	        	        if (starredNo === 0) {
+	        	        	starredNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(starredNo !== 0){
+	        	        	starredNote.classList.remove('d-none');
+	        	        	starredNote.innerText = starredNo;
+	        	        }
+	        	        var trashNote = document.querySelector("#trashNote");
+	        	        if (trashNo === 0) {
+	        	        	trashNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(trashNo !== 0){
+	        	        	trashNote.classList.remove('d-none');
+	        	        	trashNote.innerText = trashNo;
+	        	        	console.log('uckNo is not 0');
+	        	        }
+	        	        
+	        	        
+	        	    },
+	        	    error: function(error) {
+	        	        console.error('Error fetching data:', error);
+	        	    }
+	        	});
     			
     		}).fail(function (jqXHR, textStatus, errorThrown) {
     			console.log("에러");
@@ -1114,6 +1370,58 @@ function recoveryCheck() {
     				wheelPropagation: false,
     				suppressScrollX: true
     			});
+    			$.ajax({
+	        	    url: '/exodia/updateNoteNo',
+	        	    type: 'GET',
+	        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+	        	    success: function(response) {
+	        	        // 서버에서 받아온 숫자 값
+	        	        var uckNo = response.uckNo;
+	        	        var trashNo = response.trashNo;
+	        	        var draftNo = response.draftNo;
+	        	        var starredNo = response.starredNo;
+	        	        
+
+	        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+	        	        console.log('Received number:', uckNo);
+	        	        var unreadNote = document.querySelector("#unreadNote");
+	        	        if (uckNo === 0) {
+	        	        	unreadNote.classList.add('d-none');
+	        	        } else if(uckNo !== 0){
+	        	        	unreadNote.classList.remove('d-none');
+	        	        	unreadNote.innerText = uckNo;
+	        	        }
+	        	        var draftNote = document.querySelector("#draftNote");
+	        	        if (draftNo === 0) {
+	        	        	draftNote.classList.add('d-none');
+	        	        } else if(draftNo !== 0){
+	        	        	draftNote.classList.remove('d-none');
+	        	        	draftNote.innerText = draftNo;
+	        	        }
+	        	        var starredNote = document.querySelector("#starredNote");
+	        	        if (starredNo === 0) {
+	        	        	starredNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(starredNo !== 0){
+	        	        	starredNote.classList.remove('d-none');
+	        	        	starredNote.innerText = starredNo;
+	        	        }
+	        	        var trashNote = document.querySelector("#trashNote");
+	        	        if (trashNo === 0) {
+	        	        	trashNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(trashNo !== 0){
+	        	        	trashNote.classList.remove('d-none');
+	        	        	trashNote.innerText = trashNo;
+	        	        	console.log('uckNo is not 0');
+	        	        }
+	        	        
+	        	        
+	        	    },
+	        	    error: function(error) {
+	        	        console.error('Error fetching data:', error);
+	        	    }
+	        	});
     			
     		}).fail(function (jqXHR, textStatus, errorThrown) {
     			console.log("에러");
@@ -1167,9 +1475,58 @@ function trashSingleNote(noteReadNo) {
 	     		    	        wheelPropagation: false,
 	     		    	        suppressScrollX: true
 	     		    	});
-	     		    	
+	     		    	$.ajax({
+	    	        	    url: '/exodia/updateNoteNo',
+	    	        	    type: 'GET',
+	    	        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+	    	        	    success: function(response) {
+	    	        	        // 서버에서 받아온 숫자 값
+	    	        	        var uckNo = response.uckNo;
+	    	        	        var trashNo = response.trashNo;
+	    	        	        var draftNo = response.draftNo;
+	    	        	        var starredNo = response.starredNo;
+	    	        	        
 
-	     		    	
+	    	        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+	    	        	        console.log('Received number:', uckNo);
+	    	        	        var unreadNote = document.querySelector("#unreadNote");
+			        	        if (uckNo === 0) {
+			        	        	unreadNote.classList.add('d-none');
+			        	        } else if(uckNo !== 0){
+			        	        	unreadNote.classList.remove('d-none');
+			        	        	unreadNote.innerText = uckNo;
+			        	        }
+			        	        var draftNote = document.querySelector("#draftNote");
+			        	        if (draftNo === 0) {
+			        	        	draftNote.classList.add('d-none');
+			        	        } else if(draftNo !== 0){
+			        	        	draftNote.classList.remove('d-none');
+			        	        	draftNote.innerText = draftNo;
+			        	        }
+			        	        var starredNote = document.querySelector("#starredNote");
+			        	        if (starredNo === 0) {
+			        	        	starredNote.classList.add('d-none');
+			        	        	console.log('uckNo is 0');
+			        	        } else if(starredNo !== 0){
+			        	        	starredNote.classList.remove('d-none');
+			        	        	starredNote.innerText = starredNo;
+			        	        }
+			        	        var trashNote = document.querySelector("#trashNote");
+			        	        if (trashNo === 0) {
+			        	        	trashNote.classList.add('d-none');
+			        	        	console.log('uckNo is 0');
+			        	        } else if(trashNo !== 0){
+			        	        	trashNote.classList.remove('d-none');
+			        	        	trashNote.innerText = trashNo;
+			        	        	console.log('uckNo is not 0');
+			        	        }
+	    	        	        
+	    	        	        
+	    	        	    },
+	    	        	    error: function(error) {
+	    	        	        console.error('Error fetching data:', error);
+	    	        	    }
+	    	        	});
 	     		    	
 	     		    }).fail(function (jqXHR, textStatus, errorThrown) {
 	     		    	console.log("에러");
@@ -1221,6 +1578,58 @@ function deleteStarredSingleNote(noteReadNo) {
     				wheelPropagation: false,
     				suppressScrollX: true
     			});
+    			$.ajax({
+	        	    url: '/exodia/updateNoteNo',
+	        	    type: 'GET',
+	        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+	        	    success: function(response) {
+	        	        // 서버에서 받아온 숫자 값
+	        	        var uckNo = response.uckNo;
+	        	        var trashNo = response.trashNo;
+	        	        var draftNo = response.draftNo;
+	        	        var starredNo = response.starredNo;
+	        	        
+
+	        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+	        	        console.log('Received number:', uckNo);
+	        	        var unreadNote = document.querySelector("#unreadNote");
+	        	        if (uckNo === 0) {
+	        	        	unreadNote.classList.add('d-none');
+	        	        } else if(uckNo !== 0){
+	        	        	unreadNote.classList.remove('d-none');
+	        	        	unreadNote.innerText = uckNo;
+	        	        }
+	        	        var draftNote = document.querySelector("#draftNote");
+	        	        if (draftNo === 0) {
+	        	        	draftNote.classList.add('d-none');
+	        	        } else if(draftNo !== 0){
+	        	        	draftNote.classList.remove('d-none');
+	        	        	draftNote.innerText = draftNo;
+	        	        }
+	        	        var starredNote = document.querySelector("#starredNote");
+	        	        if (starredNo === 0) {
+	        	        	starredNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(starredNo !== 0){
+	        	        	starredNote.classList.remove('d-none');
+	        	        	starredNote.innerText = starredNo;
+	        	        }
+	        	        var trashNote = document.querySelector("#trashNote");
+	        	        if (trashNo === 0) {
+	        	        	trashNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(trashNo !== 0){
+	        	        	trashNote.classList.remove('d-none');
+	        	        	trashNote.innerText = trashNo;
+	        	        	console.log('uckNo is not 0');
+	        	        }
+	        	        
+	        	        
+	        	    },
+	        	    error: function(error) {
+	        	        console.error('Error fetching data:', error);
+	        	    }
+	        	});
     			
     		}).fail(function (jqXHR, textStatus, errorThrown) {
     			console.log("에러");
@@ -1273,7 +1682,58 @@ function deleteTrashSingleNote(noteReadNo) {
     				wheelPropagation: false,
     				suppressScrollX: true
     			});
-    			
+    			$.ajax({
+	        	    url: '/exodia/updateNoteNo',
+	        	    type: 'GET',
+	        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+	        	    success: function(response) {
+	        	        // 서버에서 받아온 숫자 값
+	        	        var uckNo = response.uckNo;
+	        	        var trashNo = response.trashNo;
+	        	        var draftNo = response.draftNo;
+	        	        var starredNo = response.starredNo;
+	        	        
+
+	        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+	        	        console.log('Received number:', uckNo);
+	        	        var unreadNote = document.querySelector("#unreadNote");
+	        	        if (uckNo === 0) {
+	        	        	unreadNote.classList.add('d-none');
+	        	        } else if(uckNo !== 0){
+	        	        	unreadNote.classList.remove('d-none');
+	        	        	unreadNote.innerText = uckNo;
+	        	        }
+	        	        var draftNote = document.querySelector("#draftNote");
+	        	        if (draftNo === 0) {
+	        	        	draftNote.classList.add('d-none');
+	        	        } else if(draftNo !== 0){
+	        	        	draftNote.classList.remove('d-none');
+	        	        	draftNote.innerText = draftNo;
+	        	        }
+	        	        var starredNote = document.querySelector("#starredNote");
+	        	        if (starredNo === 0) {
+	        	        	starredNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(starredNo !== 0){
+	        	        	starredNote.classList.remove('d-none');
+	        	        	starredNote.innerText = starredNo;
+	        	        }
+	        	        var trashNote = document.querySelector("#trashNote");
+	        	        if (trashNo === 0) {
+	        	        	trashNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(trashNo !== 0){
+	        	        	trashNote.classList.remove('d-none');
+	        	        	trashNote.innerText = trashNo;
+	        	        	console.log('uckNo is not 0');
+	        	        }
+	        	        
+	        	        
+	        	    },
+	        	    error: function(error) {
+	        	        console.error('Error fetching data:', error);
+	        	    }
+	        	});
     		}).fail(function (jqXHR, textStatus, errorThrown) {
     			console.log("에러");
     			console.log(jqXHR);
@@ -1379,6 +1839,57 @@ function deleteDraftSingleNote(noteNo) {
     				wheelPropagation: false,
     				suppressScrollX: true
     			});
+    			$.ajax({
+	        	    url: '/exodia/updateNoteNo',
+	        	    type: 'GET',
+	        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+	        	    success: function(response) {
+	        	        // 서버에서 받아온 숫자 값
+	        	        var uckNo = response.uckNo;
+	        	        var trashNo = response.trashNo;
+	        	        var draftNo = response.draftNo;
+	        	        var starredNo = response.starredNo;
+	        	        
+
+	        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+	        	        console.log('Received number:', uckNo);
+	        	        var unreadNote = document.querySelector("#unreadNote");
+	        	        if (uckNo === 0) {
+	        	        	unreadNote.classList.add('d-none');
+	        	        } else if(uckNo !== 0){
+	        	        	unreadNote.classList.remove('d-none');
+	        	        	unreadNote.innerText = uckNo;
+	        	        }
+	        	        var draftNote = document.querySelector("#draftNote");
+	        	        if (draftNo === 0) {
+	        	        	draftNote.classList.add('d-none');
+	        	        } else if(draftNo !== 0){
+	        	        	draftNote.classList.remove('d-none');
+	        	        	draftNote.innerText = draftNo;
+	        	        }
+	        	        var starredNote = document.querySelector("#starredNote");
+	        	        if (starredNo === 0) {
+	        	        	starredNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(starredNo !== 0){
+	        	        	starredNote.classList.remove('d-none');
+	        	        	starredNote.innerText = starredNo;
+	        	        }
+	        	        var trashNote = document.querySelector("#trashNote");
+	        	        if (trashNo === 0) {
+	        	        	trashNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(trashNo !== 0){
+	        	        	trashNote.classList.remove('d-none');
+	        	        	trashNote.innerText = trashNo;
+	        	        	console.log('uckNo is not 0');
+	        	        }
+	        	        
+	        	    },
+	        	    error: function(error) {
+	        	        console.error('Error fetching data:', error);
+	        	    }
+	        	});
     			
     			
     		}).fail(function (jqXHR, textStatus, errorThrown) {
@@ -1518,6 +2029,57 @@ function deleteDraftNote(type) {
     				wheelPropagation: false,
     				suppressScrollX: true
     			});
+    			$.ajax({
+	        	    url: '/exodia/updateNoteNo',
+	        	    type: 'GET',
+	        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+	        	    success: function(response) {
+	        	        // 서버에서 받아온 숫자 값
+	        	        var uckNo = response.uckNo;
+	        	        var trashNo = response.trashNo;
+	        	        var draftNo = response.draftNo;
+	        	        var starredNo = response.starredNo;
+	        	        
+
+	        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+	        	        console.log('Received number:', uckNo);
+	        	        var unreadNote = document.querySelector("#unreadNote");
+	        	        if (uckNo === 0) {
+	        	        	unreadNote.classList.add('d-none');
+	        	        } else if(uckNo !== 0){
+	        	        	unreadNote.classList.remove('d-none');
+	        	        	unreadNote.innerText = uckNo;
+	        	        }
+	        	        var draftNote = document.querySelector("#draftNote");
+	        	        if (draftNo === 0) {
+	        	        	draftNote.classList.add('d-none');
+	        	        } else if(draftNo !== 0){
+	        	        	draftNote.classList.remove('d-none');
+	        	        	draftNote.innerText = draftNo;
+	        	        }
+	        	        var starredNote = document.querySelector("#starredNote");
+	        	        if (starredNo === 0) {
+	        	        	starredNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(starredNo !== 0){
+	        	        	starredNote.classList.remove('d-none');
+	        	        	starredNote.innerText = starredNo;
+	        	        }
+	        	        var trashNote = document.querySelector("#trashNote");
+	        	        if (trashNo === 0) {
+	        	        	trashNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(trashNo !== 0){
+	        	        	trashNote.classList.remove('d-none');
+	        	        	trashNote.innerText = trashNo;
+	        	        	console.log('uckNo is not 0');
+	        	        }
+	        	        
+	        	    },
+	        	    error: function(error) {
+	        	        console.error('Error fetching data:', error);
+	        	    }
+	        	});
     			
     			
     		}).fail(function (jqXHR, textStatus, errorThrown) {
@@ -1603,6 +2165,60 @@ function showdraft() {
     			$("#starredTab").removeClass("active");
     			$("#trashTab").removeClass("active");
     			$("#draftTab").addClass("active");
+    			
+    			
+			    $.ajax({
+	        	    url: '/exodia/updateNoteNo',
+	        	    type: 'GET',
+	        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+	        	    success: function(response) {
+	        	        // 서버에서 받아온 숫자 값
+	        	        var uckNo = response.uckNo;
+	        	        var trashNo = response.trashNo;
+	        	        var draftNo = response.draftNo;
+	        	        var starredNo = response.starredNo;
+	        	        
+
+	        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+	        	        console.log('Received number:', uckNo);
+	        	        var unreadNote = document.querySelector("#unreadNote");
+	        	        if (uckNo === 0) {
+	        	        	unreadNote.classList.add('d-none');
+	        	        } else if(uckNo !== 0){
+	        	        	unreadNote.classList.remove('d-none');
+	        	        	unreadNote.innerText = uckNo;
+	        	        }
+	        	        var draftNote = document.querySelector("#draftNote");
+	        	        if (draftNo === 0) {
+	        	        	draftNote.classList.add('d-none');
+	        	        } else if(draftNo !== 0){
+	        	        	draftNote.classList.remove('d-none');
+	        	        	draftNote.innerText = draftNo;
+	        	        }
+	        	        var starredNote = document.querySelector("#starredNote");
+	        	        if (starredNo === 0) {
+	        	        	starredNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(starredNo !== 0){
+	        	        	starredNote.classList.remove('d-none');
+	        	        	starredNote.innerText = starredNo;
+	        	        }
+	        	        var trashNote = document.querySelector("#trashNote");
+	        	        if (trashNo === 0) {
+	        	        	trashNote.classList.add('d-none');
+	        	        	console.log('uckNo is 0');
+	        	        } else if(trashNo !== 0){
+	        	        	trashNote.classList.remove('d-none');
+	        	        	trashNote.innerText = trashNo;
+	        	        	console.log('uckNo is not 0');
+	        	        }
+	        	        
+	        	        
+	        	    },
+	        	    error: function(error) {
+	        	        console.error('Error fetching data:', error);
+	        	    }
+	        	});
     			
     			
     		}).fail(function (jqXHR, textStatus, errorThrown) {
@@ -2050,6 +2666,57 @@ function sendDraft(noteNo) {
 		$("#sentTab").addClass("active");
 		$("#starredTab").removeClass("active");
 		$("#trashTab").removeClass("active");
+		$.ajax({
+    	    url: '/exodia/updateNoteNo',
+    	    type: 'GET',
+    	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+    	    success: function(response) {
+    	        // 서버에서 받아온 숫자 값
+    	        var uckNo = response.uckNo;
+    	        var trashNo = response.trashNo;
+    	        var draftNo = response.draftNo;
+    	        var starredNo = response.starredNo;
+    	        
+
+    	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+    	        var unreadNote = document.querySelector("#unreadNote");
+    	        if (uckNo === 0) {
+    	        	unreadNote.classList.add('d-none');
+    	        } else if(uckNo !== 0){
+    	        	unreadNote.classList.remove('d-none');
+    	        	unreadNote.innerText = uckNo;
+    	        }
+    	        var draftNote = document.querySelector("#draftNote");
+    	        if (draftNo === 0) {
+    	        	draftNote.classList.add('d-none');
+    	        } else if(draftNo !== 0){
+    	        	draftNote.classList.remove('d-none');
+    	        	draftNote.innerText = draftNo;
+    	        }
+    	        var starredNote = document.querySelector("#starredNote");
+    	        if (starredNo === 0) {
+    	        	starredNote.classList.add('d-none');
+    	        	console.log('uckNo is 0');
+    	        } else if(starredNo !== 0){
+    	        	starredNote.classList.remove('d-none');
+    	        	starredNote.innerText = starredNo;
+    	        }
+    	        var trashNote = document.querySelector("#trashNote");
+    	        if (trashNo === 0) {
+    	        	trashNote.classList.add('d-none');
+    	        	console.log('uckNo is 0');
+    	        } else if(trashNo !== 0){
+    	        	trashNote.classList.remove('d-none');
+    	        	trashNote.innerText = trashNo;
+    	        	console.log('uckNo is not 0');
+    	        }
+    	        
+    	        
+    	    },
+    	    error: function(error) {
+    	        console.error('Error fetching data:', error);
+    	    }
+    	});
 		
 		
 		

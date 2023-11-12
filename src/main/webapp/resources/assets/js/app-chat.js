@@ -106,7 +106,7 @@ function chatRoom(emp_no) {
 			    
 			     $("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
 			     
-			     var empinfono = $("#empInfoNo").val();
+			     var empinfono = $("#chatEmpInfoNo").val();
 			     $("#"+empinfono).addClass("active");
 			     console.log(empinfono+"모지?ㅠ");
 			     scrollToBottom();
@@ -242,7 +242,7 @@ function sendMessage() {
 }
 
 function onMessage(evt) {
-	var emp_no = $("#empInfoNo").val();
+	var emp_no = $("#chatEmpInfoNo").val();
 	
     var postdata = {
    		 emp_no: emp_no
@@ -266,7 +266,7 @@ function onMessage(evt) {
    		      });
            $("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
 		     
-		     var empinfono = $("#empInfoNo").val();
+		     var empinfono = $("#chatEmpInfoNo").val();
 		     $("#"+empinfono).addClass("active");
            const searchInput = document.querySelector('.chat-search-input');
    		     searchInput.addEventListener('keyup', e => {
@@ -322,7 +322,7 @@ function onMessage(evt) {
    
 	$("li").removeClass("active"); // 모든 li 요소에서 active 클래스 제거
     
-    var empinfono = $("#empInfoNo").val();
+    var empinfono = $("#chatEmpInfoNo").val();
     console.log(empinfono+"왜애드클래스갑자기못해너?");
     $("#"+empinfono).addClass("active");
 	
@@ -345,7 +345,7 @@ function onMessage(evt) {
 	    checkDoubleElement.addClass('text-success');
 	}
 	
-	if(data.empInfo_no != empInfo_no) {
+	if(data.empInfo_no != empInfo_no && data.message_content != null) {
 		checkLR(data);
 	}
 	
@@ -381,7 +381,7 @@ function checkLR(data) {
       '<div class="chat-message-text">' +
       '<p class="mb-0 text-break">' + data.message_content + '</p>' +
       '</div>' +
-      '<div class="text-end text-muted mt-1">' +
+      '<div class="text-muted mt-1">' +
       ' <small>' + formattedDate + '</small>' +
       '</div>' +
       '</div>' +

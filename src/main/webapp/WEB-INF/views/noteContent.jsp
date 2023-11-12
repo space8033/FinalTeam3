@@ -129,7 +129,7 @@
                                   	id="searchNote"
                                     type="text"
                                     class="form-control email-search-input border-0 py-0"
-                                    placeholder="Search mail"
+                                    placeholder="제목 + 내용으로 검색하기"
                                     aria-label="Search..."
                                     aria-describedby="email-search" />
                                     
@@ -140,7 +140,7 @@
                              <!--  <i
                                 class="bx bx-refresh scaleX-n1-rtl cursor-pointer email-refresh me-2 bx-sm text-muted"></i> -->
                               <div class="dropdown">
-                                <button
+                               <!--  <button
                                   class="btn p-0"
                                   type="button"
                                   id="emailsActions"
@@ -153,7 +153,7 @@
                                   <a class="dropdown-item" href="javascript:void(0)">전체 </a>
                                   <a class="dropdown-item" href="javascript:void(0)">미확인</a>
                                   <a class="dropdown-item" href="javascript:void(0)">전체 삭제</a>
-                                </div>
+                                </div> -->
                               </div>
                             </div>
                           </div>

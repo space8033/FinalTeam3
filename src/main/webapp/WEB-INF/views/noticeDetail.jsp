@@ -274,6 +274,7 @@
                       </div> -->
                       <div class="card-body">
                         	<div class="card-body" style="padding-top:0px;">
+                        		<div><input type="hidden" value="${now_emp_no}" id="nowEmpNo"/></div>
 								<div>
 									<div>
 										<div>
@@ -345,33 +346,30 @@
 				                          </div>
 				                        </div> -->
 										
-										<a class="btn btn-primary btn-sm mt-2" href="noticeList">목록</a>
-										<a class="btn btn-primary btn-sm mt-2" href="noticeUpdate?notice_no=${notice.notice_no}">수정</a>
-										<a class="btn btn-primary btn-sm mt-2"data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">삭제</a>									
-										<!-- Modal -->
-										<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-										  <div class="modal-dialog">
-										    <div class="modal-content">
-										      <div class="modal-header">
-										        <h5 class="modal-title" id="exampleModalLabel">삭제하시겠습니까?</h5>
-										        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-										      </div>
-										      <div class="modal-body">
-												공지사항이 삭제됩니다.
-										      </div>
-										      <div class="modal-footer">
-										      	<textarea id="noticeNo" style="display: none">${notice.notice_no}</textarea>
-										        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
-										        <button type="button" class="btn btn-primary" id="deleteButton">삭제</button> 
-										      </div>
-										    </div>
-										  </div>
-										</div>
-										
-										
-										
-										
-										
+										<a class="btn btn-primary btn-sm mt-2" href="noticeList">목록</a>										
+										<c:if test="${now_emp_no == 0}">
+											<a class="btn btn-primary btn-sm mt-2" href="noticeUpdate?notice_no=${notice.notice_no}">수정</a>
+										    <a class="btn btn-primary btn-sm mt-2"data-bs-toggle="modal" data-bs-target="#exampleModal" href="#">삭제</a>									
+											<!-- Modal -->
+											<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											  <div class="modal-dialog">
+											    <div class="modal-content">
+											      <div class="modal-header">
+											        <h5 class="modal-title" id="exampleModalLabel">삭제하시겠습니까?</h5>
+											        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+											      </div>
+											      <div class="modal-body">
+													게시물이 삭제됩니다.
+											      </div>
+											      <div class="modal-footer">
+											      	<textarea id="noticeNo" style="display: none">${notice.notice_no}</textarea>
+											        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+											        <button type="button" class="btn btn-primary" id="deleteButton">삭제</button> 
+											      </div>
+											    </div>
+											  </div>
+											</div>
+										</c:if>
 									</div>
 								</div>
 							</div>

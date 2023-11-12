@@ -69,10 +69,10 @@
                    </li> --%>
                    <c:forEach var="alarm" items="${list}">
 	                    <c:if test="${alarm.alarm_isRead == true}">
-		                   <li class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
+		                   <li id="a-${alarm.alarm_no}" class="list-group-item list-group-item-action dropdown-notifications-item marked-as-read">
 		                </c:if>     
 		                <c:if test="${alarm.alarm_isRead == false}">
-		                   <li class="list-group-item list-group-item-action dropdown-notifications-item">
+		                   <li id="a-${alarm.alarm_no}" class="list-group-item list-group-item-action dropdown-notifications-item">
 		                </c:if>
 	                     <div class="d-flex">
 	                       <div class="flex-shrink-0 me-3" onclick="javascript:pageMove('${alarm.alarm_no}', '${alarm.alarm_type}', '${alarm.alarm_typeNo}');">

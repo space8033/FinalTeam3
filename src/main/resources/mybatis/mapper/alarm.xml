@@ -24,6 +24,14 @@
 		   AND alarm_deletedAt IS NULL
 	</select>
 	
+    <select id="countUckAlarm" parameterType="int" resultType="int">
+		SELECT count(*)
+		  FROM alarm
+		 WHERE empinfo_no = #{empInfo_no}
+		   AND alarm_isread = 0
+		   AND alarm_deletedAt IS NULL
+	</select>
+	
 	<select id="selectAlarmList" parameterType="int" resultType="AlarmRequest">
 		select ALARM_NO, ALARM_CREATEDAT, ALARM_ISREAD, ALARM_TYPE, ALARM_TYPENO
 		  from alarm
@@ -45,6 +53,13 @@
 		update alarm 
 		   set alarm_deletedAt=to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
   		 where alarm_no = #{alarm_no}
+	</update>
+	
+	<update id="deleteAlarmByAlarm" parameterType="AlarmRequest">
+		update alarm 
+		   set alarm_deletedAt=to_char(sysdate,'yyyy.mm.dd hh24:mi:ss')
+  		 where alarm_type = #{alarm_type}
+  		   and alarm_typeNo = #{alarm_typeNo}
 	</update>
 	
 	<update id="updateAlarmReadByAlarmNo" parameterType="AlarmRequest">

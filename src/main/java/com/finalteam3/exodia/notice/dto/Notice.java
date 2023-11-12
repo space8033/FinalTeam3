@@ -19,5 +19,5 @@ public class Notice {
 	private String empinfo_email;
 	private String empinfo_name;
 	private MultipartFile[] notice_files;
-
+	private int empinfo_no;
 }

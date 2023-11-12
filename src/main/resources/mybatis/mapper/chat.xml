@@ -62,7 +62,7 @@
 	>
 	<!-- lastMsgId로 chatMessage얻어오기 -->
     <select id="selectLastMsg" parameterType="int" resultType="ChatMessage">
-		SELECT CHATMESSAGE_NO, MESSAGE_CREATEDAT, MESSAGE_CONTENT
+		SELECT CHATMESSAGE_NO, MESSAGE_CREATEDAT, MESSAGE_CONTENT, EMPINFO_NO
 		FROM CHATMESSAGE
 		WHERE CHATMESSAGE_NO = #{chatRoom_lastMsgId}
  		  

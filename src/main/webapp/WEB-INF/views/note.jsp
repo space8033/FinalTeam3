@@ -289,7 +289,7 @@
                               <i class="bx bx-envelope"></i>
                               <span class="align-middle ms-2">수신 쪽지함</span>
                             </a>
-                            <div class="badge bg-label-primary rounded-pill">${unReadCount}</div>
+                            <div class="badge bg-label-primary rounded-pill" id="unreadNote">${unReadCount}</div>
                           </li>
                           <li class="d-flex justify-content-between" data-target="sent" id="sentTab">
                             <a href="javascript:void(0);" id="sentNoteList" class="d-flex flex-wrap align-items-center">
@@ -302,14 +302,14 @@
                               <i class="bx bx-edit"></i>
                               <span class="align-middle ms-2">임시 저장함</span>
                             </a>
-                            <div class="badge bg-label-success rounded-pill">${draftCount}</div>
+                            <div class="badge bg-label-success rounded-pill" id="draftNote">${draftCount}</div>
                           </li>
                           <li class="d-flex justify-content-between" data-target="starred" id="starredTab">
                             <a href="javascript:void(0);" id="starredNoteList" class="d-flex flex-wrap align-items-center">
                               <i class="bx bx-star"></i>
                               <span class="align-middle ms-2">중요 쪽지함</span>
                             </a>
-                              <div class="badge bg-label-warning rounded-pill">${starredCount}</div>
+                              <div class="badge bg-label-warning rounded-pill" id="starredNote">${starredCount}</div>
                           </li>
                           
                           <li class="d-flex justify-content-between align-items-center" data-target="trash" id="trashTab">
@@ -317,7 +317,7 @@
                               <i class="bx bx-trash"></i>
                               <span class="align-middle ms-2">휴지통</span>
                             </a>
-                             <div class="badge bg-label-secondary rounded-pill">${trashCount}</div>
+                             <div class="badge bg-label-secondary rounded-pill" id="trashNote">${trashCount}</div>
                           </li>
                         </ul>
                         <input type="hidden" id="conType" value="${noteReadNo}"/>
