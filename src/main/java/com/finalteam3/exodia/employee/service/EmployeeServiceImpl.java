@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.EmpSimpleResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
+import com.finalteam3.exodia.employee.dto.response.ProfileResponse;
 import com.finalteam3.exodia.employee.dto.response.ProjectEmpResponse;
 import com.finalteam3.exodia.employee.dto.response.TeamBasicResponse;
 import com.finalteam3.exodia.employee.dto.response.TimeLineResponse;
@@ -205,8 +207,7 @@ public class EmployeeServiceImpl implements EmployeeService{
       for(String tName : tNames) {
          EmpManagementResponse emr = new EmpManagementResponse();
          List<TeamBasicResponse> tbrs = employeeDao.selectTeamBasic(tName);
-         List<Integer> teamMembers = new ArrayList<>();
-         List<String> teamMemberNames = new ArrayList<>();
+         List<ProfileResponse> teamMembers = new ArrayList<>();
          
          for(TeamBasicResponse tbr : tbrs) {
             if(tbr.getEmp_no() == 0) {
@@ -215,14 +216,27 @@ public class EmployeeServiceImpl implements EmployeeService{
             }else if(tbr.isTeam_isleader()) {
                emr.setTeam_leader(tbr.getEmpinfo_name());               
             }else {
-               teamMembers.add(tbr.getEmp_no());
-               teamMemberNames.add(tbr.getEmpinfo_name());
+            	ProfileResponse pr = new ProfileResponse();
+            	pr.setEmp_no(tbr.getEmp_no());
+            	pr.setEmpinfo_name(tbr.getEmpinfo_name());
+            	pr.setTwo_name(tbr.getEmpinfo_name().substring(tbr.getEmpinfo_name().length() - 2));
+            	
+            	Map<String, Object> profile = new HashMap<>();
+            	profile.put("media_from", "EMP");
+            	profile.put("from_no", tbr.getEmp_no());
+            	
+            	MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+        	    
+        		if(mediaDto != null) {
+        	    	String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+        	    	pr.setPhoto(base64Img);
+        	    }
+        		
+                teamMembers.add(pr);
             }
          }
          
-         //사람당 이미지파일 구하기(아직 구현 전)
-         emr.setTeam_members(teamMembers);
-         emr.setTeam_memberNames(teamMemberNames);
+         emr.setTeam_memberNames(teamMembers);
          list.add(emr);
       }
       
@@ -403,6 +417,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 		List<String> list = employeeDao.selectTeamname(project_no);
 		return list;
 	}
+	
+	@Override
 	public TimeLineResponse getTimeLineByEmpNo(Map<String, Object> map) {
 		TimeLineResponse timeLineResponse = employeeDao.selectTimeLineResponse(map);
 		
@@ -434,15 +450,27 @@ public class EmployeeServiceImpl implements EmployeeService{
 		timeLineResponse.setNotice_title(notice.getNotice_title());
 		timeLineResponse.setInquiry_title(inquiry.getNotice_title());
 		
-		timeLineResponse.setTask_name(task.getTask_name());
-		timeLineResponse.setMyTask_name(personalTask.getTask_name());
+		if(task != null) {
+			timeLineResponse.setTask_name(task.getTask_name());
+			String tStart = task.getTask_startdate().substring(0, 10);
+			timeLineResponse.setTask_start(tStart);
+			timeLineResponse.setTask_no(task.getTask_no());
+		}else {
+			timeLineResponse.setTask_name("등록된 일정이 없습니다.");
+		}
+		if(personalTask != null) {
+			timeLineResponse.setMyTask_name(personalTask.getTask_name());			
+			String pStart = personalTask.getTask_startdate().substring(0, 10);
+			timeLineResponse.setMyTask_start(pStart);
+			timeLineResponse.setMyTask_no(personalTask.getTask_no());
+		}else {
+			timeLineResponse.setMyTask_name("등록된 개인 일정이 없습니다.");
+		}
 		
 		String nDate = notice.getNotice_createdat().substring(0, 10);
 		String nTime = notice.getNotice_createdat().substring(11);
 		String iDate = inquiry.getNotice_createdat().substring(0, 10);
 		String iTime = inquiry.getNotice_createdat().substring(11);
-		String tStart = task.getTask_startdate().substring(0, 10);
-		String pStart = personalTask.getTask_startdate().substring(0, 10);
 		String twoName = timeLineResponse.getEmpinfo_name().substring(timeLineResponse.getEmpinfo_name().length() - 2);
 		
 		timeLineResponse.setNotice_no(notice.getNotice_no());
@@ -451,10 +479,6 @@ public class EmployeeServiceImpl implements EmployeeService{
 		timeLineResponse.setInquiry_no(inquiry.getNotice_no());
 		timeLineResponse.setInquiry_createdat(iDate);
 		timeLineResponse.setInquiry_time(iTime);
-		timeLineResponse.setTask_no(task.getTask_no());
-		timeLineResponse.setTask_start(tStart);
-		timeLineResponse.setMyTask_no(personalTask.getTask_no());
-		timeLineResponse.setMyTask_start(pStart);
 		timeLineResponse.setTwo_name(twoName);
 		
 		timeLineResponse.setTeam_memberCount(employeeDao.selectTeamEmp(timeLineResponse.getTeam_name()).size() + 1);

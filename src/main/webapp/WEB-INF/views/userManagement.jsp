@@ -280,8 +280,60 @@
 					                              data-popup="tooltip-custom"
 					                              data-bs-placement="top"
 					                              class="avatar avatar-xs pull-up"
-					                              title="${members}">
-					                              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt="Avatar" class="rounded-circle" />
+					                              title="${members.empinfo_name}">
+					                                <c:if test="${members.photo == null}">
+					                                	<c:if test="${members.emp_no % 7 == 0}">
+								                        	<span class="avatar-initial rounded-circle bg-label-success" id="nameProfile" 
+								                        	style="width :25px; height: 25px; font-size: 10px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${members.two_name} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${members.emp_no % 7 == 1}">
+								                        	<span class="avatar-initial rounded-circle bg-label-primary" id="nameProfile" 
+								                        	style="width :25px; height: 25px; font-size: 10px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${members.two_name} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${members.emp_no % 7 == 2}">
+								                        	<span class="avatar-initial rounded-circle bg-label-warning" id="nameProfile" 
+								                        	style="width :25px; height: 25px; font-size: 10px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${members.two_name} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${members.emp_no % 7 == 3}">
+								                        	<span class="avatar-initial rounded-circle bg-label-danger" id="nameProfile" 
+								                        	style="width :25px; height: 25px; font-size: 10px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${members.two_name} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${members.emp_no % 7 == 4}">
+								                        	<span class="avatar-initial rounded-circle bg-label-info" id="nameProfile" 
+								                        	style="width :25px; height: 25px; font-size: 10px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${members.two_name} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${members.emp_no % 7 == 5}">
+								                        	<span class="avatar-initial rounded-circle bg-label-dark" id="nameProfile" 
+								                        	style="width :25px; height: 25px; font-size: 10px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${members.two_name} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${members.emp_no % 7 == 6}">
+								                        	<span class="avatar-initial rounded-circle bg-label-secondary" id="nameProfile" 
+								                        	style="width :25px; height: 25px; font-size: 10px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${members.two_name} 
+								                        	</span>
+					                                	</c:if>
+							                        </c:if>
+							                        <c:if test="${members.photo != null}">
+								                        <img
+								                          src="data:MIME;base64, ${members.photo}"
+								                          alt="user-avatar"
+								                          class="d-block rounded-circle"
+								                          height="25"
+								                          width="25"
+								                          id="uploadedAvatar" />            	            
+							                        </c:if>
 					                            </li>
 			                          		</c:if>
 			                          		<c:if test="${memberStatus.count > 3}">
