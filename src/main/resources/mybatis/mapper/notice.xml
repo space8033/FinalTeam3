@@ -31,6 +31,16 @@
       	)		
 	</insert>
 	
+	<insert id="insertNoticeReaders" parameterType="Map">
+	    insert into noticereaders(notice_no, empinfo_no)
+	    values(#{notice_no}, #{empinfo_no})
+	</insert>
+	
+	<select id="selectNoticeReaders" parameterType="Map" resultType="Notice">
+		select *
+		from noticereaders
+	</select>
+	
 	<update id="updateDetailByNoticeNo" parameterType="Notice">  
 		update notice set notice_title = #{notice_title}, notice_content = #{notice_content}, notice_modifiedat = to_char(sysdate,'yyyy.mm.dd hh24:mi')
 		where notice_no = #{notice_no}

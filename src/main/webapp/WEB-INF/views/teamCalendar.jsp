@@ -260,15 +260,7 @@
 							<div class="row g-0">
 								<!-- Calendar Sidebar -->
 								<div class="col app-calendar-sidebar" id="app-calendar-sidebar">
-									<div class="border-bottom p-4 my-sm-0 mb-3">
-										<div class="d-grid">
-											<button class="btn btn-primary btn-toggle-sidebar"
-												data-bs-toggle="offcanvas" data-bs-target="#addEventSidebar"
-												aria-controls="addEventSidebar">
-												<i class="bx bx-plus me-1"></i> <span class="align-middle">일정 추가하기</span>
-											</button>
-										</div>
-									</div>
+									
 									<div class="p-4">
 										<!-- inline calendar (flatpicker) -->
 										<div class="ms-n2">
@@ -290,11 +282,7 @@
 										</div>
 
 										<div class="app-calendar-events-filter">
-											<div class="form-check form-check-danger mb-2">
-												<input class="form-check-input input-filter" type="checkbox"
-													id="select-personal" data-value="personal" checked /> <label
-													class="form-check-label" for="select-personal">개인 일정</label>
-											</div>
+	
 											<div class="form-check mb-2">
 												<input class="form-check-input input-filter" type="checkbox"
 													id="select-business" data-value="business" checked /> <label
@@ -305,11 +293,7 @@
 													id="select-holiday" data-value="holiday" checked /> <label
 													class="form-check-label" for="select-holiday">휴가</label>
 											</div>
-											<div class="form-check form-check-info">
-												<input class="form-check-input input-filter" type="checkbox"
-													id="select-etc" data-value="etc" checked /> <label
-													class="form-check-label" for="select-etc">기타</label>
-											</div>
+											
 										</div>
 									</div>
 								</div>
@@ -325,7 +309,7 @@
 									</div>
 									<div class="app-overlay"></div>
 									<!-- FullCalendar Offcanvas -->
-									<div class="offcanvas offcanvas-end event-sidebar"
+									<div class=" event-sidebar d-none"
 										tabindex="-1" id="addEventSidebar"
 										aria-labelledby="addEventSidebarLabel">
 										<div class="offcanvas-header border-bottom">
@@ -335,8 +319,6 @@
 										</div>
 										<div class="offcanvas-body">
 											<form class="event-form pt-0" id="eventForm" name="CalendarRequest">
-<!-- 											<form class="event-form pt-0" id="eventForm" action="/deleteCalendar" method="post"
-												name="CalendarRequest" onsubmit="return false"> -->
 												<div class="mb-3">
 													<label class="form-label" for="eventTitle">제목</label> <input
 														type="text" class="form-control" id="eventTitle"
@@ -375,20 +357,7 @@
 													</span> <span class="switch-label">하루종일</span>
 													</label>
 												</div>
-												<div
-													class="mb-3 d-flex justify-content-sm-between justify-content-start my-4">
-													<div>
-														<button type="submit" id="calendarsubmit"
-															class="btn btn-primary btn-add-event me-sm-3 me-1"></button>
-														<button type="reset"
-															class="btn btn-label-secondary btn-cancel me-sm-0 me-1"
-															data-bs-dismiss="offcanvas">취소</button>
-													</div>
-													<div>
-														<textarea id="taskNo" style="display: none">${CalendarResponse2.task_no}</textarea>
-														<button type="button" id="taskDeleteButton" class="btn btn-label-danger btn-delete-event d-none">삭제</button>
-													</div>
-												</div>
+												
 											</form>
 										</div>
 									</div>
@@ -462,7 +431,7 @@
 
 	<!-- Page JS -->
 	<script
-		src="${pageContext.request.contextPath}/resources/assets/js/calendar.js"></script>
+		src="${pageContext.request.contextPath}/resources/assets/js/teamCalendar.js"></script>
 	<script
 		src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
 

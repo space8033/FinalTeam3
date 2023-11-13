@@ -1,6 +1,7 @@
 package com.finalteam3.exodia.notice.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.notice.dto.Notice;
@@ -13,4 +14,6 @@ public interface NoticeService {
 	public void updateByNotice(Notice notice); //공지사항 내용 업데이트
 	public void deleteByNoticeNo(int notice_no);//공지사항 삭제(update임) -> deletedat을 업데이트
 	public List<MediaDto> getMediaList(int noticeNo);//첨부파일 가져오기
+	public void insertNoticeReaders(Map<String, Object> map); //공지사항 읽은사람 noticeReaders에 저장
+	public List<Notice> getNoticeReaders();//공지사항 읽은사람 가져오기
 }

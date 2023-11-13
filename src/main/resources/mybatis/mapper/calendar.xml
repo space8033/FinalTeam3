@@ -17,6 +17,17 @@
 		where project_no = 0
 		and emp_no = #{emp_no}
     </select>
+
+    <select id="selectCalendarTeamTask" parameterType="String" resultType="CalendarResponse">
+		select c.task_no as id, i.empinfo_name, c.task_name, c.task_startdate as "start", c.task_enddate as "end", c.emp_no, c.task_type, c.task_content
+		from task c, emp e, team t, empinfo i
+		where c.project_no = 0
+		and c.emp_no = e.emp_no
+		and i.emp_no = e.emp_no
+		and t.empinfo_no = i.empinfo_no
+		and t.team_name = #{team_name}
+		and (task_type = 'Business' or task_type = 'Holiday')
+    </select>
     
     <update id="updateContentByTaskNo" parameterType="Calendar">  
 		update task set task_name = #{task_name}, task_content = #{task_content},

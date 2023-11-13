@@ -1,6 +1,7 @@
 package com.finalteam3.exodia.notice.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,4 +20,6 @@ public interface NoticeDao {
 	public void deleteByNoticeNo(int notice_no);
 	public RecentNotice selectRecentNotice();
 	public RecentNotice selectRecentInquiry();
+	public void insertNoticeReaders(Map<String, Object> map);
+	public List<Notice> selectNoticeReaders(Map<String, Object> map);
 }
