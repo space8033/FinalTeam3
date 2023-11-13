@@ -2,6 +2,7 @@ package com.finalteam3.exodia.note.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
@@ -49,8 +50,9 @@ public class NoteServiceImpl implements NoteService{
 		//log.info(map+"잘가져오나.");
 		List<NoteAll> noteAllList = noteDao.selectNoteByEmpNo(map);
 		for(NoteAll noteAll : noteAllList) {
+			
 			int senderNo = noteAll.getNote_sender();
-			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			EmployeeInfo sender = employeeDao.selectEmpInfoByEmpInfoNo(senderNo);
 			noteAll.setNote_sender_name(sender.getEmpinfo_name());
 			int noteNo = noteAll.getNote_no();
 			MediaDto media = new MediaDto();
@@ -62,9 +64,14 @@ public class NoteServiceImpl implements NoteService{
 			}else {
 				noteAll.setMedia_isEmpty(false);
 			}
+			
+			List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+	        int randomIndex = (sender.getEmp_no()%7);
+			noteAll.setTwo_name_color(myList.get(randomIndex));
+			noteAll.setTwo_name(sender.getEmpinfo_name().substring(sender.getEmpinfo_name().length() - 2));
 			Map<String, Object> profile = new HashMap<>();
 			profile.put("media_from", "EMP");
-			profile.put("from_no", noteAll.getEmp_no_receiver());
+			profile.put("from_no", sender.getEmp_no());
 	      
 	        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
 	        if(mediaDto != null) {
@@ -291,7 +298,7 @@ public class NoteServiceImpl implements NoteService{
 		List<NoteAll> noteAllList = noteDao.selectSentNoteByEmpNo(map);
 		for(NoteAll noteAll : noteAllList) {
 			int senderNo = noteAll.getNote_sender();
-			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			EmployeeInfo sender = employeeDao.selectEmpInfoByEmpInfoNo(senderNo);
 			noteAll.setNote_sender_name(sender.getEmpinfo_name());
 			int noteNo = noteAll.getNote_no();
 			MediaDto media = new MediaDto();
@@ -315,7 +322,7 @@ public class NoteServiceImpl implements NoteService{
 		List<NoteAll> noteAllList = noteDao.selectStarredNoteByEmpNo(map);
 		for(NoteAll noteAll : noteAllList) {
 			int senderNo = noteAll.getNote_sender();
-			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			EmployeeInfo sender = employeeDao.selectEmpInfoByEmpInfoNo(senderNo);
 			noteAll.setNote_sender_name(sender.getEmpinfo_name());
 			int noteNo = noteAll.getNote_no();
 			MediaDto media = new MediaDto();
@@ -337,7 +344,7 @@ public class NoteServiceImpl implements NoteService{
 		List<NoteAll> noteAllList = noteDao.selectTrashNoteByEmpNo(map);
 		for(NoteAll noteAll : noteAllList) {
 			int senderNo = noteAll.getNote_sender();
-			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			EmployeeInfo sender = employeeDao.selectEmpInfoByEmpInfoNo(senderNo);
 			noteAll.setNote_sender_name(sender.getEmpinfo_name());
 			int noteNo = noteAll.getNote_no();
 			MediaDto media = new MediaDto();
@@ -360,7 +367,7 @@ public class NoteServiceImpl implements NoteService{
 		List<NoteAll> noteAllList = noteDao.selectDraftNoteByEmpNo(map);
 		for(NoteAll noteAll : noteAllList) {
 			int senderNo = noteAll.getNote_sender();
-			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			EmployeeInfo sender = employeeDao.selectEmpInfoByEmpInfoNo(senderNo);
 			noteAll.setNote_sender_name(sender.getEmpinfo_name());
 			int noteNo = noteAll.getNote_no();
 			MediaDto media = new MediaDto();
@@ -896,7 +903,7 @@ public class NoteServiceImpl implements NoteService{
 		List<NoteAll> noteAllList = noteDao.searchNoteByEmpNo(map);
 		for(NoteAll noteAll : noteAllList) {
 			int senderNo = noteAll.getNote_sender();
-			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			EmployeeInfo sender = employeeDao.selectEmpInfoByEmpInfoNo(senderNo);
 			noteAll.setNote_sender_name(sender.getEmpinfo_name());
 			int noteNo = noteAll.getNote_no();
 			MediaDto media = new MediaDto();
@@ -919,7 +926,7 @@ public class NoteServiceImpl implements NoteService{
 		List<NoteAll> noteAllList = noteDao.searchSentNoteByEmpNo(map);
 		for(NoteAll noteAll : noteAllList) {
 			int senderNo = noteAll.getNote_sender();
-			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			EmployeeInfo sender = employeeDao.selectEmpInfoByEmpInfoNo(senderNo);
 			noteAll.setNote_sender_name(sender.getEmpinfo_name());
 			int noteNo = noteAll.getNote_no();
 			MediaDto media = new MediaDto();
@@ -940,7 +947,7 @@ public class NoteServiceImpl implements NoteService{
 		List<NoteAll> noteAllList = noteDao.searchStarredNoteByEmpNo(map);
 		for(NoteAll noteAll : noteAllList) {
 			int senderNo = noteAll.getNote_sender();
-			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			EmployeeInfo sender = employeeDao.selectEmpInfoByEmpInfoNo(senderNo);
 			noteAll.setNote_sender_name(sender.getEmpinfo_name());
 			int noteNo = noteAll.getNote_no();
 			MediaDto media = new MediaDto();
@@ -961,7 +968,7 @@ public class NoteServiceImpl implements NoteService{
 		List<NoteAll> noteAllList = noteDao.searchTrashNoteByEmpNo(map);
 		for(NoteAll noteAll : noteAllList) {
 			int senderNo = noteAll.getNote_sender();
-			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			EmployeeInfo sender = employeeDao.selectEmpInfoByEmpInfoNo(senderNo);
 			noteAll.setNote_sender_name(sender.getEmpinfo_name());
 			int noteNo = noteAll.getNote_no();
 			MediaDto media = new MediaDto();
@@ -982,7 +989,7 @@ public class NoteServiceImpl implements NoteService{
 		List<NoteAll> noteAllList = noteDao.searchDraftNoteByEmpNo(map);
 		for(NoteAll noteAll : noteAllList) {
 			int senderNo = noteAll.getNote_sender();
-			EmployeeInfo sender = employeeDao.selectInfoByEmpNo(senderNo);
+			EmployeeInfo sender = employeeDao.selectEmpInfoByEmpInfoNo(senderNo);
 			noteAll.setNote_sender_name(sender.getEmpinfo_name());
 			int noteNo = noteAll.getNote_no();
 			MediaDto media = new MediaDto();

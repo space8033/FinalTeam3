@@ -22,4 +22,5 @@ public interface NoticeDao {
 	public RecentNotice selectRecentInquiry();
 	public void insertNoticeReaders(Map<String, Object> map);
 	public List<Notice> selectNoticeReaders(Map<String, Object> map);
+	public List<String> selectEmpinfoName(int notice_no);
 }

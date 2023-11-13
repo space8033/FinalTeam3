@@ -23,5 +23,7 @@ public class NoteAll {
 	private String noteRead_starred;
 	private String note_sender_name;
 	private String base64;
+	private String two_name;
+	private String two_name_color;
 	private boolean media_isEmpty;
 }

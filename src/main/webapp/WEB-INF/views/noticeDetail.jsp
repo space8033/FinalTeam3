@@ -324,25 +324,27 @@
                                                    <!-- Icon Dropdown -->
                                                    <div class="col-lg-3 col-sm-6 col-12">
                                                       <div class="demo-inline-spacing">
-                                                         <div class="btn-group" style="padding-left: 10px;">
+                                                         <div class="btn-group" style="padding-left: 20px;">
                                                             <button type="button"
                                                                class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow"
                                                                data-bs-toggle="dropdown" aria-expanded="false">
                                                                <i class='bx bx-book-heart fs-4' id="readPeople"></i>
                                                             </button>
-                                                            <ul
-                                                               class="dropdown-menu dropdown-menu-end scrollable-list">
-                                                               <c:forEach var="i" begin="1" end="10">
-                                                                  <li><a class="dropdown-item"
-                                                                     href="javascript:void(0);">용용권${i}</a></li>
-                                                               </c:forEach>
+                                                            <ul class="dropdown-menu dropdown-menu-end scrollable-list">
+																<c:forEach var="reader" items="${unReaders}">
+												                    <li>
+												                    	<a class="dropdown-item" href="javascript:void(0);" style="display:flex; justify-content:space-between;">
+													                    	<p>${reader}</p>
+													                    	<p>🔔</p>
+												                    	</a>
+											                    	</li>
+												                </c:forEach>
                                                             </ul>
                                                          </div>
                                                       </div>
                                                    </div>
                                                    <div>
-                                                      <p style="margin-bottom: 0px; margin-top: 10px;">12명
-                                                         읽음</p>
+                                                      <p style="margin-bottom: 0px; margin-top: 10px;">${unReaders.size()}명 안 읽음</p>
                                                    </div>
                                                    <!--/ Icon Dropdown -->
                                                 </div>
