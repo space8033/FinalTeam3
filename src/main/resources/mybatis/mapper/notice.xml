@@ -82,7 +82,7 @@
 	    FROM emp e
 	    LEFT JOIN empinfo ei ON e.emp_no = ei.emp_no
 	    LEFT JOIN noticereaders n ON ei.empinfo_no = n.empinfo_no AND n.notice_no = #{notice_no}
-	    WHERE n.empinfo_no IS NULL AND e.emp_deletedat IS NULL
+	    WHERE n.empinfo_no IS NULL AND e.emp_deletedat IS NULL AND e.emp_no != 0
 	</select>
 
 </mapper>
