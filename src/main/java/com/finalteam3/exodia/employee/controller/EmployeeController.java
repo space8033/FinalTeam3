@@ -34,7 +34,6 @@ import com.finalteam3.exodia.employee.dto.request.PasswordRequest;
 import com.finalteam3.exodia.employee.dto.response.EmpManagementResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
-import com.finalteam3.exodia.employee.dto.response.EmpSimpleResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.dto.response.ProjectEmpResponse;
 import com.finalteam3.exodia.employee.dto.response.TransferDto;
