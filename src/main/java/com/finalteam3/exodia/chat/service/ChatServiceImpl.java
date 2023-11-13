@@ -183,7 +183,9 @@ public class ChatServiceImpl implements ChatService {
 
 	@Override
 	public int getUckChatMsgAll(int empInfo_no) {
+		log.info(empInfo_no+"숫자잘받아오나");
 		List<ChatMessage> chatRoom = chatDao.selectChatRoomList(empInfo_no);
+		log.info(chatRoom.toString()+"챗룸리스트?");
 		int uckChatMsg = 0;
 		for(ChatMessage chat : chatRoom) {
 			int chatRoomNo = chat.getChatRoom_no();
