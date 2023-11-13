@@ -250,8 +250,8 @@
               <div class="container-xxl flex-grow-1 container-p-y d-flex">
 
               <!-- Basic Bootstrap Table -->
-	              <div style="width : 50%; padding-top:1.625rem;">
-	              	<div class="card" style="height: 545px;">
+	              <div style="width : 50%">
+	              	<div class="card" style="height: 514px;">
 		                <h5 class="card-header">팀 목록</h5>
 		                <div class="table-responsive text-nowrap">
 		                  <table class="table">
@@ -402,7 +402,7 @@
 	              
               <!--/ Basic Bootstrap Table -->
 				<div style="width:50%">
-		            <div class="container-xxl flex-grow-1 container-p-y">
+		            <div class="container-xxl flex-grow-1">
 		
 		              <div class="row">
 		                <!-- Select2 -->
