@@ -1,13 +1,15 @@
 package com.finalteam3.exodia.inquiry.service;
 
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import com.finalteam3.exodia.inquiry.dao.InquiryDao;
-import com.finalteam3.exodia.inquiry.dto.Inquiry;
 import com.finalteam3.exodia.inquiry.dto.Reply;
 import com.finalteam3.exodia.media.dao.MediaDao;
 import com.finalteam3.exodia.media.dto.MediaDto;
@@ -42,6 +44,20 @@ public class InquiryServiceImpl implements InquiryService{
 	@Override
 	public Notice getInquiryDetail(int notice_no) {
 		Notice notice = inquiryDao.selectDetailByNoticeNo(notice_no);
+		
+		Map<String, Object> profile = new HashMap<>();
+		profile.put("media_from", "EMP");
+		profile.put("from_no", notice.getEmp_no());
+		MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+	    
+		if(mediaDto != null) {
+	    	String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+	    	notice.setPhoto(base64Img);
+	    }
+		
+		String twoname = notice.getEmpinfo_name().substring(notice.getEmpinfo_name().length()-2);
+		notice.setTwoname(twoname);
+
 		return notice;
 	}
 	
@@ -60,6 +76,25 @@ public class InquiryServiceImpl implements InquiryService{
 	public List<Reply> getReplyByNoticeNo(int notice_no) {
 		
 		List<Reply> replyList = inquiryDao.selectReplyByNoticeNo(notice_no);
+		
+		for(Reply re: replyList) {
+			
+			Map<String, Object> profile = new HashMap<>();
+			profile.put("media_from", "EMP");
+			profile.put("from_no", re.getEmp_no());
+			MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+			
+			if(mediaDto != null) {
+				String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+				re.setPhoto(base64Img);
+			}
+			
+			String twoname = re.getEmpinfo_name().substring(re.getEmpinfo_name().length()-2);
+			re.setTwoname(twoname);
+		}
+		
+		
+		
 		return replyList;
 	}
 	
@@ -92,7 +127,6 @@ public class InquiryServiceImpl implements InquiryService{
 
 	@Override
 	public Reply getReplyByReplyNo(int replyNo) {
-		// TODO Auto-generated method stub
 		return inquiryDao.selectReplyByReplyNo(replyNo);
 	}
 	

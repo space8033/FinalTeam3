@@ -123,6 +123,7 @@ public class Main {
 	    	String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
 	    	model.addAttribute("base64", base64Img);
 	    }
+		model.addAttribute("twoname", "관리");
 	      
 		return "userProfile";
 	}

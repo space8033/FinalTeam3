@@ -2,6 +2,7 @@ package com.finalteam3.exodia.notice.controller;
 
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.finalteam3.exodia.alarm.service.AlarmService;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
+import com.finalteam3.exodia.media.dao.MediaDao;
 import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.media.service.MediaService;
 import com.finalteam3.exodia.notice.dto.Notice;
@@ -42,6 +44,9 @@ public class NoticeController {
 	
 	@Resource
 	private AlarmService alarmService;
+	
+	@Resource
+	private MediaDao mediaDao;
 	
 	//공지사항 리스트 조회
 	@GetMapping("/noticeList")
@@ -208,6 +213,15 @@ public class NoticeController {
 	    
 	    log.info("안읽은놈들 :" + unReaders);
 	    
+	    Map<String, Object> profile = new HashMap<>();
+		profile.put("media_from", "EMP");
+		profile.put("from_no", 0);
+		MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+	    
+		if(mediaDto != null) {
+	    	String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+	    	model.addAttribute("base64", base64Img);
+	    }
 		
 		return "noticeDetail";
 	}

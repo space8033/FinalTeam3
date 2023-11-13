@@ -2,7 +2,10 @@ package com.finalteam3.exodia.inquiry.controller;
 
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -25,6 +28,7 @@ import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.inquiry.dto.Reply;
 import com.finalteam3.exodia.inquiry.service.InquiryService;
+import com.finalteam3.exodia.media.dao.MediaDao;
 import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.media.service.MediaService;
 import com.finalteam3.exodia.notice.dto.Notice;
@@ -49,6 +53,8 @@ public class InquiryController {
 	private EmployeeService employeeService;
 	@Resource
 	private AlarmService alarmService;
+	@Resource
+	private MediaDao mediaDao;
 	
 	//문의사항 리스트 조회
 	@GetMapping("/inquiryList")
@@ -180,6 +186,7 @@ public class InquiryController {
 		    log.info("notice : " + notice);
 		    
 		    int empNo = employeeDao.selectNoByEmpName(loginResponse.getEmpInfo_name());
+		    
 		    	    		    	
 			return "inquiryDetail";
 		}

@@ -20,5 +20,8 @@ public class Notice {
 	private String empinfo_name;
 	private MultipartFile[] notice_files;
 	private int empinfo_no;
+	private int emp_no;
+	private String photo;
+	private String twoname;
 	
 }
