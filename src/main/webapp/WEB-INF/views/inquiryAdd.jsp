@@ -293,6 +293,20 @@
                         </div>
                       </div>
                     </div>
+                    <div class="modal" id="modal-no-content2">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">내용을 입력하세요</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body"> 팀을 선택해주세요. </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                     <script>
                       // 등록 버튼 클릭 이벤트
                       document.getElementById('inquirySubmit').addEventListener('click', function() {
@@ -300,9 +314,12 @@
                         var content = document.getElementById('noticeContent').value;
                         var teamname = document.getElementById('selectpickerLiveSearch').value;
                         // 제목이나 내용이 없음
-                        if (!title || !content || !teamname) {
+                        if (!title || !content) {
                           $('#modal-no-content').modal('show');
-                        } else {
+                        } else if (!teamname) {
+                        	$('#modal-no-content2').modal('show');	
+                        } 
+                        else {
                           //폼 제출
                           document.getElementById('inquiryAdd').submit();
                         }

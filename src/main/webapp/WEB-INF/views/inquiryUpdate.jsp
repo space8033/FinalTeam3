@@ -406,9 +406,6 @@
                             </div>
                             <div class="comment-editor border-0 pb-4" id="ecommerce-category-description">${notice.notice_content}</div>
                             <textarea id="noticeContent" style="display: none"></textarea>
-                            <div class="input-group">
-                              <input type="file" name="files" class="form-control" id="attach-file" multiple />
-                            </div>
                           </div>
                         </div>
                       </div>
