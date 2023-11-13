@@ -439,12 +439,16 @@ public class EmployeeServiceImpl implements EmployeeService{
 			String tStart = task.getTask_startdate().substring(0, 10);
 			timeLineResponse.setTask_start(tStart);
 			timeLineResponse.setTask_no(task.getTask_no());
+		}else {
+			timeLineResponse.setTask_name("등록된 일정이 없습니다.");
 		}
 		if(personalTask != null) {
 			timeLineResponse.setMyTask_name(personalTask.getTask_name());			
 			String pStart = personalTask.getTask_startdate().substring(0, 10);
 			timeLineResponse.setMyTask_start(pStart);
 			timeLineResponse.setMyTask_no(personalTask.getTask_no());
+		}else {
+			timeLineResponse.setMyTask_name("등록된 개인 일정이 없습니다.");
 		}
 		
 		String nDate = notice.getNotice_createdat().substring(0, 10);
