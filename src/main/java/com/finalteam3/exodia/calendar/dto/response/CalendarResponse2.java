@@ -19,6 +19,6 @@ public class CalendarResponse2 {
 	private String description;
 	private boolean allDay = true;
 	private CalendarColor extendedProps;
-	
-	
+	private String empinfo_name;
+	private String task_name;
 }

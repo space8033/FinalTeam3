@@ -11,4 +11,6 @@ public class CalendarResponse {
 	private int emp_no;
 	private String task_type;
 	private String task_content;
+	private String empinfo_name;
+	private String task_name;
 }

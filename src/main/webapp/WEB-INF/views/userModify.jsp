@@ -176,7 +176,7 @@
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="${pageContext.request.contextPath}/calendar" class="menu-link">
+                  <a href="${pageContext.request.contextPath}/teamCalendar" class="menu-link">
                     <div class="text-truncate">팀 별 일정 관리</div>
                   </a>
                 </li>

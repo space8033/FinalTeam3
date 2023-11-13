@@ -60,4 +60,5 @@ public interface EmployeeDao {
 	public ProjectEmpResponse selectProjectPm(int project_no);
 	public TimeLineResponse selectTimeLineResponse(Map<String, Object> map);
 	public void deleteEmp(int emp_no);
+	public String selectTeamByEmpNo(Map<String, Object> map);
 }
