@@ -333,10 +333,6 @@
             </div>
             <!-- / Content -->
 
-            <!-- Footer -->
-            
-            <!-- / Footer -->
-
             <div class="content-backdrop fade"></div>
           </div>
           <!-- Content wrapper -->
