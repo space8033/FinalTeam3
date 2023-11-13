@@ -696,7 +696,7 @@ public class NoteServiceImpl implements NoteService{
 		}
 		note.setNote_draft("draft");
 		note.setNote_restime("");
-		note.setNote_label("");
+		note.setNote_label(request.getNote_label());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
         String formattedDate = sdf.format(new Date());
 

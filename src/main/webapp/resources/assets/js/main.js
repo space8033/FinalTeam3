@@ -296,27 +296,29 @@ function showAlarmCount() {
 	        console.log('Received number:', uckNo);
 	        var v_alarmIcon = document.querySelector("#alarmIcon");
 	        var moveChat = document.querySelector("#moveChat");
-	        if (uckNo === 0) {
-	        	v_alarmIcon.classList.add('d-none');
-	            console.log('uckNo is 0');
-	        } else {
-	        	v_alarmIcon.classList.remove('d-none');
-    		    v_alarmIcon.innerText = uckNo;
-	            console.log('uckNo is not 0');
-	            var alarmToast = document.querySelector("#alarmToast");
-		        var alarmId = document.querySelector("#alarmId").value;
-		    	alarmToast.classList.add('show');
-		    	var alarmMsg = document.querySelector("#alarmMsg");
-		    	alarmMsg.innerHTML = alarmId + "님 " + uckNo +"개의 미확인 알람이 있습니다."
-		    	setTimeout(function() {
-		    		alarmToast.classList.remove("show");
-			    }, 4000);
-	        }
-	        if (uckChatNo === 0) {
-	        	moveChat.classList.add('d-none');
-	        } else {
-	        	moveChat.classList.remove('d-none');
-	        	moveChat.innerText = uckChatNo;
+	        if(v_alarmIcon) {
+		        if (uckNo === 0) {
+		        	v_alarmIcon.classList.add('d-none');
+		            console.log('uckNo is 0');
+		        } else {
+		        	v_alarmIcon.classList.remove('d-none');
+	    		    v_alarmIcon.innerText = uckNo;
+		            console.log('uckNo is not 0');
+		            var alarmToast = document.querySelector("#alarmToast");
+			        var alarmId = document.querySelector("#alarmId").value;
+			    	alarmToast.classList.add('show');
+			    	var alarmMsg = document.querySelector("#alarmMsg");
+			    	alarmMsg.innerHTML = alarmId + "님 " + uckNo +"개의 미확인 알람이 있습니다."
+			    	setTimeout(function() {
+			    		alarmToast.classList.remove("show");
+				    }, 4000);
+		        }
+		        if (uckChatNo === 0) {
+		        	moveChat.classList.add('d-none');
+		        } else {
+		        	moveChat.classList.remove('d-none');
+		        	moveChat.innerText = uckChatNo;
+		        }
 	        }
 	        
 	        $.ajax({
@@ -329,15 +331,17 @@ function showAlarmCount() {
 
         	        // 여기에서 숫자 값을 사용하도록 로직을 추가
         	        console.log('Received number:', uckNo);
-        	        var moveNote = document.querySelector("#moveNote");
-        	        if (uckNo === 0) {
-        	        	moveNote.classList.add('d-none');
-        	        } else {
-        	        	moveNote.classList.remove('d-none');
-        	        	moveNote.innerText = uckNo;
-        	            
-        	        }
         	        
+        	        var moveNote = document.querySelector("#moveNote");
+        	        if(moveNote) {
+	        	        if (uckNo === 0) {
+	        	        	moveNote.classList.add('d-none');
+	        	        } else {
+	        	        	moveNote.classList.remove('d-none');
+	        	        	moveNote.innerText = uckNo;
+	        	            
+	        	        }
+        	        }
         	       
         	        
         	    },
