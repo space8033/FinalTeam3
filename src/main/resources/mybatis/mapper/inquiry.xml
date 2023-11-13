@@ -16,6 +16,7 @@
 		    r.reply_content,
 		    r.reply_createdat,
 		    r.reply_no,
+		    e.emp_no,
 		    e.empinfo_name,
 		    e.empinfo_no,
 		    e.empinfo_email
@@ -35,6 +36,7 @@
 		    r.reply_createdat,
 		    r.reply_no,
 		    r.notice_no,
+		    e.emp_no,
 		    e.empinfo_name,
 		    e.empinfo_no,
 		    e.empinfo_email
@@ -73,7 +75,7 @@
 	</update>
 	
  	<select id="selectDetailByNoticeNo" parameterType="int" resultType="Notice">
-		SELECT notice.notice_no, empinfo.empinfo_no, empinfo.empinfo_name, empinfo.empinfo_email, notice.notice_title, notice.notice_content, notice.empinfo_no_writer, notice.notice_createdat
+		SELECT notice.notice_no, empinfo.emp_no, empinfo.empinfo_no, empinfo.empinfo_name, empinfo.empinfo_email, notice.notice_title, notice.notice_content, notice.empinfo_no_writer, notice.notice_createdat
 		FROM notice
 		INNER JOIN empinfo ON notice.empinfo_no_writer = empinfo.empinfo_no
 		where notice_no = #{notice_no}
@@ -112,5 +114,6 @@
 		from empinfo
 		where emp_no = #{emp_no}
 	</select>
+	
 	
 </mapper>

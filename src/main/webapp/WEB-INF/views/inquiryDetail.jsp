@@ -292,12 +292,27 @@
 											
 											<p>
 												<div class="d-flex align-items-center mb-sm-0 mb-3">
-											    <img
+											    <%-- <img
 											      src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
 												  alt="user-avatar"
 												  class="flex-shrink-0 rounded-circle me-2"
 												  height="38"
-												  width="38" />
+												  width="38" /> --%>
+												<c:if test="${notice.photo == null}">
+						                        	<span class="avatar-initial rounded-circle" id="nameProfile" 
+						                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+						                        	${notice.twoname} 
+						                        	</span>
+						                        </c:if>
+						                        <c:if test="${notice.photo != null}">
+							                        <img
+							                          src="data:MIME;base64, ${notice.photo}"
+							                          alt="user-avatar"
+							                          class="d-block rounded-circle"
+							                          height="50"
+							                          width="50"
+							                          id="uploadedAvatar" />            	            
+						                        </c:if>
 												<div class="flex-grow-1 ms-1">
 												  <h6 class="m-0" id="replyWriter" name="replyWriter">${notice.empinfo_name}</h6>
 												  <small class="text-muted" id="replyWriterEmail" name="replyWriterEmail">${notice.empinfo_email}</small>
@@ -387,12 +402,27 @@
 										  <div class="card email-card-last mx-sm-4 mx-3 mt-4 border" id="reply${reply.reply_no}">
 										    <div class="card-header d-flex justify-content-between align-items-center flex-wrap border-bottom">
 											  <div class="d-flex align-items-center mb-sm-0 mb-3">
-											    <img
+											    <%-- <img
 											      src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
 												  alt="user-avatar"
 												  class="flex-shrink-0 rounded-circle me-2"
 												  height="38"
-												  width="38" />
+												  width="38" /> --%>
+												<c:if test="${reply.photo == null}">
+						                        	<span class="avatar-initial rounded-circle" id="nameProfile" 
+						                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+						                        	${reply.twoname} 
+						                        	</span>
+						                        </c:if>
+						                        <c:if test="${reply.photo != null}">
+							                        <img
+							                          src="data:MIME;base64, ${reply.photo}"
+							                          alt="user-avatar"
+							                          class="d-block rounded-circle"
+							                          height="50"
+							                          width="50"
+							                          id="uploadedAvatar" />            	            
+						                        </c:if>
 												<div class="flex-grow-1 ms-1">
 												  <h6 class="m-0" id="replyWriter" name="replyWriter">${reply.empinfo_name}</h6>
 												  <small class="text-muted" id="replyWriterEmail" name="replyWriterEmail">${reply.empinfo_email}</small>

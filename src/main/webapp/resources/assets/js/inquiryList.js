@@ -34,7 +34,7 @@ $(function () {
         }, // JSON file to add data
       columns: [
         // columns according to JSON
-    	  { data: "notice_no" },
+    	  { data: 'notice_no'},
           { data: 'notice_title' },
           { data: 'empinfo_name' },
           { data: 'notice_createdat' }

@@ -1,6 +1,7 @@
 package com.finalteam3.exodia.notice.service;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,9 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.finalteam3.exodia.alarm.dao.AlarmDao;
+import com.finalteam3.exodia.chat.dto.request.ChatParticipant;
+import com.finalteam3.exodia.employee.dao.EmployeeDao;
+import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.media.dao.MediaDao;
 import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.notice.dao.NoticeDao;
@@ -27,6 +31,8 @@ public class NoticeServiceImpl implements NoticeService{
 	private MediaDao mediaDao;
 	@Resource
 	private AlarmDao alarmDao;
+	@Resource
+	private EmployeeDao employeeDao;
 
 	@Override
 	public List<Notice> getNoticeList() {
@@ -37,6 +43,21 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public Notice getNoticeDetail(int notice_no) {
 		Notice notice = noticeDao.selectDetailByNoticeNo(notice_no);
+		
+			/*if(notice.getEmpinfo_no() != 0) {
+				List<String> myList = Arrays.asList("bg-label-success", "bg-label-secondary", "bg-label-danger", "bg-label-info", "bg-label-warning", "bg-label-primary");
+				int randomIndex = (notice.getEmpinfo_no()%6);
+				
+				String profileImagePath = employeeDao.  (notice.getEmpinfo_no());
+
+		        Notice noticeProfile = new Notice();
+		        noticeProfile.setProfile(profileImagePath);
+
+		        noticeProfile.setEmpinfo_no(notice.getEmpinfo_no());
+							
+
+			}*/
+		
 		return notice;
 	}
 
