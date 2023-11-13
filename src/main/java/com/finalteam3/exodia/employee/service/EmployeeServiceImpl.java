@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 
+import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -26,6 +27,7 @@ import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.EmpSimpleResponse;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
+import com.finalteam3.exodia.employee.dto.response.ProfileResponse;
 import com.finalteam3.exodia.employee.dto.response.ProjectEmpResponse;
 import com.finalteam3.exodia.employee.dto.response.TeamBasicResponse;
 import com.finalteam3.exodia.employee.dto.response.TimeLineResponse;
@@ -205,8 +207,7 @@ public class EmployeeServiceImpl implements EmployeeService{
       for(String tName : tNames) {
          EmpManagementResponse emr = new EmpManagementResponse();
          List<TeamBasicResponse> tbrs = employeeDao.selectTeamBasic(tName);
-         List<Integer> teamMembers = new ArrayList<>();
-         List<String> teamMemberNames = new ArrayList<>();
+         List<ProfileResponse> teamMembers = new ArrayList<>();
          
          for(TeamBasicResponse tbr : tbrs) {
             if(tbr.getEmp_no() == 0) {
@@ -215,14 +216,27 @@ public class EmployeeServiceImpl implements EmployeeService{
             }else if(tbr.isTeam_isleader()) {
                emr.setTeam_leader(tbr.getEmpinfo_name());               
             }else {
-               teamMembers.add(tbr.getEmp_no());
-               teamMemberNames.add(tbr.getEmpinfo_name());
+            	ProfileResponse pr = new ProfileResponse();
+            	pr.setEmp_no(tbr.getEmp_no());
+            	pr.setEmpinfo_name(tbr.getEmpinfo_name());
+            	pr.setTwo_name(tbr.getEmpinfo_name().substring(tbr.getEmpinfo_name().length() - 2));
+            	
+            	Map<String, Object> profile = new HashMap<>();
+            	profile.put("media_from", "EMP");
+            	profile.put("from_no", tbr.getEmp_no());
+            	
+            	MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+        	    
+        		if(mediaDto != null) {
+        	    	String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+        	    	pr.setPhoto(base64Img);
+        	    }
+        		
+                teamMembers.add(pr);
             }
          }
          
-         //사람당 이미지파일 구하기(아직 구현 전)
-         emr.setTeam_members(teamMembers);
-         emr.setTeam_memberNames(teamMemberNames);
+         emr.setTeam_memberNames(teamMembers);
          list.add(emr);
       }
       
@@ -403,6 +417,8 @@ public class EmployeeServiceImpl implements EmployeeService{
 		List<String> list = employeeDao.selectTeamname(project_no);
 		return list;
 	}
+	
+	@Override
 	public TimeLineResponse getTimeLineByEmpNo(Map<String, Object> map) {
 		TimeLineResponse timeLineResponse = employeeDao.selectTimeLineResponse(map);
 		

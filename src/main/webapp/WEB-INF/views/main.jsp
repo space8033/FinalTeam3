@@ -469,7 +469,7 @@
 	                          </div>
 	                          <div class="d-flex flex-column">
 	                            <small>프로젝트 시작</small>
-	                            <h6 class="mb-0">23.4~</h6>
+	                            <h6 class="mb-0">${start}~</h6>
 	                          </div>
 	                        </div>
 	                        <div class="d-flex">
@@ -478,7 +478,7 @@
 	                          </div>
 	                          <div class="d-flex flex-column">
 	                            <small>프로젝트 종료</small>
-	                            <h6 class="mb-0">~23.12</h6>
+	                            <h6 class="mb-0">~${end}</h6>
 	                          </div>
 	                        </div>
 	                      </div>

@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 
 <html
@@ -258,11 +259,24 @@
                       <img src="${pageContext.request.contextPath}/resources/assets/img/pages/profile-banner.png" alt="Banner image" class="rounded-top" />
                     </div>
                     
-                    <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4">
-                      <span class="avatar-initial rounded-circle" id="nameProfile" 
-                        	style="margin-left: 20px; width :100px; height: 100px; font-size: 40px; display: flex; align-items: center; justify-content: center;"> 
-                        	${timeLine.two_name} 
-                      </span>
+                    <input type="hidden" value="${timeLine.emp_no}" id="nowEmpNo"/>
+                    <div class="user-profile-header d-flex flex-column flex-sm-row text-sm-start text-center mb-4 pl-3">
+                      <c:if test="${base64 == null}">
+                       	<span class="avatar-initial rounded-circle" id="nameProfile" 
+                       	style="width :100px; height: 100px; font-size: 40px; display: flex; align-items: center; justify-content: center; margin-left: 20px;"> 
+                       	${timeLine.two_name} 
+                       	</span>
+                       </c:if>
+                       <c:if test="${base64 != null}">
+                        <img
+                          src="data:MIME;base64, ${base64}"
+                          alt="user-avatar"
+                          class="d-block rounded-circle"
+                          height="100"
+                          width="100"
+                          id="uploadedAvatar"
+                          style="margin-left: 20px;" />            	            
+                       </c:if>
                       <div class="flex-grow-1 mt-3 mt-sm-5">
                         <div
                           class="d-flex align-items-md-end align-items-sm-start align-items-center justify-content-md-between justify-content-start mx-4 flex-md-row flex-column gap-4">

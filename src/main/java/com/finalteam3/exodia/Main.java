@@ -1,6 +1,7 @@
 package com.finalteam3.exodia;
 
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,8 +22,12 @@ import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.dto.response.TimeLineResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
+import com.finalteam3.exodia.media.dao.MediaDao;
+import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.notice.dto.Notice;
 import com.finalteam3.exodia.notice.service.NoticeService;
+import com.finalteam3.exodia.project.dto.response.ProjectModifyResponse;
+import com.finalteam3.exodia.project.service.ProjectService;
 import com.finalteam3.exodia.security.dto.EmpDetails;
 import com.finalteam3.exodia.task.dto.TaskByTeamEmp;
 import com.finalteam3.exodia.task.dto.response.TeamTaskResponse;
@@ -43,6 +48,10 @@ public class Main {
 	private CalendarService calendarService;
 	@Resource
 	private NoticeService noticeService;
+	@Resource
+	private ProjectService projectService;
+	@Resource
+	private MediaDao mediaDao;
 	
 	@RequestMapping("/")
 	public String login(Model model) {
@@ -105,6 +114,16 @@ public class Main {
 		model.addAttribute("timeLine", timeLine);
 		log.info("timeLine" + timeLine.toString());
 		
+		Map<String, Object> profile = new HashMap<>();
+		profile.put("media_from", "EMP");
+		profile.put("from_no", loginResponse.getEmp_no());
+		MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+	    
+		if(mediaDto != null) {
+	    	String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+	    	model.addAttribute("base64", base64Img);
+	    }
+	      
 		return "userProfile";
 	}
 
@@ -135,6 +154,13 @@ public class Main {
 		double rate = taskService.getProgressRate(0);
 		model.addAttribute("progressRate", rate);
 		
+		ProjectModifyResponse mod = projectService.getProjectDetail(0);
+		String start = mod.getProject_startdate().substring(2,7).replace('-', '.');
+		String end = mod.getProject_enddate().substring(2,7).replace('-', '.');
+		
+		model.addAttribute("start", start);
+		model.addAttribute("end", end);
+		
 		//프로젝트에 해당하는 팀 리스트 받아오기
 		List<String> team_names = employeeDao.selectTeamname(0);
 		model.addAttribute("team_names", team_names);
@@ -154,6 +180,7 @@ public class Main {
 			
 			taskList.add(tte);
 		}
+		
 		model.addAttribute("taskList", taskList);
 		
 		return "main";

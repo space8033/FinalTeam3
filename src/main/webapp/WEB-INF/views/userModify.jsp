@@ -254,7 +254,7 @@
                   
                   <div class="card mb-4">
 		            <h5 class="card-header">개인 정보 수정</h5>
-  
+  					<input type="hidden" value="${emp_no}" id="nowEmpNo"/>
                     <!-- Account -->
                     <div class="card-body">
                       <div class="d-flex align-items-start align-items-sm-center gap-4">
