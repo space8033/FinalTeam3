@@ -48,7 +48,8 @@ public class NoticeServiceImpl implements NoticeService{
 
 	@Override
 	public void updateByNotice(Notice notice) {
-		noticeDao.updateDetailByNoticeNo(notice);		
+		noticeDao.updateDetailByNoticeNo(notice);
+		noticeDao.deleteNoticeReaders(notice.getNotice_no());
 	}
 
 	@Override
@@ -117,12 +118,6 @@ public class NoticeServiceImpl implements NoticeService{
 	@Override
 	public List<String> getEmpinfoName(int notice_no) {
 	    return noticeDao.selectEmpinfoName(notice_no);
-	}
-
-	@Override
-	public List<Notice> getNoticeReaders() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 	
 }

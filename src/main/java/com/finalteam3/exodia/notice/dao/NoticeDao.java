@@ -23,4 +23,5 @@ public interface NoticeDao {
 	public void insertNoticeReaders(Map<String, Object> map);
 	public List<Notice> selectNoticeReaders(Map<String, Object> map);
 	public List<String> selectEmpinfoName(int notice_no);
+	public void deleteNoticeReaders(int notice_no);
 }

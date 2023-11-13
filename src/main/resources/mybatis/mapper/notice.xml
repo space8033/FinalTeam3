@@ -84,5 +84,10 @@
 	    LEFT JOIN noticereaders n ON ei.empinfo_no = n.empinfo_no AND n.notice_no = #{notice_no}
 	    WHERE n.empinfo_no IS NULL AND e.emp_deletedat IS NULL AND e.emp_no != 0
 	</select>
-
+	
+	<delete id="deleteNoticeReaders" parameterType="int">
+		delete from noticereaders
+		where notice_no = #{notice_no}
+	</delete>
+	
 </mapper>
