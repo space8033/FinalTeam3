@@ -447,18 +447,18 @@
 				                              	<c:otherwise>
 				                              	 	<c:if test="${note.base64 == null}">
 				                              	 	  <div class="avatar avatar-sm me-3">
-							                        	<span class="avatar-initial rounded-circle" id="nameProfile"> 
-							                        	  시온
+							                        	<span class="avatar-initial rounded-circle ${note.two_name_color}" id="nameProfile"> 
+							                        	  ${note.two_name}
 							                        	</span>
 							                          </div>
 							                        </c:if>
 							                        <c:if test="${note.base64 != null}">
 								                        <img
-								                          src="data:MIME;base64, ${empModifyResponse.base64}"
+								                          src="data:MIME;base64, ${note.base64}"
 								                          alt="user-avatar"
-								                          class="d-block rounded-circle"
-								                          height="100"
-								                          width="100"
+								                          class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
+								                          height="32"
+					                                      width="32"
 								                          id="uploadedAvatar" />            	            
 							                        </c:if>
 			                                
