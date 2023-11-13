@@ -2,8 +2,10 @@ package com.finalteam3.exodia.chat.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -17,6 +19,8 @@ import com.finalteam3.exodia.chat.dto.response.EmpChat;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.ProjectEmpResponse;
+import com.finalteam3.exodia.media.dao.MediaDao;
+import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.note.dao.NoteDao;
 
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +34,8 @@ public class ChatServiceImpl implements ChatService {
 	private EmployeeDao employeeDao;
 	@Resource
 	private ChatDao chatDao;
+	@Resource
+	private MediaDao mediaDao;
 	
 	@Override
 	public EmpNote getEmpInfo(int emp_no) {
@@ -105,9 +111,9 @@ public class ChatServiceImpl implements ChatService {
 		for(EmpNote emp : empList) {
 			ChatParticipant chatParticipant = new ChatParticipant();
 			if(emp.getEmpinfo_no() != empInfo_no && emp.getEmpinfo_no() != 0) {
-				List<String> myList = Arrays.asList("bg-label-success", "bg-label-secondary", "bg-label-danger", "bg-label-info", "bg-label-warning", "bg-label-primary");
+				List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
 
-		        int randomIndex = (emp.getEmpinfo_no()%6);
+		        int randomIndex = (emp.getEmp_no()%7);
 				
 				EmpChat empchat = new EmpChat();
 				chatParticipant.setEmpInfo_no1(emp.getEmpinfo_no());
@@ -118,12 +124,20 @@ public class ChatServiceImpl implements ChatService {
 				empchat.setEmpinfo_email(emp.getEmpinfo_email());
 				empchat.setEmpinfo_position(emp.getEmpinfo_position());
 				empchat.setEmpinfo_no(emp.getEmpinfo_no());
-				empchat.setProfile(emp.getProfile());
 				empchat.setTwo_name(emp.getEmpinfo_name().substring(emp.getEmpinfo_name().length() - 2));
 				empchat.setTeam_name(emp.getTeam_name());
 				empchat.setEmpinfo_name(emp.getEmpinfo_name());
 				empchat.setEmp_status(emp.getEmp_status());
 				empchat.setEmp_color(myList.get(randomIndex));
+				Map<String, Object> profile = new HashMap<>();
+				profile.put("media_from", "EMP");
+				profile.put("from_no", emp.getEmp_no());
+		      
+		        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+		        if(mediaDto != null) {
+		    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+		    	  empchat.setBase64(base64Img);
+		        }
 				
 				//챗방검색
 				Integer chatRoomNo = chatDao.selectChatRoomNo(chatParticipant);

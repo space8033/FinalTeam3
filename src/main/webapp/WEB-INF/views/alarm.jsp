@@ -109,7 +109,6 @@
 		                                      width="40"/> 
 		                             </c:if>
 		                            	
-		                            	
 		                            </c:otherwise>
 	                            </c:choose>
 	                         

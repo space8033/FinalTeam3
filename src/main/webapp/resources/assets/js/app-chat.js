@@ -186,23 +186,54 @@ function buttonSend() {
 	    var formattedDate = period + ' ' + hour + ':' + (minute < 10 ? '0' : '') + minute;
 	    console.log(formattedDate + " 오늘날짜");
 	    
+	    var myImg = $('#myImg');
+	    var myTwoName = $('#myTwoName');
+
+	    var classes = myTwoName.attr('class');
+	    var imgSrc = myImg.attr('src');
+	    var innerText = myTwoName.text();
 	    
-	      renderMsg.html('<div class="d-flex overflow-hidden">' +
-	      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
-	      '<div class="chat-message-text">' +
-	      '<p class="mb-0 text-break">' + inputValue + '</p>' +
-	      '</div>' +
-	      '<div class="text-end text-muted mt-1">' +
-	      '<i class="bx bx-check-double"></i>' +
-	      ' <small>' + formattedDate + '</small>' +
-	      '</div>' +
-	      '</div>' +
-	      '<div class="user-avatar flex-shrink-0 ms-3">' +
-	      '<div class="avatar">' +
-	      '<span class="avatar-initial rounded-circle bg-label-primary" style="font-size: 13px;">시온</span>' +
-	      '</div>' +
-	      '</div>' +
-	      '</div>');
+	    console.log(myImg.val()+"먼데");
+	    if(myImg.val()!=undefined) {
+	    
+		      renderMsg.html('<div class="d-flex overflow-hidden">' +
+		      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
+		      '<div class="chat-message-text">' +
+		      '<p class="mb-0 text-break">' + inputValue + '</p>' +
+		      '</div>' +
+		      '<div class="text-end text-muted mt-1">' +
+		      '<i class="bx bx-check-double"></i>' +
+		      ' <small>' + formattedDate + '</small>' +
+		      '</div>' +
+		      '</div>' +
+		      '<div class="user-avatar flex-shrink-0 ms-3">' +
+		      '<div class="avatar">' +
+		      ' <img src="' + imgSrc + '" alt="user-avatar" class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0" height="40"width="40"/>  ' +
+		      '</div>' +
+		      '</div>' +
+		      '</div>');
+	      
+	    } else {
+	    	
+		      renderMsg.html('<div class="d-flex overflow-hidden">' +
+		      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
+		      '<div class="chat-message-text">' +
+		      '<p class="mb-0 text-break">' + inputValue + '</p>' +
+		      '</div>' +
+		      '<div class="text-end text-muted mt-1">' +
+		      '<i class="bx bx-check-double"></i>' +
+		      ' <small>' + formattedDate + '</small>' +
+		      '</div>' +
+		      '</div>' +
+		      '<div class="user-avatar flex-shrink-0 ms-3">' +
+		      '<div class="avatar">' +
+		      '<span class="'+ classes +
+		      '" style="font-size: 14px;">' +
+		      innerText + '</span>' +
+		      '</div>' +
+		      '</div>' +
+		      '</div>');
+	    }
 
 	      var appendedMsg = $('.chat-history').append(renderMsg);
 	      sendMessage();
@@ -371,22 +402,56 @@ function checkLR(data) {
     console.log(formattedDate + " 오늘날짜");
     
     var renderMsg = $('<li class="chat-message"></li>');
-    renderMsg.html('<div class="d-flex overflow-hidden">' +
-    		 '<div class="user-avatar flex-shrink-0 me-3">' +
-    	      '<div class="avatar">' +
-    	      '<span class="avatar-initial rounded-circle bg-label-primary" style="font-size: 13px;">재롱</span>' +
-    	      '</div>' +
-    	      '</div>' +
-      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
-      '<div class="chat-message-text">' +
-      '<p class="mb-0 text-break">' + data.message_content + '</p>' +
-      '</div>' +
-      '<div class="text-muted mt-1">' +
-      ' <small>' + formattedDate + '</small>' +
-      '</div>' +
-      '</div>' +
-     
-      '</div>');
+    var buddyImg = $('#buddyImg');
+    var buddyTwoName = $('#buddyTwoName');
+
+    var buddyclasses = buddyTwoName.attr('class');
+    var buddyImgSrc = buddyImg.attr('src');
+    var buddyInnerText = buddyTwoName.text();
+    
+    console.log(buddyInnerText+"먼데");
+    if(buddyImg.val()!=undefined) {
+    	 renderMsg.html('<div class="d-flex overflow-hidden">' +
+	    		 '<div class="user-avatar flex-shrink-0 me-3">' +
+	    	      '<div class="avatar">' +
+	    	      '<img src="' + buddyImgSrc +'" alt="user-avatar" class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"height="40"width="40"/>  ' +
+	    	      '</div>' +
+	    	      '</div>' +
+	      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
+	      '<div class="chat-message-text">' +
+	      '<p class="mb-0 text-break">' + data.message_content + '</p>' +
+	      '</div>' +
+	      '<div class="text-muted mt-1">' +
+	      ' <small>' + formattedDate + '</small>' +
+	      '</div>' +
+	      '</div>' +
+	     
+	      '</div>');
+	    
+    } else {
+    	renderMsg.html('<div class="d-flex overflow-hidden">' +
+	    		 '<div class="user-avatar flex-shrink-0 me-3">' +
+	    	      '<div class="avatar">' +
+	    	      '<span class="' +
+	    	      
+	    	      buddyclasses + '" style="font-size: 14px;">' + buddyInnerText +
+	    	      		
+	    	      		'</span>' +
+	    	      '</div>' +
+	    	      '</div>' +
+	      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
+	      '<div class="chat-message-text">' +
+	      '<p class="mb-0 text-break">' + data.message_content + '</p>' +
+	      '</div>' +
+	      '<div class="text-muted mt-1">' +
+	      ' <small>' + formattedDate + '</small>' +
+	      '</div>' +
+	      '</div>' +
+	     
+	      '</div>');
+    	
+    	
+    }
 
 	    // Append the message to the chat container
 	    $('.chat-history').append(renderMsg);

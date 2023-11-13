@@ -71,13 +71,31 @@
                     id="chatList">
                     <div class="sidebar-header pt-3 px-3 mx-1">
                       <div class="d-flex align-items-center me-3 me-lg-0">
+                       
+                       
                         <div
                           class="flex-shrink-0 avatar avatar-online me-2"
                           data-bs-toggle="sidebar"
                           data-overlay="app-overlay-ex"
                           data-target="#app-chat-sidebar-left">
-                          <span class="avatar-initial rounded-circle bg-label-primary" style="font-size: 15px;">${empInfo_twoname}</span>
+                          
+                          <c:if test="${empInfo_base64 == ''}">
+                         	 <span class="avatar-initial rounded-circle ${empInfo_color}" style="font-size: 15px;" id="myTwoName">${empInfo_twoname}</span>
+                          </c:if>
+                          <c:if test="${empInfo_base64 != ''}">
+                          	 <img
+			                          src="data:MIME;base64, ${empInfo_base64}"
+			                          alt="user-avatar"
+			                          class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
+			                          height="40"
+                                      width="40"
+                                      id="myImg"/>
+                          </c:if>
+                        
                         </div>
+                        
+                        
+                        
                         <div class="flex-grow-1 input-group input-group-merge rounded-pill ms-1">
                           <span class="input-group-text" id="basic-addon-search31"
                             ><i class="bx bx-search fs-4"></i
@@ -111,6 +129,7 @@
 						  <c:if test="${emp.lastMsgContent != null}">
 	                        <li class="chat-contact-list-item"  id="${emp.empinfo_no}" >
 	                          <a class="d-flex align-items-center" onclick="javascript:chatRoom(${emp.emp_no})">
+	                          	
 	                          	<c:choose>
 	                          	  <c:when test="${emp.emp_status == 'on-line'}">
 	                          	    <div class="flex-shrink-0 avatar avatar-online">
@@ -122,9 +141,24 @@
 		                            <div class="flex-shrink-0 avatar avatar-offline">
 		                          </c:otherwise>
 	                            </c:choose>
-	                           
+	                            
+	                            
+	                            <c:if test="${emp.base64 == null}">
 	                              <span class="avatar-initial rounded-circle ${emp.emp_color}" style="font-size: 13px;">${emp.two_name}</span>
+	                            </c:if>
+	                            <c:if test="${emp.base64 != null}">
+	                              <img
+			                          src="data:MIME;base64, ${emp.base64}"
+			                          alt="user-avatar"
+			                          class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
+			                          height="32"
+                                      width="32" />
+	                            </c:if>
+	                            
+	                            
 	                            </div>
+	                            
+	                            
 	                            <div class="chat-contact-info flex-grow-1 ms-3">
 	                              <h6 class="chat-contact-name text-truncate m-0">${emp.empinfo_name}</h6>
 	                              <p class="chat-contact-status text-truncate mb-0 text-muted">
@@ -197,8 +231,19 @@
 		                            <div class="flex-shrink-0 avatar avatar-offline">
 		                          </c:otherwise>
 	                            </c:choose>
-	                               <span class="avatar-initial rounded-circle ${emp.emp_color}" style="font-size: 13px;">${emp.two_name}</span>
-	                            </div>
+	                               <c:if test="${emp.base64 == null}">
+		                               <span class="avatar-initial rounded-circle ${emp.emp_color}" style="font-size: 13px;">${emp.two_name}</span>
+		                           </c:if>
+		                           <c:if test="${emp.base64 != null}">
+		                              <img
+				                          src="data:MIME;base64, ${emp.base64}"
+				                          alt="user-avatar"
+				                          class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
+				                          height="32"
+	                                      width="32" />
+		                            </c:if>
+	                            
+	                              </div>
 	                            <div class="chat-contact-info flex-grow-1 ms-3">
 	                              <h6 class="chat-contact-name text-truncate m-0">${emp.empinfo_name}</h6>
 	                              <p class="chat-contact-status text-truncate mb-0 text-muted">${emp.team_name} ${emp.empinfo_position}</p>
