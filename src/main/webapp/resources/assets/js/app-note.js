@@ -4,6 +4,42 @@
 
 'use strict';
 
+
+//폼 제출 시
+function validateForm() {
+    // 예시: 입력값 검사
+    var note_receiver = document.getElementById("emailContacts").value;
+    var note_title = document.getElementById("email-subject").value;
+
+    if (note_receiver === "" || note_title === "") {
+    	Swal.fire({
+            text: '모든 필드를 입력해주세요',
+            icon: 'error',
+            customClass: {
+              confirmButton: 'btn btn-secondary'
+            },
+            buttonsStyling: false
+          });
+        return false; // 폼 제출 취소
+    } else {
+
+    Swal.fire({
+        text: '쪽지 전송이 완료되었습니다.',
+        icon: 'success',
+        customClass: {
+          confirmButton: 'btn btn-primary'
+        },
+        buttonsStyling: false
+      });
+    	
+    }
+    setTimeout(function () {
+        document.getElementById("noteSend").submit();
+    }, 3000);
+    
+    return false;
+}
+
 //쪽지 상세보기
 function showDetail(noteReadNo) {
   	 var data = {
@@ -118,6 +154,7 @@ function showDetail(noteReadNo) {
 		        });
   	
 }
+
 function showDetailSent(noteNo) {
 	var data = {
 			noteNo: noteNo
@@ -397,7 +434,14 @@ function sentCancelAll() {
 	var noteReadNo = checkedIds.join(', ');
 	
 	if(noteReadNo === "") {
-		alert("발송취소할 목록이 없습니다.");
+		 Swal.fire({
+		        text: "발송취소할 목록이 없습니다.",
+		        icon: 'warning',
+		        customClass: {
+		          confirmButton: 'btn btn-primary'
+		        },
+		        buttonsStyling: false
+		      });
 	} else {
 		var data = {
 				noteReadNo: noteReadNo
@@ -411,7 +455,28 @@ function sentCancelAll() {
 		}).done(function(result) {
 			 console.log("발송취소 성공");
 			 console.log(result.noCancel+"넌 값이뭐냐 대체"); 
-			 alert(result.noCancel);
+			 if(result.noCancel === "발송취소할 목록이 없습니다.") {
+				 Swal.fire({
+				        text: result.noCancel,
+				        icon: 'warning',
+				        customClass: {
+				          confirmButton: 'btn btn-primary'
+				        },
+				        buttonsStyling: false
+				      });
+			 } else {
+				 Swal.fire({
+				        text: result.noCancel,
+				        icon: 'success',
+				        customClass: {
+				          confirmButton: 'btn btn-primary'
+				        },
+				        buttonsStyling: false
+				      });
+				 
+				 
+				 
+			 }
 			$(".cancelComplete").removeClass("d-none");
 			$(".cancelList").addClass("d-none");
 			
@@ -1221,101 +1286,130 @@ function trashDelete(type) {
 	};
 	
 	console.log("체크된 체크박스의 ID: " + checkedIdsString);
-	// AJAX 요청으로 데이터 전송
-	$.ajax({
-		url: "/exodia/deleteTrashNote",
-		type: "POST",
-		data: postData,
-		success: function(response) {
-			let noteTrash = "휴지통";
-    		var postData = {
-    				noteTrash: noteTrash
-    		};
-    		
-    		// AJAX 요청으로 데이터 전송
-    		$.ajax({
-    			url: "/exodia/noteTrash",
-    			type: "GET",
-    			data: postData
-    			
-    		}).done(function(result) {
-    			console.log("결과확인");
-    			var html = jQuery('<div>').html(result);
-    			var contents = html.find("div#noteContent").html();
-    			$("#refreshNoteContent").html(contents);
-    			$("#app-email-view").removeClass("show");
-    			
-    			var emailListInstance = new PerfectScrollbar('.email-list', {
-    				wheelPropagation: false,
-    				suppressScrollX: true
-    			});
-    			$.ajax({
-	        	    url: '/exodia/updateNoteNo',
-	        	    type: 'GET',
-	        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
-	        	    success: function(response) {
-	        	        // 서버에서 받아온 숫자 값
-	        	        var uckNo = response.uckNo;
-	        	        var trashNo = response.trashNo;
-	        	        var draftNo = response.draftNo;
-	        	        var starredNo = response.starredNo;
-	        	        
+	
+	
+	 Swal.fire({
+	        text: "휴지통에서 삭제한 쪽지는 영구삭제됩니다.",
+	        icon: 'warning',
+	        showCancelButton: true,
+	        confirmButtonText: '비우기',
+	        cancelButtonText: '취소',
+	        customClass: {
+	          confirmButton: 'btn btn-primary me-3',
+	          cancelButton: 'btn btn-label-secondary'
+	        },
+	        buttonsStyling: false
+	      }).then(function (result) {
+	        if (result.value) {
+	          Swal.fire({
+	            icon: 'success',
+	            text: '쪽지가 삭제되었습니다.',
+	            customClass: {
+	              confirmButton: 'btn btn-success'
+	            }
+	          });
+	          
+	          
+	          
+	          $.ajax({
+	      		url: "/exodia/deleteTrashNote",
+	      		type: "POST",
+	      		data: postData,
+	      		success: function(response) {
+	      			let noteTrash = "휴지통";
+	          		var postData = {
+	          				noteTrash: noteTrash
+	          		};
+	          		
+	          		// AJAX 요청으로 데이터 전송
+	          		$.ajax({
+	          			url: "/exodia/noteTrash",
+	          			type: "GET",
+	          			data: postData
+	          			
+	          		}).done(function(result) {
+	          			console.log("결과확인");
+	          			var html = jQuery('<div>').html(result);
+	          			var contents = html.find("div#noteContent").html();
+	          			$("#refreshNoteContent").html(contents);
+	          			$("#app-email-view").removeClass("show");
+	          			
+	          			var emailListInstance = new PerfectScrollbar('.email-list', {
+	          				wheelPropagation: false,
+	          				suppressScrollX: true
+	          			});
+	          			$.ajax({
+	      	        	    url: '/exodia/updateNoteNo',
+	      	        	    type: 'GET',
+	      	        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+	      	        	    success: function(response) {
+	      	        	        // 서버에서 받아온 숫자 값
+	      	        	        var uckNo = response.uckNo;
+	      	        	        var trashNo = response.trashNo;
+	      	        	        var draftNo = response.draftNo;
+	      	        	        var starredNo = response.starredNo;
+	      	        	        
 
-	        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
-	        	        console.log('Received number:', uckNo);
-	        	        var unreadNote = document.querySelector("#unreadNote");
-	        	        if (uckNo === 0) {
-	        	        	unreadNote.classList.add('d-none');
-	        	        } else if(uckNo !== 0){
-	        	        	unreadNote.classList.remove('d-none');
-	        	        	unreadNote.innerText = uckNo;
-	        	        }
-	        	        var draftNote = document.querySelector("#draftNote");
-	        	        if (draftNo === 0) {
-	        	        	draftNote.classList.add('d-none');
-	        	        } else if(draftNo !== 0){
-	        	        	draftNote.classList.remove('d-none');
-	        	        	draftNote.innerText = draftNo;
-	        	        }
-	        	        var starredNote = document.querySelector("#starredNote");
-	        	        if (starredNo === 0) {
-	        	        	starredNote.classList.add('d-none');
-	        	        	console.log('uckNo is 0');
-	        	        } else if(starredNo !== 0){
-	        	        	starredNote.classList.remove('d-none');
-	        	        	starredNote.innerText = starredNo;
-	        	        }
-	        	        var trashNote = document.querySelector("#trashNote");
-	        	        if (trashNo === 0) {
-	        	        	trashNote.classList.add('d-none');
-	        	        	console.log('uckNo is 0');
-	        	        } else if(trashNo !== 0){
-	        	        	trashNote.classList.remove('d-none');
-	        	        	trashNote.innerText = trashNo;
-	        	        	console.log('uckNo is not 0');
-	        	        }
-	        	        
-	        	        
-	        	    },
-	        	    error: function(error) {
-	        	        console.error('Error fetching data:', error);
-	        	    }
-	        	});
-    			
-    		}).fail(function (jqXHR, textStatus, errorThrown) {
-    			console.log("에러");
-    			console.log(jqXHR);
-    			console.log(textStatus);
-    			console.log(errorThrown);
-    			
-    		});
-			
-		},
-		error: function() {
-			// 오류 처리
-			alert("데이터 전송 중 오류가 발생했습니다.");
-		}
-	});
+	      	        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+	      	        	        console.log('Received number:', uckNo);
+	      	        	        var unreadNote = document.querySelector("#unreadNote");
+	      	        	        if (uckNo === 0) {
+	      	        	        	unreadNote.classList.add('d-none');
+	      	        	        } else if(uckNo !== 0){
+	      	        	        	unreadNote.classList.remove('d-none');
+	      	        	        	unreadNote.innerText = uckNo;
+	      	        	        }
+	      	        	        var draftNote = document.querySelector("#draftNote");
+	      	        	        if (draftNo === 0) {
+	      	        	        	draftNote.classList.add('d-none');
+	      	        	        } else if(draftNo !== 0){
+	      	        	        	draftNote.classList.remove('d-none');
+	      	        	        	draftNote.innerText = draftNo;
+	      	        	        }
+	      	        	        var starredNote = document.querySelector("#starredNote");
+	      	        	        if (starredNo === 0) {
+	      	        	        	starredNote.classList.add('d-none');
+	      	        	        	console.log('uckNo is 0');
+	      	        	        } else if(starredNo !== 0){
+	      	        	        	starredNote.classList.remove('d-none');
+	      	        	        	starredNote.innerText = starredNo;
+	      	        	        }
+	      	        	        var trashNote = document.querySelector("#trashNote");
+	      	        	        if (trashNo === 0) {
+	      	        	        	trashNote.classList.add('d-none');
+	      	        	        	console.log('uckNo is 0');
+	      	        	        } else if(trashNo !== 0){
+	      	        	        	trashNote.classList.remove('d-none');
+	      	        	        	trashNote.innerText = trashNo;
+	      	        	        	console.log('uckNo is not 0');
+	      	        	        }
+	      	        	        
+	      	        	        
+	      	        	    },
+	      	        	    error: function(error) {
+	      	        	        console.error('Error fetching data:', error);
+	      	        	    }
+	      	        	});
+	          			
+	          		}).fail(function (jqXHR, textStatus, errorThrown) {
+	          			console.log("에러");
+	          			console.log(jqXHR);
+	          			console.log(textStatus);
+	          			console.log(errorThrown);
+	          			
+	          		});
+	      			
+	      		},
+	      		error: function() {
+	      			// 오류 처리
+	      			alert("데이터 전송 중 오류가 발생했습니다.");
+	      		}
+	      	});
+	          
+	        }
+	      });
+	// AJAX 요청으로 데이터 전송
+	
 	// 체크된 체크박스의 ID 출력
 	
 	
@@ -1654,101 +1748,123 @@ function deleteTrashSingleNote(noteReadNo) {
 			checkedIdsString: noteReadNo
 	};
 	
+	 Swal.fire({
+	        text: "휴지통에서 삭제한 쪽지는 영구삭제됩니다.",
+	        icon: 'warning',
+	        showCancelButton: true,
+	        confirmButtonText: '비우기',
+	        cancelButtonText: '취소',
+	        customClass: {
+	          confirmButton: 'btn btn-primary me-3',
+	          cancelButton: 'btn btn-label-secondary'
+	        },
+	        buttonsStyling: false
+	      }).then(function (result) {
+	        if (result.value) {
+	          Swal.fire({
+	            icon: 'success',
+	            text: '쪽지가 삭제되었습니다.',
+	            customClass: {
+	              confirmButton: 'btn btn-success'
+	            }
+	          });
 	// AJAX 요청으로 데이터 전송
-	$.ajax({
-		url: "/exodia/deleteTrashNote",
-		type: "POST",
-		data: postData,
-		success: function(response) {
-			let noteTrash = "휴지통";
-    		var postData = {
-    				noteTrash: noteTrash
-    		};
-    		
-    		// AJAX 요청으로 데이터 전송
-    		$.ajax({
-    			url: "/exodia/noteTrash",
-    			type: "GET",
-    			data: postData
-    			
-    		}).done(function(result) {
-    			console.log("결과확인");
-    			var html = jQuery('<div>').html(result);
-    			var contents = html.find("div#noteContent").html();
-    			$("#refreshNoteContent").html(contents);
-    			$("#app-email-view").removeClass("show");
-    			
-    			var emailListInstance = new PerfectScrollbar('.email-list', {
-    				wheelPropagation: false,
-    				suppressScrollX: true
-    			});
-    			$.ajax({
-	        	    url: '/exodia/updateNoteNo',
-	        	    type: 'GET',
-	        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
-	        	    success: function(response) {
-	        	        // 서버에서 받아온 숫자 값
-	        	        var uckNo = response.uckNo;
-	        	        var trashNo = response.trashNo;
-	        	        var draftNo = response.draftNo;
-	        	        var starredNo = response.starredNo;
-	        	        
+	          $.ajax({
+	      		url: "/exodia/deleteTrashNote",
+	      		type: "POST",
+	      		data: postData,
+	      		success: function(response) {
+	      			let noteTrash = "휴지통";
+	          		var postData = {
+	          				noteTrash: noteTrash
+	          		};
+	          		
+	          		// AJAX 요청으로 데이터 전송
+	          		$.ajax({
+	          			url: "/exodia/noteTrash",
+	          			type: "GET",
+	          			data: postData
+	          			
+	          		}).done(function(result) {
+	          			console.log("결과확인");
+	          			var html = jQuery('<div>').html(result);
+	          			var contents = html.find("div#noteContent").html();
+	          			$("#refreshNoteContent").html(contents);
+	          			$("#app-email-view").removeClass("show");
+	          			
+	          			var emailListInstance = new PerfectScrollbar('.email-list', {
+	          				wheelPropagation: false,
+	          				suppressScrollX: true
+	          			});
+	          			$.ajax({
+	      	        	    url: '/exodia/updateNoteNo',
+	      	        	    type: 'GET',
+	      	        	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+	      	        	    success: function(response) {
+	      	        	        // 서버에서 받아온 숫자 값
+	      	        	        var uckNo = response.uckNo;
+	      	        	        var trashNo = response.trashNo;
+	      	        	        var draftNo = response.draftNo;
+	      	        	        var starredNo = response.starredNo;
+	      	        	        
 
-	        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
-	        	        console.log('Received number:', uckNo);
-	        	        var unreadNote = document.querySelector("#unreadNote");
-	        	        if (uckNo === 0) {
-	        	        	unreadNote.classList.add('d-none');
-	        	        } else if(uckNo !== 0){
-	        	        	unreadNote.classList.remove('d-none');
-	        	        	unreadNote.innerText = uckNo;
-	        	        }
-	        	        var draftNote = document.querySelector("#draftNote");
-	        	        if (draftNo === 0) {
-	        	        	draftNote.classList.add('d-none');
-	        	        } else if(draftNo !== 0){
-	        	        	draftNote.classList.remove('d-none');
-	        	        	draftNote.innerText = draftNo;
-	        	        }
-	        	        var starredNote = document.querySelector("#starredNote");
-	        	        if (starredNo === 0) {
-	        	        	starredNote.classList.add('d-none');
-	        	        	console.log('uckNo is 0');
-	        	        } else if(starredNo !== 0){
-	        	        	starredNote.classList.remove('d-none');
-	        	        	starredNote.innerText = starredNo;
-	        	        }
-	        	        var trashNote = document.querySelector("#trashNote");
-	        	        if (trashNo === 0) {
-	        	        	trashNote.classList.add('d-none');
-	        	        	console.log('uckNo is 0');
-	        	        } else if(trashNo !== 0){
-	        	        	trashNote.classList.remove('d-none');
-	        	        	trashNote.innerText = trashNo;
-	        	        	console.log('uckNo is not 0');
-	        	        }
-	        	        
-	        	        
-	        	    },
-	        	    error: function(error) {
-	        	        console.error('Error fetching data:', error);
-	        	    }
-	        	});
-    		}).fail(function (jqXHR, textStatus, errorThrown) {
-    			console.log("에러");
-    			console.log(jqXHR);
-    			console.log(textStatus);
-    			console.log(errorThrown);
-    			
-    		});
-			
-		},
-		error: function() {
-			// 오류 처리
-			alert("데이터 전송 중 오류가 발생했습니다.");
-		}
-	});
-	
+	      	        	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+	      	        	        console.log('Received number:', uckNo);
+	      	        	        var unreadNote = document.querySelector("#unreadNote");
+	      	        	        if (uckNo === 0) {
+	      	        	        	unreadNote.classList.add('d-none');
+	      	        	        } else if(uckNo !== 0){
+	      	        	        	unreadNote.classList.remove('d-none');
+	      	        	        	unreadNote.innerText = uckNo;
+	      	        	        }
+	      	        	        var draftNote = document.querySelector("#draftNote");
+	      	        	        if (draftNo === 0) {
+	      	        	        	draftNote.classList.add('d-none');
+	      	        	        } else if(draftNo !== 0){
+	      	        	        	draftNote.classList.remove('d-none');
+	      	        	        	draftNote.innerText = draftNo;
+	      	        	        }
+	      	        	        var starredNote = document.querySelector("#starredNote");
+	      	        	        if (starredNo === 0) {
+	      	        	        	starredNote.classList.add('d-none');
+	      	        	        	console.log('uckNo is 0');
+	      	        	        } else if(starredNo !== 0){
+	      	        	        	starredNote.classList.remove('d-none');
+	      	        	        	starredNote.innerText = starredNo;
+	      	        	        }
+	      	        	        var trashNote = document.querySelector("#trashNote");
+	      	        	        if (trashNo === 0) {
+	      	        	        	trashNote.classList.add('d-none');
+	      	        	        	console.log('uckNo is 0');
+	      	        	        } else if(trashNo !== 0){
+	      	        	        	trashNote.classList.remove('d-none');
+	      	        	        	trashNote.innerText = trashNo;
+	      	        	        	console.log('uckNo is not 0');
+	      	        	        }
+	      	        	        
+	      	        	        
+	      	        	    },
+	      	        	    error: function(error) {
+	      	        	        console.error('Error fetching data:', error);
+	      	        	    }
+	      	        	});
+	          		}).fail(function (jqXHR, textStatus, errorThrown) {
+	          			console.log("에러");
+	          			console.log(jqXHR);
+	          			console.log(textStatus);
+	          			console.log(errorThrown);
+	          			
+	          		});
+	      			
+	      		},
+	      		error: function() {
+	      			// 오류 처리
+	      			alert("데이터 전송 중 오류가 발생했습니다.");
+	      		}
+	      	});
+	        }
+	    });
+	        
 }
 
 //발신 개별 메세지 지우기

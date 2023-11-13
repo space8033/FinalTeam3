@@ -3,6 +3,7 @@ package com.finalteam3.exodia.notice.service;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -85,6 +86,38 @@ public class NoticeServiceImpl implements NoticeService{
         // 새로운 리스트에 복사
         List<Notice> list2 = new ArrayList<>(top5List);
 	    return list2;
+	}
+
+	@Override
+	public void insertNoticeReaders(Map<String, Object> map) {
+		
+		List<Notice> checkReaders = noticeDao.selectNoticeReaders(map);
+
+	    boolean shouldInsert = true;
+
+	    // notice_no와 empinfo_no 비교, 중복된 값 아닐때만 insert
+	    for (Notice reader : checkReaders) {
+	        int noticeNoFromDB = reader.getNotice_no();
+	        int empinfoNoFromDB = reader.getEmpinfo_no();
+
+	        int noticeNoToInsert = (int) map.get("notice_no");
+	        int empinfoNoToInsert = (int) map.get("empinfo_no");
+
+	        if (noticeNoFromDB == noticeNoToInsert && empinfoNoFromDB == empinfoNoToInsert) {
+	            shouldInsert = false;
+	            break;
+	        }
+	    }
+
+	    if (shouldInsert) {
+	        noticeDao.insertNoticeReaders(map);
+	    }
+	}
+
+	@Override
+	public List<Notice> getNoticeReaders() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

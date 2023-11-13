@@ -2,7 +2,9 @@ package com.finalteam3.exodia.notice.controller;
 
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -194,8 +196,13 @@ public class NoticeController {
 		List<MediaDto> mediaList = noticeService.getMediaList(notice.getNotice_no());
 	    model.addAttribute("mediaList", mediaList);
 	    
-	    log.info("공지사항 수정할떄 필요한 empinfonowriter넘버 : " + notice.getEmpinfo_no_writer());
-	    log.info("공지사항 수정할떄 필요한 empinfo넘버 : " + notice.getEmpinfo_no());
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("notice_no", notice.getNotice_no());
+	    map.put("empinfo_no", loginResponse.getEmpInfo_no());
+	    noticeService.insertNoticeReaders(map);   
+	    
+	    log.info("노티스리더스에 저장할 no" + map);
+
 		
 		return "noticeDetail";
 	}
@@ -212,9 +219,5 @@ public class NoticeController {
 		
 		return "noticeList";
 	}
-	
-	@GetMapping("/popup")
-	public String popup() {
-		return "popup";
-	}
+
 }
