@@ -201,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	              eventResizableFromStart: true,
 	              headerToolbar: {
 	                start: 'sidebarToggle, prev,next, title',
-	                end: 'dayGridMonth,timeGridWeek,timeGridDay,listMonth'
+	                end: 'dayGridMonth'
 	              },
 	              direction: direction,
 	              initialDate: new Date(),

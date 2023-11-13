@@ -202,7 +202,12 @@ public class NoticeController {
 	    noticeService.insertNoticeReaders(map);   
 	    
 	    log.info("노티스리더스에 저장할 no" + map);
-
+	    
+	    List<String> unReaders = noticeService.getEmpinfoName(notice_no);
+	    model.addAttribute("unReaders", unReaders);
+	    
+	    log.info("안읽은놈들 :" + unReaders);
+	    
 		
 		return "noticeDetail";
 	}
