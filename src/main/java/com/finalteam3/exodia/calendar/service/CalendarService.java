@@ -12,6 +12,9 @@ public interface CalendarService {
 	//캘린더에 업무 불러오기
 	public List<CalendarResponse2> getPersonalTask(int emp_no);
 	
+	//캘린더에 팀 업무 불러오기
+	public List<CalendarResponse2> getTeamTask(String team_name);
+	
 	//일정 수정
 	public void updateByTaskNo(CalendarRequest CalendarRequest);
 	

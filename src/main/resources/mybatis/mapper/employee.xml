@@ -120,6 +120,14 @@
 		and empinfo_no != 0
 	</select>
 	
+	<select id="selectTeamByEmpNo" parameterType="Map" resultType="String">
+		select t.team_name
+		from team t, empinfo i
+		where t.project_no = #{project_no}
+		and t.empinfo_no = i.empinfo_no
+		and i.emp_no = #{emp_no}
+	</select>
+	
 	<select id="selectTeamLeader" resultType="EmpSimpleResponse" parameterType="String">
 		select i.empinfo_name, i.empinfo_email
 		from empinfo i, team t
