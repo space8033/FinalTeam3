@@ -2100,6 +2100,20 @@ function deleteDraftNote(type) {
 	
 }
 
+window.addEventListener('beforeunload', (event) => {
+	  // 명세에 따라 preventDefault는 호출해야하며, 기본 동작을 방지합니다.
+	  event.preventDefault();
+	  var note_receiver = $("#emailContacts").val();
+	  var note_title = $("#email-subject").val();
+	  console.log(note_receiver+note_title+"아무것도 안받는데 대체 왜..?/");
+	  if(note_receiver !== "" && note_title !== "") {
+		  console.log("여기 왜들어오는거임?;;");
+		  showdraft();
+	  }
+	  // 문자열 반환
+	  return '메세지가 임시저장 되었습니다';
+});
+
 function showdraft() {
 	  var note_receiver = $("#emailContacts").val();
 	  var note_receiver_cc = $("#selectpickerSelectDeselect").val();
