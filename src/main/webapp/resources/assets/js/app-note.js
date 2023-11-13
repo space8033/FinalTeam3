@@ -2106,6 +2106,7 @@ function showdraft() {
 	  var note_receiver_bcc = $("#selecBcc").val();
 	  var note_title = $("#email-subject").val();
 	  var note_content = $("#note-content").val();
+	  var note_label = $("#note_label").val();
 	  const fileInput = $("#attach-file");
 
 	  const formData = new FormData();
@@ -2114,6 +2115,7 @@ function showdraft() {
 	  formData.append('note_receiver_bcc', note_receiver_bcc);
 	  formData.append('note_title', note_title);
 	  formData.append('note_content', note_content);
+	  formData.append('note_label', note_label);
 	  
 	  for(var i=0; i<fileInput.length; i++) {
 		  console.log("뭐냐고 파일 들어오지도않냐");
