@@ -4,6 +4,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Resource;
 
@@ -28,6 +29,12 @@ public class InquiryServiceImpl implements InquiryService{
 	@Override
 	public List<Notice> getInquiryList() {
 		List<Notice> list = inquiryDao.selectInquiryAll();
+		
+		//문의사항 번호 내림차순 정렬
+		 AtomicInteger counter = new AtomicInteger(1);
+		 list.forEach(notice -> notice.setNotice_no(counter.getAndIncrement()));
+		 
+		log.info("문의사항listlistlistlsit : " + list);
 		return list;
 	}
 

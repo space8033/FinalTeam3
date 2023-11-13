@@ -402,12 +402,6 @@
 										  <div class="card email-card-last mx-sm-4 mx-3 mt-4 border" id="reply${reply.reply_no}">
 										    <div class="card-header d-flex justify-content-between align-items-center flex-wrap border-bottom">
 											  <div class="d-flex align-items-center mb-sm-0 mb-3">
-											    <%-- <img
-											      src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
-												  alt="user-avatar"
-												  class="flex-shrink-0 rounded-circle me-2"
-												  height="38"
-												  width="38" /> --%>
 												<c:if test="${reply.photo == null}">
 						                        	<span class="avatar-initial rounded-circle" id="nameProfile" 
 						                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
