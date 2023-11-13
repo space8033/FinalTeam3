@@ -78,12 +78,24 @@
 	                       <div class="flex-shrink-0 me-3" onclick="javascript:pageMove('${alarm.alarm_no}', '${alarm.alarm_type}', '${alarm.alarm_typeNo}');">
 	                         
 	                         <div class="avatar">
-	                            <c:if test="${alarm.alarm_type != '프로그램'}">
-	                           		<img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle" />
-	                            </c:if>
-	                            <c:if test="${alarm.alarm_type == '프로그램'}">
-	                           		 <span class="avatar-initial rounded-circle bg-label-primary"><i class="bx bx-pie-chart-alt"></i></span>
-	                            </c:if>
+	                        	<c:choose>
+		                            <c:when test="${alarm.alarm_type == '프로그램'}">
+		                           		 <span class="avatar-initial rounded-circle bg-label-primary"><i class="bx bx-pie-chart-alt"></i></span>
+		                            </c:when>
+		                            <c:when test="${alarm.alarm_type == '공지'}">
+		                           		<span class="avatar-initial rounded-circle bg-label-warning"><i class="bx bx-bell"></i></span>
+		                            </c:when>
+		                            <c:when test="${alarm.alarm_type == '문의'}">
+		                           		<span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-conversation"></i></span>
+		                            </c:when>
+		                            <c:when test="${alarm.alarm_type == '댓글'}">
+		                           		<span class="avatar-initial rounded-circle bg-label-info"><i class="bx bx-registered"></i></span>
+		                            </c:when>
+		                           
+		                            <c:otherwise>
+		                            	<img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle" />
+		                            </c:otherwise>
+	                            </c:choose>
 	                         
 	                        </div>
 	                         
@@ -100,6 +112,21 @@
 	                         <c:if test="${alarm.alarm_type == '프로그램'}">
 	                         	<h6 class="mb-1">업무 시작일 📅</h6>
 	                         	 <p class="mb-0">오늘은  '${alarm.alarm_content}' 업무 시작일입니다. 파이팅하세요!</p>
+	                         </c:if>
+	                         <c:if test="${alarm.alarm_type == '공지'}">
+	                         	<h6 class="mb-1">새로운 공지사항 🔊</h6>
+	                         	 <p class="mb-0">새 공지사항이 등록되었습니다. <br> [제목 : ${alarm.alarm_content}]
+	                   			 </p>
+	                         </c:if>
+	                         <c:if test="${alarm.alarm_type == '문의'}">
+	                         	<h6 class="mb-1">새로운 문의사항 📬</h6>
+	                         	 <p class="mb-0">${alarm.emp_name}님으로부터 새 문의사항이 <br>등록되었습니다. <br> [제목 : ${alarm.alarm_content}]
+	                   			 </p>
+	                         </c:if>
+	                         <c:if test="${alarm.alarm_type == '댓글'}">
+	                         	<h6 class="mb-1">새로운 댓글 ✅</h6>
+	                         	 <p class="mb-0">${alarm.emp_name}님이 [${alarm.alarm_content}] 글에 새 댓글을 달았습니다.
+	                   			 </p>
 	                         </c:if>
 	                         
 	                         

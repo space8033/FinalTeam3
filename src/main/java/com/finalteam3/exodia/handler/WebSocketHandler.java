@@ -21,10 +21,13 @@ import com.finalteam3.exodia.chat.dao.ChatDao;
 import com.finalteam3.exodia.chat.dto.request.ChatMessage;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
+import com.finalteam3.exodia.inquiry.dao.InquiryDao;
+import com.finalteam3.exodia.inquiry.dto.Reply;
 import com.finalteam3.exodia.note.dao.NoteDao;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 import com.finalteam3.exodia.note.dto.request.Note;
 import com.finalteam3.exodia.note.dto.request.NoteRead;
+import com.finalteam3.exodia.notice.dto.Notice;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -48,6 +51,8 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	
 	@Resource
 	private EmployeeDao empDao;
+	@Resource
+	private InquiryDao inquiryDao;
 	
 	
 	
@@ -67,7 +72,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	
 		
 		String user_id = session.getPrincipal().getName();
-		log.info(user_id+"아읻이뭐니?");
+		//log.info(user_id+"아읻이뭐니?");
 		sessions.add(session);
 		userSessionMap.put(user_id, session);
 	}
@@ -79,7 +84,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 			// Thread.sleep(600);
 			//알람
 			String msg = message.getPayload();
-			log.info(msg+"메세지 받아오니?");
+			//log.info(msg+"메세지 받아오니?");
 			
 			
 			for(WebSocketSession single : sessions) {
@@ -87,11 +92,11 @@ public class WebSocketHandler extends TextWebSocketHandler{
 				int uckCount = alarmDao.selectAlarmUchkCount(memId);
 				if(alarmCount.get(memId) == null) {
 					alarmCount.put(memId, uckCount);
-					log.info(alarmCount.toString()+"잘드러갔닝?");
+					//log.info(alarmCount.toString()+"잘드러갔닝?");
 				}
 				
-				log.info(alarmCount.get(memId).toString()+"내아이디 안읽은 숫자는?");
-				log.info(uckCount+"알람 안읽은 숫자는?");
+				//log.info(alarmCount.get(memId).toString()+"내아이디 안읽은 숫자는?");
+				//log.info(uckCount+"알람 안읽은 숫자는?");
 				
 				if(single.getId().equals(session.getId()) && uckCount != 0) {
 					
@@ -128,7 +133,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 							
 							String jsonMessages2 = objectMapper.writeValueAsString(messageContent2);
 							TextMessage textMessage2 = new TextMessage(jsonMessages2);
-							log.info(textMessage2+"머라고보내니?");
+							//log.info(textMessage2+"머라고보내니?");
 							alarmDao.alarmToastUpdate(alarm.getAlarm_no());
 							session.sendMessage(textMessage2);
 						
@@ -161,7 +166,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 							
 							String jsonMessages2 = objectMapper.writeValueAsString(messageContent2);
 							TextMessage textMessage2 = new TextMessage(jsonMessages2);
-							log.info(textMessage2+"머라고보내니?");
+							//log.info(textMessage2+"머라고보내니?");
 							alarmDao.alarmToastUpdate(alarm.getAlarm_no());
 							session.sendMessage(textMessage2);
 							
@@ -181,15 +186,68 @@ public class WebSocketHandler extends TextWebSocketHandler{
 							
 							String jsonMessages2 = objectMapper.writeValueAsString(messageContent2);
 							TextMessage textMessage2 = new TextMessage(jsonMessages2);
-							log.info(textMessage2+"머라고보내니?");
+							alarmDao.alarmToastUpdate(alarm.getAlarm_no());
+							session.sendMessage(textMessage2);
+							
+						} else if(alarm.getAlarm_type().equals("공지") && alarm.getAlarm_toast() == null) {
+							
+							if(uckCount != alarmCount.get(memId)){
+								alarmCount.put(memId, uckCount);
+							}
+							String noticeContent = alarm.getAlarm_content();
+							String senderName = emp.getEmpInfo_name();
+							Message messageContent2= new Message();
+							messageContent2.setCmd("공지");
+							messageContent2.setTitle(noticeContent);
+							messageContent2.setCount(uckCount);
+							messageContent2.setSender(senderName);
+							
+							String jsonMessages2 = objectMapper.writeValueAsString(messageContent2);
+							TextMessage textMessage2 = new TextMessage(jsonMessages2);
+							alarmDao.alarmToastUpdate(alarm.getAlarm_no());
+							session.sendMessage(textMessage2);
+							
+						} else if(alarm.getAlarm_type().equals("문의") && alarm.getAlarm_toast() == null) {
+							
+							if(uckCount != alarmCount.get(memId)){
+								alarmCount.put(memId, uckCount);
+							}
+							String inquiryContent = alarm.getAlarm_content();
+							Notice inquiry = inquiryDao.selectDetailByNoticeNo(alarm.getAlarm_typeNo());
+							Message messageContent2= new Message();
+							messageContent2.setCmd("문의");
+							messageContent2.setTitle(inquiryContent);
+							messageContent2.setCount(uckCount);
+							messageContent2.setSender(inquiry.getEmpinfo_name());
+							
+							String jsonMessages2 = objectMapper.writeValueAsString(messageContent2);
+							TextMessage textMessage2 = new TextMessage(jsonMessages2);
+							alarmDao.alarmToastUpdate(alarm.getAlarm_no());
+							session.sendMessage(textMessage2);
+							
+						} else if(alarm.getAlarm_type().equals("댓글") && alarm.getAlarm_toast() == null) {
+							
+							if(uckCount != alarmCount.get(memId)){
+								alarmCount.put(memId, uckCount);
+							}
+							String inquiryContent = alarm.getAlarm_content();
+							Reply reply = inquiryDao.selectReplyByReplyNo(alarm.getAlarm_typeNo());
+							Message messageContent2= new Message();
+							messageContent2.setCmd("댓글");
+							messageContent2.setTitle(inquiryContent);
+							messageContent2.setCount(uckCount);
+							messageContent2.setSender(reply.getEmpinfo_name());
+							
+							String jsonMessages2 = objectMapper.writeValueAsString(messageContent2);
+							TextMessage textMessage2 = new TextMessage(jsonMessages2);
 							alarmDao.alarmToastUpdate(alarm.getAlarm_no());
 							session.sendMessage(textMessage2);
 							
 						} else if(uckCount != alarmCount.get(memId)){
 							// 메시지 목록을 배열에 담습니다.
 							
-							log.info(alarmCount.get(memId).toString()+"내아이디 안읽은 숫자는?");
-							log.info(uckCount+"알람 안읽은 숫자는?");
+							//log.info(alarmCount.get(memId).toString()+"내아이디 안읽은 숫자는?");
+							//log.info(uckCount+"알람 안읽은 숫자는?");
 							Message messageContent2= new Message();
 							
 							messageContent2.setCount(uckCount);

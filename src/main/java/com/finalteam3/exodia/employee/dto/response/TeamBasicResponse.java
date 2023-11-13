@@ -8,6 +8,7 @@ public class TeamBasicResponse {
 	private String team_name;
 	private String team_duty;
 	private int emp_no;
+	private int empinfo_no;
 	private String empinfo_name;
 	private boolean team_isleader;
 }

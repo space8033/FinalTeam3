@@ -2,7 +2,6 @@ package com.finalteam3.exodia.inquiry.service;
 
 import java.util.List;
 
-import com.finalteam3.exodia.inquiry.dto.Inquiry;
 import com.finalteam3.exodia.inquiry.dto.Reply;
 import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.notice.dto.Notice;
@@ -19,4 +18,5 @@ public interface InquiryService {
 	public void deleteReplyByReplyNo(int reply_no);//댓글 삭제
 	public int replyEmpinfoNo(int emp_no); //emp_no를 통해 댓글db에 저장될 empinfo_no를 가져옴
 	public int getEmpInfoNoByEmpNo(int emp_no); //emp_no를 가지고 empinfo_no구하기
+	public Reply getReplyByReplyNo(int replyNo); //replyNo로 reply가져오기
 }

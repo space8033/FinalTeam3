@@ -29,6 +29,25 @@
 		ORDER BY r.reply_createdat ASC
 	</select>
 	
+	<select id="selectReplyByReplyNo" resultType="Reply" parameterType="int">
+		SELECT
+		    r.reply_content,
+		    r.reply_createdat,
+		    r.reply_no,
+		    r.notice_no,
+		    e.empinfo_name,
+		    e.empinfo_no,
+		    e.empinfo_email
+		FROM
+		    reply r
+		JOIN
+		    empinfo e ON r.empinfo_no = e.empinfo_no
+		WHERE
+		    r.reply_no = #{reply_no}
+		    AND r.reply_deletedat IS NULL
+		
+	</select>
+	
 	<insert id="insertInquiry" parameterType="Notice">
 		<selectKey keyProperty="notice_no" resultType="int" order="BEFORE">
 	         select seq_noticeno.nextval from dual

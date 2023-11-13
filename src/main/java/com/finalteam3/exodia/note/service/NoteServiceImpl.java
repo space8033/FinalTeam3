@@ -44,7 +44,7 @@ public class NoteServiceImpl implements NoteService{
 
 	@Override
 	public List<NoteAll> getNoteListByRno(Map<String, Object> map) {
-		log.info(map+"잘가져오나.");
+		//log.info(map+"잘가져오나.");
 		List<NoteAll> noteAllList = noteDao.selectNoteByEmpNo(map);
 		for(NoteAll noteAll : noteAllList) {
 			int senderNo = noteAll.getNote_sender();
@@ -71,23 +71,23 @@ public class NoteServiceImpl implements NoteService{
 		return noteDao.countByEmpno(empNo);
 	}
 
-	@Override
+	/*@Override
 	@Scheduled(cron = "0 * * * * ?")
 	public void restimeSend() {
 		
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 		String currentDate = sdf.format(new Date());
 		List<Note> noteRestimes = noteDao.selectNoteByNoteRestime(currentDate);
-		log.info(noteRestimes.toString()+"noteRestimes머있나보자");
-		log.info(noteRestimes.size()+"noteRestimes몇개있나보자");
+		//log.info(noteRestimes.toString()+"noteRestimes머있나보자");
+		//log.info(noteRestimes.size()+"noteRestimes몇개있나보자");
 		for (Note noteRestime : noteRestimes) {
 			Note note = new Note();
 			note.setNote_createdAt(noteRestime.getNote_restime());
 			note.setNote_restime("예약 전송 완료");
 			note.setNote_no(noteRestime.getNote_no());
-			log.info(note.toString()+"노트 잘넣고");
+			//log.info(note.toString()+"노트 잘넣고");
 			noteDao.updateNoteRestime(note);
-			log.info("완료된것도알려줘야지");
+			//log.info("완료된것도알려줘야지");
 			
 			List<NoteRead> noteList = noteDao.selectNoteReadByNoteNo(noteRestime.getNote_no());
 			AlarmRequest alarm = new AlarmRequest();
@@ -100,11 +100,11 @@ public class NoteServiceImpl implements NoteService{
 				alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
 				alarm.setEmpinfo_no(empInfo_no);
 				alarmDao.insertAlarm(alarm);
-				log.info(alarm.toString()+"에약전송 알람이문젠지");
-				log.info(noteRead.toString()+"에약전송 노트리드가문젠지");
+				//log.info(alarm.toString()+"에약전송 알람이문젠지");
+				//log.info(noteRead.toString()+"에약전송 노트리드가문젠지");
 			}
 		}
-	}
+	}*/
 	
 	
 	@Override
@@ -116,8 +116,8 @@ public class NoteServiceImpl implements NoteService{
 		note.setNote_sender(request.getNote_sender());
 		note.setNote_title(request.getNote_title());
 		
-		log.info(request.getNote_content().toString()+"내용알려줘엉");
-		log.info(request.getNote_content());
+		//log.info(request.getNote_content().toString()+"내용알려줘엉");
+		//log.info(request.getNote_content());
 		note.setNote_content(request.getNote_content());
 		note.setNote_label(request.getNote_label());
 		note.setNote_draft("");
@@ -147,7 +147,7 @@ public class NoteServiceImpl implements NoteService{
 		noteDao.insertNote(note);
 		
 		int noteNo = note.getNote_no();
-		log.info(noteNo+"노트넘버 삽입됐낭");
+		//log.info(noteNo+"노트넘버 삽입됐낭");
 		
 		
 		
@@ -165,7 +165,7 @@ public class NoteServiceImpl implements NoteService{
 					noteRead.setEmp_no_receiver(receiverNoCC);
 					noteRead.setNoteRead_type("참조");
 					noteRead.setNote_no(noteNo);
-					log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
+					//log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
 					noteDao.insertNoteRead(noteRead);
 					
 					EmployeeInfo employeeInfo = employeeDao.selectInfoByEmpNo(receiverNoCC);
@@ -196,7 +196,7 @@ public class NoteServiceImpl implements NoteService{
 					noteRead.setEmp_no_receiver(receiverNo);
 					noteRead.setNoteRead_type("수신");
 					noteRead.setNote_no(noteNo);
-					log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
+					//log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
 					noteDao.insertNoteRead(noteRead);
 					
 					EmployeeInfo employeeInfo = employeeDao.selectInfoByEmpNo(receiverNo);
@@ -226,7 +226,7 @@ public class NoteServiceImpl implements NoteService{
 					noteRead.setEmp_no_receiver(receiverBccNo);
 					noteRead.setNoteRead_type("비밀참조");
 					noteRead.setNote_no(noteNo);
-					log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 bcc니");
+					//log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 bcc니");
 					noteDao.insertNoteRead(noteRead);
 					
 					EmployeeInfo employeeInfo = employeeDao.selectInfoByEmpNo(receiverBccNo);
@@ -274,7 +274,7 @@ public class NoteServiceImpl implements NoteService{
 	//발신 쪽지 가져오기
 	@Override
 	public List<NoteAll> getNoteSendListByRno(Map<String, Object> map) {
-		log.info(map+"잘가져오나.");
+		//log.info(map+"잘가져오나.");
 		
 		
 		List<NoteAll> noteAllList = noteDao.selectSentNoteByEmpNo(map);
@@ -436,10 +436,10 @@ public class NoteServiceImpl implements NoteService{
 		noteDao.insertNote(note);
 		
 		int noteNo = note.getNote_no();
-		log.info(noteNo+"노트넘버 삽입됐낭");
+		//log.info(noteNo+"노트넘버 삽입됐낭");
 		
 		int requestNo = request.getNote_no();
-		log.info(requestNo+"일단 답장할 노트No 잘가져오나");
+		//log.info(requestNo+"일단 답장할 노트No 잘가져오나");
 		
 		
 		//답장 표시 noteRead
@@ -707,7 +707,7 @@ public class NoteServiceImpl implements NoteService{
 		noteDao.insertNote(note);
 		
 		int noteNo = note.getNote_no();
-		log.info(noteNo+"노트넘버 삽입됐낭");
+		//log.info(noteNo+"노트넘버 삽입됐낭");
 		
 		//참조 수신자 분할/추가
 		List<String> receiverCC = request.getNote_receiver_cc();
@@ -722,7 +722,7 @@ public class NoteServiceImpl implements NoteService{
 					noteRead.setEmp_no_receiver(receiverNoCC);
 					noteRead.setNoteRead_type("참조");
 					noteRead.setNote_no(noteNo);
-					log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
+					//log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
 					noteDao.insertNoteRead(noteRead);
 					
 				}
@@ -742,7 +742,7 @@ public class NoteServiceImpl implements NoteService{
 					noteRead.setEmp_no_receiver(receiverNo);
 					noteRead.setNoteRead_type("수신");
 					noteRead.setNote_no(noteNo);
-					log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
+					//log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 수신자니");
 					noteDao.insertNoteRead(noteRead);
 				
 				}
@@ -762,7 +762,7 @@ public class NoteServiceImpl implements NoteService{
 					noteRead.setEmp_no_receiver(receiverBccNo);
 					noteRead.setNoteRead_type("비밀참조");
 					noteRead.setNote_no(noteNo);
-					log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 bcc니");
+					//log.info(noteRead.toString()+"뭐가안들어가는지 좀 보자 bcc니");
 					noteDao.insertNoteRead(noteRead);
 					
 					
@@ -820,7 +820,7 @@ public class NoteServiceImpl implements NoteService{
 					boolean hasNoReferenceCanceled = noteReadList.stream()
 						    .noneMatch(noteRead -> !noteRead.isNoteRead_isCanceled());
 					
-					log.info(hasNoReferenceCanceled+"참이냐 거짓이냐");
+					//log.info(hasNoReferenceCanceled+"참이냐 거짓이냐");
 					if(hasNoReferenceCanceled) {
 						Note newNote = new Note();
 						newNote.setNote_no(noteNo);
@@ -989,7 +989,7 @@ public class NoteServiceImpl implements NoteService{
 
 	@Override
 	public int countBySearchNoteNo(Map<String, Object> map) {
-		log.info(map.toString()+"맵정보좀줘바");
+		//log.info(map.toString()+"맵정보좀줘바");
 		return noteDao.countBySearchEmpno(map);
 	}
 

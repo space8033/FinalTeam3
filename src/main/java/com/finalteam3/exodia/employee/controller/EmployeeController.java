@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.finalteam3.exodia.employee.dto.request.EmpManageRequest;
 import com.finalteam3.exodia.employee.dto.request.JoinList;
@@ -40,6 +41,8 @@ import com.finalteam3.exodia.employee.dto.response.TransferDto;
 import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.employee.service.EmployeeService.JoinResult;
 import com.finalteam3.exodia.employee.service.EmployeeService.PasswordResult;
+import com.finalteam3.exodia.media.dto.MediaDto;
+import com.finalteam3.exodia.media.service.MediaService;
 import com.finalteam3.exodia.security.dto.EmpDetails;
 
 import lombok.extern.slf4j.Slf4j;
@@ -53,6 +56,8 @@ public class EmployeeController {
 
 	@Resource
 	private EmployeeService employeeService;
+	@Resource
+	private MediaService mediaService;
 	
 	@GetMapping("/login")
 	public String loginForm() {
@@ -151,11 +156,14 @@ public class EmployeeController {
 		
 		model.addAttribute("empInfo_name", emp_name);
 		
-		EmpModifyResponse response = employeeService.getModifyInfo(authentication.getName());
+		Map<String, Object> map = new HashMap<>();
+		map.put("emp_id", authentication.getName());
+		map.put("from_no", loginResponse.getEmp_no());
+		map.put("media_from", "EMP");
+		EmpModifyResponse response = employeeService.getModifyInfo(map);
 		response.setTwo_name(two_name);
 		
 		model.addAttribute("empModifyResponse", response);
-		log.info(response.toString());
 		
 		return "/userModify";
 	}
@@ -173,7 +181,42 @@ public class EmployeeController {
 		return "redirect:/employee/userModify";
 	}
 	
-	//프로젝트 진행을 위한 임시 부분/////////////////////////////////////////////////////////
+	@PostMapping("/profileImgModify")
+	public String profileImgModify(Authentication authentication, @RequestParam("file") MultipartFile multipartFile) throws IOException {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		MediaDto mediaDto = new MediaDto();
+		mediaDto.setMedia_name(multipartFile.getOriginalFilename());
+		mediaDto.setMedia_data(multipartFile.getBytes());
+		mediaDto.setMedia_type(multipartFile.getContentType());
+		mediaDto.setMedia_from("EMP");
+		mediaDto.setFrom_no(loginResponse.getEmp_no());
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("media_from", "EMP");
+		map.put("from_no", loginResponse.getEmp_no());
+		
+		mediaService.deleteMediaByFromNo(map);
+		mediaService.insertNoticeFile(mediaDto);
+		
+		return "redirect:/employee/userModify";
+	}
+	
+	@PostMapping("/deleteImg")
+	public String imgDelete(Authentication authentication) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("media_from", "EMP");
+		map.put("from_no", loginResponse.getEmp_no());
+		
+		mediaService.deleteMediaByFromNo(map);
+		
+		return "redirect:/employee/userModify";
+	}
+	
 	@PostMapping("/poiJoin")
 	public String poiJoin() {
 	    

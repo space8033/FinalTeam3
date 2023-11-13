@@ -329,13 +329,14 @@
 										tabindex="-1" id="addEventSidebar"
 										aria-labelledby="addEventSidebarLabel">
 										<div class="offcanvas-header border-bottom">
-											<h5 class="offcanvas-title mb-2" id="addEventSidebarLabel">변경</h5>
+											<h5 class="offcanvas-title mb-2" id="addEventSidebarLabel"></h5>
 											<button type="button" class="btn-close text-reset"
 												data-bs-dismiss="offcanvas" aria-label="Close"></button>
 										</div>
 										<div class="offcanvas-body">
-											<form class="event-form pt-0" id="eventForm" action="/deleteCalendar" method="post"
-												name="CalendarRequest" onsubmit="return false">
+											<form class="event-form pt-0" id="eventForm" name="CalendarRequest">
+<!-- 											<form class="event-form pt-0" id="eventForm" action="/deleteCalendar" method="post"
+												name="CalendarRequest" onsubmit="return false"> -->
 												<div class="mb-3">
 													<label class="form-label" for="eventTitle">제목</label> <input
 														type="text" class="form-control" id="eventTitle"
@@ -350,9 +351,8 @@
 													<label class="form-label" for="eventLabel">분류</label> <select
 														class="select2 select-event-label form-select"
 														id="eventLabel" name="eventLabel">
-														<option data-label="primary" value="Business" selected>업무</option>
-														<option data-label="danger" value="Personal">개인
-															일정</option>
+														<!-- <option data-label="primary" value="Business" selected>업무</option> -->
+														<option data-label="danger" value="Personal" selected="selected">개인 일정</option>
 														<option data-label="success" value="Holiday">휴가</option>
 														<option data-label="info" value="ETC">기타</option>
 													</select>
@@ -379,7 +379,7 @@
 													class="mb-3 d-flex justify-content-sm-between justify-content-start my-4">
 													<div>
 														<button type="submit" id="calendarsubmit"
-															class="btn btn-primary btn-add-event me-sm-3 me-1">추가</button>
+															class="btn btn-primary btn-add-event me-sm-3 me-1"></button>
 														<button type="reset"
 															class="btn btn-label-secondary btn-cancel me-sm-0 me-1"
 															data-bs-dismiss="offcanvas">취소</button>

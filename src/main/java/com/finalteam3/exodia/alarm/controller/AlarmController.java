@@ -22,9 +22,12 @@ import com.finalteam3.exodia.chat.dto.request.ChatMessage;
 import com.finalteam3.exodia.chat.service.ChatService;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
+import com.finalteam3.exodia.inquiry.dto.Reply;
+import com.finalteam3.exodia.inquiry.service.InquiryService;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 import com.finalteam3.exodia.note.dto.request.Note;
 import com.finalteam3.exodia.note.service.NoteService;
+import com.finalteam3.exodia.notice.dto.Notice;
 import com.finalteam3.exodia.security.dto.EmpDetails;
 
 import lombok.extern.slf4j.Slf4j;
@@ -41,6 +44,8 @@ public class AlarmController {
 	private NoteService noteService;
 	@Resource
 	private ChatService chatService;
+	@Resource
+	private InquiryService inquiryService;
 	
 	
 	@GetMapping("/alarmDetail")
@@ -82,6 +87,21 @@ public class AlarmController {
 				
 			} else if ("프로그램".equals(alarm.getAlarm_type())) {
 				alarmResponse.setAlarm_content(alarm.getAlarm_content());
+				list.add(alarmResponse);
+			} else if("공지".equals(alarm.getAlarm_type())) {
+				alarmResponse.setAlarm_content(alarm.getAlarm_content());
+				list.add(alarmResponse);
+			} else if("문의".equals(alarm.getAlarm_type())) {
+				alarmResponse.setAlarm_content(alarm.getAlarm_content());
+				Notice inquiry = inquiryService.getInquiryDetail(alarm.getAlarm_typeNo());
+				alarmResponse.setEmp_name(inquiry.getEmpinfo_name());
+				
+				list.add(alarmResponse);
+			} else if("댓글".equals(alarm.getAlarm_type())) {
+				alarmResponse.setAlarm_content(alarm.getAlarm_content());
+				Reply reply = inquiryService.getReplyByReplyNo(alarm.getAlarm_typeNo());
+				alarmResponse.setEmp_name(reply.getEmpinfo_name());
+				
 				list.add(alarmResponse);
 			}
 		}
@@ -155,12 +175,33 @@ public class AlarmController {
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		 
 		 int uckNo = alarmService.uckAlarmCount(empInfo.getEmpinfo_no());
+		 int uckChatNo = chatService.getUckChatMsgAll(empInfo.getEmpinfo_no());
 
         // 숫자 값을 Map에 담아 JSON으로 반환
         Map<String, Integer> response = new HashMap<>();
         response.put("uckNo", uckNo);
+        response.put("uckChatNo", uckChatNo);
 
         return response;
      }
+	 
+	 @GetMapping("/getInquiryNo")
+	 @ResponseBody
+	 public int getInquiryNo(Authentication authentication, String reply_no) {
+		 EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		 LoginResponse loginResponse = empDetails.getLoginResponse();
+		 log.info(reply_no+"뀨?잘받아오니?");
+		 EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		 int replyNo = Integer.parseInt(reply_no);
+		 Reply reply = inquiryService.getReplyByReplyNo(replyNo);
+		 log.info(reply.toString()+"리플라이 못가져오니?ㅇㅅㅇ");
+		 int response = reply.getNotice_no();
+		 
+		 
+		 // 숫자 값을 Map에 담아 JSON으로 반환
+		 
+		 
+		 return response;
+	 }
 
 }

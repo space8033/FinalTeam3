@@ -3,7 +3,6 @@ package com.finalteam3.exodia.calendar.service;
 import java.util.List;
 
 import com.finalteam3.exodia.calendar.dto.request.CalendarRequest;
-import com.finalteam3.exodia.calendar.dto.response.CalendarResponse;
 import com.finalteam3.exodia.calendar.dto.response.CalendarResponse2;
 
 public interface CalendarService {
@@ -14,7 +13,7 @@ public interface CalendarService {
 	public List<CalendarResponse2> getPersonalTask(int emp_no);
 	
 	//일정 수정
-	//public void updateByTaskNo(CalendarResponse2 calendarResponse2);
+	public void updateByTaskNo(CalendarRequest CalendarRequest);
 	
 	//일정 삭제
 	public void delete(int task_no);
