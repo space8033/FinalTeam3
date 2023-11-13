@@ -403,7 +403,7 @@
 												
 
 													<c:if test="${now_emp_no == 0}">
-														<i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4"></i>
+														<i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4" onclick="openDeleteModal(${reply.reply_no})"></i>
 													</c:if>
 													<c:if test="${reply.empinfo_no != 0}">
 														<c:if test="${reply.empinfo_no == now_empinfo_no}">

@@ -21,5 +21,6 @@ public class Inquiry {
 	private byte[] media_data;
 	private String two_name;
 	private int empinfo_no;
+	private String empinfo_email;
 	
 }

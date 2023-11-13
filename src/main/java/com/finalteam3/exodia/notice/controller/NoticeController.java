@@ -206,4 +206,9 @@ public class NoticeController {
 		
 		return "noticeList";
 	}
+	
+	@GetMapping("/popup")
+	public String popup() {
+		return "popup";
+	}
 }
