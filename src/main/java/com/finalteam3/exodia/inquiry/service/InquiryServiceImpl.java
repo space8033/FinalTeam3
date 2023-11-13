@@ -1,6 +1,8 @@
 package com.finalteam3.exodia.inquiry.service;
 
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,14 +30,25 @@ public class InquiryServiceImpl implements InquiryService{
 
 	@Override
 	public List<Notice> getInquiryList() {
-		List<Notice> list = inquiryDao.selectInquiryAll();
-		
-		//문의사항 번호 내림차순 정렬
-		 AtomicInteger counter = new AtomicInteger(1);
-		 list.forEach(notice -> notice.setNotice_no(counter.getAndIncrement()));
-		 
-		log.info("문의사항listlistlistlsit : " + list);
-		return list;
+	    List<Notice> list = inquiryDao.selectInquiryAll();
+
+	    // 새로운 notice_no2를 저장할 리스트
+	    List<Integer> newNoticeNo2List = new ArrayList<>();
+
+	    // 공지사항 목록을 notice_no로 오름차순 정렬
+	    list.sort(Comparator.comparing(Notice::getNotice_no));
+
+	    // notice_no를 1부터 시작하여 재정의하고, 정렬된 notice_no2를 notice_no2에 저장
+	    AtomicInteger counter = new AtomicInteger(1);
+	    list.forEach(notice -> {
+	        notice.setNotice_no2(counter.getAndIncrement());
+	        newNoticeNo2List.add(notice.getNotice_no2());
+	    });
+
+	    log.info("문의사항listlistlistlsit : " + list);
+	    log.info("새로운 notice_no2 리스트: " + newNoticeNo2List);
+
+	    return list;
 	}
 
 	@Override

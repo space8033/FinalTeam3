@@ -83,6 +83,7 @@ public class InquiryController {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonData = objectMapper.writeValueAsString(data);
         
+        log.info("문의사항 데이터:" + jsonData);
         
 		return jsonData;
 	}

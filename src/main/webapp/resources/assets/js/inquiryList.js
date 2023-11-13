@@ -58,7 +58,8 @@ $(function () {
         	targets: 1,
         	render: function (data, type, full, meta) {
         		sharedNoticeNo = full['notice_no'];
-        		  return "<span class='text-truncate d-flex align-items-center'>" + sharedNoticeNo + '</span>';
+        		var noticeNo2 = full['notice_no2'];
+        		  return "<span class='text-truncate d-flex align-items-center'>" + noticeNo2 + '</span>';
         	}
         },
         {
