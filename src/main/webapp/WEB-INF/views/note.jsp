@@ -56,8 +56,10 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/editor.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-select/bootstrap-select.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.css" />
 
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/animate-css/animate.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/sweetalert2/sweetalert2.css" />
     <!-- Page CSS -->
 
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/pages/app-email.css" />
@@ -859,7 +861,7 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                       </div>
                       <div class="modal-body flex-grow-1 pb-sm-0 p-4 py-2">
-                        <form class="email-compose-form" name="NoteRequest" action="noteSend" id="noteSend" method="POST" enctype="multipart/form-data">
+                        <form class="email-compose-form" name="NoteRequest" action="noteSend" id="noteSend" method="POST" enctype="multipart/form-data" onsubmit="return validateForm();">
                           <div class="email-compose-to d-flex justify-content-between align-items-center">
                             <label class="form-label mb-2" for="emailContacts" style="width: 90px;">받는 사람 :</label>
                             <div class="select2-primary border-0 shadow-none flex-grow-1 mx-1">
@@ -1103,6 +1105,7 @@
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/tagify/tagify.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bootstrap-select/bootstrap-select.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/bloodhound/bloodhound.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
 
 
 

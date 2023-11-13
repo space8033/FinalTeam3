@@ -142,7 +142,7 @@
 									   <small class="mb-0 me-3 text-muted">${note.note_restime}</small>
 									  </c:when>
 									  <c:otherwise>
-									  	<c:if test="${note.note_restime != null}">
+									  	<c:if test="${note.note_restime != null && note.note_restime != '예약 전송 완료'}">
 									    <!-- 글자 수가 20 미만인 경우 -->
 	                             	 		<small class="mb-0 me-3 text-muted">${note.note_restime} 에 보내기 예약됨</small>
 	                             	 	</c:if>
@@ -153,7 +153,6 @@
 	                     			<small class="mb-0 me-3 text-muted">${note.note_createdAt}</small>
 	                     		
 	                     		</c:when>
-                              
                             </c:choose> 	 
                               
                               <c:if test="${not empty mediaList}">

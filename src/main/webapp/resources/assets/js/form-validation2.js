@@ -1,8 +1,9 @@
 'use strict';
 //이름 프로필 랜덤 색 바꾸기
 $(document).ready(function(){
+	var nowEmpNo = $("#nowEmpNo").val();
     var colors = ["bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary"];
-    var randomClass = colors[Math.floor(Math.random() * colors.length)];
+    var randomClass = colors[nowEmpNo % 7];
     $('#nameProfile').addClass(randomClass);
 });
 

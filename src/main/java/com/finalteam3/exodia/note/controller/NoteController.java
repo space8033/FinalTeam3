@@ -2,6 +2,7 @@ package com.finalteam3.exodia.note.controller;
 
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,11 +19,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
+import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
+import com.finalteam3.exodia.media.dao.MediaDao;
 import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.media.service.MediaService;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
@@ -47,6 +49,8 @@ public class NoteController {
 	private NoteService noteService;
 	@Resource
 	private MediaService mediaService;
+	@Resource
+	private MediaDao mediaDao;
 	
 	
 	@GetMapping("/note")
@@ -60,6 +64,20 @@ public class NoteController {
 		
 		String emp_name = loginResponse.getEmpInfo_name();
 		model.addAttribute("empInfo_name", emp_name);
+		
+		Map<String, Object> profile = new HashMap<>();
+		profile.put("media_from", "EMP");
+		profile.put("from_no", loginResponse.getEmp_no());
+		
+		
+      
+        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+        if(mediaDto != null) {
+    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+    	  model.addAttribute("base64", base64Img);
+        }
+		
+		
 		
 		List<String> teamList = noteService.getTeamList();
 		List<EmpNote> empList = noteService.getEmpList();

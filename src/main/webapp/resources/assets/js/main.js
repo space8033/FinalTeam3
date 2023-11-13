@@ -22,7 +22,7 @@
 	    	  var emp_id = $("#alarmId").val();
 	    	  console.log(emp_id+"야 잘보내긴해?");
 	         sock.send(emp_id);
-	      }, 30000);
+	      }, 3000);
     }
 
 	function handleWebSocketMessage(message) {
@@ -33,13 +33,16 @@
 	    const title = message.title;
 	    const sender = message.sender;
 
+	    // 메인 페이지 토스트 알람 띄우기
 	    // 팝업 페이지 갱신
 	    $.get("/exodia/chatList?emp_no=1", function(result){
 			updateChatList(result);
 		});
-
-	    // 메인 페이지 토스트 알람 띄우기
-	    showToast(msg, count, cmd, title, sender);
+	    
+	    setTimeout(function () {
+	    	showToast(msg, count, cmd, title, sender);
+	    }, 3000);
+	    
 	    
 	    var v_alarmIcon = document.querySelector("#alarmIcon");
 	    if(v_alarmIcon && cmd != null) {
@@ -188,7 +191,7 @@
 			if(alarmToast) {
 		    	alarmToast.classList.add('show');
 		    	var alarmMsg = document.querySelector("#alarmMsg");
-		    	alarmMsg.innerHTML = sender + "님이 " + "[" + title + "]" + "<br>" + "글에 새 댓글을 달았습니다.✅";
+		    	alarmMsg.innerHTML = sender + "님이 " + "[" + title + "]" + "글에 새 댓글을 달았습니다.✅";
 		    	setTimeout(function() {
 		    		alarmToast.classList.remove("show");
 			    }, 4000);
@@ -211,8 +214,9 @@ function updateChatList(result){
 
 	    console.log("메인타고드러온놈");
 	   var chatList = $("#app-chat-contacts");
+	   var chatRoom = $("#chatRoom");
 	   
-	   if(chatList) {
+	   if(chatList && chatRoom) {
 	   
       	   var html = jQuery('<div>').html(result);
            var contents = html.find("div#chatList").html();
@@ -362,18 +366,7 @@ function wsSend() {
    
 }
 	
-function sendMsg() {
-	/*var title = document.querySelector("#email-subject").value;
-	var sender = document.getElementById('alarmId').value;
-	var receiver = document.getElementById('emailContacts').value;
-	var receiverCC = document.getElementById('selectpickerSelectDeselect').value;
-	var receiverBCC = document.getElementById('selecBcc').value;
-	let socketMsg = "note,"+title+","+sender+","+receiver+","+receiverCC+","+receiverBCC;
-	console.log(socketMsg+"가긴가니");
-	sock.send(socketMsg);
-	console.log("소켓메시지");*/
-	
-}
+
 	
 	
 function pageMove(alarm_no, alarm_type, alarm_typeNo) {
