@@ -1,6 +1,8 @@
 package com.finalteam3.exodia.alarm.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,6 +26,8 @@ import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.inquiry.dto.Reply;
 import com.finalteam3.exodia.inquiry.service.InquiryService;
+import com.finalteam3.exodia.media.dao.MediaDao;
+import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 import com.finalteam3.exodia.note.dto.request.Note;
 import com.finalteam3.exodia.note.service.NoteService;
@@ -46,6 +50,8 @@ public class AlarmController {
 	private ChatService chatService;
 	@Resource
 	private InquiryService inquiryService;
+	@Resource
+	private MediaDao mediaDao;
 	
 	
 	@GetMapping("/alarmDetail")
@@ -75,6 +81,22 @@ public class AlarmController {
 				EmployeeInfo empInfo2 = employeeService.getEmpInfoByEmpInfoNo(receiver);
 				String empInfoName = empInfo2.getEmpinfo_name();
 				alarmResponse.setEmp_name(empInfoName);
+				
+				List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+		        int randomIndex = (empInfo2.getEmp_no()%7);
+				alarmResponse.setTwo_name_color(myList.get(randomIndex));
+				
+				alarmResponse.setTwo_name(empInfo2.getEmpinfo_name().substring(empInfo2.getEmpinfo_name().length() - 2));
+				Map<String, Object> profile = new HashMap<>();
+				profile.put("media_from", "EMP");
+				profile.put("from_no", empInfo2.getEmp_no());
+		      
+		        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+		        if(mediaDto != null) {
+		    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+		    	  alarmResponse.setBase64(base64Img);
+		        }
+				
 				list.add(alarmResponse);
 			} else if ("채팅".equals(alarm.getAlarm_type())) {
 				ChatMessage chatMsg = new ChatMessage();
@@ -83,6 +105,21 @@ public class AlarmController {
 				EmployeeInfo empInfo3 = employeeService.getEmpInfoByEmpInfoNo(empInfoNo);
 				String empInfo3Name = empInfo3.getEmpinfo_name();
 				alarmResponse.setEmp_name(empInfo3Name);
+				List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+		        int randomIndex = (empInfo3.getEmp_no()%7);
+				alarmResponse.setTwo_name_color(myList.get(randomIndex));
+				
+				alarmResponse.setTwo_name(empInfo3.getEmpinfo_name().substring(empInfo3.getEmpinfo_name().length() - 2));
+				Map<String, Object> profile = new HashMap<>();
+				profile.put("media_from", "EMP");
+				profile.put("from_no", empInfo3.getEmp_no());
+		      
+		        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+		        if(mediaDto != null) {
+		    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+		    	  alarmResponse.setBase64(base64Img);
+		        }
+				
 				list.add(alarmResponse);
 				
 			} else if ("프로그램".equals(alarm.getAlarm_type())) {
@@ -176,6 +213,11 @@ public class AlarmController {
 		 
 		 int uckNo = alarmService.uckAlarmCount(empInfo.getEmpinfo_no());
 		 int uckChatNo = chatService.getUckChatMsgAll(empInfo.getEmpinfo_no());
+		 
+		 
+		 
+		 
+		 
 
         // 숫자 값을 Map에 담아 JSON으로 반환
         Map<String, Integer> response = new HashMap<>();
@@ -184,6 +226,39 @@ public class AlarmController {
 
         return response;
      }
+	 
+	 @GetMapping("/getUserInfo")
+	 @ResponseBody
+	 public Map<String, Object> getUserInfo(Authentication authentication) {
+		 EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		 LoginResponse loginResponse = empDetails.getLoginResponse();
+		 EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
+		 
+		 List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+         int randomIndex = (loginResponse.getEmp_no()%7);
+		 Map<String, Object> profile = new HashMap<>();
+		 profile.put("media_from", "EMP");
+		 profile.put("from_no", loginResponse.getEmp_no());
+      
+		 String base64 = "";
+         MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+         if(mediaDto != null) {
+    	   base64 = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+    	  
+         }
+		
+		 String two_name = empInfo.getEmpinfo_name().substring(empInfo.getEmpinfo_name().length() - 2);
+		 String two_name_color = myList.get(randomIndex);
+		 
+		 
+		 // 숫자 값을 Map에 담아 JSON으로 반환
+		 Map<String, Object> response = new HashMap<>();
+		 response.put("two_name", two_name);
+		 response.put("two_name_color", two_name_color);
+		 response.put("base64", base64);
+		 
+		 return response;
+	 }
 	 
 	 @GetMapping("/getInquiryNo")
 	 @ResponseBody

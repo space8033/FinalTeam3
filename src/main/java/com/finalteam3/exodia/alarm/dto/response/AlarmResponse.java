@@ -15,6 +15,9 @@ public class AlarmResponse {
 	private String emp_name;
 	private String alarm_toast;
 	private String alarm_content;
+	private String base64;
+	private String two_name;
+	private String two_name_color;
 
 
 }

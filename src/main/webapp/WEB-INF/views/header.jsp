@@ -264,7 +264,16 @@ function handleWebSocketMessage(message) {
            <li class="nav-item navbar-dropdown dropdown-user dropdown">
              <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                <div class="avatar avatar-online">
-                 <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                  <img
+	                          src=""
+	                          alt="user-avatar"
+	                          class="d-block rounded-circle d-none"
+	                          height="40"
+	                          width="40"
+	                          id="header_image" />
+                 <span class="avatar-initial rounded-circle d-none" id="header_twoName">
+                        	
+                 </span>
                </div>
              </a>
              <ul class="dropdown-menu dropdown-menu-end">
@@ -275,25 +284,16 @@ function handleWebSocketMessage(message) {
                        <div class="avatar avatar-online">
                          <%-- <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
                           --%>
-                        <c:if test="${base64 == null}">
-                        	<span class="avatar-initial rounded-circle" id="nameProfile"> 
-                        	시온
-                        	</span>
-                        </c:if>
-                        <c:if test="${base64 != null}">
-	                        <img
-	                          src="data:MIME;base64, ${empModifyResponse.base64}"
+                        <img
+	                          src=""
 	                          alt="user-avatar"
-	                          class="d-block rounded-circle"
-	                          height="100"
-	                          width="100"
-	                          id="uploadedAvatar" />            	            
-                        </c:if>
-                         
-                         
-                         
-                         
-                         
+	                          class="d-block rounded-circle d-none"
+	                          height="40"
+	                          width="40"
+	                          id="header_image2" />
+		                 <span class="avatar-initial rounded-circle d-none" id="header_twoName2">
+		                        	
+		                 </span>
                          
                        </div>
                      </div>

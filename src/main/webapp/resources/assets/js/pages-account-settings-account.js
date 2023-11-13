@@ -7,6 +7,8 @@
 document.addEventListener('DOMContentLoaded', function (e) {
   (function () {
 	  
+	  
+	  console.log("들어가는지좀보자");
     const formAccSettings = document.querySelector('#formAccountSettings'),
       deactivateAcc = document.querySelector('#formAccountDeactivation'),
       deactivateButton = deactivateAcc.querySelector('.deactivate-account');
@@ -244,7 +246,7 @@ $(document).ready(function() {
     var accountUserImage = $('#uploadedAvatar');
     var fileInput = $('.account-file-input');
     var resetFileInput = $('.account-image-reset');
-    
+    console.log(resetFileInput+"어디까지가는지좀보자");
     fileInput.change(function() {
     	if (fileInput[0].files[0]) {
     		var formData = new FormData();
@@ -260,6 +262,7 @@ $(document).ready(function() {
     			},
     			error: function(jqXHR, textStatus, errorThrown) {
     				console.error('AJAX Error: ', textStatus, errorThrown);
+    				console.log("에러지가는지좀보자");
     			}
     		});
     	}

@@ -310,8 +310,22 @@ public class NoteServiceImpl implements NoteService{
 			}else {
 				noteAll.setMedia_isEmpty(false);
 			}
+			List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+	        int randomIndex = (sender.getEmp_no()%7);
+			noteAll.setTwo_name_color(myList.get(randomIndex));
+			noteAll.setTwo_name(sender.getEmpinfo_name().substring(sender.getEmpinfo_name().length() - 2));
+			Map<String, Object> profile = new HashMap<>();
+			profile.put("media_from", "EMP");
+			profile.put("from_no", sender.getEmp_no());
+	      
+	        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+	        if(mediaDto != null) {
+	    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+	    	  noteAll.setBase64(base64Img);
+	        }
+			
+			
 		}
-		
 		
 		return noteAllList;
 	}
@@ -334,6 +348,21 @@ public class NoteServiceImpl implements NoteService{
 			}else {
 				noteAll.setMedia_isEmpty(false);
 			}
+			
+			List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+	        int randomIndex = (sender.getEmp_no()%7);
+			noteAll.setTwo_name_color(myList.get(randomIndex));
+			noteAll.setTwo_name(sender.getEmpinfo_name().substring(sender.getEmpinfo_name().length() - 2));
+			Map<String, Object> profile = new HashMap<>();
+			profile.put("media_from", "EMP");
+			profile.put("from_no", sender.getEmp_no());
+	      
+	        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+	        if(mediaDto != null) {
+	    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+	    	  noteAll.setBase64(base64Img);
+	        }
+			
 		}
 		return noteAllList;
 	}
@@ -356,6 +385,21 @@ public class NoteServiceImpl implements NoteService{
 			}else {
 				noteAll.setMedia_isEmpty(false);
 			}
+			
+			List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+	        int randomIndex = (sender.getEmp_no()%7);
+			noteAll.setTwo_name_color(myList.get(randomIndex));
+			noteAll.setTwo_name(sender.getEmpinfo_name().substring(sender.getEmpinfo_name().length() - 2));
+			Map<String, Object> profile = new HashMap<>();
+			profile.put("media_from", "EMP");
+			profile.put("from_no", sender.getEmp_no());
+	      
+	        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+	        if(mediaDto != null) {
+	    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+	    	  noteAll.setBase64(base64Img);
+	        }
+			
 		}
 		return noteAllList;
 	}
@@ -379,6 +423,21 @@ public class NoteServiceImpl implements NoteService{
 			}else {
 				noteAll.setMedia_isEmpty(false);
 			}
+			List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+	        int randomIndex = (sender.getEmp_no()%7);
+			noteAll.setTwo_name_color(myList.get(randomIndex));
+			noteAll.setTwo_name(sender.getEmpinfo_name().substring(sender.getEmpinfo_name().length() - 2));
+			Map<String, Object> profile = new HashMap<>();
+			profile.put("media_from", "EMP");
+			profile.put("from_no", sender.getEmp_no());
+	      
+	        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+	        if(mediaDto != null) {
+	    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+	    	  noteAll.setBase64(base64Img);
+	        }
+			
+			
 		}
 		
 		
@@ -915,6 +974,19 @@ public class NoteServiceImpl implements NoteService{
 			}else {
 				noteAll.setMedia_isEmpty(false);
 			}
+			List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+	        int randomIndex = (sender.getEmp_no()%7);
+			noteAll.setTwo_name_color(myList.get(randomIndex));
+			noteAll.setTwo_name(sender.getEmpinfo_name().substring(sender.getEmpinfo_name().length() - 2));
+			Map<String, Object> profile = new HashMap<>();
+			profile.put("media_from", "EMP");
+			profile.put("from_no", sender.getEmp_no());
+	      
+	        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+	        if(mediaDto != null) {
+	    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+	    	  noteAll.setBase64(base64Img);
+	        }
 			
 			
 		}
@@ -938,6 +1010,19 @@ public class NoteServiceImpl implements NoteService{
 			}else {
 				noteAll.setMedia_isEmpty(false);
 			}
+			List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+	        int randomIndex = (sender.getEmp_no()%7);
+			noteAll.setTwo_name_color(myList.get(randomIndex));
+			noteAll.setTwo_name(sender.getEmpinfo_name().substring(sender.getEmpinfo_name().length() - 2));
+			Map<String, Object> profile = new HashMap<>();
+			profile.put("media_from", "EMP");
+			profile.put("from_no", sender.getEmp_no());
+	      
+	        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+	        if(mediaDto != null) {
+	    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+	    	  noteAll.setBase64(base64Img);
+	        }
 		}
 		return noteAllList;
 	}
@@ -959,6 +1044,19 @@ public class NoteServiceImpl implements NoteService{
 			}else {
 				noteAll.setMedia_isEmpty(false);
 			}
+			List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+	        int randomIndex = (sender.getEmp_no()%7);
+			noteAll.setTwo_name_color(myList.get(randomIndex));
+			noteAll.setTwo_name(sender.getEmpinfo_name().substring(sender.getEmpinfo_name().length() - 2));
+			Map<String, Object> profile = new HashMap<>();
+			profile.put("media_from", "EMP");
+			profile.put("from_no", sender.getEmp_no());
+	      
+	        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+	        if(mediaDto != null) {
+	    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+	    	  noteAll.setBase64(base64Img);
+	        }
 		}
 		return noteAllList;
 	}
@@ -980,6 +1078,19 @@ public class NoteServiceImpl implements NoteService{
 			}else {
 				noteAll.setMedia_isEmpty(false);
 			}
+			List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+	        int randomIndex = (sender.getEmp_no()%7);
+			noteAll.setTwo_name_color(myList.get(randomIndex));
+			noteAll.setTwo_name(sender.getEmpinfo_name().substring(sender.getEmpinfo_name().length() - 2));
+			Map<String, Object> profile = new HashMap<>();
+			profile.put("media_from", "EMP");
+			profile.put("from_no", sender.getEmp_no());
+	      
+	        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+	        if(mediaDto != null) {
+	    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+	    	  noteAll.setBase64(base64Img);
+	        }
 		}
 		return noteAllList;
 	}
@@ -1001,6 +1112,19 @@ public class NoteServiceImpl implements NoteService{
 			}else {
 				noteAll.setMedia_isEmpty(false);
 			}
+			List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+	        int randomIndex = (sender.getEmp_no()%7);
+			noteAll.setTwo_name_color(myList.get(randomIndex));
+			noteAll.setTwo_name(sender.getEmpinfo_name().substring(sender.getEmpinfo_name().length() - 2));
+			Map<String, Object> profile = new HashMap<>();
+			profile.put("media_from", "EMP");
+			profile.put("from_no", sender.getEmp_no());
+	      
+	        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+	        if(mediaDto != null) {
+	    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+	    	  noteAll.setBase64(base64Img);
+	        }
 		}
 		return noteAllList;
 	}

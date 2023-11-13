@@ -424,30 +424,50 @@
 				                              	</c:otherwise>
 				                              </c:choose>
 			                               
-			                                 <c:choose>
+			                                  <c:choose>
 				                              
 				                              	<c:when test ="${contentType eq '발신'}">
-					                              	<img
-					                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
-					                                  alt="user-avatar"
-					                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0 ms-4"
-					                                  height="32"
-					                                  width="32" />
+					                              	<c:if test="${note.base64 == null}">
+				                              	 	  <div class="avatar avatar-sm me-3 ms-4">
+							                        	<span class="avatar-initial rounded-circle ${note.two_name_color}"> 
+							                        	  ${note.two_name}
+							                        	</span>
+							                          </div>
+							                        </c:if>
+							                        <c:if test="${note.base64 != null}">
+								                        <img
+								                          src="data:MIME;base64, ${note.base64}"
+								                          alt="user-avatar"
+								                          class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0  ms-4"
+								                          height="32"
+					                                      width="32"
+								                          id="uploadedAvatar" />            	            
+							                        </c:if>
 				                              		
 					                          	</c:when>
 				                              	<c:when test ="${contentType eq '임시저장'}">
-				                              		<img
-				                               	   		src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
-					                                  alt="user-avatar"
-					                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0 ms-4"
-					                                  height="32"
-					                                  width="32" />
+				                              		<c:if test="${note.base64 == null}">
+				                              	 	  <div class="avatar avatar-sm me-3 ms-4">
+							                        	<span class="avatar-initial rounded-circle ${note.two_name_color}"> 
+							                        	  ${note.two_name}
+							                        	</span>
+							                          </div>
+							                        </c:if>
+							                        <c:if test="${note.base64 != null}">
+								                        <img
+								                          src="data:MIME;base64, ${note.base64}"
+								                          alt="user-avatar"
+								                          class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0  ms-4"
+								                          height="32"
+					                                      width="32"
+								                          id="uploadedAvatar" />            	            
+							                        </c:if>
 					                              		
 					                          	</c:when>
-				                              	<c:otherwise>
+				                              	<c:otherwise> 
 				                              	 	<c:if test="${note.base64 == null}">
 				                              	 	  <div class="avatar avatar-sm me-3">
-							                        	<span class="avatar-initial rounded-circle ${note.two_name_color}" id="nameProfile"> 
+							                        	<span class="avatar-initial rounded-circle ${note.two_name_color}"> 
 							                        	  ${note.two_name}
 							                        	</span>
 							                          </div>
@@ -462,11 +482,11 @@
 								                          id="uploadedAvatar" />            	            
 							                        </c:if>
 			                                
-				                              	</c:otherwise>
-				                              </c:choose>
+				                               	</c:otherwise>
+				                              </c:choose> 
 			                                
 			                                <c:if test ="${contentType eq '발신'}">
-				                                <div class="email-list-item-content ms-3 me-2"  onclick="javascript:showDetailSent(${note.note_no});">
+				                                <div class="email-list-item-content me-2"  onclick="javascript:showDetailSent(${note.note_no});">
 				                                  <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
 				                                  <span class="email-list-item-subject d-xl-inline-block d-block">
 				                               	     ${note.note_title}</span

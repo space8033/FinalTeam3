@@ -2,6 +2,7 @@ package com.finalteam3.exodia.note.controller;
 
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
@@ -150,10 +151,30 @@ public class NoteController {
 		
 		Note note = noteService.getNote(noteRead_No);
 		model.addAttribute("note", note);
-		EmployeeInfo sender = employeeService.getEmpInfo(note.getNote_sender());
+		EmployeeInfo sender = employeeService.getEmpInfoByEmpInfoNo(note.getNote_sender());
 		String name = sender.getEmpinfo_name();
 		String email = sender.getEmpinfo_email();
 				
+		
+		List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+        int randomIndex = (sender.getEmp_no()%7);
+		Map<String, Object> profile = new HashMap<>();
+		profile.put("media_from", "EMP");
+		profile.put("from_no", sender.getEmp_no());
+      
+		String base64 = "";
+        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+        if(mediaDto != null) {
+    	  base64 = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+    	  
+        }
+		
+		String two_name = sender.getEmpinfo_name().substring(sender.getEmpinfo_name().length() - 2);
+		String two_name_color = myList.get(randomIndex);
+		model.addAttribute("two_name", two_name);
+		model.addAttribute("two_name_color", two_name_color);
+		model.addAttribute("base64", base64);
+		
 		model.addAttribute("name", name);
 		model.addAttribute("email", email);
 		
@@ -181,6 +202,7 @@ public class NoteController {
 		model.addAttribute("note", note);
 		EmployeeInfo sender = employeeService.getEmpInfo(note.getNote_sender());
 		String name = sender.getEmpinfo_name();
+		String email = sender.getEmpinfo_email();
 		
 		model.addAttribute("name", name);
 		
@@ -190,6 +212,27 @@ public class NoteController {
 		
 		String contentType = "발신";
 		model.addAttribute("contentType", contentType);
+		List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+        int randomIndex = (sender.getEmp_no()%7);
+		Map<String, Object> profile = new HashMap<>();
+		profile.put("media_from", "EMP");
+		profile.put("from_no", sender.getEmp_no());
+      
+		String base64 = "";
+        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+        if(mediaDto != null) {
+    	  base64 = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+    	  
+        }
+		
+		String two_name = sender.getEmpinfo_name().substring(sender.getEmpinfo_name().length() - 2);
+		String two_name_color = myList.get(randomIndex);
+		model.addAttribute("email", email);
+		model.addAttribute("two_name", two_name);
+		model.addAttribute("two_name_color", two_name_color);
+		model.addAttribute("base64", base64);
+		
+		
 		
 		List<NoteResponse> noteResponseList = noteService.getNoteReceiver(note.getNote_no(), loginResponse.getEmp_no());
 		model.addAttribute("list", noteResponseList);
@@ -792,12 +835,30 @@ public class NoteController {
 		
 		Note note = noteService.getNote(noteRead_No);
 		model.addAttribute("note", note);
-		EmployeeInfo sender = employeeService.getEmpInfo(note.getNote_sender());
+		EmployeeInfo sender = employeeService.getEmpInfoByEmpInfoNo(note.getNote_sender());
 		String name = sender.getEmpinfo_name();
 		String email = sender.getEmpinfo_email();
 				
+		List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+        int randomIndex = (sender.getEmp_no()%7);
+		Map<String, Object> profile = new HashMap<>();
+		profile.put("media_from", "EMP");
+		profile.put("from_no", sender.getEmp_no());
+      
+		String base64 = "";
+        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+        if(mediaDto != null) {
+    	  base64 = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+    	  
+        }
+		
+		String two_name = sender.getEmpinfo_name().substring(sender.getEmpinfo_name().length() - 2);
+		String two_name_color = myList.get(randomIndex);
 		model.addAttribute("name", name);
 		model.addAttribute("email", email);
+		model.addAttribute("two_name", two_name);
+		model.addAttribute("two_name_color", two_name_color);
+		model.addAttribute("base64", base64);
 		
 		List<MediaDto> mediaList = noteService.getMediaList(note.getNote_no());
 		
@@ -835,10 +896,37 @@ public class NoteController {
 		Note note = noteService.getNoteSent(note_no);
 		
 		model.addAttribute("note", note);
-		EmployeeInfo sender = employeeService.getEmpInfo(note.getNote_sender());
+		EmployeeInfo sender = employeeService.getEmpInfoByEmpInfoNo(note.getNote_sender());
 		String name = sender.getEmpinfo_name();
+		String email = sender.getEmpinfo_email();
 		
+		
+		List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+        int randomIndex = (sender.getEmp_no()%7);
+		Map<String, Object> profile = new HashMap<>();
+		profile.put("media_from", "EMP");
+		profile.put("from_no", sender.getEmp_no());
+      
+		String base64 = "";
+        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+        if(mediaDto != null) {
+    	  base64 = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+    	  
+        }
+		
+		String two_name = sender.getEmpinfo_name().substring(sender.getEmpinfo_name().length() - 2);
+		String two_name_color = myList.get(randomIndex);
 		model.addAttribute("name", name);
+		model.addAttribute("email", email);
+		model.addAttribute("two_name", two_name);
+		model.addAttribute("two_name_color", two_name_color);
+		model.addAttribute("base64", base64);
+		
+		
+		
+		
+		
+		
 		
 		List<MediaDto> mediaList = noteService.getMediaList(note.getNote_no());
 		
@@ -867,8 +955,9 @@ public class NoteController {
 		Note note = noteService.getNoteSent(note_no);
 		
 		model.addAttribute("note", note);
-		EmployeeInfo sender = employeeService.getEmpInfo(note.getNote_sender());
+		EmployeeInfo sender = employeeService.getEmpInfoByEmpInfoNo(note.getNote_sender());
 		String name = sender.getEmpinfo_name();
+		String email = sender.getEmpinfo_email();
 		
 		model.addAttribute("name", name);
 		
@@ -878,6 +967,26 @@ public class NoteController {
 		
 		String contentType = "임시저장";
 		model.addAttribute("contentType", contentType);
+		List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+        int randomIndex = (sender.getEmp_no()%7);
+		Map<String, Object> profile = new HashMap<>();
+		profile.put("media_from", "EMP");
+		profile.put("from_no", sender.getEmp_no());
+      
+		String base64 = "";
+        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+        if(mediaDto != null) {
+    	  base64 = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+    	  
+        }
+		
+		String two_name = sender.getEmpinfo_name().substring(sender.getEmpinfo_name().length() - 2);
+		String two_name_color = myList.get(randomIndex);
+		model.addAttribute("email", email);
+		model.addAttribute("two_name", two_name);
+		model.addAttribute("two_name_color", two_name_color);
+		model.addAttribute("base64", base64);
+		
 		
 		List<NoteResponse> noteResponseList = noteService.getNoteReceiverSent(note.getNote_no(), loginResponse.getEmp_no());
 		model.addAttribute("list", noteResponseList);
