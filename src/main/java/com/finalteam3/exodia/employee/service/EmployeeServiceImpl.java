@@ -434,15 +434,23 @@ public class EmployeeServiceImpl implements EmployeeService{
 		timeLineResponse.setNotice_title(notice.getNotice_title());
 		timeLineResponse.setInquiry_title(inquiry.getNotice_title());
 		
-		timeLineResponse.setTask_name(task.getTask_name());
-		timeLineResponse.setMyTask_name(personalTask.getTask_name());
+		if(task != null) {
+			timeLineResponse.setTask_name(task.getTask_name());
+			String tStart = task.getTask_startdate().substring(0, 10);
+			timeLineResponse.setTask_start(tStart);
+			timeLineResponse.setTask_no(task.getTask_no());
+		}
+		if(personalTask != null) {
+			timeLineResponse.setMyTask_name(personalTask.getTask_name());			
+			String pStart = personalTask.getTask_startdate().substring(0, 10);
+			timeLineResponse.setMyTask_start(pStart);
+			timeLineResponse.setMyTask_no(personalTask.getTask_no());
+		}
 		
 		String nDate = notice.getNotice_createdat().substring(0, 10);
 		String nTime = notice.getNotice_createdat().substring(11);
 		String iDate = inquiry.getNotice_createdat().substring(0, 10);
 		String iTime = inquiry.getNotice_createdat().substring(11);
-		String tStart = task.getTask_startdate().substring(0, 10);
-		String pStart = personalTask.getTask_startdate().substring(0, 10);
 		String twoName = timeLineResponse.getEmpinfo_name().substring(timeLineResponse.getEmpinfo_name().length() - 2);
 		
 		timeLineResponse.setNotice_no(notice.getNotice_no());
@@ -451,10 +459,6 @@ public class EmployeeServiceImpl implements EmployeeService{
 		timeLineResponse.setInquiry_no(inquiry.getNotice_no());
 		timeLineResponse.setInquiry_createdat(iDate);
 		timeLineResponse.setInquiry_time(iTime);
-		timeLineResponse.setTask_no(task.getTask_no());
-		timeLineResponse.setTask_start(tStart);
-		timeLineResponse.setMyTask_no(personalTask.getTask_no());
-		timeLineResponse.setMyTask_start(pStart);
 		timeLineResponse.setTwo_name(twoName);
 		
 		timeLineResponse.setTeam_memberCount(employeeDao.selectTeamEmp(timeLineResponse.getTeam_name()).size() + 1);
