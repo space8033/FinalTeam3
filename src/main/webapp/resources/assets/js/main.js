@@ -17,7 +17,7 @@
 	
 	var wsSend=()=>{
 		
-		  showAlarmCount();
+		 showAlarmCount();
 	      setInterval(function() {
 	    	  var emp_id = $("#alarmId").val();
 	    	  console.log(emp_id+"야 잘보내긴해?");
@@ -325,6 +325,41 @@ function showAlarmCount() {
 		        }
 	        }
 	        
+	        $.ajax({
+	    	    url: '/exodia/getUserInfo',
+	    	    type: 'GET',
+	    	    dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+	    	    success: function(response) {
+	    	        // 서버에서 받아온 숫자 값
+	    	        var two_name = response.two_name;
+	    	        var two_name_color = response.two_name_color;
+	    	        var base64 = response.base64;
+
+	    	        // 여기에서 숫자 값을 사용하도록 로직을 추가
+	    	        var headerTwoName = document.querySelector("#header_twoName");
+	    	        var headerTwoName2 = document.querySelector("#header_twoName2");
+	    	        var headerImg = document.querySelector("#header_image");
+	    	        var headerImg2 = document.querySelector("#header_image2");
+	    	        if(headerTwoName) {
+	    		        if (base64 !== "") {
+	    		        	headerImg.classList.remove('d-none');
+	    		        	headerImg.src = "data:MIME;base64," + base64;
+	    		        	headerImg2.classList.remove('d-none');
+	    		        	headerImg2.src = "data:MIME;base64," + base64;
+	    		        } else {
+	    		        	headerTwoName.classList.remove('d-none');
+	    		        	headerTwoName.classList.add(two_name_color);
+	    		        	headerTwoName.innerText = two_name;
+	    		        	headerTwoName2.classList.remove('d-none');
+	    		        	headerTwoName2.classList.add(two_name_color);
+	    		        	headerTwoName2.innerText = two_name;
+	    		        
+	    		        }
+	    		       
+	    		       
+	    	        }
+	    	    }
+	        });
 	        $.ajax({
         	    url: '/exodia/getUckNoteNo',
         	    type: 'GET',

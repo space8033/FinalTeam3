@@ -93,7 +93,23 @@
 		                            </c:when>
 		                           
 		                            <c:otherwise>
-		                            	<img src="${pageContext.request.contextPath}/resources/assets/img/avatars/2.png" alt class="w-px-40 h-auto rounded-circle" />
+		                            
+		                             <c:if test="${alarm.base64 == null}">
+		                             	<div class="avatar me-3">
+			                            	<span class="avatar-initial rounded-circle ${alarm.two_name_color}" style="font-size: 13px;">${alarm.two_name}
+								            </span>
+							            </div>
+		                             </c:if>
+		                             <c:if test="${alarm.base64 != null}">
+		                            	<img
+					                          src="data:MIME;base64, ${alarm.base64}"
+					                          alt="user-avatar"
+					                          class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
+					                          height="40"
+		                                      width="40"/> 
+		                             </c:if>
+		                            	
+		                            	
 		                            </c:otherwise>
 	                            </c:choose>
 	                         

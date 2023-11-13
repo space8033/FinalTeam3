@@ -99,12 +99,22 @@
                           <div
                             class="card-header d-flex justify-content-between align-items-center flex-wrap border-bottom">
                             <div class="d-flex align-items-center mb-sm-0 mb-3">
-                              <img
-                                src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
-                                alt="user-avatar"
-                                class="flex-shrink-0 rounded-circle me-2"
-                                height="38"
-                                width="38" />
+                              <c:if test="${base64 == ''}">
+                             	 	  <div class="avatar avatar-sm me-3 mb-1">
+		                        	<span class="avatar-initial rounded-circle ${two_name_color}"> 
+		                        	  ${two_name}
+		                        	</span>
+		                          </div>
+		                        </c:if>
+		                        <c:if test="${base64 != ''}">
+			                        <img
+			                          src="data:MIME;base64, ${base64}"
+			                          alt="user-avatar"
+			                          class="d-block flex-shrink-0 rounded-circle me-2 mb-1"
+			                          height="40"
+                                      width="40"
+			                           />            	            
+		                        </c:if>
                               <div class="flex-grow-1 ms-1">
                                 <h6 class="m-0">
                                 <label for="receiverList"
