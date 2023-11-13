@@ -108,7 +108,6 @@ public class ChatServiceImpl implements ChatService {
 				List<String> myList = Arrays.asList("bg-label-success", "bg-label-secondary", "bg-label-danger", "bg-label-info", "bg-label-warning", "bg-label-primary");
 
 		        int randomIndex = (emp.getEmpinfo_no()%6);
-		        log.info(randomIndex+"숫자어디서불만인거냐");
 				
 				EmpChat empchat = new EmpChat();
 				chatParticipant.setEmpInfo_no1(emp.getEmpinfo_no());
@@ -183,9 +182,7 @@ public class ChatServiceImpl implements ChatService {
 
 	@Override
 	public int getUckChatMsgAll(int empInfo_no) {
-		log.info(empInfo_no+"숫자잘받아오나");
 		List<ChatMessage> chatRoom = chatDao.selectChatRoomList(empInfo_no);
-		log.info(chatRoom.toString()+"챗룸리스트?");
 		int uckChatMsg = 0;
 		for(ChatMessage chat : chatRoom) {
 			int chatRoomNo = chat.getChatRoom_no();

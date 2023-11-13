@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <style>
 
@@ -271,7 +273,28 @@ function handleWebSocketMessage(message) {
                    <div class="d-flex">
                      <div class="flex-shrink-0 me-3">
                        <div class="avatar avatar-online">
-                         <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                         <%-- <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                          --%>
+                        <c:if test="${base64 == null}">
+                        	<span class="avatar-initial rounded-circle" id="nameProfile"> 
+                        	시온
+                        	</span>
+                        </c:if>
+                        <c:if test="${base64 != null}">
+	                        <img
+	                          src="data:MIME;base64, ${empModifyResponse.base64}"
+	                          alt="user-avatar"
+	                          class="d-block rounded-circle"
+	                          height="100"
+	                          width="100"
+	                          id="uploadedAvatar" />            	            
+                        </c:if>
+                         
+                         
+                         
+                         
+                         
+                         
                        </div>
                      </div>
                      <div class="flex-grow-1">

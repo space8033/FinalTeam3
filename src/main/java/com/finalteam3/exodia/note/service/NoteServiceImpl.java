@@ -2,7 +2,9 @@ package com.finalteam3.exodia.note.service;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,6 +62,15 @@ public class NoteServiceImpl implements NoteService{
 			}else {
 				noteAll.setMedia_isEmpty(false);
 			}
+			Map<String, Object> profile = new HashMap<>();
+			profile.put("media_from", "EMP");
+			profile.put("from_no", noteAll.getEmp_no_receiver());
+	      
+	        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+	        if(mediaDto != null) {
+	    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+	    	  noteAll.setBase64(base64Img);
+	        }
 			
 			
 		}

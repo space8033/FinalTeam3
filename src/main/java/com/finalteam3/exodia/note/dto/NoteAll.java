@@ -22,5 +22,6 @@ public class NoteAll {
 	private String noteRead_type;
 	private String noteRead_starred;
 	private String note_sender_name;
+	private String base64;
 	private boolean media_isEmpty;
 }

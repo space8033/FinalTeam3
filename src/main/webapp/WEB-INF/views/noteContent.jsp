@@ -445,18 +445,28 @@
 					                              		
 					                          	</c:when>
 				                              	<c:otherwise>
-				                              	 	<img
-					                                  src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
-					                                  alt="user-avatar"
-					                                  class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
-					                                  height="32"
-					                                  width="32" />
+				                              	 	<c:if test="${note.base64 == null}">
+				                              	 	  <div class="avatar avatar-sm me-3">
+							                        	<span class="avatar-initial rounded-circle" id="nameProfile"> 
+							                        	  시온
+							                        	</span>
+							                          </div>
+							                        </c:if>
+							                        <c:if test="${note.base64 != null}">
+								                        <img
+								                          src="data:MIME;base64, ${empModifyResponse.base64}"
+								                          alt="user-avatar"
+								                          class="d-block rounded-circle"
+								                          height="100"
+								                          width="100"
+								                          id="uploadedAvatar" />            	            
+							                        </c:if>
 			                                
 				                              	</c:otherwise>
 				                              </c:choose>
 			                                
 			                                <c:if test ="${contentType eq '발신'}">
-				                                <div class="email-list-item-content ms-2 ms-sm-0 me-2"  onclick="javascript:showDetailSent(${note.note_no});">
+				                                <div class="email-list-item-content ms-3 me-2"  onclick="javascript:showDetailSent(${note.note_no});">
 				                                  <span class="email-list-item-username me-2 h6">${note.note_sender_name}</span>
 				                                  <span class="email-list-item-subject d-xl-inline-block d-block">
 				                               	     ${note.note_title}</span
