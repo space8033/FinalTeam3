@@ -6,12 +6,29 @@
 const formAuthentication = document.querySelector('#formAuthentication');
 
 $(document).ready(function() {
-	var idList = $("#idList").val();
-	if(idList == "join-success" || idList == "") {
-		console.log("없음");
-	}else {
-		showDuplicateList(idList);		
-	}
+    var rememberMeCheckbox = $('#remember-me');
+    var emailInput = $('#email');
+    var loginButton = $('#btnLogin');
+
+    // 페이지가 로드될 때 로컬 스토리지에서 아이디를 가져와서 입력란에 설정합니다.
+    if (localStorage.checkbox && localStorage.checkbox !== "") {
+        rememberMeCheckbox.prop('checked', true);
+        emailInput.val(localStorage.username);
+    } else {
+        rememberMeCheckbox.prop('checked', false);
+        emailInput.val("");
+    }
+
+    // 로그인 버튼을 클릭할 때 로컬 스토리지에 값을 저장합니다.
+    loginButton.click(function() {
+        if (rememberMeCheckbox.is(":checked") && emailInput.val() !== "") {
+            localStorage.username = emailInput.val();
+            localStorage.checkbox = rememberMeCheckbox.val();
+        } else {
+            localStorage.username = "";
+            localStorage.checkbox = "";
+        }
+    });
 });
 
 function submitForm() {
@@ -130,6 +147,3 @@ document.addEventListener('DOMContentLoaded', function (e) {
   })();
 });
 
-function showDuplicateList(idList) {
-	alert("중복된 아이디입니다!" + idList);
-}

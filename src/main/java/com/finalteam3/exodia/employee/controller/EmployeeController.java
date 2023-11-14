@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -51,7 +52,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class EmployeeController {
 	private String filePath = "C:\\Users\\KOSA\\Desktop";
-	private static String fileNm = "exodiahr.xlsx";
+	private static String fileNm = "register.xlsx";
 
 	@Resource
 	private EmployeeService employeeService;
@@ -123,23 +124,31 @@ public class EmployeeController {
 		return "/addUser";
 	}
 	
-	//프로젝트 진행을 위한 임시 부분/////////////////////////////////////////////////////////
 	@GetMapping("/jjoin")
-	public String jjoinForm(Authentication authentication, Model model) {
+	public String jjoinForm(Authentication authentication, Model model, HttpSession session) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
 		String emp_name = loginResponse.getEmpInfo_name();
 		model.addAttribute("empInfo_name", emp_name);
+		
+		String idList = (String) session.getAttribute("idList");
+		if(idList != null) {
+			model.addAttribute("idList", idList);			
+			session.removeAttribute("idList");
+		}
+		
 		return "/jjoin";
 	}
 	
 	@PostMapping("/jjoin")
-	public String jjoin(JoinRequest joinRequest) {
-		if(employeeService.join(joinRequest).equals(JoinResult.JOIN_SUCCESS)) {
+	public String jjoin(JoinRequest joinRequest, HttpSession session) {
+		if(employeeService.join(joinRequest).equals("success")) {
+			session.setAttribute("idList", "join-success");
 			return "redirect:/main";			
 		}else {
-			return "/redirect:/employee/jjoin";
+			session.setAttribute("idList", joinRequest.getEmp_id());			
+			return "redirect:/employee/jjoin";
 		}
 	}
 	
@@ -218,7 +227,8 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/poiJoin")
-	public String poiJoin() {
+	public String poiJoin(HttpSession session) {
+		List<String> idList = new ArrayList<>();
 		try {
             FileInputStream file = new FileInputStream(new File(filePath, fileNm));
 
@@ -261,13 +271,24 @@ public class EmployeeController {
                 		}
                 	}
                 	
-                	employeeService.join(joinRequest);
+                	String result = employeeService.join(joinRequest);
+                	if(result == "duplicated") {
+                		idList.add(joinRequest.getEmp_id());
+                	}
                 }
             }
             file.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
+		
+		if(idList.size() != 0) {
+			String duplicatedIdList = idList.toString();
+			
+			session.setAttribute("idList", duplicatedIdList);			
+		}else {
+			session.setAttribute("idList", "join-success");
+		}
 		
 		return "redirect:/employee/jjoin";
 	}
