@@ -10,6 +10,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -70,7 +71,7 @@ public class InquiryController {
 		return "inquiryList";
 	}
 	
-	//공지사항 리스트 json화
+	//문의사항 리스트 json화
 	@ResponseBody
 	@GetMapping("/inquiryListJson")
 	public String inquiryListJson(Authentication authentication, Model model) throws JsonProcessingException {
@@ -179,7 +180,9 @@ public class InquiryController {
 
 			Notice notice = inquiryService.getInquiryDetail(notice_no);				
 			List<MediaDto> mediaList = inquiryService.getMediaList(notice.getNotice_no());
-			List<Reply> replyList = inquiryService.getReplyByNoticeNo(notice_no);
+			Map<String, Object> replyDataMap = inquiryService.getReplyByNoticeNo(notice_no);
+			List<Reply> replyList = (List<Reply>) replyDataMap.get("replyList");
+			int replyCount = (int) replyDataMap.get("replyCount");
 
 		    model.addAttribute("notice", notice);
 		    model.addAttribute("mediaList", mediaList);

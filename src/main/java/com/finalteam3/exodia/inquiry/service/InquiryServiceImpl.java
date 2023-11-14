@@ -43,6 +43,7 @@ public class InquiryServiceImpl implements InquiryService{
 	    list.forEach(notice -> {
 	        notice.setNotice_no2(counter.getAndIncrement());
 	        newNoticeNo2List.add(notice.getNotice_no2());
+	        notice.setReplyCount(inquiryDao.selectReplyCount(notice.getNotice_no()));
 	    });
 
 	    log.info("문의사항listlistlistlsit : " + list);
@@ -50,6 +51,8 @@ public class InquiryServiceImpl implements InquiryService{
 
 	    return list;
 	}
+	
+	
 
 	@Override
 	public int write(Notice notice) {
@@ -93,7 +96,7 @@ public class InquiryServiceImpl implements InquiryService{
 	}
 	
 	@Override
-	public List<Reply> getReplyByNoticeNo(int notice_no) {
+	public Map<String, Object> getReplyByNoticeNo(int notice_no) {
 		
 		List<Reply> replyList = inquiryDao.selectReplyByNoticeNo(notice_no);
 		
@@ -113,9 +116,15 @@ public class InquiryServiceImpl implements InquiryService{
 			re.setTwoname(twoname);
 		}
 		
+		int replyCount = replyList.size();
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("replyList", replyList);
+		result.put("replyCount", replyCount);
 		
 		
-		return replyList;
+		
+		return result;
 	}
 	
 	@Override

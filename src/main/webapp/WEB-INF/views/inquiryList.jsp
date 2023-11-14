@@ -264,6 +264,7 @@
                         <th>제목</th>
                         <th>글쓴이</th>
                         <th>날짜</th>
+                        <th>댓글수</th>
                       </tr>
                     </thead>
                   </table>

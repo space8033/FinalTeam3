@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 
 <html
@@ -395,9 +396,10 @@
 																	
 										<!-- 댓글 -->
 										  <hr />
+										     <c:set var="replyCount" value="${fn:length(replyList)}" />
 										  <p>
-									         <span class="title"><strong>댓글</strong></span> <br/>
-									     </p>  
+									         <span class="title"><strong>댓글</strong></span> : ${replyCount}개 <br/>
+									     </p> 
 									     <c:forEach var="reply" items="${replyList}" varStatus="a">
 										  <div class="card email-card-last mx-sm-4 mx-3 mt-4 border" id="reply${reply.reply_no}">
 										    <div class="card-header d-flex justify-content-between align-items-center flex-wrap border-bottom">
