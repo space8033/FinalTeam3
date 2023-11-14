@@ -1,7 +1,6 @@
 package com.finalteam3.exodia.notice.service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -12,13 +11,12 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import com.finalteam3.exodia.alarm.dao.AlarmDao;
-import com.finalteam3.exodia.chat.dto.request.ChatParticipant;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
-import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.media.dao.MediaDao;
 import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.notice.dao.NoticeDao;
 import com.finalteam3.exodia.notice.dto.Notice;
+import com.finalteam3.exodia.notice.dto.NoticeUnreader;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -137,8 +135,8 @@ public class NoticeServiceImpl implements NoticeService{
 	}
 
 	@Override
-	public List<String> getEmpinfoName(int notice_no) {
-	    return noticeDao.selectEmpinfoName(notice_no);
+	public List<NoticeUnreader> getUnReader(int notice_no) {
+	    return noticeDao.selectUnReader(notice_no);
 	}
 	
 }

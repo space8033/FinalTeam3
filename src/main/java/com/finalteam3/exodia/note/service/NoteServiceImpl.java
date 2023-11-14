@@ -748,6 +748,21 @@ public class NoteServiceImpl implements NoteService{
 			noteResponse.setNoteRead_read(noteRead.getNoteRead_read());
 			noteResponse.setNoteRead_no(noteRead.getNoteRead_no());
 			noteResponse.setNoteRead_isCanceled(noteRead.isNoteRead_isCanceled());
+			
+			List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+	        int randomIndex = (noteRead.getEmp_no_receiver()%7);
+	        noteResponse.setTwo_name_color(myList.get(randomIndex));
+	        noteResponse.setTwo_name(empInfo.getEmpinfo_name().substring(empInfo.getEmpinfo_name().length() - 2));
+			Map<String, Object> profile = new HashMap<>();
+			profile.put("media_from", "EMP");
+			profile.put("from_no", noteRead.getEmp_no_receiver());
+	      
+	        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+	        if(mediaDto != null) {
+	    	  String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+	    	  noteResponse.setBase64(base64Img);
+	        }
+			
 			noteResponseList.add(noteResponse);
 		}
 		

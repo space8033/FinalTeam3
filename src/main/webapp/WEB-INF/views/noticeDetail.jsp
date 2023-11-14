@@ -346,8 +346,8 @@
                                                             <ul class="dropdown-menu dropdown-menu-end scrollable-list">
 																<c:forEach var="reader" items="${unReaders}">
 												                    <li>
-												                    	<a class="dropdown-item" href="javascript:void(0);" style="display:flex; justify-content:space-between;">
-													                    	<p>${reader}</p>
+												                    	<a class="dropdown-item" href="javascript:unReadNotice(${reader.empInfo_no}, ${reader.notice_no});" style="display:flex; justify-content:space-between;">
+													                    	<p>${reader.empInfo_name}</p>
 													                    	<p>🔔</p>
 												                    	</a>
 											                    	</li>

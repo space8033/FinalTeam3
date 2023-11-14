@@ -36,12 +36,11 @@
 	    // 메인 페이지 토스트 알람 띄우기
 	    // 팝업 페이지 갱신
 	    
-	    updateChatList();
+	    /*updateChatList();*/
 	    
-	    
-	    setTimeout(function () {
-	    	showToast(msg, count, cmd, title, sender);
-	    }, 3000);
+	   
+	    showToast(msg, count, cmd, title, sender);
+	   
 	    
 	    
 	    var v_alarmIcon = document.querySelector("#alarmIcon");
@@ -152,6 +151,7 @@
 		    	setTimeout(function() {
 		    		alarmToast.classList.remove("show");
 			    }, 4000);
+		    	
 			}
 	    	
 	       /* updateChatList(message);*/
@@ -196,7 +196,17 @@
 		    		alarmToast.classList.remove("show");
 			    }, 4000);
 			}
-	    }
+	    } else if(cmd === "필독") {
+			var alarmToast = document.querySelector("#alarmToast");
+			if(alarmToast) {
+				alarmToast.classList.add('show');
+				var alarmMsg = document.querySelector("#alarmMsg");
+				alarmMsg.innerHTML = sender + "님  필독 공지사항 확인해주세요.🚨" + "<br>" + "[제목 : " + title + "]";
+				setTimeout(function() {
+					alarmToast.classList.remove("show");
+				}, 4000);
+			}
+		}
 	}
 
 	sock.onmessage = function (e) {
@@ -206,11 +216,14 @@
 
 	    // 공통 로직 수행
 	    handleWebSocketMessage(message);
+	    updateChatList();
 	    window.postMessage({ type: 'websocket_message', data: message }, '*');
 	};
 
 function updateChatList(){
-	 var chatList = $("#app-chat-contacts");
+	   
+	   console.log("채팅방 접속");
+	   var chatList = $("#app-chat-contacts");
 	   var chatRoom = $("#chatRoom");
 	   
 	   if(chatList && chatRoom) {
@@ -228,6 +241,8 @@ function updateChatList(){
    		        wheelPropagation: false,
    		        suppressScrollX: true
    		      });
+           console.log("난메인 퍼펙트");
+       	
 		    
            const searchInput = document.querySelector('.chat-search-input');
    		     searchInput.addEventListener('keyup', e => {

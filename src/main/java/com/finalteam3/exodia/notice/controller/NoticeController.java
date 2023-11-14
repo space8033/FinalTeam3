@@ -27,6 +27,7 @@ import com.finalteam3.exodia.media.dao.MediaDao;
 import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.media.service.MediaService;
 import com.finalteam3.exodia.notice.dto.Notice;
+import com.finalteam3.exodia.notice.dto.NoticeUnreader;
 import com.finalteam3.exodia.notice.service.NoticeService;
 import com.finalteam3.exodia.security.dto.EmpDetails;
 
@@ -208,7 +209,13 @@ public class NoticeController {
 	    
 	    log.info("노티스리더스에 저장할 no" + map);
 	    
-	    List<String> unReaders = noticeService.getEmpinfoName(notice_no);
+	    List<NoticeUnreader> unReaders = noticeService.getUnReader(notice_no);
+	    
+	    for(NoticeUnreader unReader : unReaders) {
+	    	unReader.setNotice_no(notice_no);
+	    }
+	    
+	    
 	    model.addAttribute("unReaders", unReaders);
 	    
 	    log.info("안읽은놈들 :" + unReaders);
