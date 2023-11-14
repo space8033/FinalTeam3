@@ -112,7 +112,6 @@ public class Main {
 		
 		TimeLineResponse timeLine = employeeService.getTimeLineByEmpNo(map);
 		model.addAttribute("timeLine", timeLine);
-		log.info("timeLine" + timeLine.toString());
 		
 		Map<String, Object> profile = new HashMap<>();
 		profile.put("media_from", "EMP");
@@ -127,18 +126,6 @@ public class Main {
 	      
 		return "userProfile";
 	}
-
-/*	@RequestMapping("/userModify2")
-	public String userModify2(Model model, Authentication authentication) {
-		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		LoginResponse loginResponse = empDetails.getLoginResponse();
-		
-		String emp_name = loginResponse.getEmpInfo_name();
-		model.addAttribute("empInfo_name", emp_name);
-		
-		return "userModify2";
-	}*/
-	
 	
 	@RequestMapping("/main")
 	public String main(Model model, Authentication authentication, HttpSession session) {

@@ -30,6 +30,7 @@
 		<typeAlias alias="AlarmRequest" type="com.finalteam3.exodia.alarm.dto.request.AlarmRequest" />
 		<typeAlias alias="ProgramRegisterRequest" type="com.finalteam3.exodia.task.dto.request.ProgramRegisterRequest" />
 		<typeAlias alias="Notice" type="com.finalteam3.exodia.notice.dto.Notice" />
+		<typeAlias alias="NoticeUnreader" type="com.finalteam3.exodia.notice.dto.NoticeUnreader" />
 		<!-- <typeAlias alias="Inquiry" type="com.finalteam3.exodia.inquiry.dto.Inquiry" /> -->
 		<typeAlias alias="Reply" type="com.finalteam3.exodia.inquiry.dto.Reply" />
 		<typeAlias alias="ProgramListResponse" type="com.finalteam3.exodia.task.dto.response.ProgramListResponse" />

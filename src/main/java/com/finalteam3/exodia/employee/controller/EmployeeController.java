@@ -219,8 +219,7 @@ public class EmployeeController {
 	
 	@PostMapping("/poiJoin")
 	public String poiJoin() {
-	    log.info("가쟈!");
-		/*try {
+		try {
             FileInputStream file = new FileInputStream(new File(filePath, fileNm));
 
             // 엑셀 파일로 Workbook instance를 생성한다.
@@ -268,7 +267,7 @@ public class EmployeeController {
             file.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 		
 		return "redirect:/employee/jjoin";
 	}

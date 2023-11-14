@@ -181,6 +181,8 @@ function updateChatList(result){
                         data-overlay
                         data-target="#app-chat-sidebar-left"></i>
                     </div>
+                    
+                    <%-- <input type="hidden" id="alarmId" value="${emp_id}"> --%>
                     <div class="sidebar-body px-4 pb-4">
                       <div class="my-3">
                         <span class="text-muted text-uppercase">소개</span>

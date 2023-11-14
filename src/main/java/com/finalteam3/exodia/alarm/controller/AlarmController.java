@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.finalteam3.exodia.alarm.dao.AlarmDao;
 import com.finalteam3.exodia.alarm.dto.request.AlarmRequest;
 import com.finalteam3.exodia.alarm.dto.response.AlarmResponse;
 import com.finalteam3.exodia.alarm.service.AlarmService;
@@ -31,6 +32,7 @@ import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 import com.finalteam3.exodia.note.dto.request.Note;
 import com.finalteam3.exodia.note.service.NoteService;
+import com.finalteam3.exodia.notice.dao.NoticeDao;
 import com.finalteam3.exodia.notice.dto.Notice;
 import com.finalteam3.exodia.security.dto.EmpDetails;
 
@@ -52,6 +54,10 @@ public class AlarmController {
 	private InquiryService inquiryService;
 	@Resource
 	private MediaDao mediaDao;
+	@Resource
+	private AlarmDao alarmDao;
+	@Resource
+	private NoticeDao noticeDao;
 	
 	
 	@GetMapping("/alarmDetail")
@@ -140,6 +146,9 @@ public class AlarmController {
 				alarmResponse.setEmp_name(reply.getEmpinfo_name());
 				
 				list.add(alarmResponse);
+			} else if("필독".equals(alarm.getAlarm_type())) {
+				alarmResponse.setAlarm_content(alarm.getAlarm_content());
+				list.add(alarmResponse);
 			}
 		}
 		
@@ -199,6 +208,29 @@ public class AlarmController {
 			alarmService.updateAlarmRead(alarmNo);
 			
 		}
+		
+		return "redirect:/alarm";
+		
+	}
+	@PostMapping("/unReaderAlarm")
+	@ResponseBody
+	public String unReaderAlarm(String empInfo_no, String notice_no, Authentication authentication) {
+		
+		int empInfoNo = Integer.parseInt(empInfo_no);
+		int noticeNo = Integer.parseInt(notice_no);
+		log.info(empInfoNo+"나엠프인포");
+		log.info(noticeNo+"노티스 넘버");
+		
+		Notice notice = noticeDao.selectDetailByNoticeNo(noticeNo);
+		log.info(notice.toString()+"나노티스");
+		AlarmRequest alarm = new AlarmRequest();
+		alarm.setAlarm_content(notice.getNotice_title());
+		alarm.setAlarm_isRead(false);
+		alarm.setAlarm_type("필독");
+		alarm.setAlarm_typeNo(noticeNo);
+		alarm.setEmpinfo_no(empInfoNo);
+		
+		alarmDao.insertAlarm(alarm);
 		
 		return "redirect:/alarm";
 		

@@ -12,4 +12,5 @@ public class ProjectEmpResponse {
 	private String team_name;
 	private String empinfo_position;
 	private String emp_status;
+	private String avatar;
 }

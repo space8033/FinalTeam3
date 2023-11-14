@@ -77,11 +77,11 @@ $(function () {
             if ($image) {
 	          // For Avatar image
 	          var $output =
-	            '<img src="' + assetsPath + 'img/avatars/' + $image + '" alt="Avatar" class="rounded-circle">';
+	            '<img src="data:MIME;base64, ' + $image + '" alt="Avatar" class="rounded-circle">';
 	        } else {
 	            // For Avatar badge
-	          var stateNum = Math.floor(Math.random() * 6);
-	          var states = ['success', 'danger', 'warning', 'info', 'dark', 'primary', 'secondary'];
+	          var stateNum = full['emp_no'] % 7;
+	          var states = ['success', 'primary', 'warning', 'danger', 'info', 'dark', 'secondary'];
 	          var $state = states[stateNum],
 	          $name = full['empinfo_name'],
 	          $initials = $name.slice(-2);
@@ -105,18 +105,7 @@ $(function () {
                 '</div>' +
                 '</div>';
               return $row_output;
-            /*var $row_output =
-              '<div class="d-flex justify-content-start align-items-center user-name">' +
-              '<div class="d-flex flex-column">' +
-              '<span class="fw-medium">' +
-              $name +
-              '</span>' +
-              '<small class="text-muted">' +
-              $email +
-              '</small>' +
-              '</div>' +
-              '</div>';
-            return $row_output;*/
+
           }
         },
         {
@@ -183,7 +172,6 @@ $(function () {
         		return (
         				'<div class="d-inline-block text-nowrap">' +
         				'<button class="btn btn-sm btn-icon"><i class="bx bx-paper-plane"></i></button>' +
-        				'<button class="btn btn-sm btn-icon"><i class="bx bx-chat"></i></button>' +
         				'</div>'
         		);
         	}

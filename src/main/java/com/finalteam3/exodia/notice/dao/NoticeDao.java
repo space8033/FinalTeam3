@@ -6,9 +6,8 @@ import java.util.Map;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.finalteam3.exodia.notice.dto.Notice;
+import com.finalteam3.exodia.notice.dto.NoticeUnreader;
 import com.finalteam3.exodia.notice.dto.RecentNotice;
-
-import lombok.Data;
 
 @Mapper
 public interface NoticeDao {
@@ -22,6 +21,6 @@ public interface NoticeDao {
 	public RecentNotice selectRecentInquiry();
 	public void insertNoticeReaders(Map<String, Object> map);
 	public List<Notice> selectNoticeReaders(Map<String, Object> map);
-	public List<String> selectEmpinfoName(int notice_no);
+	public List<NoticeUnreader> selectUnReader(int notice_no);
 	public void deleteNoticeReaders(int notice_no);
 }

@@ -137,7 +137,7 @@
 						    </c:if>
 						</c:forEach>
                       
-                      <input type="hidden" id="alarmId" value="${empInfo.empinfo_no}"/>
+                      <input type="hidden" id="empInfoNo" value="${empInfo.empinfo_no}"/>
                       <div class="chat-history-body">
                         <ul class="list-unstyled chat-history mb-0">
                          
