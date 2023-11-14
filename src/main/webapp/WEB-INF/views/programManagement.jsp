@@ -13,14 +13,12 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-<title>Roles - Apps | Sneat - Bootstrap 5 HTML Admin Template -
-	Pro</title>
+<title>Project Management System</title>
 
-<meta name="description" content="" />
+    <meta name="description" content="" />
 
-<!-- Favicon -->
-<link rel="icon" type="image/x-icon"
-	href="${pageContext.request.contextPath}/resources/assets/img/favicon/favicon.ico" />
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/img/backgrounds/pmslogo.png" />
 
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com" />
