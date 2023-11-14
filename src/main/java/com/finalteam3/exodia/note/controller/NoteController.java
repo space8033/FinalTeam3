@@ -55,7 +55,7 @@ public class NoteController {
 	
 	
 	@GetMapping("/note")
-	public String note(String pageNote, HttpSession session, @RequestParam(name= "inbox", required=false) String inbox, @RequestParam(name= "noteReadNo", required=false) String noteReadNo, Model model, Authentication authentication) {
+	public String note(String pageNote, HttpSession session, @RequestParam(name= "inbox", required=false) String inbox, @RequestParam(name= "noteReadNo", required=false) String noteReadNo, String emp_no, Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		String emp_id = loginResponse.getEmp_id();
@@ -69,6 +69,11 @@ public class NoteController {
 		Map<String, Object> profile = new HashMap<>();
 		profile.put("media_from", "EMP");
 		profile.put("from_no", loginResponse.getEmp_no());
+		log.info(emp_no+"empNo 인력검색 잘받아오나");
+		if(emp_no != null) {
+			
+			model.addAttribute("emp_no", emp_no);
+		}
 		
 		
       

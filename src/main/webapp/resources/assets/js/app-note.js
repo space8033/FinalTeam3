@@ -2919,6 +2919,16 @@ document.addEventListener('DOMContentLoaded', function () {
     // ------------------------------
      const noteRead = document.getElementById('conType');
 	 var noteReadNo = noteRead.value;
+	 
+	 var searchUser = document.getElementById('searchUserFrom');
+	 
+	 if(searchUser.value!=null) {
+		 console.log(searchUser.value+"잘 받아오니?");
+		 var button = document.getElementById("emailComposeSidebarLabel");
+		 button.click();
+		 $('#emailContacts').val(searchUser.value);
+	 }
+	 
      console.log(noteReadNo+"받아는오나");
 	 // noteReadNo를 사용하여 필요한 작업을 수행합니다.
 	 if (noteReadNo) {
