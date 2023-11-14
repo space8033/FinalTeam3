@@ -80,9 +80,7 @@ $(function () {
 	            '<img src="data:MIME;base64, ' + $image + '" alt="Avatar" class="rounded-circle">';
 	        } else {
 	            // For Avatar badge
-	          console.log(full['emp_no']);
 	          var stateNum = full['emp_no'] % 7;
-	          console.log(stateNum);
 	          var states = ['success', 'primary', 'warning', 'danger', 'info', 'dark', 'secondary'];
 	          var $state = states[stateNum],
 	          $name = full['empinfo_name'],
@@ -174,7 +172,6 @@ $(function () {
         		return (
         				'<div class="d-inline-block text-nowrap">' +
         				'<button class="btn btn-sm btn-icon"><i class="bx bx-paper-plane"></i></button>' +
-        				'<button class="btn btn-sm btn-icon"><i class="bx bx-chat"></i></button>' +
         				'</div>'
         		);
         	}
