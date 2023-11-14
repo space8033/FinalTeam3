@@ -56,43 +56,6 @@ public class EmployeeServiceImpl implements EmployeeService{
    //암호화용
    private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
    
-   //로그인
-   /*@Override
-   @Transactional
-   public LoginResult login(LoginRequest loginRequest) {
-      LoginResponse loginResponse = employeeDao.selectInfoByEmpId(loginRequest);
-      //아이디가 없는 경우
-      if(loginResponse == null) {
-         return LoginResult.FAIL_ID;
-      }
-
-      //가입 혹은 비밀번호 초기화 후 최초 로그인인 경우
-      if(loginResponse.isEmp_isinit()) {
-         if(loginRequest.getEmp_password().equals("0000")) {
-            return LoginResult.LOGIN_SUCCESS;            
-         }else {
-            return LoginResult.FAIL_PASSWORD;
-         }
-      }
-      
-      //비밀번호가 일치하지 않는 경우
-      if(!passwordEncoder.matches(loginRequest.getEmp_password(), loginResponse.getEmp_password())) {
-         return LoginResult.FAIL_PASSWORD;
-      }
-      //휴면, 혹은 탈퇴 유저의 경우
-      if(loginResponse.getEmp_deletedAt() != null) {
-         return LoginResult.FAIL_ENABLED;
-      }
-      
-      //로그인 중인 사용자 로그인 상태 변경
-      Map<String, Object> status = new HashMap<>();
-      status.put("emp_id", loginRequest.getEmp_id());
-      status.put("emp_status", "on-line");
-      employeeDao.updateStatus(status);
-      
-      return LoginResult.LOGIN_SUCCESS;
-   }*/
-   
    //로그인중인 유저 표시할 때 필요한 정보 얻기
    @Override
    public LoginResponse getLoginResponse(LoginRequest loginRequest) {
@@ -377,6 +340,16 @@ public class EmployeeServiceImpl implements EmployeeService{
       list.add(pm);
       
       for(ProjectEmpResponse per : list) {
+    	 Map<String, Object> profile = new HashMap<>();
+    	 profile.put("media_from", "EMP");
+	     profile.put("from_no", per.getEmp_no());
+	     MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+	  	    
+	  	 if(mediaDto != null) {
+	  	   String base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+	  	   per.setAvatar(base64Img);
+	  	 } 
+    	  
          if(per.getRole_category().equals("ROLE_EMP")) {
             per.setRole_category("팀원");
          }else if(per.getRole_category().equals("ROLE_PL")) {
