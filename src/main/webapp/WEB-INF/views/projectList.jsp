@@ -234,12 +234,6 @@
                 <div class="text-truncate">사용자 등록</div>
               </a>
             </li>
-<%--             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user"></i>
-                <div class="text-truncate">사용자 등록</div>
-              </a>
-            </li> --%>
             
             <li class="menu-item">
               <a href="${pageContext.request.contextPath}/employee/userManagement" class="menu-link">
@@ -263,7 +257,7 @@
        <c:if test="${project_no == null}">
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="${pageContext.request.contextPath}/main" class="app-brand-link">
+            <a href="javascript:alert('프로젝트를 선택 후 이용하세요!');" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -415,12 +409,6 @@
                 <div class="text-truncate">사용자 등록</div>
               </a>
             </li>
-<%--             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user"></i>
-                <div class="text-truncate">사용자 등록</div>
-              </a>
-            </li> --%>
             
             <li class="menu-item">
               <a href="javascript:alert('프로젝트를 선택 후 이용하세요!');" class="menu-link">
@@ -437,8 +425,9 @@
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
-
-           <%@ include file="/WEB-INF/views/header.jsp" %>
+			<div class="d-none">
+	           <%@ include file="/WEB-INF/views/header.jsp" %>
+			</div>
        
        </c:if>
 
