@@ -246,10 +246,8 @@ public class WebSocketHandler extends TextWebSocketHandler{
 						} else if(uckCount != alarmCount.get(memId)){
 							// 메시지 목록을 배열에 담습니다.
 							
-							//log.info(alarmCount.get(memId).toString()+"내아이디 안읽은 숫자는?");
-							//log.info(uckCount+"알람 안읽은 숫자는?");
 							Message messageContent2= new Message();
-							
+							alarmCount.put(memId, uckCount);
 							messageContent2.setCount(uckCount);
 							String jsonMessages2 = objectMapper.writeValueAsString(messageContent2);
 							
