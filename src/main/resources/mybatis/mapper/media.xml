@@ -37,4 +37,9 @@
 		where media_from = #{media_from}
 		and from_no = #{from_no}
 	</delete>
+	
+	<delete id="deleteMediaByMediaNo" parameterType="int">
+		delete from media
+		where media_no = #{media_no}
+	</delete>
 </mapper>
