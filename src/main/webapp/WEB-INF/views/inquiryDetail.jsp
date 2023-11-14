@@ -294,10 +294,48 @@
 											<p>
 												<div class="d-flex align-items-center mb-sm-0 mb-3">
 												<c:if test="${notice.photo == null}">
-						                        	<span class="avatar-initial rounded-circle" id="nameProfile" 
-						                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
-						                        	${notice.twoname} 
-						                        	</span>
+														<c:if test="${notice.emp_no % 7 == 0}">
+								                        	<span class="avatar-initial rounded-circle bg-label-success" id="nameProfile" 
+								                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${notice.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${notice.emp_no % 7 == 1}">
+								                        	<span class="avatar-initial rounded-circle bg-label-primary" id="nameProfile" 
+								                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${notice.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${notice.emp_no % 7 == 2}">
+								                        	<span class="avatar-initial rounded-circle bg-label-warning" id="nameProfile" 
+								                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${notice.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${notice.emp_no % 7 == 3}">
+								                        	<span class="avatar-initial rounded-circle bg-label-danger" id="nameProfile" 
+								                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${notice.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${notice.emp_no % 7 == 4}">
+								                        	<span class="avatar-initial rounded-circle bg-label-info" id="nameProfile" 
+								                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${notice.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${notice.emp_no % 7 == 5}">
+								                        	<span class="avatar-initial rounded-circle bg-label-dark" id="nameProfile" 
+								                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${notice.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${notice.emp_no % 7 == 6}">
+								                        	<span class="avatar-initial rounded-circle bg-label-secondary" id="nameProfile" 
+								                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${notice.twoname} 
+								                        	</span>
+					                                	</c:if>
 						                        </c:if>
 						                        <c:if test="${notice.photo != null}">
 							                        <img
@@ -400,10 +438,48 @@
 										    <div class="card-header d-flex justify-content-between align-items-center flex-wrap border-bottom">
 											  <div class="d-flex align-items-center mb-sm-0 mb-3">
 												<c:if test="${reply.photo == null}">
-						                        	<span class="avatar-initial rounded-circle" id="nameProfile" 
-						                        	style="width :40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;"> 
-						                        	${reply.twoname} 
-						                        	</span>
+													<c:if test="${reply.emp_no % 7 == 0}">
+								                        	<span class="avatar-initial rounded-circle bg-label-success" id="nameProfile" 
+								                        	style="width :40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${reply.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${reply.emp_no % 7 == 1}">
+								                        	<span class="avatar-initial rounded-circle bg-label-primary" id="nameProfile" 
+								                        	style="width :40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${reply.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${reply.emp_no % 7 == 2}">
+								                        	<span class="avatar-initial rounded-circle bg-label-warning" id="nameProfile" 
+								                        	style="width :40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${reply.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${reply.emp_no % 7 == 3}">
+								                        	<span class="avatar-initial rounded-circle bg-label-danger" id="nameProfile" 
+								                        	style="width :40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${reply.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${reply.emp_no % 7 == 4}">
+								                        	<span class="avatar-initial rounded-circle bg-label-info" id="nameProfile" 
+								                        	style="width :40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${reply.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${reply.emp_no % 7 == 5}">
+								                        	<span class="avatar-initial rounded-circle bg-label-dark" id="nameProfile" 
+								                        	style="width :40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${reply.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${reply.emp_no % 7 == 6}">
+								                        	<span class="avatar-initial rounded-circle bg-label-secondary" id="nameProfile" 
+								                        	style="width :40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${reply.twoname} 
+								                        	</span>
+					                                	</c:if>
 						                        </c:if>
 						                        <c:if test="${reply.photo != null}">
 							                        <img
