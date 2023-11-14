@@ -1,9 +1,12 @@
 package com.finalteam3.exodia.inquiry.service;
 
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Resource;
 
@@ -27,9 +30,29 @@ public class InquiryServiceImpl implements InquiryService{
 
 	@Override
 	public List<Notice> getInquiryList() {
-		List<Notice> list = inquiryDao.selectInquiryAll();
-		return list;
+	    List<Notice> list = inquiryDao.selectInquiryAll();
+
+	    // 새로운 notice_no2를 저장할 리스트
+	    List<Integer> newNoticeNo2List = new ArrayList<>();
+
+	    // 공지사항 목록을 notice_no로 오름차순 정렬
+	    list.sort(Comparator.comparing(Notice::getNotice_no));
+
+	    // notice_no를 1부터 시작하여 재정의하고, 정렬된 notice_no2를 notice_no2에 저장
+	    AtomicInteger counter = new AtomicInteger(1);
+	    list.forEach(notice -> {
+	        notice.setNotice_no2(counter.getAndIncrement());
+	        newNoticeNo2List.add(notice.getNotice_no2());
+	        notice.setReplyCount(inquiryDao.selectReplyCount(notice.getNotice_no()));
+	    });
+
+	    log.info("문의사항listlistlistlsit : " + list);
+	    log.info("새로운 notice_no2 리스트: " + newNoticeNo2List);
+
+	    return list;
 	}
+	
+	
 
 	@Override
 	public int write(Notice notice) {
@@ -73,7 +96,7 @@ public class InquiryServiceImpl implements InquiryService{
 	}
 	
 	@Override
-	public List<Reply> getReplyByNoticeNo(int notice_no) {
+	public Map<String, Object> getReplyByNoticeNo(int notice_no) {
 		
 		List<Reply> replyList = inquiryDao.selectReplyByNoticeNo(notice_no);
 		
@@ -93,9 +116,15 @@ public class InquiryServiceImpl implements InquiryService{
 			re.setTwoname(twoname);
 		}
 		
+		int replyCount = replyList.size();
+		
+		Map<String, Object> result = new HashMap<>();
+		result.put("replyList", replyList);
+		result.put("replyCount", replyCount);
 		
 		
-		return replyList;
+		
+		return result;
 	}
 	
 	@Override

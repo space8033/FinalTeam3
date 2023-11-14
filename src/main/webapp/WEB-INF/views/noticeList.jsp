@@ -266,7 +266,6 @@
                         <th>날짜</th>
                       </tr>
                     </thead>
-
                   </table>
                 </div>
               </div>

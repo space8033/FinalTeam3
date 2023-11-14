@@ -115,5 +115,17 @@
 		where emp_no = #{emp_no}
 	</select>
 	
+	<select id="selectReplyCount" parameterType="int" resultType="int">
+		SELECT
+		    count(*)
+		FROM
+		    reply r
+		JOIN
+		    empinfo e ON r.empinfo_no = e.empinfo_no
+		WHERE
+		    r.notice_no = #{notice_no}
+		    AND r.reply_deletedat IS NULL
+	</select>
+	
 	
 </mapper>

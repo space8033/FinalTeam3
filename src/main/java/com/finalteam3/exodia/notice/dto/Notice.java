@@ -23,5 +23,7 @@ public class Notice {
 	private int emp_no;
 	private String photo;
 	private String twoname;
+	private int notice_no2;
+	private int replyCount;
 	
 }

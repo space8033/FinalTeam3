@@ -20,4 +20,5 @@ public interface InquiryDao {
 	public int selectEmpInfoNo(int emp_no);
 	public int selectEmpInfoNoByEmpNo(int emp_no);
 	public Reply selectReplyByReplyNo(int replyNo);
+	public int selectReplyCount(int notice_no);
 }
