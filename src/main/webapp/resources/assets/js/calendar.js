@@ -310,21 +310,21 @@ document.addEventListener('DOMContentLoaded', function () {
 	                eventTitle: {
 	                  validators: {
 	                    notEmpty: {
-	                      message: 'Please enter event title '
+	                      message: '제목을 입력하세요 '
 	                    }
 	                  }
 	                },
 	                eventStartDate: {
 	                  validators: {
 	                    notEmpty: {
-	                      message: 'Please enter start date '
+	                      message: '시작일을 입력하세요 '
 	                    }
 	                  }
 	                },
 	                eventEndDate: {
 	                  validators: {
 	                    notEmpty: {
-	                      message: 'Please enter end date '
+	                      message: '종료일을 입력하세요 '
 	                    }
 	                  }
 	                }
