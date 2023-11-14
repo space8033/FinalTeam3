@@ -65,6 +65,11 @@
     <!-- Layout wrapper -->
 
                   <!-- /Chat contacts -->
+                  
+                  
+                 
+                  
+                  
 
                   <!-- Chat History -->
                   <div class="col app-chat-history" id="chatRoomContent">
@@ -78,7 +83,22 @@
                               data-overlay
                               data-target="#app-chat-contacts"></i>
                             <div class="flex-shrink-0 avatar">
-                               <span class="avatar-initial rounded-circle bg-label-primary" style="font-size: 15px;">${buddy.two_name}</span>
+                             <c:if test="${buddy.base64 != null}">
+                            
+                                <img
+		                          src="data:MIME;base64, ${buddy.base64}"
+		                          alt="user-avatar"
+		                          class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
+		                          height="40"
+                                  width="40"
+                                  id="buddyImg"
+		                          />  
+                             </c:if>
+                             <c:if test="${buddy.base64 == null}">
+                            
+                               <span id="buddyTwoName" class="avatar-initial rounded-circle ${buddy.two_name_color}" style="font-size: 14px;">${buddy.two_name}</span>
+                             </c:if>
+                           
                             </div>
                             <div class="chat-contact-info flex-grow-1 ms-3">
                               <h6 class="m-0">${buddy.empinfo_name}</h6>
@@ -129,7 +149,19 @@
 	                            <div class="d-flex overflow-hidden">
 	                              <div class="user-avatar flex-shrink-0 me-3">
 	                                <div class="avatar">
-	                                   <span class="avatar-initial rounded-circle bg-label-success" style="font-size: 13px;">${buddy.two_name}</span>
+	                                    <c:if test="${buddy.base64 != null}">
+			                                <img
+					                          src="data:MIME;base64, ${buddy.base64}"
+					                          alt="user-avatar"
+					                          class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
+					                          height="40"
+			                                  width="40"
+					                          />  
+			                             </c:if>
+			                             <c:if test="${buddy.base64 == null}">
+			                            
+			                               <span class="avatar-initial rounded-circle ${buddy.two_name_color}" style="font-size: 14px;">${buddy.two_name}</span>
+			                             </c:if>
 	                                </div>
 	                              </div>
 	                              <div class="chat-message-wrapper flex-grow-1">
@@ -211,7 +243,21 @@
 	                              </div>
 	                              <div class="user-avatar flex-shrink-0 ms-3">
 	                                <div class="avatar">
-	                                   <span class="avatar-initial rounded-circle bg-label-primary" style="font-size: 13px;">${empInfo_twoname}</span>
+	                                  <c:if test="${empInfo_base64 == ''}">
+	                                
+	                                   <span class="avatar-initial rounded-circle ${empInfo_color}" style="font-size: 14px;">${empInfo_twoname}</span>
+	                                  </c:if>
+	                                
+	                                  <c:if test="${empInfo_base64 != ''}">
+		                                  <img
+					                          src="data:MIME;base64, ${empInfo_base64}"
+					                          alt="user-avatar"
+					                          class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
+					                          height="40"
+			                                  width="40"
+					                          />  
+	                                  </c:if>
+	                                
 	                                </div>
 	                              </div>
 	                            </div>

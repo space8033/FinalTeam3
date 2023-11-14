@@ -34,10 +34,11 @@ $(function () {
         }, // JSON file to add data
       columns: [
         // columns according to JSON
-    	  { data: "notice_no" },
-          { data: 'notice_title' },
+    	  { data: 'notice_no'},
+          { data: 'notice_title'},
           { data: 'empinfo_name' },
-          { data: 'notice_createdat' }
+          { data: 'notice_createdat' },
+          { data: 'replyCount' }
       ],
       columnDefs: [
         {
@@ -58,7 +59,8 @@ $(function () {
         	targets: 1,
         	render: function (data, type, full, meta) {
         		sharedNoticeNo = full['notice_no'];
-        		  return "<span class='text-truncate d-flex align-items-center'>" + sharedNoticeNo + '</span>';
+        		var noticeNo2 = full['notice_no2'];
+        		  return "<span class='text-truncate d-flex align-items-center'>" + noticeNo2 + '</span>';
         	}
         },
         {
@@ -68,13 +70,14 @@ $(function () {
         	  render: function (data, type, full, meta) {
         		  var $title = full['notice_title'];
         		  sharedNoticeNo = full['notice_no'];
+        		 
 
         		    // Create a text output for Product name
         		    var $row_output =
         		      '<div class="d-flex justify-content-start align-items-center product-name">' +
         		      '<div class="d-flex flex-column">' +
         		      '<h6 class="text-body text-nowrap mb-0">' +
-        		      '<a href="inquiryDetail?notice_no=' + sharedNoticeNo + '" style="text-decoration: none; color: black;">' + $title + '</a>' +
+        		      '<a href="inquiryDetail?notice_no=' + sharedNoticeNo + '" style="text-decoration: none; color: black;">' + $title+ '</a>' +
         		      '</h6>' +
         		      '</div>' +
         		      '</div>';
@@ -97,6 +100,14 @@ $(function () {
         	render: function (data, type, full, meta) {
         		var $date = full['notice_createdat']; //date 필드에서 날짜 정보를 가져옴
         	    return '<span class="text-truncate d-flex align-items-center">' + $date + '</span>';
+        	}
+        },
+        {
+        	//date
+        	targets: 5,
+        	render: function (data, type, full, meta) {
+        		 var $replyCount = full['replyCount'];
+        		 return '<span class="text-truncate d-flex align-items-center">' + $replyCount + '</span>';
         	}
         }
       ],

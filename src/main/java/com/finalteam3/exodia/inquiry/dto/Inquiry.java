@@ -1,4 +1,4 @@
-package com.finalteam3.exodia.inquiry.dto;
+/*package com.finalteam3.exodia.inquiry.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -22,5 +22,6 @@ public class Inquiry {
 	private String two_name;
 	private int empinfo_no;
 	private String empinfo_email;
+	private int emp_no;
 	
-}
+}*/

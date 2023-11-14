@@ -295,8 +295,7 @@
                                        <div>
                                           <div>
                                              <p>
-                                                <span style="font-size: 12px; display: none;">글
-                                                   번호:</span> <span style="font-size: 12px; display: none;">${notice.notice_no}</span>
+                                                <span style="font-size: 12px; display: none;">글 번호:</span> <span style="font-size: 12px; display: none;">${notice.notice_no}</span>
                                              </p>
 
                                              <p>
@@ -305,11 +304,26 @@
 
                                              <p>
                                              <div class="d-flex align-items-center mb-sm-0 mb-3">
-                                                <img
+                                                <%-- <img
                                                    src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
                                                    alt="user-avatar"
                                                    class="flex-shrink-0 rounded-circle me-2" height="38"
-                                                   width="38" />
+                                                   width="38" /> --%>
+                                                <c:if test="${base64 == null}">
+						                        	<span class="avatar-initial rounded-circle" id="nameProfile" 
+						                        	style="width :100px; height: 100px; font-size: 40px; display: flex; align-items: center; justify-content: center;"> 
+						                        	${twoname} 
+						                        	</span>
+						                        </c:if>
+						                        <c:if test="${base64 != null}">
+							                        <img
+							                          src="data:MIME;base64, ${base64}"
+							                          alt="user-avatar"
+							                          class="d-block rounded-circle"
+							                          height="50"
+							                          width="50"
+							                          id="uploadedAvatar" />            	            
+						                        </c:if>   
                                                 <div class="flex-grow-1 ms-1">
                                                    <h6 class="m-0" id="replyWriter" name="replyWriter">${notice.empinfo_name}</h6>
                                                    <small class="text-muted" id="replyWriterEmail"

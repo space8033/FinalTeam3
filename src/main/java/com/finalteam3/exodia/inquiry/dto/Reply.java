@@ -15,4 +15,7 @@ public class Reply {
 	private String reply_deletedat;
 	private String empinfo_name;
 	private String empinfo_email;
+	private String photo;
+	private int emp_no;
+	private String twoname;
 }

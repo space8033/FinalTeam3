@@ -2,11 +2,15 @@ package com.finalteam3.exodia.inquiry.controller;
 
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -25,6 +29,7 @@ import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.inquiry.dto.Reply;
 import com.finalteam3.exodia.inquiry.service.InquiryService;
+import com.finalteam3.exodia.media.dao.MediaDao;
 import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.media.service.MediaService;
 import com.finalteam3.exodia.notice.dto.Notice;
@@ -49,6 +54,8 @@ public class InquiryController {
 	private EmployeeService employeeService;
 	@Resource
 	private AlarmService alarmService;
+	@Resource
+	private MediaDao mediaDao;
 	
 	//문의사항 리스트 조회
 	@GetMapping("/inquiryList")
@@ -64,7 +71,7 @@ public class InquiryController {
 		return "inquiryList";
 	}
 	
-	//공지사항 리스트 json화
+	//문의사항 리스트 json화
 	@ResponseBody
 	@GetMapping("/inquiryListJson")
 	public String inquiryListJson(Authentication authentication, Model model) throws JsonProcessingException {
@@ -77,6 +84,7 @@ public class InquiryController {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonData = objectMapper.writeValueAsString(data);
         
+        log.info("문의사항 데이터:" + jsonData);
         
 		return jsonData;
 	}
@@ -172,7 +180,9 @@ public class InquiryController {
 
 			Notice notice = inquiryService.getInquiryDetail(notice_no);				
 			List<MediaDto> mediaList = inquiryService.getMediaList(notice.getNotice_no());
-			List<Reply> replyList = inquiryService.getReplyByNoticeNo(notice_no);
+			Map<String, Object> replyDataMap = inquiryService.getReplyByNoticeNo(notice_no);
+			List<Reply> replyList = (List<Reply>) replyDataMap.get("replyList");
+			int replyCount = (int) replyDataMap.get("replyCount");
 
 		    model.addAttribute("notice", notice);
 		    model.addAttribute("mediaList", mediaList);
@@ -180,6 +190,7 @@ public class InquiryController {
 		    log.info("notice : " + notice);
 		    
 		    int empNo = employeeDao.selectNoByEmpName(loginResponse.getEmpInfo_name());
+		    
 		    	    		    	
 			return "inquiryDetail";
 		}

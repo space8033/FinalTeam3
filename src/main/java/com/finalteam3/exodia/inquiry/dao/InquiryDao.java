@@ -4,12 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.finalteam3.exodia.employee.dto.response.LoginResponse;
-import com.finalteam3.exodia.inquiry.dto.Inquiry;
 import com.finalteam3.exodia.inquiry.dto.Reply;
 import com.finalteam3.exodia.notice.dto.Notice;
-
-import lombok.Data;
 
 @Mapper
 public interface InquiryDao {
@@ -24,4 +20,5 @@ public interface InquiryDao {
 	public int selectEmpInfoNo(int emp_no);
 	public int selectEmpInfoNoByEmpNo(int emp_no);
 	public Reply selectReplyByReplyNo(int replyNo);
+	public int selectReplyCount(int notice_no);
 }

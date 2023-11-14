@@ -20,5 +20,5 @@ public class EmpChat {
 	private String empinfo_position;
 	private String emp_status;
 	private String emp_color;
-	private byte[] profile;
+	private String base64;
 }

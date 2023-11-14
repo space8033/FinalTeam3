@@ -109,7 +109,6 @@
 		                                      width="40"/> 
 		                             </c:if>
 		                            	
-		                            	
 		                            </c:otherwise>
 	                            </c:choose>
 	                         
@@ -146,9 +145,9 @@
 	                         </c:if>
 	                         
 
-	                         <c:if test="${alarm.alarm_type == '공지'}">
-	                         	<h6 class="mb-1">새로운 필독사항 🚨</h6>
-	                         	 <p class="mb-0">새 필독사항이 등록되었습니다. <br> [제목 : ${alarm.alarm_content}]
+	                         <c:if test="${alarm.alarm_type == '독촉'}">
+	                         	<h6 class="mb-1">필독사항 🚨</h6>
+	                         	 <p class="mb-0">필독사항을 확인해주세요. <br> [제목 : ${alarm.alarm_content}]
 	                   			 </p>
 	                         </c:if>
 	                         

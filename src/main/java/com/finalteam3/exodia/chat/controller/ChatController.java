@@ -1,7 +1,10 @@
 package com.finalteam3.exodia.chat.controller;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -21,6 +24,8 @@ import com.finalteam3.exodia.chat.service.ChatService;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
+import com.finalteam3.exodia.media.dao.MediaDao;
+import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 import com.finalteam3.exodia.note.service.NoteService;
 import com.finalteam3.exodia.security.dto.EmpDetails;
@@ -36,6 +41,8 @@ public class ChatController {
 	private NoteService noteService;
 	@Resource
 	private ChatService chatService;
+	@Resource
+	private MediaDao mediaDao;
 	
 	@GetMapping("/chat")
 	public String chat(HttpSession session, Model model, Authentication authentication, @RequestParam(name= "emp_no", required=false) String emp_no) {
@@ -67,11 +74,24 @@ public class ChatController {
 		model.addAttribute("empInfo_name", emp_name);
 		String empInfo_twoname = emp_name.substring(emp_name.length() - 2);
 		model.addAttribute("empInfo_twoname", empInfo_twoname);
+		List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+
+        int randomIndex = (loginResponse.getEmp_no()%7);
+        Map<String, Object> profile = new HashMap<>();
+		profile.put("media_from", "EMP");
+		profile.put("from_no", loginResponse.getEmp_no());
+      
+        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+        
+        String base64Img = "";
+        if(mediaDto != null) {
+    	  base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+        }
+		
+		model.addAttribute("empInfo_color", myList.get(randomIndex));
+		model.addAttribute("empInfo_base64", base64Img);
 		
 		List<EmpChat> empChatList = chatService.getChatEmpList(empInfo.getEmpinfo_no());
-		
-		
-		
 		
 		model.addAttribute("empList", empChatList);
 		
@@ -89,7 +109,24 @@ public class ChatController {
 		model.addAttribute("empInfo", empInfo);
 		String emp_name = empInfo.getEmpinfo_name();
 		String empInfo_twoname = emp_name.substring(emp_name.length() - 2);
+		List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
+
+        int randomIndex = (loginResponse.getEmp_no()%7);
+        Map<String, Object> profile = new HashMap<>();
+		profile.put("media_from", "EMP");
+		profile.put("from_no", loginResponse.getEmp_no());
+      
+        MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
+        
+        String base64Img = "";
+        if(mediaDto != null) {
+    	  base64Img = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+    	  
+        }
+		
 		model.addAttribute("empInfo_twoname", empInfo_twoname);
+		model.addAttribute("empInfo_color", myList.get(randomIndex));
+		model.addAttribute("empInfo_base64", base64Img);
 	
 		
 		
@@ -97,6 +134,19 @@ public class ChatController {
 		//채팅방정보
 		int empNo = Integer.parseInt(emp_no);
 		EmpNote buddy = chatService.getEmpInfo(empNo);
+		int buddyrandomIndex = (buddy.getEmp_no()%7);
+		buddy.setTwo_name_color(myList.get(buddyrandomIndex));
+		Map<String, Object> buddyprofile = new HashMap<>();
+		buddyprofile.put("media_from", "EMP");
+		buddyprofile.put("from_no", buddy.getEmp_no());
+        MediaDto mediaDtobuddy = mediaDao.selectMediaFromNo(buddyprofile);
+        
+        String buddybase64Img = "";
+        if(mediaDtobuddy != null) {
+        	buddybase64Img = Base64.getEncoder().encodeToString(mediaDtobuddy.getMedia_data());
+        	buddy.setBase64(buddybase64Img);
+        }
+		
 		model.addAttribute("buddy", buddy);
 		
 		ChatParticipant chatParticipant = new ChatParticipant();
