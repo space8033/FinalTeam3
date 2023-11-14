@@ -133,7 +133,7 @@ public class NoticeController {
 		return "redirect:/noticeList";
 	}
 		
-	//쪽지 파일 다운로드
+	//공지사항 파일 다운로드
 	@GetMapping("/noticeFileDownload")
 	public void noticeFileDownload(int mno, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		MediaDto media = mediaService.getMedia(mno);
@@ -167,10 +167,14 @@ public class NoticeController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
 		Notice notice = noticeService.getNoticeDetail(notice_no);
-		log.info("notice :" +  notice);
+		log.info("업데이트notice :" +  notice);
 		model.addAttribute("notice", notice);
-		log.info("넘버"+notice.getNotice_no());
-		log.info("모델이 뭔데 좀 :" + notice);
+		log.info("업데이트넘버"+notice.getNotice_no());
+		log.info("업데이트 모델이 뭔데 좀 :" + notice);
+		
+		List<MediaDto> mediaList = noticeService.getMediaList(notice.getNotice_no());
+	    model.addAttribute("mediaList", mediaList);
+	    log.info("업데이트 첨부파일목록 : " + mediaList);
 		
 		return "noticeUpdate";
 	}
@@ -238,5 +242,14 @@ public class NoticeController {
 		
 		return "noticeList";
 	}
+	
+	/*@PostMapping("/mediaDelete")
+	public String mediaDelete(Authentication authentication, int media_no) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		mediaService.deleteMediaByMediaNo(media_no);
+		
+	}*/
 
 }

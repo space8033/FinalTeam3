@@ -173,3 +173,19 @@ $(document).ready(function() {
 	        });
 	    });
 });
+
+$(document).ready(function () {
+    $("a[name='file-delete']").on("click", function (e) {
+        e.preventDefault();
+        deleteFile($(this).closest('p'));
+    });
+});
+
+function deleteFile(elementToDelete) {
+    // elementToDelete이 null이 아니면 삭제
+    if (elementToDelete) {
+        elementToDelete.remove();
+    }
+
+    // TODO: 삭제할 로직 추가 (예: 서버 요청 등)
+}

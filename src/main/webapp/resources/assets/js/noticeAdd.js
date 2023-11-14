@@ -96,6 +96,18 @@
 
 //Jquery to handle the e-commerce product add page
 
+$(document).ready(function () {
+    $("a[name='file-delete']").on("click", function (e) {
+        e.preventDefault();
+        deleteFile($(this));
+    });
+});
+
+function deleteFile(obj) {
+    obj.parent().remove();
+}
+
+
 $(function () {
   // Select2
   var select2 = $('.select2');
