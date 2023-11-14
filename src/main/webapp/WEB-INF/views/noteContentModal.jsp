@@ -118,7 +118,22 @@
 	          <li class="d-flex flex-wrap mb-3">
 	            
 	            <div class="avatar me-3">
-	              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt="avatar" class="rounded-circle" />
+	              
+		            <c:if test="${list.base64 == null}">
+	                    <span class="avatar-initial rounded-circle ${list.two_name_color}"> 
+	                    	  ${list.two_name}
+	                    </span>
+	                </c:if>
+	                <c:if test="${list.base64 != null}">
+	                     <img
+	                       src="data:MIME;base64, ${list.base64}"
+	                       alt="user-avatar"
+	                       class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
+	                       height="32"
+	                                width="32"
+	                       />            	            
+				    </c:if>  
+	              
 	            </div>
 	            <div class="d-flex justify-content-between flex-grow-1">
 	              <div class="me-2">
@@ -163,7 +178,20 @@
 	          <li class="d-flex flex-wrap mb-3">
 	            
 	            <div class="avatar me-3">
-	              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt="avatar" class="rounded-circle" />
+	              <c:if test="${list.base64 == null}">
+	                    <span class="avatar-initial rounded-circle ${list.two_name_color}"> 
+	                    	  ${list.two_name}
+	                    </span>
+	                </c:if>
+	                <c:if test="${list.base64 != null}">
+	                     <img
+	                       src="data:MIME;base64, ${list.base64}"
+	                       alt="user-avatar"
+	                       class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
+	                       height="32"
+	                                width="32"
+	                        />            	            
+				    </c:if>  
 	            </div>
 	            <div class="d-flex justify-content-between flex-grow-1">
 	              <div class="me-2">
@@ -204,7 +232,20 @@
 		          <li class="d-flex flex-wrap mb-3">
 		            
 		            <div class="avatar me-3">
-		              <img src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png" alt="avatar" class="rounded-circle" />
+		               <c:if test="${list.base64 == null}">
+	                    <span class="avatar-initial rounded-circle ${list.two_name_color}"> 
+	                    	  ${list.two_name}
+	                    </span>
+		                </c:if>
+		                <c:if test="${list.base64 != null}">
+		                     <img
+		                       src="data:MIME;base64, ${list.base64}"
+		                       alt="user-avatar"
+		                       class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0"
+		                       height="32"
+		                                width="32"
+		                       />            	            
+					    </c:if>  
 		            </div>
 		            <div class="d-flex justify-content-between flex-grow-1">
 		              <div class="me-2">

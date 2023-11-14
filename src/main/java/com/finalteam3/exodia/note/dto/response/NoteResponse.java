@@ -11,6 +11,9 @@ public class NoteResponse {
 	private String noteRead_read;
 	private String emp_name;
 	private String emp_email;
+	private String base64;
+	private String two_name;
+	private String two_name_color;
 	private int noteRead_no;
 	private boolean noteRead_isCanceled;
 }

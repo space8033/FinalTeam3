@@ -7,6 +7,8 @@
 
 
 
+
+
 let chatsock;
 function connect() {
 	
@@ -23,7 +25,7 @@ function connect() {
 }
 
 function onOpen() {
-	var empInfo_no = $("#alarmId").val();
+	var empInfo_no = $("#empInfoNo").val();
 		var chatNo = $("#chatNo").val();
 		console.log(empInfo_no+"넘버갖고오걸아");
 		console.log(chatNo+"챗넘버갖고오걸아");
@@ -500,6 +502,8 @@ document.addEventListener('DOMContentLoaded', function () {
     // Initialize PerfectScrollbar
     // ------------------------------
 
+    
+    
     if(chatList) {
     	var emp_no = "24";
 	    var data = {
@@ -517,6 +521,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	      	    var html = jQuery('<div>').html(result);
 	           var contents = html.find("div#chatList").html();
 	        	$("#app-chat-contacts").html(contents);
+	        	console.log("난채팅에잇는아이란다");
 	        	
 	           new PerfectScrollbar('.app-chat-contacts .sidebar-body', {
 	   		        wheelPropagation: false,

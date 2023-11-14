@@ -5,6 +5,34 @@
 
 //Javascript to handle the e-commerce product add page
 
+
+
+function unReadNotice(empInfo_no, notice_no) {
+	console.log(empInfo_no+"나인간번호");
+	console.log(notice_no+"나공지번호");
+	var postData = {
+			empInfo_no: empInfo_no,
+			notice_no: notice_no
+        };
+        
+        // AJAX 요청으로 데이터 전송
+        $.ajax({
+        	url: "/exodia/unReaderAlarm",
+            type: "POST",
+            data: postData,
+            success: function(response) {
+            	
+            	alert("알람 보내기 성공");
+            	
+            },
+            error: function() {
+                // 오류 처리
+                alert("데이터 전송 중 오류가 발생했습니다.");
+            }
+        });
+	
+	
+}
 (function () {
   // Comment editor
 

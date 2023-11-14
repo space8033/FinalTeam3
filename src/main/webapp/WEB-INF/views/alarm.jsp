@@ -85,6 +85,9 @@
 		                            <c:when test="${alarm.alarm_type == '공지'}">
 		                           		<span class="avatar-initial rounded-circle bg-label-warning"><i class="bx bx-bell"></i></span>
 		                            </c:when>
+		                            <c:when test="${alarm.alarm_type == '필독'}">
+		                           		<span class="avatar-initial rounded-circle bg-label-danger"><i class="bx bx-bell"></i></span>
+		                            </c:when>
 		                            <c:when test="${alarm.alarm_type == '문의'}">
 		                           		<span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-conversation"></i></span>
 		                            </c:when>
@@ -143,18 +146,11 @@
 	                         	 <p class="mb-0">${alarm.emp_name}님이 [${alarm.alarm_content}] 글에 새 댓글을 달았습니다.
 	                   			 </p>
 	                         </c:if>
-	                         
-
-	                         <c:if test="${alarm.alarm_type == '독촉'}">
+	                         <c:if test="${alarm.alarm_type == '필독'}">
 	                         	<h6 class="mb-1">필독사항 🚨</h6>
 	                         	 <p class="mb-0">필독사항을 확인해주세요. <br> [제목 : ${alarm.alarm_content}]
 	                   			 </p>
 	                         </c:if>
-	                         
-	                         
-	                         
-	                         
-	                         
 	                        
 	                         <small class="text-muted">${alarm.alarm_createdAt}</small>
 	                       </div>

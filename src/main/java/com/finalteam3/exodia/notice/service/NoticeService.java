@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.notice.dto.Notice;
+import com.finalteam3.exodia.notice.dto.NoticeUnreader;
 
 public interface NoticeService {
 	public List<Notice> getNoticeList(); //공지사항 목록
@@ -15,5 +16,6 @@ public interface NoticeService {
 	public void deleteByNoticeNo(int notice_no);//공지사항 삭제(update임) -> deletedat을 업데이트
 	public List<MediaDto> getMediaList(int noticeNo);//첨부파일 가져오기
 	public void insertNoticeReaders(Map<String, Object> map); //공지사항 읽은사람 noticeReaders에 저장
-	public List<String> getEmpinfoName(int notice_no);//전체 사원 이름 가져오기
+	public List<NoticeUnreader> getUnReader(int notice_no);//전체 사원 이름 가져오기
+	
 }
