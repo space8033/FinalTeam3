@@ -255,7 +255,7 @@ function buttonSend() {
 
 function sendMessage() {
 	var messageInput = $('.message-input').val();
-	var empInfo_no = $("#alarmId").val();
+	var empInfo_no = $("#empInfo_No").val();
 	var chatNo = $("#chatNo").val();
 	
 	const data = {
@@ -276,7 +276,7 @@ function sendMessage() {
 
 function onMessage(evt) {
 	var emp_no = $("#chatEmpInfoNo").val();
-	
+	console.log(emp_no+"누구니");
     var postdata = {
    		 emp_no: emp_no
    	};
@@ -369,7 +369,7 @@ function onMessage(evt) {
 			"message_content" : receive[2]
 			
 	};
-	var empInfo_no = $("#alarmId").val();
+	var empInfo_no = $("#empInfo_No").val();
 	
 	// 실시간 읽음 확인용
 	
@@ -377,6 +377,7 @@ function onMessage(evt) {
 		var checkDoubleElement = $('.bx.bx-check-double');
 	    checkDoubleElement.addClass('text-success');
 	}
+	console.log(data.empInfo_no+"값이나야혹시?");
 	
 	if(data.empInfo_no != empInfo_no && data.message_content != null) {
 		checkLR(data);

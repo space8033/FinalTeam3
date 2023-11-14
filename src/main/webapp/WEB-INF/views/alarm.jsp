@@ -86,7 +86,7 @@
 		                           		<span class="avatar-initial rounded-circle bg-label-warning"><i class="bx bx-bell"></i></span>
 		                            </c:when>
 		                            <c:when test="${alarm.alarm_type == '필독'}">
-		                           		<span class="avatar-initial rounded-circle bg-label-danger"><i class="bx bx-bell"></i></span>
+		                           		<span class="avatar-initial rounded-circle bg-label-danger"><i class="bx bx-error"></i></span>
 		                            </c:when>
 		                            <c:when test="${alarm.alarm_type == '문의'}">
 		                           		<span class="avatar-initial rounded-circle bg-label-success"><i class="bx bx-conversation"></i></span>
@@ -148,7 +148,7 @@
 	                         </c:if>
 	                         <c:if test="${alarm.alarm_type == '필독'}">
 	                         	<h6 class="mb-1">필독사항 🚨</h6>
-	                         	 <p class="mb-0">필독사항을 확인해주세요. <br> [제목 : ${alarm.alarm_content}]
+	                         	 <p class="mb-0">필독공지를 확인해주세요. <br> [제목 : ${alarm.alarm_content}]
 	                   			 </p>
 	                         </c:if>
 	                        
