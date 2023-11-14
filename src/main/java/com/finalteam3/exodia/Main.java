@@ -130,7 +130,12 @@ public class Main {
 
 	@GetMapping("/main")
 	public String main(Model model, Authentication authentication, HttpSession session, Integer projectNo) {
+		if(projectNo == null) {
+			projectNo = (Integer) session.getAttribute("projectNo");
+		}
+		
 		session.setAttribute("projectNo", projectNo);
+		
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		String emp_id = loginResponse.getEmp_id();
