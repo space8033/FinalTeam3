@@ -14,5 +14,5 @@ public interface MediaDao {
 	public MediaDto selectMediaByMno(int mno);
 	public MediaDto selectMediaFromNo(Map<String, Object> map);
 	public void deleteMediaByFromNo(Map<String, Object> map);
-	public void deleteMEdiaByMediaNo(int media_no);
+	public void deleteMediaByMediaNo(int media_no);
 }

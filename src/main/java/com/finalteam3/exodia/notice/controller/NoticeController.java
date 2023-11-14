@@ -1,5 +1,6 @@
 package com.finalteam3.exodia.notice.controller;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.Base64;
@@ -175,21 +176,47 @@ public class NoticeController {
 		
 		List<MediaDto> mediaList = noticeService.getMediaList(notice.getNotice_no());
 	    model.addAttribute("mediaList", mediaList);
-	    log.info("업데이트 첨부파일목록 : " + mediaList);
+	    
 		
 		return "noticeUpdate";
 	}
 	
 	//공지사항 업데이트
 	@PostMapping("/noticeUpdate")
-	public String noticeUpdateForm(Authentication authentication, int notice_no, Notice notice) {
-		log.info("noticeNo :" + notice_no);
-		log.info("업데이트잘됏니?" + notice.toString());
+	public String noticeUpdateForm(Authentication authentication,
+			@RequestParam("noticeNo") int noticeNo,
+			@RequestParam("noticeTitle") String noticeTitle,
+			@RequestParam("noticeContent") String noticeContent,
+			@RequestParam("files") List<MultipartFile> mfs) throws IOException {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
+		log.info("noticeNo : " + noticeNo);
+		log.info("noticeTitle : " + noticeNo);
+		log.info("noticeContent : " + noticeNo);
+		
+		Notice notice = new Notice();
+		notice.setNotice_no(noticeNo);
+		notice.setNotice_title(noticeTitle);
+		notice.setNotice_content(noticeContent);
 		noticeService.updateByNotice(notice);
-		return "noticeList";
+		
+		for(MultipartFile mf : mfs) {
+			if(!mf.isEmpty()) {
+		MediaDto mediaDto = new MediaDto();
+		mediaDto.setFrom_no(noticeNo);
+		mediaDto.setMedia_name(mf.getOriginalFilename());
+		mediaDto.setMedia_type(mf.getContentType());
+		mediaDto.setMedia_data(mf.getBytes());
+		mediaDto.setMedia_from("NOTICE");
+		
+		mediaService.insertNoticeFile(mediaDto);
+			}
+		}
+		log.info("미미ㅣ미디딩어어엉 :" + mfs);
+
+		
+		return "redirect:/noticeList";
 	}
 	
 	//공지사항 상세정보 열람
@@ -250,13 +277,17 @@ public class NoticeController {
 		return "noticeList";
 	}
 	
-	/*@PostMapping("/mediaDelete")
-	public String mediaDelete(Authentication authentication, int media_no) {
+
+	@PostMapping("/mediaDelete")
+	public String mediaDelete(Authentication authentication, @RequestParam("media_no") int media_no) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
+		log.info("미디어넘버를 잘 ㅂㄷ받아오나요?" + media_no);
 		mediaService.deleteMediaByMediaNo(media_no);
+		log.info("삭제 됌?");
 		
-	}*/
+		return "noticeDetail";
+	}
 
 }

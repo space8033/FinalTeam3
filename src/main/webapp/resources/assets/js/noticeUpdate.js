@@ -148,7 +148,7 @@ $(function () {
   }
 });
 
-$(document).ready(function() {
+/*$(document).ready(function() {
 	//add task
 		console.log("insert시작");
 	    $('#noticeSubmit').click(function() {
@@ -156,7 +156,8 @@ $(document).ready(function() {
 	        var noticeData = {
 	            notice_title: $('input[name=noticeTitle]').val(),
 	            notice_content: $('#noticeContent').val(),
-	            notice_no: $('#noticeNo').val()
+	            notice_no: $('#noticeNo').val(),
+	            
 	            //task_startdate: $('input[name=eventStartDate]').val(),
 	            //task_enddate: $('input[name=eventEndDate]').val()
 	        };
@@ -172,9 +173,9 @@ $(document).ready(function() {
 	            }
 	        });
 	    });
-});
+});*/
 
-$(document).ready(function () {
+/*$(document).ready(function () {
     $("a[name='file-delete']").on("click", function (e) {
         e.preventDefault();
         deleteFile($(this).closest('p'));
@@ -188,4 +189,4 @@ function deleteFile(elementToDelete) {
     }
 
     // TODO: 삭제할 로직 추가 (예: 서버 요청 등)
-}
+}*/

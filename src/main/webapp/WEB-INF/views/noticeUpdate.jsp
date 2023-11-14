@@ -285,12 +285,13 @@
 					    </div>
 					  </div>
 					</div>
-                    <button type="submit" id="noticeSubmit" class="btn btn-primary">수정</button>
+                    <button type="submit" form="noticeUpdate" id="noticeSubmit" class="btn btn-primary">수정</button>
                     
                   </div>
                 </div>
-
+				<form action="noticeUpdate" id="noticeUpdate" method="post" enctype="multipart/form-data">
                 <div class="row">
+                  <input name="noticeNo" type="hidden" value="${notice.notice_no}"/>
                   <!-- First column-->
                   <div class="col-12 col-lg-12">
                     <!-- Product Information -->
@@ -346,23 +347,56 @@
                               </div>
                             </div>
                             <div class="comment-editor border-0 pb-4" id="ecommerce-category-description">${notice.notice_content}</div>
-                            <textarea id="noticeContent" style="display: none"></textarea>
+                            <textarea id="noticeContent" name="noticeContent" style="display: none">${notice.notice_content}</textarea>
                             <div class="input-group">							
 								<input type="file" name="files" class="form-control" id="attach-file" multiple/>
 							</div>
 								<div class="file-group" style="padding-top:15px; padding-left:10px;">
 							        <c:forEach var="media" items="${mediaList}">
-							            <p>
+							            <p id="p${media.media_no}">
 							            	<span><i class='bx bx-file-blank'></i></span>
 							                <span>${media.media_name}</span>
-							                <span style="display: none;">${media.media_no}</span>
-							                <a href="#this" name="file-delete" style="border: 1px solid #ccc; padding: 5px 10px; display: inline-block; text-decoration: none; color: #333;"
+							                <span style="display: none;" id="media">${media.media_no}</span>
+							                <a href="#this" style="border: 1px solid #ccc; padding: 5px 10px; display: inline-block; text-decoration: none; color: #333;"
 							                   onclick="deleteFile(${media.media_no})">삭제</a>
 							            </p>
 							        </c:forEach>
 							    </div>
+							    
+							    <script>
+								    function deleteFile(media_no) {
+								    	console.log("미디어넘버를 잘 받아오나요?" + media_no);
+								    	if(confirm("삭제하시겠습니까?")){
+								       		 // AJAX 통신
+									        $.ajax({
+									            type: "POST",
+									            url: "/exodia/mediaDelete",
+									            data: { media_no: media_no },
+									            success: function (response) {
+									                // 성공적으로 서버에서 응답을 받았을 때 수행할 작업
+									                console.log("삭제가 돼?"); // 서버에서 보낸 응답을 콘솔에 출력 (디버깅용)
+									                const elementToDelete = document.getElementById('p'+media_no);
+
+									                // elementToDelete이 null이 아니면 숨기기
+									                if (elementToDelete) {
+									                    elementToDelete.remove();
+									                }
+									                // 여기에서 필요한 업데이트 또는 화면 조작을 수행
+									                // 예: 화면 갱신, 삭제된 항목 감춤 등
+									            },
+									            error: function (error) {
+									                // 서버 요청 중에 오류가 발생했을 때 수행할 작업
+									                console.log("제발...뭐가 문제야");
+									                console.error(error); // 에러를 콘솔에 출력 (디버깅용)
+									            }
+									        });
+								    		
+								    	}
+								    }
+								</script>
                           </div>
                         </div>
+                        </form>
                       </div>
                     </div>
                     <!-- /Product Information -->

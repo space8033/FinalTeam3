@@ -38,7 +38,7 @@
 		and from_no = #{from_no}
 	</delete>
 	
-	<delete id="deleteMEdiaByMediaNo" parameterType="int">
+	<delete id="deleteMediaByMediaNo" parameterType="int">
 		delete from media
 		where media_no = #{media_no}
 	</delete>
