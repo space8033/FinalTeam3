@@ -244,6 +244,7 @@
           <!-- / Navbar -->
 
           <!-- Content wrapper -->
+          
    <div class="content-wrapper">
    	<div class="container-xxl flex-grow-1 container-p-y">
     <!-- Content -->
@@ -319,6 +320,7 @@
             </div>
           </form>
 		</div>
+		<input type="hidden" value="${idList}" id="idList"/>
 		<div class="card-body pt-0">
             <div class="col-md-12">
             	<hr/>
@@ -336,7 +338,7 @@
                     </label>
                   </div>
                 </div>        
-             </form>
+               </form>
             </div>
             </div>
           </div>

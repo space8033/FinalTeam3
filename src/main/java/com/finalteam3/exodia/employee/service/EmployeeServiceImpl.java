@@ -1,5 +1,6 @@
 package com.finalteam3.exodia.employee.service;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
@@ -10,7 +11,6 @@ import java.util.regex.Pattern;
 
 import javax.annotation.Resource;
 
-import org.springframework.context.annotation.Primary;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -67,24 +67,28 @@ public class EmployeeServiceImpl implements EmployeeService{
    //회원 가입
    @Override
    @Transactional
-   public JoinResult join(JoinRequest joinRequest) {
+   public String join(JoinRequest joinRequest) {
       LoginRequest loginRequest = new LoginRequest();
       loginRequest.setEmp_id(joinRequest.getEmp_id());
-      //아이디 존재여부 확인
-      LoginResponse loginResponse = employeeDao.selectInfoByEmpId(loginRequest);
       
-      if(loginResponse == null) {
-         employeeDao.insertEmp(joinRequest);
-         int emp_no = employeeDao.selectNoByEmpId(joinRequest.getEmp_id());
-         
-         joinRequest.setEmp_no(emp_no);
-         employeeDao.insertEmpInfo(joinRequest);
-         
-         employeeDao.insertRole(joinRequest.getEmpinfo_no());
-         
-         return JoinResult.JOIN_SUCCESS;
-      }else {
-         return JoinResult.DUPLICATED_ID;
+      //아이디 존재여부 확인
+      try {
+    	  LoginResponse loginResponse = employeeDao.selectInfoByEmpId(loginRequest);
+    	  if(loginResponse == null) {
+    		  employeeDao.insertEmp(joinRequest);
+    		  int emp_no = employeeDao.selectNoByEmpId(joinRequest.getEmp_id());
+    		  
+    		  joinRequest.setEmp_no(emp_no);
+    		  employeeDao.insertEmpInfo(joinRequest);
+    		  
+    		  employeeDao.insertRole(joinRequest.getEmpinfo_no());
+    		  
+    		  return "success";
+    	  }else {
+    		  return "duplicated";    	  
+    	  }
+      } catch (Exception e) {
+		  return "duplicated";
       }
       
    }

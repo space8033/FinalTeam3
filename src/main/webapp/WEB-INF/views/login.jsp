@@ -170,6 +170,6 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/pages-auth.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/login.js"></script>
   </body>
 </html>
