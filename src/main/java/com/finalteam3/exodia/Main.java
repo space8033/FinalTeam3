@@ -126,7 +126,7 @@ public class Main {
 	      
 		return "userProfile";
 	}
-	
+
 	@RequestMapping("/main")
 	public String main(Model model, Authentication authentication, HttpSession session) {
 		session.setAttribute("projectNo", 0);

@@ -450,11 +450,11 @@
 	                              aria-expanded="false">
 	                              	프로젝트 1
 	                            </button>
-	                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
+	                            <!-- <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
 	                              <a class="dropdown-item" href="javascript:void(0);">프로젝트 2</a>
 	                              <a class="dropdown-item" href="javascript:void(0);">프로젝트 3</a>
 	                              <a class="dropdown-item" href="javascript:void(0);">프로젝트 4</a>
-	                            </div>
+	                            </div> -->
 	                          </div>
 	                        </div>
 	                      </div>
