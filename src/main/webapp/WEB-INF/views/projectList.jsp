@@ -15,12 +15,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>eCommerce Category List - Apps | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Project Management System</title>
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/img/backgrounds/pmslogo.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -234,12 +234,6 @@
                 <div class="text-truncate">사용자 등록</div>
               </a>
             </li>
-<%--             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user"></i>
-                <div class="text-truncate">사용자 등록</div>
-              </a>
-            </li> --%>
             
             <li class="menu-item">
               <a href="${pageContext.request.contextPath}/employee/userManagement" class="menu-link">
@@ -263,7 +257,7 @@
        <c:if test="${project_no == null}">
         <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
           <div class="app-brand demo">
-            <a href="${pageContext.request.contextPath}/main" class="app-brand-link">
+            <a href="javascript:alert('프로젝트를 선택 후 이용하세요!');" class="app-brand-link">
               <span class="app-brand-logo demo">
                 <svg
                   width="25"
@@ -415,12 +409,6 @@
                 <div class="text-truncate">사용자 등록</div>
               </a>
             </li>
-<%--             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/addUser" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user"></i>
-                <div class="text-truncate">사용자 등록</div>
-              </a>
-            </li> --%>
             
             <li class="menu-item">
               <a href="javascript:alert('프로젝트를 선택 후 이용하세요!');" class="menu-link">
@@ -437,8 +425,9 @@
         <!-- Layout container -->
         <div class="layout-page">
           <!-- Navbar -->
-
-           <%@ include file="/WEB-INF/views/header.jsp" %>
+			<div class="d-none">
+	           <%@ include file="/WEB-INF/views/header.jsp" %>
+			</div>
        
        </c:if>
 

@@ -241,7 +241,7 @@ $(document).ready(function() {
 	  var task_realstart = $("#flatpickr-date").val();
 	  var task_realend = $("#flatpickr-disabled-range").val();
 	  var task_status = $("#task-progress").val();
-	  console.log(emp_no);
+	  
 	  var data = {
 			  task_no : task_no,
 			  task_name : task_name,

@@ -31,8 +31,13 @@ $(document).ready(function() {
     });
 });
 
+function submitForm() {
+	console.log("나도 가쟈!");
+	document.getElementById('myForm').submit();
+}
+
 document.addEventListener('DOMContentLoaded', function (e) {
-  (function () {
+	(function () {
     // Form validation for Add new record
     if (formAuthentication) {
       const fv = FormValidation.formValidation(formAuthentication, {

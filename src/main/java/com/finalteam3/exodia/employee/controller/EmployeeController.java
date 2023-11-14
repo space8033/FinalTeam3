@@ -137,7 +137,7 @@ public class EmployeeController {
 	@PostMapping("/jjoin")
 	public String jjoin(JoinRequest joinRequest) {
 		if(employeeService.join(joinRequest).equals(JoinResult.JOIN_SUCCESS)) {
-			return "redirect:/employee/login";			
+			return "redirect:/main";			
 		}else {
 			return "/redirect:/employee/jjoin";
 		}
@@ -219,8 +219,8 @@ public class EmployeeController {
 	
 	@PostMapping("/poiJoin")
 	public String poiJoin() {
-	    
-		try {
+	    log.info("가쟈!");
+		/*try {
             FileInputStream file = new FileInputStream(new File(filePath, fileNm));
 
             // 엑셀 파일로 Workbook instance를 생성한다.
@@ -268,7 +268,7 @@ public class EmployeeController {
             file.close();
         } catch (IOException e) {
             e.printStackTrace();
-        }
+        }*/
 		
 		return "redirect:/employee/jjoin";
 	}

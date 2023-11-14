@@ -15,12 +15,12 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <title>Selects and tags - Forms | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
+    <title>Project Management System</title>
 
     <meta name="description" content="" />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/img/favicon/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="${pageContext.request.contextPath}/resources/assets/img/backgrounds/pmslogo.png" />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -250,8 +250,8 @@
               <div class="container-xxl flex-grow-1 container-p-y d-flex">
 
               <!-- Basic Bootstrap Table -->
-	              <div style="width : 50%; padding-top:1.625rem;">
-	              	<div class="card" style="height: 545px;">
+	              <div style="width : 50%">
+	              	<div class="card" style="height: 514px;">
 		                <h5 class="card-header">팀 목록</h5>
 		                <div class="table-responsive text-nowrap">
 		                  <table class="table">
@@ -402,7 +402,7 @@
 	              
               <!--/ Basic Bootstrap Table -->
 				<div style="width:50%">
-		            <div class="container-xxl flex-grow-1 container-p-y">
+		            <div class="container-xxl flex-grow-1">
 		
 		              <div class="row">
 		                <!-- Select2 -->
