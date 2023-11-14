@@ -6,6 +6,13 @@
 const formAuthentication = document.querySelector('#formAuthentication');
 
 $(document).ready(function() {
+	console.log("Dgadga");
+	var errorBox = $("#errorBox").val();
+	if(errorBox == "true") {
+		console.log("Dgadga");
+		alert("로그인 실패!");
+	}
+	
     var rememberMeCheckbox = $('#remember-me');
     var emailInput = $('#email');
     var loginButton = $('#btnLogin');

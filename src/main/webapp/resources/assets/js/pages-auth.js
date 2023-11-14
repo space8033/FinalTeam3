@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
     if (formAuthentication) {
       const fv = FormValidation.formValidation(formAuthentication, {
         fields: {
-          username: {
+        	emp_id: {
             validators: {
               notEmpty: {
                 message: '아이디를 입력하세요'
@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
               }
             }
           },
-          email: {
+          emp_email: {
             validators: {
               notEmpty: {
                 message: '이메일을 입력하세요'
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
               }
             }
           },
-          'email-username': {
+          'emp_email': {
             validators: {
               notEmpty: {
                 message: '아이디 혹은 이메일을 입력하세요'
@@ -55,34 +55,6 @@ document.addEventListener('DOMContentLoaded', function (e) {
               stringLength: {
                 min: 6,
                 message: '6글자 이상 입력하세요'
-              }
-            }
-          },
-          password: {
-            validators: {
-              notEmpty: {
-                message: '비밀번호를 입력해주세요'
-              },
-              stringLength: {
-                min: 6,
-                message: '비밀번호는 6글자 이상입니다.'
-              }
-            }
-          },
-          'confirm-password': {
-            validators: {
-              notEmpty: {
-                message: '비밀번호 확인을 입력해주세요.'
-              },
-              identical: {
-                compare: function () {
-                  return formAuthentication.querySelector('[name="password"]').value;
-                },
-                message: '비밀번호와 비밀번호 확인이 다릅니다.'
-              },
-              stringLength: {
-                min: 6,
-                message: '비밀번호 확인은 6글자 이상입니다.'
               }
             }
           },

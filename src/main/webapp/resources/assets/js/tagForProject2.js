@@ -222,38 +222,6 @@ $(document).ready(function() {
     console.log('invalid', e.detail);
   }
   
-  $("#registerButton").on("click", function(e) {
-	  e.preventDefault();
-	  
-	  var project_name = $("#fullname").val();
-	  var project_outline = $("#address").val();
-	  var emp_notes = TagifyUserList.value;
-	  var team_name = $("#TagifyBasic").val();
-	  var project_client = $("#pnumber").val();
-	  var project_date = $("flatpickr-range").val();
-	  
-	  var data = {
-			  project_name : project_name,
-			  project_outline : project_outline,
-			  emp_notes : emp_notes,
-			  team_name : team_name,
-			  project_client : project_client,
-			  project_date : project_date
-	  }
-	  console.log(data);
-	  $.ajax({
-		  url: "/exodia/project/addProject",
-		  method: "post",
-		  contentType: 'application/json',
-		  data: JSON.stringify(data),
-		  success: function(data) {
-			  window.location.href = "/exodia/employee/userManagement";
-		  },
-		  error: function(error) {
-			  console.log("아왜안떠왜왜왜");
-		  }
-	  });
-  });
   $("#modifyButton").on("click", function(e) {
 	  e.preventDefault();
 	  var project_no = $("#projectNoBox").val();
@@ -264,14 +232,26 @@ $(document).ready(function() {
 	  var project_client = $("#pnumber").val();
 	  var project_date = $("#flatpickr-range").val();
 	  
-	  var data = {
-			  project_no : project_no,
-			  project_name : project_name,
-			  project_outline : project_outline,
-			  emp_notes : emp_notes,
-			  team_names : team_names,
-			  project_client : project_client,
-			  project_date : project_date
+	  if(team_names.length == 0) {
+		  var data = {
+				  project_no : project_no,
+				  project_name : project_name,
+				  project_outline : project_outline,
+				  emp_notes : emp_notes,
+				  project_client : project_client,
+				  project_date : project_date
+		  };
+		  
+	  }else {
+		  var data = {
+				  project_no : project_no,
+				  project_name : project_name,
+				  project_outline : project_outline,
+				  emp_notes : emp_notes,
+				  team_names : team_names,
+				  project_client : project_client,
+				  project_date : project_date
+		  };
 	  }
 	  
 	  $.ajax({

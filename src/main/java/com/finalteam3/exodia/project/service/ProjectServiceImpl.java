@@ -82,18 +82,20 @@ public class ProjectServiceImpl implements ProjectService{
 	@Override
 	@Transactional
 	public void modifyProject(ProjectModifyResponse response) {
-		JSONArray teamNames = response.getTeam_names();
-		int length = teamNames.length();
-		for(int i = 0; i < length; i++) {
-			JSONObject obj = teamNames.getJSONObject(i);
-			String name = obj.get("value").toString();
-			
-			Map<String, Object> map = new HashMap<>();
-			map.put("project_no", response.getProject_no());
-			//map.put("empinfo_no", response.getProject_manager());
-			map.put("team_name", name);
-			
-			projectDao.insertTeam(map);
+		if(response.getTeam_names() != null) {
+			JSONArray teamNames = response.getTeam_names();
+			int length = teamNames.length();
+			for(int i = 0; i < length; i++) {
+				JSONObject obj = teamNames.getJSONObject(i);
+				String name = obj.get("value").toString();
+				
+				Map<String, Object> map = new HashMap<>();
+				map.put("project_no", response.getProject_no());
+				//map.put("empinfo_no", response.getProject_manager());
+				map.put("team_name", name);
+				
+				projectDao.insertTeam(map);
+			}
 		}
 		
 		String project_startdate = response.getProject_date().split(" to ")[0];

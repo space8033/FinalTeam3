@@ -63,6 +63,13 @@ public class EmployeeController {
 	public String loginForm() {
 		return "/login";
 	}
+
+	@GetMapping("/loginFailure")
+	public String loginFailure(Model model) {
+		model.addAttribute("error", "true");
+		
+		return "/login";
+	}
 	
 	@PostMapping("/confirmPassword")
 	@ResponseBody
