@@ -442,13 +442,12 @@
 	                        <div class="text-center">
 	                          <div class="dropdown">
 	                            <button
-	                              class="btn btn-sm btn-label-primary dropdown-toggle"
+	                              class="btn btn-sm btn-label-primary"
 	                              type="button"
 	                              id="growthReportId"
-	                              data-bs-toggle="dropdown"
 	                              aria-haspopup="true"
 	                              aria-expanded="false">
-	                              	프로젝트 1
+	                              	${project_name}
 	                            </button>
 	                            <!-- <div class="dropdown-menu dropdown-menu-end" aria-labelledby="growthReportId">
 	                              <a class="dropdown-item" href="javascript:void(0);">프로젝트 2</a>

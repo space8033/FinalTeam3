@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.finalteam3.exodia.calendar.service.CalendarService;
@@ -127,9 +128,9 @@ public class Main {
 		return "userProfile";
 	}
 
-	@RequestMapping("/main")
-	public String main(Model model, Authentication authentication, HttpSession session) {
-		session.setAttribute("projectNo", 0);
+	@GetMapping("/main")
+	public String main(Model model, Authentication authentication, HttpSession session, Integer projectNo) {
+		session.setAttribute("projectNo", projectNo);
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		String emp_id = loginResponse.getEmp_id();
@@ -139,10 +140,11 @@ public class Main {
 		model.addAttribute("empInfo_name", emp_name);
 		
 		//진척률
-		double rate = taskService.getProgressRate(0);
+		double rate = taskService.getProgressRate(projectNo);
 		model.addAttribute("progressRate", rate);
+		model.addAttribute("project_name", projectService.getProjectName(projectNo));
 		
-		ProjectModifyResponse mod = projectService.getProjectDetail(0);
+		ProjectModifyResponse mod = projectService.getProjectDetail(projectNo);
 		String start = mod.getProject_startdate().substring(2,7).replace('-', '.');
 		String end = mod.getProject_enddate().substring(2,7).replace('-', '.');
 		
@@ -150,7 +152,7 @@ public class Main {
 		model.addAttribute("end", end);
 		
 		//프로젝트에 해당하는 팀 리스트 받아오기
-		List<String> team_names = employeeDao.selectTeamname(0);
+		List<String> team_names = employeeDao.selectTeamname(projectNo);
 		model.addAttribute("team_names", team_names);
 		
 		List<TaskByTeamEmp> taskList = new ArrayList<>();
@@ -160,7 +162,7 @@ public class Main {
 			tte.setTeam_name(s);
 			
 			Map<String, Object> map = new HashMap<>();
-			map.put("project_no", 0);
+			map.put("project_no", projectNo);
 			map.put("team_name", s);
 			
 			List<TeamTaskResponse> ttr = taskService.getTeamTaskDetail(map);

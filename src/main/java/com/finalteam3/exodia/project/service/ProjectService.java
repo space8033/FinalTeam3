@@ -16,4 +16,5 @@ public interface ProjectService {
 	public ProjectModifyResponse getProjectDetail(int project_no);
 	public void modifyProject(ProjectModifyResponse response);
 	public List<ProjectListResponse> getAllProjectList(int empinfo_no);
+	public String getProjectName(int project_no);
 }

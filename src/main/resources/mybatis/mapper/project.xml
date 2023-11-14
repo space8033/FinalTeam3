@@ -51,4 +51,10 @@
 			project_enddate = #{project_enddate}, project_client = #{project_client}, project_manager = #{project_manager}
 		where project_no = #{project_no}
 	</update>
+	
+	<select id="selectNowProject" parameterType="int" resultType="String">
+		select project_name
+		from project
+		where project_no = #{project_no}
+	</select>
 </mapper>
