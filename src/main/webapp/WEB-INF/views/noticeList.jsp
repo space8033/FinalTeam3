@@ -312,7 +312,6 @@
         $(document).ready(function() {
             // card-header 요소 선택
             var cardHeader = $('.card-header');
-
             // 스타일 추가
             cardHeader.css('padding-right', '15px');
         });

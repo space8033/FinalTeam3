@@ -148,7 +148,7 @@ $(function () {
   }
 });
 
-$(document).ready(function() {
+/*$(document).ready(function() {
 	//add task
 		console.log("insert시작");
 	    $('#inquirySubmit').click(function() {
@@ -172,4 +172,20 @@ $(document).ready(function() {
 	            }
 	        });
 	    });
+});*/
+
+//등록 버튼 클릭 이벤트
+document.getElementById('inquirySubmit').addEventListener('click', function() {
+  var title = document.getElementById('ecommerce-product-name').value;
+  var content = document.getElementById('noticeContent').value;
+  var teamname = document.getElementById('selectpickerLiveSearch').value;
+  // 제목이나 내용이 없음222
+  if (!title || !content || content.trim() === "<p><br></p>") {
+    $('#modal-no-content').modal('show');
+  } else if (!teamname) {
+  	$('#modal-no-content2').modal('show');	
+  } else {
+    //폼 제출
+	  document.getElementById('inquiryUpdate').submit();
+  }
 });

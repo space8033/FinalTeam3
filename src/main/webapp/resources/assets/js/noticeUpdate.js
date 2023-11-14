@@ -190,3 +190,15 @@ function deleteFile(elementToDelete) {
 
     // TODO: 삭제할 로직 추가 (예: 서버 요청 등)
 }*/
+// 등록 버튼 클릭 이벤트
+document.getElementById('noticeSubmit').addEventListener('click', function() {
+  var title = document.getElementById('ecommerce-product-name').value;
+  var content = document.getElementById('noticeContent').value;
+  // 제목이나 내용이 없음222
+  if (!title || !content || content.trim() === "<p><br></p>") {
+    $('#modal-no-content').modal('show');
+  } else {
+    //폼 제출
+    document.getElementById('noticeUpdate').submit();
+  }
+});

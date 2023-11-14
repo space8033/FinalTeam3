@@ -374,9 +374,6 @@
 	                            <textarea id="noticeContent" name="noticeContent" style="display:none"></textarea>
 	                            <div class="input-group">							
 									<input type="file" name="files" class="form-control" id="attach-file" multiple/>
-									<div class="file-group">
-										<a href="#this" name="file-delete" style="border: 1px solid #ccc; padding: 5px 10px; display: inline-block; text-decoration: none; color: #333;">삭제</a>
-									</div>
 								</div>
 	                          </div>
 	                        </div>

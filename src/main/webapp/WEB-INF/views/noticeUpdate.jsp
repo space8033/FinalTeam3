@@ -285,8 +285,22 @@
 					    </div>
 					  </div>
 					</div>
-                    <button type="submit" form="noticeUpdate" id="noticeSubmit" class="btn btn-primary">수정</button>
-                    
+                    <button type="button" form="noticeUpdate" id="noticeSubmit" class="btn btn-primary">수정</button>
+                    <!-- 모달 -->
+                    <div class="modal" id="modal-no-content">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">내용을 입력하세요</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body"> 제목이나 내용을 입력해주세요. </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 				<form action="noticeUpdate" id="noticeUpdate" method="post" enctype="multipart/form-data">
@@ -318,32 +332,32 @@
                             <div class="comment-toolbar border-0 border-bottom">
                               <div class="d-flex justify-content-start">
                                 <span class="ql-formats">
-			                          <select class="ql-font"></select>
-			                          <select class="ql-size"></select>
-			                        </span>
-			                        <span class="ql-formats">
-			                          <button class="ql-bold"></button>
-			                          <button class="ql-italic"></button>
-			                          <button class="ql-underline"></button>
-			                          <button class="ql-strike"></button>
-			                        </span>
-			                        <span class="ql-formats">
-			                          <select class="ql-color"></select>
-			                          <select class="ql-background"></select>
-			                        </span>
-			                        <span class="ql-formats">
-			                          <button class="ql-script" value="sub"></button>
-			                          <button class="ql-script" value="super"></button>
-			                        </span>
-			                        <span class="ql-formats">
-			                          <button class="ql-header" value="1"></button>
-			                          <button class="ql-header" value="2"></button>
-			                          <button class="ql-blockquote"></button>
-			                          <button class="ql-code-block"></button>
-			                          <button class="ql-link"></button>
-	                                  <button class="ql-image"></button>
-	                                  <button class="ql-video"></button>
-			                        </span>
+		                          <select class="ql-font"></select>
+		                          <select class="ql-size"></select>
+		                        </span>
+		                        <span class="ql-formats">
+		                          <button class="ql-bold"></button>
+		                          <button class="ql-italic"></button>
+		                          <button class="ql-underline"></button>
+		                          <button class="ql-strike"></button>
+		                        </span>
+		                        <span class="ql-formats">
+		                          <select class="ql-color"></select>
+		                          <select class="ql-background"></select>
+		                        </span>
+		                        <span class="ql-formats">
+		                          <button class="ql-script" value="sub"></button>
+		                          <button class="ql-script" value="super"></button>
+		                        </span>
+		                        <span class="ql-formats">
+		                          <button class="ql-header" value="1"></button>
+		                          <button class="ql-header" value="2"></button>
+		                          <button class="ql-blockquote"></button>
+		                          <button class="ql-code-block"></button>
+		                          <button class="ql-link"></button>
+                                  <button class="ql-image"></button>
+                                  <button class="ql-video"></button>
+		                        </span>
                               </div>
                             </div>
                             <div class="comment-editor border-0 pb-4" id="ecommerce-category-description">${notice.notice_content}</div>
