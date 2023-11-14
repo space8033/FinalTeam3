@@ -52,7 +52,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class EmployeeController {
 	private String filePath = "C:\\Users\\KOSA\\Desktop";
-	private static String fileNm = "exodiahr.xlsx";
+	private static String fileNm = "register.xlsx";
 
 	@Resource
 	private EmployeeService employeeService;
