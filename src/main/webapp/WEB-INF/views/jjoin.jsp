@@ -244,6 +244,7 @@
           <!-- / Navbar -->
 
           <!-- Content wrapper -->
+          
    <div class="content-wrapper">
    	<div class="container-xxl flex-grow-1 container-p-y">
     <!-- Content -->
@@ -319,6 +320,7 @@
             </div>
           </form>
 		</div>
+		<input type="hidden" value="${idList}" id="idList"/>
 		<div class="card-body pt-0">
             <div class="col-md-12">
             	<hr/>
@@ -330,13 +332,13 @@
                     <label class="form-check-label custom-option-content" for="basicPlanMain1">
                       <span class="custom-option-body">
                         <img class="my-4" width=50 height=50 src="${pageContext.request.contextPath}/resources/assets/img/illustrations/excelIcon.png">
-                        <span class="custom-option-title"> 이쿠조 </span>
-                        <small> 엑셀 사용자 등록</small>
+                        <span class="custom-option-title"> register.xlsx </span>
+                        <small>바탕화면에 위치 시켜주세요</small>
                       </span>
                     </label>
                   </div>
                 </div>        
-             </form>
+               </form>
             </div>
             </div>
           </div>

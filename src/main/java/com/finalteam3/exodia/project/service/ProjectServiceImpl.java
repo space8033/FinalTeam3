@@ -120,4 +120,10 @@ public class ProjectServiceImpl implements ProjectService{
 		
 		return list;
 	}
+
+	@Override
+	public String getProjectName(int project_no) {
+		
+		return projectDao.selectNowProject(project_no);
+	}
 }

@@ -163,7 +163,7 @@ $(function () {
         	if(empNow == 0) {
         		return (
         				'<div class="d-inline-block text-nowrap">' +
-        				'<button class="btn btn-sm btn-icon"><i class="bx bx-paper-plane"></i></button>' +
+        				'<button class="btn btn-sm btn-icon" onclick="javascript:noteEmployee(' + $no + ')"><i class="bx bx-paper-plane"></i></button>' +
         				'<button class="btn btn-sm btn-icon"><i class="bx bx-chat"></i></button>' +
         				'<button class="btn btn-sm btn-icon delete-record" onclick="javascript:deleteEmployee(' + $no + ')"><i class="bx bx-trash"></i></button>' +
         				'</div>'
@@ -171,7 +171,7 @@ $(function () {
         	}else {
         		return (
         				'<div class="d-inline-block text-nowrap">' +
-        				'<button class="btn btn-sm btn-icon"><i class="bx bx-paper-plane"></i></button>' +
+        				'<button class="btn btn-sm btn-icon" onclick="javascript:noteEmployee(' + $no + ')"><i class="bx bx-paper-plane"></i></button>' +
         				'</div>'
         		);
         	}
@@ -390,4 +390,9 @@ function deleteEmployee(emp_no) {
 	}else {
 		alert('삭제가 취소되었습니다.');
 	}
+}
+function noteEmployee(emp_no) {
+	
+	window.location.href = '/exodia/note?emp_no=' + emp_no;
+	
 }

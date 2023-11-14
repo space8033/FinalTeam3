@@ -17,4 +17,5 @@ public interface ProjectDao {
 	public ProjectModifyResponse selectProjectDetail(int project_no);
 	public void updateProject(ProjectModifyResponse response);
 	public List<ProjectListResponse> selectProjectList(int empinfo_no);
+	public String selectNowProject(int project_no);
 }

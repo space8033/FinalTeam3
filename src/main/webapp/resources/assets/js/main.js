@@ -38,7 +38,7 @@
 	    
 	    /*updateChatList();*/
 	    
-	   
+	    updateChatList();
 	    showToast(msg, count, cmd, title, sender);
 	   
 	    
@@ -216,7 +216,7 @@
 
 	    // 공통 로직 수행
 	    handleWebSocketMessage(message);
-	    updateChatList();
+	    
 	    window.postMessage({ type: 'websocket_message', data: message }, '*');
 	};
 
@@ -599,6 +599,51 @@ function pageMove(alarm_no, alarm_type, alarm_typeNo) {
 	
 		
      	    	window.location.href = '/exodia/noticeDetail?notice_no=' + alarm_typeNo;
+		
+		
+	} else if (alarmType === '필독' && clickedItem !==excludedItem) {
+		var postData = {
+				alarm_no: alarmNo
+		};
+		
+		$.ajax({
+			url: "/exodia/alarmRead",
+			type: "POST",
+			data: postData 
+			
+		}).done(function(result) {
+			console.log("알람읽음처리완료");
+			
+			$.ajax({
+				url: '/exodia/getUckAlarmNo',
+				type: 'GET',
+				dataType: 'json', // 반환되는 데이터 형식을 JSON으로 지정
+				success: function(response) {
+					// 서버에서 받아온 숫자 값
+					var uckNo = response.uckNo;
+					
+					// 여기에서 숫자 값을 사용하도록 로직을 추가
+					console.log('Received number:', uckNo);
+					var v_alarmIcon = document.querySelector("#alarmIcon");
+					if (uckNo === 0) {
+						v_alarmIcon.classList.add('d-none');
+						console.log('uckNo is 0');
+					} else {
+						v_alarmIcon.classList.remove('d-none');
+						v_alarmIcon.innerText = uckNo;
+						console.log('uckNo is not 0');
+					}
+					
+				},
+				error: function(error) {
+					console.error('Error fetching data:', error);
+				}
+			});
+			
+		});
+		
+		
+		window.location.href = '/exodia/noticeDetail?notice_no=' + alarm_typeNo;
 		
 		
 	} else if (alarmType === '문의' && clickedItem !==excludedItem) {

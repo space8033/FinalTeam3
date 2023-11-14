@@ -83,6 +83,7 @@
                               data-overlay
                               data-target="#app-chat-contacts"></i>
                             <div class="flex-shrink-0 avatar">
+                            <input type="hidden" id="empInfoNo" value="${empInfo.empinfo_no}"/>
                              <c:if test="${buddy.base64 != null}">
                             
                                 <img
@@ -134,10 +135,11 @@
 						   <input type="hidden" id="chatNo" value="${chat.chatRoom_no}"/>
 						    <c:if test="${empInfo.empinfo_no != chat.empInfo_no}">
 						      <input type="hidden" id="chatEmpInfoNo" value="${chat.empInfo_no}"/>
+						      
 						    </c:if>
 						</c:forEach>
                       
-                      <input type="hidden" id="empInfoNo" value="${empInfo.empinfo_no}"/>
+                      
                       <div class="chat-history-body">
                         <ul class="list-unstyled chat-history mb-0">
                          

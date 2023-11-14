@@ -390,7 +390,7 @@
             </li>
             
             <li class="menu-item">
-              <a href="javascript:alert('프로젝트를 선택 후 이용하세요!');" class="menu-link">
+              <a href="${pageContext.request.contextPath}/project/addProject" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-file"></i>
                 <div class="text-truncate">프로젝트 등록</div>
               </a>

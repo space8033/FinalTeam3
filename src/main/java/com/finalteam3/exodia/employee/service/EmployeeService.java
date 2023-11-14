@@ -45,7 +45,7 @@ public interface EmployeeService {
 	public LoginResponse getLoginResponse(LoginRequest loginRequest);
 	public TimeLineResponse getTimeLineByEmpNo(Map<String, Object> map);
 	public EmployeeInfo getEmpInfo(int empNo);
-	public JoinResult join(JoinRequest joinRequest);
+	public String join(JoinRequest joinRequest);
 	public PasswordResult changePassword(PasswordRequest passwordRequest);
 	public EmpModifyResponse getModifyInfo(Map<String, Object> map);
 	public ModifyResult changeEmpInfo(ModifyRequest modifyRequest);

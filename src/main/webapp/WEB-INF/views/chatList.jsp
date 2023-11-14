@@ -91,7 +91,7 @@
                                       width="40"
                                       id="myImg"/>
                           </c:if>
-                        
+                        <input type="hidden" id="empInfo_No" value="${empInfo.empinfo_no}">
                         </div>
                         
                         

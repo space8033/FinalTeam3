@@ -39,7 +39,7 @@
 	</select>
 	
 	<select id="selectProjectList" resultType="ProjectListResponse" parameterType="int">
-		select p.project_no, p.project_name, p.project_startdate, p.project_enddate, p.project_client
+		select distinct p.project_no, p.project_name, p.project_startdate, p.project_enddate, p.project_client
 		from project p, team t
 		where p.project_no = t.project_no
 		and t.empinfo_no = #{empinfo_no}
@@ -51,4 +51,10 @@
 			project_enddate = #{project_enddate}, project_client = #{project_client}, project_manager = #{project_manager}
 		where project_no = #{project_no}
 	</update>
+	
+	<select id="selectNowProject" parameterType="int" resultType="String">
+		select project_name
+		from project
+		where project_no = #{project_no}
+	</select>
 </mapper>
