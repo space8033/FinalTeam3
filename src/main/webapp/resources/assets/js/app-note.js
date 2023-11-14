@@ -3660,12 +3660,12 @@ document.addEventListener('DOMContentLoaded', function () {
           }
           let $avatar =
             "<div class='d-flex flex-wrap align-items-center'>" +
-            "<div class='avatar avatar-xs me-2 w-px-20 h-px-20'>" +
-            "<img src='" +
+            "<div class='avatar avatar-xs'>" +
+            /*"<img src='" +
             assetsPath +
             'img/avatars/' +
             $(option.element).data('avatar') +
-            "' alt='avatar' class='rounded-circle' />" +
+            "' alt='avatar' class='rounded-circle' />" +*/
             '</div>' +
             option.text + $(option.element).data('subtext') +
             '</div>';

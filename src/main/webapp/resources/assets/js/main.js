@@ -35,9 +35,9 @@
 
 	    // 메인 페이지 토스트 알람 띄우기
 	    // 팝업 페이지 갱신
-	    $.get("/exodia/chatList?emp_no=1", function(result){
-			updateChatList(result);
-		});
+	    
+	    updateChatList();
+	    
 	    
 	    setTimeout(function () {
 	    	showToast(msg, count, cmd, title, sender);
@@ -209,15 +209,13 @@
 	    window.postMessage({ type: 'websocket_message', data: message }, '*');
 	};
 
-function updateChatList(result){
-	
-
-	    console.log("메인타고드러온놈");
-	   var chatList = $("#app-chat-contacts");
+function updateChatList(){
+	 var chatList = $("#app-chat-contacts");
 	   var chatRoom = $("#chatRoom");
 	   
 	   if(chatList && chatRoom) {
-	   
+		$.get("/exodia/chatList?emp_no=1", function(result){
+	      console.log("메인타고드러온놈");
       	   var html = jQuery('<div>').html(result);
            var contents = html.find("div#chatList").html();
         	$("#app-chat-contacts").html(contents);
@@ -281,8 +279,8 @@ function updateChatList(result){
    		           listItem0.classList.add('d-none');
    		         }
    		       }
-		   /*	});*/
-		
+
+		});
 	} 
 	
 }
