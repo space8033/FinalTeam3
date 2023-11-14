@@ -846,6 +846,7 @@
                       
                   </div> 
                 </div>
+                <input type="hidden" id="searchUserFrom" value="${emp_no}">
 
                 <!-- Compose Email -->
                 <div
