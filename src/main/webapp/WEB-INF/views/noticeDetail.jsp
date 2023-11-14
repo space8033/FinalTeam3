@@ -322,9 +322,10 @@
 							                          class="d-block rounded-circle"
 							                          height="50"
 							                          width="50"
-							                          id="uploadedAvatar" />            	            
+							                          id="uploadedAvatar"
+							                          style="margin-bottom:7px;" />            	            
 						                        </c:if>   
-                                                <div class="flex-grow-1 ms-1">
+                                                <div class="flex-grow-1 ms-3">
                                                    <h6 class="m-0" id="replyWriter" name="replyWriter">${notice.empinfo_name}</h6>
                                                    <small class="text-muted" id="replyWriterEmail"
                                                       name="replyWriterEmail">${notice.empinfo_email}</small>
