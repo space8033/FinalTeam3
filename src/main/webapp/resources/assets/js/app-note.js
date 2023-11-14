@@ -3660,7 +3660,7 @@ document.addEventListener('DOMContentLoaded', function () {
           }
           let $avatar =
             "<div class='d-flex flex-wrap align-items-center'>" +
-            "<div class='avatar avatar-xs'>" +
+            "<div class='py-2'>" +
             /*"<img src='" +
             assetsPath +
             'img/avatars/' +

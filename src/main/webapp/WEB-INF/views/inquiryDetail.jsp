@@ -293,17 +293,49 @@
 											
 											<p>
 												<div class="d-flex align-items-center mb-sm-0 mb-3">
-											    <%-- <img
-											      src="${pageContext.request.contextPath}/resources/assets/img/avatars/1.png"
-												  alt="user-avatar"
-												  class="flex-shrink-0 rounded-circle me-2"
-												  height="38"
-												  width="38" /> --%>
 												<c:if test="${notice.photo == null}">
-						                        	<span class="avatar-initial rounded-circle" id="nameProfile" 
-						                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
-						                        	${notice.twoname} 
-						                        	</span>
+														<c:if test="${notice.emp_no % 7 == 0}">
+								                        	<span class="avatar-initial rounded-circle bg-label-success" id="nameProfile" 
+								                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${notice.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${notice.emp_no % 7 == 1}">
+								                        	<span class="avatar-initial rounded-circle bg-label-primary" id="nameProfile" 
+								                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${notice.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${notice.emp_no % 7 == 2}">
+								                        	<span class="avatar-initial rounded-circle bg-label-warning" id="nameProfile" 
+								                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${notice.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${notice.emp_no % 7 == 3}">
+								                        	<span class="avatar-initial rounded-circle bg-label-danger" id="nameProfile" 
+								                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${notice.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${notice.emp_no % 7 == 4}">
+								                        	<span class="avatar-initial rounded-circle bg-label-info" id="nameProfile" 
+								                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${notice.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${notice.emp_no % 7 == 5}">
+								                        	<span class="avatar-initial rounded-circle bg-label-dark" id="nameProfile" 
+								                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${notice.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${notice.emp_no % 7 == 6}">
+								                        	<span class="avatar-initial rounded-circle bg-label-secondary" id="nameProfile" 
+								                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${notice.twoname} 
+								                        	</span>
+					                                	</c:if>
 						                        </c:if>
 						                        <c:if test="${notice.photo != null}">
 							                        <img
@@ -312,10 +344,11 @@
 							                          class="d-block rounded-circle"
 							                          height="50"
 							                          width="50"
-							                          id="uploadedAvatar" />            	            
+							                          id="uploadedAvatar"
+							                          style="margin-bottom:7px;"/>            	            
 						                        </c:if>
-												<div class="flex-grow-1 ms-1">
-												  <h6 class="m-0" id="replyWriter" name="replyWriter">${notice.empinfo_name}</h6>
+												<div class="flex-grow-1 ms-3">
+												  <h6 class="mb-1" id="replyWriter" name="replyWriter">${notice.empinfo_name}</h6>
 												  <small class="text-muted" id="replyWriterEmail" name="replyWriterEmail">${notice.empinfo_email}</small>
 												  <small class="mb-0 me-3 text-muted" id="replyCreatedat" name="replyCreatedat">  /  ${notice.notice_createdat}</small>											    
 												</div>
@@ -398,28 +431,66 @@
 										  <hr />
 										     <c:set var="replyCount" value="${fn:length(replyList)}" />
 										  <p>
-									         <span class="title"><strong>댓글</strong></span> : ${replyCount}개 <br/>
+									         <span class="tit le"><strong>댓글</strong></span> : ${replyCount}개 <br/>
 									     </p> 
 									     <c:forEach var="reply" items="${replyList}" varStatus="a">
 										  <div class="card email-card-last mx-sm-4 mx-3 mt-4 border" id="reply${reply.reply_no}">
 										    <div class="card-header d-flex justify-content-between align-items-center flex-wrap border-bottom">
 											  <div class="d-flex align-items-center mb-sm-0 mb-3">
 												<c:if test="${reply.photo == null}">
-						                        	<span class="avatar-initial rounded-circle" id="nameProfile" 
-						                        	style="width :50px; height: 50px; font-size: 20px; display: flex; align-items: center; justify-content: center;"> 
-						                        	${reply.twoname} 
-						                        	</span>
+													<c:if test="${reply.emp_no % 7 == 0}">
+								                        	<span class="avatar-initial rounded-circle bg-label-success" id="nameProfile" 
+								                        	style="width :40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${reply.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${reply.emp_no % 7 == 1}">
+								                        	<span class="avatar-initial rounded-circle bg-label-primary" id="nameProfile" 
+								                        	style="width :40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${reply.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${reply.emp_no % 7 == 2}">
+								                        	<span class="avatar-initial rounded-circle bg-label-warning" id="nameProfile" 
+								                        	style="width :40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${reply.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${reply.emp_no % 7 == 3}">
+								                        	<span class="avatar-initial rounded-circle bg-label-danger" id="nameProfile" 
+								                        	style="width :40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${reply.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${reply.emp_no % 7 == 4}">
+								                        	<span class="avatar-initial rounded-circle bg-label-info" id="nameProfile" 
+								                        	style="width :40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${reply.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${reply.emp_no % 7 == 5}">
+								                        	<span class="avatar-initial rounded-circle bg-label-dark" id="nameProfile" 
+								                        	style="width :40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${reply.twoname} 
+								                        	</span>
+					                                	</c:if>
+					                                	<c:if test="${reply.emp_no % 7 == 6}">
+								                        	<span class="avatar-initial rounded-circle bg-label-secondary" id="nameProfile" 
+								                        	style="width :40px; height: 40px; font-size: 16px; display: flex; align-items: center; justify-content: center;"> 
+								                        	${reply.twoname} 
+								                        	</span>
+					                                	</c:if>
 						                        </c:if>
 						                        <c:if test="${reply.photo != null}">
 							                        <img
 							                          src="data:MIME;base64, ${reply.photo}"
 							                          alt="user-avatar"
 							                          class="d-block rounded-circle"
-							                          height="50"
-							                          width="50"
+							                          height="40"
+							                          width="40"
 							                          id="uploadedAvatar" />            	            
 						                        </c:if>
-												<div class="flex-grow-1 ms-1">
+												<div class="flex-grow-1 ms-3">
 												  <h6 class="m-0" id="replyWriter" name="replyWriter">${reply.empinfo_name}</h6>
 												  <small class="text-muted" id="replyWriterEmail" name="replyWriterEmail">${reply.empinfo_email}</small>
 												  <small class="mb-0 me-3 text-muted" id="replyCreatedat" name="replyCreatedat">  /  ${reply.reply_createdat}</small>											    
@@ -467,7 +538,9 @@
 					                          </div>
 				                          </div>
 			                             </c:forEach>
- 
+ 										
+ 										<!-- 댓글 작성 -->
+ 										
 									     	<form action="#" id="replyDetail" enctype="multipart/form-data">
 						                        <div class="card email-card-last mx-sm-4 mx-3 mt-4 border">
 													<div class="card-body pt-3" style="padding-bottom:0px;">											
