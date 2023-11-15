@@ -159,12 +159,14 @@ $(function () {
           searchable: false,
           orderable: false,
           render: function (data, type, full, meta) {
-        	var $no = full['emp_no']
-        	if(empNow == 0) {
+        	var $no = full['emp_no'];
+        	var $name = full['empinfo_name'];
+        	
+        	if(empNow == 0 || empNow == 1) {
         		return (
         				'<div class="d-inline-block text-nowrap">' +
         				'<button class="btn btn-sm btn-icon" onclick="javascript:noteEmployee(' + $no + ')"><i class="bx bx-paper-plane"></i></button>' +
-        				'<button class="btn btn-sm btn-icon"><i class="bx bx-chat"></i></button>' +
+        				'<button class="btn btn-sm btn-icon" onclick="javascript:initPassword(\'' + $name + '\', \'' + $no + '\')"><i class="bx bx-reset"></i></button>' +
         				'<button class="btn btn-sm btn-icon delete-record" onclick="javascript:deleteEmployee(' + $no + ')"><i class="bx bx-trash"></i></button>' +
         				'</div>'
         		);
@@ -391,6 +393,23 @@ function deleteEmployee(emp_no) {
 		alert('삭제가 취소되었습니다.');
 	}
 }
+
+function initPassword(empinfo_name, emp_no) {
+	if(confirm(empinfo_name + '의 비밀번호를 초기화하시겠습니까?')) {
+		$.ajax({
+			type: 'post',
+			url: '/exodia/employee/initEmpPassword', 
+			data: {emp_no : emp_no}, 
+			success: function(data) {
+				alert(empinfo_name + '의 비밀번호가 초기화되었습니다.');
+				location.reload();
+			}
+		});		
+	}else {
+		alert('비밀번호 초기화가 취소되었습니다.');
+	}
+}
+
 function noteEmployee(emp_no) {
 	
 	window.location.href = '/exodia/note?emp_no=' + emp_no;

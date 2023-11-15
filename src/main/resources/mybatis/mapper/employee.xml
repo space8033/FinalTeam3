@@ -225,6 +225,10 @@
 	<update id="updateTeamDuty" parameterType="Map">
 		update team set team_duty = #{team_duty} where project_no = #{project_no} and empinfo_no = 0 and team_name = #{team_name}
 	</update>
+
+	<update id="initPassword" parameterType="int">
+		update emp set emp_password = '{noop}0000', emp_isinit = 1 where emp_no = #{emp_no}
+	</update>
 	
 	<update id="deleteEmp" parameterType="int">
 		update emp set emp_deletedat = to_char(sysdate,'yyyy.mm.dd hh24:mi:ss') where emp_no = #{emp_no}
@@ -292,5 +296,6 @@
 		and t.empinfo_no = i.empinfo_no
 		and i.emp_no = e.emp_no
         and i.emp_no = #{emp_no}
+        FETCH FIRST 1 ROW ONLY
 	</select>
 </mapper>

@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.request.EmpManageRequest;
 import com.finalteam3.exodia.employee.dto.request.JoinList;
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
@@ -56,6 +57,8 @@ public class EmployeeController {
 
 	@Resource
 	private EmployeeService employeeService;
+	@Resource
+	private EmployeeDao employeeDao;
 	@Resource
 	private MediaService mediaService;
 	
@@ -381,5 +384,11 @@ public class EmployeeController {
 	@ResponseBody
 	public void deleteEmp(int emp_no) {
 		employeeService.deleteEmp(emp_no);
+	}
+	
+	@PostMapping("/initEmpPassword")
+	@ResponseBody
+	public void initEmpPassword(int emp_no) {
+		employeeDao.initPassword(emp_no);
 	}
 }

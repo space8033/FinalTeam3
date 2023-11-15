@@ -218,11 +218,8 @@ public class AlarmController {
 		
 		int empInfoNo = Integer.parseInt(empInfo_no);
 		int noticeNo = Integer.parseInt(notice_no);
-		log.info(empInfoNo+"나엠프인포");
-		log.info(noticeNo+"노티스 넘버");
 		
 		Notice notice = noticeDao.selectDetailByNoticeNo(noticeNo);
-		log.info(notice.toString()+"나노티스");
 		AlarmRequest alarm = new AlarmRequest();
 		alarm.setAlarm_content(notice.getNotice_title());
 		alarm.setAlarm_isRead(false);
@@ -246,11 +243,6 @@ public class AlarmController {
 		 int uckNo = alarmService.uckAlarmCount(empInfo.getEmpinfo_no());
 		 int uckChatNo = chatService.getUckChatMsgAll(empInfo.getEmpinfo_no());
 		 
-		 
-		 
-		 
-		 
-
         // 숫자 값을 Map에 담아 JSON으로 반환
         Map<String, Integer> response = new HashMap<>();
         response.put("uckNo", uckNo);
@@ -259,54 +251,16 @@ public class AlarmController {
         return response;
      }
 	 
-	 @GetMapping("/getUserInfo")
-	 @ResponseBody
-	 public Map<String, Object> getUserInfo(Authentication authentication) {
-		 EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		 LoginResponse loginResponse = empDetails.getLoginResponse();
-		 EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
-		 
-		 List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
-         int randomIndex = (loginResponse.getEmp_no()%7);
-		 Map<String, Object> profile = new HashMap<>();
-		 profile.put("media_from", "EMP");
-		 profile.put("from_no", loginResponse.getEmp_no());
-      
-		 String base64 = "";
-         MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
-         if(mediaDto != null) {
-    	   base64 = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
-    	  
-         }
-		
-		 String two_name = empInfo.getEmpinfo_name().substring(empInfo.getEmpinfo_name().length() - 2);
-		 String two_name_color = myList.get(randomIndex);
-		 
-		 
-		 // 숫자 값을 Map에 담아 JSON으로 반환
-		 Map<String, Object> response = new HashMap<>();
-		 response.put("two_name", two_name);
-		 response.put("two_name_color", two_name_color);
-		 response.put("base64", base64);
-		 
-		 return response;
-	 }
 	 
 	 @GetMapping("/getInquiryNo")
 	 @ResponseBody
 	 public int getInquiryNo(Authentication authentication, String reply_no) {
 		 EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		 LoginResponse loginResponse = empDetails.getLoginResponse();
-		 log.info(reply_no+"뀨?잘받아오니?");
 		 EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		 int replyNo = Integer.parseInt(reply_no);
 		 Reply reply = inquiryService.getReplyByReplyNo(replyNo);
-		 log.info(reply.toString()+"리플라이 못가져오니?ㅇㅅㅇ");
 		 int response = reply.getNotice_no();
-		 
-		 
-		 // 숫자 값을 Map에 담아 JSON으로 반환
-		 
 		 
 		 return response;
 	 }

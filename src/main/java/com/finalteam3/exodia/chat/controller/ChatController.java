@@ -103,7 +103,6 @@ public class ChatController {
 	public String chatRoom(HttpSession session, @RequestParam(name= "emp_no", required=false) String emp_no, Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
-		log.info(emp_no+"누가 널이지?");
 		//내정보
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
@@ -177,7 +176,6 @@ public class ChatController {
 		chatMsg.setChatRoom_no(chat_no);
 		chatMsg.setEmpInfo_no(empInfo.getEmpinfo_no());
 		chatService.updateMessageRead(chatMsg);
-		log.info("업데이트 성공이요");
 		return "redirect:/chatRoom";
 	}
 	

@@ -401,7 +401,20 @@
 		                    <div class="card-body">
 		                      <div class="row">
 		                        <!-- Basic -->
-		
+								<div class="col-md-10 mb-4">
+		                          <label for="selectpickerLiveSearch" class="form-label">팀 설정</label>
+		                          <select
+		                            id="selectpickerLiveSearch"
+		                            class="selectpicker w-100"
+		                            data-style="btn-default"
+		                            data-live-search="true">
+		                            <option data-tokens="ketchup mustard">-------팀을 선택해주세요-------</option>
+		                            <c:forEach var="teamName" items="${list}">
+			                            <option data-tokens="ketchup mustard">${teamName.team_name}</option>
+		                            </c:forEach>
+		                          </select>
+		                        </div>
+		                        
 		                        <div class="col-md-10 mb-4">
 		                          <label for="selectpickerIcons" class="form-label">권한 구분</label>
 		                          <select
@@ -414,21 +427,6 @@
 		                            <!-- <option data-icon="bx">ROLE_PM</option> -->
 		                            <option data-icon="bx" value="ROLE_PL">팀장</option>
 		                            <option data-icon="bx" value="ROLE_EMP">팀원</option>
-		                          </select>
-		                        </div>
-		                        
-		                          <!-- Live Search -->
-		                        <div class="col-md-10 mb-4">
-		                          <label for="selectpickerLiveSearch" class="form-label">팀 설정</label>
-		                          <select
-		                            id="selectpickerLiveSearch"
-		                            class="selectpicker w-100"
-		                            data-style="btn-default"
-		                            data-live-search="true">
-		                            <option data-tokens="ketchup mustard">-------팀을 선택해주세요-------</option>
-		                            <c:forEach var="teamName" items="${list}">
-			                            <option data-tokens="ketchup mustard">${teamName.team_name}</option>
-		                            </c:forEach>
 		                          </select>
 		                        </div>
 		                        
