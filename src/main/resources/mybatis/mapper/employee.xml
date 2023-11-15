@@ -292,5 +292,6 @@
 		and t.empinfo_no = i.empinfo_no
 		and i.emp_no = e.emp_no
         and i.emp_no = #{emp_no}
+        FETCH FIRST 1 ROW ONLY
 	</select>
 </mapper>

@@ -114,7 +114,7 @@ public class Main {
 		return "main";
 	}
 	
-	@RequestMapping("/mainCalendar")
+	@GetMapping("/mainCalendar")
 	public String mainCalendar(Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
@@ -183,7 +183,7 @@ public class Main {
 		 String base64 = "";
         MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
         if(mediaDto != null) {
-   	   base64 = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
+        	base64 = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
    	  
         }
 		

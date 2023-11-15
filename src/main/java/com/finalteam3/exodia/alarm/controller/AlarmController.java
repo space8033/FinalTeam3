@@ -243,11 +243,6 @@ public class AlarmController {
 		 int uckNo = alarmService.uckAlarmCount(empInfo.getEmpinfo_no());
 		 int uckChatNo = chatService.getUckChatMsgAll(empInfo.getEmpinfo_no());
 		 
-		 
-		 
-		 
-		 
-
         // 숫자 값을 Map에 담아 JSON으로 반환
         Map<String, Integer> response = new HashMap<>();
         response.put("uckNo", uckNo);
@@ -266,10 +261,6 @@ public class AlarmController {
 		 int replyNo = Integer.parseInt(reply_no);
 		 Reply reply = inquiryService.getReplyByReplyNo(replyNo);
 		 int response = reply.getNotice_no();
-		 
-		 
-		 // 숫자 값을 Map에 담아 JSON으로 반환
-		 
 		 
 		 return response;
 	 }
