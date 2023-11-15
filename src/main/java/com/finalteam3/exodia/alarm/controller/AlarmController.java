@@ -256,38 +256,6 @@ public class AlarmController {
         return response;
      }
 	 
-	 @GetMapping("/getUserInfo")
-	 @ResponseBody
-	 public Map<String, Object> getUserInfo(Authentication authentication) {
-		 EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		 LoginResponse loginResponse = empDetails.getLoginResponse();
-		 EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
-		 
-		 List<String> myList = Arrays.asList("bg-label-success", "bg-label-primary", "bg-label-warning", "bg-label-danger", "bg-label-info", "bg-label-dark", "bg-label-secondary");
-         int randomIndex = (loginResponse.getEmp_no()%7);
-		 Map<String, Object> profile = new HashMap<>();
-		 profile.put("media_from", "EMP");
-		 profile.put("from_no", loginResponse.getEmp_no());
-      
-		 String base64 = "";
-         MediaDto mediaDto = mediaDao.selectMediaFromNo(profile);
-         if(mediaDto != null) {
-    	   base64 = Base64.getEncoder().encodeToString(mediaDto.getMedia_data());
-    	  
-         }
-		
-		 String two_name = empInfo.getEmpinfo_name().substring(empInfo.getEmpinfo_name().length() - 2);
-		 String two_name_color = myList.get(randomIndex);
-		 
-		 
-		 // 숫자 값을 Map에 담아 JSON으로 반환
-		 Map<String, Object> response = new HashMap<>();
-		 response.put("two_name", two_name);
-		 response.put("two_name_color", two_name_color);
-		 response.put("base64", base64);
-		 
-		 return response;
-	 }
 	 
 	 @GetMapping("/getInquiryNo")
 	 @ResponseBody
