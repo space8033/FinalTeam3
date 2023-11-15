@@ -218,11 +218,8 @@ public class AlarmController {
 		
 		int empInfoNo = Integer.parseInt(empInfo_no);
 		int noticeNo = Integer.parseInt(notice_no);
-		log.info(empInfoNo+"나엠프인포");
-		log.info(noticeNo+"노티스 넘버");
 		
 		Notice notice = noticeDao.selectDetailByNoticeNo(noticeNo);
-		log.info(notice.toString()+"나노티스");
 		AlarmRequest alarm = new AlarmRequest();
 		alarm.setAlarm_content(notice.getNotice_title());
 		alarm.setAlarm_isRead(false);
@@ -297,11 +294,9 @@ public class AlarmController {
 	 public int getInquiryNo(Authentication authentication, String reply_no) {
 		 EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		 LoginResponse loginResponse = empDetails.getLoginResponse();
-		 log.info(reply_no+"뀨?잘받아오니?");
 		 EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		 int replyNo = Integer.parseInt(reply_no);
 		 Reply reply = inquiryService.getReplyByReplyNo(replyNo);
-		 log.info(reply.toString()+"리플라이 못가져오니?ㅇㅅㅇ");
 		 int response = reply.getNotice_no();
 		 
 		 
