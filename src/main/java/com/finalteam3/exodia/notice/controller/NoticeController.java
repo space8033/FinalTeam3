@@ -56,6 +56,8 @@ public class NoticeController {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		int emp_no = empDetails.getLoginResponse().getEmp_no();
+		String emp_id = loginResponse.getEmp_id();
+		model.addAttribute("emp_id", emp_id);
 		
 		model.addAttribute("emp_no", emp_no);
 		
@@ -162,6 +164,8 @@ public class NoticeController {
 	public String noticeUpdateForm(Authentication authentication, int notice_no, Model model) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
+		String emp_id = loginResponse.getEmp_id();
+		model.addAttribute("emp_id", emp_id);
 		
 		Notice notice = noticeService.getNoticeDetail(notice_no);
 		model.addAttribute("notice", notice);
@@ -210,6 +214,8 @@ public class NoticeController {
 	public String noticeDetail(Authentication authentication, int notice_no, Model model){
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
+		String emp_id = loginResponse.getEmp_id();
+		model.addAttribute("emp_id", emp_id);
 		
 		model.addAttribute("now_emp_no", loginResponse.getEmp_no());
 
