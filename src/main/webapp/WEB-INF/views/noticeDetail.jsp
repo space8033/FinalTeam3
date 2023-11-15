@@ -333,7 +333,7 @@
                                                 </div>
 
                                                 <!-- 공지사항 안 읽은 사람 목록 -->
-                                                <c:if test="${now_emp_no == 0}">
+                                                <c:if test="${now_emp_no == 0 || now_emp_no == 1}">
 	                                                <div style="disply: flex; flex-direction: column;">
 	                                                   <!-- Icon Dropdown -->
 	                                                   <div class="col-lg-3 col-sm-6 col-12">

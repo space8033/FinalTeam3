@@ -42,6 +42,17 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet"
+		href="${pageContext.request.contextPath}/resources/assets/vendor/libs/fullcalendar/fullcalendar.css" />
+	<link rel="stylesheet"
+		href="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.css" />
+	<link rel="stylesheet"
+		href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
+	<link rel="stylesheet"
+		href="${pageContext.request.contextPath}/resources/assets/vendor/libs/quill/editor.css" />
+	<link rel="stylesheet"
+		href="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/styles/index.min.css" />
+	    
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/apex-charts/apex-charts.css" />
 
     <!-- Page CSS -->
@@ -55,7 +66,7 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
     <!-- calendar -->
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+    <!-- <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script> -->
     <script>
 
       document.addEventListener('DOMContentLoaded', function() {
@@ -285,13 +296,93 @@
 			            <div class="flex-grow-1 container-p-y">
 			              <div class="card app-calendar-wrapper">
 			                <div class="row g-0">
-			                  <div id='calendar' style="padding:30px;"></div>
+			                  <div class="col app-calendar-content">
+									<div class="card shadow-none border-0">
+										<div class="card-body pb-0">
+											<!-- FullCalendar -->
+											<div id="calendar"></div>
+										</div>
+									</div>
+									<div class="app-overlay"></div>
+									<!-- FullCalendar Offcanvas -->
+									<div class="offcanvas offcanvas-end event-sidebar"
+										tabindex="-1" id="addEventSidebar"
+										aria-labelledby="addEventSidebarLabel">
+										<div class="offcanvas-header border-bottom">
+											<h5 class="offcanvas-title mb-2" id="addEventSidebarLabel"></h5>
+											<button type="button" class="btn-close text-reset"
+												data-bs-dismiss="offcanvas" aria-label="Close"></button>
+										</div>
+										<div class="offcanvas-body">
+											<form class="event-form pt-0" id="eventForm" name="CalendarRequest">
+<!-- 											<form class="event-form pt-0" id="eventForm" action="/deleteCalendar" method="post"
+												name="CalendarRequest" onsubmit="return false"> -->
+												<div class="mb-3">
+													<label class="form-label" for="eventTitle">제목</label> <input
+														type="text" class="form-control" id="eventTitle"
+														name="eventTitle" />
+												</div>
+												<div class="mb-3">
+													<label class="form-label" for="eventDescription">내용</label>
+													<textarea class="form-control" name="eventDescription"
+														id="eventDescription"></textarea>
+												</div>
+												<div class="mb-3">
+													<label class="form-label" for="eventLabel">분류</label> <select
+														class="select2 select-event-label form-select"
+														id="eventLabel" name="eventLabel">
+														<!-- <option data-label="primary" value="Business" selected>업무</option> -->
+														<option data-label="danger" value="Personal" selected="selected">개인 일정</option>
+														<option data-label="success" value="Holiday">휴가</option>
+														<option data-label="info" value="ETC">기타</option>
+													</select>
+												</div>
+												<div class="mb-3">
+													<label class="form-label" for="eventStartDate">시작 날짜</label>
+													<input type="text" class="form-control"
+														id="eventStartDate" name="eventStartDate" />
+												</div>
+												<div class="mb-3">
+													<label class="form-label" for="eventEndDate">종료 날짜</label>
+													<input type="text" class="form-control" id="eventEndDate"
+														name="eventEndDate" />
+												</div>
+												<div class="mb-3">
+													<label class="switch"> <input type="checkbox"
+														class="switch-input allDay-switch" /> <span
+														class="switch-toggle-slider"> <span
+															class="switch-on"></span> <span class="switch-off"></span>
+													</span> <span class="switch-label">하루종일</span>
+													</label>
+												</div>
+												<div
+													class="mb-3 d-flex justify-content-sm-between justify-content-start my-4">
+													<div>
+														<button type="submit" id="calendarsubmit"
+															class="btn btn-primary btn-add-event me-sm-3 me-1"></button>
+														<button type="reset"
+															class="btn btn-label-secondary btn-cancel me-sm-0 me-1"
+															data-bs-dismiss="offcanvas">취소</button>
+													</div>
+													<div>
+														<textarea id="taskNo" style="display: none">${CalendarResponse2.task_no}</textarea>
+														<button type="button" id="taskDeleteButton" class="btn btn-label-danger btn-delete-event d-none">삭제</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
 			                </div>
 			              </div>
 			            </div>
 	          		</div>
 					 
 					 
+					
+					
+					
+					
 					 
 					 
 					 
@@ -529,6 +620,8 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
+    <script
+		src="${pageContext.request.contextPath}/resources/assets/vendor/libs/fullcalendar/fullcalendar.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/apex-charts/apexcharts.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
@@ -542,6 +635,8 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
+    <script
+		src="${pageContext.request.contextPath}/resources/assets/js/calendar.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/mainRank.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/mainGraph.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/mainNoticeList.js"></script>

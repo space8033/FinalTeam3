@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.finalteam3.exodia.calendar.dto.response.CalendarResponse2;
 import com.finalteam3.exodia.calendar.service.CalendarService;
 import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
@@ -141,6 +142,18 @@ public class Main {
 		return "mainCalendar";
 	}
 	
+
+	//달력 일정 조회
+
+	
+	
+	
+	
+	
+	
+	
+	
+
 	@GetMapping("/userProfile")
 	public String userProfile(Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
@@ -213,4 +226,5 @@ public class Main {
 		 
 		 return response;
 	 }
+
 }

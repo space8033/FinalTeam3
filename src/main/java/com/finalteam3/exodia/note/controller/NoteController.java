@@ -271,6 +271,7 @@ public class NoteController {
 		map.put("empNo", empNo);
 		
 		List<NoteAll> list = noteService.getNoteListByRno(map);
+
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
