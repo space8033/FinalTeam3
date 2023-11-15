@@ -103,7 +103,7 @@ public class ProjectController {
 		return "redirect:/main";
 	}
 	
-	@RequestMapping("/searchUser")
+	@GetMapping("/searchUser")
 	public String searchUser(Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();

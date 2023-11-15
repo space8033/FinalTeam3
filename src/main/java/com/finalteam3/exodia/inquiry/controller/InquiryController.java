@@ -84,8 +84,6 @@ public class InquiryController {
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonData = objectMapper.writeValueAsString(data);
         
-        log.info("문의사항 데이터:" + jsonData);
-        
 		return jsonData;
 	}
 	
@@ -187,11 +185,9 @@ public class InquiryController {
 		    model.addAttribute("notice", notice);
 		    model.addAttribute("mediaList", mediaList);
 		    model.addAttribute("replyList", replyList);
-		    log.info("notice : " + notice);
 		    
 		    int empNo = employeeDao.selectNoByEmpName(loginResponse.getEmpInfo_name());
 		    
-		    	    		    	
 			return "inquiryDetail";
 		}
 				
@@ -205,15 +201,12 @@ public class InquiryController {
 			
 			int empinfo_no = inquiryService.replyEmpinfoNo(emp_no);
 			
-			log.info("공지사항 번호 : " + notice_no);
 			Reply reply = new Reply();
 			reply.setNotice_no(notice_no);
 			reply.setReply_content(replyContent);
 			reply.setEmpinfo_no(empinfo_no);
 			
 			inquiryService.replyWrite(reply);		
-			log.info("댓글작성버튼이 눌려?");
-			log.info("댓글 입력 시 db로 넘어가는 값들 :" + reply);
 			alarmService.insertReplyAlarm(reply);
 			return "inquiryDetail";
 		}
@@ -229,9 +222,6 @@ public class InquiryController {
 			
 			Notice notice = inquiryService.getInquiryDetail(notice_no);
 			model.addAttribute("notice", notice);
-			
-			log.info("팀이름이 잘 들어가나요?" + model);
-			log.info("문의사하 ㅇ업데이트 문의사항 번호? :" + notice);
 			
 			return "inquiryUpdate";
 		}

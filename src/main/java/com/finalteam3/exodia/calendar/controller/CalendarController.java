@@ -31,12 +31,12 @@ public class CalendarController {
 	private EmployeeDao employeeDao;
 	
 	@GetMapping("/calendar")
-	public String calendarForm() {
+	public String calendarForm(Authentication authentication) {
 		return "/calendar";
 	}
 
 	@GetMapping("/teamCalendar")
-	public String teamCalendarForm() {
+	public String teamCalendarForm(Authentication authentication) {
 		
 		return "/teamCalendar";
 	}
@@ -65,6 +65,7 @@ public class CalendarController {
 		return "redirect:/calendar";
 	}
 	
+	//달력 일정 조회
 	@ResponseBody
 	@GetMapping("/calendar1")
 	public List<CalendarResponse2> getTask(Authentication authentication, Model model) throws Exception {
