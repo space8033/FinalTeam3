@@ -72,9 +72,6 @@ public class NoticeController {
 		
 		List<Notice> data = noticeService.getNoticeList();
 		
-		log.info("데이터 data 어떻게 나오 : " + data);
-		
-		
 		//data를 json데이터로 바꾸기
        /* ObjectMapper objectMapper = new ObjectMapper();
         String jsonData = objectMapper.writeValueAsString(data);
