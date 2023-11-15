@@ -56,13 +56,27 @@ public class Main {
 	@Resource
 	private MediaDao mediaDao;
 	
-	@RequestMapping("/")
+	@GetMapping("/")
 	public String login(Model model) {
 		return "redirect:/employee/login";
+	}
+
+	@GetMapping("/error404")
+	public String error404() {
+		return "/404error";
+	}
+
+	@GetMapping("/error500")
+	public String error500() {
+		return "/500error";
 	}
 	
 	@GetMapping("/main")
 	public String main(Model model, Authentication authentication, HttpSession session, Integer projectNo) {
+		if(authentication == null) {
+			return "redirect:/";
+		}
+		
 		if(projectNo == null) {
 			projectNo = (Integer) session.getAttribute("projectNo");
 		}
