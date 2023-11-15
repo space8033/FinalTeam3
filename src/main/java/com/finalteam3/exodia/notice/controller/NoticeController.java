@@ -228,11 +228,9 @@ public class NoticeController {
 	    
 	    for(NoticeUnreader unReader : unReaders) {
 	    	unReader.setNotice_no(notice_no);
-	    }
-	    
+	    }   
 	    
 	    model.addAttribute("unReaders", unReaders);
-	    
 	    
 	    Map<String, Object> profile = new HashMap<>();
 		profile.put("media_from", "EMP");
@@ -259,7 +257,7 @@ public class NoticeController {
 		return "noticeList";
 	}
 	
-
+	//첨부파일 삭제
 	@PostMapping("/mediaDelete")
 	public String mediaDelete(Authentication authentication, @RequestParam("media_no") int media_no) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();

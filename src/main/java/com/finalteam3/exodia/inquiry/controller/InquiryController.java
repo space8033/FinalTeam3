@@ -1,5 +1,6 @@
 package com.finalteam3.exodia.inquiry.controller;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.Base64;
@@ -171,22 +172,21 @@ public class InquiryController {
 			
 			model.addAttribute("loginResponse", loginResponse);
 			model.addAttribute("now_emp_no", loginResponse.getEmp_no());
+			
 			String emp_id = loginResponse.getEmp_id();
 			model.addAttribute("emp_id", emp_id);
+			
 			int empinfoNo = inquiryService.getEmpInfoNoByEmpNo(loginResponse.getEmp_no());
 			model.addAttribute("now_empinfo_no", empinfoNo);
 
 			Notice notice = inquiryService.getInquiryDetail(notice_no);				
 			List<MediaDto> mediaList = inquiryService.getMediaList(notice.getNotice_no());
 			Map<String, Object> replyDataMap = inquiryService.getReplyByNoticeNo(notice_no);
-			List<Reply> replyList = (List<Reply>) replyDataMap.get("replyList");
-			int replyCount = (int) replyDataMap.get("replyCount");
+			List<Reply> replyList = (List<Reply>) replyDataMap.get("replyList");			
 
 		    model.addAttribute("notice", notice);
 		    model.addAttribute("mediaList", mediaList);
 		    model.addAttribute("replyList", replyList);
-		    
-		    int empNo = employeeDao.selectNoByEmpName(loginResponse.getEmpInfo_name());
 		    
 			return "inquiryDetail";
 		}
@@ -205,9 +205,10 @@ public class InquiryController {
 			reply.setNotice_no(notice_no);
 			reply.setReply_content(replyContent);
 			reply.setEmpinfo_no(empinfo_no);
-			
 			inquiryService.replyWrite(reply);		
+			
 			alarmService.insertReplyAlarm(reply);
+			
 			return "inquiryDetail";
 		}
 				
@@ -223,24 +224,62 @@ public class InquiryController {
 			Notice notice = inquiryService.getInquiryDetail(notice_no);
 			model.addAttribute("notice", notice);
 			
+			List<MediaDto> mediaList = inquiryService.getMediaList(notice.getNotice_no());
+		    model.addAttribute("mediaList", mediaList);
+			
 			return "inquiryUpdate";
 		}
 		
 		//공지사항 업데이트2
 		@PostMapping("/inquiryUpdate")
-		public String inquiryUpdateForm(Authentication authentication, int notice_no, Notice notice) {
+		public String inquiryUpdateForm(Authentication authentication, 
+				@RequestParam("noticeNo") int noticeNo,
+				@RequestParam("noticeTitle") String noticeTitle,
+				@RequestParam("noticeContent") String noticeContent,
+				@RequestParam("files") List<MultipartFile> mfs) throws IOException {
 			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 			LoginResponse loginResponse = empDetails.getLoginResponse();
 			
+			Notice notice = new Notice();
+			notice.setNotice_no(noticeNo);
+			notice.setNotice_title(noticeTitle);
+			notice.setNotice_content(noticeContent);
 			inquiryService.updateByInquiry(notice);
+			
+			for(MultipartFile mf : mfs) {
+						if(!mf.isEmpty()) {
+					MediaDto mediaDto = new MediaDto();
+					mediaDto.setFrom_no(noticeNo);
+					mediaDto.setMedia_name(mf.getOriginalFilename());
+					mediaDto.setMedia_type(mf.getContentType());
+					mediaDto.setMedia_data(mf.getBytes());
+					mediaDto.setMedia_from("NOTICE");
+					
+					mediaService.insertNoticeFile(mediaDto);
+				}
+			}
+			log.info("미디어 :" + mfs);
 
-			return "inquiryList";
+			
+			return "redirect:/inquiryList";
+		}
+		
+		//첨부파일 삭제
+		@PostMapping("/inquiryMediaDelete")
+		public String inquiryMediaDelete(Authentication authentication, @RequestParam("media_no") int media_no) {
+			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+			LoginResponse loginResponse = empDetails.getLoginResponse();
+			
+			log.info("미디어넘버를 잘 ㅂㄷ받아오나요?" + media_no);
+			mediaService.deleteMediaByMediaNo(media_no);
+			log.info("삭제 됌?");
+			
+			return "noticeDetail";
 		}
 		
 		//문의사항 삭제
 		@PostMapping("/inquiryDelete")
 		public String inquiryDelete(Authentication authentication, int notice_no) {
-			
 			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 			LoginResponse loginResponse = empDetails.getLoginResponse();
 			

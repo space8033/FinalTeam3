@@ -332,35 +332,37 @@
                                                       ${notice.notice_createdat}</small>
                                                 </div>
 
-                                                <!-- 공지사항 읽은 사람 목록 -->
-                                                <div style="disply: flex; flex-direction: column;">
-                                                   <!-- Icon Dropdown -->
-                                                   <div class="col-lg-3 col-sm-6 col-12">
-                                                      <div class="demo-inline-spacing">
-                                                         <div class="btn-group" style="padding-left: 20px;">
-                                                            <button type="button"
-                                                               class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow"
-                                                               data-bs-toggle="dropdown" aria-expanded="false">
-                                                               <i class='bx bx-book-heart fs-4' id="readPeople"></i>
-                                                            </button>
-                                                            <ul class="dropdown-menu dropdown-menu-end scrollable-list">
-																<c:forEach var="reader" items="${unReaders}">
-												                    <li>
-												                    	<a class="dropdown-item" href="javascript:unReadNotice(${reader.empInfo_no}, ${reader.notice_no});" style="display:flex; justify-content:space-between;">
-													                    	<p>${reader.empInfo_name}</p>
-													                    	<p>🔔</p>
-												                    	</a>
-											                    	</li>
-												                </c:forEach>
-                                                            </ul>
-                                                         </div>
-                                                      </div>
-                                                   </div>
-                                                   <div>
-                                                      <p style="margin-bottom: 0px; margin-top: 10px;">${unReaders.size()}명 안 읽음</p>
-                                                   </div>
-                                                   <!--/ Icon Dropdown -->
-                                                </div>
+                                                <!-- 공지사항 안 읽은 사람 목록 -->
+                                                <c:if test="${now_emp_no == 0}">
+	                                                <div style="disply: flex; flex-direction: column;">
+	                                                   <!-- Icon Dropdown -->
+	                                                   <div class="col-lg-3 col-sm-6 col-12">
+	                                                      <div class="demo-inline-spacing">
+	                                                         <div class="btn-group" style="padding-left: 20px;">
+	                                                            <button type="button"
+	                                                               class="btn btn-primary btn-icon rounded-pill dropdown-toggle hide-arrow"
+	                                                               data-bs-toggle="dropdown" aria-expanded="false">
+	                                                               <i class='bx bx-book-heart fs-4' id="readPeople"></i>
+	                                                            </button>
+	                                                            <ul class="dropdown-menu dropdown-menu-end scrollable-list">
+																	<c:forEach var="reader" items="${unReaders}">
+													                    <li>
+													                    	<a class="dropdown-item" href="javascript:unReadNotice(${reader.empInfo_no}, ${reader.notice_no});" style="display:flex; justify-content:space-between;">
+														                    	<p>${reader.empInfo_name}</p>
+														                    	<p>🔔</p>
+													                    	</a>
+												                    	</li>
+													                </c:forEach>
+	                                                            </ul>
+	                                                         </div>
+	                                                      </div>
+	                                                   </div>
+	                                                   <div>
+	                                                      <p style="margin-bottom: 0px; margin-top: 10px;">${unReaders.size()}명 안 읽음</p>
+	                                                   </div>
+	                                                   <!--/ Icon Dropdown -->
+	                                                </div>
+	                                            </c:if>
 
 
                                              </div>
