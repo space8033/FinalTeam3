@@ -114,7 +114,6 @@ public class NoticeController {
 		int noticeNo = notice.getNotice_no();
 		
 		alarmService.insertNoticeAlarm(notice);
-		log.info("" + noticeNo);
 		
 		for(MultipartFile mf : mfs) {
 					if(!mf.isEmpty()) {
@@ -128,7 +127,6 @@ public class NoticeController {
 				mediaService.insertNoticeFile(mediaDto);
 					}
 		}
-		log.info("공지사항 입력 시 db로 넘어가는 값들 :" + notice);	
 		return "redirect:/noticeList";
 	}
 		
@@ -166,10 +164,7 @@ public class NoticeController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
 		Notice notice = noticeService.getNoticeDetail(notice_no);
-		log.info("업데이트notice :" +  notice);
 		model.addAttribute("notice", notice);
-		log.info("업데이트넘버"+notice.getNotice_no());
-		log.info("업데이트 모델이 뭔데 좀 :" + notice);
 		
 		List<MediaDto> mediaList = noticeService.getMediaList(notice.getNotice_no());
 	    model.addAttribute("mediaList", mediaList);
@@ -187,10 +182,6 @@ public class NoticeController {
 			@RequestParam("files") List<MultipartFile> mfs) throws IOException {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
-		
-		log.info("noticeNo : " + noticeNo);
-		log.info("noticeTitle : " + noticeNo);
-		log.info("noticeContent : " + noticeNo);
 		
 		Notice notice = new Notice();
 		notice.setNotice_no(noticeNo);
@@ -210,9 +201,7 @@ public class NoticeController {
 		mediaService.insertNoticeFile(mediaDto);
 			}
 		}
-		log.info("미미ㅣ미디딩어어엉 :" + mfs);
 
-		
 		return "redirect:/noticeList";
 	}
 	
@@ -235,8 +224,6 @@ public class NoticeController {
 	    map.put("empinfo_no", loginResponse.getEmpInfo_no());
 	    noticeService.insertNoticeReaders(map);   
 	    
-	    log.info("노티스리더스에 저장할 no" + map);
-	    
 	    List<NoticeUnreader> unReaders = noticeService.getUnReader(notice_no);
 	    
 	    for(NoticeUnreader unReader : unReaders) {
@@ -244,8 +231,6 @@ public class NoticeController {
 	    }   
 	    
 	    model.addAttribute("unReaders", unReaders);
-	    
-	    log.info("미확인 인원 :" + unReaders);
 	    
 	    Map<String, Object> profile = new HashMap<>();
 		profile.put("media_from", "EMP");
@@ -266,7 +251,6 @@ public class NoticeController {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
-		log.info("노티스넘버 : " + notice_no);
 		noticeService.deleteByNoticeNo(notice_no);
 		alarmService.deleteNoticeAlarm(notice_no);
 		
@@ -279,9 +263,7 @@ public class NoticeController {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
-		log.info("미디어넘버를 잘 ㅂㄷ받아오나요?" + media_no);
 		mediaService.deleteMediaByMediaNo(media_no);
-		log.info("삭제 됌?");
 		
 		return "noticeDetail";
 	}

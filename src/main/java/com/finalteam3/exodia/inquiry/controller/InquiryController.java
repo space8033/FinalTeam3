@@ -187,10 +187,7 @@ public class InquiryController {
 		    model.addAttribute("notice", notice);
 		    model.addAttribute("mediaList", mediaList);
 		    model.addAttribute("replyList", replyList);
-		    		    
-		    //int replyCount = (int) replyDataMap.get("replyCount");
-		    //int empNo = employeeDao.selectNoByEmpName(loginResponse.getEmpInfo_name());		    
-		    	    		    	
+		    
 			return "inquiryDetail";
 		}
 				
@@ -204,14 +201,11 @@ public class InquiryController {
 			
 			int empinfo_no = inquiryService.replyEmpinfoNo(emp_no);
 			
-			log.info("공지사항 번호 : " + notice_no);
 			Reply reply = new Reply();
 			reply.setNotice_no(notice_no);
 			reply.setReply_content(replyContent);
 			reply.setEmpinfo_no(empinfo_no);
 			inquiryService.replyWrite(reply);		
-			log.info("댓글작성버튼이 눌려?");
-			log.info("댓글 입력 시 db로 넘어가는 값들 :" + reply);
 			
 			alarmService.insertReplyAlarm(reply);
 			
