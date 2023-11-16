@@ -66,17 +66,7 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
     <!-- calendar -->
-    <script>
-
-      document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: 'dayGridMonth'
-        });
-        calendar.render();
-      });
-
-    </script>
+    
   </head>
 
   <body>
@@ -299,7 +289,7 @@
 									<div class="card shadow-none border-0">
 										<div class="card-body pb-0">
 											<!-- FullCalendar -->
-											<div id="calendar"></div>
+											<div id="calendar" style="padding:10px;"></div>
 										</div>
 									</div>
 									<div class="app-overlay"></div>
@@ -619,35 +609,26 @@
     <!-- endbuild -->
 
     <!-- Vendors JS -->
-    <script
-		src="${pageContext.request.contextPath}/resources/assets/vendor/libs/fullcalendar/fullcalendar.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/apex-charts/apexcharts.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/fullcalendar/fullcalendar.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/bundle/popular.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables-bootstrap5.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-bootstrap5/index.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/plugin-auto-focus/index.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/flatpickr/flatpickr.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/moment/moment.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
     <!-- Main JS -->
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
     <script
-		src="${pageContext.request.contextPath}/resources/assets/js/calendar.js"></script>
+		src="${pageContext.request.contextPath}/resources/assets/js/teamCalendar.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/mainRank.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/mainGraph.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/mainNoticeList.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/header.js"></script>
-    
-    <script>
-        // 사이드바 숨기기
-        //document.getElementById('app-calendar-sidebar').style.display = 'none';
-
-        // 사이드바 보이기
-        // document.getElementById('app-calendar-sidebar').style.display = 'block';
-    </script>
     
   </body>
 </html>

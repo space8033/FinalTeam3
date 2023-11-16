@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	                ETC: 'info'
 	              },
 	              offcanvasTitle = document.querySelector('.offcanvas-title'),
-	              btnToggleSidebar = document.querySelector('.btn-toggle-sidebar'),
+	              //btnToggleSidebar = document.querySelector('.btn-toggle-sidebar'),
 	              btnSubmit = document.querySelector('#calendarsubmit'),
 	              btnDeleteEvent = document.querySelector('.btn-delete-event'),
 	              btnCancel = document.querySelector('.btn-cancel'),
@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	              // We are reading event object from app-calendar-events.js file directly by including that file above app-calendar file.
 	              // You should make an API call, look into above commented API call for reference
 	              let selectedEvents = currentEvents.filter(function (event) {
-	                  return calendars.includes(event.extendedProps.calendar.toLowerCase());
+	                  return calendars;
 	              });
 	               if (selectedEvents.length > 0) {
 	            	   successCallback(selectedEvents);
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	              plugins: [dayGridPlugin, interactionPlugin, listPlugin, timegridPlugin],
 	              editable: true,
 	              dragScroll: true,
-	              dayMaxEvents: 2,
+	              dayMaxEvents: 1,
 	              eventResizableFromStart: true,
 	              headerToolbar: {
 	                start: 'sidebarToggle, prev,next, title',
@@ -226,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	                btnDeleteEvent.classList.add('d-none');
 	                eventStartDate.value = date;
 	                eventEndDate.value = date;
-	              },
+	              }/*,
 	              eventClick: function (info) {
 	                eventClick(info);
 	              },
@@ -235,13 +235,13 @@ document.addEventListener('DOMContentLoaded', function () {
 	              },
 	              viewDidMount: function () {
 	                modifyToggler();
-	              }
+	              }*/
 	            });
 
 	            // Render calendar
 	            calendar.render();
 	            // Modify sidebar toggler
-	            modifyToggler();
+	            //modifyToggler();
 
 	            const eventForm = document.getElementById('eventForm');
 	            const fv = FormValidation.formValidation(eventForm, {
@@ -294,11 +294,11 @@ document.addEventListener('DOMContentLoaded', function () {
 	              });
 
 	            // Sidebar Toggle Btn
-	            if (btnToggleSidebar) {
+	            /*if (btnToggleSidebar) {
 	              btnToggleSidebar.addEventListener('click', e => {
 	                btnCancel.classList.remove('d-none');
 	              });
-	            }
+	            }*/
 
 	            // Add Event
 	            // ------------------------------------------------
@@ -511,7 +511,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	            });
 
 	            // Hide left sidebar if the right sidebar is open
-	            btnToggleSidebar.addEventListener('click', e => {
+	            /*btnToggleSidebar.addEventListener('click', e => {
 	              if (offcanvasTitle) {
 	                offcanvasTitle.innerHTML = 'Add Event';
 	              }
@@ -521,7 +521,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	              btnDeleteEvent.classList.add('d-none');
 	              appCalendarSidebar.classList.remove('show');
 	              appOverlay.classList.remove('show');
-	            });
+	            });*/
 
 	            // Calender filter functionality
 	            // ------------------------------------------------
@@ -548,12 +548,12 @@ document.addEventListener('DOMContentLoaded', function () {
 	            }
 
 	            // Jump to date on sidebar(inline) calendar change
-	            inlineCalInstance.config.onChange.push(function (date) {
+	            /*inlineCalInstance.config.onChange.push(function (date) {
 	              calendar.changeView(calendar.view.type, moment(date[0]).format('YYYY-MM-DD'));
-	              modifyToggler();
+	              //modifyToggler();
 	              appCalendarSidebar.classList.remove('show');
 	              appOverlay.classList.remove('show');
-	            });
+	            });*/
 	          })();
 	    } else {
 	        console.log('Request failed with status ' + xhr.status);

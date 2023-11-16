@@ -142,18 +142,31 @@ public class Main {
 		return "mainCalendar";
 	}
 	
-
 	//달력 일정 조회
-
+	@ResponseBody
+	@GetMapping("/teamCalendarList")
+	public List<CalendarResponse2> getTeamTask(Authentication authentication, Model model) throws Exception {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		int emp_no = loginResponse.getEmp_no();
+		List<CalendarResponse2> events;
+		
+		if(emp_no == 0 || emp_no ==1) {
+			events = calendarService.getPMTask();
+		} else {
+			Map<String, Object> map = new HashMap<>();
+			map.put("project_no", 0);
+			map.put("emp_no", emp_no);
+			
+			String team_name = employeeDao.selectTeamByEmpNo(map);
+			
+			events = calendarService.getTeamTask(team_name);
+		}		
+		
+		return events;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-
 	@GetMapping("/userProfile")
 	public String userProfile(Model model, Authentication authentication) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
