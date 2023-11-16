@@ -8,6 +8,7 @@
 //폼 제출 시
 function validateForm() {
     // 예시: 입력값 검사
+	removeBeforeUnloadHandler();
     var note_receiver = document.getElementById("emailContacts").value;
     var note_title = document.getElementById("email-subject").value;
 
@@ -33,9 +34,11 @@ function validateForm() {
       });
     	
     }
+    
+    window.removeEventListener('beforeunload', beforeUnloadHandler);
     setTimeout(function () {
         document.getElementById("noteSend").submit();
-    }, 3000);
+    }, 2000);
     
     return false;
 }
@@ -2215,18 +2218,19 @@ function deleteDraftNote(type) {
 	
 	
 }
+window.addEventListener('beforeunload', beforeUnloadHandler);
+function beforeUnloadHandler(event) {
+    var note_receiver = $("#emailContacts").val();
+    var note_title = $("#email-subject").val();
 
-window.addEventListener('beforeunload', (event) => {
-	  // 명세에 따라 preventDefault는 호출해야하며, 기본 동작을 방지합니다.
-	  var note_receiver = $("#emailContacts").val();
-	  var note_title = $("#email-subject").val();
-	  console.log(note_receiver+note_title+"아무것도 안받는데 대체 왜..?/");
-	  if(note_receiver !== "" && note_title !== "") {
-		  console.log("여기 왜들어오는거임?;;");
-		  showdraft();
-	  }
-	  // 문자열 반환
-});
+    if (note_receiver !== "" && note_title !== "") {
+        // 임시 저장 로직 호출
+    	showdraft();
+    }
+}
+function removeBeforeUnloadHandler() {
+    window.removeEventListener('beforeunload', beforeUnloadHandler);
+}
 
 function showdraft() {
 	  var note_receiver = $("#emailContacts").val();
@@ -2922,7 +2926,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	 
 	 var searchUser = document.getElementById('searchUserFrom');
 	 
-	 if(searchUser.value!=null) {
+	 if(searchUser.value!=='') {
 		 console.log(searchUser.value+"잘 받아오니?");
 		 var button = document.getElementById("emailComposeSidebarLabel");
 		 button.click();

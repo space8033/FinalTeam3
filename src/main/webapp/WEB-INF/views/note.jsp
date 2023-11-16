@@ -986,7 +986,7 @@
                             class="email-compose-actions d-flex justify-content-between align-items-center my-2 py-1">
                             <div class="d-flex align-items-center">
                               <div class="btn-group">
-                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close" onclick="javascript:sendMsg();">
+                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal" aria-label="Close">
                                   	보내기
                                 </button>
                                 <button
