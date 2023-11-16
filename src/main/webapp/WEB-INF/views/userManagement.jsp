@@ -142,11 +142,11 @@
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <!-- <li class="menu-item">
                   <a href="dashboards-crm.html" class="menu-link">
                     <div class="text-truncate" >프로젝트 조직도</div>
                   </a>
-                </li>
+                </li> -->
                 <li class="menu-item">
                   <a href="${pageContext.request.contextPath}/project/searchUser" class="menu-link">
                     <div class="text-truncate">프로젝트 인력 검색</div>
@@ -212,7 +212,7 @@
             </li>
             
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/employee/jjoin" class="menu-link">
+              <a href="${pageContext.request.contextPath}/employee/join" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
               </a>
@@ -401,7 +401,20 @@
 		                    <div class="card-body">
 		                      <div class="row">
 		                        <!-- Basic -->
-		
+								<div class="col-md-10 mb-4">
+		                          <label for="selectpickerLiveSearch" class="form-label">팀 설정</label>
+		                          <select
+		                            id="selectpickerLiveSearch"
+		                            class="selectpicker w-100"
+		                            data-style="btn-default"
+		                            data-live-search="true">
+		                            <option data-tokens="ketchup mustard">-------팀을 선택해주세요-------</option>
+		                            <c:forEach var="teamName" items="${list}">
+			                            <option data-tokens="ketchup mustard">${teamName.team_name}</option>
+		                            </c:forEach>
+		                          </select>
+		                        </div>
+		                        
 		                        <div class="col-md-10 mb-4">
 		                          <label for="selectpickerIcons" class="form-label">권한 구분</label>
 		                          <select
@@ -414,21 +427,6 @@
 		                            <!-- <option data-icon="bx">ROLE_PM</option> -->
 		                            <option data-icon="bx" value="ROLE_PL">팀장</option>
 		                            <option data-icon="bx" value="ROLE_EMP">팀원</option>
-		                          </select>
-		                        </div>
-		                        
-		                          <!-- Live Search -->
-		                        <div class="col-md-10 mb-4">
-		                          <label for="selectpickerLiveSearch" class="form-label">팀 설정</label>
-		                          <select
-		                            id="selectpickerLiveSearch"
-		                            class="selectpicker w-100"
-		                            data-style="btn-default"
-		                            data-live-search="true">
-		                            <option data-tokens="ketchup mustard">-------팀을 선택해주세요-------</option>
-		                            <c:forEach var="teamName" items="${list}">
-			                            <option data-tokens="ketchup mustard">${teamName.team_name}</option>
-		                            </c:forEach>
 		                          </select>
 		                        </div>
 		                        

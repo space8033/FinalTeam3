@@ -145,11 +145,11 @@
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <!-- <li class="menu-item">
                   <a href="dashboards-crm.html" class="menu-link">
                     <div class="text-truncate" >프로젝트 조직도</div>
                   </a>
-                </li>
+                </li> -->
                 <li class="menu-item">
                   <a href="${pageContext.request.contextPath}/project/searchUser" class="menu-link">
                     <div class="text-truncate">프로젝트 인력 검색</div>
@@ -221,7 +221,7 @@
               </a>
             </li> --%>
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/employee/jjoin" class="menu-link">
+              <a href="${pageContext.request.contextPath}/employee/join" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
               </a>
@@ -285,7 +285,8 @@
 					    </div>
 					  </div>
 					</div>
-                    <button type="submit" id="inquirySubmit" class="btn btn-primary">수정</button>
+					<button type="button" form="inquiryUpdate" id="inquirySubmit" class="btn btn-primary">수정</button>
+                    <!-- 모달 -->
                     <div class="modal" id="modal-no-content">
                       <div class="modal-dialog">
                         <div class="modal-content">
@@ -300,121 +301,187 @@
                         </div>
                       </div>
                     </div>
-                    <script>
-                      // 등록 버튼 클릭 이벤트
-                      document.getElementById('inquiryeSubmit').addEventListener('click', function() {
-                        var title = document.getElementById('ecommerce-product-name').value;
-                        var content = document.getElementById('noticeContent').value;
-                        // 제목이나 내용이 없음
-                        if (!title || !content) {
-                          $('#modal-no-content').modal('show');
-                        } else {
-                          //폼 제출
-                          document.getElementById('inquiryAdd').submit();
-                        }
-                      });
-                    </script>
-                    
-                  </div>
-                </div>
-
-                <div class="row">
-                  <!-- First column-->
-                  <div class="col-12 col-lg-12">
-                    <!-- Product Information -->
-                    <div class="card mb-4">
-                      <div class="card-body">
-                        <div class="row">
-						  <div class="col-8 mb-3">
-						    <label class="form-label" for="ecommerce-product-name">제목</label>
-						    <input
-						      type="text"
-						      class="form-control"
-						      id="ecommerce-product-name"
-						      value="${notice.notice_title }"
-						      placeholder="제목을 입력해 주세요"
-						      name="noticeTitle"
-						      aria-label="Notice title" />
-						  </div>
-						  
-						  <div class="col-4 mb-3">
-                              <label class="form-label" for="selectpickerLiveSearch">팀</label>
-                              <select id="selectpickerLiveSearch" class="selectpicker form-select" data-style="btn-default"
-		                            data-live-search="true">
-		                            <option data-tokens="ketchup mustard"  value="">팀을 선택해주세요</option>
-                                <c:forEach var="teamName" items="${tNames}">
-		                            <option data-tokens="ketchup mustard">${teamName}</option>
-	                            </c:forEach>
-                              </select>
-                            </div>
-						</div>
-						<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-							<script>
-							  $(document).ready(function () {
-							    // 기존 입력값 저장 변수
-							    var originalInputValue = '';
-							
-							    // selectpickerLiveSearch 변경 감지
-							    $('#selectpickerLiveSearch').change(function () {
-							      // 선택한 팀 이름 가져오기
-							      var selectedTeam = $(this).val();
-							
-							      // 기존 입력된 값 가져오기
-							      var currentInputValue = $('#ecommerce-product-name').val();
-							
-							      // 기존 값이 존재하면 저장
-							      if (!originalInputValue) {
-							        originalInputValue = currentInputValue;
-							      }
-							
-							      // 팀 이름이 이미 존재하는지 확인
-							      if (currentInputValue.includes('[')) {
-							        // 이미 팀 이름이 존재하면 기존 팀 이름을 지우고 새로운 팀 이름으로 수정
-							        var newValue = currentInputValue.replace(/\[.*?\]\s*/, '[' + selectedTeam + '] ');
-							      } else {
-							        // 팀 이름이 존재하지 않으면 맨 앞에 [팀이름] 추가
-							        var newValue = '[' + selectedTeam + '] ' + currentInputValue.trim();
-							      }
-							
-							      // 팀 이름을 input 칸에 설정
-							      $('#ecommerce-product-name').val(newValue);
-							    });
-							
-							    // 팀을 선택하지 않은 경우 원래의 입력값 복원
-							    $('#selectpickerLiveSearch').on('selectpicker:unselect', function () {
-							      $('#ecommerce-product-name').val(originalInputValue);
-							      originalInputValue = ''; // 초기화
-							    });
-							  });
-							</script>
-                        <!-- Description -->
-                        <div>
-                          <label class="form-label">내용</label>
-                          <div class="form-control p-0 pt-1">
-                            <div class="comment-toolbar border-0 border-bottom">
-                              <div class="d-flex justify-content-start">
-                                <span class="ql-formats me-0">
-                                  <button class="ql-bold"></button>
-                                  <button class="ql-italic"></button>
-                                  <button class="ql-underline"></button>
-                                  <button class="ql-list" value="ordered"></button>
-                                  <button class="ql-list" value="bullet"></button>
-                                  <button class="ql-link"></button>
-                                  <button class="ql-image"></button>
-                                </span>
-                              </div>
-                            </div>
-                            <div class="comment-editor border-0 pb-4" id="ecommerce-category-description">${notice.notice_content}</div>
-                            <textarea id="noticeContent" style="display: none"></textarea>
+                    <div class="modal" id="modal-no-content2">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">내용을 입력하세요</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body"> 팀을 선택해주세요. </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">확인</button>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <!-- /Product Information -->
-                    <!-- Media -->
-                    
                   </div>
                 </div>
+                
+				<form action="inquiryUpdate" id="inquiryUpdate" method="post" enctype="multipart/form-data">
+	                <div class="row">
+	                	<input name="noticeNo" type="hidden" value="${notice.notice_no}"/>
+	                  <!-- First column-->
+	                  <div class="col-12 col-lg-12">
+	                    <!-- Product Information -->
+	                    <div class="card mb-4">
+	                      <div class="card-body">
+	                        <div class="row">
+							  <div class="col-8 mb-3">
+							    <label class="form-label" for="ecommerce-product-name">제목</label>
+							    <input
+							      type="text"
+							      class="form-control"
+							      id="ecommerce-product-name"
+							      value="${notice.notice_title }"
+							      placeholder="제목을 입력해 주세요"
+							      name="noticeTitle"
+							      aria-label="Notice title" />
+							  </div>
+							  
+							  <div class="col-4 mb-3">
+	                              <label class="form-label" for="selectpickerLiveSearch">팀</label>
+	                              <select id="selectpickerLiveSearch" class="selectpicker form-select" data-style="btn-default"
+			                            data-live-search="true">
+			                            <option data-tokens="ketchup mustard"  value="">팀을 선택해주세요</option>
+	                                <c:forEach var="teamName" items="${tNames}">
+			                            <option data-tokens="ketchup mustard">${teamName}</option>
+		                            </c:forEach>
+	                              </select>
+	                            </div>
+							</div>
+							<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+								<script>
+								  $(document).ready(function () {
+								    // 기존 입력값 저장 변수
+								    var originalInputValue = '';
+								
+								    // selectpickerLiveSearch 변경 감지
+								    $('#selectpickerLiveSearch').change(function () {
+								      // 선택한 팀 이름 가져오기
+								      var selectedTeam = $(this).val();
+								
+								      // 기존 입력된 값 가져오기
+								      var currentInputValue = $('#ecommerce-product-name').val();
+								
+								      // 기존 값이 존재하면 저장
+								      if (!originalInputValue) {
+								        originalInputValue = currentInputValue;
+								      }
+								
+								      // 팀 이름이 이미 존재하는지 확인
+								      if (currentInputValue.includes('[')) {
+								        // 이미 팀 이름이 존재하면 기존 팀 이름을 지우고 새로운 팀 이름으로 수정
+								        var newValue = currentInputValue.replace(/\[.*?\]\s*/, '[' + selectedTeam + '] ');
+								      } else {
+								        // 팀 이름이 존재하지 않으면 맨 앞에 [팀이름] 추가
+								        var newValue = '[' + selectedTeam + '] ' + currentInputValue.trim();
+								      }
+								
+								      // 팀 이름을 input 칸에 설정
+								      $('#ecommerce-product-name').val(newValue);
+								    });
+								
+								    // 팀을 선택하지 않은 경우 원래의 입력값 복원
+								    $('#selectpickerLiveSearch').on('selectpicker:unselect', function () {
+								      $('#ecommerce-product-name').val(originalInputValue);
+								      originalInputValue = ''; // 초기화
+								    });
+								  });
+								</script>
+	                        <!-- Description -->
+	                        <div>
+	                          <label class="form-label">내용</label>
+	                          <div class="form-control p-0 pt-1">
+	                            <div class="comment-toolbar border-0 border-bottom">
+	                              <div class="d-flex justify-content-start">
+	                                <span class="ql-formats">
+			                          <select class="ql-font"></select>
+			                          <select class="ql-size"></select>
+			                        </span>
+			                        <span class="ql-formats">
+			                          <button class="ql-bold"></button>
+			                          <button class="ql-italic"></button>
+			                          <button class="ql-underline"></button>
+			                          <button class="ql-strike"></button>
+			                        </span>
+			                        <span class="ql-formats">
+			                          <select class="ql-color"></select>
+			                          <select class="ql-background"></select>
+			                        </span>
+			                        <span class="ql-formats">
+			                          <button class="ql-script" value="sub"></button>
+			                          <button class="ql-script" value="super"></button>
+			                        </span>
+			                        <span class="ql-formats">
+			                          <button class="ql-header" value="1"></button>
+			                          <button class="ql-header" value="2"></button>
+			                          <button class="ql-blockquote"></button>
+			                          <button class="ql-code-block"></button>
+			                          <button class="ql-link"></button>
+	                                  <button class="ql-image"></button>
+	                                  <button class="ql-video"></button>
+			                        </span>
+	                              </div>
+	                            </div>
+	                            <div class="comment-editor border-0 pb-4" id="ecommerce-category-description">${notice.notice_content}</div>
+	                            <textarea id="noticeContent" name="noticeContent" style="display: none">${notice.notice_content}</textarea>
+	                            <div class="input-group">							
+									<input type="file" name="files" class="form-control" id="attach-file" multiple/>
+								</div>
+									<div class="file-group" style="padding-top:15px; padding-left:10px;">
+								        <c:forEach var="media" items="${mediaList}">
+								            <p id="p${media.media_no}">
+								            	<span><i class='bx bx-file-blank'></i></span>
+								                <span>${media.media_name}</span>
+								                <span style="display: none;" id="media">${media.media_no}</span>
+								                <a href="#this" style="border: 1px solid #ccc; padding: 5px 10px; display: inline-block; text-decoration: none; color: #333;"
+								                   onclick="deleteFile(${media.media_no})">삭제</a>
+								            </p>
+								        </c:forEach>
+								    </div>
+								    
+								    <script>
+									    function deleteFile(media_no) {
+									    	console.log("미디어넘버를 잘 받아오나요?" + media_no);
+									    	if(confirm("삭제하시겠습니까?")){
+									       		 // AJAX 통신
+										        $.ajax({
+										            type: "POST",
+										            url: "/exodia/inquiryMediaDelete",
+										            data: { media_no: media_no },
+										            success: function (response) {
+										                // 성공적으로 서버에서 응답을 받았을 때 수행할 작업
+										                console.log("삭제가 돼?"); // 서버에서 보낸 응답을 콘솔에 출력 (디버깅용)
+										                const elementToDelete = document.getElementById('p'+media_no);
+	
+										                // elementToDelete이 null이 아니면 숨기기
+										                if (elementToDelete) {
+										                    elementToDelete.remove();
+										                }
+										                // 여기에서 필요한 업데이트 또는 화면 조작을 수행
+										                // 예: 화면 갱신, 삭제된 항목 감춤 등
+										            },
+										            error: function (error) {
+										                // 서버 요청 중에 오류가 발생했을 때 수행할 작업
+										                console.log("제발...뭐가 문제야");
+										                console.error(error); // 에러를 콘솔에 출력 (디버깅용)
+										            }
+										        });
+									    		
+									    	}
+									    }
+									</script>
+	                          </div>
+	                        </div>
+	                      </div>
+	                    </div>
+	                    <!-- /Product Information -->
+	                    <!-- Media -->
+	                    
+	                  </div>
+	                </div>
+                </form>
               </div>
             </div>
             <!-- / Content -->

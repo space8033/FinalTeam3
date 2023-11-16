@@ -32,8 +32,8 @@
 	  		  
 	  	  }
 	  	  
-	  	  console.log(htmlContent+"뭐라 나오는지 좀 보자");
-	  	  console.log(inputElement.value+"그래서 넘어가는 값이 뭐냐");
+	  	  console.log(htmlContent+"내용 입력 값");
+	  	  console.log(inputElement.value+"DB로 전달되는 내용 값");
     });
   }
 
@@ -96,6 +96,18 @@
 
 //Jquery to handle the e-commerce product add page
 
+$(document).ready(function () {
+    $("a[name='file-delete']").on("click", function (e) {
+        e.preventDefault();
+        deleteFile($(this));
+    });
+});
+
+function deleteFile(obj) {
+    obj.parent().remove();
+}
+
+
 $(function () {
   // Select2
   var select2 = $('.select2');
@@ -148,6 +160,7 @@ $(function () {
   }
 });
 
+//ajax로 넘기기
 /*$(document).ready(function() {
 	//add task
 		console.log("insert시작");

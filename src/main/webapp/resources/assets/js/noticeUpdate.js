@@ -148,7 +148,7 @@ $(function () {
   }
 });
 
-$(document).ready(function() {
+/*$(document).ready(function() {
 	//add task
 		console.log("insert시작");
 	    $('#noticeSubmit').click(function() {
@@ -156,7 +156,8 @@ $(document).ready(function() {
 	        var noticeData = {
 	            notice_title: $('input[name=noticeTitle]').val(),
 	            notice_content: $('#noticeContent').val(),
-	            notice_no: $('#noticeNo').val()
+	            notice_no: $('#noticeNo').val(),
+	            
 	            //task_startdate: $('input[name=eventStartDate]').val(),
 	            //task_enddate: $('input[name=eventEndDate]').val()
 	        };
@@ -172,4 +173,32 @@ $(document).ready(function() {
 	            }
 	        });
 	    });
+});*/
+
+/*$(document).ready(function () {
+    $("a[name='file-delete']").on("click", function (e) {
+        e.preventDefault();
+        deleteFile($(this).closest('p'));
+    });
+});
+
+function deleteFile(elementToDelete) {
+    // elementToDelete이 null이 아니면 삭제
+    if (elementToDelete) {
+        elementToDelete.remove();
+    }
+
+    // TODO: 삭제할 로직 추가 (예: 서버 요청 등)
+}*/
+// 등록 버튼 클릭 이벤트
+document.getElementById('noticeSubmit').addEventListener('click', function() {
+  var title = document.getElementById('ecommerce-product-name').value;
+  var content = document.getElementById('noticeContent').value;
+  // 제목이나 내용이 없음222
+  if (!title || !content || content.trim() === "<p><br></p>") {
+    $('#modal-no-content').modal('show');
+  } else {
+    //폼 제출
+    document.getElementById('noticeUpdate').submit();
+  }
 });

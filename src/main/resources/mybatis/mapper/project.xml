@@ -45,10 +45,22 @@
 		and t.empinfo_no = #{empinfo_no}
 	</select>
 	
+	<select id="selectPmProject" resultType="ProjectListResponse" parameterType="int">
+		select distinct project_no, project_name, project_startdate, project_enddate, project_client
+		from project
+		where project_manager = #{project_manager}
+	</select>
+	
 	<update id="updateProject" parameterType="ProjectModifyResponse">
 		update project
 		set project_name = #{project_name}, project_outline = #{project_outline}, project_startdate = #{project_startdate},
 			project_enddate = #{project_enddate}, project_client = #{project_client}, project_manager = #{project_manager}
 		where project_no = #{project_no}
 	</update>
+	
+	<select id="selectNowProject" parameterType="int" resultType="String">
+		select project_name
+		from project
+		where project_no = #{project_no}
+	</select>
 </mapper>

@@ -6,6 +6,11 @@
 const formAuthentication = document.querySelector('#formAuthentication');
 
 $(document).ready(function() {
+	var errorBox = $("#errorBox").val();
+	if(errorBox == "true") {
+		alert("로그인 실패!");
+	}
+	
     var rememberMeCheckbox = $('#remember-me');
     var emailInput = $('#email');
     var loginButton = $('#btnLogin');

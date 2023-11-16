@@ -10,7 +10,7 @@ $(document).ready(function () {
 	
 	var checkExist = setInterval(function() {
 		if($(".add-new").length) {
-			if(empNo == 0) {
+			if(empNo == 0 || empNo == 1) {
 				$(".add-new").show();
 				console.log("empnoempnoempnopo2 :" + empNo);
 			} else {

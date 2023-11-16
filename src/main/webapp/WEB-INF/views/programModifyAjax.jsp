@@ -246,7 +246,7 @@
       </div>
     </div>
     <div class="pt-4">
-      <c:if test="${now_emp_no == 0}">
+      <c:if test="${now_emp_no == 0 || now_emp_no == 1}">
 	      <div class="row justify-content-end">
 	        <div class="col-sm-12 col-md-8 ps-4">
 	          <button id="programModify" type="submit" class="btn btn-primary me-sm-2 me-1 mb-2" >수정</button>
@@ -260,7 +260,6 @@
 		      <div class="row justify-content-end">
 		        <div class="col-sm-12 col-md-8 ps-4">
 		          <button id="programModify" type="submit" class="btn btn-primary me-sm-2 me-1 mb-2" >수정</button>
-		          <button id="programDelete" type="button" class="btn btn-danger me-sm-2 me-1 mb-2" onclick="javascript:deleteProgram(${programModify.task_no})">삭제</button>
 		          <button type="reset" class="btn btn-label-secondary mb-2 me-1">취소</button>
 		        </div>
 		      </div>

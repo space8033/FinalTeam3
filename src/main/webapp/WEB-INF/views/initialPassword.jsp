@@ -68,7 +68,7 @@
               <div class="app-brand mb-5 d-flex justify-content-center ms-5">
               <a href="/exodia/main" class="app-brand-link gap-2">
                   <img
-		              src="${pageContext.request.contextPath}/resources/assets/img/illustrations/otilogo.png"
+		              src="${pageContext.request.contextPath}/resources/assets/img/illustrations/mainlogo.png"
 		              class="img-fluid"
 		              alt="Login image"
 		              width="80%"
@@ -159,6 +159,6 @@
     <script src="${pageContext.request.contextPath}/resources/assets/js/main.js"></script>
 
     <!-- Page JS -->
-    <script src="${pageContext.request.contextPath}/resources/assets/js/pages-auth.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/assets/js/login.js"></script>
   </body>
 </html>

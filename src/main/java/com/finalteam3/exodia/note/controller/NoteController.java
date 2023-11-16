@@ -73,7 +73,6 @@ public class NoteController {
 		Map<String, Object> profile = new HashMap<>();
 		profile.put("media_from", "EMP");
 		profile.put("from_no", loginResponse.getEmp_no());
-		log.info(emp_no+"empNo 인력검색 잘받아오나");
 		if(emp_no != null) {
 			
 			model.addAttribute("emp_no", emp_no);
@@ -119,9 +118,7 @@ public class NoteController {
 		int intPageNo = Integer.parseInt(pageNote);
 		//세션에 pageNo를 저장
 		session.setAttribute("pageNote", String.valueOf(pageNote));
-		log.info("여기까지 ok2");
 		int totalRows = noteService.countByNoteNo(empNo);
-		log.info(totalRows+"나전체숫자");
 		
 		Pager pager = new Pager(10, 5, totalRows, intPageNo);
 		
@@ -129,17 +126,14 @@ public class NoteController {
 		map.put("startRowNo", pager.getStartRowNo());
 		map.put("endRowNo", pager.getEndRowNo());
 		map.put("empNo", empNo);
-		log.info(map+"여기까지 맵임ok3");
 		
 		List<NoteAll> list = noteService.getNoteListByRno(map);
-		log.info(list+"여기까지 ok3");
 			
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
 		if(noteReadNo != null) {
 			model.addAttribute("noteReadNo", noteReadNo);
 		}
-		log.info("여기까지 ok4");
 		
 		return "/note";
 	}
@@ -152,10 +146,8 @@ public class NoteController {
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
 		
-		log.info(noteReadNo+"먼값이 들어오나 보자");
 		int noteRead_No = Integer.parseInt(noteReadNo);
 		NoteRead noteRead = noteService.getNoteRead(noteRead_No);
-		log.info(noteRead.toString()+"모지?");
 		model.addAttribute("noteRead", noteRead);
 		
 		Note note = noteService.getNote(noteRead_No);
@@ -204,7 +196,6 @@ public class NoteController {
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
 		
-		log.info(noteNo+"먼값이 들어오나 보자");
 		int note_no = Integer.parseInt(noteNo);
 		Note note = noteService.getNoteSent(note_no);
 		
@@ -256,19 +247,16 @@ public class NoteController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
-		log.info("내 페이지 넘버는 1?" + pageInbox);
 		if(pageInbox == null) {
 			//세션에 저장되어 있는지 확인
 			pageInbox = (String) session.getAttribute("pageInbox");
 			//저장되어있지 않다면 "1"로 초기화
-			log.info("내 페이지 넘버는 2?" + pageInbox);
 			
 			if(pageInbox == null || pageInbox == "0") {
 				pageInbox = "1";
 			}
 			
 		}
-		log.info("내 페이지 넘버는 3?" + pageInbox);
 		
 		int empNo = empInfo.getEmpinfo_no();
 		
@@ -278,7 +266,6 @@ public class NoteController {
 		//세션에 pageNo를 저장
 		session.setAttribute("pageInbox", String.valueOf(pageInbox));
 		int totalRows = noteService.countByNoteNo(empNo);
-		log.info("내 totalRows 넘버는 ?" + totalRows);
 		
 		Pager pager = new Pager(10, 5, totalRows, intPageNo);
 		
@@ -288,7 +275,7 @@ public class NoteController {
 		map.put("empNo", empNo);
 		
 		List<NoteAll> list = noteService.getNoteListByRno(map);
-		log.info("내 list 가온나 " + list.toString());
+
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
@@ -305,34 +292,27 @@ public class NoteController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
-		log.info("내 페이지 넘버는 1?" + pageInboxSearch);
-		log.info("서치 키워드는?" + searchKeyword);
 		if(pageInboxSearch == null) {
 			//세션에 저장되어 있는지 확인
 			pageInboxSearch = (String) session.getAttribute("pageInboxSearch");
 			//저장되어있지 않다면 "1"로 초기화
-			log.info("내 페이지 넘버는 2?" + pageInboxSearch);
 			
 			if(pageInboxSearch == null || pageInboxSearch == "0") {
 				pageInboxSearch = "1";
 			}
 			
 		}
-		log.info("내 페이지 넘버는 3?" + pageInboxSearch);
 		
 		int empNo = empInfo.getEmpinfo_no();
-		log.info("내 엠프넘버는?" + empNo);
 		
 		Map<String, Object> mapCount = new HashMap<>();
 		mapCount.put("empNo", empNo);
 		mapCount.put("searchKeyword", searchKeyword);
-		log.info("어디서 막히는거임?");
 		//문자열을 정수로 변환
 		int intPageNo = Integer.parseInt(pageInboxSearch);
 		//세션에 pageNo를 저장
 		session.setAttribute("pageInboxSearch", String.valueOf(pageInboxSearch));
 		int totalRows = noteService.countBySearchNoteNo(mapCount);
-		log.info("내 totalRows 넘버는 ?" + totalRows);
 		
 		Pager pager = new Pager(10, 5, totalRows, intPageNo);
 		
@@ -343,7 +323,6 @@ public class NoteController {
 		map.put("searchKeyword", searchKeyword);
 		
 		List<NoteAll> list = noteService.getNoteSearchListByRno(map);
-		log.info("내 list 가온나 " + list.toString());
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
@@ -383,9 +362,7 @@ public class NoteController {
 		int intPageNo = Integer.parseInt(pageSentSearch);
 		//세션에 pageNo를 저장
 		session.setAttribute("pageSentSearch", String.valueOf(pageSentSearch));
-		log.info("여기까지 ok2");
 		int totalRows = noteService.countBySearchNoteSenderNo(mapCount);
-		log.info(totalRows+"나전체숫자");
 		
 		Pager pager = new Pager(10, 5, totalRows, intPageNo);
 		
@@ -409,7 +386,6 @@ public class NoteController {
 	//발신 쪽지함 불러오기
 	@GetMapping("/noteSent")
 	public String noteSent(String pageSent,@RequestParam("noteSent") String noteSent, HttpSession session, Model model, Authentication authentication) {
-		log.info(noteSent+"노트센트 잘받아오니");
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
@@ -432,9 +408,7 @@ public class NoteController {
 		int intPageNo = Integer.parseInt(pageSent);
 		//세션에 pageNo를 저장
 		session.setAttribute("pageSent", String.valueOf(pageSent));
-		log.info("여기까지 ok2");
 		int totalRows = noteService.countByNoteSenderNo(empNo);
-		log.info(totalRows+"나전체숫자");
 		
 		Pager pager = new Pager(10, 5, totalRows, intPageNo);
 		
@@ -442,18 +416,13 @@ public class NoteController {
 		map.put("startRowNo", pager.getStartRowNo());
 		map.put("endRowNo", pager.getEndRowNo());
 		map.put("empNo", empNo);
-		log.info(map+"여기까지 맵임ok3");
 		
 		List<NoteAll> list = noteService.getNoteSendListByRno(map);
-		log.info(list+"여기까지 ok3");
 			
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
 		String contentType = "발신";
 		model.addAttribute("contentType", contentType);
-		
-		
-		log.info("여기까지 ok4");
 		
 		return "/noteContent";
 	}
@@ -487,9 +456,7 @@ public class NoteController {
 		int intPageNo = Integer.parseInt(pageSent);
 		//세션에 pageNo를 저장
 		session.setAttribute("pageSent", String.valueOf(pageSent));
-		log.info("여기까지 ok2");
 		int totalRows = noteService.countByNoteSenderNo(empNo);
-		log.info(totalRows+"나전체숫자");
 		
 		Pager pager = new Pager(10, 5, totalRows, intPageNo);
 		
@@ -497,18 +464,13 @@ public class NoteController {
 		map.put("startRowNo", pager.getStartRowNo());
 		map.put("endRowNo", pager.getEndRowNo());
 		map.put("empNo", empNo);
-		log.info(map+"여기까지 맵임ok3");
 		
 		List<NoteAll> list = noteService.getNoteSendListByRno(map);
-		log.info(list+"여기까지 ok3");
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
 		String contentType = "발신";
 		model.addAttribute("contentType", contentType);
-		
-		
-		log.info("여기까지 ok4");
 		
 		return "/noteContent";
 	}
@@ -516,7 +478,6 @@ public class NoteController {
 	//임시저장 쪽지함 불러오기
 	@GetMapping("/noteDraft")
 	public String noteDraft(String pageDraft,@RequestParam("noteDraft") String noteDraft, HttpSession session, Model model, Authentication authentication) {
-		log.info(noteDraft+"노트임시 잘받아오니");
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
@@ -539,28 +500,20 @@ public class NoteController {
 		int intPageNo = Integer.parseInt(pageDraft);
 		//세션에 pageNo를 저장
 		session.setAttribute("pageDraft", String.valueOf(pageDraft));
-		log.info("여기까지 ok2");
 		int totalRows = noteService.countByNoteDraftNo(empNo);
-		log.info(totalRows+"나전체숫자");
-		
 		Pager pager = new Pager(10, 5, totalRows, intPageNo);
 		
 		Map<String, Object> map = new HashMap<>();
 		map.put("startRowNo", pager.getStartRowNo());
 		map.put("endRowNo", pager.getEndRowNo());
 		map.put("empNo", empNo);
-		log.info(map+"여기까지 맵임ok3");
 		
 		List<NoteAll> list = noteService.getNoteDraftListByRno(map);
-		log.info(list+"여기까지 ok3");
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
 		String contentType = "임시저장";
 		model.addAttribute("contentType", contentType);
-		
-		
-		log.info("여기까지 ok4");
 		
 		return "/noteContent";
 	}
@@ -595,9 +548,7 @@ public class NoteController {
 		int intPageNo = Integer.parseInt(pageDraftSearch);
 		//세션에 pageNo를 저장
 		session.setAttribute("pageDraftSearch", String.valueOf(pageDraftSearch));
-		log.info("여기까지 ok2");
 		int totalRows = noteService.countBySearchNoteDraftNo(mapCount);
-		log.info(totalRows+"나전체숫자");
 		
 		Pager pager = new Pager(10, 5, totalRows, intPageNo);
 		
@@ -606,18 +557,14 @@ public class NoteController {
 		map.put("endRowNo", pager.getEndRowNo());
 		map.put("empNo", empNo);
 		map.put("searchKeyword", searchKeyword);
-		log.info(map+"여기까지 맵임ok3");
 		
 		List<NoteAll> list = noteService.getNoteDraftSearchListByRno(map);
-		log.info(list+"여기까지 ok3");
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
 		String contentType = "임시저장";
 		model.addAttribute("contentType", contentType);
 		model.addAttribute("searchKeyword", searchKeyword);
-		
-		log.info("여기까지 ok4");
 		
 		return "/noteContent";
 	}
@@ -646,9 +593,7 @@ public class NoteController {
 		int intPageNo = Integer.parseInt(pageStarred);
 		//세션에 pageNo를 저장
 		session.setAttribute("pageStarred", String.valueOf(pageStarred));
-		log.info("여기까지 ok2");
 		int totalRows = noteService.countByNoteStarredNo(empNo);
-		log.info(totalRows+"나전체숫자");
 		
 		Pager pager = new Pager(10, 5, totalRows, intPageNo);
 		
@@ -656,17 +601,13 @@ public class NoteController {
 		map.put("startRowNo", pager.getStartRowNo());
 		map.put("endRowNo", pager.getEndRowNo());
 		map.put("empNo", empNo);
-		log.info(map+"여기까지 맵임ok3");
 		
 		List<NoteAll> list = noteService.getNoteStarredListByRno(map);
-		log.info(list+"여기까지 ok3");
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
 		String contentType = "중요";
 		model.addAttribute("contentType", contentType);
-		
-		log.info("여기까지 ok4");
 		
 		return "/noteContent";
 	}
@@ -699,9 +640,7 @@ public class NoteController {
 		int intPageNo = Integer.parseInt(pageStarredSearch);
 		//세션에 pageNo를 저장
 		session.setAttribute("pageStarred", String.valueOf(pageStarredSearch));
-		log.info("여기까지 ok2");
 		int totalRows = noteService.countBySearchNoteStarredNo(mapCount);
-		log.info(totalRows+"나전체숫자");
 		
 		Pager pager = new Pager(10, 5, totalRows, intPageNo);
 		
@@ -710,18 +649,14 @@ public class NoteController {
 		map.put("endRowNo", pager.getEndRowNo());
 		map.put("empNo", empNo);
 		map.put("searchKeyword", searchKeyword);
-		log.info(map+"여기까지 맵임ok3");
 		
 		List<NoteAll> list = noteService.getNoteStarredSearchListByRno(map);
-		log.info(list+"여기까지 ok3");
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
 		String contentType = "중요";
 		model.addAttribute("contentType", contentType);
 		model.addAttribute("searchKeyword", searchKeyword);
-		
-		log.info("여기까지 ok4");
 		
 		return "/noteContent";
 	}
@@ -753,9 +688,7 @@ public class NoteController {
 		int intPageNo = Integer.parseInt(pageTrashSearch);
 		//세션에 pageNo를 저장
 		session.setAttribute("pageTrashSearch", String.valueOf(pageTrashSearch));
-		log.info("여기까지 ok2");
 		int totalRows = noteService.countBySearchNoteTrashNo(mapCount);
-		log.info(totalRows+"나전체숫자");
 		
 		Pager pager = new Pager(10, 5, totalRows, intPageNo);
 		
@@ -764,18 +697,14 @@ public class NoteController {
 		map.put("endRowNo", pager.getEndRowNo());
 		map.put("empNo", empNo);
 		map.put("searchKeyword", searchKeyword);
-		log.info(map+"여기까지 맵임ok3");
 		
 		List<NoteAll> list = noteService.getNoteTrashSearchListByRno(map);
-		log.info(list+"여기까지 ok3");
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
 		String contentType = "휴지통";
 		model.addAttribute("contentType", contentType);
 		model.addAttribute("searchKeyword", searchKeyword);
-		
-		log.info("여기까지 ok4");
 		
 		return "/noteContent";
 	}
@@ -803,9 +732,7 @@ public class NoteController {
 		int intPageNo = Integer.parseInt(pageTrash);
 		//세션에 pageNo를 저장
 		session.setAttribute("pageTrash", String.valueOf(pageTrash));
-		log.info("여기까지 ok2");
 		int totalRows = noteService.countByNoteTrashNo(empNo);
-		log.info(totalRows+"나전체숫자");
 		
 		Pager pager = new Pager(10, 5, totalRows, intPageNo);
 		
@@ -813,17 +740,13 @@ public class NoteController {
 		map.put("startRowNo", pager.getStartRowNo());
 		map.put("endRowNo", pager.getEndRowNo());
 		map.put("empNo", empNo);
-		log.info(map+"여기까지 맵임ok3");
 		
 		List<NoteAll> list = noteService.getNoteTrashListByRno(map);
-		log.info(list+"여기까지 ok3");
 		
 		model.addAttribute("pager", pager);
 		model.addAttribute("list", list);
 		String contentType = "휴지통";
 		model.addAttribute("contentType", contentType);
-		
-		log.info("여기까지 ok4");
 		
 		return "/noteContent";
 	}
@@ -836,10 +759,8 @@ public class NoteController {
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
 		
-		log.info(noteReadNo+"먼값이 들어오나 보자");
 		int noteRead_No = Integer.parseInt(noteReadNo);
 		NoteRead noteRead = noteService.getNoteRead(noteRead_No);
-		log.info(noteRead.toString()+"모지?");
 		model.addAttribute("noteRead", noteRead);
 		
 		Note note = noteService.getNote(noteRead_No);
@@ -884,7 +805,6 @@ public class NoteController {
 	@PostMapping("/editFileGet")
 	@ResponseBody
 	public String editFileGet(String fileValues, HttpSession session, Model model, Authentication authentication) {
-		log.info(fileValues+"파일밸류알려달라");
 		List<MediaDto> mediaList = noteService.selectMediaFiles(fileValues);
 		
 		
@@ -900,7 +820,6 @@ public class NoteController {
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
 		
-		log.info(noteNo+"먼값이 들어오나 보자");
 		int note_no = Integer.parseInt(noteNo);
 		Note note = noteService.getNoteSent(note_no);
 		
@@ -931,12 +850,6 @@ public class NoteController {
 		model.addAttribute("two_name_color", two_name_color);
 		model.addAttribute("base64", base64);
 		
-		
-		
-		
-		
-		
-		
 		List<MediaDto> mediaList = noteService.getMediaList(note.getNote_no());
 		
 		model.addAttribute("mediaList", mediaList);
@@ -959,7 +872,6 @@ public class NoteController {
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
 		
-		log.info(noteNo+"먼값이 들어오나 보자");
 		int note_no = Integer.parseInt(noteNo);
 		Note note = noteService.getNoteSent(note_no);
 		
@@ -1012,7 +924,6 @@ public class NoteController {
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
 		model.addAttribute("empInfo", empInfo);
 		
-		log.info(noteNo+"먼값이 들어오나 보자");
 		int note_no = Integer.parseInt(noteNo);
 		List<NoteResponse> list = noteService.getNoteSentList(note_no);
 		model.addAttribute("list", list);
@@ -1059,7 +970,6 @@ public class NoteController {
 	//쪽지 발송
 	@PostMapping("/noteSend")
 	public String noteSend(NoteRequest request, Authentication authentication) throws Exception {
-		log.info(request.toString());
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		EmployeeInfo empInfo = employeeService.getEmpInfo(loginResponse.getEmp_no());
@@ -1075,7 +985,6 @@ public class NoteController {
 	//답장 발송
 	@PostMapping("/replySend")
 	public String replySend(ReplyRequest request, Authentication authentication) throws Exception {
-		log.info(request.toString());
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		request.setNote_sender(loginResponse.getEmp_no());
@@ -1089,7 +998,6 @@ public class NoteController {
 	@PostMapping("/readUpdate")
 	@ResponseBody
 	public String readUpdate(String readUpdateId) {
-		log.info(readUpdateId+"controller 못들어오는건지");
 		int readUpdateIdNo = Integer.parseInt(readUpdateId);
 		noteService.updateRead(readUpdateIdNo);
 		
@@ -1112,7 +1020,6 @@ public class NoteController {
 	@ResponseBody
 	public String noteStarredUpdate(String noteStarred, String noteReadNo) {
 		int noteRead_no = Integer.parseInt(noteReadNo);
-		
 		
 		noteService.updateStarred(noteRead_no, noteStarred);
 		
@@ -1160,19 +1067,12 @@ public class NoteController {
 	}
 	
 	//임시저장
-	@SuppressWarnings("null")
 	@PostMapping("/draftNote")
 	@ResponseBody
 	public String draftNote(NoteRequest request, Authentication authentication) throws Exception {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		request.setNote_sender(loginResponse.getEmp_no());
-		log.info(request.getNote_receiver()+"수신자");
-		log.info(request.getNote_receiver_cc()+"씨씨");
-		log.info(request.getNote_receiver_bcc()+"비씨씨");
-		log.info(request.getNote_title()+"주제");
-		log.info(request.getNote_content()+"내용");
-		log.info(request.getFiles()+"파일들");
 		noteService.addDraft(request);
 		return "redirect:/note";
 	}
@@ -1211,7 +1111,6 @@ public class NoteController {
 		response.put("trashNo", trashNo);
 		response.put("draftNo", draftNo);
 		response.put("starredNo", starredNo);
-		log.info(uckNo+"수신"+trashNo+"휴지"+draftNo+"임시"+starredNo+"중요");
 		
 		return response;
 	}

@@ -50,4 +50,12 @@ public class MediaServiceImpl implements MediaService {
 		mediaDao.deleteMediaByFromNo(map);
 	}
 
+
+
+	@Override
+	public void deleteMediaByMediaNo(int media_no) {
+		mediaDao.deleteMediaByMediaNo(media_no);
+		
+	}
+
 }

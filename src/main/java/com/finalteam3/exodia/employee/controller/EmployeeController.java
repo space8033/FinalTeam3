@@ -27,6 +27,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.finalteam3.exodia.employee.dao.EmployeeDao;
 import com.finalteam3.exodia.employee.dto.request.EmpManageRequest;
 import com.finalteam3.exodia.employee.dto.request.JoinList;
 import com.finalteam3.exodia.employee.dto.request.JoinRequest;
@@ -57,10 +58,19 @@ public class EmployeeController {
 	@Resource
 	private EmployeeService employeeService;
 	@Resource
+	private EmployeeDao employeeDao;
+	@Resource
 	private MediaService mediaService;
 	
 	@GetMapping("/login")
 	public String loginForm() {
+		return "/login";
+	}
+
+	@GetMapping("/loginFailure")
+	public String loginFailure(Model model) {
+		model.addAttribute("error", "true");
+		
 		return "/login";
 	}
 	
@@ -100,32 +110,8 @@ public class EmployeeController {
 		
 	}
 	
-	@GetMapping("/addUser")
-	public String joinForm(Authentication authentication, Model model) {
-		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
-		LoginResponse loginResponse = empDetails.getLoginResponse();
-		String emp_id = loginResponse.getEmp_id();
-		model.addAttribute("emp_id", emp_id);
-		
-		String emp_name = loginResponse.getEmpInfo_name();
-		model.addAttribute("empInfo_name", emp_name);
-		
-		return "/addUser";
-	}
-	
-	
-	@PostMapping("/addUser")
-	public String join(JoinList joinRequest) {
-		
-		log.info(joinRequest.toString());
-		
-		//employeeService.join(joinRequest);
-		
-		return "/addUser";
-	}
-	
-	@GetMapping("/jjoin")
-	public String jjoinForm(Authentication authentication, Model model, HttpSession session) {
+	@GetMapping("/join")
+	public String joinForm(Authentication authentication, Model model, HttpSession session) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
@@ -141,14 +127,14 @@ public class EmployeeController {
 		return "/jjoin";
 	}
 	
-	@PostMapping("/jjoin")
-	public String jjoin(JoinRequest joinRequest, HttpSession session) {
+	@PostMapping("/join")
+	public String join(JoinRequest joinRequest, HttpSession session) {
 		if(employeeService.join(joinRequest).equals("success")) {
 			session.setAttribute("idList", "join-success");
 			return "redirect:/main";			
 		}else {
 			session.setAttribute("idList", joinRequest.getEmp_id());			
-			return "redirect:/employee/jjoin";
+			return "redirect:/employee/join";
 		}
 	}
 	
@@ -290,7 +276,7 @@ public class EmployeeController {
 			session.setAttribute("idList", "join-success");
 		}
 		
-		return "redirect:/employee/jjoin";
+		return "redirect:/employee/join";
 	}
 	
 	@GetMapping("/userManagement")
@@ -398,5 +384,11 @@ public class EmployeeController {
 	@ResponseBody
 	public void deleteEmp(int emp_no) {
 		employeeService.deleteEmp(emp_no);
+	}
+	
+	@PostMapping("/initEmpPassword")
+	@ResponseBody
+	public void initEmpPassword(int emp_no) {
+		employeeDao.initPassword(emp_no);
 	}
 }

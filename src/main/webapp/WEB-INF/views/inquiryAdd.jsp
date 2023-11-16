@@ -145,11 +145,11 @@
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <!-- <li class="menu-item">
                   <a href="dashboards-crm.html" class="menu-link">
                     <div class="text-truncate" >프로젝트 조직도</div>
                   </a>
-                </li>
+                </li> -->
                 <li class="menu-item">
                   <a href="${pageContext.request.contextPath}/project/searchUser" class="menu-link">
                     <div class="text-truncate">프로젝트 인력 검색</div>
@@ -221,7 +221,7 @@
               </a>
             </li> --%>
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/employee/jjoin" class="menu-link">
+              <a href="${pageContext.request.contextPath}/employee/join" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
               </a>
@@ -343,7 +343,7 @@
                               <label class="form-label" for="selectpickerLiveSearch">팀</label>
                               <select id="selectpickerLiveSearch" class="selectpicker form-select" data-style="btn-default"
 		                            data-live-search="true">
-		                            <option data-tokens="ketchup mustard"  value="">팀을 선택해주세요</option>
+		                            <option data-tokens="ketchup mustard"  value="">팀을 선택해 주세요</option>
                                 <c:forEach var="teamName" items="${tNames}">
 		                            <option data-tokens="ketchup mustard">${teamName}</option>
 	                            </c:forEach>
@@ -395,22 +395,40 @@
                             <div class="form-control p-0 pt-1">
                               <div class="comment-toolbar border-0 border-bottom">
                                 <div class="d-flex justify-content-start">
-                                  <span class="ql-formats me-0">
-                                    <button class="ql-bold"></button>
-                                    <button class="ql-italic"></button>
-                                    <button class="ql-underline"></button>
-                                    <button class="ql-list" value="ordered"></button>
-                                    <button class="ql-list" value="bullet"></button>
-                                    <button class="ql-link"></button>
-                                    <button class="ql-image"></button>
-                                  </span>
+                                  <span class="ql-formats">
+			                          <select class="ql-font"></select>
+			                          <select class="ql-size"></select>
+			                        </span>
+			                        <span class="ql-formats">
+			                          <button class="ql-bold"></button>
+			                          <button class="ql-italic"></button>
+			                          <button class="ql-underline"></button>
+			                          <button class="ql-strike"></button>
+			                        </span>
+			                        <span class="ql-formats">
+			                          <select class="ql-color"></select>
+			                          <select class="ql-background"></select>
+			                        </span>
+			                        <span class="ql-formats">
+			                          <button class="ql-script" value="sub"></button>
+			                          <button class="ql-script" value="super"></button>
+			                        </span>
+			                        <span class="ql-formats">
+			                          <button class="ql-header" value="1"></button>
+			                          <button class="ql-header" value="2"></button>
+			                          <button class="ql-blockquote"></button>
+			                          <button class="ql-code-block"></button>
+			                          <button class="ql-link"></button>
+	                                  <button class="ql-image"></button>
+	                                  <button class="ql-video"></button>
+			                        </span>
                                 </div>
                               </div>
                               <div class="comment-editor border-0 pb-4" id="ecommerce-category-description"></div>
                               <textarea id="noticeContent" name="noticeContent" style="display:none"></textarea>
-                              <div class="input-group">
-                                <input type="file" name="files" class="form-control" id="attach-file" multiple />
-                              </div>
+                              <div class="input-group">							
+									<input type="file" name="files" class="form-control" id="attach-file" multiple/>
+							  </div>
                             </div>
                           </div>
                         </div>

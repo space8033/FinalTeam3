@@ -1,5 +1,6 @@
 package com.finalteam3.exodia.notice.controller;
 
+import java.io.IOException;
 import java.io.OutputStream;
 import java.net.URLEncoder;
 import java.util.Base64;
@@ -55,6 +56,8 @@ public class NoticeController {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		int emp_no = empDetails.getLoginResponse().getEmp_no();
+		String emp_id = loginResponse.getEmp_id();
+		model.addAttribute("emp_id", emp_id);
 		
 		model.addAttribute("emp_no", emp_no);
 		
@@ -70,9 +73,6 @@ public class NoticeController {
 		//int emp_no = empDetails.getLoginResponse().getEmp_no();
 		
 		List<Notice> data = noticeService.getNoticeList();
-		
-		log.info("데이터 data 어떻게 나오 : " + data);
-		
 		
 		//data를 json데이터로 바꾸기
        /* ObjectMapper objectMapper = new ObjectMapper();
@@ -116,7 +116,6 @@ public class NoticeController {
 		int noticeNo = notice.getNotice_no();
 		
 		alarmService.insertNoticeAlarm(notice);
-		log.info("" + noticeNo);
 		
 		for(MultipartFile mf : mfs) {
 					if(!mf.isEmpty()) {
@@ -130,11 +129,10 @@ public class NoticeController {
 				mediaService.insertNoticeFile(mediaDto);
 					}
 		}
-		log.info("공지사항 입력 시 db로 넘어가는 값들 :" + notice);	
 		return "redirect:/noticeList";
 	}
 		
-	//쪽지 파일 다운로드
+	//공지사항 파일 다운로드
 	@GetMapping("/noticeFileDownload")
 	public void noticeFileDownload(int mno, HttpServletRequest request, HttpServletResponse response) throws Exception{
 		MediaDto media = mediaService.getMedia(mno);
@@ -166,26 +164,49 @@ public class NoticeController {
 	public String noticeUpdateForm(Authentication authentication, int notice_no, Model model) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
+		String emp_id = loginResponse.getEmp_id();
+		model.addAttribute("emp_id", emp_id);
 		
 		Notice notice = noticeService.getNoticeDetail(notice_no);
-		log.info("notice :" +  notice);
 		model.addAttribute("notice", notice);
-		log.info("넘버"+notice.getNotice_no());
-		log.info("모델이 뭔데 좀 :" + notice);
+		
+		List<MediaDto> mediaList = noticeService.getMediaList(notice.getNotice_no());
+	    model.addAttribute("mediaList", mediaList);
+	    
 		
 		return "noticeUpdate";
 	}
 	
 	//공지사항 업데이트
 	@PostMapping("/noticeUpdate")
-	public String noticeUpdateForm(Authentication authentication, int notice_no, Notice notice) {
-		log.info("noticeNo :" + notice_no);
-		log.info("업데이트잘됏니?" + notice.toString());
+	public String noticeUpdateForm(Authentication authentication,
+			@RequestParam("noticeNo") int noticeNo,
+			@RequestParam("noticeTitle") String noticeTitle,
+			@RequestParam("noticeContent") String noticeContent,
+			@RequestParam("files") List<MultipartFile> mfs) throws IOException {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
+		Notice notice = new Notice();
+		notice.setNotice_no(noticeNo);
+		notice.setNotice_title(noticeTitle);
+		notice.setNotice_content(noticeContent);
 		noticeService.updateByNotice(notice);
-		return "noticeList";
+		
+		for(MultipartFile mf : mfs) {
+			if(!mf.isEmpty()) {
+		MediaDto mediaDto = new MediaDto();
+		mediaDto.setFrom_no(noticeNo);
+		mediaDto.setMedia_name(mf.getOriginalFilename());
+		mediaDto.setMedia_type(mf.getContentType());
+		mediaDto.setMedia_data(mf.getBytes());
+		mediaDto.setMedia_from("NOTICE");
+		
+		mediaService.insertNoticeFile(mediaDto);
+			}
+		}
+
+		return "redirect:/noticeList";
 	}
 	
 	//공지사항 상세정보 열람
@@ -193,6 +214,8 @@ public class NoticeController {
 	public String noticeDetail(Authentication authentication, int notice_no, Model model){
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
+		String emp_id = loginResponse.getEmp_id();
+		model.addAttribute("emp_id", emp_id);
 		
 		model.addAttribute("now_emp_no", loginResponse.getEmp_no());
 
@@ -207,18 +230,13 @@ public class NoticeController {
 	    map.put("empinfo_no", loginResponse.getEmpInfo_no());
 	    noticeService.insertNoticeReaders(map);   
 	    
-	    log.info("노티스리더스에 저장할 no" + map);
-	    
 	    List<NoticeUnreader> unReaders = noticeService.getUnReader(notice_no);
 	    
 	    for(NoticeUnreader unReader : unReaders) {
 	    	unReader.setNotice_no(notice_no);
-	    }
-	    
+	    }   
 	    
 	    model.addAttribute("unReaders", unReaders);
-	    
-	    log.info("안읽은놈들 :" + unReaders);
 	    
 	    Map<String, Object> profile = new HashMap<>();
 		profile.put("media_from", "EMP");
@@ -239,11 +257,21 @@ public class NoticeController {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
-		log.info("노티스넘버 : " + notice_no);
 		noticeService.deleteByNoticeNo(notice_no);
 		alarmService.deleteNoticeAlarm(notice_no);
 		
 		return "noticeList";
+	}
+	
+	//첨부파일 삭제
+	@PostMapping("/mediaDelete")
+	public String mediaDelete(Authentication authentication, @RequestParam("media_no") int media_no) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		
+		mediaService.deleteMediaByMediaNo(media_no);
+		
+		return "noticeDetail";
 	}
 
 }

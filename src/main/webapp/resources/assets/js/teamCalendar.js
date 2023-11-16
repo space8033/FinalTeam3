@@ -30,6 +30,7 @@ document.addEventListener('DOMContentLoaded', function () {
 	var xhr = new XMLHttpRequest();
 	xhr.open('GET', '/exodia/teamCalendarList', true);
 	xhr.onload = function () {
+		console.log("아아아아아");
 	    if (xhr.status >= 200 && xhr.status < 300) {
 	        events = JSON.parse(xhr.responseText);
 	        console.log(events);

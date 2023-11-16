@@ -47,7 +47,7 @@
 		
 	</bean>
 	<bean id="authenticationFailureHandler" class="com.finalteam3.exodia.security.handler.AuthenticationFailureHandler">
-		<property name="defaultFailureUrl" value="/employee/login"></property>
+		<property name="defaultFailureUrl" value="/employee/loginFailure"></property>
 	</bean>
 	<bean id="logoutSuccessHandler" class="com.finalteam3.exodia.security.handler.LogoutSuccessHandler">
 		<property name="defaultTargetUrl" value="/employee/login"></property>

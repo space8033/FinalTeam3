@@ -79,15 +79,17 @@ $(function () {
           targets: 1,
           responsivePriority: 2,
           render: function (data, type, full, meta) {
-            var $name = full['project_name'];
+            var $name = full['project_name'],
+            	$pno = full['project_no'];
             var $row_output =
               '<div class="d-flex align-items-center">' +
               '<div class="d-flex flex-column justify-content-center">' +
-              '<a class="text-body text-wrap fw-medium" href="/exodia/main">' +
+              '<a class="text-body text-wrap fw-medium" href="/exodia/main?projectNo=' + $pno + '">' +
               $name +
               '</a>' +
               '</div>' +
               '</div>';
+            console.log($pno);
             return $row_output;
           }
         },
@@ -226,3 +228,7 @@ $(function () {
     }
   });
 })();
+
+function goMain() {
+	
+}

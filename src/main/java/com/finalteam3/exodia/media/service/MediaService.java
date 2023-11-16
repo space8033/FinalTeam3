@@ -9,4 +9,5 @@ public interface MediaService {
 	public void insertNoticeFile(MediaDto mediaDto);
 	public MediaDto getMediaByFromNo(Map<String, Object> map);
 	public void deleteMediaByFromNo(Map<String, Object> map);
+	public void deleteMediaByMediaNo(int media_no);
 }

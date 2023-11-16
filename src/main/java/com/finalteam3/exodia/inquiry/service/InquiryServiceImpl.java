@@ -46,7 +46,6 @@ public class InquiryServiceImpl implements InquiryService{
 	        notice.setReplyCount(inquiryDao.selectReplyCount(notice.getNotice_no()));
 	    });
 
-	    log.info("문의사항listlistlistlsit : " + list);
 	    log.info("새로운 notice_no2 리스트: " + newNoticeNo2List);
 
 	    return list;
