@@ -1,5 +1,6 @@
 package com.finalteam3.exodia.project.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -111,7 +112,17 @@ public class ProjectServiceImpl implements ProjectService{
 
 	@Override
 	public List<ProjectListResponse> getAllProjectList(int empinfo_no) {
-		List<ProjectListResponse> list = projectDao.selectProjectList(empinfo_no);
+		List<ProjectListResponse> noPmList = projectDao.selectProjectList(empinfo_no);
+		List<ProjectListResponse> pmList = projectDao.selectPmProject(empinfo_no);
+		List<ProjectListResponse> list = new ArrayList<>();
+		
+		for(ProjectListResponse no : noPmList) {
+			list.add(no);
+		}
+		for(ProjectListResponse pm : pmList) {
+			list.add(pm);
+		}
+		
 		for(ProjectListResponse plr : list) {
 			int totalEmp = employeeDao.countProjectEmp(plr.getProject_no());
 			plr.setProject_memberCount(totalEmp);

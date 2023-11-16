@@ -5,6 +5,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -166,8 +168,8 @@ public class TaskServiceImpl implements TaskService{
 	public List<TeamTaskResponse> getTeamTaskDetail(Map<String, Object> map) {
 		List<TeamTaskResponse> list = taskDao.selectTeamTaskDetail(map);
 		List<TeamTaskResponse> response = new ArrayList<>();
+		List<TeamTaskResponse> response5 = new ArrayList<>();
 		
-		int index = 1;
 		for(TeamTaskResponse ttr : list) {
 			Map<String, Object> empMap = new HashMap<>();
 			empMap.put("project_no", 0);
@@ -183,12 +185,26 @@ public class TaskServiceImpl implements TaskService{
 			ttr.setTotal_task(all);
 			ttr.setComplete_task(complete);
 			ttr.setProgress_rate(rate);
-			ttr.setIndex(index);
-			index++;
 			
 			response.add(ttr);
 		}
 		
-		return response;
+		Collections.sort(response, Comparator.comparing(TeamTaskResponse::getProgress_rate).reversed());
+		if(response.size() > 5) {
+			for(int i = 0; i < 5; i ++) {
+				response.get(i).setIndex(i + 1);
+				response5.add(response.get(i));
+			}			
+		}else {
+			int index = 1;
+			for(TeamTaskResponse t : response) {
+				t.setIndex(index);
+				index++;
+				
+				response5.add(t);
+			}
+		}
+		
+		return response5;
 	}
 }

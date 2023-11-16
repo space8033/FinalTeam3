@@ -163,11 +163,11 @@
                     <div class="text-truncate" >프로젝트 목록</div>
                   </a>
                 </li>
-                <li class="menu-item">
+                <!-- <li class="menu-item">
                   <a href="dashboards-crm.html" class="menu-link">
                     <div class="text-truncate" >프로젝트 조직도</div>
                   </a>
-                </li>
+                </li> -->
                 <li class="menu-item">
                   <a href="${pageContext.request.contextPath}/project/searchUser" class="menu-link">
                     <div class="text-truncate">프로젝트 인력 검색</div>
@@ -233,7 +233,7 @@
             </li>
             
             <li class="menu-item">
-              <a href="${pageContext.request.contextPath}/employee/jjoin" class="menu-link">
+              <a href="${pageContext.request.contextPath}/employee/join" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div class="text-truncate">사용자 등록</div>
               </a>
