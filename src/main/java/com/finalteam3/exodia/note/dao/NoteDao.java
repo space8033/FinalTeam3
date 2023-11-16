@@ -84,6 +84,7 @@ public interface NoteDao {
 	//발송취소
 	public void sentCancelNote(int noteReadNo);
 	
+	public Note selectNoteByNoteCreatedAt(Note note);
 	//noteReadNo로 noteRead불러오기
 	public NoteRead selectNoteReadByNoteReadNo(int noteReadNo);
 }

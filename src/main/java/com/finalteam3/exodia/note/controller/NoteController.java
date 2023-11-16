@@ -2,8 +2,10 @@ package com.finalteam3.exodia.note.controller;
 
 import java.io.OutputStream;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Base64;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,13 +23,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.finalteam3.exodia.employee.dto.response.EmpModifyResponse;
 import com.finalteam3.exodia.employee.dto.response.EmpNote;
 import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.employee.service.EmployeeService;
 import com.finalteam3.exodia.media.dao.MediaDao;
 import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.media.service.MediaService;
+import com.finalteam3.exodia.note.dao.NoteDao;
 import com.finalteam3.exodia.note.dto.EmployeeInfo;
 import com.finalteam3.exodia.note.dto.NoteAll;
 import com.finalteam3.exodia.note.dto.Pager;
@@ -52,6 +54,8 @@ public class NoteController {
 	private MediaService mediaService;
 	@Resource
 	private MediaDao mediaDao;
+	@Resource
+	private NoteDao noteDao;
 	
 	
 	@GetMapping("/note")
@@ -1156,6 +1160,7 @@ public class NoteController {
 	}
 	
 	//임시저장
+	@SuppressWarnings("null")
 	@PostMapping("/draftNote")
 	@ResponseBody
 	public String draftNote(NoteRequest request, Authentication authentication) throws Exception {
@@ -1168,9 +1173,7 @@ public class NoteController {
 		log.info(request.getNote_title()+"주제");
 		log.info(request.getNote_content()+"내용");
 		log.info(request.getFiles()+"파일들");
-		
 		noteService.addDraft(request);
-		
 		return "redirect:/note";
 	}
 	
