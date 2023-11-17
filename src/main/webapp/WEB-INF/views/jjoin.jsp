@@ -6,7 +6,7 @@
   class="light-style layout-wide customizer-hide"
   dir="ltr"
   data-theme="theme-default"
-  data-assets-path="../../assets/"
+  data-assets-path="${pageContext.request.contextPath}/resources/assets/"
   data-template="vertical-menu-template-no-customizer">
   <head>
     <meta charset="utf-8" />
@@ -34,24 +34,29 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/fonts/flag-icons.css" />
 
     <!-- Core CSS -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/core.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/theme-default.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/core.css" class="template-customizer-core-css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/rtl/theme-default.css" class="template-customizer-theme-css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/css/demo.css" />
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-bs5/datatables.bootstrap5.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/select2/select2.css" />
     <!-- Vendor -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/styles/index.min.css" />
+    <%-- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/libs/@form-validation/umd/styles/index.min.css" />
 
     <!-- Page CSS -->
     <!-- Page -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/pages/page-auth.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/assets/vendor/css/pages/page-auth.css" /> --%>
 
     <!-- Helpers -->
     <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/helpers.js"></script>
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
+    <script src="${pageContext.request.contextPath}/resources/assets/vendor/js/template-customizer.js"></script>
     <script src="${pageContext.request.contextPath}/resources/assets/js/config.js"></script>
   </head>
 
@@ -248,102 +253,104 @@
    <div class="content-wrapper">
    	<div class="container-xxl flex-grow-1 container-p-y">
     <!-- Content -->
-	<div class="col-12 mt-1">
-      <div class="card">
-        <div class="card-body">
-          <form id="formAuthentication" class="row g-3" name="JoinRequest" action="jjoin" method="POST">
-            <!-- Account Details -->
-            <div class="col-12">
-              <h4>개인 사용자 등록</h4>
-              <hr class="mt-0" />
-            </div>
-
-            <div class="col-md-6">
-              <label for="emp_id" class="form-label">아이디</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="emp_id"
-                    name="emp_id"
-                    placeholder="아이디"
-                    autofocus />
-            </div>
-            <div class="col-md-6">
-              <label for="emp_name" class="form-label">이름</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="emp_name"
-                    name="empinfo_name"
-                    placeholder="이름"
-                    autofocus />
-            </div>
-
-            <div class="col-md-6">
-              <label for="emp_phone" class="form-label">전화번호</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="emp_phone"
-                    name="empinfo_phone"
-                    placeholder="전화번호"
-                    autofocus />
-            </div>
-            <div class="col-md-6">
-              <label for="emp_email" class="form-label">이메일</label>
-                  <input
-                    type="text"
-                    class="form-control"
-                    id="emp_email"
-                    name="empinfo_email"
-                    placeholder="이메일"
-                    autofocus />
-            </div>
-            <div class="col-md-6">
-              <label class="form-label" for="emp_position">직위</label>
-                  <select id="emp_position" class="form-select" name="empinfo_position">
-                    <option value="사원">사원</option>
-                    <option value="대리">대리</option>
-                    <option value="과장">과장</option>
-                    <option value="차장">차장</option>
-                    <option value="부장">부장</option>
-                  </select>
-            </div>
-
-            <div class="col-md-6"></div>
-            
-            <div class="col-md-10"></div>
-            <div class="col-md-2 align-items-end">
-            	<div class="d-flex h-100">
-                  <button class="login btn btn-primary d-grid w-100 align-self-end" type="submit">가입하기</button>
-                </div>
-            </div>
-          </form>
-		</div>
-		<input type="hidden" value="${idList}" id="idList"/>
-		<div class="card-body pt-0">
-            <div class="col-md-12">
-            	<hr/>
-            	<h4 class="mb-4">엑셀 사용자 등록</h4>
-            	<hr/>
-              <form action="poiJoin" method="POST" id="myForm">
-            	<div class="col-xl-3 col-md-5 col-sm-6 col-12" onclick="submitForm()">
-                  <div class="form-check custom-option custom-option-icon mb-4">
-                    <label class="form-check-label custom-option-content" for="basicPlanMain1">
-                      <span class="custom-option-body">
-                        <img class="my-4" width=50 height=50 src="${pageContext.request.contextPath}/resources/assets/img/illustrations/excelIcon.png">
-                        <span class="custom-option-title"> register.xlsx </span>
-                        <small>바탕화면에 위치 시켜주세요</small>
-                      </span>
-                    </label>
-                  </div>
-                </div>        
-               </form>
-            </div>
-            </div>
-          </div>
-          <!-- /Register -->
-        </div>
+	    <div class="row" style="padding:25px;">
+			<div class="col-12 mt-1">
+		      <div class="card">
+		        <div class="card-body">
+		          <form id="formAuthentication" class="row g-3" name="JoinRequest" action="jjoin" method="POST">
+		            <!-- Account Details -->
+		            <div class="col-12">
+		              <h4>개인 사용자 등록</h4>
+		              <hr class="mt-0" />
+		            </div>
+		
+		            <div class="col-md-6">
+		              <label for="emp_id" class="form-label">아이디</label>
+		                  <input
+		                    type="text"
+		                    class="form-control"
+		                    id="emp_id"
+		                    name="emp_id"
+		                    placeholder="아이디"
+		                    autofocus />
+		            </div>
+		            <div class="col-md-6">
+		              <label for="emp_name" class="form-label">이름</label>
+		                  <input
+		                    type="text"
+		                    class="form-control"
+		                    id="emp_name"
+		                    name="empinfo_name"
+		                    placeholder="이름"
+		                    autofocus />
+		            </div>
+		
+		            <div class="col-md-6">
+		              <label for="emp_phone" class="form-label">전화번호</label>
+		                  <input
+		                    type="text"
+		                    class="form-control"
+		                    id="emp_phone"
+		                    name="empinfo_phone"
+		                    placeholder="전화번호"
+		                    autofocus />
+		            </div>
+		            <div class="col-md-6">
+		              <label for="emp_email" class="form-label">이메일</label>
+		                  <input
+		                    type="text"
+		                    class="form-control"
+		                    id="emp_email"
+		                    name="empinfo_email"
+		                    placeholder="이메일"
+		                    autofocus />
+		            </div>
+		            <div class="col-md-6">
+		              <label class="form-label" for="emp_position">직위</label>
+		                  <select id="emp_position" class="form-select" name="empinfo_position">
+		                    <option value="사원">사원</option>
+		                    <option value="대리">대리</option>
+		                    <option value="과장">과장</option>
+		                    <option value="차장">차장</option>
+		                    <option value="부장">부장</option>
+		                  </select>
+		            </div>
+		
+		            <div class="col-md-6"></div>
+		            
+		            <div class="col-md-10"></div>
+		            <div class="col-md-2 align-items-end">
+		            	<div class="d-flex h-100">
+		                  <button class="login btn btn-primary d-grid w-100 align-self-end" type="submit">가입하기</button>
+		                </div>
+		            </div>
+		          </form>
+				</div>
+				<input type="hidden" value="${idList}" id="idList"/>
+				<div class="card-body pt-0">
+		            <div class="col-md-12">
+		            	<hr/>
+		            	<h4 class="mb-4">엑셀 사용자 등록</h4>
+		            	<hr/>
+		              <form action="poiJoin" method="POST" id="myForm">
+		            	<div class="col-xl-3 col-md-5 col-sm-6 col-12" onclick="submitForm()">
+		                  <div class="form-check custom-option custom-option-icon mb-4">
+		                    <label class="form-check-label custom-option-content" for="basicPlanMain1">
+		                      <span class="custom-option-body">
+		                        <img class="my-4" width=50 height=50 src="${pageContext.request.contextPath}/resources/assets/img/illustrations/excelIcon.png">
+		                        <span class="custom-option-title"> register.xlsx </span>
+		                        <small>바탕화면에 위치 시켜주세요</small>
+		                      </span>
+		                    </label>
+		                  </div>
+		                </div>        
+		               </form>
+		            </div>
+		            </div>
+		          </div>
+		          <!-- /Register -->
+		        </div>
+	       	</div>
         </div>
       </div>
     </div>
