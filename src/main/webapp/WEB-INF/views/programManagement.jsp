@@ -277,7 +277,7 @@
 						<!-- Role cards -->
 						<div class="row">
 
-							<div class="col-md-6 col-lg-6 mb-4 mb-md-0">
+							<div class="col-md-7 col-lg-7 mb-4 mb-md-0">
 								<!-- Role Table -->
 								<div class="card">
 									<div class="card-datatable table-responsive">
@@ -303,7 +303,7 @@
 
 
 							<!-- 비동기 jsp 삽입부분 -->
-							<div class="col-md-6 col-lg-6 mb-4 mb-md-0 py-0"
+							<div class="col-md-5 col-lg-5 mb-4 mb-md-0 py-0"
 								id="programModifyContainer">
 								<div class="card mb-5">
 									<h5 class="card-header mb-4">프로그램 상세정보</h5>
