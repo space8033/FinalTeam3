@@ -1703,7 +1703,6 @@ if (typeof $ !== 'undefined') {
       searchInput.on('keyup', function () {
         psSearch.update();
       });
-      layoutCollapsedCustomizerOptions.addClass("d-none");
     }
   });
 }

@@ -38,10 +38,11 @@ public class TaskController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		int empinfo_no = loginResponse.getEmpInfo_no();
 		int emp_no = empDetails.getLoginResponse().getEmp_no();
-		log.info("empno : " + emp_no);
 		
 		model.addAttribute("emp_no", emp_no);
 		model.addAttribute("empinfo_no", empinfo_no);
+		model.addAttribute("emp_id", loginResponse.getEmp_id());
+		model.addAttribute("empInfo_name", loginResponse.getEmpInfo_name());
 		
 		return "/programManagement";
 	}
@@ -72,6 +73,8 @@ public class TaskController {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		
+		model.addAttribute("emp_id", loginResponse.getEmp_id());
+		model.addAttribute("empInfo_name", loginResponse.getEmpInfo_name());
 		model.addAttribute("now_emp_no", loginResponse.getEmp_no());
 		
 		return "/programModifyAjax";

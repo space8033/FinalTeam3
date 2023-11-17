@@ -63,6 +63,8 @@ public class ProjectController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		int empinfo_no = employeeDao.selectEmpInfoNoByEmpNo(loginResponse.getEmp_no());
 		model.addAttribute("empinfo_no", empinfo_no);
+		model.addAttribute("emp_id", loginResponse.getEmp_id());
+		model.addAttribute("empInfo_name", loginResponse.getEmpInfo_name());
 		
 		if(session.getAttribute("projectNo") != null) {
 			int project_no = (int) session.getAttribute("projectNo");

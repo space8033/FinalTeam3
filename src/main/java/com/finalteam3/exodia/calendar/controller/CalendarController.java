@@ -31,7 +31,11 @@ public class CalendarController {
 	private EmployeeDao employeeDao;
 	
 	@GetMapping("/calendar")
-	public String calendarForm(Authentication authentication) {
+	public String calendarForm(Authentication authentication, Model model) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		model.addAttribute("emp_id", loginResponse.getEmp_id());
+		model.addAttribute("empInfo_name", loginResponse.getEmpInfo_name());
 		return "/calendar";
 	}
 
