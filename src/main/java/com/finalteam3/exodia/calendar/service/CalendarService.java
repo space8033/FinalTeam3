@@ -21,4 +21,7 @@ public interface CalendarService {
 	//일정 삭제
 	public void delete(int task_no);
 	
+	//관리자,PM 일 때
+	public List<CalendarResponse2> getPMTask();
+	
 }

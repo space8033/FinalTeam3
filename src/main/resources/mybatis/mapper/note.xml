@@ -465,6 +465,14 @@
   	 	 where note_Restime = #{currentDate}
 	</select>
 	
+	<!-- 노트 시간으로 노트 가져오기 -->
+	<select id="selectNoteByNoteCreatedAt" resultType="Note" parameterType="Note">
+		select NOTE_TITLE, NOTE_CONTENT, NOTE_SENDER, NOTE_CREATEDAT, NOTE_LABEL
+  		  from note
+  	 	 where NOTE_CREATEDAT = #{note_createdAt}
+  	 	   and note_draft IS NULL
+	</select>
+	
 	<!-- 쪽지 번호로 noteRead 발송 취소 쪽지 업데이트 작성자: 김시온 -->
 	<update id="updateNoteRestime" parameterType="note">
 		update note

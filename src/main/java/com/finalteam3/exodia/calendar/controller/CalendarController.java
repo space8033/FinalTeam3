@@ -80,7 +80,7 @@ public class CalendarController {
 		return events;
 	}
 
-	@ResponseBody
+	/*@ResponseBody
 	@GetMapping("/teamCalendarList")
 	public List<CalendarResponse2> getTeamTask(Authentication authentication, Model model) throws Exception {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
@@ -96,7 +96,7 @@ public class CalendarController {
 		List<CalendarResponse2> events = calendarService.getTeamTask(team_name);
 		
 		return events;
-	}
+	}*/
 	
 	//일정 삭제
 	@PostMapping("/deleteCalendar")
