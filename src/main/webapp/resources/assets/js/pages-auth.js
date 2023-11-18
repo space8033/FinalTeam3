@@ -20,7 +20,7 @@ function submitForm() {
 	}
 }
 
-document.addEventListener('DOMContentLoaded', function (e) {
+/*document.addEventListener('DOMContentLoaded', function (e) {
 	(function () {
     // Form validation for Add new record
     if (formAuthentication) {
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function (e) {
       });
     }
   })();
-});
+});*/
 
 function showDuplicateList(idList) {
 	alert("중복된 아이디입니다!" + idList);

@@ -190,7 +190,7 @@
 			<div class="col-12 mt-1">
 		      <div class="card">
 		        <div class="card-body">
-		          <form id="formAuthentication" class="row g-3" name="JoinRequest" action="jjoin" method="POST">
+		          <form id="formAuthentication" class="row g-3" name="JoinRequest" action="join" method="POST">
 		            <!-- Account Details -->
 		            <div class="col-12">
 		              <h4>개인 사용자 등록</h4>
