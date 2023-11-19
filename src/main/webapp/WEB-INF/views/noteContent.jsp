@@ -178,7 +178,7 @@
 	                               <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:deleteDraftNote('${contentType}')"></i>
 	                          	</c:when>
                               	<c:when test ="${contentType eq '중요'}">
-	                               <i class="bx bx-trash-alt email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:deleteStarredNote('${contentType}')"></i>
+	                               <i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:deleteStarredNote('${contentType}')"></i>
 	                          	</c:when>
                               	<c:otherwise>
                               		<i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4" onclick="javascript:trashCheck('${contentType}')"></i>
