@@ -76,7 +76,7 @@ $(function () {
         		      '<div class="d-flex justify-content-start align-items-center product-name">' +
         		      '<div class="d-flex flex-column">' +
         		      '<h6 class="text-body text-nowrap mb-0">' +
-        		      '<a href="noticeDetail?notice_no=' + sharedNoticeNo + '" style="text-decoration: none; color: black;">' + $title + '</a>' +
+        		      '<a href="noticeDetail?notice_no=' + sharedNoticeNo + '" class="text-body text-truncate">' + $title + '</a>' +
         		      '</h6>' +
         		      '</div>' +
         		      '</div>';

@@ -117,6 +117,7 @@ public class EmployeeController {
 		
 		String emp_name = loginResponse.getEmpInfo_name();
 		model.addAttribute("empInfo_name", emp_name);
+		model.addAttribute("emp_id", loginResponse.getEmp_id());
 		
 		String idList = (String) session.getAttribute("idList");
 		if(idList != null) {
@@ -283,6 +284,9 @@ public class EmployeeController {
 	public String getUserManagement(Authentication authentication, Model model) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
+		model.addAttribute("emp_id", loginResponse.getEmp_id());
+		model.addAttribute("empInfo_name", loginResponse.getEmpInfo_name());
+		
 		List<EmpManagementResponse> list = employeeService.getManagementResponse(0);
 		model.addAttribute("list", list);
 		

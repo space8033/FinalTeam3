@@ -57,8 +57,9 @@ public class NoticeController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		int emp_no = empDetails.getLoginResponse().getEmp_no();
 		String emp_id = loginResponse.getEmp_id();
-		model.addAttribute("emp_id", emp_id);
 		
+		model.addAttribute("empInfo_name", loginResponse.getEmpInfo_name());
+		model.addAttribute("emp_id", emp_id);
 		model.addAttribute("emp_no", emp_no);
 		
         return "noticeList";
@@ -166,7 +167,7 @@ public class NoticeController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		String emp_id = loginResponse.getEmp_id();
 		model.addAttribute("emp_id", emp_id);
-		
+		model.addAttribute("empInfo_name", loginResponse.getEmpInfo_name());
 		Notice notice = noticeService.getNoticeDetail(notice_no);
 		model.addAttribute("notice", notice);
 		
@@ -216,7 +217,7 @@ public class NoticeController {
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		String emp_id = loginResponse.getEmp_id();
 		model.addAttribute("emp_id", emp_id);
-		
+		model.addAttribute("empInfo_name", loginResponse.getEmpInfo_name());
 		model.addAttribute("now_emp_no", loginResponse.getEmp_no());
 
 		Notice notice = noticeService.getNoticeDetail(notice_no);		

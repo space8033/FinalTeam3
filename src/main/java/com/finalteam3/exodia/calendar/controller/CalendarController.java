@@ -31,7 +31,11 @@ public class CalendarController {
 	private EmployeeDao employeeDao;
 	
 	@GetMapping("/calendar")
-	public String calendarForm(Authentication authentication) {
+	public String calendarForm(Authentication authentication, Model model) {
+		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+		LoginResponse loginResponse = empDetails.getLoginResponse();
+		model.addAttribute("emp_id", loginResponse.getEmp_id());
+		model.addAttribute("empInfo_name", loginResponse.getEmpInfo_name());
 		return "/calendar";
 	}
 
@@ -80,7 +84,7 @@ public class CalendarController {
 		return events;
 	}
 
-	@ResponseBody
+	/*@ResponseBody
 	@GetMapping("/teamCalendarList")
 	public List<CalendarResponse2> getTeamTask(Authentication authentication, Model model) throws Exception {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
@@ -96,7 +100,7 @@ public class CalendarController {
 		List<CalendarResponse2> events = calendarService.getTeamTask(team_name);
 		
 		return events;
-	}
+	}*/
 	
 	//일정 삭제
 	@PostMapping("/deleteCalendar")

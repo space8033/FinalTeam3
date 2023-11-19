@@ -224,7 +224,7 @@ $(document).ready(function() {
 	  var emp_notes = TagifyUserList.value;
 	  var team_name = $("#TagifyBasic").val();
 	  var project_client = $("#pnumber").val();
-	  var project_period = $("flatpickr-range").val();
+	  var project_period = $("#flatpickr-range").val();
 	  
 	  var data = {
 			  project_name : project_name,

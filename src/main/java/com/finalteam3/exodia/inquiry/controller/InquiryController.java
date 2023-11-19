@@ -172,6 +172,7 @@ public class InquiryController {
 			
 			model.addAttribute("loginResponse", loginResponse);
 			model.addAttribute("now_emp_no", loginResponse.getEmp_no());
+			model.addAttribute("empInfo_name", loginResponse.getEmpInfo_name());
 			
 			String emp_id = loginResponse.getEmp_id();
 			model.addAttribute("emp_id", emp_id);
@@ -217,6 +218,8 @@ public class InquiryController {
 		public String inquiryUpdateForm(Authentication authentication, int notice_no, Model model) {
 			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 			LoginResponse loginResponse = empDetails.getLoginResponse();
+			model.addAttribute("emp_id", loginResponse.getEmp_id());
+			model.addAttribute("empInfo_name", loginResponse.getEmpInfo_name());
 			
 			List<String> tNames = employeeDao.selectTeamname(0);
 			model.addAttribute("tNames", tNames);
@@ -258,8 +261,6 @@ public class InquiryController {
 					mediaService.insertNoticeFile(mediaDto);
 				}
 			}
-			log.info("미디어 :" + mfs);
-
 			
 			return "redirect:/inquiryList";
 		}
