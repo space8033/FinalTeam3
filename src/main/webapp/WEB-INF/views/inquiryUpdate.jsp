@@ -281,7 +281,7 @@
 	                              <label class="form-label" for="selectpickerLiveSearch">팀</label>
 	                              <select id="selectpickerLiveSearch" class="selectpicker form-select" data-style="btn-default"
 			                            data-live-search="true">
-			                            <option data-tokens="ketchup mustard"  value="">팀을 선택해주세요</option>
+			                            <option data-tokens="ketchup mustard"  value="">문의하실 팀을 선택해주세요</option>
 	                                <c:forEach var="teamName" items="${tNames}">
 			                            <option data-tokens="ketchup mustard">${teamName}</option>
 		                            </c:forEach>

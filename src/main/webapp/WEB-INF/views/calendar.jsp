@@ -287,7 +287,7 @@
 												<div class="mb-3">
 													<label class="form-label" for="eventTitle">제목</label> <input
 														type="text" class="form-control" id="eventTitle"
-														name="eventTitle" />
+														name="eventTitle" autocomplete=off />
 												</div>
 												<div class="mb-3">
 													<label class="form-label" for="eventDescription">내용</label>
