@@ -161,6 +161,7 @@
 		   and i.empinfo_no = t.empinfo_no
 		   and e.emp_no = i.emp_no
 		   and e.emp_deletedat is null
+		   and e.emp_no != 0
 	</select>
 	
 	<select id="selectEmployeeByEmpNo" resultType="EmpNote" parameterType="int">

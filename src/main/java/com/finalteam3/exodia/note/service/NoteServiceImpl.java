@@ -89,7 +89,7 @@ public class NoteServiceImpl implements NoteService{
 		return noteDao.countByEmpno(empNo);
 	}
 
-	/*@Override
+	@Override
 	@Scheduled(cron = "0 * * * * ?")
 	public void restimeSend() {
 		
@@ -122,7 +122,7 @@ public class NoteServiceImpl implements NoteService{
 				//log.info(noteRead.toString()+"에약전송 노트리드가문젠지");
 			}
 		}
-	}*/
+	}
 	
 	
 	@Override
@@ -920,7 +920,7 @@ public class NoteServiceImpl implements NoteService{
 						SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
 						String currentDate = sdf.format(new Date());
 						
-						newNote.setNote_restime(currentDate+" 예악 발송 취소됨");
+						newNote.setNote_restime(currentDate+" 예약 발송 취소됨");
 						newNote.setNote_createdAt("");
 						noteDao.updateNoteRestime(newNote);
 						

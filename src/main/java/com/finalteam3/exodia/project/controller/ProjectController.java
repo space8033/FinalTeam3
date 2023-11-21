@@ -52,6 +52,7 @@ public class ProjectController {
 	
 	@PostMapping(value = "/addProject", produces = "application/json; charset=UTF-8")
 	public String addProject(@RequestBody ProjectAddRequest request) {
+		log.info(request.toString());
 		projectService.addProject(request);
 		
 		return "redirect:/employee/userManagement";

@@ -207,10 +207,10 @@
                       </div>
                     <!--   <hr class="m-0" /> -->
                      
-                      
+                       
                       
                       <!-- Email View : Content-->
-                      <div class="app-email-view-content py-4">
+                      <div class="app-email-view-content py-4" id="detailContent">
                         <!-- <p class="email-earlier-msgs text-center text-muted cursor-pointer mb-5">이전 메세지 1개</p> -->
                         <!-- Email View : Previous mails-->
                         <div class="card email-card-prev mx-sm-4 mx-3 border">
@@ -262,6 +262,12 @@
                             <p class="fw-medium">Greetings!</p>
                             <p>
                               ${note.note_content}
+                            </p>
+                            
+                            <p>
+                            <input type="hidden" value="${note.note_content}" id="noteContent"/>
+                        	<input type="hidden" value="${note.note_title}" id="noteTitle"/>
+                            
                             </p>
                             <hr />
                             <p class="mb-2">Attachments</p>
@@ -455,7 +461,7 @@
                           <div class="card-body pt-3">
 	                          <div class="collapse" id="collapseExample">
 	                          	<div class="d-flex">
-	                          		<div class="" style="width:60px;">수신자 : </div>
+	                          		<div class="" style="width:70px;">수신자 : </div>
 	                          		<div>
 		                          			<c:forEach var="list" items="${list}">
 		                          				<c:if test="${list.noteRead_type == '수신'}">
@@ -487,7 +493,7 @@
 	                          	</div>
 	                          <hr />
 	                          </div>
-	                          <div>
+	                          <div id ="contentScroller">
 	                            <p class="fw-medium py-2"><strong>제목 : ${note.note_title}</strong></p>
 	                            <p>
 	                            	 ${note.note_content}
@@ -512,8 +518,7 @@
                         </div>
                         
                         
-                        <input type="hidden" value="${note.note_title}" id="noteTitle"/>
-                        <input type="hidden" value="${note.note_content}" id="noteContent"/>
+                       
                         
                         <c:forEach var="list" items="${list}">
                         	<c:if test="${list.noteRead_type == '수신'}">
@@ -543,7 +548,47 @@
                         
                         <c:choose>		                                  
 								<c:when test ="${contentType eq '발신'}">
-								
+									 <form class = "d-none" name="ReplyRequest" action="replySend" id="replySend" method="POST" enctype="multipart/form-data">
+		                        
+		                        <!-- Email View : Reply mail-->
+			                        <div class="email-reply card mt-4 mx-sm-4 mx-3 border">
+			                          <h6 class="card-header border mb-2"><strong>'${name}' 님께 답장</strong></h6>
+			                          <div class="card-body pt-0 px-3">
+			                            <div class="d-flex justify-content-start">
+			                              <div class="email-reply-toolbar border-0 w-100 ps-0" id="toolbar">
+			                                <span class="ql-formats me-0">
+			                                  <button class="ql-bold"></button>
+			                                  <button class="ql-italic"></button>
+			                                  <button class="ql-underline"></button>
+			                                  <button class="ql-list" value="ordered"></button>
+			                                  <button class="ql-list" value="bullet"></button>
+			                                  <button class="ql-link"></button>
+			                                  <button class="ql-image"></button>
+			                                </span>
+			                              </div>
+			                            </div>
+			                            <div class="email-reply-editor" id="editor"></div>
+			                            
+			                            <input type="hidden" name="note_content" id="reply"/>
+			                            <input type="hidden" name="note_no" value="${note.note_no}"/>
+			                            <input type="hidden" name="note_title" value="${note.note_title}"/>
+			                            <input type="hidden" name="note_receiver" value="${note.note_sender}"/>
+			                            <div class="d-flex justify-content-end align-items-center">
+			                              <div class="cursor-pointer me-3">
+				                              <input value="" readonly type="text" id="reply-filename" placeholder="" class="text-muted ms-1 upload-name" style="border:none; width:400px; outline: none; text-align:right;">
+			                                  <label for="reply-attach-file"><i class="bx bx-paperclip"></i><span class="align-middle cursor-pointer"> 첨부 파일</span></label>
+				                              <input type="file" name="reply_files" class="d-none" id="reply-attach-file" multiple/>
+			                                  
+			                              </div>
+			                              <button type="submit" class="btn btn-primary">
+			                                <i class="bx bx-paper-plane me-1"></i>
+			                                <span class="align-middle">보내기</span>
+			                              </button>
+			                            </div>
+			                          </div>
+			                        </div>
+			                        
+		                        </form>
 								 	
 	                     		</c:when>
 	                     		<c:when test ="${contentType eq '임시저장'}">
