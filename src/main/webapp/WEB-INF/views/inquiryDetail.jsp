@@ -194,7 +194,7 @@
                 <!-- Add Product -->
                 <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
                   <div class="d-flex flex-column justify-content-center">
-                    <h4 class="mb-1 mt-3"><strong>문의사항 내용🎃🍠</strong></h4>
+                    <h4 class="mb-1 mt-3"><strong>문의사항 내용</strong></h4>
                     <!-- <p class="text-muted">Orders placed across your store</p> -->
                   </div>
                   <div class="d-flex align-content-center flex-wrap gap-3">
@@ -369,7 +369,7 @@
 										  <hr />
 										     <c:set var="replyCount" value="${fn:length(replyList)}" />
 										  <p>
-									         <span class="tit le"><strong>댓글</strong></span> : ${replyCount}개 <br/>
+									         <span class="title"><strong>댓글</strong></span> : ${replyCount}개 <br/>
 									     </p> 
 									     <c:forEach var="reply" items="${replyList}" varStatus="a">
 										  <div class="card email-card-last mx-sm-4 mx-3 mt-4 border" id="reply${reply.reply_no}">

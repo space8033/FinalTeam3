@@ -208,7 +208,7 @@
                         class="d-flex flex-wrap justify-content-between align-items-center mb-3">
                         <div class="d-flex flex-column justify-content-center">
                            <h4 class="mb-1 mt-3">
-                              <strong>공지사항 내용🍣</strong>
+                              <strong>공지사항 내용</strong>
                            </h4>
                            <!-- <p class="text-muted">Orders placed across your store</p> -->
                         </div>
