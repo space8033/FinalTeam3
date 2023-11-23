@@ -63,4 +63,10 @@
 		from project
 		where project_no = #{project_no}
 	</select>
+	
+	<delete id="deleteProject" parameterType="int">
+		delete from project
+		where project_no = #{project_no}
+	</delete>
+	
 </mapper>

@@ -119,4 +119,10 @@ public class ProjectController {
 		model.addAttribute("empInfo_name", emp_name);
 		return "searchUser";
 	}
+	
+	@PostMapping("/deleteProject")
+	@ResponseBody
+	public void deleteProject(@RequestParam int project_no) {
+		projectService.deleteProject(project_no);
+	}
 }

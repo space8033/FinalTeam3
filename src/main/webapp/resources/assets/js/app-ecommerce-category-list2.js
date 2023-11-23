@@ -89,7 +89,6 @@ $(function () {
               '</a>' +
               '</div>' +
               '</div>';
-            console.log($pno);
             return $row_output;
           }
         },

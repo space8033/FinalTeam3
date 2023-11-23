@@ -139,4 +139,10 @@ public class ProjectServiceImpl implements ProjectService{
 		
 		return projectDao.selectNowProject(project_no);
 	}
+
+	@Override
+	public void deleteProject(int project_no) {
+		projectDao.deleteProject(project_no);
+		
+	}
 }
