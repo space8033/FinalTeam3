@@ -22,7 +22,7 @@
 	    	  var emp_id = $("#alarmId").val();
 	    	  console.log(emp_id+"야 잘보내긴해?");
 	         sock.send(emp_id);
-	      }, 5000);
+	      }, 1000);
     }
 
 	function handleWebSocketMessage(message) {

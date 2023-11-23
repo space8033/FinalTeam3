@@ -84,7 +84,6 @@ public class WebSocketHandler extends TextWebSocketHandler{
 			// Thread.sleep(600);
 			//알람
 			String msg = message.getPayload();
-			//log.info(msg+"메세지 받아오니?");
 			
 			
 			for(WebSocketSession single : sessions) {
@@ -92,11 +91,7 @@ public class WebSocketHandler extends TextWebSocketHandler{
 				int uckCount = alarmDao.selectAlarmUchkCount(memId);
 				if(alarmCount.get(memId) == null) {
 					alarmCount.put(memId, uckCount);
-					//log.info(alarmCount.toString()+"잘드러갔닝?");
 				}
-				
-				//log.info(alarmCount.get(memId).toString()+"내아이디 안읽은 숫자는?");
-				//log.info(uckCount+"알람 안읽은 숫자는?");
 				
 				if(single.getId().equals(session.getId()) && uckCount != 0) {
 					
