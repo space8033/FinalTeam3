@@ -18,7 +18,8 @@
                placeholder="프로그램명"
                value= "${programModify.task_name}"
                aria-label="john.doe"
-               aria-describedby="multicol-email2" />
+               aria-describedby="multicol-email2"
+               ${now_emp_no != 0 && now_emp_no != 1 ? 'readonly' : ''} />
            </div>
          </div>
        </div>
@@ -31,7 +32,8 @@
        <div class="row mb-3">
            <label class="col-sm-3 col-form-label" for="TagifyUserList2">담당자</label>
            <div class="col-sm-9">
-               <input type="text" id="TagifyUserList2" class="form-control" name="emp_note"/>
+               <input type="text" id="TagifyUserList2" class="form-control" name="emp_note"
+               		  ${now_emp_no != 0 && now_emp_no != 1 ? 'readonly' : ''}/>
            </div>
        </div>
        
@@ -45,7 +47,8 @@
                class="form-control"
                value="${programModify.task_url}"
                placeholder="URL"
-               aria-describedby="multicol-password2" />
+               aria-describedby="multicol-password2"
+               ${now_emp_no != 0 && now_emp_no != 1 ? 'readonly' : ''} />
            </div>
          </div>
        </div>
@@ -53,7 +56,8 @@
          <label class="col-sm-3 col-form-label" for="task-priority">작업 중요도</label>
          
          <div class="col-sm-9">
-           <select id="task-priority" class="select2 form-select" data-allow-clear="true">
+           <select id="task-priority" class="select2 form-select" data-allow-clear="true"
+           			${now_emp_no != 0 && now_emp_no != 1 ? 'disabled' : ''}>
            	 <c:if test="${programModify.task_importance == null}">
 	           	 <option value="">선택</option>
 	             <option value="상">상</option>
@@ -84,7 +88,8 @@
        <div class="row mb-3">
          <label class="col-sm-3 col-form-label" for="multicol-country">프로그램 유형</label>
          <div class="col-sm-9">
-           <select id="multicol-country" class="select2 form-select" data-allow-clear="true">
+           <select id="multicol-country" class="select2 form-select" data-allow-clear="true"
+           			${now_emp_no != 0 && now_emp_no != 1 ? 'disabled' : ''}>
              <c:if test="${programModify.task_category == null}">
 	             <option value="">Select</option>
 	             <option value="온라인">온라인</option>
@@ -115,7 +120,8 @@
        <div class="row mb-3">
          <label class="col-sm-3 col-form-label" for="detail-category">세부 유형</label>
          <div class="col-sm-9">
-           <select id="detail-category" class="select2 form-select" data-allow-clear="true">
+           <select id="detail-category" class="select2 form-select" data-allow-clear="true"
+           			${now_emp_no != 0 && now_emp_no != 1 ? 'disabled' : ''}>
            	 <c:if test="${programModify.task_detail == null}">
 	             <option value="">선택</option>
 	             <option value="화면(메인)">화면(메인)</option>
@@ -175,7 +181,8 @@
              class="form-control"
              value="${programModify.task_date}"
              placeholder="YYYY-MM-DD to YYYY-MM-DD"
-             id="flatpickr-range" />
+             id="flatpickr-range"
+             ${now_emp_no != 0 && now_emp_no != 1 ? 'disabled' : ''} />
          </div>
        </div>
      <div class="row mb-3">
