@@ -268,6 +268,23 @@ $(document).ready(function() {
 	  });
   });
   
+  $("#deleteButton").on("click", function(e) {
+	  e.preventDefault();
+	  var project_no = $("#projectNoBox").val();
+	  console.log(project_no);
+	  $.ajax({
+		  url: "/exodia/project/deleteProject",
+		  type: "post",
+		  data: {project_no : project_no},
+		  success: function(data) {
+			  window.location.href = "/exodia/project/projectList";
+		  },
+		  error: function(error) {
+			  console.log("아왜안떠왜왜왜");
+		  }
+	  });
+  });
+  
   
 });
 
