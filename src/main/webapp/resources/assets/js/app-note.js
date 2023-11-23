@@ -3051,6 +3051,39 @@ document.addEventListener('DOMContentLoaded', function () {
 	 
      console.log(noteReadNo+"받아는오나");
 	 // noteReadNo를 사용하여 필요한 작업을 수행합니다.
+     var unreadNote = document.querySelector("#unreadNote");
+     if (unreadNote.innerText.trim() === "0") {
+     	unreadNote.classList.add('d-none');
+     } else if(unreadNote.innerText.trim() !== "0"){
+     	unreadNote.classList.remove('d-none');
+     	
+     }
+     var draftNote = document.querySelector("#draftNote");
+     if (draftNote.innerText.trim() === "0") {
+    	 console.log(""+draftNote.value);
+     	draftNote.classList.add('d-none');
+     } else if(draftNote.innerText.trim() !== "0"){
+    	 console.log(""+draftNote.value);
+     	draftNote.classList.remove('d-none');
+     }
+     var starredNote = document.querySelector("#starredNote");
+     if (starredNote.innerText.trim() === "0") {
+     	starredNote.classList.add('d-none');
+     } else if(starredNote.innerText.trim() !== "0"){
+    	 
+     	starredNote.classList.remove('d-none');
+     }
+     var trashNote = document.querySelector("#trashNote");
+     if (trashNote.innerText.trim() === "0") {
+     	trashNote.classList.add('d-none');
+     	console.log('uckNo is 0');
+     } else if(trashNote.innerText.trim() !== "0"){
+     	trashNote.classList.remove('d-none');
+     	console.log('uckNo is not 0');
+     }
+     
+     
+     
 	 if (noteReadNo) {
 		 var data = {
 	  			 noteReadNo: noteReadNo
