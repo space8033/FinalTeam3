@@ -157,12 +157,14 @@
 	              </a>
 	            </li>
 	            
-	            <li class="menu-item">
-	              <a href="${pageContext.request.contextPath}/employee/join" class="menu-link">
-	                <i class="menu-icon tf-icons bx bx-user"></i>
-	                <div class="text-truncate">사용자 등록</div>
-	              </a>
-	            </li>
+	            <c:if test="${emp_id == 'admin'}">
+		            <li class="menu-item">
+		              <a href="${pageContext.request.contextPath}/employee/join" class="menu-link">
+		                <i class="menu-icon tf-icons bx bx-user"></i>
+		                <div class="text-truncate">사용자 등록</div>
+		              </a>
+		            </li>
+	            </c:if>
 	            
 	            <li class="menu-item">
 	              <a href="${pageContext.request.contextPath}/employee/userManagement" class="menu-link">
