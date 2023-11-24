@@ -17,7 +17,7 @@ function connect() {
 		
 	}
 	
-	chatsock = new SockJS("http://192.168.0.102:8080/exodia/chat");
+	chatsock = new SockJS("http://192.168.0.28:8080/exodia/chat");
 	chatsock.onopen = onOpen;
 	chatsock.onmessage = onMessage;
 	console.log(chatsock.send);
@@ -173,8 +173,9 @@ function chatRoom(emp_no) {
 
 function buttonSend() {
 	  var inputValue = $('.message-input').val();
-	  if (inputValue.trim() !== "") {
-		    // Create a div and add a class
+	  var sanitizedInput = inputValue.replace(/[^a-zA-Z0-9가-힣\s\.,!?@#\$%\^&\*\(\)-_+=~`<>\[\]:;{}'"\\/]+/g, '');
+	  if (sanitizedInput.trim() !== "") {
+/*		    // Create a div and add a class
 	    var renderMsg = $('<li class="chat-message chat-message-right"></li>');
 	    var currentDate = new Date();
 	    var hour = currentDate.getHours();
@@ -237,7 +238,7 @@ function buttonSend() {
 		      '</div>');
 	    }
 
-	      var appendedMsg = $('.chat-history').append(renderMsg);
+	      var appendedMsg = $('.chat-history').append(renderMsg);*/
 	      sendMessage();
 
 	        // Find the appended checkDoubleElement and add the class
@@ -245,7 +246,7 @@ function buttonSend() {
 	    var messageInput = $('.message-input');
 	    messageInput.val('');
 	    
-	    scrollToBottom();
+	    /*scrollToBottom();*/
 	    	
 	  }
 	
@@ -380,7 +381,10 @@ function onMessage(evt) {
 	console.log(data.empInfo_no+"값이나야혹시?");
 	
 	if(data.empInfo_no != empInfo_no && data.message_content != null) {
-		checkLR(data);
+		checkL(data);
+	} else if(data.empInfo_no == empInfo_no && data.message_content != null) {
+		
+		checkR(data);
 	}
 	
 
@@ -388,7 +392,7 @@ function onMessage(evt) {
 }
 
 
-function checkLR(data) {
+function checkL(data) {
 	
 	console.log("어디가 문젠지 알ㄹ줘야 고치지?"+ data);
 	var renderMsg = $('<li class="chat-message chat-message-right"></li>');
@@ -466,6 +470,83 @@ function checkLR(data) {
 	        suppressScrollX: true
 	});
 
+	
+}
+
+
+function checkR(data) {
+    // Create a div and add a class
+    var renderMsg = $('<li class="chat-message chat-message-right"></li>');
+    var currentDate = new Date();
+    var hour = currentDate.getHours();
+    var minute = currentDate.getMinutes();
+    var period = (hour < 12) ? '오전' : '오후';
+
+    if (hour > 12) {
+        hour -= 12;
+    }
+
+    var formattedDate = period + ' ' + hour + ':' + (minute < 10 ? '0' : '') + minute;
+    console.log(formattedDate + " 오늘날짜");
+    
+    var myImg = $('#myImg');
+    var myTwoName = $('#myTwoName');
+
+    var classes = myTwoName.attr('class');
+    var imgSrc = myImg.attr('src');
+    var innerText = myTwoName.text();
+    
+    console.log(myImg.val()+"먼데");
+    if(myImg.val()!=undefined) {
+    
+	      renderMsg.html('<div class="d-flex overflow-hidden">' +
+	      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
+	      '<div class="chat-message-text">' +
+	      '<p class="mb-0 text-break">' + data.message_content + '</p>' +
+	      '</div>' +
+	      '<div class="text-end text-muted mt-1">' +
+	      '<i class="bx bx-check-double"></i>' +
+	      ' <small>' + formattedDate + '</small>' +
+	      '</div>' +
+	      '</div>' +
+	      '<div class="user-avatar flex-shrink-0 ms-3">' +
+	      '<div class="avatar">' +
+	      ' <img src="' + imgSrc + '" alt="user-avatar" class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0" height="40"width="40"/>  ' +
+	      '</div>' +
+	      '</div>' +
+	      '</div>');
+      
+    } else {
+    	
+	      renderMsg.html('<div class="d-flex overflow-hidden">' +
+	      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
+	      '<div class="chat-message-text">' +
+	      '<p class="mb-0 text-break">' + data.message_content + '</p>' +
+	      '</div>' +
+	      '<div class="text-end text-muted mt-1">' +
+	      '<i class="bx bx-check-double"></i>' +
+	      ' <small>' + formattedDate + '</small>' +
+	      '</div>' +
+	      '</div>' +
+	      '<div class="user-avatar flex-shrink-0 ms-3">' +
+	      '<div class="avatar">' +
+	      '<span class="'+ classes +
+	      '" style="font-size: 14px;">' +
+	      innerText + '</span>' +
+	      '</div>' +
+	      '</div>' +
+	      '</div>');
+    }
+
+      var appendedMsg = $('.chat-history').append(renderMsg);
+      scrollToBottom();
+      new PerfectScrollbar('.chat-history-body', {
+	        wheelPropagation: false,
+	        suppressScrollX: true
+	  });
+      
+      
+	
 	
 }
 
