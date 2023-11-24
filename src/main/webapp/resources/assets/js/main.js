@@ -330,9 +330,9 @@ function showAlarmCount() {
 			    		alarmToast.classList.remove("show");
 				    }, 4000);
 		        }
-		        if (uckChatNo === 0) {
+		        if (moveChat && uckChatNo === 0) {
 		        	moveChat.classList.add('d-none');
-		        } else {
+		        } else if(moveChat && uckChatNo !== 0){
 		        	moveChat.classList.remove('d-none');
 		        	moveChat.innerText = uckChatNo;
 		        }
