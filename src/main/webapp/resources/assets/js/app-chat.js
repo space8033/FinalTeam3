@@ -497,46 +497,103 @@ function checkR(data) {
     var innerText = myTwoName.text();
     
     console.log(myImg.val()+"먼데");
-    if(myImg.val()!=undefined) {
-    
-	      renderMsg.html('<div class="d-flex overflow-hidden">' +
-	      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
-	      '<div class="chat-message-text">' +
-	      '<p class="mb-0 text-break">' + data.message_content + '</p>' +
-	      '</div>' +
-	      '<div class="text-end text-muted mt-1">' +
-	      '<i class="bx bx-check-double"></i>' +
-	      ' <small>' + formattedDate + '</small>' +
-	      '</div>' +
-	      '</div>' +
-	      '<div class="user-avatar flex-shrink-0 ms-3">' +
-	      '<div class="avatar">' +
-	      ' <img src="' + imgSrc + '" alt="user-avatar" class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0" height="40"width="40"/>  ' +
-	      '</div>' +
-	      '</div>' +
-	      '</div>');
-      
-    } else {
-    	
-	      renderMsg.html('<div class="d-flex overflow-hidden">' +
-	      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
-	      '<div class="chat-message-text">' +
-	      '<p class="mb-0 text-break">' + data.message_content + '</p>' +
-	      '</div>' +
-	      '<div class="text-end text-muted mt-1">' +
-	      '<i class="bx bx-check-double"></i>' +
-	      ' <small>' + formattedDate + '</small>' +
-	      '</div>' +
-	      '</div>' +
-	      '<div class="user-avatar flex-shrink-0 ms-3">' +
-	      '<div class="avatar">' +
-	      '<span class="'+ classes +
-	      '" style="font-size: 14px;">' +
-	      innerText + '</span>' +
-	      '</div>' +
-	      '</div>' +
-	      '</div>');
-    }
+    if(data.emp_read === "읽음") {
+		
+	    if(myImg.val()!=undefined) {
+	    
+		      renderMsg.html('<div class="d-flex overflow-hidden">' +
+		      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
+		      '<div class="chat-message-text">' +
+		      '<p class="mb-0 text-break">' + data.message_content + '</p>' +
+		      '</div>' +
+		      '<div class="text-end text-muted mt-1">' +
+		      '<i class="bx bx-check-double text-success"></i>' +
+		      ' <small>' + formattedDate + '</small>' +
+		      '</div>' +
+		      '</div>' +
+		      '<div class="user-avatar flex-shrink-0 ms-3">' +
+		      '<div class="avatar">' +
+		      ' <img src="' + imgSrc + '" alt="user-avatar" class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0" height="40"width="40"/>  ' +
+		      '</div>' +
+		      '</div>' +
+		      '</div>');
+	      
+	    } else {
+	    	
+		      renderMsg.html('<div class="d-flex overflow-hidden">' +
+		      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
+		      '<div class="chat-message-text">' +
+		      '<p class="mb-0 text-break">' + data.message_content + '</p>' +
+		      '</div>' +
+		      '<div class="text-end text-muted mt-1">' +
+		      '<i class="bx bx-check-double"></i>' +
+		      ' <small>' + formattedDate + '</small>' +
+		      '</div>' +
+		      '</div>' +
+		      '<div class="user-avatar flex-shrink-0 ms-3">' +
+		      '<div class="avatar">' +
+		      '<span class="'+ classes +
+		      '" style="font-size: 14px;">' +
+		      innerText + '</span>' +
+		      '</div>' +
+		      '</div>' +
+		      '</div>');
+	    }
+      } else {
+    	  if(myImg.val()!=undefined) {
+    		    
+		      renderMsg.html('<div class="d-flex overflow-hidden">' +
+		      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
+		      '<div class="chat-message-text">' +
+		      '<p class="mb-0 text-break">' + data.message_content + '</p>' +
+		      '</div>' +
+		      '<div class="text-end text-muted mt-1">' +
+		      '<i class="bx bx-check-double"></i>' +
+		      ' <small>' + formattedDate + '</small>' +
+		      '</div>' +
+		      '</div>' +
+		      '<div class="user-avatar flex-shrink-0 ms-3">' +
+		      '<div class="avatar">' +
+		      ' <img src="' + imgSrc + '" alt="user-avatar" class="d-block flex-shrink-0 rounded-circle me-sm-3 me-0" height="40"width="40"/>  ' +
+		      '</div>' +
+		      '</div>' +
+		      '</div>');
+	      
+	    } else {
+	    	
+		      renderMsg.html('<div class="d-flex overflow-hidden">' +
+		      '<div class="chat-message-wrapper flex-grow-1 w-50">' +
+		      '<div class="chat-message-text">' +
+		      '<p class="mb-0 text-break">' + data.message_content + '</p>' +
+		      '</div>' +
+		      '<div class="text-end text-muted mt-1">' +
+		      '<i class="bx bx-check-double"></i>' +
+		      ' <small>' + formattedDate + '</small>' +
+		      '</div>' +
+		      '</div>' +
+		      '<div class="user-avatar flex-shrink-0 ms-3">' +
+		      '<div class="avatar">' +
+		      '<span class="'+ classes +
+		      '" style="font-size: 14px;">' +
+		      innerText + '</span>' +
+		      '</div>' +
+		      '</div>' +
+		      '</div>');
+	    }
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+    	  
+      }
 
       var appendedMsg = $('.chat-history').append(renderMsg);
       scrollToBottom();
