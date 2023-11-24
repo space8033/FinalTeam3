@@ -156,12 +156,14 @@
 	              </a>
 	            </li>
 	            
-	            <li class="menu-item">
-	              <a href="${pageContext.request.contextPath}/employee/join" class="menu-link">
-	                <i class="menu-icon tf-icons bx bx-user"></i>
-	                <div class="text-truncate">사용자 등록</div>
-	              </a>
-	            </li>
+	            <c:if test="${emp_id == 'admin'}">
+		            <li class="menu-item">
+		              <a href="${pageContext.request.contextPath}/employee/join" class="menu-link">
+		                <i class="menu-icon tf-icons bx bx-user"></i>
+		                <div class="text-truncate">사용자 등록</div>
+		              </a>
+		            </li>
+	            </c:if>
 	            
 	            <li class="menu-item">
 	              <a href="${pageContext.request.contextPath}/employee/userManagement" class="menu-link">
@@ -198,9 +200,9 @@
                     <div
                       class="card-header sticky-element bg-label-secondary d-flex justify-content-sm-between align-items-sm-center flex-column flex-sm-row">
                       <h5 class="card-title mb-sm-0 me-2">프로젝트 수정</h5>
-                      <div class="action-btns">
-                        
-                        <button class="btn btn-primary" id="modifyButton">저장</button>
+                      <div class="action-btns d-flex">
+                        <button class="btn btn-danger" id="deleteButton">삭제</button>
+                        <button class="btn btn-primary" style="margin-left: 20px" id="modifyButton">저장</button>
                       </div>
                     </div>
                     <div class="card-body">

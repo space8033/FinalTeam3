@@ -12,6 +12,7 @@ import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
+import org.springframework.web.util.HtmlUtils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.finalteam3.exodia.alarm.dao.AlarmDao;
@@ -67,8 +68,14 @@ public class ChatHandler extends TextWebSocketHandler{
 			
 			String msg = message.getPayload();
 			
+			
+			
 			//채팅
+			
 			ChatMessage chatMessage = objectMapper.readValue(msg, ChatMessage.class);
+			
+			String chatContent = HtmlUtils.htmlEscape(chatMessage.getMessage_content());
+			chatMessage.setMessage_content(chatContent);
 			
 			
 			//채팅 세션 목록에 채팅방이 존재하지 않고, 처음 들어 왔을 때

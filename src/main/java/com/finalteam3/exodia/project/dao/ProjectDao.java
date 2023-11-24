@@ -19,4 +19,5 @@ public interface ProjectDao {
 	public List<ProjectListResponse> selectProjectList(int empinfo_no);
 	public List<ProjectListResponse> selectPmProject(int project_manager);
 	public String selectNowProject(int project_no);
+	public void deleteProject(int project_no);
 }

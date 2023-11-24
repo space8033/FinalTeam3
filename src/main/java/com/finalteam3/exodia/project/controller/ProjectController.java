@@ -83,7 +83,7 @@ public class ProjectController {
 	}
 
 	@GetMapping("/modifyProject")
-	public String modifyProjectForm(Model model, Authentication authentication) {
+	public String modifyProjectForm(Model model, Authentication authentication, HttpSession session) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		String emp_id = loginResponse.getEmp_id();
@@ -92,7 +92,8 @@ public class ProjectController {
 		String emp_name = loginResponse.getEmpInfo_name();
 		model.addAttribute("empInfo_name", emp_name);
 		
-		int project_no = 0;
+		Integer projectNo = (Integer) session.getAttribute("projectNo");
+		int project_no = projectNo;
 		ProjectModifyResponse response = projectService.getProjectDetail(project_no);
 		model.addAttribute("projectDetail", response);
 		
@@ -117,5 +118,11 @@ public class ProjectController {
 		String emp_name = loginResponse.getEmpInfo_name();
 		model.addAttribute("empInfo_name", emp_name);
 		return "searchUser";
+	}
+	
+	@PostMapping("/deleteProject")
+	@ResponseBody
+	public void deleteProject(@RequestParam int project_no) {
+		projectService.deleteProject(project_no);
 	}
 }

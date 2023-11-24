@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.NoHandlerFoundException;
 
 @Component
-/*@ControllerAdvice*/
+@ControllerAdvice
 public class ExodiaExceptionHandler {
 	@ExceptionHandler(NullPointerException.class)
 	public String handleNullPointerException() {

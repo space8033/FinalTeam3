@@ -281,13 +281,14 @@ public class EmployeeController {
 	}
 	
 	@GetMapping("/userManagement")
-	public String getUserManagement(Authentication authentication, Model model) {
+	public String getUserManagement(Authentication authentication, Model model, HttpSession session) {
 		EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
 		LoginResponse loginResponse = empDetails.getLoginResponse();
 		model.addAttribute("emp_id", loginResponse.getEmp_id());
 		model.addAttribute("empInfo_name", loginResponse.getEmpInfo_name());
+		Integer projectNo = (Integer) session.getAttribute("projectNo");
 		
-		List<EmpManagementResponse> list = employeeService.getManagementResponse(0);
+		List<EmpManagementResponse> list = employeeService.getManagementResponse(projectNo);
 		model.addAttribute("list", list);
 		
 		return "/userManagement";
