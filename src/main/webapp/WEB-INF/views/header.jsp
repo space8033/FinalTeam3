@@ -198,28 +198,31 @@ function handleWebSocketMessage(message) {
                <li>
                  <div class="dropdown-divider"></div>
                </li>
-               <li>
-                 <a class="dropdown-item" href="${pageContext.request.contextPath}/note">
-                   <span class="d-flex align-items-center align-middle">
-               	  <i class="bx bx-envelope me-3"></i>
-                	  <span class="flex-grow-1 align-middle">쪽지함</span>
-                 	  <span class="badge badge-center rounded-pill bg-label-warning" id="moveNote">1</span>
-                 	</span>
-                 </a>
-               </li>
-               <li>
-                 <a class="dropdown-item" href="javascript:chat();">
-                   <span class="d-flex align-items-center align-middle">
-                     <i class="bx bx-chat me-3"></i>
-                     <span class="flex-grow-1 align-middle">채팅</span>
-                     <span class="badge badge-center rounded-pill bg-label-primary" id="moveChat">1</span>
-                   </span>
-                 </a>
-               </li>
-
-               <li>
-                 <div class="dropdown-divider"></div>
-               </li>
+               <c:if test="${emp_id != 'admin'}">
+	               <li>
+	                 <a class="dropdown-item" href="${pageContext.request.contextPath}/note">
+	                   <span class="d-flex align-items-center align-middle">
+	               	  <i class="bx bx-envelope me-3"></i>
+	                	  <span class="flex-grow-1 align-middle">쪽지함</span>
+	                 	  <span class="badge badge-center rounded-pill bg-label-warning" id="moveNote">1</span>
+	                 	</span>
+	                 </a>
+	               </li>
+	               <li>
+	                 <a class="dropdown-item" href="javascript:chat();">
+	                   <span class="d-flex align-items-center align-middle">
+	                     <i class="bx bx-chat me-3"></i>
+	                     <span class="flex-grow-1 align-middle">채팅</span>
+	                     <span class="badge badge-center rounded-pill bg-label-primary" id="moveChat">1</span>
+	                   </span>
+	                 </a>
+	               </li>
+	
+	               <li>
+	                 <div class="dropdown-divider"></div>
+	               </li>
+               
+               </c:if>
                <li>
                  <a class="dropdown-item" href="${pageContext.request.contextPath}/logout">
                    <i class="bx bx-power-off me-2"></i>
