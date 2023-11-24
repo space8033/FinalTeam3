@@ -17,7 +17,7 @@ function connect() {
 		
 	}
 	
-	chatsock = new SockJS("http://192.168.0.28:8080/exodia/chat");
+	chatsock = new SockJS("http://192.168.0.102:8080/exodia/chat");
 	chatsock.onopen = onOpen;
 	chatsock.onmessage = onMessage;
 	console.log(chatsock.send);
@@ -173,8 +173,8 @@ function chatRoom(emp_no) {
 
 function buttonSend() {
 	  var inputValue = $('.message-input').val();
-	  var sanitizedInput = inputValue.replace(/[^a-zA-Z0-9가-힣\s\.,!?@#\$%\^&\*\(\)-_+=~`<>\[\]:;{}'"\\/]+/g, '');
-	  if (sanitizedInput.trim() !== "") {
+	  
+	  if (inputValue.trim() !== "") {
 /*		    // Create a div and add a class
 	    var renderMsg = $('<li class="chat-message chat-message-right"></li>');
 	    var currentDate = new Date();
