@@ -91,4 +91,9 @@
 		where notice_no = #{notice_no}
 	</delete>
 	
+	<select id="selectPname" resultType="Notice">
+		select project_name
+		from project
+	</select>
+	
 </mapper>

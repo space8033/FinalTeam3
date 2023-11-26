@@ -270,6 +270,16 @@
 							      name="noticeTitle"
 							      aria-label="Notice title" />
 							  </div>
+							  <div class="col-4 mb-3">
+                              <label class="form-label" for="selectpickerLiveSearch">프로젝트</label>
+                              <select id="selectpickerLiveSearch" class="selectpicker form-select" data-style="btn-default"
+		                            data-live-search="true">
+		                            <option data-tokens="ketchup mustard"  value="">프로젝트를 선택해주세요</option>
+                                <c:forEach var="projectName" items="${projectNames}">
+		                            <option data-tokens="ketchup mustard">${projectName}</option>
+	                            </c:forEach>
+                              </select>
+                            </div>
 							</div>
 	                        <!-- Description -->
 	                        <div>

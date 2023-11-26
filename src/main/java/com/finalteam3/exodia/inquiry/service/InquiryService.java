@@ -20,4 +20,5 @@ public interface InquiryService {
 	public int replyEmpinfoNo(int emp_no); //emp_no를 통해 댓글db에 저장될 empinfo_no를 가져옴
 	public int getEmpInfoNoByEmpNo(int emp_no); //emp_no를 가지고 empinfo_no구하기
 	public Reply getReplyByReplyNo(int replyNo); //replyNo로 reply가져오기
+	public void replyUpdate(Reply reply); //댓글 수정
 }

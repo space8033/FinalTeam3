@@ -7,6 +7,7 @@ import java.util.Base64;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +28,7 @@ import com.finalteam3.exodia.employee.dto.response.LoginResponse;
 import com.finalteam3.exodia.media.dao.MediaDao;
 import com.finalteam3.exodia.media.dto.MediaDto;
 import com.finalteam3.exodia.media.service.MediaService;
+import com.finalteam3.exodia.notice.dao.NoticeDao;
 import com.finalteam3.exodia.notice.dto.Notice;
 import com.finalteam3.exodia.notice.dto.NoticeUnreader;
 import com.finalteam3.exodia.notice.service.NoticeService;
@@ -49,6 +51,9 @@ public class NoticeController {
 	
 	@Resource
 	private MediaDao mediaDao;
+	
+	@Resource
+	private NoticeDao noticeDao;
 	
 	//공지사항 리스트 조회
 	@GetMapping("/noticeList")
@@ -95,6 +100,13 @@ public class NoticeController {
 		
 		String emp_name = loginResponse.getEmpInfo_name();
 		model.addAttribute("empInfo_name", emp_name);
+		
+		List<Notice> pNames = noticeDao.selectPname();
+		List<String> projectNames = pNames.stream()
+                .map(Notice::getProject_name)
+                .collect(Collectors.toList());
+
+				model.addAttribute("projectNames", projectNames);
 		
 		return "noticeAdd";
 	}

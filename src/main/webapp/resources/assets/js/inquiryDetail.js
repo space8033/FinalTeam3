@@ -229,5 +229,132 @@ $(function () {
 	  	            console.error('에러 메시지: ' + error);
 	  	        }
 	  	    });
-	  	};    
+	  	};
+	  	
+	  	
+	  	$(document).ready(function () {
+	  	    function replyModify(replyNo) {
+	  	        // 해당 댓글의 내용과 번호를 가져옴
+	  	        var replyContent = $(this).closest('.card').find('.replyContent');
+	  	        var replyText = replyContent.text().trim();
+	  	        var replyNo = $(this).closest('.card').find('[id^="replyNo"]').val();
+	  	        console.log("replyNo" + replyNo);
+
+	  	        // 댓글 내용을 textarea로 변경
+	  	        var textarea = $('<textarea class="form-control">' + replyText + '</textarea>');
+	  	        replyContent.replaceWith(textarea);
+
+	  	        $(this).addClass('d-none'); // 수정 버튼 숨기기
+	  	        $(this).closest('.card-footer').find('.bx-check-circle').removeClass('d-none'); // 완료 버튼 아이콘 보이기
+
+	  	        var completeButton = $(this).closest('.card-footer').find('.bx-check-circle');
+	  	        // 완료 버튼 클릭 시
+	  	        completeButton.on('click', function () {
+	  	            console.log("완료버튼누름" + replyNo);
+	  	            // 수정이 완료된 경우
+	  	            // textarea에서의 텍스트를 가져와서 p 요소로 변경
+	  	            var editedText = textarea.val().trim();
+	  	            var editedContent = $('<p class="replyContent">' + editedText + '</p>');
+	  	            textarea.replaceWith(editedContent);
+
+	  	            // 여기에서 수정된 댓글 내용을 서버로 전송하는 코드를 추가할 수 있습니다.
+	  	            $.ajax({
+	  	                url: '/exodia/replyUpdate', // 실제 수정 처리를 담당하는 서버 엔드포인트로 변경해야 합니다.
+	  	                type: 'POST',
+	  	                data: {
+	  	                    replyNo: replyNo,
+	  	                    editedText: editedText
+	  	                },
+	  	                success: function (response) {
+	  	                    // 서버에서 응답이 성공적으로 왔을 때 처리
+
+	  	                    // 완료 버튼을 수정 버튼으로 변경
+	  	                    $(this).removeClass('d-none'); // 수정 버튼 숨기기
+	  	                    $(this).closest('.card-footer').find('.bx-check-circle').removeClass('d-none'); // 완료 버튼 아이콘 보이기
+	  	                    location.reload();
+	  	                },
+	  	                error: function (error) {
+	  	                    // 서버에서 응답이 오류일 때 처리
+	  	                    alert('에러 발생: ' + error.statusText);
+	  	                }
+	  	            });
+
+	  	            // 수정 버튼 클릭 이벤트 중지
+	  	            return false;
+	  	        });
+
+	  	        // 수정 버튼 클릭 이벤트 중지
+	  	        return false;
+	  	    }
+
+	  	    // 클릭 이벤트 바인딩
+	  	    $(document).on('click', '.bx-edit-alt', replyModify);
+	  	});
+	  	
+	  	
+	  	
+	  	
+	  	//댓글 수정하기
+	  	/*$(document).ready(function () {
+	        // 수정 버튼 클릭 시
+	        $(document).on('click', '.btn-primary[id^="replyModifyButton"]', function () {
+	            // 해당 댓글의 내용과 번호를 가져옴
+	            var replyContent = $(this).closest('.card').find('.replyContent');
+	            var replyText = replyContent.text().trim();
+	            var replyNo = $(this).closest('.card').find('[id^="replyNo"]').val();
+	            console.log("replyNo" + replyNo);
+
+	            // 댓글 내용을 textarea로 변경
+	            var textarea = $('<textarea class="form-control">' + replyText + '</textarea>');
+	            replyContent.replaceWith(textarea);
+	            
+	            $(this).addClass('d-none'); // 수정 버튼 숨기기
+	            $(this).closest('.card-footer').find('.btn-primary[id^="replyModifyFinish"]').removeClass('d-none'); // 완료 버튼 보이기
+
+	            
+
+
+	            var completeButton = $(this).closest('.card-footer').find('.btn-primary[id^="replyModifyFinish"]');	
+	            // 완료 버튼 클릭 시
+	            completeButton.on('click', function () {
+	            	console.log("완료버튼누름"+replyNo);
+	                // 수정이 완료된 경우
+	                // textarea에서의 텍스트를 가져와서 p 요소로 변경
+	                var editedText = textarea.val().trim();
+	                var editedContent = $('<p class="replyContent">' + editedText + '</p>');
+	                textarea.replaceWith(editedContent);
+
+	                // 여기에서 수정된 댓글 내용을 서버로 전송하는 코드를 추가할 수 있습니다.
+	                $.ajax({
+	                    url: '/exodia/replyUpdate', // 실제 수정 처리를 담당하는 서버 엔드포인트로 변경해야 합니다.
+	                    type: 'POST',
+	                    data: {
+	                        replyNo: replyNo,
+	                        editedText: editedText
+	                    },
+	                    success: function (response) {
+	                        // 서버에서 응답이 성공적으로 왔을 때 처리
+	                        
+
+	                        // 완료 버튼을 수정 버튼으로 변경
+	                        $(this).removeClass('d-none'); // 수정 버튼 숨기기
+	        	            $(this).closest('.card-footer').find('.btn-primary[id^="replyModifyFinish"]').addClass('d-none'); // 완료 버튼 보이기
+	        	            location.reload();
+	                    },
+	                    error: function (error) {
+	                        // 서버에서 응답이 오류일 때 처리
+	                        alert('에러 발생: ' + error.statusText);
+	                    }
+	                });
+
+	                // 수정 버튼 클릭 이벤트 중지
+	                return false;
+	            });
+
+
+	            // 수정 버튼 클릭 이벤트 중지
+	            return false;
+	        });
+	    });*/
+
 	   

@@ -212,6 +212,31 @@ public class InquiryController {
 			
 			return "inquiryDetail";
 		}
+		
+		@PostMapping("replyUpdate")
+		@ResponseBody
+		public void replyUpdateForm(Authentication authentication,
+				@RequestParam("editedText") String replyContent,
+				@RequestParam("replyNo") int replyNo,
+				Model model) {
+			log.info("리플라이넘버" + replyNo);
+			EmpDetails empDetails = (EmpDetails) authentication.getPrincipal();
+			LoginResponse loginResponse = empDetails.getLoginResponse();
+			int emp_no = loginResponse.getEmp_no();		
+			int empinfo_no = inquiryService.replyEmpinfoNo(emp_no);
+			model.addAttribute("emp_id", loginResponse.getEmp_id());
+			model.addAttribute("empInfo_name", loginResponse.getEmpInfo_name());
+			
+			Reply reply = new Reply();
+			reply.setEmpinfo_no(empinfo_no);
+			reply.setReply_content(replyContent);
+			reply.setReply_no(replyNo);
+			log.info("댓글???????????" + replyContent);
+			
+			inquiryService.replyUpdate(reply);
+								
+		}
+		
 				
 		//공지사항 업데이트1
 		@GetMapping("/inquiryUpdate")

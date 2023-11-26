@@ -115,7 +115,7 @@
 		where emp_no = #{emp_no}
 	</select>
 	
-	<select id="selectReplyCount" parameterType="int" resultType="int">
+	<select id="selectReplyCount" parameterType="int">
 		SELECT
 		    count(*)
 		FROM
@@ -126,6 +126,12 @@
 		    r.notice_no = #{notice_no}
 		    AND r.reply_deletedat IS NULL
 	</select>
+	
+	<update id="updateReply" parameterType="Reply">
+		UPDATE reply
+		SET reply_content = #{reply_content}
+		WHERE reply_no = #{reply_no}
+	</update>
 	
 	
 </mapper>

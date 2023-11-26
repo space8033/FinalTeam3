@@ -157,5 +157,12 @@ public class InquiryServiceImpl implements InquiryService{
 	public Reply getReplyByReplyNo(int replyNo) {
 		return inquiryDao.selectReplyByReplyNo(replyNo);
 	}
+
+
+
+	@Override
+	public void replyUpdate(Reply reply) {
+		inquiryDao.updateReply(reply);
+	}
 	
 }
