@@ -23,4 +23,5 @@ public interface NoticeDao {
 	public List<Notice> selectNoticeReaders(Map<String, Object> map);
 	public List<NoticeUnreader> selectUnReader(int notice_no);
 	public void deleteNoticeReaders(int notice_no);
+	public List<Notice> selectPname();
 }

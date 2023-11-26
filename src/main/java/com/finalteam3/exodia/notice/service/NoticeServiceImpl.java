@@ -138,5 +138,10 @@ public class NoticeServiceImpl implements NoticeService{
 	public List<NoticeUnreader> getUnReader(int notice_no) {
 	    return noticeDao.selectUnReader(notice_no);
 	}
+
+	@Override
+	public List<Notice> getPname() {
+		return noticeDao.selectPname();
+	}
 	
 }

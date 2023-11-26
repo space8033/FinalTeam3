@@ -377,6 +377,8 @@
 										  <div class="card email-card-last mx-sm-4 mx-3 mt-4 border" id="reply${reply.reply_no}">
 										    <div class="card-header d-flex justify-content-between align-items-center flex-wrap border-bottom">
 											  <div class="d-flex align-items-center mb-sm-0 mb-3">
+											  
+											  <!-- 프로필사진변경 -->
 												<c:if test="${reply.photo == null}">
 													<c:if test="${reply.emp_no % 7 == 0}">
 								                        	<span class="avatar-initial rounded-circle bg-label-success" id="nameProfile" 
@@ -430,20 +432,26 @@
 							                          width="40"
 							                          id="uploadedAvatar" />            	            
 						                        </c:if>
+						                        
 												<div class="flex-grow-1 ms-3">
 												  <h6 class="m-0" id="replyWriter" name="replyWriter">${reply.empinfo_name}</h6>
 												  <small class="text-muted" id="replyWriterEmail" name="replyWriterEmail">${reply.empinfo_email}</small>
 												  <small class="mb-0 me-3 text-muted" id="replyCreatedat" name="replyCreatedat">  /  ${reply.reply_createdat}</small>											    
 												</div>
 											  </div>
-												<div class="d-flex align-items-center">
+												<div class=" card-footer d-flex align-items-center">
 												
 
+													<!-- 삭제버튼생성조건 -->
 													<c:if test="${now_emp_no == 0}">
+														<i class="bx bx-edit-alt cursor-pointer me-3 fs-4" onclick="replyModify(${reply.reply_no})"></i>
+														<i class='bx bx-check-circle cursor-pointer me-3 fs-4 d-none' id="replyModifyFinish"></i>
 														<i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4" onclick="openDeleteModal(${reply.reply_no})"></i>
 													</c:if>
 													<c:if test="${reply.empinfo_no != 0}">
 														<c:if test="${reply.empinfo_no == now_empinfo_no}">
+															<i class="bx bx-edit-alt cursor-pointer me-3 fs-4" onclick="replyModify(${reply.reply_no})"></i>
+															<i class='bx bx-check-circle cursor-pointer me-3 fs-4 d-none' id="replyModifyFinish"></i>
 															<i class="bx bx-trash email-list-delete cursor-pointer me-3 fs-4" onclick="openDeleteModal(${reply.reply_no})"></i>
 														</c:if>
 													</c:if>
@@ -472,10 +480,24 @@
 											    </div>
 											</div>
 					                          <div class="card-body pt-3">
-					                            <p>
-					                            	${reply.reply_content}
-					                            </p>
+					                            <div class="comment-container">
+												    <p class="replyContent">
+												        ${reply.reply_content}
+												    </p>
+												</div>  
 					                          </div>
+					                          
+					                          
+					                          <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+					                          
+					                          
+					                          
+					                          
+					                          
+					                          
+					                          
+					                          
+					                          
 				                          </div>
 			                             </c:forEach>
  										
