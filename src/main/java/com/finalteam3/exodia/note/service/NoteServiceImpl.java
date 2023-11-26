@@ -945,6 +945,16 @@ public class NoteServiceImpl implements NoteService{
 		note.setNote_no(noteNo);
 		note.setNote_draft("");
 		noteDao.updateDraftNote(note);
+		List<NoteRead> noteReadList = noteDao.selectNoteReadByNoteNo(noteNo);
+		for(NoteRead noteRead : noteReadList) {
+			AlarmRequest alarm = new AlarmRequest();
+			alarm.setAlarm_isRead(false);
+			alarm.setAlarm_type("쪽지");
+			alarm.setAlarm_typeNo(noteRead.getNoteRead_no());
+			alarm.setEmpinfo_no(noteRead.getEmp_no_receiver());
+			alarm.setAlarm_content("");
+			alarmDao.insertAlarm(alarm);
+		}
 		
 	}
 

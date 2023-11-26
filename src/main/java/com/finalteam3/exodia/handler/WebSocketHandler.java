@@ -1,9 +1,9 @@
 package com.finalteam3.exodia.handler;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.annotation.Resource;
 
@@ -60,9 +60,9 @@ public class WebSocketHandler extends TextWebSocketHandler{
 	private static List<WebSocketSession> sessions = new ArrayList<WebSocketSession>();
 	
 	//1:1로 할 경우
-	private Map<String, WebSocketSession> userSessionMap = new HashMap<String, WebSocketSession>();
+	private Map<String, WebSocketSession> userSessionMap = new ConcurrentHashMap<String, WebSocketSession>();
 	
-	private Map<String, Integer> alarmCount = new HashMap<String, Integer>();
+	private Map<String, Integer> alarmCount = new ConcurrentHashMap<String, Integer>();
 	
     
     private static int i;
@@ -85,8 +85,8 @@ public class WebSocketHandler extends TextWebSocketHandler{
 			//알람
 			String msg = message.getPayload();
 			
-			
-			for(WebSocketSession single : sessions) {
+			List<WebSocketSession> copyList = new ArrayList<>(sessions);
+			for (WebSocketSession single : copyList) {
 				String memId = single.getPrincipal().getName();
 				int uckCount = alarmDao.selectAlarmUchkCount(memId);
 				if(alarmCount.get(memId) == null) {
