@@ -17,7 +17,7 @@ function connect() {
 		
 	}
 	
-	chatsock = new SockJS("http://192.168.0.102:8080/exodia/chat");
+	chatsock = new SockJS("http://192.168.0.28:8080/exodia/chat");
 	chatsock.onopen = onOpen;
 	chatsock.onmessage = onMessage;
 	console.log(chatsock.send);
@@ -526,7 +526,7 @@ function checkR(data) {
 		      '<p class="mb-0 text-break">' + data.message_content + '</p>' +
 		      '</div>' +
 		      '<div class="text-end text-muted mt-1">' +
-		      '<i class="bx bx-check-double"></i>' +
+		      '<i class="bx bx-check-double text-success"></i>' +
 		      ' <small>' + formattedDate + '</small>' +
 		      '</div>' +
 		      '</div>' +
