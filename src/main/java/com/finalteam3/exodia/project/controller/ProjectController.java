@@ -52,10 +52,9 @@ public class ProjectController {
 	
 	@PostMapping(value = "/addProject", produces = "application/json; charset=UTF-8")
 	public String addProject(@RequestBody ProjectAddRequest request) {
-		log.info(request.toString());
 		projectService.addProject(request);
 		
-		return "redirect:/employee/userManagement";
+		return "redirect:/project/projectList";
 	}
 	
 	@GetMapping("/projectList")
@@ -104,7 +103,7 @@ public class ProjectController {
 	public String modifyProject(@RequestBody ProjectModifyResponse response) {
 		projectService.modifyProject(response);
 		
-		return "redirect:/main";
+		return "redirect:/project/projectList";
 	}
 	
 	@GetMapping("/searchUser")

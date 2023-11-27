@@ -260,7 +260,7 @@ $(document).ready(function() {
 		  contentType: 'application/json',
 		  data: JSON.stringify(data),
 		  success: function(data) {
-			  window.location.href = "/exodia/employee/userManagement";
+			  window.location.href = "/exodia/project/projectList";
 		  },
 		  error: function(error) {
 			  console.log("아왜안떠왜왜왜");

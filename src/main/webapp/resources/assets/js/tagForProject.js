@@ -241,7 +241,7 @@ $(document).ready(function() {
 		  contentType: 'application/json',
 		  data: JSON.stringify(data),
 		  success: function(data) {
-			  window.location.href = "/exodia/employee/userManagement";
+			  window.location.href = "/exodia/project/projectList";
 		  },
 		  error: function(error) {
 			  alert("모든 항목을 입력해주세요!");
